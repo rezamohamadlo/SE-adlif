@@ -1,0 +1,47 @@
+# @package _global_
+
+defaults:
+  - /dataset: oscillation
+
+exp_name: oscillation_LSTM
+
+
+n_epochs: 200
+
+auto_regression: True
+# Whether to use a two-layer network
+two_layers: False
+dropout: 0.0
+dt: 1.0
+l1:
+  # Which cell to use
+  cell: lstm
+  input_size: ${dataset.n_dof}
+  # number of neurons
+  n_neurons: 100
+  forget_bias_init: 1.0
+
+l_out:
+  input_size: 100
+  # number of neurons
+  n_neurons: ${dataset.n_dof}
+  # Time constant of output layer 
+  tau_u_range: [1, 20]
+  train_tau_u_method: 'interpolation'
+  dt: ${dt}
+
+# Batch size
+batch_size: 256
+
+# Loss aggregation
+loss_agg: MSE
+
+# Metric tracking
+tracking_metric: val_loss
+tracking_mode: min
+
+# optimizer parameters
+# learning rate of the optimizer
+lr: 0.001
+factor: 0.4
+patience: 3

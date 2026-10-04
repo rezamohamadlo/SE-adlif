@@ -1,0 +1,47 @@
+# @package _global_
+
+# Plain LIF baseline matched to SHD_SE_adLIF for Phase 1 comparisons.
+defaults:
+  - /dataset: shd
+
+exp_name: SHD_LIF
+
+# Architecture and shared training settings match SHD_SE_adLIF.
+two_layers: true
+alpha: 5.0
+c: 0.4
+dt: 1.0
+dropout: 0.15
+
+l1:
+  cell: lif
+  input_size: 140
+  n_neurons: 360
+  tau_u_range: [5, 25]
+  alpha: ${alpha}
+  c: ${c}
+  dt: ${dt}
+
+l2:
+  cell: lif
+  input_size: 360
+  n_neurons: 360
+  tau_u_range: [5, 25]
+  alpha: ${alpha}
+  c: ${c}
+  dt: ${dt}
+
+l_out:
+  input_size: 360
+  n_neurons: ${dataset.num_classes}
+  tau_u_range: [15, 15]
+  dt: ${dt}
+
+n_epochs: 300
+batch_size: 256
+loss_agg: softmax
+tracking_metric: val_acc
+tracking_mode: max
+lr: 0.01
+factor: 0.9
+patience: 9999
