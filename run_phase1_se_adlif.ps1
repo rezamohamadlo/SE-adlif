@@ -8,7 +8,7 @@ param(
     [ValidateRange(0, 100000)]
     [int]$BatchSize = 0,
     [ValidateSet(0, 1)]
-    [int]$EarlyStopping = 1,
+    [int]$EarlyStopping = 50,
     [int]$EarlyStoppingPatience = 50,
     [double]$EarlyStoppingMinDelta = 0.001,
     [ValidateRange(0, 10000)]
@@ -43,9 +43,9 @@ $ModelName = if ($Mode -eq "reference") {
 }
 
 $DatasetDefaults = @{
-    SHD = @{ Epochs = 300; BatchSize = 256 }
-    SSC = @{ Epochs = 40; BatchSize = 256 }
-    ECG = @{ Epochs = 400; BatchSize = 64 }
+    SHD = @{ Epochs = 300; BatchSize = 512 }
+    SSC = @{ Epochs = 300; BatchSize = 512 }
+    ECG = @{ Epochs = 300; BatchSize = 512 }
 }
 
 Write-Host "Starting the Phase 1 model runs"
