@@ -19,6 +19,47 @@ layer_map = {
 }
 
 
+def aggregate_temporal_outputs(
+    outputs: torch.Tensor,
+    block_idx: torch.Tensor,
+    num_blocks: int,
+    loss_agg: str,
+) -> torch.Tensor:
+    """Aggregate temporal model outputs into target-aligned blocks."""
+    if loss_agg in ("sum_softmax_over_time", "softmax"):
+        # ``softmax`` is the legacy name retained for existing experiment
+        # configurations. Both names mean softmax per timestep, then sum.
+        values = torch.softmax(outputs, dim=-1)
+        reduction = "sum"
+    elif loss_agg == "summed_membrane_potentials":
+        values = outputs
+        reduction = "sum"
+    elif loss_agg == "mean_membrane_potentials":
+        values = outputs
+        reduction = "mean"
+    else:
+        raise ValueError(
+            f"Unsupported loss_agg {loss_agg!r}. Expected one of: "
+            "'sum_softmax_over_time', 'summed_membrane_potentials', "
+            "'mean_membrane_potentials', or legacy 'softmax'."
+        )
+
+    block_outputs = torch.zeros(
+        size=(outputs.size(0), num_blocks, outputs.size(2)),
+        dtype=outputs.dtype,
+        device=outputs.device,
+    )
+    expanded_block_idx = block_idx.unsqueeze(-1).expand_as(outputs)
+    return torch.scatter_reduce(
+        block_outputs,
+        dim=1,
+        index=expanded_block_idx,
+        src=values,
+        reduce=reduction,
+        include_self=False,
+    )
+
+
 class MLPSNN(pl.LightningModule):
     def __init__(
         self,
@@ -123,28 +164,13 @@ class MLPSNN(pl.LightningModule):
             outputs_reduce = outputs
             loss = block_output.mean()
         else:
-            if self.output_func == "softmax":
-                outputs = torch.softmax(outputs, -1)
-                reduction = "sum"
-            else:
-                reduction = "mean"
-            # create a zero array of size (batch, number_of_targets, number_of_classes)
-            # this will be used to defined the prediction for each targets for each classes
-            block_outputs = torch.zeros(
-                size=(targets.size(0), targets.size(1), outputs.size(2)),
-                dtype=outputs.dtype,
-                device=outputs.device,
+            block_output = aggregate_temporal_outputs(
+                outputs=outputs,
+                block_idx=block_idx,
+                num_blocks=targets.size(1),
+                loss_agg=self.output_func,
             )
             block_idx = block_idx.unsqueeze(-1)
-
-            block_output = torch.scatter_reduce(
-                block_outputs,
-                dim=1,
-                index=block_idx.broadcast_to(outputs.shape),
-                src=outputs,
-                reduce=reduction,
-                include_self=False,
-            )
 
 
             outputs_reduce = block_output.reshape(-1, outputs.size(-1))

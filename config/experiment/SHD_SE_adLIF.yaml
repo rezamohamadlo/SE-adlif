@@ -62,7 +62,7 @@ n_epochs: 300
 batch_size: 256
 
 # Loss aggregation
-loss_agg: softmax
+loss_agg: sum_softmax_over_time
 
 # Metric tracking
 tracking_metric: val_acc

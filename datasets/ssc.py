@@ -1,6 +1,9 @@
 import math
+import os
 from typing import Optional
 
+import h5py
+import numpy as np
 import torch
 import torch.utils.data
 
@@ -11,9 +14,9 @@ from datasets.utils.transforms import (
     Flatten,
 )
 import tonic
+from tonic.io import make_structured_array
 from tonic.transforms import ToFrame
 import hydra
-import os
 
 class SSCLDM(pl.LightningDataModule):
     def __init__(
@@ -169,7 +172,25 @@ class SSCWrapper(tonic.datasets.SSC):
         self.ignore_first_timesteps = ignore_first_timesteps
 
     def __getitem__(self, index):
-        events, target = super().__getitem__(index)
+        # Tonic's SSC loader multiplies the float16 timestamps by 1e6 before
+        # widening them, which overflows float16 and corrupts every timestamp.
+        # Widen first, then convert seconds to microseconds.
+        with h5py.File(
+            os.path.join(self.location_on_system, self.data_filename), "r"
+        ) as file:
+            events = make_structured_array(
+                file["spikes/times"][index].astype(np.float64) * 1e6,
+                file["spikes/units"][index],
+                1,
+                dtype=self.dtype,
+            )
+            target = file["labels"][index].astype(int)
+
+        if self.transform is not None:
+            events = self.transform(events)
+        if self.target_transform is not None:
+            target = self.target_transform(target)
+
         block_idx = torch.ones((events.shape[0],), dtype=torch.int64)
         block_idx[: self.ignore_first_timesteps] = 0
         return events, target, block_idx

@@ -1,7 +1,8 @@
 param(
     [int[]]$Seeds = @(42, 123, 456),
     [ValidateSet("SHD", "SSC", "ECG")]
-    [string]$Dataset = "SSC",
+    [Alias("Dataset")]
+    [string[]]$Datasets = @("SSC", "ECG"),
     [ValidateRange(0, 10000)]
     [int]$Epochs = 0,
     [ValidateRange(0, 100000)]
@@ -35,15 +36,6 @@ if (-not (Test-Path -LiteralPath $Runner)) {
     throw "Experiment runner was not found at: $Runner"
 }
 
-switch ("$Mode/$Dataset") {
-    "reference/SHD" { $Experiment = "SHD_SE_adLIF" }
-    "reference/SSC" { $Experiment = "SSC_SE_adLIF" }
-    "reference/ECG" { $Experiment = "ECG_SE_adLIF_2layer" }
-    "ours/SHD" { $Experiment = "SHD_DA_LIF" }
-    "ours/SSC" { $Experiment = "SSC_DA_LIF" }
-    "ours/ECG" { $Experiment = "ECG_DA_LIF_2layer" }
-}
-
 $ModelName = if ($Mode -eq "reference") {
     "SE-adLIF reference"
 } else {
@@ -51,32 +43,15 @@ $ModelName = if ($Mode -eq "reference") {
 }
 
 $DatasetDefaults = @{
-    SHD = @{ Epochs = 300; BatchSize = 512 }
+    SHD = @{ Epochs = 300; BatchSize = 256 }
     SSC = @{ Epochs = 40; BatchSize = 256 }
     ECG = @{ Epochs = 400; BatchSize = 64 }
 }
 
-if ($Epochs -eq 0) {
-    $Epochs = $DatasetDefaults[$Dataset].Epochs
-}
-if ($BatchSize -eq 0) {
-    $BatchSize = $DatasetDefaults[$Dataset].BatchSize
-}
-
-$ExperimentConfig = Join-Path $ProjectRoot "config\experiment\$Experiment.yaml"
-if (-not (Test-Path -LiteralPath $ExperimentConfig)) {
-    throw "The '$Mode' model is not implemented yet. Expected configuration: $ExperimentConfig"
-}
-
-$DatasetName = $Dataset.ToUpperInvariant()
-$ModeLogDir = "$LogDir/$Mode/$DatasetName"
-
 Write-Host "Starting the Phase 1 model runs"
 Write-Host "  Mode:    $Mode ($ModelName)"
-Write-Host "  Dataset: $DatasetName"
+Write-Host "  Datasets: $($Datasets -join ', ')"
 Write-Host "  Seeds:   $($Seeds -join ', ')"
-Write-Host "  Epochs:  $Epochs"
-Write-Host "  Batch:   $BatchSize"
 Write-Host "  Early stopping: $EarlyStopping"
 if ($EarlyStopping -eq 1) {
     Write-Host "    Patience:  $EarlyStoppingPatience"
@@ -85,10 +60,44 @@ if ($EarlyStopping -eq 1) {
 Write-Host "  LR scheduler patience: $LrSchedulerPatience"
 Write-Host "  LR scheduler factor:   $LrSchedulerFactor"
 Write-Host "  Resume:  $Resume"
-Write-Host "  Log dir: $ModeLogDir"
 
 Push-Location $ProjectRoot
 try {
+    foreach ($Dataset in $Datasets) {
+        switch ("$Mode/$Dataset") {
+            "reference/SHD" { $Experiment = "SHD_SE_adLIF" }
+            "reference/SSC" { $Experiment = "SSC_SE_adLIF" }
+            "reference/ECG" { $Experiment = "ECG_SE_adLIF_2layer" }
+            "ours/SHD" { $Experiment = "SHD_DA_LIF" }
+            "ours/SSC" { $Experiment = "SSC_DA_LIF" }
+            "ours/ECG" { $Experiment = "ECG_DA_LIF_2layer" }
+        }
+
+        $ExperimentConfig = Join-Path $ProjectRoot "config\experiment\$Experiment.yaml"
+        if (-not (Test-Path -LiteralPath $ExperimentConfig)) {
+            throw "The '$Mode' model is not implemented yet. Expected configuration: $ExperimentConfig"
+        }
+
+        $DatasetName = $Dataset.ToUpperInvariant()
+        $DatasetEpochs = if ($Epochs -eq 0) {
+            $DatasetDefaults[$DatasetName].Epochs
+        } else {
+            $Epochs
+        }
+        $DatasetBatchSize = if ($BatchSize -eq 0) {
+            $DatasetDefaults[$DatasetName].BatchSize
+        } else {
+            $BatchSize
+        }
+        $ModeLogDir = "$LogDir/$Mode/$DatasetName"
+
+        Write-Host ""
+        Write-Host "Starting dataset $DatasetName"
+        Write-Host "  Experiment: $Experiment"
+        Write-Host "  Epochs:     $DatasetEpochs"
+        Write-Host "  Batch:      $DatasetBatchSize"
+        Write-Host "  Log dir:    $ModeLogDir"
+
     foreach ($Seed in $Seeds) {
         $SeedLogDir = "$ModeLogDir/seed_$Seed"
         $CompletionMarker = Join-Path $SeedLogDir "completed.txt"
@@ -127,9 +136,9 @@ try {
         $Overrides = @(
             "experiment=$Experiment"
             "random_seed=$Seed"
-            "n_epochs=$Epochs"
-            "batch_size=$BatchSize"
-            "dataset.batch_size=$BatchSize"
+            "n_epochs=$DatasetEpochs"
+            "batch_size=$DatasetBatchSize"
+            "dataset.batch_size=$DatasetBatchSize"
             "logdir=$SeedLogDir"
             "dataset.num_workers=0"
             "early_stopping=$($EarlyStopping -eq 1)"
@@ -159,6 +168,8 @@ try {
         New-Item -ItemType Directory -Path $SeedLogDir -Force | Out-Null
         Set-Content -LiteralPath $CompletionMarker -Value "Completed $(Get-Date -Format o)"
         Write-Host "Seed $Seed completed successfully."
+    }
+        Write-Host "Dataset $DatasetName completed successfully."
     }
 }
 finally {

@@ -60,7 +60,7 @@ n_epochs: 40
 batch_size: 256
 
 # Loss aggregation
-loss_agg: mean_membrane_potentials
+loss_agg: summed_membrane_potentials
 
 # Metric tracking
 tracking_metric: val_acc

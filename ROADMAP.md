@@ -17,12 +17,43 @@
 
 ## فاز ۱ — اجرای مقاله پایه
 
-- کد مقاله Baronig / adLIF را اجرا کن.
-- فعلاً هیچ تغییری در مدل نده.
-- اولین دیتاست: SHD.
-- هر دو مدل LIF و adLIF را اجرا کن.
+- مدل مرجع **SE-adLIF** را بدون تغییر در ساختار نورون اجرا کن.
+- سه دیتاست مرجع این فاز: **SHD، SSC و ECG/QTDB**.
+- برای هر دیتاست سه seed برابر با `42`، `123` و `456` اجرا کن.
+- دیتاست‌ها باید ترتیبی اجرا شوند: `SHD → SSC → ECG`.
+- در این فاز هنوز مدل پیشنهادی DA-LIF پیاده‌سازی نمی‌شود.
 
-**خروجی:** Accuracy، تعداد پارامترها، زمان آموزش، spike rate و تنظیمات دقیق هر اجرا.
+**خروجی:** `Mean ± SD` دقت، loss، تعداد پارامترها، GFLOPs، زمان آموزش و تنظیمات دقیق هر اجرا. Spike rate و SynOps در فاز efficiency تکمیل می‌شوند.
+
+### وضعیت فعلی فاز ۱ — ۶ اکتبر ۲۰۲۶
+
+| دیتاست | وضعیت | جزئیات |
+| --- | --- | --- |
+| SHD | تقریباً کامل | سه seed نتیجه دارند؛ `94.63% ± 0.86%`. اجرای seed 42 در epoch 214 قابل resume است. |
+| SSC | کامل | سه seed اصلاح‌شده با تجمیع `summed_membrane_potentials` کامل شده‌اند؛ دقت test برابر `78.21% ± 0.11%` است. |
+| ECG/QTDB | آماده اجرا | داده‌های train/test دانلود شده‌اند؛ آموزش هنوز شروع نشده است. |
+
+بهترین دقت‌های فعلی SE-adLIF روی SHD:
+
+| Seed | Best Accuracy | Best Epoch |
+| ---: | ---: | ---: |
+| 42 | 95.45% | 205 |
+| 123 | 94.70% | 128 |
+| 456 | 93.73% | 60 |
+
+### Reference-result validity policy
+
+- The original SHD SE-adLIF runs for seeds `42`, `123`, and `456` are valid
+  reference runs. Their old `loss_agg: softmax` mode computed
+  `sum_t softmax(y_t)`, exactly matching the explicit
+  `sum_softmax_over_time` mode.
+- Canonical SHD mean/SD calculations use those three original runs exactly
+  once. Any future repeat of an existing seed must be labelled verification-only
+  and excluded from the independent-run count.
+- Earlier SSC runs are different: temporal mean was used instead of temporal
+  sum, so those SSC runs are not valid for exact paper reproduction.
+
+> نکته: پیکربندی فعلی SHD از test split برای validation و انتخاب checkpoint استفاده می‌کند؛ بنابراین این اعداد برای بازتولید اولیه مناسب‌اند، اما نتیجه نهایی unbiased مقاله نیستند.
 
 ## فاز ۲ — ساخت محیط مقایسه ثابت
 
@@ -31,6 +62,8 @@
 - نتیجه هر اجرا را در CSV یا JSON ذخیره کن.
 
 **خروجی:** یک pipeline تکرارپذیر که بعداً همه مدل‌ها داخل آن تست شوند.
+
+**وضعیت:** runner چنددیتاسته، اجرای چند seed، resume، checkpoint، early stopping، LR scheduler، CSV log و خلاصه خودکار آموزش پیاده‌سازی شده‌اند.
 
 ## فاز ۳ — فقط Dynamic Threshold
 
@@ -61,17 +94,17 @@
 | مدل | Accuracy | Params | Spike Rate | SynOps |
 | --- | --- | --- | --- | --- |
 | LIF | — | — | — | — |
-| adLIF | — | — | — | — |
+| SE-adLIF | 94.63% ± 0.86% | 450,760 | — | — |
 | Dynamic-θ | — | — | — | — |
 | Dynamic-τ | — | — | — | — |
 | DA-LIF | — | — | — | — |
 
 **هدف:** دقت مشابه یا بهتر، با spike کمتر و SynOps کمتر.
 
-## فاز ۷ — اجرای پنج seed
+## فاز ۷ — اجرای سه seed
 
 - هنگام توسعه فقط از یک seed استفاده کن.
-- پس از freeze شدن معماری، پنج seed اجرا کن.
+- پس از freeze شدن معماری، seedهای `42`، `123` و `456` را اجرا کن.
 - نتیجه را به شکل `Mean ± SD` گزارش کن.
 
 **خروجی:** نتایج نهایی قابل‌استفاده در مقاله.
@@ -80,9 +113,9 @@
 
 1. SHD برای توسعه.
 2. SSC برای آزمون temporal سخت‌تر.
-3. DVS128 Gesture برای event vision واقعی.
+3. ECG/QTDB برای بررسی تعمیم به سیگنال زمانی غیرگفتاری.
 
-**قانون:** تا وقتی SHD درست و پایدار نشده، سراغ SSC و DVS نرو.
+**قانون:** ابتدا baseline هر دیتاست کامل شود؛ سپس همان پروتکل بدون تغییر برای مدل پیشنهادی اجرا شود.
 
 ## فاز ۹ — آزمون Energy / Efficiency
 
@@ -106,30 +139,28 @@
 
 ## ترتیب اجرایی کار
 
-1. اجرای کد Baronig
-2. اجرای LIF روی SHD
-3. اجرای adLIF روی SHD
-4. ذخیره نتایج baseline
+1. تکمیل سه seed مدل SE-adLIF روی SHD
+2. اجرای سه seed مدل SE-adLIF روی SSC
+3. اجرای سه seed مدل SE-adLIF روی ECG/QTDB
+4. تجمیع نتایج baseline به شکل `Mean ± SD`
 5. پیاده‌سازی Dynamic Threshold
-6. آزمون آن
+6. آزمون مستقل Dynamic Threshold روی SHD
 7. پیاده‌سازی Dynamic Tau
-8. آزمون آن
+8. آزمون مستقل Dynamic Tau روی SHD
 9. ترکیب هر دو در DA-LIF
-10. مقایسه همه مدل‌ها
+10. مقایسه DA-LIF و SE-adLIF روی SHD
 11. Freeze کردن بهترین معماری
-12. اجرای ۵ seed
-13. اندازه‌گیری spikeها و SynOps
-14. اجرای SSC
-15. اجرای DVS128 Gesture
-16. ساخت جدول‌ها و نمودارهای نهایی
+12. اجرای سه seed مدل پیشنهادی روی SHD، SSC و ECG
+13. اندازه‌گیری spikeها، SynOps، latency و memory
+14. ساخت جدول‌ها و نمودارهای نهایی
 
 ## فعلاً چه کاری انجام ندهد
 
-- از روز اول روی سه دیتاست کار نکند.
+- سه دیتاست را هم‌زمان اجرا نکند؛ آن‌ها را به‌ترتیب کامل کند.
 - مدل را پیچیده نکند.
 - تا baseline درست نشده، روش جدید پیاده نکند.
 - فقط Accuracy را معیار موفقیت قرار ندهد.
-- در مرحله توسعه ۵ seed اجرا نکند.
+- در مرحله توسعه هر تغییر کوچک را روی هر سه seed اجرا نکند.
 
 ## تعریف ساده موفقیت پروژه
 

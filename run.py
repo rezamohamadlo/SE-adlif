@@ -176,9 +176,66 @@ class TrainingSummaryCallback(pl.Callback):
 
     def on_train_end(self, trainer, pl_module):
         self._write_if_new_best(trainer, status="Training finished")
+        self._update_run_status(trainer, "Training finished")
+
+    def on_test_end(self, trainer, pl_module):
+        self._update_run_status(trainer, "Training and testing finished")
+        self._update_test_results(trainer)
 
     def on_exception(self, trainer, pl_module, exception):
         self._write_if_new_best(trainer, status="Training interrupted; resumable")
+        self._update_run_status(trainer, "Training interrupted; resumable")
+
+    @staticmethod
+    def _replace_summary(summary_path, text):
+        temporary_path = summary_path.with_suffix(".md.tmp")
+        temporary_path.write_text(text, encoding="utf-8")
+        os.replace(temporary_path, summary_path)
+
+    def _update_run_status(self, trainer, status):
+        summary_path = Path.cwd() / "TRAINING_SUMMARY.md"
+        if not summary_path.exists():
+            return
+
+        completed_epochs = min(trainer.current_epoch + 1, int(self.cfg.n_epochs))
+        final_epoch = max(completed_epochs - 1, 0)
+        lines = summary_path.read_text(encoding="utf-8").splitlines()
+        for index, line in enumerate(lines):
+            if line.startswith("- **Status:**"):
+                lines[index] = f"- **Status:** {status}"
+            elif line.startswith("- **Progress:**"):
+                lines[index] = (
+                    f"- **Progress:** {completed_epochs} epochs completed "
+                    f"(`0` through `{final_epoch}`) out of {self.cfg.n_epochs}"
+                )
+        self._replace_summary(summary_path, "\n".join(lines) + "\n")
+
+    def _update_test_results(self, trainer):
+        summary_path = Path.cwd() / "TRAINING_SUMMARY.md"
+        if not summary_path.exists():
+            return
+
+        metrics = trainer.callback_metrics
+        test_acc = self._metric(metrics, "test_acc")
+        test_loss = self._metric(metrics, "test_loss")
+        if test_acc is None and test_loss is None:
+            return
+
+        marker = "\n## Final test evaluation\n"
+        summary = summary_path.read_text(encoding="utf-8")
+        summary = summary.split(marker, 1)[0].rstrip()
+        test_section = f"""
+
+## Final test evaluation
+
+The best validation checkpoint was evaluated on the test split after training.
+
+| Metric | Value |
+|---|---:|
+| Test accuracy | **{self._format(test_acc, percent=True)}** |
+| Test loss | **{self._format(test_loss)}** |
+"""
+        self._replace_summary(summary_path, summary + test_section)
 
     def _write_if_new_best(self, trainer, status):
         best_path = self.checkpoint_callback.best_model_path
@@ -206,6 +263,14 @@ class TrainingSummaryCallback(pl.Callback):
         dataset_name = self.cfg.exp_name.split("_", 1)[0].upper()
         validation_split = dataset_cfg.get("validate_on", "validation")
         early_stopping = self.cfg.get("early_stopping", False)
+        mode = "ours" if "DA_LIF" in self.cfg.exp_name else "reference"
+        configured_logdir = Path(str(self.cfg.logdir)).as_posix().rstrip("/")
+        seed_suffix = f"/{mode}/{dataset_name}/seed_{self.cfg.random_seed}"
+        launcher_logdir = (
+            configured_logdir[: -len(seed_suffix)]
+            if configured_logdir.endswith(seed_suffix)
+            else "results/phase1_models"
+        )
 
         summary = f"""# {self.cfg.exp_name} Training Summary — Seed {self.cfg.random_seed}
 
@@ -275,7 +340,7 @@ The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds
 ## Resume command
 
 ```powershell
-.\\run_phase1_se_adlif.ps1 -Mode reference -Dataset {dataset_name} -Resume 1
+.\\run_phase1_se_adlif.ps1 -Mode {mode} -Datasets {dataset_name} -Seeds {self.cfg.random_seed} -Epochs {self.cfg.n_epochs} -BatchSize {dataset_cfg.batch_size} -EarlyStopping {1 if early_stopping else 0} -LrSchedulerPatience {self.cfg.patience} -LrSchedulerFactor {self.cfg.factor} -Resume 1 -LogDir {launcher_logdir}
 ```
 
 ## Evaluation note
@@ -283,9 +348,7 @@ The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds
 This run uses `validate_on: {validation_split}`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
 """
 
-        temporary_path = summary_path.with_suffix(".md.tmp")
-        temporary_path.write_text(summary, encoding="utf-8")
-        os.replace(temporary_path, summary_path)
+        self._replace_summary(summary_path, summary)
         self._summarized_best_path = best_path
 
 
