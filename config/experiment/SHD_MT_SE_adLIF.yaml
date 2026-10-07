@@ -1,0 +1,15 @@
+# @package _global_
+defaults:
+  - SHD_SE_adLIF
+  - _self_
+
+exp_name: SHD_MT_SE_adLIF
+
+l1:
+  cell: mt_se_adlif
+  tau_w_range: [60, 300]
+  tau_w_slow_range: [300, 600]
+l2:
+  cell: mt_se_adlif
+  tau_w_range: [60, 300]
+  tau_w_slow_range: [300, 600]

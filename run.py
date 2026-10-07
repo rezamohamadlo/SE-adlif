@@ -278,6 +278,15 @@ The best validation checkpoint was evaluated on the test split after training.
             f" -ModelVariant {self.cfg.model_variant}"
             if self.cfg.get("model_variant") else ""
         )
+        resume_command = (
+            f".\\.venv\\Scripts\\python.exe full_runner.py {self.cfg.model_variant}"
+            if launcher_script == "full_runner.py" else
+            f".\\{launcher_script} -Mode {mode}{variant_argument}{dataset_seed_arguments} "
+            f"-Epochs {self.cfg.n_epochs} -BatchSize {dataset_cfg.batch_size} "
+            f"-EarlyStopping {1 if early_stopping else 0} "
+            f"-LrSchedulerPatience {self.cfg.patience} -LrSchedulerFactor {self.cfg.factor} "
+            f"-Resume 1 -LogDir {launcher_logdir}"
+        )
 
         summary = f"""# {self.cfg.exp_name} Training Summary — Seed {self.cfg.random_seed}
 
@@ -347,7 +356,7 @@ The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds
 ## Resume command
 
 ```powershell
-.\\{launcher_script} -Mode {mode}{variant_argument}{dataset_seed_arguments} -Epochs {self.cfg.n_epochs} -BatchSize {dataset_cfg.batch_size} -EarlyStopping {1 if early_stopping else 0} -LrSchedulerPatience {self.cfg.patience} -LrSchedulerFactor {self.cfg.factor} -Resume 1 -LogDir {launcher_logdir}
+{resume_command}
 ```
 
 ## Evaluation note

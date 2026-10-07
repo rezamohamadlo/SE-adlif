@@ -15,7 +15,7 @@ param(
     [ValidateRange(0, 100000)]
     [int]$BatchSize = 512,
     [ValidateSet(0, 1)]
-    [int]$EarlyStopping = 0,
+    [int]$EarlyStopping = 1,
     [int]$EarlyStoppingPatience = 50,
     [double]$EarlyStoppingMinDelta = 0.001,
     [ValidateRange(0, 10000)]
@@ -26,7 +26,7 @@ param(
     [string]$Mode = "ours",
     [ValidateSet(0, 1)]
     [int]$Resume = 0,
-    [string]$LogDir = "results/phase1_models"
+    [string]$LogDir = "results/model_development"
 )
 
 $ErrorActionPreference = "Stop"

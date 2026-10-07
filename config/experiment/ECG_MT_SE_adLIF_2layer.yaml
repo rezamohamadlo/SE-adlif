@@ -1,0 +1,15 @@
+# @package _global_
+defaults:
+  - ECG_SE_adLIF_2layer
+  - _self_
+
+exp_name: ECG_MT_SE_adLIF_2layer
+
+l1:
+  cell: mt_se_adlif
+  tau_w_range: [60, 300]
+  tau_w_slow_range: [300, 600]
+l2:
+  cell: mt_se_adlif
+  tau_w_range: [60, 300]
+  tau_w_slow_range: [300, 600]

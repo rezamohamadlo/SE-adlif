@@ -1,0 +1,21 @@
+# @package _global_
+defaults:
+  - ECG_SE_adLIF_2layer
+  - _self_
+
+exp_name: ECG_DTH_SE_adLIF_2layer
+
+l1:
+  cell: dth_se_adlif
+  rho_fast: 0.9
+  rho_slow: 0.99
+  target_rate: 0.05
+  theta_min: 0.5
+  theta_max: 1.5
+l2:
+  cell: dth_se_adlif
+  rho_fast: 0.9
+  rho_slow: 0.99
+  target_rate: 0.05
+  theta_min: 0.5
+  theta_max: 1.5
