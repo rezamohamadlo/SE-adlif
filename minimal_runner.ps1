@@ -1,34 +1,32 @@
+[CmdletBinding()]
 param(
-    # [int[]]$Seeds = @(42, 123, 456),
-    [int[]]$Seeds = @(42),
-    # [ValidateSet("SHD", "SSC", "ECG")]
-    [ValidateSet("SHD")]
-    [Alias("Dataset")]
-    [string[]]$Datasets = @("SHD"),
     # Experiment-config suffix. For example, SE_adLIF resolves to
     # config/experiment/SHD_SE_adLIF.yaml.
     [ValidatePattern("^[A-Za-z][A-Za-z0-9_-]*$")]
     [string]$ModelVariant = "SE_adLIF",
     [ValidateRange(0, 10000)]
-    [int]$Epochs = 0,
+    [int]$Epochs = 300,
     [ValidateRange(0, 100000)]
-    [int]$BatchSize = 0,
+    [int]$BatchSize = 512,
     [ValidateSet(0, 1)]
     [int]$EarlyStopping = 0,
     [int]$EarlyStoppingPatience = 50,
     [double]$EarlyStoppingMinDelta = 0.001,
     [ValidateRange(0, 10000)]
-    [int]$LrSchedulerPatience = 15,
+    [int]$LrSchedulerPatience = 9999,
     [ValidateRange(0.000001, 0.999999)]
     [double]$LrSchedulerFactor = 0.9,
     [ValidateSet("reference", "ours")]
-    [string]$Mode = "reference",
+    [string]$Mode = "ours",
     [ValidateSet(0, 1)]
     [int]$Resume = 0,
     [string]$LogDir = "results/phase1_models"
 )
 
 $ErrorActionPreference = "Stop"
+# This launcher is exclusively for the first SHD development experiment.
+$Seeds = @(42)
+$Datasets = @("SHD")
 
 $ProjectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Python = Join-Path $ProjectRoot ".venv\Scripts\python.exe"
@@ -160,6 +158,10 @@ try {
             "batch_size=$DatasetBatchSize"
             "dataset.batch_size=$DatasetBatchSize"
             "logdir=$SeedLogDir"
+            "++launcher_script=minimal_runner.ps1"
+            "++model_variant=$ModelVariant"
+            "++run_mode=$Mode"
+            "++launcher_logdir=$LogDir"
             "dataset.num_workers=0"
             "early_stopping=$($EarlyStopping -eq 1)"
             "early_stopping_patience=$EarlyStoppingPatience"

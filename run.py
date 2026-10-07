@@ -263,13 +263,23 @@ The best validation checkpoint was evaluated on the test split after training.
         dataset_name = self.cfg.exp_name.split("_", 1)[0].upper()
         validation_split = dataset_cfg.get("validate_on", "validation")
         early_stopping = self.cfg.get("early_stopping", False)
-        mode = "ours" if "DA_LIF" in self.cfg.exp_name else "reference"
+        mode = self.cfg.get("run_mode", "ours" if "DA_LIF" in self.cfg.exp_name else "reference")
         configured_logdir = Path(str(self.cfg.logdir)).as_posix().rstrip("/")
         seed_suffix = f"/{mode}/{dataset_name}/seed_{self.cfg.random_seed}"
         launcher_logdir = (
             configured_logdir[: -len(seed_suffix)]
             if configured_logdir.endswith(seed_suffix)
             else "results/phase1_models"
+        )
+        launcher_logdir = self.cfg.get("launcher_logdir", launcher_logdir)
+        launcher_script = self.cfg.get("launcher_script", "run_phase1_se_adlif.ps1")
+        dataset_seed_arguments = (
+            "" if launcher_script == "minimal_runner.ps1"
+            else f" -Datasets {dataset_name} -Seeds {self.cfg.random_seed}"
+        )
+        variant_argument = (
+            f" -ModelVariant {self.cfg.model_variant}"
+            if self.cfg.get("model_variant") else ""
         )
 
         summary = f"""# {self.cfg.exp_name} Training Summary — Seed {self.cfg.random_seed}
@@ -340,7 +350,7 @@ The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds
 ## Resume command
 
 ```powershell
-.\\run_phase1_se_adlif.ps1 -Mode {mode} -Datasets {dataset_name} -Seeds {self.cfg.random_seed} -Epochs {self.cfg.n_epochs} -BatchSize {dataset_cfg.batch_size} -EarlyStopping {1 if early_stopping else 0} -LrSchedulerPatience {self.cfg.patience} -LrSchedulerFactor {self.cfg.factor} -Resume 1 -LogDir {launcher_logdir}
+.\\{launcher_script} -Mode {mode}{variant_argument}{dataset_seed_arguments} -Epochs {self.cfg.n_epochs} -BatchSize {dataset_cfg.batch_size} -EarlyStopping {1 if early_stopping else 0} -LrSchedulerPatience {self.cfg.patience} -LrSchedulerFactor {self.cfg.factor} -Resume 1 -LogDir {launcher_logdir}
 ```
 
 ## Evaluation note
