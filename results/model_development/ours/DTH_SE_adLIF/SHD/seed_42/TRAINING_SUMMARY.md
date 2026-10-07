@@ -4,8 +4,8 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 ## Run status
 
-- **Status:** Training in progress
-- **Progress:** 2 epochs completed (`0` through `1`) out of 300
+- **Status:** Training and testing finished
+- **Progress:** 300 epochs completed (`0` through `299`) out of 300
 - **Dataset:** SHD
 - **Model:** SHD_DTH_SE_adLIF
 - **Seed:** 42
@@ -15,12 +15,12 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 | Metric | Value | Epoch |
 |---|---:|---:|
-| Best validation accuracy | **47.75%** | 1 |
-| Validation loss | **1.7079** | 1 |
-| Training accuracy | **5.74%** | 1 |
-| Training loss | **2.993373** | 1 |
-| Gradient norm | **1.1707** | 1 |
-| Learning rate | **0.01** | 1 |
+| Best validation accuracy | **95.19%** | 164 |
+| Validation loss | **0.2468** | 164 |
+| Training accuracy | **99.77%** | 164 |
+| Training loss | **0.007914** | 164 |
+| Gradient norm | **0.0238** | 164 |
+| Learning rate | **0.01** | 164 |
 
 ## Model size and computation
 
@@ -36,7 +36,7 @@ The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds
 ## Best checkpoint
 
 ```text
-ckpt/epoch=1-step=30.ckpt
+ckpt/epoch=164-step=2475.ckpt
 ```
 
 ## Main hyperparameters
@@ -72,3 +72,12 @@ ckpt/epoch=1-step=30.ckpt
 ## Evaluation note
 
 This run uses `validate_on: test`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
+
+## Final test evaluation
+
+The best validation checkpoint was evaluated on the test split after training.
+
+| Metric | Value |
+|---|---:|
+| Test accuracy | **95.19%** |
+| Test loss | **0.2468** |

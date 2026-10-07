@@ -1,5 +1,11 @@
 [CmdletBinding()]
 param(
+    [ValidateNotNullOrEmpty()]
+    [int[]]$Seeds = @(42),
+    [ValidateSet("SHD", "SSC", "ECG")]
+    [ValidateNotNullOrEmpty()]
+    [Alias("Dataset")]
+    [string[]]$Datasets = @("SHD"),
     # Experiment-config suffix. For example, SE_adLIF resolves to
     # config/experiment/SHD_SE_adLIF.yaml.
     [ValidatePattern("^[A-Za-z][A-Za-z0-9_-]*$")]
@@ -24,9 +30,6 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-# This launcher is exclusively for the first SHD development experiment.
-$Seeds = @(42)
-$Datasets = @("SHD")
 
 $ProjectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Python = Join-Path $ProjectRoot ".venv\Scripts\python.exe"

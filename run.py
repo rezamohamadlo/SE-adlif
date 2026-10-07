@@ -273,10 +273,7 @@ The best validation checkpoint was evaluated on the test split after training.
         )
         launcher_logdir = self.cfg.get("launcher_logdir", launcher_logdir)
         launcher_script = self.cfg.get("launcher_script", "run_phase1_se_adlif.ps1")
-        dataset_seed_arguments = (
-            "" if launcher_script == "minimal_runner.ps1"
-            else f" -Datasets {dataset_name} -Seeds {self.cfg.random_seed}"
-        )
+        dataset_seed_arguments = f" -Datasets {dataset_name} -Seeds {self.cfg.random_seed}"
         variant_argument = (
             f" -ModelVariant {self.cfg.model_variant}"
             if self.cfg.get("model_variant") else ""
