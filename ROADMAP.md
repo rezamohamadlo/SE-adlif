@@ -1,169 +1,225 @@
-# نقشه راه ساده پروژه DA-LIF
+# DA-LIF Project Roadmap
 
-راهنمای اجرایی برای شروع پروژه DA-LIF برای کسی که تازه با شبکه‌های عصبی اسپایکی آشنا می‌شود.
+## Project objective
 
-## هدف پروژه
+Develop a dual-adaptive spiking neuron whose firing threshold and time constant
+respond to network activity. The proposed model should preserve or improve
+classification accuracy while reducing spike activity and computational cost
+relative to SE-adLIF.
 
-ساخت یک نورون اسپایکی که آستانه شلیک و ثابت زمانی آن با فعالیت شبکه تغییر کند؛ سپس بررسی کنیم که آیا با حفظ دقت، تعداد اسپایک‌ها و هزینه محاسباتی کاهش می‌یابد یا نه.
+```text
+SE-adLIF reference -> Dynamic Threshold -> Dynamic Time Constant
+-> Dual-Adaptive model -> Accuracy and efficiency evaluation
+```
 
-`Baseline → Dynamic Threshold → Dynamic Time Constant → Dual-Adaptive → Efficiency Tests`
+## Current status — 7 October 2026
 
-## چهار مفهوم اولیه
+**Phase 1 is complete.** Canonical three-seed SE-adLIF reference results are
+available for SHD, SSC, and ECG/QTDB.
 
-- **Spike:** خروجی صفر یا یکِ یک نورون در هر لحظه.
-- **Threshold:** اگر پتانسیل نورون از آن عبور کند، نورون اسپایک می‌زند.
-- **Time Constant (τ):** تعیین می‌کند اثر اطلاعات قبلی با چه سرعتی فراموش شود.
-- **هدف ما:** وابسته‌کردن Threshold و τ به activity شبکه، به‌جای ثابت نگه‌داشتن آن‌ها.
+| Dataset | Seed 42 | Seed 123 | Seed 456 | Mean ± sample SD | Status |
+|---|---:|---:|---:|---:|---|
+| SHD | 95.45% | 94.70% | 93.73% | **94.63% ± 0.86%** | Complete reference set |
+| SSC | 78.33% | 78.12% | 78.17% | **78.21% ± 0.11%** | Complete final-test set |
+| ECG/QTDB | 88.13% | 88.72% | 88.11% | **88.32% ± 0.35%** | Complete final-test set |
 
-## فاز ۱ — اجرای مقاله پایه
+The detailed report is available at
+[`reports/phase-1-se-adlif-reference.md`](reports/phase-1-se-adlif-reference.md).
 
-- مدل مرجع **SE-adLIF** را بدون تغییر در ساختار نورون اجرا کن.
-- سه دیتاست مرجع این فاز: **SHD، SSC و ECG/QTDB**.
-- برای هر دیتاست سه seed برابر با `42`، `123` و `456` اجرا کن.
-- دیتاست‌ها باید ترتیبی اجرا شوند: `SHD → SSC → ECG`.
-- در این فاز هنوز مدل پیشنهادی DA-LIF پیاده‌سازی نمی‌شود.
+### Canonical result locations
 
-**خروجی:** `Mean ± SD` دقت، loss، تعداد پارامترها، GFLOPs، زمان آموزش و تنظیمات دقیق هر اجرا. Spike rate و SynOps در فاز efficiency تکمیل می‌شوند.
+```text
+results/phase1_models/reference/SHD/seed_{42,123,456}
+results/phase1_models/reference/SSC/seed_{42,123,456}
+results/phase1_models/reference/ECG/seed_{42,123,456}
+```
 
-### وضعیت فعلی فاز ۱ — ۶ اکتبر ۲۰۲۶
+Only these runs should be included in Phase 1 statistics. A repeated run of an
+existing seed must be labelled as verification-only and must not be counted as
+an additional independent seed.
 
-| دیتاست | وضعیت | جزئیات |
-| --- | --- | --- |
-| SHD | تقریباً کامل | سه seed نتیجه دارند؛ `94.63% ± 0.86%`. اجرای seed 42 در epoch 214 قابل resume است. |
-| SSC | کامل | سه seed اصلاح‌شده با تجمیع `summed_membrane_potentials` کامل شده‌اند؛ دقت test برابر `78.21% ± 0.11%` است. |
-| ECG/QTDB | آماده اجرا | داده‌های train/test دانلود شده‌اند؛ آموزش هنوز شروع نشده است. |
+### Interpretation of Phase 1 results
 
-بهترین دقت‌های فعلی SE-adLIF روی SHD:
+- SSC and ECG used validation data for checkpoint selection followed by final
+  test evaluation. Their table values are final test accuracies.
+- SHD used the test split for validation and checkpoint selection. Its result
+  reproduces the current reference setup but is not an unbiased final-test
+  estimate.
+- The old SHD `loss_agg: softmax` mode computed
+  `sum_t softmax(y_t)`, which is mathematically identical to the explicit
+  `sum_softmax_over_time` mode. The canonical SHD results remain valid.
+- Canonical SSC runs use `summed_membrane_potentials`. Earlier temporal-mean
+  SSC runs are excluded from the reference result set.
+- The SHD seed-42 training summary is stale; its authoritative `metrics.csv`
+  and checkpoint record 95.45% at epoch 205.
 
-| Seed | Best Accuracy | Best Epoch |
-| ---: | ---: | ---: |
-| 42 | 95.45% | 205 |
-| 123 | 94.70% | 128 |
-| 456 | 93.73% | 60 |
+## Phase 1 — Reproduce the SE-adLIF reference
 
-### Reference-result validity policy
+**Status: COMPLETE**
 
-- The original SHD SE-adLIF runs for seeds `42`, `123`, and `456` are valid
-  reference runs. Their old `loss_agg: softmax` mode computed
-  `sum_t softmax(y_t)`, exactly matching the explicit
-  `sum_softmax_over_time` mode.
-- Canonical SHD mean/SD calculations use those three original runs exactly
-  once. Any future repeat of an existing seed must be labelled verification-only
-  and excluded from the independent-run count.
-- Earlier SSC runs are different: temporal mean was used instead of temporal
-  sum, so those SSC runs are not valid for exact paper reproduction.
+Completed work:
 
-> نکته: پیکربندی فعلی SHD از test split برای validation و انتخاب checkpoint استفاده می‌کند؛ بنابراین این اعداد برای بازتولید اولیه مناسب‌اند، اما نتیجه نهایی unbiased مقاله نیستند.
+- Prepared SHD, SSC, and ECG/QTDB datasets.
+- Ran seeds `42`, `123`, and `456` for every dataset.
+- Corrected and tested temporal loss aggregation.
+- Saved checkpoints, metrics, hyperparameters, and per-seed summaries.
+- Recorded parameter counts and dense-forward GFLOPs estimates.
+- Calculated mean accuracy and sample standard deviation.
+- Consolidated valid results under a single canonical `reference` hierarchy.
 
-## فاز ۲ — ساخت محیط مقایسه ثابت
+Remaining publication-quality improvement, not required to begin model
+development:
 
-- همه مدل‌ها باید با یک seed، batch size، preprocessing و تعداد epoch اجرا شوند.
-- یک فایل config برای SHD بساز.
-- نتیجه هر اجرا را در CSV یا JSON ذخیره کن.
+- Introduce a separate SHD validation split and reserve the test split for one
+  final evaluation.
+- Standardize scheduler and early-stopping settings across every seed and model
+  before the final controlled comparison.
 
-**خروجی:** یک pipeline تکرارپذیر که بعداً همه مدل‌ها داخل آن تست شوند.
+## Phase 2 — Freeze the comparison protocol
 
-**وضعیت:** runner چنددیتاسته، اجرای چند seed، resume، checkpoint، early stopping، LR scheduler، CSV log و خلاصه خودکار آموزش پیاده‌سازی شده‌اند.
+**Status: NEXT**
 
-## فاز ۳ — فقط Dynamic Threshold
+Before evaluating a proposed architecture, define a single protocol that both
+SE-adLIF and the proposed model will use:
 
-- Threshold نورون را بر اساس recent activity تغییر بده.
-- در این مرحله τ را تغییر نده.
-- هدف: کاهش اسپایک‌های غیرضروری، بدون افت محسوس دقت.
+- identical preprocessing and dataset splits;
+- identical seeds: `42`, `123`, and `456`;
+- identical batch size, epoch budget, optimizer, and learning-rate schedule;
+- identical checkpoint-selection and final-test rules;
+- identical accuracy, spike, SynOps, latency, memory, and parameter reporting;
+- separate development and final-evaluation result directories.
 
-**خروجی:** مدل Dynamic-θ به‌همراه مقایسه با LIF و adLIF.
+During initial development, use SHD seed 42 only. Freeze the architecture and
+hyperparameters before running seeds 123 and 456.
 
-## فاز ۴ — فقط Dynamic Time Constant
+**Deliverable:** a reproducible runner and config set shared by the reference
+and proposed models.
 
-- Threshold را ثابت نگه دار.
-- τ را بر اساس activity تغییر بده.
-- بررسی کن آیا مدل در پردازش زمانی بهتر یا sparse‌تر می‌شود.
+## Phase 3 — Dynamic Threshold model
 
-**خروجی:** مدل Dynamic-τ و نتایج مستقل آن.
+Change only the firing-threshold mechanism while retaining the SE-adLIF time
+constants and the rest of the architecture.
 
-## فاز ۵ — مدل اصلی: Dual-Adaptive
+Tasks:
 
-- Dynamic Threshold و Dynamic τ را هم‌زمان فعال کن.
-- ابتدا از ساده‌ترین قانون adaptation استفاده کن؛ attention یا شبکه اضافی اضافه نکن.
-- اگر آموزش ناپایدار شد، range مربوط به threshold و τ را محدود کن.
+1. Define the recent-activity signal.
+2. Define a bounded threshold adaptation rule.
+3. Implement the neuron as a separate, selectable cell.
+4. Add unit tests for shape, gradients, bounds, and deterministic behavior.
+5. Train on SHD seed 42.
+6. Compare accuracy, spike rate, gradient behavior, and stability with SE-adLIF.
 
-**خروجی:** مدل اصلی پروژه، **DA-LIF**.
+**Deliverable:** Dynamic-Threshold model and a controlled SHD ablation.
 
-## فاز ۶ — مقایسه اصلی روی SHD
+## Phase 4 — Dynamic Time Constant model
 
-| مدل | Accuracy | Params | Spike Rate | SynOps |
-| --- | --- | --- | --- | --- |
-| LIF | — | — | — | — |
-| SE-adLIF | 94.63% ± 0.86% | 450,760 | — | — |
-| Dynamic-θ | — | — | — | — |
-| Dynamic-τ | — | — | — | — |
-| DA-LIF | — | — | — | — |
+Keep the threshold mechanism unchanged and adapt only the time constant.
 
-**هدف:** دقت مشابه یا بهتر، با spike کمتر و SynOps کمتر.
+Tasks:
 
-## فاز ۷ — اجرای سه seed
+1. Define the activity-to-time-constant rule.
+2. Constrain the learned/adaptive time constant to a stable range.
+3. Add gradient and numerical-stability tests.
+4. Train on SHD seed 42 using the frozen protocol.
+5. Measure temporal accuracy, spike rate, and computational cost.
 
-- هنگام توسعه فقط از یک seed استفاده کن.
-- پس از freeze شدن معماری، seedهای `42`، `123` و `456` را اجرا کن.
-- نتیجه را به شکل `Mean ± SD` گزارش کن.
+**Deliverable:** Dynamic-Time-Constant model and an independent SHD ablation.
 
-**خروجی:** نتایج نهایی قابل‌استفاده در مقاله.
+## Phase 5 — Dual-Adaptive model
 
-## فاز ۸ — انتقال به دیتاست‌های بعدی
+Combine Dynamic Threshold and Dynamic Time Constant in the simplest stable
+form. Avoid adding attention or auxiliary networks until the direct adaptation
+rules have been evaluated.
 
-1. SHD برای توسعه.
-2. SSC برای آزمون temporal سخت‌تر.
-3. ECG/QTDB برای بررسی تعمیم به سیگنال زمانی غیرگفتاری.
+Tasks:
 
-**قانون:** ابتدا baseline هر دیتاست کامل شود؛ سپس همان پروتکل بدون تغییر برای مدل پیشنهادی اجرا شود.
+1. Combine both mechanisms in a new DA-LIF cell.
+2. Bound threshold and time-constant ranges.
+3. Verify forward behavior and surrogate-gradient flow.
+4. Train on SHD seed 42.
+5. Compare against SE-adLIF and both single-mechanism ablations.
 
-## فاز ۹ — آزمون Energy / Efficiency
+**Deliverable:** the primary DA-LIF model.
 
-- تعداد کل spikeها
-- Spike rate
-- SynOps
-- Latency
-- GPU memory
-- تعداد پارامترها
+## Phase 6 — SHD ablation and model selection
 
-**نکته مهم:** مقاله فقط درباره Accuracy نیست؛ باید نشان دهیم adaptive neuron واقعاً محاسبات را کاهش می‌دهد.
+Use a controlled comparison table:
 
-## فاز ۱۰ — آزمون‌های تکمیلی
+| Model | Accuracy | Parameters | Spike rate | SynOps | GFLOPs | Latency |
+|---|---:|---:|---:|---:|---:|---:|
+| SE-adLIF | 94.63% ± 0.86% | 450,760 | — | — | 0.2510 | — |
+| Dynamic Threshold | — | — | — | — | — | — |
+| Dynamic Time Constant | — | — | — | — | — | — |
+| DA-LIF | — | — | — | — | — | — |
 
-- کاهش timestep
-- حذف بخشی از eventها
-- اضافه‌کردن temporal noise
-- بررسی رفتار threshold و τ در طول زمان
+Select the architecture using validation performance and efficiency, not test
+accuracy. Freeze the selected architecture before multi-seed evaluation.
 
-**خروجی:** مشخص شود adaptation فقط Accuracy را تغییر نمی‌دهد، بلکه رفتار زمانی واقعی دارد.
+## Phase 7 — Three-seed evaluation
 
-## ترتیب اجرایی کار
+Run the frozen proposed architecture with seeds `42`, `123`, and `456`.
 
-1. تکمیل سه seed مدل SE-adLIF روی SHD
-2. اجرای سه seed مدل SE-adLIF روی SSC
-3. اجرای سه seed مدل SE-adLIF روی ECG/QTDB
-4. تجمیع نتایج baseline به شکل `Mean ± SD`
-5. پیاده‌سازی Dynamic Threshold
-6. آزمون مستقل Dynamic Threshold روی SHD
-7. پیاده‌سازی Dynamic Tau
-8. آزمون مستقل Dynamic Tau روی SHD
-9. ترکیب هر دو در DA-LIF
-10. مقایسه DA-LIF و SE-adLIF روی SHD
-11. Freeze کردن بهترین معماری
-12. اجرای سه seed مدل پیشنهادی روی SHD، SSC و ECG
-13. اندازه‌گیری spikeها، SynOps، latency و memory
-14. ساخت جدول‌ها و نمودارهای نهایی
+Report:
 
-## فعلاً چه کاری انجام ندهد
+- per-seed validation and final-test accuracy;
+- mean ± sample standard deviation;
+- parameter count and GFLOPs;
+- spike rate and SynOps;
+- training time, inference latency, and peak GPU memory.
 
-- سه دیتاست را هم‌زمان اجرا نکند؛ آن‌ها را به‌ترتیب کامل کند.
-- مدل را پیچیده نکند.
-- تا baseline درست نشده، روش جدید پیاده نکند.
-- فقط Accuracy را معیار موفقیت قرار ندهد.
-- در مرحله توسعه هر تغییر کوچک را روی هر سه seed اجرا نکند.
+**Deliverable:** statistically comparable SHD results.
 
-## تعریف ساده موفقیت پروژه
+## Phase 8 — Generalization to SSC and ECG/QTDB
 
-**Accuracy حفظ شود + Spike کمتر شود + SynOps کمتر شود**
+Apply the frozen model and comparison protocol in this order:
 
-اگر DA-LIF با دقت مشابه، فعالیت کمتری نسبت به LIF/adLIF داشته باشد، جهت اصلی پروژه درست است.
+1. SSC for a harder temporal speech task.
+2. ECG/QTDB for a non-speech temporal-signal task.
+
+Do not tune on the test split. Any dataset-specific hyperparameter changes must
+be documented and applied consistently to the SE-adLIF comparison.
+
+**Deliverable:** three-dataset evidence for generalization.
+
+## Phase 9 — Energy and efficiency evaluation
+
+Measure:
+
+- total spike count;
+- spike rate per layer and sample;
+- SynOps;
+- dense-equivalent FLOPs/GFLOPs;
+- inference latency;
+- peak GPU memory;
+- total and trainable parameters.
+
+Accuracy alone is insufficient. The central claim should show whether adaptive
+neurons reduce activity or computation without unacceptable accuracy loss.
+
+## Phase 10 — Robustness and final reporting
+
+Evaluate:
+
+- reduced timestep budgets;
+- dropped input events;
+- temporal noise;
+- threshold and time-constant trajectories;
+- sensitivity to adaptation bounds and coefficients.
+
+Prepare final tables, plots, ablations, method description, and limitations.
+
+## Immediate next actions
+
+1. Freeze the Phase 2 comparison protocol.
+2. Create a feature branch for proposed-model development.
+3. Specify the Dynamic Threshold equation and allowed range.
+4. Implement the Dynamic Threshold neuron and unit tests.
+5. Run the first controlled SHD seed-42 experiment.
+6. Compare it with the canonical SE-adLIF reference using accuracy and spike
+   activity.
+
+## Definition of success
+
+The project succeeds if DA-LIF provides comparable or better accuracy than
+SE-adLIF while measurably reducing spike activity and SynOps under the same
+evaluation protocol.
