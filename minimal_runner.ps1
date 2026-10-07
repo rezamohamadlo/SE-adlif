@@ -5,12 +5,16 @@ param(
     [ValidateSet("SHD")]
     [Alias("Dataset")]
     [string[]]$Datasets = @("SHD"),
+    # Experiment-config suffix. For example, SE_adLIF resolves to
+    # config/experiment/SHD_SE_adLIF.yaml.
+    [ValidatePattern("^[A-Za-z][A-Za-z0-9_-]*$")]
+    [string]$ModelVariant = "SE_adLIF",
     [ValidateRange(0, 10000)]
     [int]$Epochs = 0,
     [ValidateRange(0, 100000)]
     [int]$BatchSize = 0,
     [ValidateSet(0, 1)]
-    [int]$EarlyStopping = 50,
+    [int]$EarlyStopping = 0,
     [int]$EarlyStoppingPatience = 50,
     [double]$EarlyStoppingMinDelta = 0.001,
     [ValidateRange(0, 10000)]
@@ -18,7 +22,7 @@ param(
     [ValidateRange(0.000001, 0.999999)]
     [double]$LrSchedulerFactor = 0.9,
     [ValidateSet("reference", "ours")]
-    [string]$Mode = "ours",
+    [string]$Mode = "reference",
     [ValidateSet(0, 1)]
     [int]$Resume = 0,
     [string]$LogDir = "results/phase1_models"
@@ -38,11 +42,7 @@ if (-not (Test-Path -LiteralPath $Runner)) {
     throw "Experiment runner was not found at: $Runner"
 }
 
-$ModelName = if ($Mode -eq "reference") {
-    "SE-adLIF reference"
-} else {
-    "DA-LIF proposed model"
-}
+$ModelName = "$ModelVariant ($Mode)"
 
 $DatasetDefaults = @{
     SHD = @{ Epochs = 300; BatchSize = 512 }
@@ -50,8 +50,9 @@ $DatasetDefaults = @{
     ECG = @{ Epochs = 300; BatchSize = 512 }
 }
 
-Write-Host "Starting the Phase 1 model runs"
-Write-Host "  Mode:    $Mode ($ModelName)"
+Write-Host "Starting a minimal model-analysis run"
+Write-Host "  Mode:    $Mode"
+Write-Host "  Model variant: $ModelVariant"
 Write-Host "  Datasets: $($Datasets -join ', ')"
 Write-Host "  Seeds:   $($Seeds -join ', ')"
 Write-Host "  Early stopping: $EarlyStopping"
@@ -66,21 +67,36 @@ Write-Host "  Resume:  $Resume"
 Push-Location $ProjectRoot
 try {
     foreach ($Dataset in $Datasets) {
-        switch ("$Mode/$Dataset") {
-            "reference/SHD" { $Experiment = "SHD_SE_adLIF" }
-            "reference/SSC" { $Experiment = "SSC_SE_adLIF" }
-            "reference/ECG" { $Experiment = "ECG_SE_adLIF_2layer" }
-            "ours/SHD" { $Experiment = "SHD_DA_LIF" }
-            "ours/SSC" { $Experiment = "SSC_DA_LIF" }
-            "ours/ECG" { $Experiment = "ECG_DA_LIF_2layer" }
-        }
-
-        $ExperimentConfig = Join-Path $ProjectRoot "config\experiment\$Experiment.yaml"
-        if (-not (Test-Path -LiteralPath $ExperimentConfig)) {
-            throw "The '$Mode' model is not implemented yet. Expected configuration: $ExperimentConfig"
-        }
-
         $DatasetName = $Dataset.ToUpperInvariant()
+        $ExperimentCandidates = if ($DatasetName -eq "ECG") {
+            @(
+                "${DatasetName}_${ModelVariant}_2layer"
+                "${DatasetName}_${ModelVariant}"
+            )
+        } else {
+            @("${DatasetName}_${ModelVariant}")
+        }
+
+        $Experiment = $null
+        $ExperimentConfig = $null
+        foreach ($Candidate in $ExperimentCandidates) {
+            $CandidateConfig = Join-Path $ProjectRoot "config\experiment\$Candidate.yaml"
+            if (Test-Path -LiteralPath $CandidateConfig) {
+                $Experiment = $Candidate
+                $ExperimentConfig = $CandidateConfig
+                break
+            }
+        }
+
+        if ($null -eq $ExperimentConfig) {
+            $ExpectedConfigs = $ExperimentCandidates |
+                ForEach-Object { "config/experiment/$_.yaml" }
+            throw (
+                "Model variant '$ModelVariant' is not implemented for $DatasetName. " +
+                "Create one of: $($ExpectedConfigs -join ', ')"
+            )
+        }
+
         $DatasetEpochs = if ($Epochs -eq 0) {
             $DatasetDefaults[$DatasetName].Epochs
         } else {
@@ -91,7 +107,9 @@ try {
         } else {
             $BatchSize
         }
-        $ModeLogDir = "$LogDir/$Mode/$DatasetName"
+        # Keep variants isolated so development runs cannot overwrite the
+        # reference baseline or another proposed-model variant.
+        $ModeLogDir = "$LogDir/$Mode/$ModelVariant/$DatasetName"
 
         Write-Host ""
         Write-Host "Starting dataset $DatasetName"
