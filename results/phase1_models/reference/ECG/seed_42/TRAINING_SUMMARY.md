@@ -5,7 +5,7 @@ This file is updated automatically whenever training saves a new best checkpoint
 ## Run status
 
 - **Status:** Training and testing finished
-- **Progress:** 300 epochs completed (`0` through `299`) out of 300
+- **Progress:** 383 epochs completed (`0` through `382`) out of 383
 - **Dataset:** ECG
 - **Model:** ECG_SE_adLIF_2layer
 - **Seed:** 42
@@ -15,12 +15,12 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 | Metric | Value | Epoch |
 |---|---:|---:|
-| Best validation accuracy | **78.73%** | 297 |
-| Validation loss | **0.5964** | 297 |
-| Training accuracy | **80.50%** | 297 |
-| Training loss | **0.542262** | 297 |
-| Gradient norm | **0.0493** | 297 |
-| Learning rate | **0.00531441** | 297 |
+| Best validation accuracy | **86.34%** | 267 |
+| Validation loss | **0.3617** | 267 |
+| Training accuracy | **87.65%** | 267 |
+| Training loss | **0.333235** | 267 |
+| Gradient norm | **0.0369** | 267 |
+| Learning rate | **0.01** | 267 |
 
 ## Model size and computation
 
@@ -36,18 +36,18 @@ The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds
 ## Best checkpoint
 
 ```text
-ckpt/epoch=297-step=298.ckpt
+ckpt/epoch=267-step=2412.ckpt
 ```
 
 ## Main hyperparameters
 
 | Hyperparameter | Value |
 |---|---:|
-| Epoch limit | 300 |
-| Batch size | 512 |
+| Epoch limit | 400 |
+| Batch size | 64 |
 | Initial learning rate | 0.01 |
 | LR scheduler factor | 0.9 |
-| LR scheduler patience | 15 |
+| LR scheduler patience | 9999 |
 | Early stopping | false |
 | Early-stopping patience | 50 |
 | Early-stopping minimum delta | 0.001 |
@@ -66,7 +66,7 @@ ckpt/epoch=297-step=298.ckpt
 ## Resume command
 
 ```powershell
-.\run_phase1_se_adlif.ps1 -Mode reference -Datasets ECG -Seeds 42 -Epochs 300 -BatchSize 512 -EarlyStopping 0 -LrSchedulerPatience 15 -LrSchedulerFactor 0.9 -Resume 1 -LogDir results/phase1_models
+.\run_phase1_se_adlif.ps1 -Mode reference -Datasets ECG -Seeds 42 -Epochs 400 -BatchSize 64 -EarlyStopping 0 -LrSchedulerPatience 9999 -LrSchedulerFactor 0.9 -Resume 1 -LogDir results/phase1_models
 ```
 
 ## Evaluation note
@@ -79,5 +79,5 @@ The best validation checkpoint was evaluated on the test split after training.
 
 | Metric | Value |
 |---|---:|
-| Test accuracy | **84.03%** |
-| Test loss | **0.4387** |
+| Test accuracy | **88.13%** |
+| Test loss | **0.3119** |

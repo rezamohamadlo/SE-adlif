@@ -1,26 +1,26 @@
-# ECG_SE_adLIF_2layer Training Summary — Seed 123
+# ECG_SE_adLIF_2layer Training Summary — Seed 456
 
 This file is updated automatically whenever training saves a new best checkpoint.
 
 ## Run status
 
 - **Status:** Training and testing finished
-- **Progress:** 284 epochs completed (`0` through `283`) out of 400
+- **Progress:** 186 epochs completed (`0` through `185`) out of 400
 - **Dataset:** ECG
 - **Model:** ECG_SE_adLIF_2layer
-- **Seed:** 123
+- **Seed:** 456
 - **Device:** cuda:0
 
 ## Best result
 
 | Metric | Value | Epoch |
 |---|---:|---:|
-| Best validation accuracy | **86.18%** | 232 |
-| Validation loss | **0.3765** | 232 |
-| Training accuracy | **87.40%** | 232 |
-| Training loss | **0.338932** | 232 |
-| Gradient norm | **0.1065** | 232 |
-| Learning rate | **0.01** | 232 |
+| Best validation accuracy | **84.77%** | 168 |
+| Validation loss | **0.4003** | 168 |
+| Training accuracy | **86.18%** | 168 |
+| Training loss | **0.373298** | 168 |
+| Gradient norm | **0.1313** | 168 |
+| Learning rate | **0.01** | 168 |
 
 ## Model size and computation
 
@@ -36,7 +36,7 @@ The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds
 ## Best checkpoint
 
 ```text
-ckpt/epoch=232-step=2097.ckpt
+ckpt/epoch=168-step=1521.ckpt
 ```
 
 ## Main hyperparameters
@@ -66,7 +66,7 @@ ckpt/epoch=232-step=2097.ckpt
 ## Resume command
 
 ```powershell
-.\run_phase1_se_adlif.ps1 -Mode reference -Datasets ECG -Seeds 123 -Epochs 400 -BatchSize 64 -EarlyStopping 1 -LrSchedulerPatience 9999 -LrSchedulerFactor 0.9 -Resume 1 -LogDir results/phase1_models
+.\run_phase1_se_adlif.ps1 -Mode reference -Datasets ECG -Seeds 456 -Epochs 400 -BatchSize 64 -EarlyStopping 1 -LrSchedulerPatience 9999 -LrSchedulerFactor 0.9 -Resume 1 -LogDir results/phase1_models
 ```
 
 ## Evaluation note
@@ -79,5 +79,5 @@ The best validation checkpoint was evaluated on the test split after training.
 
 | Metric | Value |
 |---|---:|
-| Test accuracy | **88.72%** |
-| Test loss | **0.3045** |
+| Test accuracy | **88.11%** |
+| Test loss | **0.3186** |
