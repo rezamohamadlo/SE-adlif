@@ -278,6 +278,8 @@ The best validation checkpoint was evaluated on the test split after training.
             f" -ModelVariant {self.cfg.model_variant}"
             if self.cfg.get("model_variant") else ""
         )
+        if self.cfg.get("model_variant") == "MR_SE_adLIF":
+            variant_argument += f" -AdaptationUpdateInterval {self.cfg.adaptation_update_interval}"
         resume_command = (
             f".\\.venv\\Scripts\\python.exe full_runner.py {self.cfg.model_variant}"
             if launcher_script == "full_runner.py" else

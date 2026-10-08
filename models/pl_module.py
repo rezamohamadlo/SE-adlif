@@ -8,6 +8,7 @@ from omegaconf import DictConfig
 from models.alif import EFAdLIF, SEAdLIF
 from models.ours.dth_adlif import DTHSEAdLIF
 from models.ours.mt_adlif import MTSEAdLIF
+from models.ours.mr_adlif import MRSEAdLIF
 from models.li import LI
 from models.lif import LIF
 from models.rnn import LSTMCellWrapper
@@ -18,6 +19,7 @@ layer_map = {
     "se_adlif": SEAdLIF,
     "dth_se_adlif": DTHSEAdLIF,
     "mt_se_adlif": MTSEAdLIF,
+    "mr_se_adlif": MRSEAdLIF,
     "ef_adlif": EFAdLIF,
     'lstm': LSTMCellWrapper,
 }

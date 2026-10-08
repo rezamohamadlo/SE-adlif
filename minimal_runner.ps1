@@ -10,6 +10,8 @@ param(
     # config/experiment/SHD_SE_adLIF.yaml.
     [ValidatePattern("^[A-Za-z][A-Za-z0-9_-]*$")]
     [string]$ModelVariant = "SE_adLIF",
+    [ValidateRange(1, 2147483647)]
+    [int]$AdaptationUpdateInterval = 1,
     [ValidateRange(0, 10000)]
     [int]$Epochs = 300,
     [ValidateRange(0, 100000)]
@@ -30,6 +32,11 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+if ($ModelVariant -eq "MR_SE_adLIF") {
+    if (-not $PSBoundParameters.ContainsKey('BatchSize')) { $BatchSize = 256 }
+} elseif ($PSBoundParameters.ContainsKey('AdaptationUpdateInterval')) {
+    throw 'AdaptationUpdateInterval is supported only for MR_SE_adLIF.'
+}
 
 $ProjectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Python = Join-Path $ProjectRoot ".venv\Scripts\python.exe"
@@ -111,6 +118,9 @@ try {
         # Keep variants isolated so development runs cannot overwrite the
         # reference baseline or another proposed-model variant.
         $ModeLogDir = "$LogDir/$Mode/$ModelVariant/$DatasetName"
+        if ($ModelVariant -eq "MR_SE_adLIF") {
+            $ModeLogDir = "$LogDir/$Mode/$ModelVariant/K_$AdaptationUpdateInterval/$DatasetName"
+        }
 
         Write-Host ""
         Write-Host "Starting dataset $DatasetName"
@@ -173,6 +183,10 @@ try {
             "factor=$LrSchedulerFactor"
             "hydra.run.dir=$HydraRunDir"
         )
+
+        if ($ModelVariant -eq "MR_SE_adLIF") {
+            $Overrides += "adaptation_update_interval=$AdaptationUpdateInterval"
+        }
 
         if ($null -ne $ResumeCheckpoint) {
             Write-Host "  Resuming: $($ResumeCheckpoint.FullName)"
