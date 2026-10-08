@@ -1,0 +1,15 @@
+# @package _global_
+defaults:
+  - SHD_SE_adLIF
+  - _self_
+
+exp_name: SHD_FP_SE_adLIF
+# Hz; dt and tau in the inherited neuron config are milliseconds.
+frequency_range_hz: [1.0, 50.0]
+
+l1:
+  cell: fp_se_adlif
+  frequency_range_hz: ${frequency_range_hz}
+l2:
+  cell: fp_se_adlif
+  frequency_range_hz: ${frequency_range_hz}
