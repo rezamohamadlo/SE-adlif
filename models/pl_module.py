@@ -10,6 +10,7 @@ from models.ours.dth_adlif import DTHSEAdLIF
 from models.ours.mt_adlif import MTSEAdLIF
 from models.ours.mr_adlif import MRSEAdLIF
 from models.ours.fp_adlif import FPSEAdLIF
+from models.ours.da_adlif import DASEAdLIF
 from models.li import LI
 from models.lif import LIF
 from models.rnn import LSTMCellWrapper
@@ -22,6 +23,7 @@ layer_map = {
     "mt_se_adlif": MTSEAdLIF,
     "mr_se_adlif": MRSEAdLIF,
     "fp_se_adlif": FPSEAdLIF,
+    "da_se_adlif": DASEAdLIF,
     "ef_adlif": EFAdLIF,
     'lstm': LSTMCellWrapper,
 }

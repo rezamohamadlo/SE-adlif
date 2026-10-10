@@ -1,0 +1,16 @@
+# @package _global_
+# Preserve the reference architecture and neuron dynamics; filter only input current.
+defaults:
+  - SHD_SE_adLIF
+  - _self_
+
+exp_name: SHD_DA_SE_adLIF
+# Fixed causal positions; only their mixing weights and gate are learned.
+delay_frames: [1, 2, 4]
+
+l1:
+  cell: da_se_adlif
+  delay_frames: ${delay_frames}
+l2:
+  cell: da_se_adlif
+  delay_frames: ${delay_frames}
