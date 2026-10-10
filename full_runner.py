@@ -31,7 +31,10 @@ def result_root(model, adaptation_update_interval=2):
     return root / f"K_{adaptation_update_interval}" if model == "MR_SE_adLIF" else root
 
 
-def build_plan(model, adaptation_update_interval=2):
+def build_plan(model, adaptation_update_interval=2, seeds=SEEDS):
+    seeds = tuple(dict.fromkeys(seeds))
+    if not seeds or any(isinstance(seed, bool) or seed not in SEEDS for seed in seeds):
+        raise ValueError(f"Select one or more canonical seeds: {SEEDS}")
     if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]*", model):
         raise ValueError("Model must be an experiment suffix, for example MT_SE_adLIF")
     if (isinstance(adaptation_update_interval, bool)
@@ -43,7 +46,7 @@ def build_plan(model, adaptation_update_interval=2):
             experiment = f"{dataset}_{model}" + ("_2layer" if dataset == "ECG" else "")
             if not (ROOT / "config" / "experiment" / f"{experiment}.yaml").is_file():
                 raise ValueError(f"Missing experiment config: config/experiment/{experiment}.yaml")
-            for seed in SEEDS:
+            for seed in seeds:
                 directory = result_root(model, adaptation_update_interval) / dataset / f"seed_{seed}"
                 overrides = [
                     f"experiment={experiment}", f"random_seed={seed}",
@@ -140,8 +143,8 @@ def write_aggregate(model, adaptation_update_interval=2):
     temporary.replace(root / "RESULTS.md")
 
 
-def run(model, adaptation_update_interval=2):
-    plan = build_plan(model, adaptation_update_interval)  # Preflight all nine before writes.
+def run(model, adaptation_update_interval=2, seeds=SEEDS):
+    plan = build_plan(model, adaptation_update_interval, seeds)  # Preflight selected runs before writes.
     for item in plan:
         directory = item["directory"]
         print(f"{item['dataset']} seed {item['seed']}: {item['status']} -> {directory}", flush=True)
@@ -166,12 +169,14 @@ if __name__ == "__main__":
     parser.add_argument("models", nargs="+", help="SE_adLIF, DTH_SE_adLIF, MT_SE_adLIF, or configured future models")
     parser.add_argument("--adaptation-update-interval", type=int, default=2,
                         help="Fixed K for MR_SE_adLIF only (default: 2)")
+    parser.add_argument("--seeds", nargs="+", type=int, choices=SEEDS, default=SEEDS,
+                        help="Training seeds to run (default: 42 123 456)")
     parser.add_argument("--dry-run", action="store_true", help="Validate and display plans without training or writes")
     args = parser.parse_args()
     try:
         # Preserve order and avoid scheduling duplicate model suites.
         models = list(dict.fromkeys(args.models))
-        plans = [(model, build_plan(model, args.adaptation_update_interval)) for model in models]
+        plans = [(model, build_plan(model, args.adaptation_update_interval, args.seeds)) for model in models]
         if args.dry_run:
             for model, plan in plans:
                 for item in plan:
@@ -179,7 +184,7 @@ if __name__ == "__main__":
             print(f"Validated {sum(len(plan) for _, plan in plans)} runs; no training or writes.")
         else:
             for model in models:
-                run(model, args.adaptation_update_interval)
+                run(model, args.adaptation_update_interval, args.seeds)
     except KeyboardInterrupt:
         print("Interrupted. Rerun the same command to resume.", file=sys.stderr)
         sys.exit(130)

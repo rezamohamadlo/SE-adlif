@@ -34,6 +34,19 @@ Append `--dry-run` to preflight all runs without training or writing files.
 Rerun the same command to resume incomplete runs and skip completed runs.
 Configuration manifests prevent incompatible checkpoint reuse.
 
+For two-stage training, run seed 42 first (9 runs), then seeds 123 and 456
+(18 runs). Both commands use the same protocol, output paths and aggregate
+report. Seed selection does not change experiment configurations.
+
+```powershell
+.\.venv\Scripts\python.exe full_runner.py DTH_SE_adLIF DA_SE_adLIF MR_SE_adLIF --adaptation-update-interval 2 --seeds 42
+.\.venv\Scripts\python.exe full_runner.py DTH_SE_adLIF DA_SE_adLIF MR_SE_adLIF --adaptation-update-interval 2 --seeds 123 456
+```
+
+Stop any already running full suite before switching commands; editing the
+launcher does not change the queue of an existing process. Resume a stage with
+its exact command above, not the seed-unrestricted command in an older summary.
+
 Results are saved under `results/full_runs/protocol_v2/<model>/<dataset>/seed_<seed>/`;
 MR adds `K_2` between model and dataset. Each model/K has a separate `RESULTS.md`
 with final-test mean and sample SD from completed seeds only.

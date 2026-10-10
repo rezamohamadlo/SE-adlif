@@ -65,6 +65,23 @@ class FullRunnerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             full_runner.build_plan("MT_SE_adLIF")
 
+    def test_two_stage_seed_selection_preserves_config_and_paths(self):
+        for model in ('DTH_SE_adLIF', 'DA_SE_adLIF', 'MR_SE_adLIF'):
+            complete = full_runner.build_plan(model)
+            first = full_runner.build_plan(model, seeds=(42, 42))
+            second = full_runner.build_plan(model, seeds=(123, 456))
+            self.assertEqual(len(first), 3)
+            self.assertEqual(len(second), 6)
+            self.assertEqual({x['seed'] for x in first}, {42})
+            self.assertEqual({x['seed'] for x in second}, {123, 456})
+            for item in first + second:
+                original = next(x for x in complete if x['directory'] == item['directory'])
+                self.assertEqual(item['config'], original['config'])
+                self.assertEqual(item['overrides'], original['overrides'])
+        for seeds in ((), (0,), (True,)):
+            with self.assertRaises(ValueError):
+                full_runner.build_plan('DTH_SE_adLIF', seeds=seeds)
+
     def test_aggregate_only_completed_seeds(self):
         for seed, value, complete in ((42, .90, True), (123, .92, True), (456, .99, False)):
             directory = full_runner.result_root('MT_SE_adLIF') / 'SHD' / f'seed_{seed}'
