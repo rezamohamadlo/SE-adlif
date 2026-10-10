@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - ECG_SE_adLIF_2layer
+  - _self_
+exp_name: ECG_MR_SE_adLIF_2layer
+adaptation_update_interval: 2
+l1:
+  cell: mr_se_adlif
+  adaptation_update_interval: ${adaptation_update_interval}
+l2:
+  cell: mr_se_adlif
+  adaptation_update_interval: ${adaptation_update_interval}

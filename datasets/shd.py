@@ -1,4 +1,7 @@
 import math
+import hashlib
+import json
+import re
 from typing import Optional
 
 import h5py
@@ -76,6 +79,7 @@ class SHDLDM(pl.LightningDataModule):
         additional_test_set_validation: bool = False,
         random_seed=42,
         ignore_first_timesteps: int = 10,
+        cache_namespace: str = None,
     ) -> None:
         super().__init__()
         # workaround in order to use the same training loop
@@ -87,6 +91,20 @@ class SHDLDM(pl.LightningDataModule):
             
         self.data_path = data_path
         self.cache_path = data_path + "/cache/SHD"
+        # Opt-in isolation preserves legacy paths and prevents subset-local
+        # cache indices from referring to different samples after split changes.
+        if cache_namespace is not None:
+            if not re.fullmatch(r"[A-Za-z0-9_-]+", cache_namespace):
+                raise ValueError("cache_namespace must contain only letters, digits, '_' or '-'")
+            signature = json.dumps(dict(
+                spatial_factor=spatial_factor, time_factor=time_factor,
+                window_size=window_size, pad_to_min_size=pad_to_min_size,
+                validate_on=validate_on, random_seed=random_seed,
+                ignore_first_timesteps=ignore_first_timesteps,
+                bias_for_test_set=bias_for_test_set, test_bias_variant=test_bias_variant,
+            ), sort_keys=True)
+            digest = hashlib.sha256(signature.encode()).hexdigest()[:16]
+            self.cache_path = os.path.join(self.cache_path, f"{cache_namespace}_{digest}")
         self.spatial_factor = spatial_factor
         self.time_factor = time_factor
         self.window_size = window_size

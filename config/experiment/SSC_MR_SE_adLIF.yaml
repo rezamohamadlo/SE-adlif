@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - SSC_SE_adLIF
+  - _self_
+exp_name: SSC_MR_SE_adLIF
+adaptation_update_interval: 2
+l1:
+  cell: mr_se_adlif
+  adaptation_update_interval: ${adaptation_update_interval}
+l2:
+  cell: mr_se_adlif
+  adaptation_update_interval: ${adaptation_update_interval}

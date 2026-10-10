@@ -282,6 +282,8 @@ The best validation checkpoint was evaluated on the test split after training.
             variant_argument += f" -AdaptationUpdateInterval {self.cfg.adaptation_update_interval}"
         resume_command = (
             f".\\.venv\\Scripts\\python.exe full_runner.py {self.cfg.model_variant}"
+            + (f" --adaptation-update-interval {self.cfg.adaptation_update_interval}"
+               if self.cfg.get("model_variant") == "MR_SE_adLIF" else "")
             if launcher_script == "full_runner.py" else
             f".\\{launcher_script} -Mode {mode}{variant_argument}{dataset_seed_arguments} "
             f"-Epochs {self.cfg.n_epochs} -BatchSize {dataset_cfg.batch_size} "

@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - ECG_SE_adLIF_2layer
+  - _self_
+exp_name: ECG_DA_SE_adLIF_2layer
+delay_frames: [1, 2, 4]
+l1:
+  cell: da_se_adlif
+  delay_frames: ${delay_frames}
+l2:
+  cell: da_se_adlif
+  delay_frames: ${delay_frames}

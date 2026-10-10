@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - SSC_SE_adLIF
+  - _self_
+exp_name: SSC_DA_SE_adLIF
+delay_frames: [1, 2, 4]
+l1:
+  cell: da_se_adlif
+  delay_frames: ${delay_frames}
+l2:
+  cell: da_se_adlif
+  delay_frames: ${delay_frames}

@@ -16,6 +16,8 @@ from omegaconf import OmegaConf
 
 ROOT = Path(__file__).resolve().parent
 SEEDS = (42, 123, 456)
+RUN_LOGDIR = "results/full_runs/protocol_v2"
+SPLIT_SEED = 42
 # One explicit protocol shared by reference and proposed models.
 PROTOCOL = {
     "SHD": {"epochs": 300, "batch_size": 512, "early_stopping": True},
@@ -24,9 +26,17 @@ PROTOCOL = {
 }
 
 
-def build_plan(model):
+def result_root(model, adaptation_update_interval=2):
+    root = ROOT / RUN_LOGDIR / model
+    return root / f"K_{adaptation_update_interval}" if model == "MR_SE_adLIF" else root
+
+
+def build_plan(model, adaptation_update_interval=2):
     if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]*", model):
         raise ValueError("Model must be an experiment suffix, for example MT_SE_adLIF")
+    if (isinstance(adaptation_update_interval, bool)
+            or not isinstance(adaptation_update_interval, int) or adaptation_update_interval < 1):
+        raise ValueError("adaptation_update_interval must be a positive integer")
     plan = []
     with initialize_config_dir(config_dir=str(ROOT / "config"), version_base=None):
         for dataset, settings in PROTOCOL.items():
@@ -34,7 +44,7 @@ def build_plan(model):
             if not (ROOT / "config" / "experiment" / f"{experiment}.yaml").is_file():
                 raise ValueError(f"Missing experiment config: config/experiment/{experiment}.yaml")
             for seed in SEEDS:
-                directory = ROOT / "results" / "full_runs" / model / dataset / f"seed_{seed}"
+                directory = result_root(model, adaptation_update_interval) / dataset / f"seed_{seed}"
                 overrides = [
                     f"experiment={experiment}", f"random_seed={seed}",
                     f"n_epochs={settings['epochs']}",
@@ -47,8 +57,16 @@ def build_plan(model):
                     f"hydra.run.dir={json.dumps(directory.as_posix())}",
                     "++launcher_script=full_runner.py", f"++model_variant={model}",
                     f"++run_mode={'reference' if model == 'SE_adLIF' else 'ours'}",
-                    "++launcher_logdir=results/full_runs",
+                    f"++launcher_logdir={RUN_LOGDIR}",
+                    "++evaluation_protocol=controlled_v2",
                 ]
+                if dataset == "SHD":
+                    overrides += ["dataset.validate_on=0.2", f"++dataset.random_seed={SPLIT_SEED}",
+                                  "++dataset.cache_namespace=controlled_v2"]
+                elif dataset == "ECG":
+                    overrides += ["dataset.valid_fraction=0.05", f"dataset.random_seed={SPLIT_SEED}"]
+                if model == "MR_SE_adLIF":
+                    overrides.append(f"adaptation_update_interval={adaptation_update_interval}")
                 cfg = compose(config_name="main", overrides=overrides)
                 resolved = OmegaConf.to_container(cfg, resolve=True)
                 # Validate model registry, architecture and temporal aggregation
@@ -85,14 +103,17 @@ def build_plan(model):
     return plan
 
 
-def write_aggregate(model):
-    root = ROOT / "results" / "full_runs" / model
+def write_aggregate(model, adaptation_update_interval=2):
+    root = result_root(model, adaptation_update_interval)
     lines = [f"# {model}: full evaluation", "", "Statistics use final test accuracy from completed runs only.",
-             "SHD uses the test split for checkpoint selection; it is not an unbiased test estimate.", "",
+             "Controlled v2: SHD uses 20% training-derived validation; ECG uses 5%; split seed is 42.",
+             "SSC uses official train/valid/test. Test evaluation follows validation checkpoint selection.", "",
              "Protocol: SHD 300/512, SSC 40/256, ECG 400/64 (epochs/batch).",
              "LR scheduler patience 9999; SHD/ECG early stopping patience 50, min_delta 0.001; SSC fixed 40 epochs.", "",
              "| Dataset | Seed 42 | Seed 123 | Seed 456 | n | Mean ± sample SD |",
              "|---|---:|---:|---:|---:|---:|"]
+    if model == "MR_SE_adLIF":
+        lines.insert(2, f"Adaptation update interval K={adaptation_update_interval}.")
     for dataset in PROTOCOL:
         values = []
         cells = []
@@ -119,8 +140,8 @@ def write_aggregate(model):
     temporary.replace(root / "RESULTS.md")
 
 
-def run(model):
-    plan = build_plan(model)  # Preflight all nine experiments before any writes.
+def run(model, adaptation_update_interval=2):
+    plan = build_plan(model, adaptation_update_interval)  # Preflight all nine before writes.
     for item in plan:
         directory = item["directory"]
         print(f"{item['dataset']} seed {item['seed']}: {item['status']} -> {directory}", flush=True)
@@ -132,25 +153,33 @@ def run(model):
         )
         result = subprocess.run([sys.executable, str(ROOT / "run.py"), *item["overrides"]], cwd=ROOT)
         if result.returncode:
-            write_aggregate(model)
+            write_aggregate(model, adaptation_update_interval)
             raise RuntimeError(f"Run failed ({result.returncode}). Rerun the same command to resume: {directory}")
         (directory / "completed.txt").write_text("Training and final test evaluation completed.\n", encoding="utf-8")
-        write_aggregate(model)
-    write_aggregate(model)
-    print(f"Finished. Report: results/full_runs/{model}/RESULTS.md")
+        write_aggregate(model, adaptation_update_interval)
+    write_aggregate(model, adaptation_update_interval)
+    print(f"Finished. Report: {result_root(model, adaptation_update_interval) / 'RESULTS.md'}")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("models", nargs="+", help="SE_adLIF, DTH_SE_adLIF, MT_SE_adLIF, or configured future models")
+    parser.add_argument("--adaptation-update-interval", type=int, default=2,
+                        help="Fixed K for MR_SE_adLIF only (default: 2)")
+    parser.add_argument("--dry-run", action="store_true", help="Validate and display plans without training or writes")
     args = parser.parse_args()
     try:
         # Preserve order and avoid scheduling duplicate model suites.
         models = list(dict.fromkeys(args.models))
-        for model in models:
-            build_plan(model)
-        for model in models:
-            run(model)
+        plans = [(model, build_plan(model, args.adaptation_update_interval)) for model in models]
+        if args.dry_run:
+            for model, plan in plans:
+                for item in plan:
+                    print(f"{model} {item['dataset']} seed {item['seed']}: {item['status']} -> {item['directory']}")
+            print(f"Validated {sum(len(plan) for _, plan in plans)} runs; no training or writes.")
+        else:
+            for model in models:
+                run(model, args.adaptation_update_interval)
     except KeyboardInterrupt:
         print("Interrupted. Rerun the same command to resume.", file=sys.stderr)
         sys.exit(130)
