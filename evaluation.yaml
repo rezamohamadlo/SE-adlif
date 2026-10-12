@@ -1,0 +1,33 @@
+# Shared comparison settings. Model architecture remains in experiment configs.
+name: controlled_v2
+seeds: [42, 123, 456]
+common:
+  dataset.num_workers: 0
+  patience: 9999
+  factor: 0.9
+  early_stopping_patience: 50
+  early_stopping_min_delta: 0.001
+datasets:
+  SHD:
+    n_epochs: 300
+    batch_size: 512
+    dataset.batch_size: 512
+    lr: 0.01
+    early_stopping: true
+    dataset.validate_on: 0.2
+    dataset.random_seed: 42
+    dataset.cache_namespace: controlled_v2
+  SSC:
+    n_epochs: 40
+    batch_size: 256
+    dataset.batch_size: 256
+    lr: 0.006
+    early_stopping: false
+  ECG:
+    n_epochs: 400
+    batch_size: 64
+    dataset.batch_size: 64
+    lr: 0.01
+    early_stopping: true
+    dataset.valid_fraction: 0.05
+    dataset.random_seed: 42

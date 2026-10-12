@@ -281,10 +281,11 @@ The best validation checkpoint was evaluated on the test split after training.
         if self.cfg.get("model_variant") == "MR_SE_adLIF":
             variant_argument += f" -AdaptationUpdateInterval {self.cfg.adaptation_update_interval}"
         resume_command = (
-            f".\\.venv\\Scripts\\python.exe full_runner.py {self.cfg.model_variant}"
+            f".\\.venv\\Scripts\\python.exe runner.py --models {self.cfg.model_variant}"
             + (f" --adaptation-update-interval {self.cfg.adaptation_update_interval}"
                if self.cfg.get("model_variant") == "MR_SE_adLIF" else "")
-            if launcher_script == "full_runner.py" else
+            + f" --datasets {dataset_name} --seeds {self.cfg.random_seed}"
+            if launcher_script in ("full_runner.py", "runner.py") else
             f".\\{launcher_script} -Mode {mode}{variant_argument}{dataset_seed_arguments} "
             f"-Epochs {self.cfg.n_epochs} -BatchSize {dataset_cfg.batch_size} "
             f"-EarlyStopping {1 if early_stopping else 0} "
@@ -401,6 +402,8 @@ class AppendCSVLogger(CSVLogger):
 
 @hydra.main(config_path="config", config_name="main", version_base=None)
 def main(cfg: DictConfig):
+    from evaluation_protocol import apply_protocol
+    apply_protocol(cfg)
     logging.getLogger().addHandler(logging.FileHandler("out.log"))
     logging.info(f"Experiment name: {cfg.exp_name}")
     pl.seed_everything(cfg.random_seed, workers=True)

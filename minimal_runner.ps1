@@ -28,7 +28,9 @@ param(
     [string]$Mode = "ours",
     [ValidateSet(0, 1)]
     [int]$Resume = 0,
-    [string]$LogDir = "results/model_development"
+    [string]$LogDir = "results/model_development",
+    [ValidateSet('', 'controlled_v2')]
+    [string]$Protocol = ''
 )
 
 $ErrorActionPreference = "Stop"
@@ -197,6 +199,10 @@ try {
             Write-Host "  No last checkpoint found; starting this seed from the beginning."
         }
 
+        if ($Protocol) {
+            $ProtocolPath = (Join-Path $ProjectRoot 'evaluation.yaml') -replace '\\', '/'
+            $Overrides += "++evaluation_file=$($ProtocolPath | ConvertTo-Json -Compress)"
+        }
         & $Python $Runner @Overrides
 
         $TrainingExitCode = $LASTEXITCODE

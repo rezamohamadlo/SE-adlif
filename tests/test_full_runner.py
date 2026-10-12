@@ -10,10 +10,44 @@ import contextlib
 import io
 import torch
 
-import full_runner
+import runner as full_runner
 
 
 class FullRunnerTests(unittest.TestCase):
+    def test_cli_overrides_are_applied_and_isolated(self):
+        original = full_runner.EVALUATION
+        captured = []
+        build = full_runner.build_plan
+        def inspect(*args):
+            plan = build(*args)
+            captured.extend(plan)
+            return plan
+        with patch.object(full_runner, 'build_plan', side_effect=inspect):
+            with contextlib.redirect_stdout(io.StringIO()):
+                full_runner.main(['--models', 'SE_adLIF', '--datasets', 'SHD',
+                                  '--seeds', '42', '--epochs', '12', '--batch-size', '32',
+                                  '--lr', '0.002', '--early-stopping', 'false', '--dry-run'])
+        cfg = captured[0]['config']
+        self.assertEqual(cfg['n_epochs'], 12)
+        self.assertEqual(cfg['batch_size'], 32)
+        self.assertEqual(cfg['dataset']['batch_size'], 32)
+        self.assertEqual(cfg['lr'], .002)
+        self.assertFalse(cfg['early_stopping'])
+        self.assertEqual(cfg['dataset']['validate_on'], .2)
+        self.assertIn('experiments', captured[0]['directory'].parts)
+        self.assertIn('_custom_', cfg['evaluation_protocol'])
+        self.assertIs(full_runner.EVALUATION, original)
+
+    def test_cli_selects_models_datasets_and_seeds_without_training(self):
+        with patch.object(full_runner, 'run') as train:
+            with contextlib.redirect_stdout(io.StringIO()) as output:
+                full_runner.main(['--models', 'SE_adLIF', 'DTH_SE_adLIF',
+                                  '--datasets', 'SHD', '--seeds', '123', '--dry-run'])
+            train.assert_not_called()
+            self.assertIn('Validated 2 runs', output.getvalue())
+            self.assertNotIn(' SSC ', output.getvalue())
+            self.assertNotIn(' ECG ', output.getvalue())
+
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)

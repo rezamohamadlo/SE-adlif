@@ -8,7 +8,7 @@ param(
     [ValidateRange(0, 100000)]
     [int]$BatchSize = 0,
     [ValidateSet(0, 1)]
-    [int]$EarlyStopping = 50,
+    [int]$EarlyStopping = 1,
     [int]$EarlyStoppingPatience = 50,
     [double]$EarlyStoppingMinDelta = 0.001,
     [ValidateRange(0, 10000)]
@@ -19,7 +19,9 @@ param(
     [string]$Mode = "reference",
     [ValidateSet(0, 1)]
     [int]$Resume = 0,
-    [string]$LogDir = "results/phase1_models"
+    [string]$LogDir = "results/phase1_models",
+    [ValidateSet('', 'controlled_v2')]
+    [string]$Protocol = ''
 )
 
 $ErrorActionPreference = "Stop"
@@ -158,6 +160,10 @@ try {
             Write-Host "  No last checkpoint found; starting this seed from the beginning."
         }
 
+        if ($Protocol) {
+            $ProtocolPath = (Join-Path $ProjectRoot 'evaluation.yaml') -replace '\\', '/'
+            $Overrides += "++evaluation_file=$($ProtocolPath | ConvertTo-Json -Compress)"
+        }
         & $Python $Runner @Overrides
 
         $TrainingExitCode = $LASTEXITCODE
