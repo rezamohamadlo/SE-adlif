@@ -20,7 +20,7 @@ from evaluation_protocol import load_protocol, protocol_overrides, protocol_sett
 ROOT = Path(__file__).resolve().parent
 EVALUATION = load_protocol()
 SEEDS = tuple(EVALUATION['seeds'])
-RUN_LOGDIR = "results/full_runs/protocol_v2"
+RUN_LOGDIR = "results/valid/protocol_v2"
 # One explicit protocol shared by reference and proposed models.
 PROTOCOL = EVALUATION['datasets']
 
@@ -50,13 +50,23 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None):
                 raise ValueError(f"Missing experiment config: config/experiment/{experiment}.yaml")
             for seed in seeds:
                 directory = result_root(model, adaptation_update_interval) / dataset / f"seed_{seed}"
+                # Leave active historical-layout jobs in place until they finish.
+                if RUN_LOGDIR == 'results/valid/protocol_v2' and not directory.exists():
+                    legacy = ROOT / 'results/full_runs/protocol_v2' / model
+                    if model == 'MR_SE_adLIF':
+                        legacy /= f'K_{adaptation_update_interval}'
+                    legacy = legacy / dataset / f'seed_{seed}'
+                    if legacy.exists():
+                        directory = legacy
+                launcher_root = directory.parents[2] if model != 'MR_SE_adLIF' else directory.parents[3]
+                launcher_logdir = launcher_root.relative_to(ROOT).as_posix()
                 overrides = [
                     f"experiment={experiment}", f"random_seed={seed}",
                     f"logdir={json.dumps(directory.as_posix())}",
                     f"hydra.run.dir={json.dumps(directory.as_posix())}",
                     "++launcher_script=runner.py", f"++model_variant={model}",
                     f"++run_mode={'reference' if model == 'SE_adLIF' else 'ours'}",
-                    f"++launcher_logdir={RUN_LOGDIR}",
+                    f"++launcher_logdir={launcher_logdir}",
                     f"++evaluation_protocol={EVALUATION['name']}",
                 ]
                 overrides += protocol_overrides(EVALUATION, dataset)
@@ -80,6 +90,12 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None):
                     # The public launcher rename does not change training settings.
                     if previous.get('launcher_script') == 'full_runner.py':
                         previous['launcher_script'] = 'runner.py'
+                    if (RUN_LOGDIR == 'results/valid/protocol_v2'
+                            and previous.get('launcher_logdir') == 'results/full_runs/protocol_v2'
+                            and str(previous.get('logdir', '')).replace('\\', '/') ==
+                            directory.as_posix().replace('/results/valid/protocol_v2/', '/results/full_runs/protocol_v2/')):
+                        previous['logdir'] = resolved['logdir']
+                        previous['launcher_logdir'] = resolved['launcher_logdir']
                     if previous != resolved:
                         raise ValueError(f"Configuration changed; refusing to reuse {directory}")
                 elif directory.exists() and any(directory.iterdir()):

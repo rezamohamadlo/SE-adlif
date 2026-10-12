@@ -21,7 +21,7 @@ fixed across models. Scheduler patience is 9999 and factor is 0.9.
 Architecture and preprocessing come from experiment/dataset configs.
 Parameter counts may differ. Final testing follows validation checkpoint selection.
 
-Results retain the existing `results/full_runs/protocol_v2/<model>/<dataset>/seed_<seed>`
+Results retain the existing `results/valid/protocol_v2/<model>/<dataset>/seed_<seed>`
 layout (MR adds `K_2`). Rerun the same command to resume incomplete jobs and skip
 completed jobs. Saved manifests reject changed settings. The launcher rename
 alone is accepted for existing controlled-v2 manifests.

@@ -34,7 +34,7 @@ One-epoch integration check:
 Full development run (default SHD, seed 42, 300 epochs, batch 512):
 
 ```powershell
-.\minimal_runner.ps1 -ModelVariant MT_SE_adLIF -LogDir results/model_development
+.\minimal_runner.ps1 -ModelVariant MT_SE_adLIF -LogDir results/archive/model_development
 ```
 
 Results use `ours/MT_SE_adLIF/SHD/seed_42/` beneath the chosen output root.

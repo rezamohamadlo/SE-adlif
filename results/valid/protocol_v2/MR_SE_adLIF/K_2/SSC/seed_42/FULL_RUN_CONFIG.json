@@ -1,0 +1,88 @@
+{
+  "adaptation_update_interval": 2,
+  "alpha": 5.0,
+  "batch_size": 256,
+  "c": 0.4,
+  "cachedir": "./data/cache",
+  "ckpt_path": null,
+  "datadir": "./data",
+  "dataset": {
+    "_target_": "datasets.ssc.SSCLDM",
+    "batch_size": 256,
+    "data_path": "./data",
+    "ignore_first_timesteps": 10,
+    "num_classes": 35,
+    "num_workers": 0,
+    "pad_to_min_size": 300,
+    "spatial_factor": 0.2,
+    "time_factor": 0.001,
+    "window_size": 4
+  },
+  "device": "cuda:0",
+  "dropout": 0.15,
+  "dt": 1.0,
+  "early_stopping": false,
+  "early_stopping_min_delta": 0.001,
+  "early_stopping_patience": 50,
+  "evaluation_protocol": "controlled_v2",
+  "exp_name": "SSC_MR_SE_adLIF",
+  "factor": 0.9,
+  "l1": {
+    "adaptation_update_interval": 2,
+    "alpha": 5.0,
+    "c": 0.4,
+    "cell": "mr_se_adlif",
+    "dt": 1.0,
+    "input_size": 140,
+    "n_neurons": 720,
+    "q": 120,
+    "tau_u_range": [
+      5,
+      25
+    ],
+    "tau_w_range": [
+      60,
+      300
+    ]
+  },
+  "l2": {
+    "adaptation_update_interval": 2,
+    "alpha": 5.0,
+    "c": 0.4,
+    "cell": "mr_se_adlif",
+    "dt": 1.0,
+    "input_size": 720,
+    "n_neurons": 720,
+    "q": 120,
+    "tau_u_range": [
+      5,
+      25
+    ],
+    "tau_w_range": [
+      60,
+      300
+    ]
+  },
+  "l_out": {
+    "dt": 1.0,
+    "input_size": 720,
+    "n_neurons": 35,
+    "tau_u_range": [
+      15,
+      15
+    ]
+  },
+  "launcher_logdir": "results/valid/protocol_v2",
+  "launcher_script": "full_runner.py",
+  "logdir": "E:/AI_paper_nazari/SE-adlif/results/valid/protocol_v2/MR_SE_adLIF/K_2/SSC/seed_42",
+  "loss_agg": "summed_membrane_potentials",
+  "lr": 0.006,
+  "model_variant": "MR_SE_adLIF",
+  "n_epochs": 40,
+  "patience": 9999,
+  "random_seed": 42,
+  "run_mode": "ours",
+  "tracking_metric": "val_acc",
+  "tracking_mode": "max",
+  "two_layers": true
+}

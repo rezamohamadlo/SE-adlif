@@ -1,0 +1,15 @@
+# @package _global_
+defaults:
+  - ECG_SE_adLIF_2layer
+  - _self_
+
+exp_name: ECG_FP_SE_adLIF_2layer
+# Hz; dt and tau in the inherited neuron config are milliseconds.
+frequency_range_hz: [1.0, 50.0]
+
+l1:
+  cell: fp_se_adlif
+  frequency_range_hz: ${frequency_range_hz}
+l2:
+  cell: fp_se_adlif
+  frequency_range_hz: ${frequency_range_hz}

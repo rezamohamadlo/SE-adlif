@@ -54,7 +54,7 @@ Stop any already running full suite before switching commands; editing the
 launcher does not change the queue of an existing process. Resume a stage with
 its exact command above, not the seed-unrestricted command in an older summary.
 
-Results are saved under `results/full_runs/protocol_v2/<model>/<dataset>/seed_<seed>/`;
+Results are saved under `results/valid/protocol_v2/<model>/<dataset>/seed_<seed>/`;
 MR adds `K_2` between model and dataset. Each model/K has a separate `RESULTS.md`
 with final-test mean and sample SD from completed seeds only.
 

@@ -109,13 +109,13 @@ results/phase1_models/reference/SHD/seed_42
 results/phase1_models/reference/SHD/seed_123
 results/phase1_models/reference/SHD/seed_456
 
-results/phase1_models/reference/SSC/seed_42
-results/phase1_models/reference/SSC/seed_123
-results/phase1_models/reference/SSC/seed_456
+results/valid/reference/SSC/seed_42
+results/valid/reference/SSC/seed_123
+results/valid/reference/SSC/seed_456
 
-results/phase1_models/reference/ECG/seed_42
-results/phase1_models/reference/ECG/seed_123
-results/phase1_models/reference/ECG/seed_456
+results/archive/reference/ECG/seed_42
+results/archive/reference/ECG/seed_123
+results/archive/reference/ECG/seed_456
 ```
 
 Each canonical directory contains its available training summary, metrics,

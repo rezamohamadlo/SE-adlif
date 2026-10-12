@@ -58,7 +58,7 @@ class FullRunnerTests(unittest.TestCase):
         self.addCleanup(self.root_patch.stop)
 
     def test_all_model_plans(self):
-        for model in ("SE_adLIF", "DTH_SE_adLIF", "MT_SE_adLIF", "DA_SE_adLIF", "MR_SE_adLIF"):
+        for model in ("SE_adLIF", "DTH_SE_adLIF", "MT_SE_adLIF", "DA_SE_adLIF", "MR_SE_adLIF", "FP_SE_adLIF"):
             plan = full_runner.build_plan(model)
             self.assertEqual([(x['dataset'], x['seed']) for x in plan],
                              [(d, s) for d in ("SHD", "SSC", "ECG") for s in (42,123,456)])
@@ -147,7 +147,7 @@ class FullRunnerTests(unittest.TestCase):
         from models.pl_module import MLPSNN
         from omegaconf import OmegaConf
         torch.manual_seed(42)
-        for variant in ('SE_adLIF', 'DTH_SE_adLIF', 'DA_SE_adLIF', 'MR_SE_adLIF'):
+        for variant in ('SE_adLIF', 'DTH_SE_adLIF', 'DA_SE_adLIF', 'MR_SE_adLIF', 'FP_SE_adLIF'):
             for item in full_runner.build_plan(variant)[::3]:
                 cfg = OmegaConf.create(item['config'])
                 with contextlib.redirect_stdout(io.StringIO()):

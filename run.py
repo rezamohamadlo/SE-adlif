@@ -272,7 +272,8 @@ The best validation checkpoint was evaluated on the test split after training.
             else "results/phase1_models"
         )
         launcher_logdir = self.cfg.get("launcher_logdir", launcher_logdir)
-        launcher_script = self.cfg.get("launcher_script", "run_phase1_se_adlif.ps1")
+        launcher_script = self.cfg.get("launcher_script", "runner.py")
+        model_variant = self.cfg.get('model_variant', self.cfg.exp_name.split('_', 1)[1].removesuffix('_2layer'))
         dataset_seed_arguments = f" -Datasets {dataset_name} -Seeds {self.cfg.random_seed}"
         variant_argument = (
             f" -ModelVariant {self.cfg.model_variant}"
@@ -281,7 +282,7 @@ The best validation checkpoint was evaluated on the test split after training.
         if self.cfg.get("model_variant") == "MR_SE_adLIF":
             variant_argument += f" -AdaptationUpdateInterval {self.cfg.adaptation_update_interval}"
         resume_command = (
-            f".\\.venv\\Scripts\\python.exe runner.py --models {self.cfg.model_variant}"
+            f".\\.venv\\Scripts\\python.exe runner.py --models {model_variant}"
             + (f" --adaptation-update-interval {self.cfg.adaptation_update_interval}"
                if self.cfg.get("model_variant") == "MR_SE_adLIF" else "")
             + f" --datasets {dataset_name} --seeds {self.cfg.random_seed}"
@@ -292,6 +293,17 @@ The best validation checkpoint was evaluated on the test split after training.
             f"-LrSchedulerPatience {self.cfg.patience} -LrSchedulerFactor {self.cfg.factor} "
             f"-Resume 1 -LogDir {launcher_logdir}"
         )
+        if launcher_script in ('runner.py', 'full_runner.py'):
+            if '_custom_' in str(self.cfg.get('evaluation_protocol', '')):
+                resume_command += (
+                    f' --epochs {self.cfg.n_epochs} --batch-size {dataset_cfg.batch_size}'
+                    f' --lr {self.cfg.lr} --early-stopping {str(bool(early_stopping)).lower()}'
+                    f" --early-stopping-patience {self.cfg.get('early_stopping_patience', 50)}"
+                    f" --early-stopping-min-delta {self.cfg.get('early_stopping_min_delta', 0.001)}"
+                    f' --lr-scheduler-patience {self.cfg.patience} --lr-scheduler-factor {self.cfg.factor}'
+                )
+            if self.cfg.get('launcher_logdir'):
+                resume_command += f' --logdir "{self.cfg.launcher_logdir}"'
 
         summary = f"""# {self.cfg.exp_name} Training Summary — Seed {self.cfg.random_seed}
 
