@@ -3,6 +3,13 @@
 This protocol is separate from historical Phase 1 and development results.
 No old checkpoints are used. All model variants share dataset-specific settings:
 
+The shared `config/dataset/shd.yaml` and `shd_val.yaml` now also default to
+20% training-derived validation, split seed 42, and the isolated `controlled_v2`
+cache. Future SHD experiments inherit this policy even outside the full runner.
+Do not resume historical test-validation checkpoints under these new defaults
+or reuse their output directories; use fresh output paths for new experiments.
+Saved historical configurations, measurements and checkpoints remain unchanged.
+
 | Setting | SHD | SSC | ECG |
 |---|---:|---:|---:|
 | Hidden layers / neurons | 2 / 360 | 2 / 720 | 2 / 36 |

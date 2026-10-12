@@ -17,6 +17,21 @@ class FakeSHD:
 
 
 class SHDSplitCacheTests(unittest.TestCase):
+    def test_shared_configs_use_training_derived_validation(self):
+        from hydra import compose, initialize_config_dir
+        from omegaconf import OmegaConf
+        root = Path(__file__).resolve().parents[1]
+        with initialize_config_dir(config_dir=str(root / 'config'), version_base=None):
+            for experiment in ('SHD_SE_adLIF', 'SHD_DTH_SE_adLIF', 'SHD_DA_SE_adLIF',
+                               'SHD_MR_SE_adLIF', 'SHD_MT_SE_adLIF', 'SHD_FP_SE_adLIF'):
+                for seed in (42, 123, 456):
+                    cfg = compose(config_name='main', overrides=[
+                        f'experiment={experiment}', f'random_seed={seed}'])
+                    dataset = OmegaConf.to_container(cfg.dataset, resolve=True)
+                    self.assertEqual(dataset['validate_on'], .2)
+                    self.assertEqual(dataset['random_seed'], 42)
+                    self.assertEqual(dataset['cache_namespace'], 'controlled_v2')
+
     def test_opt_in_cache_isolation_and_fixed_split(self):
         with tempfile.TemporaryDirectory() as directory, patch('datasets.shd.SHDWrapper', FakeSHD):
             def dataset(**extra):
