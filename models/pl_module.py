@@ -326,7 +326,17 @@ class MLPSNN(pl.LightningModule):
 
     def configure_optimizers(self):
         optimizer = torch.optim.Adam(params=self.parameters(), lr=self.lr)
-
+        scheduler_name = self.hparams.cfg.get('scheduler', 'plateau')
+        if scheduler_name == 'constant':
+            return optimizer
+        if scheduler_name == 'cosine':
+            return {'optimizer': optimizer, 'lr_scheduler': {
+                'scheduler': torch.optim.lr_scheduler.CosineAnnealingLR(
+                    optimizer, T_max=int(self.hparams.cfg.n_epochs),
+                    eta_min=float(self.hparams.cfg.get('scheduler_min_lr', 0.0))),
+                'interval': 'epoch'}}
+        if scheduler_name != 'plateau':
+            raise ValueError(f'Unknown scheduler: {scheduler_name}')
         lr_scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
             optimizer=optimizer,
             mode=self.tracking_mode,

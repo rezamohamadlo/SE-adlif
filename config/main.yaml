@@ -10,6 +10,11 @@ logdir: ./results
 datadir: ./data
 cachedir: ./data/cache
 ckpt_path: null
+init_ckpt_path: null # weights-only initialization; optimizer and epoch count start fresh
+run_test: true # disable during hyperparameter selection
+scheduler: plateau # plateau, constant, cosine
+scheduler_min_lr: 0.0
+gradient_clip_val: 1.5
 device: cuda:0
 
 # Optional validation-based early stopping. Experiment launchers can override

@@ -1,6 +1,7 @@
 import os
 import tempfile
 import csv
+import json
 from pathlib import Path
 
 # Some restricted Windows profiles cannot write Matplotlib's user cache.  Keep
@@ -304,6 +305,14 @@ The best validation checkpoint was evaluated on the test split after training.
                 )
             if self.cfg.get('launcher_logdir'):
                 resume_command += f' --logdir "{self.cfg.launcher_logdir}"'
+        if launcher_script == 'tune_shd.py':
+            resume_command = (
+                f'.\\.ven\\Scripts\\python.exe tune_shd.py '
+                f'--checkpoint "{self.cfg.sweep_checkpoint}" '
+                f'--output "{self.cfg.sweep_output}" --trial {self.cfg.sweep_trial}'
+                + (f' --full-train --seeds {self.cfg.random_seed}'
+                   if self.cfg.run_test else f' --epochs {self.cfg.n_epochs}')
+            )
 
         summary = f"""# {self.cfg.exp_name} Training Summary — Seed {self.cfg.random_seed}
 
@@ -353,6 +362,7 @@ The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds
 | Epoch limit | {self.cfg.n_epochs} |
 | Batch size | {dataset_cfg.batch_size} |
 | Initial learning rate | {self.cfg.lr} |
+| LR scheduler | {self.cfg.get('scheduler', 'plateau')} |
 | LR scheduler factor | {self.cfg.factor} |
 | LR scheduler patience | {self.cfg.patience} |
 | Early stopping | {str(bool(early_stopping)).lower()} |
@@ -361,7 +371,7 @@ The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds
 | Dropout | {self.cfg.dropout} |
 | Hidden layers | {2 if self.cfg.two_layers else 1} |
 | Neurons per hidden layer | {self.cfg.l1.n_neurons} |
-| Gradient clipping | 1.5 |
+| Gradient clipping | {self.cfg.get('gradient_clip_val', 1.5)} |
 
 ## Files
 
@@ -423,6 +433,11 @@ def main(cfg: DictConfig):
 
     datamodule = hydra.utils.instantiate(cfg.dataset)
     model = MLPSNN(cfg)
+    if cfg.get('init_ckpt_path'):
+        if cfg.get('ckpt_path'):
+            raise ValueError('Choose weights initialization or full resume, not both')
+        checkpoint = torch.load(cfg.init_ckpt_path, map_location='cpu', weights_only=False)
+        model.load_state_dict(checkpoint['state_dict'], strict=True)
     callbacks = []
     model_ckpt_tracker: ModelCheckpoint = ModelCheckpoint(
         monitor=cfg.get('tracking_metric', "val_acc_epoch"),
@@ -456,21 +471,26 @@ def main(cfg: DictConfig):
         )
 
     trainer: pl.Trainer = pl.Trainer(
+        accelerator='cpu' if str(cfg.device).startswith('cpu') else 'gpu',
         callbacks=callbacks,
         logger=AppendCSVLogger("logs", name="mlp_snn", version=0),
         max_epochs=cfg.n_epochs,
-        gradient_clip_val=1.5,
+        gradient_clip_val=cfg.get('gradient_clip_val', 1.5),
         enable_progress_bar=True,
         strategy=SingleDeviceStrategy(device=cfg.device),
         plugins=[TrustedLocalCheckpointIO()],
         )
 
+    if cfg.get('init_ckpt_path'):
+        baseline = trainer.validate(model, datamodule=datamodule, verbose=False)[0]
+        Path('SWEEP_BASELINE.json').write_text(json.dumps(baseline, indent=2), encoding='utf-8')
     trainer.fit(model, datamodule=datamodule, ckpt_path=cfg.get("ckpt_path"))
     if trainer.interrupted:
         raise RuntimeError("Training was interrupted before all epochs completed.")
 
-    result = trainer.test(model, ckpt_path="best", datamodule=datamodule)
-    logging.info(f"Final result: {result}")
+    if cfg.get('run_test', True):
+        result = trainer.test(model, ckpt_path="best", datamodule=datamodule)
+        logging.info(f"Final result: {result}")
 
     return trainer.checkpoint_callback.best_model_score.cpu().detach().numpy()
 
