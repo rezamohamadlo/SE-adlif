@@ -3,19 +3,19 @@
 From the project root, using the project virtual environment:
 
 ```powershell
-.\.venv\Scripts\python.exe full_runner.py MT_SE_adLIF
+.\.venv\Scripts\python.exe runner.py --models MT_SE_adLIF
 ```
 
 Supply one or more model-config suffixes. For example:
 
 ```powershell
-.\.venv\Scripts\python.exe full_runner.py DTH_SE_adLIF MT_SE_adLIF
+.\.venv\Scripts\python.exe runner.py --models DTH_SE_adLIF MT_SE_adLIF --datasets SSC ECG --seeds 42 --resume 1
 ```
 
 Models run sequentially in the supplied order. All requested models are
 validated before training starts; repeated names are scheduled only once.
 Supported configured models are
-`SE_adLIF`, `DTH_SE_adLIF`, and `MT_SE_adLIF`. Future variants need SHD, SSC,
+`SE_adLIF`, `DTH_SE_adLIF`, `DA_SE_adLIF`, `MR_SE_adLIF`, `MT_SE_adLIF`, and `FP_SE_adLIF`. Future variants need SHD, SSC,
 and ECG experiment configs and a registered neuron cell.
 
 The runner launches SHD, SSC, and ECG sequentially, each with seeds 42, 123,
@@ -28,16 +28,19 @@ and 456. It uses the same explicit protocol for every model:
 | ECG | 2 × 36 | 400 | 64 | 0.01 | Patience 50, min_delta 0.001 |
 
 LR scheduler patience is 9999 for all runs. Architecture and dataset-specific
-loss settings are inherited from reference configs. SHD still uses the test
-split for checkpoint selection; this is a reproduction/development protocol,
-not an unbiased final test estimate. Historical reference runs used some
+loss settings are inherited from reference configs. SHD uses 20% of training
+data for validation with split seed 42; official test data is evaluated after
+checkpoint selection. Shared settings come from root `evaluation.yaml`.
+Historical reference runs used some
 different stopping/scheduler settings and remain separate experimental records.
 
-Outputs: `results/full_runs/<model>/<dataset>/seed_<seed>/`.
-Aggregate report: `results/full_runs/<model>/RESULTS.md`.
+Outputs: `results/valid/protocol_v2/<model>/<dataset>/seed_<seed>/`.
+Aggregate report: `results/valid/protocol_v2/<model>/RESULTS.md`.
+MR adds `K_2` beneath its model folder by default.
 
 Rerun the identical command to skip completed seeds and resume interrupted
-ones from `ckpt/last.ckpt`. The resolved config must match the original run.
+ones from `ckpt/last.ckpt`. `--resume 1` is the default; `--resume 0` requires
+empty output directories. The resolved config must match the original run.
 Existing unrecognized results or artifacts without a resumable checkpoint
 cause an error rather than being overwritten. A failed subprocess stops the
 suite. Aggregate statistics include final test results from completed seeds

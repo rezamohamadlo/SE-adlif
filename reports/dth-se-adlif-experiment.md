@@ -29,22 +29,21 @@ Its inherited experiment configuration is
 Run a development experiment from the project root:
 
 ```powershell
-.\minimal_runner.ps1 -Mode ours -ModelVariant DTH_SE_adLIF -Epochs 300 -BatchSize 512 -EarlyStopping 0 -LrSchedulerPatience 9999 -LogDir results/archive/model_development
+.\.venv\Scripts\python.exe runner.py --models DTH_SE_adLIF --datasets SHD --seeds 42 --resume 1
 ```
 
 Outputs are saved under:
 
 ```text
-results/archive/model_development/ours/DTH_SE_adLIF/SHD/seed_42/
+results/valid/protocol_v2/DTH_SE_adLIF/SHD/seed_42/
 ```
 
 The one-epoch integration check uses a separate output root:
 
 ```powershell
-.\minimal_runner.ps1 -Mode ours -ModelVariant DTH_SE_adLIF -Epochs 1 -BatchSize 512 -EarlyStopping 0 -LrSchedulerPatience 9999 -LogDir results/model_checks
+.\.venv\Scripts\python.exe runner.py --models DTH_SE_adLIF --datasets SHD --seeds 42 --epochs 1 --logdir results/model_checks --resume 0
 ```
 
-The check verifies execution rather than final accuracy. This initial config
-inherits SHD's existing test-as-validation setup. Use a separate validation
-split before selecting model changes or tuning these parameters for final
-scientific evaluation.
+The check verifies execution rather than final accuracy. Current shared
+settings use 20% training-derived SHD validation, with official test data
+evaluated after checkpoint selection.

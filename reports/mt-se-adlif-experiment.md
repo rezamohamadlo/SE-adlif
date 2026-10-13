@@ -28,16 +28,29 @@ The original SE-adLIF and DTH models remain separately selectable.
 One-epoch integration check:
 
 ```powershell
-.\minimal_runner.ps1 -ModelVariant MT_SE_adLIF -Epochs 1 -LogDir results/model_checks
+.\.venv\Scripts\python.exe runner.py --models MT_SE_adLIF --datasets SHD --seeds 42 --epochs 1 --logdir results/model_checks --resume 0
 ```
 
-Full development run (default SHD, seed 42, 300 epochs, batch 512):
+Shared-protocol SHD run (seed 42, maximum 300 epochs, batch 512):
 
 ```powershell
-.\minimal_runner.ps1 -ModelVariant MT_SE_adLIF -LogDir results/archive/model_development
+.\.venv\Scripts\python.exe runner.py --models MT_SE_adLIF --datasets SHD --seeds 42 --resume 1
 ```
 
-Results use `ours/MT_SE_adLIF/SHD/seed_42/` beneath the chosen output root.
-No accuracy improvement or novelty claim has been established. This config
-inherits the reference SHD test-as-validation setup. A separate validation
-split is needed before tuning or selecting the final model.
+Results use `results/valid/protocol_v2/MT_SE_adLIF/<dataset>/seed_42/`.
+The shared protocol uses 20% training-derived SHD validation, separate from
+the official test set. No novelty claim has been established.
+
+## Completed seed 42 results
+
+| Dataset | Final test accuracy | Test loss |
+|---|---:|---:|
+| SHD | 92.76% | 0.5292 |
+| SSC | 77.60% | 1.3197 |
+| ECG | 87.23% | 0.3349 |
+
+The SHD result was recovered by independently evaluating the validation-selected
+epoch-104 checkpoint; its original training logs contain overlapping runs.
+ECG selected epoch 258 and ended with final testing recorded at epoch 260.
+See [seed 42 comparison](seed-42-model-comparison.md) for reference differences
+and the ECG stopping-setting caveat.

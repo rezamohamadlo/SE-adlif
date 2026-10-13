@@ -31,7 +31,7 @@ Sources: Table 2, page 11 of `reference_paper.pdf`;
 | DTH_SE_adLIF | **93.77** | 78.22 | **88.35** |
 | DA_SE_adLIF | 91.83 | 77.88 | 87.20 |
 | MR_SE_adLIF (K=2) | 92.58 | 76.93 | 88.05 |
-| MT_SE_adLIF | 92.76† | 77.60 | Pending |
+| MT_SE_adLIF | 92.76† | 77.60 | 87.23 |
 | FP_SE_adLIF | 91.56 | 77.67 | 86.85 |
 
 ## Seed 42: difference from reference (percentage points)
@@ -41,12 +41,12 @@ Sources: Table 2, page 11 of `reference_paper.pdf`;
 | DTH_SE_adLIF | +0.35 | -0.11 | +0.22* |
 | DA_SE_adLIF | -1.59 | -0.45 | -0.93* |
 | MR_SE_adLIF (K=2) | -0.84 | -1.40 | -0.08* |
-| MT_SE_adLIF | -0.66† | -0.73 | Pending |
+| MT_SE_adLIF | -0.66† | -0.73 | -0.90* |
 | FP_SE_adLIF | -1.86 | -0.66 | -1.28* |
 
 *ECG seed 42 reference disabled early stopping; the candidate runs enabled it.
 †MT's epoch-104 validation-selected checkpoint was independently evaluated;
-its original training logs contain overlapping runs. Pending means final
-testing is not yet recorded; — means no result is included.
+its original training logs contain overlapping runs. All six models now have
+recorded seed 42 test results on SHD, SSC, and ECG.
 
 Source: [seed 42 model comparison](seed-42-model-comparison.md).

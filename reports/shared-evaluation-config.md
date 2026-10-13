@@ -30,9 +30,8 @@ layout (MR adds `K_2`). Rerun the same command to resume incomplete jobs and ski
 completed jobs. Saved manifests reject changed settings. The launcher rename
 alone is accepted for existing controlled-v2 manifests.
 
-`full_runner.py` is a compatibility shim for historical commands. Older
-PowerShell launchers remain for historical workflows; use `runner.py` for new
-comparisons. All protocol loading uses the single root `evaluation.yaml`.
+Legacy Python and PowerShell launchers have been removed. Use `runner.py`
+for comparisons. All protocol loading uses the single root `evaluation.yaml`.
 Changing the file does not change training processes already running.
 
 ## Per-run training overrides
