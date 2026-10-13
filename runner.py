@@ -30,7 +30,9 @@ def result_root(model, adaptation_update_interval=2):
     return root / f"K_{adaptation_update_interval}" if model == "MR_SE_adLIF" else root
 
 
-def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None):
+def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, resume=1):
+    if resume not in (0, 1):
+        raise ValueError('resume must be 0 or 1')
     seeds = tuple(dict.fromkeys(seeds))
     if not seeds or any(isinstance(seed, bool) or seed not in SEEDS for seed in seeds):
         raise ValueError(f"Select one or more canonical seeds: {SEEDS}")
@@ -60,6 +62,8 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None):
                         directory = legacy
                 launcher_root = directory.parents[2] if model != 'MR_SE_adLIF' else directory.parents[3]
                 launcher_logdir = launcher_root.relative_to(ROOT).as_posix()
+                if resume == 0 and directory.exists() and any(directory.iterdir()):
+                    raise ValueError(f'--resume 0 requires an empty output directory; use --logdir for a fresh run: {directory}')
                 overrides = [
                     f"experiment={experiment}", f"random_seed={seed}",
                     f"logdir={json.dumps(directory.as_posix())}",
@@ -87,6 +91,12 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None):
                 manifest = directory / "FULL_RUN_CONFIG.json"
                 if manifest.exists():
                     previous = json.loads(manifest.read_text(encoding="utf-8"))
+                    # These newly explicit defaults preserve older runner behavior.
+                    for key, value in {
+                        'init_ckpt_path': None, 'run_test': True, 'scheduler': 'plateau',
+                        'scheduler_min_lr': 0.0, 'gradient_clip_val': 1.5,
+                    }.items():
+                        previous.setdefault(key, value)
                     # The public launcher rename does not change training settings.
                     if previous.get('launcher_script') == 'full_runner.py':
                         previous['launcher_script'] = 'runner.py'
@@ -162,8 +172,8 @@ def write_aggregate(model, adaptation_update_interval=2):
     temporary.replace(root / "RESULTS.md")
 
 
-def run(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None):
-    plan = build_plan(model, adaptation_update_interval, seeds, datasets)  # Preflight selected runs before writes.
+def run(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, resume=1):
+    plan = build_plan(model, adaptation_update_interval, seeds, datasets, resume)  # Preflight selected runs before writes.
     for item in plan:
         directory = item["directory"]
         print(f"{item['dataset']} seed {item['seed']}: {item['status']} -> {directory}", flush=True)
@@ -193,6 +203,8 @@ def main(argv=None):
     parser.add_argument("--seeds", nargs="+", type=int, choices=SEEDS, default=SEEDS,
                         help="Training seeds to run (default: 42 123 456)")
     parser.add_argument("--dry-run", action="store_true", help="Validate and display plans without training or writes")
+    parser.add_argument('--resume', type=int, choices=(0, 1), default=1,
+                        help='1: resume/skip existing runs (default); 0: fresh runs in empty directories')
     parser.add_argument('--datasets', nargs='+', choices=tuple(PROTOCOL), default=None,
                         help='Select datasets; defaults to SHD SSC ECG')
     parser.add_argument('--epochs', type=int, help='Override epoch limit for selected datasets')
@@ -240,7 +252,7 @@ def main(argv=None):
             RUN_LOGDIR = args.logdir
         # Preserve order and avoid scheduling duplicate model suites.
         models = list(dict.fromkeys(args.models))
-        plans = [(model, build_plan(model, args.adaptation_update_interval, args.seeds, args.datasets)) for model in models]
+        plans = [(model, build_plan(model, args.adaptation_update_interval, args.seeds, args.datasets, args.resume)) for model in models]
         if args.dry_run:
             for model, plan in plans:
                 for item in plan:
@@ -248,7 +260,7 @@ def main(argv=None):
             print(f"Validated {sum(len(plan) for _, plan in plans)} runs; no training or writes.")
         else:
             for model in models:
-                run(model, args.adaptation_update_interval, args.seeds, args.datasets)
+                run(model, args.adaptation_update_interval, args.seeds, args.datasets, args.resume)
     except KeyboardInterrupt:
         print("Interrupted. Rerun the same command to resume.", file=sys.stderr)
         sys.exit(130)

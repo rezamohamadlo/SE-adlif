@@ -11,5 +11,5 @@ Training settings: SHD: LR=0.01, early stopping=True, patience=50, delta=0.001, 
 | Dataset | Seed 42 | Seed 123 | Seed 456 | n | Mean ± sample SD |
 |---|---:|---:|---:|---:|---:|
 | SHD | 92.76% | pending | pending | 1 | pending |
-| SSC | pending | pending | pending | 0 | pending |
+| SSC | 77.60% | pending | pending | 1 | pending |
 | ECG | pending | pending | pending | 0 | pending |

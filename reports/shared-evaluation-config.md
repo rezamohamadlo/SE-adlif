@@ -10,6 +10,10 @@ point is `runner.py`; `run.py` performs one internal training job.
 Remove `--dry-run` to train. Omit `--datasets` to select SHD, SSC, and ECG;
 omit `--seeds` to use the default seeds from `evaluation.yaml`.
 
+`--resume 1` is the default: resume from `last.ckpt` and skip completed runs.
+Use `--resume 0` for fresh runs only; nonempty result directories are rejected
+to preserve existing artifacts. Supply a new `--logdir` to start over.
+
 | Dataset | Epoch limit | Batch size | LR | Early stopping | Validation |
 |---|---:|---:|---:|---|---|
 | SHD | 300 | 512 | 0.01 | 50 checks, delta 0.001 | Random 20% of training, split seed 42 |

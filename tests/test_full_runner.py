@@ -14,6 +14,22 @@ import runner as full_runner
 
 
 class FullRunnerTests(unittest.TestCase):
+    def test_resume_flag_defaults_to_resume_and_fresh_runs_never_overwrite(self):
+        item = full_runner.build_plan('FP_SE_adLIF', seeds=(42,), datasets=('SSC',), resume=0)[0]
+        self.assertEqual(item['status'], 'new')
+        directory = item['directory']
+        directory.mkdir(parents=True)
+        (directory / 'FULL_RUN_CONFIG.json').write_text(json.dumps(item['config']), encoding='utf-8')
+        (directory / 'ckpt').mkdir()
+        (directory / 'ckpt/last.ckpt').touch()
+        self.assertEqual(full_runner.build_plan('FP_SE_adLIF', seeds=(42,), datasets=('SSC',))[0]['status'], 'resume')
+        with self.assertRaisesRegex(ValueError, 'empty output directory'):
+            full_runner.build_plan('FP_SE_adLIF', seeds=(42,), datasets=('SSC',), resume=0)
+        with patch.object(full_runner, 'build_plan', return_value=[]) as build:
+            with contextlib.redirect_stdout(io.StringIO()):
+                full_runner.main(['--models', 'FP_SE_adLIF', '--dry-run'])
+            self.assertEqual(build.call_args.args[-1], 1)
+
     def test_cli_overrides_are_applied_and_isolated(self):
         original = full_runner.EVALUATION
         captured = []
@@ -98,6 +114,22 @@ class FullRunnerTests(unittest.TestCase):
         manifest.write_text('{}', encoding='utf-8')
         with self.assertRaises(ValueError):
             full_runner.build_plan("MT_SE_adLIF")
+
+    def test_legacy_manifest_accepts_only_equivalent_new_defaults(self):
+        item = full_runner.build_plan('FP_SE_adLIF', seeds=(42,), datasets=('SSC',))[0]
+        directory = item['directory']
+        directory.mkdir(parents=True)
+        legacy = dict(item['config'])
+        for key in ('init_ckpt_path', 'run_test', 'scheduler', 'scheduler_min_lr', 'gradient_clip_val'):
+            legacy.pop(key)
+        (directory / 'FULL_RUN_CONFIG.json').write_text(json.dumps(legacy), encoding='utf-8')
+        (directory / 'ckpt').mkdir()
+        (directory / 'ckpt/last.ckpt').touch()
+        self.assertEqual(full_runner.build_plan('FP_SE_adLIF', seeds=(42,), datasets=('SSC',))[0]['status'], 'resume')
+        legacy['scheduler'] = 'constant'
+        (directory / 'FULL_RUN_CONFIG.json').write_text(json.dumps(legacy), encoding='utf-8')
+        with self.assertRaises(ValueError):
+            full_runner.build_plan('FP_SE_adLIF', seeds=(42,), datasets=('SSC',))
 
     def test_two_stage_seed_selection_preserves_config_and_paths(self):
         for model in ('DTH_SE_adLIF', 'DA_SE_adLIF', 'MR_SE_adLIF'):
