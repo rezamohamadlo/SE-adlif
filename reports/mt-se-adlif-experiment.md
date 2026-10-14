@@ -28,13 +28,13 @@ The original SE-adLIF and DTH models remain separately selectable.
 One-epoch integration check:
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models MT_SE_adLIF --datasets SHD --seeds 42 --epochs 1 --logdir results/model_checks --resume 0
+.\.ven\Scripts\python.exe runner.py --models MT_SE_adLIF --datasets SHD --seeds 42 --epochs 1 --logdir results/model_checks --resume 0
 ```
 
 Shared-protocol SHD run (seed 42, maximum 300 epochs, batch 512):
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models MT_SE_adLIF --datasets SHD --seeds 42 --resume 1
+.\.ven\Scripts\python.exe runner.py --models MT_SE_adLIF --datasets SHD --seeds 42 --resume 1
 ```
 
 Results use `results/valid/protocol_v2/MT_SE_adLIF/<dataset>/seed_42/`.
@@ -54,3 +54,6 @@ epoch-104 checkpoint; its original training logs contain overlapping runs.
 ECG selected epoch 258 and ended with final testing recorded at epoch 260.
 See [seed 42 comparison](seed-42-model-comparison.md) for reference differences
 and the ECG stopping-setting caveat.
+
+A historical local training-progress snapshot is retained in
+[the documentation archive](archive/mt-shd-local-progress.md).

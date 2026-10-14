@@ -1,50 +1,5 @@
-# Full evaluation runner
+# Evaluation runner
 
-From the project root, using the project virtual environment:
+The maintained entry point is `runner.py`. The former `full_runner.py` and PowerShell launchers have been removed.
 
-```powershell
-.\.venv\Scripts\python.exe runner.py --models MT_SE_adLIF
-```
-
-Supply one or more model-config suffixes. For example:
-
-```powershell
-.\.venv\Scripts\python.exe runner.py --models DTH_SE_adLIF MT_SE_adLIF --datasets SSC ECG --seeds 42 --resume 1
-```
-
-Models run sequentially in the supplied order. All requested models are
-validated before training starts; repeated names are scheduled only once.
-Supported configured models are
-`SE_adLIF`, `DTH_SE_adLIF`, `DA_SE_adLIF`, `MR_SE_adLIF`, `MT_SE_adLIF`, and `FP_SE_adLIF`. Future variants need SHD, SSC,
-and ECG experiment configs and a registered neuron cell.
-
-The runner launches SHD, SSC, and ECG sequentially, each with seeds 42, 123,
-and 456. It uses the same explicit protocol for every model:
-
-| Dataset | Hidden layers × neurons | Epoch limit | Batch | LR | Early stopping |
-|---|---:|---:|---:|---:|---|
-| SHD | 2 × 360 | 300 | 512 | 0.01 | Patience 50, min_delta 0.001 |
-| SSC | 2 × 720 | 40 | 256 | 0.006 | Disabled |
-| ECG | 2 × 36 | 400 | 64 | 0.01 | Patience 50, min_delta 0.001 |
-
-LR scheduler patience is 9999 for all runs. Architecture and dataset-specific
-loss settings are inherited from reference configs. SHD uses 20% of training
-data for validation with split seed 42; official test data is evaluated after
-checkpoint selection. Shared settings come from root `evaluation.yaml`.
-Historical reference runs used some
-different stopping/scheduler settings and remain separate experimental records.
-
-Outputs: `results/valid/protocol_v2/<model>/<dataset>/seed_<seed>/`.
-Aggregate report: `results/valid/protocol_v2/<model>/RESULTS.md`.
-MR adds `K_2` beneath its model folder by default.
-
-Rerun the identical command to skip completed seeds and resume interrupted
-ones from `ckpt/last.ckpt`. `--resume 1` is the default; `--resume 0` requires
-empty output directories. The resolved config must match the original run.
-Existing unrecognized results or artifacts without a resumable checkpoint
-cause an error rather than being overwritten. A failed subprocess stops the
-suite. Aggregate statistics include final test results from completed seeds
-only; mean ± sample SD is recalculated after each completion.
-
-This runner starts fresh experiments in its own results hierarchy. It does
-not automatically reuse development checkpoints or historical reference runs.
+See [shared evaluation settings and commands](shared-evaluation-config.md) and [controlled comparison protocol](controlled-protocol-v2.md).

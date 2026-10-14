@@ -1,0 +1,75 @@
+# SHD_SE_adLIF Training Summary — Seed 42
+
+This file is updated automatically whenever training saves a new best checkpoint.
+
+## Run status
+
+- **Status:** Training finished
+- **Progress:** 142 epochs completed (`0` through `141`) out of 300
+- **Dataset:** SHD
+- **Model:** SHD_SE_adLIF
+- **Seed:** 42
+- **Device:** cuda:0
+
+## Best result
+
+| Metric | Value | Epoch |
+|---|---:|---:|
+| Best validation accuracy | **98.84%** | 111 |
+| Validation loss | **0.1008** | 111 |
+| Training accuracy | **100.00%** | 111 |
+| Training loss | **0.000025** | 111 |
+| Gradient norm | **0.0003** | 111 |
+| Learning rate | **0.005** | 111 |
+
+## Model size and computation
+
+| Measurement | Value |
+|---|---:|
+| Total parameters | **450,760** |
+| Trainable parameters | **450,020** |
+| Average padded validation timesteps/sample | **293.31** |
+| Estimated dense forward GFLOPs/sample | **0.2619** |
+
+The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds, with one multiply-add equal to two FLOPs. It uses the actual average padded validation sequence length. Elementwise neuron-state updates, loss computation, backward propagation, and data loading are excluded. It is therefore a reproducible forward-compute estimate rather than measured GPU throughput.
+
+## Best checkpoint
+
+```text
+ckpt/epoch=111-step=2800.ckpt
+```
+
+## Main hyperparameters
+
+| Hyperparameter | Value |
+|---|---:|
+| Epoch limit | 300 |
+| Batch size | 256 |
+| Initial learning rate | 0.005 |
+| LR scheduler | plateau |
+| LR scheduler factor | 0.9 |
+| LR scheduler patience | 9999 |
+| Early stopping | true |
+| Early-stopping patience | 50 |
+| Early-stopping minimum delta | 0.001 |
+| Dropout | 0.15 |
+| Hidden layers | 2 |
+| Neurons per hidden layer | 360 |
+| Gradient clipping | 1.5 |
+
+## Files
+
+- Metrics: `logs/mlp_snn/version_0/metrics.csv`
+- Hyperparameters: `logs/mlp_snn/version_0/hparams.yaml`
+- Runtime log: `out.log`
+- Checkpoints: `ckpt/`
+
+## Resume command
+
+```powershell
+.\.ven\Scripts\python.exe search_shd.py --output "C:\Users\jafari.h.SPADANACO\Desktop\SE-adlif\results\experiments\shd_scratch_search" --trials r02 --seeds 42
+```
+
+## Evaluation note
+
+This run uses `validate_on: 0.2`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.

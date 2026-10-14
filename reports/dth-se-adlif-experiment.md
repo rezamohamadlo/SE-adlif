@@ -29,7 +29,7 @@ Its inherited experiment configuration is
 Run a development experiment from the project root:
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models DTH_SE_adLIF --datasets SHD --seeds 42 --resume 1
+.\.ven\Scripts\python.exe runner.py --models DTH_SE_adLIF --datasets SHD --seeds 42 --resume 1
 ```
 
 Outputs are saved under:
@@ -41,7 +41,7 @@ results/valid/protocol_v2/DTH_SE_adLIF/SHD/seed_42/
 The one-epoch integration check uses a separate output root:
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models DTH_SE_adLIF --datasets SHD --seeds 42 --epochs 1 --logdir results/model_checks --resume 0
+.\.ven\Scripts\python.exe runner.py --models DTH_SE_adLIF --datasets SHD --seeds 42 --epochs 1 --logdir results/model_checks --resume 0
 ```
 
 The check verifies execution rather than final accuracy. Current shared

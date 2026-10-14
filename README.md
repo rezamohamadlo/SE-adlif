@@ -10,10 +10,24 @@
 ## 📌 Getting Started
 
 ### Install Dependencies
-To set up the required environment, run:
+For the tested Windows CUDA environment, use Python 3.11:
+```powershell
+python -m venv .ven
+.\.ven\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+`environment.yml` retains the original Conda/audio research setup. It is not
+the tested Windows environment and includes optional CUDA/JAX dependencies:
 ```sh
 conda env create -f environment.yml
 ```
+
+For current controlled model comparisons, use [the shared evaluation
+runner guide](reports/shared-evaluation-config.md). Reference tuning is
+documented in [the scratch-search guide](reports/shd-scratch-search.md).
+Current results belong in `results/valid/`; tuning results belong in
+`results/experiments/`. Historical notes and document exports are under
+`reports/archive/` and `reports/exports/`.
 
 ---
 
@@ -57,6 +71,8 @@ python run_compress.py experiment=<experiment_name> ++logdir=path/to/my/logdir +
 
 ## 📊 Evaluating Audio Compression Models 
 Model checkpoints for each configuration are available at [checkpoints](https://github.com/IGITUGraz/SE-adlif/tree/main/checkpoints).
+The local CSV measurements from those audio experiments are retained under
+`reports/audio-compression/`; they are evaluation records, not model weights.
 
 ### 1️⃣ Generating Wave Files
 To generate wave files from a checkpoint:

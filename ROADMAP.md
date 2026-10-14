@@ -12,88 +12,47 @@ SE-adLIF reference -> Dynamic Threshold -> Dynamic Time Constant
 -> Dual-Adaptive model -> Accuracy and efficiency evaluation
 ```
 
-## Current status — 7 October 2026
+## Current status - 14 October 2026
 
-**Phase 1 is complete.** Canonical three-seed SE-adLIF reference results are
-available for SHD, SSC, and ECG/QTDB.
+The controlled comparison protocol is implemented in `evaluation.yaml`,
+`evaluation_protocol.py`, and `runner.py`. SHD uses 20% training-derived
+validation with split seed 42; SSC uses official validation; ECG uses 5%
+training-derived validation. Final test results follow validation checkpoint
+selection. Architecture and neuron implementations remain separate.
 
-| Dataset | Seed 42 | Seed 123 | Seed 456 | Mean ± sample SD | Status |
-|---|---:|---:|---:|---:|---|
-| SHD | 95.45% | 94.70% | 93.73% | **94.63% ± 0.86%** | Complete reference set |
-| SSC | 78.33% | 78.12% | 78.17% | **78.21% ± 0.11%** | Complete final-test set |
-| ECG/QTDB | 88.13% | 88.72% | 88.11% | **88.32% ± 0.35%** | Complete final-test set |
+Reference and proposed-model records are under `results/valid/reference/`
+and `results/valid/protocol_v2/`. Current comparisons:
 
-The detailed report is available at
-[`reports/phase-1-se-adlif-reference.md`](reports/phase-1-se-adlif-reference.md).
+- [Seed-42 model comparison](reports/seed-42-model-comparison.md).
+- [Paper versus reference](reports/paper-vs-reference.md).
+- [Shared evaluation commands](reports/shared-evaluation-config.md).
 
-### Canonical result locations
+Historical test-selected SHD reproduction statistics are retained in the
+[Phase 1 report](reports/phase-1-se-adlif-reference.md); they are not current
+unbiased test estimates. The old `results/phase1_models` and development
+archive paths are no longer present.
 
-```text
-results/phase1_models/reference/SHD/seed_{42,123,456}
-results/phase1_models/reference/SSC/seed_{42,123,456}
-results/phase1_models/reference/ECG/seed_{42,123,456}
-```
+Reference tuning is separate from controlled model comparisons:
 
-Only these runs should be included in Phase 1 statistics. A repeated run of an
-existing seed must be labelled as verification-only and must not be counted as
-an additional independent seed.
+- `tune_shd.py`: checkpoint continuation screening and fresh confirmation.
+- `search_shd.py`: nine fresh LR/batch runs.
+- `queue_shd_dropout.py`: optional dropout follow-up queue.
 
-### Interpretation of Phase 1 results
+Their results remain under `results/experiments/`. A fine-tuning test gain
+must not be interpreted as a better training-from-scratch configuration.
 
-- SSC and ECG used validation data for checkpoint selection followed by final
-  test evaluation. Their table values are final test accuracies.
-- SHD used the test split for validation and checkpoint selection. Its result
-  reproduces the current reference setup but is not an unbiased final-test
-  estimate.
-- The old SHD `loss_agg: softmax` mode computed
-  `sum_t softmax(y_t)`, which is mathematically identical to the explicit
-  `sum_softmax_over_time` mode. The canonical SHD results remain valid.
-- Canonical SSC runs use `summed_membrane_potentials`. Earlier temporal-mean
-  SSC runs are excluded from the reference result set.
-- The SHD seed-42 training summary is stale; its authoritative `metrics.csv`
-  and checkpoint record 95.45% at epoch 205.
+## Phase 1 - Reference reproduction
 
-## Phase 1 — Reproduce the SE-adLIF reference
+Historical three-seed reproduction is documented. Current training-derived
+validation reference records are retained separately. Verify matched settings
+and checkpoint provenance before aggregating seeds.
 
-**Status: COMPLETE**
+## Phase 2 - Comparison protocol
 
-Completed work:
-
-- Prepared SHD, SSC, and ECG/QTDB datasets.
-- Ran seeds `42`, `123`, and `456` for every dataset.
-- Corrected and tested temporal loss aggregation.
-- Saved checkpoints, metrics, hyperparameters, and per-seed summaries.
-- Recorded parameter counts and dense-forward GFLOPs estimates.
-- Calculated mean accuracy and sample standard deviation.
-- Consolidated valid results under a single canonical `reference` hierarchy.
-
-Remaining publication-quality improvement, not required to begin model
-development:
-
-- Introduce a separate SHD validation split and reserve the test split for one
-  final evaluation.
-- Standardize scheduler and early-stopping settings across every seed and model
-  before the final controlled comparison.
-
-## Phase 2 — Freeze the comparison protocol
-
-**Status: NEXT**
-
-Before evaluating a proposed architecture, define a single protocol that both
-SE-adLIF and the proposed model will use:
-
-- identical preprocessing and dataset splits;
-- identical seeds: `42`, `123`, and `456`;
-- identical batch size, epoch budget, optimizer, and learning-rate schedule;
-- identical checkpoint-selection and final-test rules;
-- identical accuracy, spike, SynOps, latency, memory, and parameter reporting;
-- separate development and final-evaluation result directories.
-
-During initial development, use SHD seed 42 only. Freeze the architecture and
-hyperparameters before running seeds 123 and 456.
-
-**Deliverable:** a reproducible runner and config set shared by the reference
-and proposed models.
+Implemented. Preserve the shared splits, preprocessing, seeds, budgets,
+checkpoint selection and final-test rules for fair model comparisons.
+Remaining work includes multi-seed confirmation of proposed models and
+measured efficiency rather than inferred energy savings.
 
 ## Phase 3 — Dynamic Threshold model
 

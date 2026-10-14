@@ -5,7 +5,7 @@ No old checkpoints are used. All model variants share dataset-specific settings:
 
 The shared `config/dataset/shd.yaml` and `shd_val.yaml` now also default to
 20% training-derived validation, split seed 42, and the isolated `controlled_v2`
-cache. Future SHD experiments inherit this policy even outside the full runner.
+cache. Future SHD experiments inherit this policy even outside the shared runner.
 Do not resume historical test-validation checkpoints under these new defaults
 or reuse their output directories; use fresh output paths for new experiments.
 Saved historical configurations, measurements and checkpoints remain unchanged.
@@ -34,7 +34,7 @@ retain their legacy cache paths when the namespace is not supplied.
 ## Launch candidates (27 sequential runs)
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models DTH_SE_adLIF DA_SE_adLIF MR_SE_adLIF --adaptation-update-interval 2
+.\.ven\Scripts\python.exe runner.py --models DTH_SE_adLIF DA_SE_adLIF MR_SE_adLIF --adaptation-update-interval 2
 ```
 
 Append `--dry-run` to preflight all runs without training or writing files.
@@ -46,8 +46,8 @@ For two-stage training, run seed 42 first (9 runs), then seeds 123 and 456
 report. Seed selection does not change experiment configurations.
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models DTH_SE_adLIF DA_SE_adLIF MR_SE_adLIF --adaptation-update-interval 2 --seeds 42
-.\.venv\Scripts\python.exe runner.py --models DTH_SE_adLIF DA_SE_adLIF MR_SE_adLIF --adaptation-update-interval 2 --seeds 123 456
+.\.ven\Scripts\python.exe runner.py --models DTH_SE_adLIF DA_SE_adLIF MR_SE_adLIF --adaptation-update-interval 2 --seeds 42
+.\.ven\Scripts\python.exe runner.py --models DTH_SE_adLIF DA_SE_adLIF MR_SE_adLIF --adaptation-update-interval 2 --seeds 123 456
 ```
 
 Stop any already running full suite before switching commands; editing the
@@ -61,7 +61,7 @@ with final-test mean and sample SD from completed seeds only.
 ## Matched reference (9 additional runs)
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models SE_adLIF
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF
 ```
 
 Alternatively, prepend `SE_adLIF` to the candidate command to queue all 36 runs.
