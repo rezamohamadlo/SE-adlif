@@ -1,26 +1,26 @@
-# SHD_SE_adLIF Training Summary — Seed 456
+# SHD_SE_adLIF_paper Training Summary — Seed 42
 
 This file is updated automatically whenever training saves a new best checkpoint.
 
 ## Run status
 
 - **Status:** Training and testing finished
-- **Progress:** 166 epochs completed (`0` through `165`) out of 300
+- **Progress:** 300 epochs completed (`0` through `299`) out of 300
 - **Dataset:** SHD
-- **Model:** SHD_SE_adLIF
-- **Seed:** 456
+- **Model:** SHD_SE_adLIF_paper
+- **Seed:** 42
 - **Device:** cuda:0
 
 ## Best result
 
 | Metric | Value | Epoch |
 |---|---:|---:|
-| Best validation accuracy | **99.08%** | 114 |
-| Validation loss | **0.0818** | 114 |
-| Training accuracy | **100.00%** | 114 |
-| Training loss | **0.000024** | 114 |
-| Gradient norm | **0.0002** | 114 |
-| Learning rate | **0.01** | 114 |
+| Best validation accuracy | **99.14%** | 261 |
+| Validation loss | **0.0635** | 261 |
+| Training accuracy | **99.91%** | 261 |
+| Training loss | **0.001770** | 261 |
+| Gradient norm | **0.0003** | 261 |
+| Learning rate | **0.01** | 261 |
 
 ## Model size and computation
 
@@ -28,15 +28,15 @@ This file is updated automatically whenever training saves a new best checkpoint
 |---|---:|
 | Total parameters | **450,760** |
 | Trainable parameters | **450,020** |
-| Average padded validation timesteps/sample | **296.92** |
-| Estimated dense forward GFLOPs/sample | **0.2651** |
+| Average padded validation timesteps/sample | **293.31** |
+| Estimated dense forward GFLOPs/sample | **0.2619** |
 
 The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds, with one multiply-add equal to two FLOPs. It uses the actual average padded validation sequence length. Elementwise neuron-state updates, loss computation, backward propagation, and data loading are excluded. It is therefore a reproducible forward-compute estimate rather than measured GPU throughput.
 
 ## Best checkpoint
 
 ```text
-ckpt/epoch=114-step=1380.ckpt
+ckpt/epoch=261-step=6550.ckpt
 ```
 
 ## Main hyperparameters
@@ -44,11 +44,12 @@ ckpt/epoch=114-step=1380.ckpt
 | Hyperparameter | Value |
 |---|---:|
 | Epoch limit | 300 |
-| Batch size | 512 |
+| Batch size | 256 |
 | Initial learning rate | 0.01 |
+| LR scheduler | plateau |
 | LR scheduler factor | 0.9 |
 | LR scheduler patience | 9999 |
-| Early stopping | true |
+| Early stopping | false |
 | Early-stopping patience | 50 |
 | Early-stopping minimum delta | 0.001 |
 | Dropout | 0.15 |
@@ -63,10 +64,10 @@ ckpt/epoch=114-step=1380.ckpt
 - Runtime log: `out.log`
 - Checkpoints: `ckpt/`
 
-## Runner command
+## Evaluate saved reference checkpoint
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models SE_adLIF --datasets SHD --seeds 456
+.\.ven\Scripts\python.exe test_checkpoint.py --checkpoint "results/valid/reference/SHD/seed_42/ckpt/epoch=261-step=6550.ckpt"
 ```
 
 ## Evaluation note
@@ -79,7 +80,11 @@ The best validation checkpoint was evaluated on the test split after training.
 
 | Metric | Value |
 |---|---:|
-| Test accuracy | **93.07%** |
-| Test loss | **0.5026** |
+| Test accuracy | **92.93%** |
+| Test loss | **0.6220** |
 
-This runner command uses the shared evaluation settings and starts or resumes a runner-managed job. It does not import this retained historical run automatically.
+## Canonical reference provenance
+
+Protocol: **SHD***; baseline: `paper_classification_v1`. Completed 300 epochs with batch 256 and early stopping disabled.
+
+Original run: `results/experiments/shd_paper/multirun/2026-10-14/10-10-21/seed_42`. Saved runtime configs and checkpoint contents are retained unchanged. Current metadata: `REFERENCE_RESULT.json`.

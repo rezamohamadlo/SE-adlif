@@ -199,3 +199,15 @@ actually verified and any material limitations.
   authorization.
 - Status updates should distinguish completed work from queued, running,
   interrupted or unverified work. Keep explanations concise and candid.
+
+## Canonical SHD reference location
+
+The user explicitly replaced the prior SHD reference. The sole current
+reference is `results/valid/reference/SHD/seed_<seed>/`, with aggregate
+`REFERENCE_RESULTS.json` and per-seed `REFERENCE_RESULT.json`. Its protocol
+is paper_classification_v1 (batch 256, full 300 epochs). Do not restore the
+retired controlled-v2 SHD tree or use old date-based paths as the active baseline.
+Historical experiments retain their original baseline in REFERENCE_BASELINE.json;
+do not retroactively substitute current reference scores into those records.
+Proposed controlled-v2 SHD results remain unmatched until rerun with this
+baseline. Prefer metadata/metrics over hard-coded reference numbers.

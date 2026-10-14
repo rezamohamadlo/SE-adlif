@@ -1,52 +1,22 @@
-# Paper versus our SE-adLIF reference
+# Current paper/reference comparison
 
-Test accuracy (%), **mean ± SD**, for two-layer models. Our results use
-seeds **42, 123, 456**; current local statistics use sample SD.
+Final test accuracy (%), mean ± sample SD for local two-layer reference models.
 
-| Dataset / protocol | Paper | Our reference | Difference (pp) | Paper / local runs |
+| Dataset | Paper | Current reference | Difference (pp) | Paper/local runs |
 |---|---:|---:|---:|---:|
-| SHD: test-based checkpoint selection | 95.81 ± 0.56 | 94.63 ± 0.86 | -1.18 | 20 / 3 |
-| SHD*: separate 20% validation split | 93.79 ± 0.76 | 92.93 ± 0.56 | -0.86 | 20 / 3 |
-| SSC: official validation/test splits | 80.44 ± 0.26 | 78.21 ± 0.11 | -2.23 | 5 / 3 |
-| ECG: training-derived validation | 88.18 ± 0.36 | 88.32 ± 0.35 | +0.14 | 20 / 3 |
+| SHD* | 93.79 ± 0.76 | 93.15 ± 0.42 | -0.64 | 20/3 |
+| SSC | 80.44 ± 0.26 | 78.21 ± 0.11 | -2.23 | 5/3 |
+| ECG | 88.18 ± 0.36 | 88.32 ± 0.35 | +0.14 | 20/3 |
 
-SHD* is the appropriate comparison for our current shared protocol. The first
-SHD row is historical and uses the test set for checkpoint selection; it is
-not an unbiased final evaluation. Its local figures are retained in the Phase 1
-report after the original run artifacts were deleted.
+The canonical SHD* reference now uses batch 256 and 300 epochs without early
+stopping. Per-seed test scores: 42 = 92.93%, 123 = 92.89%, 456 = 93.64%.
+SSC and ECG reference records are unchanged. ECG retained inconsistent
+stopping settings across seeds, so its comparison is descriptive.
 
-Local ECG stopping settings differ: seed 42 disabled early stopping, while
-seeds 123 and 456 enabled it. These are descriptive results, not evidence of
-a statistically significant improvement or an exact reproduction.
+[Full paper comparison](paper-vs-reference.md) provides sources and provenance.
+[Seed-42 model comparison](seed-42-model-comparison.md) lists proposed-model
+results; their controlled-v2 SHD settings do not match the new reference, so
+no fair SHD improvement claim can be made from those old runs.
 
-Sources: Table 2, page 11 of `reference_paper.pdf`;
-[current reference comparison](paper-vs-reference.md);
-[historical Phase 1 results](phase-1-se-adlif-reference.md).
-
-## Seed 42: final test accuracy (%)
-
-| Model | SHD* | SSC | ECG |
-|---|---:|---:|---:|
-| SE_adLIF reference | 93.42 | **78.33** | 88.13* |
-| DTH_SE_adLIF | **93.77** | 78.22 | **88.35** |
-| DA_SE_adLIF | 91.83 | 77.88 | 87.20 |
-| MR_SE_adLIF (K=2) | 92.58 | 76.93 | 88.05 |
-| MT_SE_adLIF | 92.76† | 77.60 | 87.23 |
-| FP_SE_adLIF | 91.56 | 77.67 | 86.85 |
-
-## Seed 42: difference from reference (percentage points)
-
-| Model | SHD* | SSC | ECG |
-|---|---:|---:|---:|
-| DTH_SE_adLIF | +0.35 | -0.11 | +0.22* |
-| DA_SE_adLIF | -1.59 | -0.45 | -0.93* |
-| MR_SE_adLIF (K=2) | -0.84 | -1.40 | -0.08* |
-| MT_SE_adLIF | -0.66† | -0.73 | -0.90* |
-| FP_SE_adLIF | -1.86 | -0.66 | -1.28* |
-
-*ECG seed 42 reference disabled early stopping; the candidate runs enabled it.
-†MT's epoch-104 validation-selected checkpoint was independently evaluated;
-its original training logs contain overlapping runs. All six models now have
-recorded seed 42 test results on SHD, SSC, and ECG.
-
-Source: [seed 42 model comparison](seed-42-model-comparison.md).
+Historical test-selected SHD reproduction is documented only in the
+[Phase 1 report](phase-1-se-adlif-reference.md), not in this current comparison.

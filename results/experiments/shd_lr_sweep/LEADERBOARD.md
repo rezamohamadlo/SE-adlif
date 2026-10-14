@@ -1,7 +1,7 @@
 # SHD validation sweep
 
 Sorted by acc_diffe descending; untested trials appear last. Ties use validation accuracy, then validation loss. BEST_CONFIG.json retains the best validation configuration.
-`acc_diffe` is test accuracy minus the reported reference test accuracy (93.42%), in percentage points.
+`acc_diffe` uses this experiment's reference (93.42%, retired_controlled_v2_shd), in percentage points. Historical baselines are not the current canonical reference.
 Delta is relative to the same saved reference weights evaluated before each trial.
 
 | Trial | LR | Batch | Scheduler | Val accuracy | Delta (pp) | Val loss | Test accuracy | acc_diffe (pp) |

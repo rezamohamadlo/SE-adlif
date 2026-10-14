@@ -1,0 +1,221 @@
+hydra:
+  run:
+    dir: ${logdir}/hydra/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: ./results/experiments/shd_paper/multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: seed_${random_seed}
+  launcher:
+    _target_: hydra._internal.core_plugins.basic_launcher.BasicLauncher
+  sweeper:
+    _target_: hydra._internal.core_plugins.basic_sweeper.BasicSweeper
+    max_batch_size: null
+    params: null
+  help:
+    app_name: ${hydra.job.name}
+    header: '${hydra.help.app_name} is powered by Hydra.
+
+      '
+    footer: 'Powered by Hydra (https://hydra.cc)
+
+      Use --hydra-help to view Hydra specific help
+
+      '
+    template: '${hydra.help.header}
+
+      == Configuration groups ==
+
+      Compose your configuration from those groups (group=option)
+
+
+      $APP_CONFIG_GROUPS
+
+
+      == Config ==
+
+      Override anything in the config (foo.bar=value)
+
+
+      $CONFIG
+
+
+      ${hydra.help.footer}
+
+      '
+  hydra_help:
+    template: 'Hydra (${hydra.runtime.version})
+
+      See https://hydra.cc for more info.
+
+
+      == Flags ==
+
+      $FLAGS_HELP
+
+
+      == Configuration groups ==
+
+      Compose your configuration from those groups (For example, append hydra/job_logging=disabled
+      to command line)
+
+
+      $HYDRA_CONFIG_GROUPS
+
+
+      Use ''--cfg hydra'' to Show the Hydra config.
+
+      '
+    hydra_help: ???
+  hydra_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '[%(asctime)s][HYDRA] %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+    root:
+      level: INFO
+      handlers:
+      - console
+    loggers:
+      logging_example:
+        level: DEBUG
+    disable_existing_loggers: false
+  job_logging:
+    version: 1
+    root: null
+    disable_existing_loggers: false
+  env: {}
+  mode: MULTIRUN
+  searchpath: []
+  callbacks: {}
+  output_subdir: .hydra
+  overrides:
+    hydra:
+    - hydra.mode=MULTIRUN
+    task:
+    - experiment=SHD_SE_adLIF_paper
+    - random_seed=42,123,456
+  job:
+    name: run
+    chdir: true
+    override_dirname: experiment=SHD_SE_adLIF_paper,random_seed=42,123,456
+    id: ???
+    num: ???
+    config_name: main
+    env_set: {}
+    env_copy: []
+    config:
+      override_dirname:
+        kv_sep: '='
+        item_sep: ','
+        exclude_keys: []
+  runtime:
+    version: 1.3.2
+    version_base: '1.3'
+    cwd: C:\Users\jafari.h.SPADANACO\Desktop\SE-adlif
+    config_sources:
+    - path: hydra.conf
+      schema: pkg
+      provider: hydra
+    - path: C:\Users\jafari.h.SPADANACO\Desktop\SE-adlif\config
+      schema: file
+      provider: main
+    - path: ''
+      schema: structured
+      provider: schema
+    output_dir: ???
+    choices:
+      experiment: SHD_SE_adLIF_paper
+      dataset: shd
+      hydra/env: default
+      hydra/callbacks: null
+      hydra/job_logging: none
+      hydra/hydra_logging: default
+      hydra/hydra_help: default
+      hydra/help: default
+      hydra/sweeper: basic
+      hydra/launcher: basic
+      hydra/output: default
+  verbose: false
+random_seed: 42
+logdir: ./results/experiments/shd_paper/seed_${random_seed}
+datadir: ./data
+cachedir: ./data/cache
+ckpt_path: null
+init_ckpt_path: null
+run_test: true
+scheduler: plateau
+scheduler_min_lr: 0.0
+gradient_clip_val: 1.5
+device: cuda:0
+early_stopping: false
+early_stopping_patience: 50
+early_stopping_min_delta: 0.001
+dataset:
+  _target_: datasets.shd.SHDLDM
+  data_path: ${datadir}
+  spatial_factor: 0.2
+  time_factor: 0.001
+  pad_to_min_size: 250
+  window_size: 4
+  batch_size: 256
+  num_workers: 0
+  num_classes: 20
+  validate_on: 0.2
+  random_seed: 42
+  cache_namespace: controlled_v2
+  ignore_first_timesteps: 10
+  additional_test_set_validation: false
+exp_name: SHD_SE_adLIF_paper
+two_layers: true
+alpha: 5.0
+c: 0.4
+dt: 1.0
+dropout: 0.15
+l1:
+  cell: se_adlif
+  input_size: 140
+  n_neurons: 360
+  tau_u_range:
+  - 5
+  - 25
+  tau_w_range:
+  - 60
+  - 300
+  q: 120
+  alpha: ${alpha}
+  c: ${c}
+  dt: ${dt}
+l2:
+  cell: se_adlif
+  input_size: 360
+  n_neurons: 360
+  tau_u_range:
+  - 5
+  - 25
+  tau_w_range:
+  - 60
+  - 300
+  q: 120
+  alpha: ${alpha}
+  c: ${c}
+  dt: ${dt}
+l_out:
+  input_size: 360
+  n_neurons: ${dataset.num_classes}
+  tau_u_range:
+  - 15
+  - 15
+  dt: ${dt}
+n_epochs: 300
+batch_size: 256
+loss_agg: sum_softmax_over_time
+tracking_metric: val_acc
+tracking_mode: max
+lr: 0.01
+factor: 0.9
+patience: 9999
+evaluation_protocol: paper_shd_reproduction

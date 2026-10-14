@@ -1,0 +1,103 @@
+{
+  "seed": 42,
+  "protocol": "paper_shd_reproduction",
+  "baseline_version": "paper_classification_v1",
+  "test_acc": 0.9293286204338074,
+  "test_loss": 0.6220112442970276,
+  "val_acc": 0.991416335105896,
+  "val_loss": 0.06347879022359848,
+  "best_epoch": 261,
+  "checkpoint": "ckpt/epoch=261-step=6550.ckpt",
+  "checkpoint_sha256": "d571c7af2ac1c5b19a0c549a5fdb124774d31d63e254e16b501ef354103c4541",
+  "original_directory": "results/experiments/shd_paper/multirun/2026-10-14/10-10-21/seed_42",
+  "config": {
+    "random_seed": 42,
+    "logdir": "./results/experiments/shd_paper/seed_42",
+    "datadir": "./data",
+    "cachedir": "./data/cache",
+    "ckpt_path": null,
+    "init_ckpt_path": null,
+    "run_test": true,
+    "scheduler": "plateau",
+    "scheduler_min_lr": 0.0,
+    "gradient_clip_val": 1.5,
+    "device": "cuda:0",
+    "early_stopping": false,
+    "early_stopping_patience": 50,
+    "early_stopping_min_delta": 0.001,
+    "dataset": {
+      "_target_": "datasets.shd.SHDLDM",
+      "data_path": "./data",
+      "spatial_factor": 0.2,
+      "time_factor": 0.001,
+      "pad_to_min_size": 250,
+      "window_size": 4,
+      "batch_size": 256,
+      "num_workers": 0,
+      "num_classes": 20,
+      "validate_on": 0.2,
+      "random_seed": 42,
+      "cache_namespace": "controlled_v2",
+      "ignore_first_timesteps": 10,
+      "additional_test_set_validation": false
+    },
+    "exp_name": "SHD_SE_adLIF_paper",
+    "two_layers": true,
+    "alpha": 5.0,
+    "c": 0.4,
+    "dt": 1.0,
+    "dropout": 0.15,
+    "l1": {
+      "cell": "se_adlif",
+      "input_size": 140,
+      "n_neurons": 360,
+      "tau_u_range": [
+        5,
+        25
+      ],
+      "tau_w_range": [
+        60,
+        300
+      ],
+      "q": 120,
+      "alpha": 5.0,
+      "c": 0.4,
+      "dt": 1.0
+    },
+    "l2": {
+      "cell": "se_adlif",
+      "input_size": 360,
+      "n_neurons": 360,
+      "tau_u_range": [
+        5,
+        25
+      ],
+      "tau_w_range": [
+        60,
+        300
+      ],
+      "q": 120,
+      "alpha": 5.0,
+      "c": 0.4,
+      "dt": 1.0
+    },
+    "l_out": {
+      "input_size": 360,
+      "n_neurons": 20,
+      "tau_u_range": [
+        15,
+        15
+      ],
+      "dt": 1.0
+    },
+    "n_epochs": 300,
+    "batch_size": 256,
+    "loss_agg": "sum_softmax_over_time",
+    "tracking_metric": "val_acc",
+    "tracking_mode": "max",
+    "lr": 0.01,
+    "factor": 0.9,
+    "patience": 9999,
+    "evaluation_protocol": "paper_shd_reproduction"
+  }
+}

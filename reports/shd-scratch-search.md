@@ -78,3 +78,7 @@ reference seeds. A better configuration is not guaranteed.
 
 LR scheduler changes are a later, separate experiment after the LR/batch
 search; this first stage deliberately retains the original scheduler behavior.
+
+Historical reference context: these experiments used the now-retired
+controlled-v2 baseline. Their saved REFERENCE_BASELINE.json preserves that
+comparison; the canonical SHD reference has since been replaced.

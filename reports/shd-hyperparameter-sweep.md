@@ -1,12 +1,11 @@
 # SHD reference hyperparameter sweep
 
-Target: SHD SE_adLIF, reference seed 42, reported final test accuracy 93.42%.
-The retained best checkpoint is `epoch=162-step=1956.ckpt`, with 99.14%
-validation accuracy, under
-`results/valid/reference/SHD/seed_42/hydra/2026-10-12/07-17-03/ckpt/`.
-It is the runner's default checkpoint. The Markdown summary names epoch 120
-and 98.96%, which differ from the actual checkpoint metadata; use the saved
-checkpoint and CSV metrics for source provenance.
+This document describes the historical continuation sweep from the retired
+controlled-v2 reference (reported seed-42 test accuracy 93.42%, epoch 162).
+Its source checkpoint is no longer canonical; original checkpoint paths in
+saved manifests are provenance only. `REFERENCE_BASELINE.json` in the historical
+sweep retains its original comparison basis. The current canonical reference
+is `results/valid/reference/SHD/seed_42/`, best checkpoint epoch 261, test 92.93%.
 
 The screening runner starts every trial from exactly the same reference weights.
 It resets Adam, scheduler state and epoch numbering, then trains for 10 epochs
@@ -38,9 +37,9 @@ From the project root:
 # Inspect all 20 recipes without loading a checkpoint.
 .\.ven\Scripts\python.exe tune_shd.py --list
 
-# Use the retained epoch-162 checkpoint (or supply --checkpoint explicitly).
-.\.ven\Scripts\python.exe tune_shd.py --epochs 10 --dry-run
-.\.ven\Scripts\python.exe tune_shd.py --epochs 10
+# Use the current canonical epoch-261 checkpoint (or supply --checkpoint explicitly).
+.\.ven\Scripts\python.exe tune_shd.py --output results/experiments/shd_paper_sweep --epochs 10 --dry-run
+.\.ven\Scripts\python.exe tune_shd.py --output results/experiments/shd_paper_sweep --epochs 10
 ```
 
 Runs execute sequentially on the configured device. Results go to
@@ -63,8 +62,8 @@ existing baseline, using seeds 42, 123 and 456 before claiming an improvement.
 For example, if c11 is chosen:
 
 ```powershell
-.\.ven\Scripts\python.exe tune_shd.py --full-train --trial c11 --dry-run
-.\.ven\Scripts\python.exe tune_shd.py --full-train --trial c11
+.\.ven\Scripts\python.exe tune_shd.py --output results/experiments/shd_paper_sweep --full-train --trial c11 --dry-run
+.\.ven\Scripts\python.exe tune_shd.py --output results/experiments/shd_paper_sweep --full-train --trial c11
 ```
 
 Confirmation initializes weights and Adam from scratch, uses a 300-epoch limit,
@@ -72,4 +71,4 @@ restores the reference early-stopping settings, and stretches cosine decay over
 the full budget. Results are isolated under `full_train/c11/seed_<seed>/`.
 Test evaluation occurs once after validation checkpoint selection in each
 full run. Select the final recipe using validation results, then report test
-accuracy and variability across seeds. There is no guarantee of exceeding 93.42%.
+accuracy and variability across seeds. The historical 93.42% comparison is retired; use the baseline saved with each new experiment.

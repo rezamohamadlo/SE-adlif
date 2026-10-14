@@ -72,6 +72,8 @@ class SweepTests(unittest.TestCase):
         self.assertEqual(full['random_seed'], 123)
 
     def test_ranking_excludes_test_and_baseline_and_rejects_changed_resume(self):
+        (self.root/'REFERENCE_BASELINE.json').write_text(json.dumps(dict(
+            protocol='test_fixture', reference_test_acc=.9)))
         for trial, val, test in [('c01', .80, .99), ('c02', .85, .50)]:
             directory = self.root/trial
             metrics = directory/'logs/mlp_snn/version_0/metrics.csv'
@@ -118,6 +120,12 @@ class SweepTests(unittest.TestCase):
                     optimizer.step()
                     scheduler.step()
                 self.assertAlmostEqual(optimizer.param_groups[0]['lr'], recipe['lr'] * .1)
+
+    def test_historical_report_keeps_its_saved_test_baseline(self):
+        record = dict(protocol='retired_controlled_v2_shd', reference_test_acc=.934187,
+                      reported_reference_percent=93.42)
+        (self.root/'REFERENCE_BASELINE.json').write_text(json.dumps(record))
+        self.assertEqual(tune_shd.test_baseline(self.root), record)
 
     def test_real_weights_initialization_and_one_epoch_without_test(self):
         cfg = copy.deepcopy(self.source)

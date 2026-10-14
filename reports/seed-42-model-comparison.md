@@ -2,24 +2,24 @@
 
 Final test accuracy (%). MR uses adaptation interval K=2.
 
-| Model | SHD | SSC | ECG |
+| Model | SHD* | SSC | ECG |
 |---|---:|---:|---:|
-| SE_adLIF reference | 93.42 | **78.33** | 88.13* |
-| DTH_SE_adLIF | **93.77** | 78.22 | **88.35** |
-| DA_SE_adLIF | 91.83 | 77.88 | 87.20 |
-| MR_SE_adLIF (K=2) | 92.58 | 76.93 | 88.05 |
-| MT_SE_adLIF | 92.76 | 77.60 | 87.23 |
-| FP_SE_adLIF | 91.56 | 77.67 | 86.85 |
+| SE_adLIF reference | 92.93 | **78.33** | 88.13* |
+| DTH_SE_adLIF | 93.77 [unmatched] | 78.22 | **88.35** |
+| DA_SE_adLIF | 91.83 [unmatched] | 77.88 | 87.20 |
+| MR_SE_adLIF (K=2) | 92.58 [unmatched] | 76.93 | 88.05 |
+| MT_SE_adLIF | 92.76 [unmatched] | 77.60 | 87.23 |
+| FP_SE_adLIF | 91.56 [unmatched] | 77.67 | 86.85 |
 
 Change relative to reference, in percentage points (rounded displayed values):
 
-| Model | SHD | SSC | ECG |
+| Model | SHD* | SSC | ECG |
 |---|---:|---:|---:|
-| DTH_SE_adLIF | +0.35 | -0.11 | +0.22* |
-| DA_SE_adLIF | -1.59 | -0.45 | -0.93* |
-| MR_SE_adLIF (K=2) | -0.84 | -1.40 | -0.08* |
-| MT_SE_adLIF | -0.66 | -0.73 | -0.90* |
-| FP_SE_adLIF | -1.86 | -0.66 | -1.28* |
+| DTH_SE_adLIF | unmatched | -0.11 | +0.22* |
+| DA_SE_adLIF | unmatched | -0.45 | -0.93* |
+| MR_SE_adLIF (K=2) | unmatched | -1.40 | -0.08* |
+| MT_SE_adLIF | unmatched | -0.73 | -0.90* |
+| FP_SE_adLIF | unmatched | -0.66 | -1.28* |
 
 Numeric scores come from completed final evaluations with separate validation
 and test splits. Historical test-selected MT/FP scores are excluded. FP has
@@ -41,7 +41,7 @@ it does not establish that the original training history was uncontaminated.
 
 ## Sources
 
-- SHD reference: `results/valid/reference/SHD/seed_42/hydra/2026-10-12/07-17-03/TRAINING_SUMMARY.md`
+- SHD reference: `results/valid/reference/SHD/seed_42/TRAINING_SUMMARY.md`
 - SSC reference: `results/valid/reference/SSC/seed_42/TRAINING_SUMMARY.md`
 - ECG reference: `results/valid/reference/ECG/seed_42/TRAINING_SUMMARY.md`
 - DTH and DA: `results/valid/protocol_v2/<model>/<dataset>/seed_42/TRAINING_SUMMARY.md`
@@ -50,5 +50,10 @@ it does not establish that the original training history was uncontaminated.
 - MT SSC/ECG: `results/valid/protocol_v2/MT_SE_adLIF/<dataset>/seed_42/TRAINING_SUMMARY.md`
 - FP: `results/valid/protocol_v2/FP_SE_adLIF/<dataset>/seed_42/TRAINING_SUMMARY.md`
 
-The older SHD test-selected reference is excluded; SHD uses the new
-training-derived validation run. Scores are taken from final test evaluations.
+The SHD reference now uses paper-baseline training; historical test-selected reference scores remain excluded. Scores are taken from final test evaluations.
+
+[unmatched] Proposed-model SHD scores were trained under controlled_v2 (batch 512 and
+early stopping). The replacement reference used paper_classification_v1
+(batch 256, full 300 epochs). These are unmatched SHD* results; SHD differences
+are deliberately not reported until the proposed models are retrained under
+the same baseline. SSC and ECG records were not replaced.

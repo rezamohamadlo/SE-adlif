@@ -6,7 +6,7 @@ seeds 42, 123, and 456 and sample SD (n−1), calculated from final CSV test met
 
 | Dataset | Paper: mean ± SD | Paper runs | Local reference: mean ± sample SD | Local runs | Local − paper mean (pp) |
 |---|---:|---:|---:|---:|---:|
-| SHD* | 93.79 ± 0.76 | 20 | 92.93 ± 0.56 | 3 | -0.86 |
+| SHD* | 93.79 ± 0.76 | 20 | 93.15 ± 0.42 | 3 | -0.64 |
 | SSC | 80.44 ± 0.26 | 5 | 78.21 ± 0.11 | 3 | -2.23 |
 | ECG (2 layers) | 88.18 ± 0.36 | 20 | 88.32 ± 0.35 | 3 | +0.14 |
 
@@ -27,14 +27,23 @@ the small positive ECG mean difference does not demonstrate superiority.
 
 | Dataset | Seed 42 | Seed 123 | Seed 456 |
 |---|---:|---:|---:|
-| SHD | 93.42 | 92.31 | 93.07 |
+| SHD* | 92.93 | 92.89 | 93.64 |
 | SSC | 78.33 | 78.12 | 78.17 |
 | ECG | 88.13 | 88.72 | 88.11 |
 
 Local sources: final `test_acc` rows in `metrics.csv` under
-`results/valid/reference/<dataset>/seed_<seed>/` (SHD retains its Hydra date/time
-subdirectories). Values above are rounded after calculating statistics.
+`results/valid/reference/<dataset>/seed_<seed>/` (SHD now uses canonical per-seed directories). Values above are rounded after calculating statistics.
 
 Paper: Baronig et al., *Advancing Spatio-Temporal Processing in Spiking Neural
 Networks through Adaptation*, Table 2, page 11 in the local PDF;
 DOI: 10.1038/s41467-025-60878-z.
+
+## Canonical SHD reference replacement
+
+The current SHD* reference is the completed paper-baseline run set promoted to
+`results/valid/reference/SHD/seed_<seed>/`. Its batch is 256 and all 300 epochs
+completed without early stopping. The former batch-512/early-stopped SHD
+reference is retired. Aggregate metrics and checkpoint provenance are in
+`results/valid/reference/SHD/REFERENCE_RESULTS.json` and per-seed
+`REFERENCE_RESULT.json`. Proposed controlled-v2 SHD runs have different training
+settings and must not be treated as matched comparisons against this baseline.

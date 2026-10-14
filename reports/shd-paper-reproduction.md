@@ -48,3 +48,11 @@ different controlled_v2 batch/stopping settings over this configuration.
 
 The paper's 93.79 +/- 0.76% is a mean and SD across 20 initializations, not an
 individual-seed target. Compare multi-seed averages and report uncertainty.
+
+## Promoted completed reference
+
+The completed run set originally produced under multirun/2026-10-14/10-10-21
+was moved to `results/valid/reference/SHD/seed_<seed>/`. It is now the canonical
+reference: **93.15 ± 0.42%** over seeds 42/123/456. Original paths are provenance
+only. New training commands still write new timestamped experiment folders;
+they do not overwrite the canonical reference automatically.

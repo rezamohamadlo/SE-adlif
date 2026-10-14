@@ -69,3 +69,7 @@ The separate queue holds its own lock to reject duplicates. Once the grid
 finishes, it also holds the grid's lock during follow-up training. Test data
 is not evaluated in either dropout experiment; test evaluation is explicit
 after validation-based selection.
+
+Historical reference context: these experiments used the now-retired
+controlled-v2 baseline. Their saved REFERENCE_BASELINE.json preserves that
+comparison; the canonical SHD reference has since been replaced.

@@ -14,7 +14,20 @@ from omegaconf import OmegaConf
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_OUTPUT = ROOT / 'results/experiments/shd_lr_sweep'
-DEFAULT_CHECKPOINT = ROOT / 'results/valid/reference/SHD/seed_42/hydra/2026-10-12/07-17-03/ckpt/epoch=162-step=1956.ckpt'
+DEFAULT_CHECKPOINT = ROOT / 'results/valid/reference/SHD/seed_42/ckpt/epoch=261-step=6550.ckpt'
+
+
+def test_baseline(output):
+    saved = output / 'REFERENCE_BASELINE.json'
+    if saved.exists():
+        return json.loads(saved.read_text(encoding='utf-8'))
+    result = DEFAULT_CHECKPOINT.parent.parent / 'REFERENCE_RESULT.json'
+    if not result.exists():
+        raise ValueError('Missing reference test baseline; supply REFERENCE_BASELINE.json for historical reports')
+    record = json.loads(result.read_text(encoding='utf-8'))
+    return dict(protocol=record['baseline_version'], reference_test_acc=record['test_acc'],
+                reported_reference_percent=100 * record['test_acc'],
+                checkpoint=str(DEFAULT_CHECKPOINT))
 
 
 def candidates():
@@ -40,7 +53,7 @@ def reference(checkpoint):
     if 'state_dict' not in saved or 'cfg' not in saved.get('hyper_parameters', {}):
         raise ValueError('Expected a local Lightning checkpoint containing state_dict and hyper_parameters.cfg')
     cfg = OmegaConf.to_container(OmegaConf.create(saved['hyper_parameters']['cfg']), resolve=True)
-    if cfg.get('exp_name') != 'SHD_SE_adLIF' or cfg.get('random_seed') != 42:
+    if cfg.get('exp_name') not in ('SHD_SE_adLIF', 'SHD_SE_adLIF_paper') or cfg.get('random_seed') != 42:
         raise ValueError('This sweep expects the seed-42 SHD_SE_adLIF reference checkpoint')
     if cfg['dataset'].get('validate_on') != 0.2 or cfg['dataset'].get('random_seed') != 42:
         raise ValueError('Reference must use the training-derived 20% validation split with split seed 42')
@@ -128,6 +141,8 @@ def scores(directory):
 
 
 def report(output):
+    baseline_record = test_baseline(output)
+    baseline_percent = baseline_record.get('reported_reference_percent', 100 * baseline_record['reference_test_acc'])
     rows = []
     for candidate in candidates():
         directory = output / candidate['id']
@@ -138,7 +153,7 @@ def report(output):
                 value = json.loads(test_path.read_text(encoding='utf-8'))['metrics'].get('test_acc')
                 if value is not None and math.isfinite(float(value)):
                     row['test_acc'] = float(value)
-            row['acc_diffe'] = (100 * row['test_acc'] - 93.42
+            row['acc_diffe'] = (100 * row['test_acc'] - baseline_percent
                                 if row['test_acc'] is not None else None)
             rows.append(row)
     validation_best = min(rows, key=lambda row: (-row['val_acc'], row['val_loss'], row['id'])) if rows else None
@@ -147,7 +162,7 @@ def report(output):
                               -row['val_acc'], row['val_loss'], row['id']))
     lines = ['# SHD validation sweep', '',
              'Sorted by acc_diffe descending; untested trials appear last. Ties use validation accuracy, then validation loss. BEST_CONFIG.json retains the best validation configuration.',
-             '`acc_diffe` is test accuracy minus the reported reference test accuracy (93.42%), in percentage points.',
+             f"`acc_diffe` uses this experiment's reference ({baseline_percent:.2f}%, {baseline_record['protocol']}), in percentage points. Historical baselines are not the current canonical reference.",
              'Delta is relative to the same saved reference weights evaluated before each trial.', '',
              '| Trial | LR | Batch | Scheduler | Val accuracy | Delta (pp) | Val loss | Test accuracy | acc_diffe (pp) |',
              '|---|---:|---:|---|---:|---:|---:|---:|---:|']
@@ -169,7 +184,7 @@ def report(output):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--checkpoint', type=Path, default=DEFAULT_CHECKPOINT,
-                        help='Trusted local seed-42 reference best checkpoint (default: retained epoch-162 checkpoint)')
+                        help='Trusted local seed-42 reference best checkpoint (default: canonical paper-baseline epoch-261 checkpoint)')
     parser.add_argument('--epochs', type=int, choices=(5, 10), default=10)
     parser.add_argument('--output', type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument('--trial', choices=[row['id'] for row in candidates()])
@@ -208,6 +223,12 @@ def main(argv=None):
         if args.dry_run:
             print(f'Validated {len(plan)} runs; no writes or training.')
             return
+        if not args.full_train and not (output / 'REFERENCE_BASELINE.json').exists():
+            if args.checkpoint.resolve() != DEFAULT_CHECKPOINT.resolve():
+                raise ValueError('A custom checkpoint requires an explicit REFERENCE_BASELINE.json in --output')
+            output.mkdir(parents=True, exist_ok=True)
+            (output / 'REFERENCE_BASELINE.json').write_text(
+                json.dumps(test_baseline(output), indent=2), encoding='utf-8')
         for directory, manifest, status in plan:
             try:
                 launch(directory, manifest, status)
