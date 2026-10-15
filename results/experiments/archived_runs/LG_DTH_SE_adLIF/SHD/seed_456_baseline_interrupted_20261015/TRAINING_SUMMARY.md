@@ -4,8 +4,8 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 ## Run status
 
-- **Status:** Training in progress
-- **Progress:** 2 epochs completed (`0` through `1`) out of 300
+- **Status:** Training interrupted; resumable
+- **Progress:** 5 epochs completed (`0` through `4`) out of 300
 - **Dataset:** SHD
 - **Model:** SHD_LG_DTH_SE_adLIF
 - **Seed:** 456
@@ -15,12 +15,12 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 | Metric | Value | Epoch |
 |---|---:|---:|
-| Best validation accuracy | **62.29%** | 1 |
-| Validation loss | **1.0811** | 1 |
-| Training accuracy | **9.64%** | 1 |
-| Training loss | **2.820001** | 1 |
-| Gradient norm | **2.8279** | 1 |
-| Learning rate | **0.01** | 1 |
+| Best validation accuracy | **89.15%** | 3 |
+| Validation loss | **0.3236** | 3 |
+| Training accuracy | **72.37%** | 3 |
+| Training loss | **0.788353** | 3 |
+| Gradient norm | **1.5286** | 3 |
+| Learning rate | **0.01** | 3 |
 
 ## Model size and computation
 
@@ -36,7 +36,7 @@ The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds
 ## Best checkpoint
 
 ```text
-ckpt/epoch=1-step=50.ckpt
+ckpt/epoch=3-step=100.ckpt
 ```
 
 ## Main hyperparameters
@@ -49,7 +49,7 @@ ckpt/epoch=1-step=50.ckpt
 | LR scheduler | plateau |
 | LR scheduler factor | 0.9 |
 | LR scheduler patience | 9999 |
-| Early stopping | true |
+| Early stopping | false |
 | Early-stopping patience | 50 |
 | Early-stopping minimum delta | 0.001 |
 | Dropout | 0.15 |
@@ -67,7 +67,7 @@ ckpt/epoch=1-step=50.ckpt
 ## Resume command
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models LG_DTH_SE_adLIF --datasets SHD --seeds 456 --epochs 300 --batch-size 256 --lr 0.01 --early-stopping true --early-stopping-patience 50 --early-stopping-min-delta 0.001 --lr-scheduler-patience 9999 --lr-scheduler-factor 0.9 --logdir "results/experiments/paper_classification_v1_custom_af62d1bc3d42"
+.\.venv\Scripts\python.exe runner.py --models LG_DTH_SE_adLIF --datasets SHD --seeds 456 --logdir "results/valid/protocol_v2"
 ```
 
 ## Evaluation note

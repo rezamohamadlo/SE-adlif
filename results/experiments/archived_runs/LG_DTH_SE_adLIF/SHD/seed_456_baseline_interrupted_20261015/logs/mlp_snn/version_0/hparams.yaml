@@ -1,6 +1,6 @@
 cfg:
   random_seed: 456
-  logdir: results/experiments/paper_classification_v1_custom_af62d1bc3d42/LG_DTH_SE_adLIF/SHD/seed_456
+  logdir: results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_456
   datadir: data
   cachedir: data/cache
   ckpt_path: null
@@ -10,7 +10,7 @@ cfg:
   scheduler_min_lr: 0.0
   gradient_clip_val: 1.5
   device: cuda:0
-  early_stopping: true
+  early_stopping: false
   early_stopping_patience: 50
   early_stopping_min_delta: 0.001
   dataset:
@@ -193,5 +193,5 @@ cfg:
   launcher_script: runner.py
   model_variant: LG_DTH_SE_adLIF
   run_mode: ours
-  launcher_logdir: results/experiments/paper_classification_v1_custom_af62d1bc3d42
-  evaluation_protocol: paper_classification_v1_custom_af62d1bc3d42
+  launcher_logdir: results/valid/protocol_v2
+  evaluation_protocol: paper_classification_v1
