@@ -1,0 +1,151 @@
+.\.venv\Scripts\python.exe : test_causal_delay_average_and_batch_isolation 
+(test_da_adlif.DATests.test_causal_delay_average_and_batch_isolation) ... ok
+At line:2 char:1
++ .\.venv\Scripts\python.exe -m unittest discover -s tests -v *> report ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_causal_del...olation) ... ok:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+test_constraints_reset_and_invalid_delays (test_da_adlif.DATests.test_constraints_reset_and_invalid_delays) ... ok
+test_history_retains_gradients (test_da_adlif.DATests.test_history_retains_gradients) ... ok
+test_hydra_registry_and_model_construction (test_da_adlif.DATests.test_hydra_registry_and_model_construction) ... ok
+test_scan_backward_dtype_device_and_state_reset 
+(test_da_adlif.DATests.test_scan_backward_dtype_device_and_state_reset) ... ok
+test_zero_gate_preserves_original_dynamics (test_da_adlif.DATests.test_zero_gate_preserves_original_dynamics) ... ok
+test_gradients_and_bounds (test_dth_adlif.DTHTests.test_gradients_and_bounds) ... ok
+test_step_scan_and_sample_isolation (test_dth_adlif.DTHTests.test_step_scan_and_sample_isolation) ... ok
+test_zero_gains_match_reference (test_dth_adlif.DTHTests.test_zero_gains_match_reference) ... ok
+test_direct_runner_matches_shared_settings_for_all_models 
+(test_evaluation_protocol.EvaluationProtocolTests.test_direct_runner_matches_shared_settings_for_all_models) ... ok
+test_rejects_resume_with_different_split 
+(test_evaluation_protocol.EvaluationProtocolTests.test_rejects_resume_with_different_split) ... ok
+test_backward_scan_dtype_device_and_sequence_reset 
+(test_fp_adlif.FPTests.test_backward_scan_dtype_device_and_sequence_reset) ... ok
+test_bounds_constraints_and_reset (test_fp_adlif.FPTests.test_bounds_constraints_and_reset) ... ok
+test_formula_units_and_subthreshold_eigenvalues 
+(test_fp_adlif.FPTests.test_formula_units_and_subthreshold_eigenvalues) ... ok
+test_hydra_registry_and_full_model_smoke (test_fp_adlif.FPTests.test_hydra_registry_and_full_model_smoke) ... ok
+test_invalid_configuration (test_fp_adlif.FPTests.test_invalid_configuration) ... ok
+test_long_subthreshold_stability (test_fp_adlif.FPTests.test_long_subthreshold_stability) ... ok
+test_original_step_reset_and_surrogate_are_preserved 
+(test_fp_adlif.FPTests.test_original_step_reset_and_surrogate_are_preserved) ... ok
+test_aggregate_only_completed_seeds (test_full_runner.FullRunnerTests.test_aggregate_only_completed_seeds) ... ok
+test_all_model_plans (test_full_runner.FullRunnerTests.test_all_model_plans) ... ok
+test_candidate_models_construct_on_each_dataset 
+(test_full_runner.FullRunnerTests.test_candidate_models_construct_on_each_dataset) ... ok
+test_cli_overrides_are_applied_and_isolated 
+(test_full_runner.FullRunnerTests.test_cli_overrides_are_applied_and_isolated) ... ok
+test_cli_selects_models_datasets_and_seeds_without_training 
+(test_full_runner.FullRunnerTests.test_cli_selects_models_datasets_and_seeds_without_training) ... ok
+test_legacy_manifest_accepts_only_equivalent_new_defaults 
+(test_full_runner.FullRunnerTests.test_legacy_manifest_accepts_only_equivalent_new_defaults) ... ok
+test_mr_interval_isolation (test_full_runner.FullRunnerTests.test_mr_interval_isolation) ... ok
+test_resume_flag_defaults_to_resume_and_fresh_runs_never_overwrite 
+(test_full_runner.FullRunnerTests.test_resume_flag_defaults_to_resume_and_fresh_runs_never_overwrite) ... ok
+test_resume_skip_and_configuration_guard (test_full_runner.FullRunnerTests.test_resume_skip_and_configuration_guard) 
+... ok
+test_two_stage_seed_selection_preserves_config_and_paths 
+(test_full_runner.FullRunnerTests.test_two_stage_seed_selection_preserves_config_and_paths) ... ok
+test_backward_shapes_and_device (test_lg_dth_adlif.LGDTHTests.test_backward_shapes_and_device) ... ok
+test_bounds_stability_and_ablation_gradients 
+(test_lg_dth_adlif.LGDTHTests.test_bounds_stability_and_ablation_gradients) ... ok
+test_causal_updates_formula_and_isolation (test_lg_dth_adlif.LGDTHTests.test_causal_updates_formula_and_isolation) ... 
+ok
+test_exact_initialization_and_disabled_equivalence 
+(test_lg_dth_adlif.LGDTHTests.test_exact_initialization_and_disabled_equivalence) ... ok
+test_lightning_smoke_checkpoint_and_optimizer_resume 
+(test_lg_dth_adlif.LGDTHTests.test_lightning_smoke_checkpoint_and_optimizer_resume) ... GPU available: True (cuda), 
+used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+`Trainer(limit_train_batches=1)` was configured so 1 batch per epoch will be used.
+`Trainer(limit_val_batches=1)` was configured so 1 batch will be used.
+You are using a CUDA device ('NVIDIA GeForce RTX 4090') that has Tensor Cores. To properly utilize them, you should 
+set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more 
+details, read 
+https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+E:\AI_paper_nazari\SE-adlif\.venv\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:441: The 
+'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the 
+`num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+E:\AI_paper_nazari\SE-adlif\.venv\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:441: The 
+'val_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the 
+`num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=1` reached.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+`Trainer(limit_train_batches=1)` was configured so 1 batch per epoch will be used.
+`Trainer(limit_val_batches=1)` was configured so 1 batch will be used.
+Restoring states from the checkpoint path at C:\Users\MOHAMM~1.SPA\AppData\Local\Temp\tmpdp22dvnm\smoke.ckpt
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Restored all states from the checkpoint at C:\Users\MOHAMM~1.SPA\AppData\Local\Temp\tmpdp22dvnm\smoke.ckpt
+`Trainer.fit` stopped: `max_epochs=2` reached.
+ok
+test_protocol_registry_counts_and_resume_plan 
+(test_lg_dth_adlif.LGDTHTests.test_protocol_registry_counts_and_resume_plan) ... ok
+test_burn_in_and_padding_do_not_contribute 
+(test_loss_aggregation.TemporalLossAggregationTests.test_burn_in_and_padding_do_not_contribute) ... ok
+test_invalid_mode_raises (test_loss_aggregation.TemporalLossAggregationTests.test_invalid_mode_raises) ... ok
+test_shd_and_ssc_aggregations_are_different 
+(test_loss_aggregation.TemporalLossAggregationTests.test_shd_and_ssc_aggregations_are_different) ... ok
+test_shd_is_sum_of_per_timestep_softmax 
+(test_loss_aggregation.TemporalLossAggregationTests.test_shd_is_sum_of_per_timestep_softmax) ... ok
+test_ssc_is_sum_of_membrane_potentials 
+(test_loss_aggregation.TemporalLossAggregationTests.test_ssc_is_sum_of_membrane_potentials) ... ok
+test_invalid_intervals (test_mr_adlif.MRTests.test_invalid_intervals) ... ok
+test_k1_equivalence (test_mr_adlif.MRTests.test_k1_equivalence) ... ok
+test_k4_boundaries_and_block_equation (test_mr_adlif.MRTests.test_k4_boundaries_and_block_equation) ... ok
+test_k4_gradients_scan_and_dtype (test_mr_adlif.MRTests.test_k4_gradients_scan_and_dtype) ... ok
+test_gradients_and_constraints (test_mt_adlif.MTTests.test_gradients_and_constraints) ... ok
+test_identical_memories_recover_reference (test_mt_adlif.MTTests.test_identical_memories_recover_reference) ... ok
+test_step_scan_and_sample_isolation (test_mt_adlif.MTTests.test_step_scan_and_sample_isolation) ... ok
+test_opt_in_cache_isolation_and_fixed_split 
+(test_shd_split_cache.SHDSplitCacheTests.test_opt_in_cache_isolation_and_fixed_split) ... ok
+test_shared_configs_use_training_derived_validation 
+(test_shd_split_cache.SHDSplitCacheTests.test_shared_configs_use_training_derived_validation) ... ok
+test_ranking_excludes_test_and_baseline_and_rejects_changed_resume 
+(test_tune_shd.SweepTests.test_ranking_excludes_test_and_baseline_and_rejects_changed_resume) ... ok
+test_real_weights_initialization_and_one_epoch_without_test 
+(test_tune_shd.SweepTests.test_real_weights_initialization_and_one_epoch_without_test) ... Seed set to 42
+GPU available: True (cuda), used: False
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+E:\AI_paper_nazari\SE-adlif\.venv\Lib\site-packages\pytorch_lightning\trainer\setup.py:187: GPU available but not 
+used. You can set it by doing `Trainer(accelerator='gpu')`.
+
+  | Name         | Type             | Params
+--------------------------------------------------
+0 | l1           | SEAdLIF          | 52    
+1 | l2           | SEAdLIF          | 56    
+2 | out_layer    | LI               | 12    
+3 | loss         | CrossEntropyLoss | 0     
+4 | train_metric | MetricCollection | 0     
+5 | val_metric   | MetricCollection | 0     
+6 | test_metric  | MetricCollection | 0     
+--------------------------------------------------
+110       Trainable params
+10        Non-trainable params
+120       Total params
+0.000     Total estimated model params size (MB)
+E:\AI_paper_nazari\SE-adlif\.venv\Lib\site-packages\pytorch_lightning\loops\fit_loop.py:298: The number of training 
+batches (2) is smaller than the logging interval Trainer(log_every_n_steps=50). Set a lower value for 
+log_every_n_steps if you want to see logs for the training epoch.
+`Trainer.fit` stopped: `max_epochs=1` reached.
+ok
+test_scheduler_and_learning_rate_choices_reach_optimizer 
+(test_tune_shd.SweepTests.test_scheduler_and_learning_rate_choices_reach_optimizer) ... ok
+test_twenty_recipes_keep_split_and_architecture_and_reset_training 
+(test_tune_shd.SweepTests.test_twenty_recipes_keep_split_and_architecture_and_reset_training) ... ok
+
+----------------------------------------------------------------------
+Ran 52 tests in 27.797s
+
+OK
+K=1 cpu torch.float32: maximum errors {'membrane': 0.0, 'spikes': 0.0, 'u': 0.0, 'w': 0.0}
+K=1 cpu torch.float64: maximum errors {'membrane': 0.0, 'spikes': 0.0, 'u': 0.0, 'w': 0.0}
+K=1 cuda torch.float32: maximum errors {'membrane': 0.0, 'spikes': 0.0, 'u': 0.0, 'w': 0.0}
+K=1 cuda torch.float64: maximum errors {'membrane': 0.0, 'spikes': 0.0, 'u': 0.0, 'w': 0.0}
