@@ -14,7 +14,8 @@ import pytorch_lightning as pl
 import hydra
 import torch
 from lightning_fabric.plugins.io import TorchCheckpointIO
-from omegaconf import DictConfig
+from omegaconf import DictConfig, OmegaConf
+from project_paths import local_path, portable_config, relocate_checkpoint_callbacks
 from pytorch_lightning.callbacks import EarlyStopping, LearningRateMonitor, ModelCheckpoint
 from pytorch_lightning.loggers.csv_logs import CSVLogger, ExperimentWriter
 import logging
@@ -32,7 +33,8 @@ class TrustedLocalCheckpointIO(TorchCheckpointIO):
     """
 
     def load_checkpoint(self, path, map_location=lambda storage, loc: storage):
-        return torch.load(path, map_location=map_location, weights_only=False)
+        checkpoint = torch.load(local_path(path, must_exist=True), map_location=map_location, weights_only=False)
+        return relocate_checkpoint_callbacks(checkpoint)
 
 
 class GradientNormProgressBar(pl.Callback):
@@ -426,17 +428,22 @@ class AppendCSVLogger(CSVLogger):
 def main(cfg: DictConfig):
     from evaluation_protocol import apply_protocol
     apply_protocol(cfg)
+    cfg = OmegaConf.create(portable_config(OmegaConf.to_container(cfg, resolve=True)))
+    if Path('.hydra').is_dir():
+        OmegaConf.save(cfg, '.hydra/config.yaml')
     logging.getLogger().addHandler(logging.FileHandler("out.log"))
     logging.info(f"Experiment name: {cfg.exp_name}")
     pl.seed_everything(cfg.random_seed, workers=True)
     torch.set_float32_matmul_precision("high")
 
-    datamodule = hydra.utils.instantiate(cfg.dataset)
+    dataset_paths = {key: str(local_path(cfg.dataset[key]))
+                     for key in ('data_path', 'cache_root') if cfg.dataset.get(key)}
+    datamodule = hydra.utils.instantiate(cfg.dataset, **dataset_paths)
     model = MLPSNN(cfg)
     if cfg.get('init_ckpt_path'):
         if cfg.get('ckpt_path'):
             raise ValueError('Choose weights initialization or full resume, not both')
-        checkpoint = torch.load(cfg.init_ckpt_path, map_location='cpu', weights_only=False)
+        checkpoint = torch.load(local_path(cfg.init_ckpt_path, must_exist=True), map_location='cpu', weights_only=False)
         model.load_state_dict(checkpoint['state_dict'], strict=True)
     callbacks = []
     model_ckpt_tracker: ModelCheckpoint = ModelCheckpoint(
@@ -484,7 +491,8 @@ def main(cfg: DictConfig):
     if cfg.get('init_ckpt_path'):
         baseline = trainer.validate(model, datamodule=datamodule, verbose=False)[0]
         Path('SWEEP_BASELINE.json').write_text(json.dumps(baseline, indent=2), encoding='utf-8')
-    trainer.fit(model, datamodule=datamodule, ckpt_path=cfg.get("ckpt_path"))
+    resume_path = str(local_path(cfg.ckpt_path, must_exist=True)) if cfg.get('ckpt_path') else None
+    trainer.fit(model, datamodule=datamodule, ckpt_path=resume_path)
     if trainer.interrupted:
         raise RuntimeError("Training was interrupted before all epochs completed.")
 

@@ -56,4 +56,4 @@ See [seed 42 comparison](seed-42-model-comparison.md) for reference differences
 and the ECG stopping-setting caveat.
 
 A historical local training-progress snapshot is retained in
-[the documentation archive](archive/mt-shd-local-progress.md).
+[the documentation archive](../mt-shd-local-progress.md).

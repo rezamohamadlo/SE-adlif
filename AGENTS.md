@@ -24,9 +24,12 @@ here; put changing scores, run progress, timing estimates and findings in
   shared data, loss/metric and neuron-parameter utilities.
 - `run_compress.py`, `generate_waves.py` and `evaluate_metrics.py`: audio
   compression workflows; do not confuse these with classification evaluation.
-- `tests/`: unittest checks. `reports/`: maintained guides and comparisons;
-  `reports/archive/`: historical notes; `reports/exports/`: document exports;
-  `reports/audio-compression/`: audio measurement CSVs.
+- `tests/`: unittest checks. `reports/`: three current table reports:
+  `paper-results.md`, `paper-vs-reference.md`, and `reference-vs-models.md`.
+  `reference-vs-models-legacy.md` separately summarizes archived results and
+  their configuration/provenance limits; do not mix it into the current grid.
+  `reports/archive/`: previous reports, guides, audits, document exports and
+  audio measurement CSVs, including the `2026-10-15-report-consolidation/` snapshot.
 
 Paper reproduction uses `config/experiment/SHD_SE_adLIF_paper.yaml` separately
 from the controlled protocol. Its documented SHD settings are batch 256 and
@@ -105,6 +108,13 @@ user asks to run it themselves, return the command and let them start it.
 
 ## Execution and checkpoint safety
 
+- Use `project_paths.py` for classification artifact path serialization and
+  resolution. Persist repository-relative paths for files inside the checkout;
+  resolve them against the repository root at runtime, not Hydra's run directory.
+  `config/path_aliases.yaml` registers previous checkout roots. Relocate only
+  an explicit root prefix, preserving the artifact suffix and checkpoint identity.
+  Compare normalized paths in manifest guards while retaining historical records.
+  Never substitute a different checkpoint because a recorded file is missing.
 - Use the project's `.ven` Python explicitly in commands. Do not accidentally
   install dependencies into global Python. The tested Windows environment is
   described by `requirements.txt`; `environment.yml` is the legacy Conda setup.

@@ -1,0 +1,80 @@
+# Saved training configuration audit
+
+Baseline: `paper_classification_v1`; snapshot UTC: 2026-10-15T07:14:53.198584+00:00.
+
+This compares saved settings with each dataset section of `config/paper_baseline.yaml`.
+Model-specific neuron parameters are allowed; shared layer sizes and dynamics are checked.
+Matching settings do not prove historical code/environment equivalence or independent test selection.
+Active metrics are snapshots; missing tests remain pending. Epoch numbers below are zero-based.
+Optimizer is Adam in the current shared implementation; historical optimizer versions/state were not loaded.
+Missing optional keys use the current documented defaults, listed in the JSON audit.
+
+| Run | Match | Status | Last epoch | Differences (actual → baseline) |
+|---|---|---|---:|---|
+| `results/experiments/shd_dropout_search/d25/seed_42` | no | test evidence, completion not independently established | — | dropout: 0.25 → 0.15; batch_size: 512 → 256; early_stopping: True → False; dataset.batch_size: 512 → 256; run_test: False → True |
+| `results/experiments/shd_lr_sweep/c01` | no | test evidence, completion not independently established | — | lr: 0.0001 → 0.01; batch_size: 512 → 256; n_epochs: 10 → 300; scheduler: constant → plateau; dataset.batch_size: 512 → 256; scheduler_min_lr: 1e-05 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c02` | no | test evidence, completion not independently established | — | lr: 0.0001 → 0.01; n_epochs: 10 → 300; scheduler: constant → plateau; scheduler_min_lr: 1e-05 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c03` | no | test evidence, completion not independently established | — | lr: 0.0001 → 0.01; batch_size: 512 → 256; n_epochs: 10 → 300; patience: 2 → 9999; factor: 0.5 → 0.9; dataset.batch_size: 512 → 256; scheduler_min_lr: 1e-05 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c04` | no | test evidence, completion not independently established | — | lr: 0.0001 → 0.01; batch_size: 512 → 256; n_epochs: 10 → 300; scheduler: cosine → plateau; dataset.batch_size: 512 → 256; scheduler_min_lr: 1e-05 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c05` | no | test evidence, completion not independently established | — | lr: 0.0003 → 0.01; batch_size: 512 → 256; n_epochs: 10 → 300; scheduler: constant → plateau; dataset.batch_size: 512 → 256; scheduler_min_lr: 2.9999999999999997e-05 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c06` | no | test evidence, completion not independently established | — | lr: 0.0003 → 0.01; n_epochs: 10 → 300; scheduler: constant → plateau; scheduler_min_lr: 2.9999999999999997e-05 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c07` | no | test evidence, completion not independently established | — | lr: 0.0003 → 0.01; batch_size: 512 → 256; n_epochs: 10 → 300; patience: 2 → 9999; factor: 0.5 → 0.9; dataset.batch_size: 512 → 256; scheduler_min_lr: 2.9999999999999997e-05 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c08` | no | test evidence, completion not independently established | — | lr: 0.0003 → 0.01; batch_size: 512 → 256; n_epochs: 10 → 300; scheduler: cosine → plateau; dataset.batch_size: 512 → 256; scheduler_min_lr: 2.9999999999999997e-05 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c09` | no | test evidence, completion not independently established | — | lr: 0.001 → 0.01; batch_size: 512 → 256; n_epochs: 10 → 300; scheduler: constant → plateau; dataset.batch_size: 512 → 256; scheduler_min_lr: 0.0001 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c10` | no | test evidence, completion not independently established | — | lr: 0.001 → 0.01; n_epochs: 10 → 300; scheduler: constant → plateau; scheduler_min_lr: 0.0001 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c11` | no | test evidence, completion not independently established | — | lr: 0.001 → 0.01; batch_size: 512 → 256; n_epochs: 10 → 300; patience: 2 → 9999; factor: 0.5 → 0.9; dataset.batch_size: 512 → 256; scheduler_min_lr: 0.0001 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c12` | no | test evidence, completion not independently established | — | lr: 0.001 → 0.01; batch_size: 512 → 256; n_epochs: 10 → 300; scheduler: cosine → plateau; dataset.batch_size: 512 → 256; scheduler_min_lr: 0.0001 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c13` | no | test evidence, completion not independently established | — | lr: 0.003 → 0.01; batch_size: 512 → 256; n_epochs: 10 → 300; scheduler: constant → plateau; dataset.batch_size: 512 → 256; scheduler_min_lr: 0.00030000000000000003 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c14` | no | test evidence, completion not independently established | — | lr: 0.003 → 0.01; n_epochs: 10 → 300; scheduler: constant → plateau; scheduler_min_lr: 0.00030000000000000003 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c15` | no | test evidence, completion not independently established | — | lr: 0.003 → 0.01; batch_size: 512 → 256; n_epochs: 10 → 300; patience: 2 → 9999; factor: 0.5 → 0.9; dataset.batch_size: 512 → 256; scheduler_min_lr: 0.00030000000000000003 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c16` | no | test evidence, completion not independently established | — | lr: 0.003 → 0.01; batch_size: 512 → 256; n_epochs: 10 → 300; scheduler: cosine → plateau; dataset.batch_size: 512 → 256; scheduler_min_lr: 0.00030000000000000003 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c17` | no | test evidence, completion not independently established | — | batch_size: 512 → 256; n_epochs: 10 → 300; scheduler: constant → plateau; dataset.batch_size: 512 → 256; scheduler_min_lr: 0.001 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c18` | no | test evidence, completion not independently established | — | n_epochs: 10 → 300; scheduler: constant → plateau; scheduler_min_lr: 0.001 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c19` | no | test evidence, completion not independently established | — | batch_size: 512 → 256; n_epochs: 10 → 300; patience: 2 → 9999; factor: 0.5 → 0.9; dataset.batch_size: 512 → 256; scheduler_min_lr: 0.001 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/c20` | no | test evidence, completion not independently established | — | batch_size: 512 → 256; n_epochs: 10 → 300; scheduler: cosine → plateau; dataset.batch_size: 512 → 256; scheduler_min_lr: 0.001 → 0.0; run_test: False → True; initialization: weights-only continuation → fresh training |
+| `results/experiments/shd_lr_sweep/full_train/c03/seed_42` | no | config only; completion unverified | — | lr: 0.0001 → 0.01; batch_size: 512 → 256; early_stopping: True → False; patience: 2 → 9999; factor: 0.5 → 0.9; dataset.batch_size: 512 → 256; scheduler_min_lr: 1e-05 → 0.0 |
+| `results/experiments/shd_lr_sweep/full_train/c04/seed_42` | no | config only; completion unverified | — | lr: 0.0001 → 0.01; batch_size: 512 → 256; early_stopping: True → False; scheduler: cosine → plateau; dataset.batch_size: 512 → 256; scheduler_min_lr: 1e-05 → 0.0 |
+| `results/experiments/shd_lr_sweep/full_train/c06/seed_42` | no | config only; completion unverified | — | lr: 0.0003 → 0.01; early_stopping: True → False; scheduler: constant → plateau; scheduler_min_lr: 2.9999999999999997e-05 → 0.0 |
+| `results/experiments/shd_lr_sweep/full_train/c07/seed_42` | no | config only; completion unverified | — | lr: 0.0003 → 0.01; batch_size: 512 → 256; early_stopping: True → False; patience: 2 → 9999; factor: 0.5 → 0.9; dataset.batch_size: 512 → 256; scheduler_min_lr: 2.9999999999999997e-05 → 0.0 |
+| `results/experiments/shd_lr_sweep/full_train/c08/seed_42` | no | config only; completion unverified | — | lr: 0.0003 → 0.01; batch_size: 512 → 256; early_stopping: True → False; scheduler: cosine → plateau; dataset.batch_size: 512 → 256; scheduler_min_lr: 2.9999999999999997e-05 → 0.0 |
+| `results/experiments/shd_lr_sweep/full_train/c13/seed_42` | no | config only; completion unverified | — | lr: 0.003 → 0.01; batch_size: 512 → 256; early_stopping: True → False; scheduler: constant → plateau; dataset.batch_size: 512 → 256; scheduler_min_lr: 0.00030000000000000003 → 0.0 |
+| `results/experiments/shd_lr_sweep/full_train/c19/seed_42` | no | config only; completion unverified | — | batch_size: 512 → 256; early_stopping: True → False; patience: 2 → 9999; factor: 0.5 → 0.9; dataset.batch_size: 512 → 256; scheduler_min_lr: 0.001 → 0.0 |
+| `results/experiments/shd_scratch_search/r01/seed_42` | no | config only; completion unverified | — | lr: 0.005 → 0.01; batch_size: 128 → 256; early_stopping: True → False; dataset.batch_size: 128 → 256; run_test: False → True |
+| `results/experiments/shd_scratch_search/r02/seed_42` | no | config only; completion unverified | — | lr: 0.005 → 0.01; early_stopping: True → False; run_test: False → True |
+| `results/experiments/shd_scratch_search/r03/seed_42` | no | config only; completion unverified | — | lr: 0.005 → 0.01; batch_size: 512 → 256; early_stopping: True → False; dataset.batch_size: 512 → 256; run_test: False → True |
+| `results/experiments/shd_scratch_search/r04/seed_42` | no | config only; completion unverified | — | batch_size: 128 → 256; early_stopping: True → False; dataset.batch_size: 128 → 256; run_test: False → True |
+| `results/experiments/shd_scratch_search/r05/seed_42` | no | config only; completion unverified | — | early_stopping: True → False; run_test: False → True |
+| `results/experiments/shd_scratch_search/r06/seed_42` | no | config only; completion unverified | — | batch_size: 512 → 256; early_stopping: True → False; dataset.batch_size: 512 → 256; run_test: False → True |
+| `results/experiments/shd_scratch_search/r07/seed_42` | no | config only; completion unverified | — | lr: 0.015 → 0.01; batch_size: 128 → 256; early_stopping: True → False; dataset.batch_size: 128 → 256; run_test: False → True |
+| `results/experiments/shd_scratch_search/r08/seed_42` | no | config only; completion unverified | — | lr: 0.015 → 0.01; early_stopping: True → False; run_test: False → True |
+| `results/experiments/shd_scratch_search/r09/seed_42` | no | config only; completion unverified | — | lr: 0.015 → 0.01; batch_size: 512 → 256; early_stopping: True → False; dataset.batch_size: 512 → 256; run_test: False → True |
+| `results/valid/protocol_v2/DA_SE_adLIF/ECG/seed_42` | no | completed marker + test evidence | 329 | early_stopping: True → False |
+| `results/valid/protocol_v2/DA_SE_adLIF/SHD/seed_42` | no | completed marker + test evidence | 96 | batch_size: 512 → 256; early_stopping: True → False; dataset.batch_size: 512 → 256 |
+| `results/valid/protocol_v2/DA_SE_adLIF/SSC/seed_42` | yes | completed marker + test evidence | 40 | none |
+| `results/valid/protocol_v2/DTH_SE_adLIF/ECG/seed_42` | no | completed marker + test evidence | 240 | early_stopping: True → False |
+| `results/valid/protocol_v2/DTH_SE_adLIF/SHD/seed_123` | no | config only; completion unverified | — | batch_size: 512 → 256; early_stopping: True → False; dataset.batch_size: 512 → 256 |
+| `results/valid/protocol_v2/DTH_SE_adLIF/SHD/seed_42` | yes | partial snapshot; no final test evidence; completion marker exists without local test evidence; saved config sources disagree; see JSON conflicts | 1 | none |
+| `results/valid/protocol_v2/DTH_SE_adLIF/SSC/seed_42` | yes | completed marker + test evidence | 40 | none |
+| `results/valid/protocol_v2/FP_SE_adLIF/ECG/seed_42` | no | completed marker + test evidence | 204 | early_stopping: True → False |
+| `results/valid/protocol_v2/FP_SE_adLIF/SHD/seed_42` | no | completed marker + test evidence | 92 | batch_size: 512 → 256; early_stopping: True → False; dataset.batch_size: 512 → 256 |
+| `results/valid/protocol_v2/FP_SE_adLIF/SSC/seed_42` | yes | completed marker + test evidence; epoch order decreases; possible overlapping/resumed histories | 40 | none |
+| `results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_123` | yes | partial snapshot; no final test evidence | 86 | none |
+| `results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_42` | yes | completed marker + test evidence | 300 | none |
+| `results/valid/protocol_v2/MR_SE_adLIF/K_2/ECG/seed_42` | no | completed marker + test evidence | 201 | early_stopping: True → False |
+| `results/valid/protocol_v2/MR_SE_adLIF/K_2/SHD/seed_42` | no | completed marker + test evidence | 103 | batch_size: 512 → 256; early_stopping: True → False; dataset.batch_size: 512 → 256 |
+| `results/valid/protocol_v2/MR_SE_adLIF/K_2/SSC/seed_42` | yes | completed marker + test evidence | 40 | none |
+| `results/valid/protocol_v2/MT_SE_adLIF/ECG/seed_42` | no | completed marker + test evidence | 260 | early_stopping: True → False |
+| `results/valid/protocol_v2/MT_SE_adLIF/SHD/seed_42` | no | completed marker + test evidence; epoch order decreases; possible overlapping/resumed histories; result record flags overlapping training logs; summary mentions overlapping/mixed histories; inspect provenance | 127 | batch_size: 512 → 256; early_stopping: True → False; dataset.batch_size: 512 → 256 |
+| `results/valid/protocol_v2/MT_SE_adLIF/SSC/seed_42` | yes | completed marker + test evidence | 40 | none |
+| `results/valid/reference/ECG/seed_123` | no | completed marker + test evidence | 283 | early_stopping: True → False |
+| `results/valid/reference/ECG/seed_42` | no | completed marker + test evidence | 383 | n_epochs: 383 → 400 |
+| `results/valid/reference/ECG/seed_456` | no | completed marker + test evidence | 185 | early_stopping: True → False |
+| `results/valid/reference/SHD/seed_123/hydra/2026-10-12/08-10-25` | no | test evidence, completion not independently established | 120 | batch_size: 512 → 256; early_stopping: True → False; dataset.batch_size: 512 → 256 |
+| `results/valid/reference/SHD/seed_123` | yes | completed reference record | — | none |
+| `results/valid/reference/SHD/seed_42/hydra/2026-10-12/07-17-03` | no | test evidence, completion not independently established | 193 | batch_size: 512 → 256; early_stopping: True → False; dataset.batch_size: 512 → 256 |
+| `results/valid/reference/SHD/seed_42` | yes | completed reference record | — | none |
+| `results/valid/reference/SHD/seed_456/hydra/2026-10-12/08-42-57` | no | test evidence, completion not independently established | 165 | batch_size: 512 → 256; early_stopping: True → False; dataset.batch_size: 512 → 256 |
+| `results/valid/reference/SHD/seed_456` | yes | completed reference record | — | none |
+| `results/valid/reference/SSC/seed_123` | yes | completed marker + test evidence | 40 | none |
+| `results/valid/reference/SSC/seed_42` | yes | completed marker + test evidence | 40 | none |
+| `results/valid/reference/SSC/seed_456` | yes | completed marker + test evidence | 40 | none |

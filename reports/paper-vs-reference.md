@@ -1,49 +1,25 @@
-# Paper versus local SE_adLIF reference
+# Paper versus local reference
 
-Final test accuracy (%), mean ± SD. Paper values use the two-layer SE-adLIF
-rows in Table 2 (page 11 of `reference_paper.pdf`). Local statistics use
-seeds 42, 123, and 456 and sample SD (n−1), calculated from final CSV test metrics.
+Snapshot: 15 October 2026. Final test accuracy (%); all selected paper rows are two-layer SE-adLIF. Local mean and sample SD use training seeds 42, 123 and 456. Differences are local minus paper mean in percentage points (pp), computed from unrounded local metrics; paper means are published rounded values.
 
-| Dataset | Paper: mean ± SD | Paper runs | Local reference: mean ± sample SD | Local runs | Local − paper mean (pp) |
-|---|---:|---:|---:|---:|---:|
-| SHD* | 93.79 ± 0.76 | 20 | 93.15 ± 0.42 | 3 | -0.64 |
-| SSC | 80.44 ± 0.26 | 5 | 78.21 ± 0.11 | 3 | -2.23 |
-| ECG (2 layers) | 88.18 ± 0.36 | 20 | 88.32 ± 0.35 | 3 | +0.14 |
+| Dataset | Paper mean ± SD | Reference mean ± sample SD | Difference (pp) | Baseline compatibility |
+| --- | ---: | ---: | ---: | --- |
+| SHD* | 93.79 ± 0.76 | 93.15 ± 0.42 | -0.64 | Matched saved settings |
+| SSC | 80.44 ± 0.26 | 78.21 ± 0.11 | -2.23 | Matched saved settings |
+| ECG | 88.18 ± 0.36 | 88.32 ± 0.35 | +0.14 | Unmatched budget / stopping; descriptive only |
 
-SHD* uses 20% of the official training data for validation and selects the
-checkpoint by validation accuracy. This is the appropriate paper row for
-the local reference runs. The paper's 95.81 ± 0.56 SHD row instead uses the
-test set for checkpoint selection and is excluded from this comparison.
-The paper's one-layer ECG result (86.88 ± 0.40) is also excluded because the
-local reference has two layers.
+| Dataset | Seed 42 | Seed 123 | Seed 456 | Evidence |
+|---|---:|---:|---:|---|
+| SHD* | 92.93 | 92.89 | 93.64 | [Canonical results](../results/valid/reference/SHD/REFERENCE_RESULTS.json) |
+| SSC | 78.33 | 78.12 | 78.17 | [Seed 42 metrics](../results/valid/reference/SSC/seed_42/logs/mlp_snn/version_0/metrics.csv) / [Seed 123 metrics](../results/valid/reference/SSC/seed_123/logs/mlp_snn/version_0/metrics.csv) / [Seed 456 metrics](../results/valid/reference/SSC/seed_456/logs/mlp_snn/version_0/metrics.csv) |
+| ECG | 88.13 | 88.72 | 88.11 | [Seed 42 metrics](../results/valid/reference/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv) / [Seed 123 metrics](../results/valid/reference/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv) / [Seed 456 metrics](../results/valid/reference/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv) |
 
-The ECG reference seeds used different stopping settings: seed 42 disabled
-early stopping; seeds 123 and 456 enabled it. The table describes the retained
-results and is not an exact reproduction of every paper training setting.
-Three local seeds provide much less evidence about variability than 20 runs;
-the small positive ECG mean difference does not demonstrate superiority.
+| Qualification | Meaning |
+|---|---|
+| Shared authority | [config/paper_baseline.yaml](../config/paper_baseline.yaml); matching saved settings do not establish exact paper reproduction. |
+| SHD* | Canonical reference: batch 256, 300 epochs, early stopping disabled; 20% training-derived validation, split seed 42. Retired dated SHD reference records are excluded. |
+| SSC | Retained reference settings match the SSC baseline section. |
+| ECG | Seed 42 used a 383-epoch budget instead of 400; seeds 123/456 enabled early stopping. The retained three-seed mean is descriptive, not a fully matched baseline result. |
+| Uncertainty | The local and paper results use different sample sizes. A positive mean difference alone does not demonstrate superiority. |
 
-## Local seed results
-
-| Dataset | Seed 42 | Seed 123 | Seed 456 |
-|---|---:|---:|---:|
-| SHD* | 92.93 | 92.89 | 93.64 |
-| SSC | 78.33 | 78.12 | 78.17 |
-| ECG | 88.13 | 88.72 | 88.11 |
-
-Local sources: final `test_acc` rows in `metrics.csv` under
-`results/valid/reference/<dataset>/seed_<seed>/` (SHD now uses canonical per-seed directories). Values above are rounded after calculating statistics.
-
-Paper: Baronig et al., *Advancing Spatio-Temporal Processing in Spiking Neural
-Networks through Adaptation*, Table 2, page 11 in the local PDF;
-DOI: 10.1038/s41467-025-60878-z.
-
-## Canonical SHD reference replacement
-
-The current SHD* reference is the completed paper-baseline run set promoted to
-`results/valid/reference/SHD/seed_<seed>/`. Its batch is 256 and all 300 epochs
-completed without early stopping. The former batch-512/early-stopped SHD
-reference is retired. Aggregate metrics and checkpoint provenance are in
-`results/valid/reference/SHD/REFERENCE_RESULTS.json` and per-seed
-`REFERENCE_RESULT.json`. Proposed controlled-v2 SHD runs have different training
-settings and must not be treated as matched comparisons against this baseline.
+[Paper source table](paper-results.md) · [Reference versus proposed models](reference-vs-models.md)

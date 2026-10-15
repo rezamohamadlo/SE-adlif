@@ -1,0 +1,3204 @@
+{
+  "snapshot_utc": "2026-10-15T07:14:53.198584+00:00",
+  "baseline_version": "paper_classification_v1",
+  "baseline_source": "config/paper_baseline.yaml",
+  "runs": [
+    {
+      "run": "results/experiments/shd_dropout_search/d25/seed_42",
+      "source": "results/experiments/shd_dropout_search/d25/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_dropout_search",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "dropout",
+          "actual": 0.25,
+          "baseline": 0.15
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_dropout_search\\d25\\seed_42\\ckpt\\epoch=213-step=2568.ckpt",
+            "metrics": {
+              "test_acc": 0.9306536912918091,
+              "test_loss": 0.5054779648780823
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c01",
+      "source": "results/experiments/shd_lr_sweep/c01/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.0001,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "scheduler",
+          "actual": "constant",
+          "baseline": "plateau"
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 1e-05,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c01\\ckpt\\epoch=9-step=120.ckpt",
+            "metrics": {
+              "test_acc": 0.9337455630302429,
+              "test_loss": 0.5937970876693726
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c02",
+      "source": "results/experiments/shd_lr_sweep/c02/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.0001,
+          "baseline": 0.01
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "scheduler",
+          "actual": "constant",
+          "baseline": "plateau"
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 1e-05,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c02\\ckpt\\epoch=8-step=225.ckpt",
+            "metrics": {
+              "test_acc": 0.9319788217544556,
+              "test_loss": 0.5818542838096619
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c03",
+      "source": "results/experiments/shd_lr_sweep/c03/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.0001,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "patience",
+          "actual": 2,
+          "baseline": 9999
+        },
+        {
+          "key": "factor",
+          "actual": 0.5,
+          "baseline": 0.9
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 1e-05,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c03\\ckpt\\epoch=1-step=24.ckpt",
+            "metrics": {
+              "test_acc": 0.9368374347686768,
+              "test_loss": 0.5418238043785095
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c04",
+      "source": "results/experiments/shd_lr_sweep/c04/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.0001,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "scheduler",
+          "actual": "cosine",
+          "baseline": "plateau"
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 1e-05,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c04\\ckpt\\epoch=1-step=24.ckpt",
+            "metrics": {
+              "test_acc": 0.9350706934928894,
+              "test_loss": 0.558914303779602
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c05",
+      "source": "results/experiments/shd_lr_sweep/c05/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.0003,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "scheduler",
+          "actual": "constant",
+          "baseline": "plateau"
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 2.9999999999999997e-05,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c05\\ckpt\\epoch=2-step=36.ckpt",
+            "metrics": {
+              "test_acc": 0.9328621625900269,
+              "test_loss": 0.5992457270622253
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c06",
+      "source": "results/experiments/shd_lr_sweep/c06/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.0003,
+          "baseline": 0.01
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "scheduler",
+          "actual": "constant",
+          "baseline": "plateau"
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 2.9999999999999997e-05,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c06\\ckpt\\epoch=3-step=100.ckpt",
+            "metrics": {
+              "test_acc": 0.9350706934928894,
+              "test_loss": 0.6045961380004883
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c07",
+      "source": "results/experiments/shd_lr_sweep/c07/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.0003,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "patience",
+          "actual": 2,
+          "baseline": 9999
+        },
+        {
+          "key": "factor",
+          "actual": 0.5,
+          "baseline": 0.9
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 2.9999999999999997e-05,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c07\\ckpt\\epoch=0-step=12.ckpt",
+            "metrics": {
+              "test_acc": 0.9359540343284607,
+              "test_loss": 0.5927112102508545
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c08",
+      "source": "results/experiments/shd_lr_sweep/c08/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.0003,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "scheduler",
+          "actual": "cosine",
+          "baseline": "plateau"
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 2.9999999999999997e-05,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c08\\ckpt\\epoch=0-step=12.ckpt",
+            "metrics": {
+              "test_acc": 0.934628963470459,
+              "test_loss": 0.5771209597587585
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c09",
+      "source": "results/experiments/shd_lr_sweep/c09/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.001,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "scheduler",
+          "actual": "constant",
+          "baseline": "plateau"
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 0.0001,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c09\\ckpt\\epoch=3-step=48.ckpt",
+            "metrics": {
+              "test_acc": 0.9222614765167236,
+              "test_loss": 0.7047978639602661
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c10",
+      "source": "results/experiments/shd_lr_sweep/c10/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.001,
+          "baseline": 0.01
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "scheduler",
+          "actual": "constant",
+          "baseline": "plateau"
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 0.0001,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c10\\ckpt\\epoch=3-step=100.ckpt",
+            "metrics": {
+              "test_acc": 0.9302120208740234,
+              "test_loss": 0.5970673561096191
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c11",
+      "source": "results/experiments/shd_lr_sweep/c11/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.001,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "patience",
+          "actual": 2,
+          "baseline": 9999
+        },
+        {
+          "key": "factor",
+          "actual": 0.5,
+          "baseline": 0.9
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 0.0001,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c11\\ckpt\\epoch=8-step=108.ckpt",
+            "metrics": {
+              "test_acc": 0.9328621625900269,
+              "test_loss": 0.6734131574630737
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c12",
+      "source": "results/experiments/shd_lr_sweep/c12/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.001,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "scheduler",
+          "actual": "cosine",
+          "baseline": "plateau"
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 0.0001,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c12\\ckpt\\epoch=8-step=108.ckpt",
+            "metrics": {
+              "test_acc": 0.9275618195533752,
+              "test_loss": 0.7049105763435364
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c13",
+      "source": "results/experiments/shd_lr_sweep/c13/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.003,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "scheduler",
+          "actual": "constant",
+          "baseline": "plateau"
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 0.00030000000000000003,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c13\\ckpt\\epoch=8-step=108.ckpt",
+            "metrics": {
+              "test_acc": 0.9368374347686768,
+              "test_loss": 0.534916341304779
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c14",
+      "source": "results/experiments/shd_lr_sweep/c14/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.003,
+          "baseline": 0.01
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "scheduler",
+          "actual": "constant",
+          "baseline": "plateau"
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 0.00030000000000000003,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c14\\ckpt\\epoch=1-step=50.ckpt",
+            "metrics": {
+              "test_acc": 0.922703206539154,
+              "test_loss": 0.6965414881706238
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c15",
+      "source": "results/experiments/shd_lr_sweep/c15/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.003,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "patience",
+          "actual": 2,
+          "baseline": 9999
+        },
+        {
+          "key": "factor",
+          "actual": 0.5,
+          "baseline": 0.9
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 0.00030000000000000003,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c15\\ckpt\\epoch=5-step=72.ckpt",
+            "metrics": {
+              "test_acc": 0.929770290851593,
+              "test_loss": 0.6152899265289307
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c16",
+      "source": "results/experiments/shd_lr_sweep/c16/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.003,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "scheduler",
+          "actual": "cosine",
+          "baseline": "plateau"
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 0.00030000000000000003,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c16\\ckpt\\epoch=7-step=96.ckpt",
+            "metrics": {
+              "test_acc": 0.9315370917320251,
+              "test_loss": 0.6484389305114746
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c17",
+      "source": "results/experiments/shd_lr_sweep/c17/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "scheduler",
+          "actual": "constant",
+          "baseline": "plateau"
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 0.001,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c17\\ckpt\\epoch=3-step=48.ckpt",
+            "metrics": {
+              "test_acc": 0.9235865473747253,
+              "test_loss": 0.4792087972164154
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c18",
+      "source": "results/experiments/shd_lr_sweep/c18/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "scheduler",
+          "actual": "constant",
+          "baseline": "plateau"
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 0.001,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c18\\ckpt\\epoch=3-step=100.ckpt",
+            "metrics": {
+              "test_acc": 0.9103356599807739,
+              "test_loss": 0.6512244939804077
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c19",
+      "source": "results/experiments/shd_lr_sweep/c19/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "patience",
+          "actual": 2,
+          "baseline": 9999
+        },
+        {
+          "key": "factor",
+          "actual": 0.5,
+          "baseline": 0.9
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 0.001,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c19\\ckpt\\epoch=9-step=120.ckpt",
+            "metrics": {
+              "test_acc": 0.9368374347686768,
+              "test_loss": 0.430726557970047
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/c20",
+      "source": "results/experiments/shd_lr_sweep/c20/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "n_epochs",
+          "actual": 10,
+          "baseline": 300
+        },
+        {
+          "key": "scheduler",
+          "actual": "cosine",
+          "baseline": "plateau"
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 0.001,
+          "baseline": 0.0
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        },
+        {
+          "key": "initialization",
+          "actual": "weights-only continuation",
+          "baseline": "fresh training"
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "C:\\Users\\jafari.h.SPADANACO\\Desktop\\SE-adlif\\results\\experiments\\shd_lr_sweep\\c20\\ckpt\\epoch=9-step=120.ckpt",
+            "metrics": {
+              "test_acc": 0.9333038926124573,
+              "test_loss": 0.4877464771270752
+            }
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/full_train/c03/seed_42",
+      "source": "results/experiments/shd_lr_sweep/full_train/c03/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.0001,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "patience",
+          "actual": 2,
+          "baseline": 9999
+        },
+        {
+          "key": "factor",
+          "actual": 0.5,
+          "baseline": 0.9
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 1e-05,
+          "baseline": 0.0
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/full_train/c04/seed_42",
+      "source": "results/experiments/shd_lr_sweep/full_train/c04/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.0001,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "scheduler",
+          "actual": "cosine",
+          "baseline": "plateau"
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 1e-05,
+          "baseline": 0.0
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/full_train/c06/seed_42",
+      "source": "results/experiments/shd_lr_sweep/full_train/c06/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.0003,
+          "baseline": 0.01
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "scheduler",
+          "actual": "constant",
+          "baseline": "plateau"
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 2.9999999999999997e-05,
+          "baseline": 0.0
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/full_train/c07/seed_42",
+      "source": "results/experiments/shd_lr_sweep/full_train/c07/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.0003,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "patience",
+          "actual": 2,
+          "baseline": 9999
+        },
+        {
+          "key": "factor",
+          "actual": 0.5,
+          "baseline": 0.9
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 2.9999999999999997e-05,
+          "baseline": 0.0
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/full_train/c08/seed_42",
+      "source": "results/experiments/shd_lr_sweep/full_train/c08/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.0003,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "scheduler",
+          "actual": "cosine",
+          "baseline": "plateau"
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 2.9999999999999997e-05,
+          "baseline": 0.0
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/full_train/c13/seed_42",
+      "source": "results/experiments/shd_lr_sweep/full_train/c13/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.003,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "scheduler",
+          "actual": "constant",
+          "baseline": "plateau"
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 0.00030000000000000003,
+          "baseline": 0.0
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_lr_sweep/full_train/c19/seed_42",
+      "source": "results/experiments/shd_lr_sweep/full_train/c19/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_validation_tuning",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "patience",
+          "actual": 2,
+          "baseline": 9999
+        },
+        {
+          "key": "factor",
+          "actual": 0.5,
+          "baseline": 0.9
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "scheduler_min_lr",
+          "actual": 0.001,
+          "baseline": 0.0
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_scratch_search/r01/seed_42",
+      "source": "results/experiments/shd_scratch_search/r01/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_scratch_lr_batch_search",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.005,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 128,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 128,
+          "baseline": 256
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_scratch_search/r02/seed_42",
+      "source": "results/experiments/shd_scratch_search/r02/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_scratch_lr_batch_search",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.005,
+          "baseline": 0.01
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_scratch_search/r03/seed_42",
+      "source": "results/experiments/shd_scratch_search/r03/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_scratch_lr_batch_search",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.005,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_scratch_search/r04/seed_42",
+      "source": "results/experiments/shd_scratch_search/r04/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_scratch_lr_batch_search",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "batch_size",
+          "actual": 128,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 128,
+          "baseline": 256
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_scratch_search/r05/seed_42",
+      "source": "results/experiments/shd_scratch_search/r05/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_scratch_lr_batch_search",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_scratch_search/r06/seed_42",
+      "source": "results/experiments/shd_scratch_search/r06/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_scratch_lr_batch_search",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_scratch_search/r07/seed_42",
+      "source": "results/experiments/shd_scratch_search/r07/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_scratch_lr_batch_search",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.015,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 128,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 128,
+          "baseline": 256
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_scratch_search/r08/seed_42",
+      "source": "results/experiments/shd_scratch_search/r08/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_scratch_lr_batch_search",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.015,
+          "baseline": 0.01
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/experiments/shd_scratch_search/r09/seed_42",
+      "source": "results/experiments/shd_scratch_search/r09/seed_42/SWEEP_CONFIG.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "shd_scratch_lr_batch_search",
+      "scope": "tuning",
+      "matched": false,
+      "differences": [
+        {
+          "key": "lr",
+          "actual": 0.015,
+          "baseline": 0.01
+        },
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "run_test",
+          "actual": false,
+          "baseline": true
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/valid/protocol_v2/DA_SE_adLIF/ECG/seed_42",
+      "source": "results/valid/protocol_v2/DA_SE_adLIF/ECG/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "ECG",
+      "model": "DA_SE_adLIF",
+      "seed": 42,
+      "protocol": "controlled_v2",
+      "scope": "comparison",
+      "matched": false,
+      "differences": [
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        }
+      ],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 329,
+      "test_metrics": [
+        0.8720242381095886
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/DA_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/DA_SE_adLIF/SHD/seed_42",
+      "source": "results/valid/protocol_v2/DA_SE_adLIF/SHD/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "SHD",
+      "model": "DA_SE_adLIF",
+      "seed": 42,
+      "protocol": "controlled_v2",
+      "scope": "comparison",
+      "matched": false,
+      "differences": [
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        }
+      ],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true,
+        "dataset.additional_test_set_validation": false
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 96,
+      "test_metrics": [
+        0.9182862043380737
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/DA_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/DA_SE_adLIF/SSC/seed_42",
+      "source": "results/valid/protocol_v2/DA_SE_adLIF/SSC/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "SSC",
+      "model": "DA_SE_adLIF",
+      "seed": 42,
+      "protocol": "controlled_v2",
+      "scope": "comparison",
+      "matched": true,
+      "differences": [],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 40,
+      "test_metrics": [
+        0.7787753939628601
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/DA_SE_adLIF/SSC/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/DTH_SE_adLIF/ECG/seed_42",
+      "source": "results/valid/protocol_v2/DTH_SE_adLIF/ECG/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "ECG",
+      "model": "DTH_SE_adLIF",
+      "seed": 42,
+      "protocol": "controlled_v2",
+      "scope": "comparison",
+      "matched": false,
+      "differences": [
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        }
+      ],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 240,
+      "test_metrics": [
+        0.8834720849990845
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/DTH_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/DTH_SE_adLIF/SHD/seed_123",
+      "source": "results/valid/protocol_v2/DTH_SE_adLIF/SHD/seed_123/.hydra/config.yaml",
+      "dataset": "SHD",
+      "model": "DTH_SE_adLIF",
+      "seed": 123,
+      "protocol": "controlled_v2",
+      "scope": "comparison",
+      "matched": false,
+      "differences": [
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        }
+      ],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true,
+        "dataset.additional_test_set_validation": false
+      },
+      "status": "config only; completion unverified",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/valid/protocol_v2/DTH_SE_adLIF/SHD/seed_42",
+      "source": "results/valid/protocol_v2/DTH_SE_adLIF/SHD/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "SHD",
+      "model": "DTH_SE_adLIF",
+      "seed": 42,
+      "protocol": "paper_classification_v1",
+      "scope": "comparison",
+      "matched": true,
+      "differences": [],
+      "assumed_defaults": {},
+      "status": "partial snapshot; no final test evidence",
+      "last_metric_epoch": 1,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [
+        "completion marker exists without local test evidence",
+        "saved config sources disagree; see JSON conflicts"
+      ],
+      "config_conflicts": [
+        {
+          "source": "results/valid/protocol_v2/DTH_SE_adLIF/SHD/seed_42/.hydra/config.yaml",
+          "key": "early_stopping",
+          "primary": false,
+          "other": true
+        },
+        {
+          "source": "results/valid/protocol_v2/DTH_SE_adLIF/SHD/seed_42/.hydra/config.yaml",
+          "key": "batch_size",
+          "primary": 256,
+          "other": 512
+        },
+        {
+          "source": "results/valid/protocol_v2/DTH_SE_adLIF/SHD/seed_42/.hydra/config.yaml",
+          "key": "dataset.batch_size",
+          "primary": 256,
+          "other": 512
+        }
+      ],
+      "metrics_source": "results/valid/protocol_v2/DTH_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/DTH_SE_adLIF/SSC/seed_42",
+      "source": "results/valid/protocol_v2/DTH_SE_adLIF/SSC/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "SSC",
+      "model": "DTH_SE_adLIF",
+      "seed": 42,
+      "protocol": "controlled_v2",
+      "scope": "comparison",
+      "matched": true,
+      "differences": [],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 40,
+      "test_metrics": [
+        0.782160758972168
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/DTH_SE_adLIF/SSC/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/FP_SE_adLIF/ECG/seed_42",
+      "source": "results/valid/protocol_v2/FP_SE_adLIF/ECG/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "ECG",
+      "model": "FP_SE_adLIF",
+      "seed": 42,
+      "protocol": "controlled_v2",
+      "scope": "comparison",
+      "matched": false,
+      "differences": [
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 204,
+      "test_metrics": [
+        0.8685135841369629
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/FP_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/FP_SE_adLIF/SHD/seed_42",
+      "source": "results/valid/protocol_v2/FP_SE_adLIF/SHD/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "SHD",
+      "model": "FP_SE_adLIF",
+      "seed": 42,
+      "protocol": "controlled_v2",
+      "scope": "comparison",
+      "matched": false,
+      "differences": [
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        }
+      ],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true,
+        "dataset.additional_test_set_validation": false
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 92,
+      "test_metrics": [
+        0.9156360626220703
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/FP_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/FP_SE_adLIF/SSC/seed_42",
+      "source": "results/valid/protocol_v2/FP_SE_adLIF/SSC/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "SSC",
+      "model": "FP_SE_adLIF",
+      "seed": 42,
+      "protocol": "controlled_v2",
+      "scope": "comparison",
+      "matched": true,
+      "differences": [],
+      "assumed_defaults": {},
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 40,
+      "test_metrics": [
+        0.7767147421836853
+      ],
+      "test_records": [],
+      "issues": [
+        "epoch order decreases; possible overlapping/resumed histories"
+      ],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/FP_SE_adLIF/SSC/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_123",
+      "source": "results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_123/FULL_RUN_CONFIG.json",
+      "dataset": "SHD",
+      "model": "LG_DTH_SE_adLIF",
+      "seed": 123,
+      "protocol": "controlled_v2_custom_b134d147776c",
+      "scope": "comparison",
+      "matched": true,
+      "differences": [],
+      "assumed_defaults": {
+        "dataset.additional_test_set_validation": false
+      },
+      "status": "partial snapshot; no final test evidence",
+      "last_metric_epoch": 86,
+      "test_metrics": [],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_123/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_42",
+      "source": "results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "SHD",
+      "model": "LG_DTH_SE_adLIF",
+      "seed": 42,
+      "protocol": "controlled_v2_custom_b134d147776c",
+      "scope": "comparison",
+      "matched": true,
+      "differences": [],
+      "assumed_defaults": {
+        "dataset.additional_test_set_validation": false
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 300,
+      "test_metrics": [
+        0.9377208352088928
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/MR_SE_adLIF/K_2/ECG/seed_42",
+      "source": "results/valid/protocol_v2/MR_SE_adLIF/K_2/ECG/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "ECG",
+      "model": "MR_SE_adLIF",
+      "seed": 42,
+      "protocol": "controlled_v2",
+      "scope": "comparison",
+      "matched": false,
+      "differences": [
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        }
+      ],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 201,
+      "test_metrics": [
+        0.8804901838302612
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/MR_SE_adLIF/K_2/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/MR_SE_adLIF/K_2/SHD/seed_42",
+      "source": "results/valid/protocol_v2/MR_SE_adLIF/K_2/SHD/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "SHD",
+      "model": "MR_SE_adLIF",
+      "seed": 42,
+      "protocol": "controlled_v2",
+      "scope": "comparison",
+      "matched": false,
+      "differences": [
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        }
+      ],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true,
+        "dataset.additional_test_set_validation": false
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 103,
+      "test_metrics": [
+        0.9257950782775879
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/MR_SE_adLIF/K_2/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/MR_SE_adLIF/K_2/SSC/seed_42",
+      "source": "results/valid/protocol_v2/MR_SE_adLIF/K_2/SSC/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "SSC",
+      "model": "MR_SE_adLIF",
+      "seed": 42,
+      "protocol": "controlled_v2",
+      "scope": "comparison",
+      "matched": true,
+      "differences": [],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 40,
+      "test_metrics": [
+        0.7693062424659729
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/MR_SE_adLIF/K_2/SSC/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/MT_SE_adLIF/ECG/seed_42",
+      "source": "results/valid/protocol_v2/MT_SE_adLIF/ECG/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "ECG",
+      "model": "MT_SE_adLIF",
+      "seed": 42,
+      "protocol": "controlled_v2",
+      "scope": "comparison",
+      "matched": false,
+      "differences": [
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        }
+      ],
+      "assumed_defaults": {},
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 260,
+      "test_metrics": [
+        0.8722640872001648
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/MT_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/MT_SE_adLIF/SHD/seed_42",
+      "source": "results/valid/protocol_v2/MT_SE_adLIF/SHD/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "SHD",
+      "model": "MT_SE_adLIF",
+      "seed": 42,
+      "protocol": "controlled_v2",
+      "scope": "comparison",
+      "matched": false,
+      "differences": [
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        }
+      ],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true,
+        "dataset.additional_test_set_validation": false
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 127,
+      "test_metrics": [
+        0.9191696047782898,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.9275618195533752
+      ],
+      "test_records": [
+        {
+          "source": "RESULT.json",
+          "record": {
+            "test_acc": 0.9275618195533752,
+            "test_loss": 0.5292407274246216,
+            "checkpoint": "ckpt/epoch=104-step=1260.ckpt",
+            "checkpoint_epoch": 104,
+            "validation_accuracy": 0.9883506894111633,
+            "sha256": "b07aaafc5711e2385a60f6d09a5fb2eb85bf61eea4610c11dc42884df7ea441e",
+            "training_end_epoch": 126,
+            "note": "Record restored from the previously completed independent checkpoint evaluation after the separate mt_verified folder was removed. Original training logs contain overlapping runs."
+          }
+        }
+      ],
+      "issues": [
+        "epoch order decreases; possible overlapping/resumed histories",
+        "result record flags overlapping training logs",
+        "summary mentions overlapping/mixed histories; inspect provenance"
+      ],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/MT_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/protocol_v2/MT_SE_adLIF/SSC/seed_42",
+      "source": "results/valid/protocol_v2/MT_SE_adLIF/SSC/seed_42/FULL_RUN_CONFIG.json",
+      "dataset": "SSC",
+      "model": "MT_SE_adLIF",
+      "seed": 42,
+      "protocol": "controlled_v2",
+      "scope": "comparison",
+      "matched": true,
+      "differences": [],
+      "assumed_defaults": {},
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 40,
+      "test_metrics": [
+        0.7759788036346436
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/protocol_v2/MT_SE_adLIF/SSC/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/reference/ECG/seed_123",
+      "source": "results/valid/reference/ECG/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+      "dataset": "ECG",
+      "model": "se_adlif",
+      "seed": 123,
+      "protocol": null,
+      "scope": "comparison",
+      "matched": false,
+      "differences": [
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        }
+      ],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 283,
+      "test_metrics": [
+        0.8872498273849487
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/reference/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/reference/ECG/seed_42",
+      "source": "results/valid/reference/ECG/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+      "dataset": "ECG",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": null,
+      "scope": "comparison",
+      "matched": false,
+      "differences": [
+        {
+          "key": "n_epochs",
+          "actual": 383,
+          "baseline": 400
+        }
+      ],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 383,
+      "test_metrics": [
+        0.8812915086746216
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/reference/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/reference/ECG/seed_456",
+      "source": "results/valid/reference/ECG/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+      "dataset": "ECG",
+      "model": "se_adlif",
+      "seed": 456,
+      "protocol": null,
+      "scope": "comparison",
+      "matched": false,
+      "differences": [
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        }
+      ],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 185,
+      "test_metrics": [
+        0.8811280131340027
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/reference/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/reference/SHD/seed_123/hydra/2026-10-12/08-10-25",
+      "source": "results/valid/reference/SHD/seed_123/hydra/2026-10-12/08-10-25/logs/mlp_snn/version_0/hparams.yaml",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 123,
+      "protocol": null,
+      "scope": "historical SHD reference",
+      "matched": false,
+      "differences": [
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        }
+      ],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true,
+        "dataset.additional_test_set_validation": false
+      },
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": 120,
+      "test_metrics": [
+        0.9231448769569397
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/reference/SHD/seed_123/hydra/2026-10-12/08-10-25/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/reference/SHD/seed_123",
+      "source": "results/valid/reference/SHD/seed_123/REFERENCE_RESULT.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 123,
+      "protocol": "paper_shd_reproduction",
+      "scope": "comparison",
+      "matched": true,
+      "differences": [],
+      "assumed_defaults": {},
+      "status": "completed reference record",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "ckpt/epoch=204-step=5125.ckpt",
+            "metrics": {
+              "test_acc": 0.9288869500160217,
+              "test_loss": 0.6164538264274597
+            }
+          }
+        },
+        {
+          "source": "REFERENCE_RESULT.json",
+          "record": {
+            "seed": 123,
+            "protocol": "paper_shd_reproduction",
+            "baseline_version": "paper_classification_v1",
+            "test_acc": 0.9288869500160217,
+            "test_loss": 0.6164538264274597,
+            "val_acc": 0.9938687682151794,
+            "val_loss": 0.03837515413761139,
+            "best_epoch": 204,
+            "checkpoint": "ckpt/epoch=204-step=5125.ckpt",
+            "checkpoint_sha256": "187503fada10dc4ac773ab14637b1912c8df1bba8f0f0bc3433cfadf7af9bffe",
+            "original_directory": "results/experiments/shd_paper/multirun/2026-10-14/10-10-21/seed_123"
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/valid/reference/SHD/seed_42/hydra/2026-10-12/07-17-03",
+      "source": "results/valid/reference/SHD/seed_42/hydra/2026-10-12/07-17-03/logs/mlp_snn/version_0/hparams.yaml",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": null,
+      "scope": "historical SHD reference",
+      "matched": false,
+      "differences": [
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        }
+      ],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true,
+        "dataset.additional_test_set_validation": false
+      },
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": 193,
+      "test_metrics": [
+        0.9341872930526733
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/reference/SHD/seed_42/hydra/2026-10-12/07-17-03/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/reference/SHD/seed_42",
+      "source": "results/valid/reference/SHD/seed_42/REFERENCE_RESULT.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": "paper_shd_reproduction",
+      "scope": "comparison",
+      "matched": true,
+      "differences": [],
+      "assumed_defaults": {},
+      "status": "completed reference record",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "ckpt/epoch=261-step=6550.ckpt",
+            "metrics": {
+              "test_acc": 0.9293286204338074,
+              "test_loss": 0.6220112442970276
+            }
+          }
+        },
+        {
+          "source": "REFERENCE_RESULT.json",
+          "record": {
+            "seed": 42,
+            "protocol": "paper_shd_reproduction",
+            "baseline_version": "paper_classification_v1",
+            "test_acc": 0.9293286204338074,
+            "test_loss": 0.6220112442970276,
+            "val_acc": 0.991416335105896,
+            "val_loss": 0.06347879022359848,
+            "best_epoch": 261,
+            "checkpoint": "ckpt/epoch=261-step=6550.ckpt",
+            "checkpoint_sha256": "d571c7af2ac1c5b19a0c549a5fdb124774d31d63e254e16b501ef354103c4541",
+            "original_directory": "results/experiments/shd_paper/multirun/2026-10-14/10-10-21/seed_42"
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/valid/reference/SHD/seed_456/hydra/2026-10-12/08-42-57",
+      "source": "results/valid/reference/SHD/seed_456/hydra/2026-10-12/08-42-57/logs/mlp_snn/version_0/hparams.yaml",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 456,
+      "protocol": null,
+      "scope": "historical SHD reference",
+      "matched": false,
+      "differences": [
+        {
+          "key": "batch_size",
+          "actual": 512,
+          "baseline": 256
+        },
+        {
+          "key": "early_stopping",
+          "actual": true,
+          "baseline": false
+        },
+        {
+          "key": "dataset.batch_size",
+          "actual": 512,
+          "baseline": 256
+        }
+      ],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true,
+        "dataset.additional_test_set_validation": false
+      },
+      "status": "test evidence, completion not independently established",
+      "last_metric_epoch": 165,
+      "test_metrics": [
+        0.9306536912918091
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/reference/SHD/seed_456/hydra/2026-10-12/08-42-57/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/reference/SHD/seed_456",
+      "source": "results/valid/reference/SHD/seed_456/REFERENCE_RESULT.json",
+      "dataset": "SHD",
+      "model": "se_adlif",
+      "seed": 456,
+      "protocol": "paper_shd_reproduction",
+      "scope": "comparison",
+      "matched": true,
+      "differences": [],
+      "assumed_defaults": {},
+      "status": "completed reference record",
+      "last_metric_epoch": null,
+      "test_metrics": [],
+      "test_records": [
+        {
+          "source": "TEST_RESULTS.json",
+          "record": {
+            "checkpoint": "ckpt/epoch=243-step=6100.ckpt",
+            "metrics": {
+              "test_acc": 0.9363957643508911,
+              "test_loss": 0.589467465877533
+            }
+          }
+        },
+        {
+          "source": "REFERENCE_RESULT.json",
+          "record": {
+            "seed": 456,
+            "protocol": "paper_shd_reproduction",
+            "baseline_version": "paper_classification_v1",
+            "test_acc": 0.9363957643508911,
+            "test_loss": 0.589467465877533,
+            "val_acc": 0.9908031821250916,
+            "val_loss": 0.07048723846673965,
+            "best_epoch": 243,
+            "checkpoint": "ckpt/epoch=243-step=6100.ckpt",
+            "checkpoint_sha256": "56c1e85513c6ad84603614af79a613d6c5962b7e98a2577abcf4851039435d07",
+            "original_directory": "results/experiments/shd_paper/multirun/2026-10-14/10-10-21/seed_456"
+          }
+        }
+      ],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": null
+    },
+    {
+      "run": "results/valid/reference/SSC/seed_123",
+      "source": "results/valid/reference/SSC/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+      "dataset": "SSC",
+      "model": "se_adlif",
+      "seed": 123,
+      "protocol": null,
+      "scope": "comparison",
+      "matched": true,
+      "differences": [],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 40,
+      "test_metrics": [
+        0.7811794877052307
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/reference/SSC/seed_123/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/reference/SSC/seed_42",
+      "source": "results/valid/reference/SSC/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+      "dataset": "SSC",
+      "model": "se_adlif",
+      "seed": 42,
+      "protocol": null,
+      "scope": "comparison",
+      "matched": true,
+      "differences": [],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 40,
+      "test_metrics": [
+        0.7833382487297058
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/reference/SSC/seed_42/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "run": "results/valid/reference/SSC/seed_456",
+      "source": "results/valid/reference/SSC/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+      "dataset": "SSC",
+      "model": "se_adlif",
+      "seed": 456,
+      "protocol": null,
+      "scope": "comparison",
+      "matched": true,
+      "differences": [],
+      "assumed_defaults": {
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "run_test": true
+      },
+      "status": "completed marker + test evidence",
+      "last_metric_epoch": 40,
+      "test_metrics": [
+        0.781670093536377
+      ],
+      "test_records": [],
+      "issues": [],
+      "config_conflicts": [],
+      "metrics_source": "results/valid/reference/SSC/seed_456/logs/mlp_snn/version_0/metrics.csv"
+    }
+  ],
+  "errors": []
+}

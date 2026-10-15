@@ -9,6 +9,7 @@ import pytorch_lightning as pl
 import torch
 
 from models.pl_module import MLPSNN
+from project_paths import local_path, portable_path, portable_config
 
 ROOT = Path(__file__).resolve().parent
 
@@ -17,14 +18,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--checkpoint', type=Path, required=True)
     args = parser.parse_args()
-    checkpoint_path = args.checkpoint.resolve()
+    checkpoint_path = local_path(args.checkpoint, must_exist=True)
     checkpoint = torch.load(checkpoint_path, map_location='cpu', weights_only=False)
-    cfg = OmegaConf.create(checkpoint['hyper_parameters']['cfg'])
+    cfg = OmegaConf.create(portable_config(OmegaConf.to_container(
+        OmegaConf.create(checkpoint['hyper_parameters']['cfg']), resolve=True)))
     pl.seed_everything(cfg.random_seed, workers=True)
     torch.set_float32_matmul_precision('high')
     # Standalone execution has no Hydra working directory to resolve data paths.
-    data_path = Path(str(cfg.dataset.data_path))
-    cfg.dataset.data_path = str(data_path if data_path.is_absolute() else ROOT / data_path)
+    cfg.dataset.data_path = str(local_path(cfg.dataset.data_path))
     cfg.dataset.num_workers = 0
     model = MLPSNN(cfg)
     model.load_state_dict(checkpoint['state_dict'], strict=True)
@@ -38,7 +39,7 @@ def main():
     results = trainer.test(model, datamodule=datamodule)[0]
     directory = checkpoint_path.parent.parent
     (directory / 'TEST_RESULTS.json').write_text(
-        json.dumps(dict(checkpoint=str(checkpoint_path), metrics=results), indent=2) + '\n',
+        json.dumps(dict(checkpoint=portable_path(checkpoint_path), metrics=results), indent=2) + '\n',
         encoding='utf-8',
     )
     summary_path = directory / 'TRAINING_SUMMARY.md'

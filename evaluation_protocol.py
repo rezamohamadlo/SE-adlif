@@ -3,13 +3,14 @@ import json
 from pathlib import Path
 
 from omegaconf import OmegaConf, open_dict
+from project_paths import local_path
 
 
 PROTOCOL_PATH = Path(__file__).resolve().parent / 'evaluation.yaml'
 
 
 def load_protocol(path=PROTOCOL_PATH):
-    return OmegaConf.to_container(OmegaConf.load(path), resolve=True)
+    return OmegaConf.to_container(OmegaConf.load(local_path(path)), resolve=True)
 
 
 def protocol_settings(protocol, dataset):
@@ -36,7 +37,7 @@ def apply_protocol(cfg):
         raise ValueError(f"Protocol training seeds must be one of {protocol['seeds']}")
     settings = protocol_settings(protocol, dataset)
     if cfg.get('ckpt_path'):
-        saved_path = Path(cfg.ckpt_path).resolve().parent.parent / '.hydra/config.yaml'
+        saved_path = local_path(cfg.ckpt_path).parent.parent / '.hydra/config.yaml'
         if not saved_path.exists():
             raise ValueError('Cannot verify resumed checkpoint protocol: missing saved Hydra config')
         saved = OmegaConf.load(saved_path)

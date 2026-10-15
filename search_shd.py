@@ -17,6 +17,7 @@ import torch
 
 from evaluation_protocol import load_protocol, protocol_overrides
 from tune_shd import check_directory, launch
+from project_paths import local_path, portable_config
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_OUTPUT = ROOT / 'results/experiments/shd_scratch_search'
@@ -87,7 +88,7 @@ def configuration(source, candidate, directory, seed):
                           validate_on=.2, random_seed=42, cache_namespace='controlled_v2',
                           additional_test_set_validation=False)
     cfg['hydra'] = dict(job=dict(chdir=True), run=dict(dir=directory.as_posix()))
-    return cfg
+    return portable_config(cfg)
 
 
 def build_plan(output, trials=None, seeds=(42,)):
@@ -229,7 +230,7 @@ def main(argv=None):
     parser.add_argument('--test-selected', action='store_true', help='Evaluate completed, explicitly selected trials without training')
     args = parser.parse_args(argv)
     try:
-        output = args.output.resolve()
+        output = local_path(args.output)
         if args.report:
             report(output)
             return

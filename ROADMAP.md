@@ -12,23 +12,23 @@ SE-adLIF reference -> Dynamic Threshold -> Dynamic Time Constant
 -> Dual-Adaptive model -> Accuracy and efficiency evaluation
 ```
 
-## Current status - 14 October 2026
+## Current status - 15 October 2026
 
-The controlled comparison protocol is implemented in `evaluation.yaml`,
-`evaluation_protocol.py`, and `runner.py`. SHD uses 20% training-derived
-validation with split seed 42; SSC uses official validation; ECG uses 5%
-training-derived validation. Final test results follow validation checkpoint
-selection. Architecture and neuron implementations remain separate.
+The runner uses `config/paper_baseline.yaml` through `config/comparison/`.
+The current focus is SHD*: seven models and training seeds 42, 123 and 456,
+with 20% training-derived validation and split seed 42. Final test results
+follow validation checkpoint selection. `evaluation.yaml` retains the older
+controlled-v2 protocol as a separate historical record.
 
 Reference and proposed-model records are under `results/valid/reference/`
 and `results/valid/protocol_v2/`. Current comparisons:
 
-- [Seed-42 model comparison](reports/seed-42-model-comparison.md).
+- [Paper results](reports/paper-results.md).
 - [Paper versus reference](reports/paper-vs-reference.md).
-- [Shared evaluation commands](reports/shared-evaluation-config.md).
+- [Reference versus six proposed models](reports/reference-vs-models.md).
 
 Historical test-selected SHD reproduction statistics are retained in the
-[Phase 1 report](reports/phase-1-se-adlif-reference.md); they are not current
+[Phase 1 report](reports/archive/2026-10-15-report-consolidation/phase-1-se-adlif-reference.md); they are not current
 unbiased test estimates. The old `results/phase1_models` and development
 archive paths are no longer present.
 

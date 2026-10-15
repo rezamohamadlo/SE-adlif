@@ -10,6 +10,7 @@ import time
 
 import search_shd
 from tune_shd import check_directory, launch
+from project_paths import local_path
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_OUTPUT = ROOT / 'results/experiments/shd_dropout_search'
@@ -82,7 +83,7 @@ def main():
     args = parser.parse_args()
     if not 0 < args.hours <= 48 or not 0 < args.seconds_per_epoch:
         parser.error('Hours must be in (0, 48]; seconds per epoch must be positive')
-    source, output = args.source.resolve(), args.output.resolve()
+    source, output = local_path(args.source), local_path(args.output)
     try:
         with nullcontext() if args.dry_run else search_shd.search_lock(output):
             plan = build_plan(output, args.trials)

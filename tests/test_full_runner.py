@@ -1,4 +1,5 @@
 import csv
+import copy
 import json
 from pathlib import Path
 import shutil
@@ -14,6 +15,55 @@ import runner as full_runner
 
 
 class FullRunnerTests(unittest.TestCase):
+    def test_legacy_shd_baseline_match_preserves_provenance_and_resume(self):
+        item = full_runner.build_plan('LG_DTH_SE_adLIF', seeds=(123,), datasets=('SHD',))[0]
+        legacy = copy.deepcopy(item['config'])
+        for key in ('paper_baseline', 'paper_baseline_version',
+                    'paper_baseline_dataset', 'paper_baseline_deviations'):
+            legacy.pop(key)
+        legacy['evaluation_protocol'] = 'controlled_v2_custom_b134d147776c'
+        legacy['dataset'].pop('additional_test_set_validation')
+        directory = item['directory']
+        (directory / 'ckpt').mkdir(parents=True)
+        (directory / 'ckpt/last.ckpt').touch()
+        manifest = directory / 'FULL_RUN_CONFIG.json'
+        original_text = json.dumps(legacy)
+        manifest.write_text(original_text, encoding='utf-8')
+        plan = full_runner.build_plan('LG_DTH_SE_adLIF', seeds=(123, 456), datasets=('SHD',))
+        self.assertEqual([x['status'] for x in plan], ['resume', 'new'])
+        self.assertEqual(plan[0]['compatibility']['original_config'], legacy)
+        self.assertIn('ckpt_path=', plan[0]['overrides'][-1])
+        self.assertFalse((directory / 'PAPER_BASELINE_COMPATIBILITY.json').exists())
+        with patch.object(full_runner.subprocess, 'run') as train, patch.object(full_runner, 'write_aggregate'):
+            train.return_value.returncode = 0
+            full_runner.run('LG_DTH_SE_adLIF', seeds=(123,), datasets=('SHD',))
+        self.assertEqual(manifest.read_text(encoding='utf-8'), original_text)
+        audit = json.loads((directory / 'PAPER_BASELINE_COMPATIBILITY.json').read_text())
+        self.assertEqual(audit['resolved_config'], item['config'])
+        with patch.object(full_runner.subprocess, 'run') as train, patch.object(full_runner, 'write_aggregate'):
+            full_runner.run('LG_DTH_SE_adLIF', seeds=(123,), datasets=('SHD',))
+            train.assert_not_called()
+        for key, value in [('lr', .02), ('n_epochs', 301), ('early_stopping', True),
+                           ('random_seed', 42), ('batch_size', 512),
+                           ('evaluation_protocol', 'unknown_protocol')]:
+            changed = copy.deepcopy(legacy)
+            changed[key] = value
+            manifest.write_text(json.dumps(changed), encoding='utf-8')
+            with self.subTest(key=key), self.assertRaisesRegex(ValueError, 'Configuration changed'):
+                full_runner.build_plan('LG_DTH_SE_adLIF', seeds=(123,), datasets=('SHD',))
+        for key, value in [('random_seed', 123), ('validate_on', .1),
+                           ('window_size', 8), ('additional_test_set_validation', True)]:
+            changed = copy.deepcopy(legacy)
+            changed['dataset'][key] = value
+            manifest.write_text(json.dumps(changed), encoding='utf-8')
+            with self.subTest(dataset_key=key), self.assertRaisesRegex(ValueError, 'Configuration changed'):
+                full_runner.build_plan('LG_DTH_SE_adLIF', seeds=(123,), datasets=('SHD',))
+        changed = copy.deepcopy(legacy)
+        changed['l1']['local_slow_enabled'] = False
+        manifest.write_text(json.dumps(changed), encoding='utf-8')
+        with self.assertRaisesRegex(ValueError, 'Configuration changed'):
+            full_runner.build_plan('LG_DTH_SE_adLIF', seeds=(123,), datasets=('SHD',))
+
     def test_resume_flag_defaults_to_resume_and_fresh_runs_never_overwrite(self):
         item = full_runner.build_plan('FP_SE_adLIF', seeds=(42,), datasets=('SSC',), resume=0)[0]
         self.assertEqual(item['status'], 'new')

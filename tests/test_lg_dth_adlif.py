@@ -29,6 +29,13 @@ def config(**kwargs):
 class LGDTHTests(unittest.TestCase):
     def setUp(self):
         torch.manual_seed(42)
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        root = Path(directory.name)
+        shutil.copytree(runner.ROOT / 'config', root / 'config')
+        root_patch = patch.object(runner, 'ROOT', root)
+        root_patch.start()
+        self.addCleanup(root_patch.stop)
 
     def test_exact_initialization_and_disabled_equivalence(self):
         for disabled in (False, True):
@@ -132,8 +139,11 @@ class LGDTHTests(unittest.TestCase):
             self.assertEqual(cfg.l1.n_neurons, 360)
             self.assertEqual(cfg.l2.n_neurons, 360)
             for key in reference['config']:
-                if key not in ['l1', 'l2', 'exp_name', 'model_variant', 'logdir', 'hydra']:
+                if key not in ['l1', 'l2', 'exp_name', 'model_variant', 'logdir', 'hydra',
+                               'paper_baseline_deviations']:
                     self.assertEqual(plan[0]['config'][key], reference['config'][key], key)
+            self.assertEqual(plan[0]['config']['paper_baseline_deviations'],
+                             [f'model_variant={variant}'])
             with contextlib.redirect_stdout(io.StringIO()):
                 model = MLPSNN(cfg)
                 baseline = MLPSNN(OmegaConf.create(reference['config']))

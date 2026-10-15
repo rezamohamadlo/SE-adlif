@@ -15,6 +15,7 @@ import sys
 from hydra import compose, initialize_config_dir
 from omegaconf import OmegaConf
 from evaluation_protocol import load_protocol, protocol_overrides, protocol_settings
+from project_paths import portable_config, portable_path
 
 
 ROOT = Path(__file__).resolve().parent
@@ -31,6 +32,26 @@ PROTOCOL = EVALUATION['datasets']
 def result_root(model, adaptation_update_interval=2):
     root = ROOT / RUN_LOGDIR / model
     return root / f"K_{adaptation_update_interval}" if model == "MR_SE_adLIF" else root
+
+
+def matches_paper_baseline(previous, resolved, dataset):
+    """Accept legacy SHD metadata only after comparing all effective settings."""
+    baseline_keys = ('paper_baseline', 'paper_baseline_version',
+                     'paper_baseline_dataset', 'paper_baseline_deviations')
+    if (dataset != 'SHD'
+            or not re.fullmatch(r'controlled_v2(?:_custom_[0-9a-f]{12})?',
+                                str(previous.get('evaluation_protocol', '')))
+            or any(key in previous for key in baseline_keys)
+            or resolved.get('evaluation_protocol') != resolved.get('paper_baseline_version')
+            or resolved.get('paper_baseline_dataset') != dataset):
+        return False
+    old, current = copy.deepcopy(previous), copy.deepcopy(resolved)
+    for key in (*baseline_keys, 'evaluation_protocol'):
+        old.pop(key, None)
+        current.pop(key, None)
+    # SHDLDM's omitted value has always defaulted to False.
+    old.setdefault('dataset', {}).setdefault('additional_test_set_validation', False)
+    return old == current
 
 
 def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, resume=1):
@@ -70,7 +91,7 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                 overrides = [
                     f"experiment={experiment}", f"random_seed={seed}",
                     f"+comparison={dataset}",
-                    f"logdir={json.dumps(directory.as_posix())}",
+                    f"logdir={json.dumps(portable_path(directory, ROOT))}",
                     f"hydra.run.dir={json.dumps(directory.as_posix())}",
                     "++launcher_script=runner.py", f"++model_variant={model}",
                     f"++run_mode={'reference' if model == 'SE_adLIF' else 'ours'}",
@@ -82,7 +103,7 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                 if model == "MR_SE_adLIF":
                     overrides.append(f"adaptation_update_interval={adaptation_update_interval}")
                 cfg = compose(config_name="main", overrides=overrides)
-                resolved = OmegaConf.to_container(cfg, resolve=True)
+                resolved = portable_config(OmegaConf.to_container(cfg, resolve=True), ROOT)
                 # Validate model registry, architecture and temporal aggregation
                 # before launching any expensive training subprocess.
                 from models.pl_module import layer_map
@@ -94,8 +115,10 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                 if cfg.loss_agg != expected_loss or not cfg.two_layers:
                     raise ValueError(f"{experiment} must use two layers and {expected_loss}")
                 manifest = directory / "FULL_RUN_CONFIG.json"
+                compatibility = None
                 if manifest.exists():
-                    previous = json.loads(manifest.read_text(encoding="utf-8"))
+                    original_config = json.loads(manifest.read_text(encoding="utf-8"))
+                    previous = portable_config(copy.deepcopy(original_config), ROOT)
                     # These newly explicit defaults preserve older runner behavior.
                     for key, value in {
                         'init_ckpt_path': None, 'run_test': True, 'scheduler': 'plateau',
@@ -108,18 +131,34 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                     if (RUN_LOGDIR == 'results/valid/protocol_v2'
                             and previous.get('launcher_logdir') == 'results/full_runs/protocol_v2'
                             and str(previous.get('logdir', '')).replace('\\', '/') ==
-                            directory.as_posix().replace('/results/valid/protocol_v2/', '/results/full_runs/protocol_v2/')):
+                            portable_path(directory, ROOT).replace('results/valid/protocol_v2/', 'results/full_runs/protocol_v2/')):
                         previous['logdir'] = resolved['logdir']
                         previous['launcher_logdir'] = resolved['launcher_logdir']
                     if previous != resolved:
-                        raise ValueError(f"Configuration changed; refusing to reuse {directory}")
+                        if not matches_paper_baseline(previous, resolved, dataset):
+                            raise ValueError(f"Configuration changed; refusing to reuse {directory}")
+                        compatibility = {
+                            'original_config': original_config,
+                            'resolved_config': resolved,
+                            'paper_baseline_version': resolved['paper_baseline_version'],
+                            'paper_baseline_dataset': dataset,
+                            'note': 'Effective settings match; original protocol metadata retained in FULL_RUN_CONFIG.json.',
+                        }
+                    elif original_config != resolved:
+                        compatibility = {
+                            'original_config': original_config,
+                            'resolved_config': resolved,
+                            'paper_baseline_version': resolved['paper_baseline_version'],
+                            'paper_baseline_dataset': dataset,
+                            'note': 'Equivalent relocated paths or explicit defaults; original manifest retained.',
+                        }
                 elif directory.exists() and any(directory.iterdir()):
                     raise ValueError(f"Unrecognized existing results; refusing to overwrite {directory}")
                 if (directory / "completed.txt").exists():
                     status = "complete"
                 elif (directory / "ckpt" / "last.ckpt").exists():
                     status = "resume"
-                    overrides.append(f"ckpt_path={json.dumps((directory / 'ckpt' / 'last.ckpt').as_posix())}")
+                    overrides.append(f"ckpt_path={json.dumps(portable_path(directory / 'ckpt' / 'last.ckpt', ROOT))}")
                 elif (directory / "ckpt").exists() and any((directory / "ckpt").iterdir()):
                     raise ValueError(f"Checkpoints exist without last.ckpt: {directory}")
                 else:
@@ -129,7 +168,8 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                         raise ValueError(f"Existing artifacts have no resumable checkpoint: {directory}")
                     status = "new"
                 plan.append(dict(dataset=dataset, seed=seed, directory=directory,
-                                 config=resolved, overrides=overrides, status=status))
+                                 config=resolved, overrides=overrides, status=status,
+                                 compatibility=compatibility))
     return plan
 
 
@@ -192,12 +232,17 @@ def run(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, resume=
     for item in plan:
         directory = item["directory"]
         print(f"{item['dataset']} seed {item['seed']}: {item['status']} -> {directory}", flush=True)
+        if item.get('compatibility'):
+            (directory / 'PAPER_BASELINE_COMPATIBILITY.json').write_text(
+                json.dumps(item['compatibility'], indent=2, sort_keys=True) + '\n',
+                encoding='utf-8')
         if item["status"] == "complete":
             continue
         directory.mkdir(parents=True, exist_ok=True)
-        (directory / "FULL_RUN_CONFIG.json").write_text(
-            json.dumps(item["config"], indent=2, sort_keys=True) + "\n", encoding="utf-8"
-        )
+        if not item.get('compatibility'):
+            (directory / "FULL_RUN_CONFIG.json").write_text(
+                json.dumps(item["config"], indent=2, sort_keys=True) + "\n", encoding="utf-8"
+            )
         result = subprocess.run([sys.executable, str(ROOT / "run.py"), *item["overrides"]], cwd=ROOT)
         if result.returncode:
             write_aggregate(model, adaptation_update_interval)
@@ -264,7 +309,7 @@ def main(argv=None):
             RUN_LOGDIR = f'results/experiments/{EVALUATION["name"]}'
             print('Training overrides: ' + json.dumps(overrides, sort_keys=True))
         if args.logdir:
-            RUN_LOGDIR = args.logdir
+            RUN_LOGDIR = portable_path(args.logdir, ROOT)
         # Preserve order and avoid scheduling duplicate model suites.
         models = list(dict.fromkeys(args.models))
         plans = [(model, build_plan(model, args.adaptation_update_interval, args.seeds, args.datasets, args.resume)) for model in models]

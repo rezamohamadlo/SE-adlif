@@ -11,6 +11,7 @@ import sys
 
 import torch
 from omegaconf import OmegaConf
+from project_paths import local_path, portable_path, portable_config
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_OUTPUT = ROOT / 'results/experiments/shd_lr_sweep'
@@ -27,7 +28,7 @@ def test_baseline(output):
     record = json.loads(result.read_text(encoding='utf-8'))
     return dict(protocol=record['baseline_version'], reference_test_acc=record['test_acc'],
                 reported_reference_percent=100 * record['test_acc'],
-                checkpoint=str(DEFAULT_CHECKPOINT))
+                checkpoint=portable_path(DEFAULT_CHECKPOINT))
 
 
 def candidates():
@@ -45,7 +46,7 @@ def candidates():
 
 
 def reference(checkpoint):
-    checkpoint = Path(checkpoint).resolve()
+    checkpoint = local_path(checkpoint)
     if not checkpoint.is_file():
         raise ValueError(f'Missing checkpoint: {checkpoint}. Reports alone cannot initialize training.')
     # Only use trusted, locally produced Lightning checkpoints.
@@ -61,7 +62,7 @@ def reference(checkpoint):
         raise ValueError('Reference must select checkpoints using val_acc in max mode')
     with checkpoint.open('rb') as stream:
         digest = hashlib.file_digest(stream, 'sha256').hexdigest()
-    return cfg, dict(checkpoint=str(checkpoint), sha256=digest, epoch=saved.get('epoch'))
+    return portable_config(cfg), dict(checkpoint=portable_path(checkpoint), sha256=digest, epoch=saved.get('epoch'))
 
 
 def trial_config(source, checkpoint, candidate, directory, epochs, seed=42, full=False):
@@ -84,13 +85,13 @@ def trial_config(source, checkpoint, candidate, directory, epochs, seed=42, full
     cfg['dataset']['num_workers'] = 0
     cfg['dataset']['additional_test_set_validation'] = False
     cfg['hydra'] = dict(job=dict(chdir=True), run=dict(dir=directory.as_posix()))
-    return cfg
+    return portable_config(cfg)
 
 
 def check_directory(directory, manifest):
     path = directory / 'SWEEP_CONFIG.json'
     if path.exists():
-        if json.loads(path.read_text(encoding='utf-8')) != manifest:
+        if portable_config(json.loads(path.read_text(encoding='utf-8'))) != portable_config(manifest):
             raise ValueError(f'Configuration changed; choose another --output: {directory}')
         if (directory / 'completed.txt').exists():
             return 'complete'
@@ -111,11 +112,14 @@ def launch(directory, manifest, status):
     if status == 'complete':
         return
     directory.mkdir(parents=True, exist_ok=True)
-    (directory / 'SWEEP_CONFIG.json').write_text(json.dumps(manifest, indent=2), encoding='utf-8')
-    cfg = copy.deepcopy(manifest['config'])
+    # Retain historical manifests; path relocation is not a new experiment.
+    if not (directory / 'SWEEP_CONFIG.json').exists():
+        (directory / 'SWEEP_CONFIG.json').write_text(json.dumps(portable_config(manifest), indent=2), encoding='utf-8')
+    cfg = portable_config(copy.deepcopy(manifest['config']))
     if status == 'resume':
         cfg['init_ckpt_path'] = None
         cfg['ckpt_path'] = (directory / 'ckpt/last.ckpt').as_posix()
+    cfg['hydra'] = dict(job=dict(chdir=True), run=dict(dir=directory.as_posix()))
     OmegaConf.save(OmegaConf.create(cfg), directory / 'trial.yaml')
     subprocess.check_call([sys.executable, str(ROOT / 'run.py'), '--config-path',
                            str(directory), '--config-name', 'trial'], cwd=ROOT)
@@ -198,7 +202,7 @@ def main(argv=None):
         if args.list:
             print(json.dumps(candidates(), indent=2))
             return
-        output = args.output.resolve()
+        output = local_path(args.output)
         if args.report:
             report(output)
             return
@@ -213,7 +217,7 @@ def main(argv=None):
                 directory = output / candidate['id']
                 if args.full_train:
                     directory = output / 'full_train' / candidate['id'] / f'seed_{seed}'
-                cfg = trial_config(source, args.checkpoint.resolve(), candidate, directory,
+                cfg = trial_config(source, local_path(args.checkpoint), candidate, directory,
                                    300 if args.full_train else args.epochs, seed, args.full_train)
                 manifest = dict(reference=provenance, config=cfg)
                 status = check_directory(directory, manifest)
@@ -224,7 +228,7 @@ def main(argv=None):
             print(f'Validated {len(plan)} runs; no writes or training.')
             return
         if not args.full_train and not (output / 'REFERENCE_BASELINE.json').exists():
-            if args.checkpoint.resolve() != DEFAULT_CHECKPOINT.resolve():
+            if local_path(args.checkpoint) != DEFAULT_CHECKPOINT.resolve():
                 raise ValueError('A custom checkpoint requires an explicit REFERENCE_BASELINE.json in --output')
             output.mkdir(parents=True, exist_ok=True)
             (output / 'REFERENCE_BASELINE.json').write_text(

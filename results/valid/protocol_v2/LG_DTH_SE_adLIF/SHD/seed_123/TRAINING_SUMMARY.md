@@ -4,8 +4,8 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 ## Run status
 
-- **Status:** Training in progress
-- **Progress:** 77 epochs completed (`0` through `76`) out of 300
+- **Status:** Training and testing finished
+- **Progress:** 300 epochs completed (`0` through `299`) out of 300
 - **Dataset:** SHD
 - **Model:** SHD_LG_DTH_SE_adLIF
 - **Seed:** 123
@@ -15,12 +15,12 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 | Metric | Value | Epoch |
 |---|---:|---:|
-| Best validation accuracy | **98.59%** | 76 |
-| Validation loss | **0.0942** | 76 |
-| Training accuracy | **100.00%** | 76 |
-| Training loss | **0.000048** | 76 |
-| Gradient norm | **0.0002** | 76 |
-| Learning rate | **0.01** | 76 |
+| Best validation accuracy | **99.26%** | 267 |
+| Validation loss | **0.0522** | 267 |
+| Training accuracy | **100.00%** | 267 |
+| Training loss | **0.000153** | 267 |
+| Gradient norm | **0.0023** | 267 |
+| Learning rate | **0.01** | 267 |
 
 ## Model size and computation
 
@@ -36,7 +36,7 @@ The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds
 ## Best checkpoint
 
 ```text
-ckpt/epoch=76-step=1925.ckpt
+ckpt/epoch=267-step=6700.ckpt
 ```
 
 ## Main hyperparameters
@@ -67,9 +67,18 @@ ckpt/epoch=76-step=1925.ckpt
 ## Resume command
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models LG_DTH_SE_adLIF --datasets SHD --seeds 123 --epochs 300 --batch-size 256 --lr 0.01 --early-stopping false --early-stopping-patience 50 --early-stopping-min-delta 0.001 --lr-scheduler-patience 9999 --lr-scheduler-factor 0.9 --logdir "results/valid/protocol_v2"
+.\.venv\Scripts\python.exe runner.py --models LG_DTH_SE_adLIF --datasets SHD --seeds 123 --logdir "results/valid/protocol_v2"
 ```
 
 ## Evaluation note
 
 This run uses `validate_on: 0.2`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
+
+## Final test evaluation
+
+The best validation checkpoint was evaluated on the test split after training.
+
+| Metric | Value |
+|---|---:|
+| Test accuracy | **93.02%** |
+| Test loss | **0.6372** |

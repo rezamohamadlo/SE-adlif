@@ -22,12 +22,37 @@ the tested Windows environment and includes optional CUDA/JAX dependencies:
 conda env create -f environment.yml
 ```
 
-For current controlled model comparisons, use [the shared evaluation
-runner guide](reports/shared-evaluation-config.md). Reference tuning is
-documented in [the scratch-search guide](reports/shd-scratch-search.md).
+Current tables: [paper results](reports/paper-results.md),
+[paper versus reference](reports/paper-vs-reference.md), and
+[reference versus six proposed models](reports/reference-vs-models.md).
+The runner uses `config/paper_baseline.yaml`. Previous guides and tuning notes
+are retained in [the report archive](reports/archive/2026-10-15-report-consolidation/).
 Current results belong in `results/valid/`; tuning results belong in
 `results/experiments/`. Historical notes and document exports are under
-`reports/archive/` and `reports/exports/`.
+`reports/archive/`.
+
+### Working across computers
+
+New classification run manifests and checkpoint configuration fields use
+repository-relative artifact paths. `project_paths.py` resolves them against
+the checkout root, including when Hydra changes the working directory.
+Previous checkout roots are explicitly registered in `config/path_aliases.yaml`;
+add another root there if a saved record comes from a different location.
+Only the root prefix is relocated: the full checkpoint filename and directory
+are retained. Existing historical configs and summaries are not rewritten.
+
+To inspect a portable view of an existing saved config without changing it:
+
+```powershell
+.\.ven\Scripts\python.exe project_paths.py --inspect results/experiments/shd_lr_sweep/c03/SWEEP_CONFIG.json
+```
+
+Checkpoints and datasets are not transferred by Git. Copy the exact required
+files separately and verify recorded checkpoint hashes. A missing file causes
+an error; no newer or similarly named checkpoint is substituted. The standard
+classification runner, tuning/search launchers and standalone checkpoint tester
+resolve registered historical paths automatically. Already running processes
+keep their existing code; these changes apply to subsequent launches.
 
 ---
 
@@ -72,7 +97,8 @@ python run_compress.py experiment=<experiment_name> ++logdir=path/to/my/logdir +
 ## 📊 Evaluating Audio Compression Models 
 Model checkpoints for each configuration are available at [checkpoints](https://github.com/IGITUGraz/SE-adlif/tree/main/checkpoints).
 The local CSV measurements from those audio experiments are retained under
-`reports/audio-compression/`; they are evaluation records, not model weights.
+`reports/archive/2026-10-15-report-consolidation/audio-compression/`;
+they are evaluation records, not model weights.
 
 ### 1️⃣ Generating Wave Files
 To generate wave files from a checkpoint:
