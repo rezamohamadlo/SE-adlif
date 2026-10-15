@@ -1,0 +1,11 @@
+# @package _global_
+defaults:
+  - common
+  - _self_
+paper_baseline_dataset: SSC
+dataset:
+  spatial_factor: ${paper_baseline.datasets.SSC.spatial_factor}
+  time_factor: ${paper_baseline.datasets.SSC.time_factor}
+  window_size: ${paper_baseline.datasets.SSC.window_size}
+  pad_to_min_size: ${paper_baseline.datasets.SSC.pad_to_min_size}
+  ignore_first_timesteps: ${paper_baseline.datasets.SSC.ignore_first_timesteps}

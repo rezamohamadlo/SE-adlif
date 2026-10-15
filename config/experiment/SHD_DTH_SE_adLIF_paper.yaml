@@ -1,0 +1,31 @@
+# @package _global_
+# Shared paper-derived training/preprocessing settings; DTH cells are the deviation.
+defaults:
+  - SHD_SE_adLIF_paper
+  - _self_
+
+exp_name: SHD_DTH_SE_adLIF_paper
+evaluation_protocol: paper_classification_v1
+paper_baseline_dataset: SHD
+paper_baseline_deviations: [DTH hidden cells with adaptive thresholds]
+
+l1:
+  cell: dth_se_adlif
+  rho_fast: 0.9
+  rho_slow: 0.99
+  target_rate: 0.05
+  theta_min: 0.5
+  theta_max: 1.5
+l2:
+  cell: dth_se_adlif
+  rho_fast: 0.9
+  rho_slow: 0.99
+  target_rate: 0.05
+  theta_min: 0.5
+  theta_max: 1.5
+
+logdir: ./results/valid/paper_classification_v1/DTH_SE_adLIF/SHD/seed_${random_seed}
+hydra:
+  sweep:
+    dir: ./results/valid/paper_classification_v1/DTH_SE_adLIF/SHD
+    subdir: seed_${random_seed}

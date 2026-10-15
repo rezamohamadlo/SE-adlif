@@ -18,9 +18,12 @@ from evaluation_protocol import load_protocol, protocol_overrides, protocol_sett
 
 
 ROOT = Path(__file__).resolve().parent
-EVALUATION = load_protocol()
+_BASELINE = OmegaConf.load(ROOT / 'config/paper_baseline.yaml').paper_baseline
+EVALUATION = {'name': _BASELINE.version,
+              'seeds': list(_BASELINE.reproduction_policy.training_seeds),
+              'common': {}, 'datasets': {name: {} for name in _BASELINE.datasets}}
 SEEDS = tuple(EVALUATION['seeds'])
-RUN_LOGDIR = "results/valid/protocol_v2"
+RUN_LOGDIR = f"results/valid/{EVALUATION['name']}"
 # One explicit protocol shared by reference and proposed models.
 PROTOCOL = EVALUATION['datasets']
 
@@ -66,12 +69,14 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                     raise ValueError(f'--resume 0 requires an empty output directory; use --logdir for a fresh run: {directory}')
                 overrides = [
                     f"experiment={experiment}", f"random_seed={seed}",
+                    f"+comparison={dataset}",
                     f"logdir={json.dumps(directory.as_posix())}",
                     f"hydra.run.dir={json.dumps(directory.as_posix())}",
                     "++launcher_script=runner.py", f"++model_variant={model}",
                     f"++run_mode={'reference' if model == 'SE_adLIF' else 'ours'}",
                     f"++launcher_logdir={launcher_logdir}",
                     f"++evaluation_protocol={EVALUATION['name']}",
+                    f"++paper_baseline_deviations={json.dumps([] if model == 'SE_adLIF' else [f'model_variant={model}'])}",
                 ]
                 overrides += protocol_overrides(EVALUATION, dataset)
                 if model == "MR_SE_adLIF":
@@ -130,18 +135,28 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
 
 def write_aggregate(model, adaptation_update_interval=2):
     root = result_root(model, adaptation_update_interval)
+    settings_by_dataset = {}
+    with initialize_config_dir(config_dir=str(ROOT / 'config'), version_base=None):
+        for dataset in PROTOCOL:
+            cfg = compose(config_name='main', overrides=[f'+comparison={dataset}'] +
+                          protocol_overrides(EVALUATION, dataset))
+            keys = ('n_epochs', 'batch_size', 'lr', 'early_stopping',
+                    'early_stopping_patience', 'early_stopping_min_delta', 'patience', 'factor')
+            settings_by_dataset[dataset] = {key: OmegaConf.select(cfg, key) for key in keys}
+            for key in ('validate_on', 'valid_fraction', 'random_seed'):
+                settings_by_dataset[dataset][f'dataset.{key}'] = OmegaConf.select(cfg, f'dataset.{key}')
     lines = [f"# {model}: full evaluation", "", "Statistics use final test accuracy from completed runs only.",
-             f"Protocol: {EVALUATION['name']}. Settings: evaluation.yaml.",
-             f"SHD training-derived validation: {PROTOCOL['SHD']['dataset.validate_on']:.0%}; "
-             f"ECG: {PROTOCOL['ECG']['dataset.valid_fraction']:.0%}; "
-             f"split seeds: SHD {PROTOCOL['SHD']['dataset.random_seed']}, ECG {PROTOCOL['ECG']['dataset.random_seed']}.",
+             f"Protocol: {EVALUATION['name']}. Baseline: config/paper_baseline.yaml; dataset settings: config/comparison/.",
+             f"SHD* training-derived validation: {settings_by_dataset['SHD']['dataset.validate_on']:.0%}; "
+             f"ECG: {settings_by_dataset['ECG']['dataset.valid_fraction']:.0%}; "
+             f"split seeds: SHD* {settings_by_dataset['SHD']['dataset.random_seed']}, ECG {settings_by_dataset['ECG']['dataset.random_seed']}.",
              "SSC uses official train/valid/test. Test evaluation follows validation checkpoint selection.", "",
-             'Epochs/batch: ' + ', '.join(f"{d} {s['n_epochs']}/{s['batch_size']}" for d, s in PROTOCOL.items()),
+             'Epochs/batch: ' + ', '.join(f"{d} {s['n_epochs']}/{s['batch_size']}" for d, s in settings_by_dataset.items()),
              'Training settings: ' + '; '.join(
                  f"{d}: LR={s['lr']}, early stopping={s['early_stopping']}, "
                  f"patience={s['early_stopping_patience']}, delta={s['early_stopping_min_delta']}, "
                  f"scheduler patience={s['patience']}, factor={s['factor']}"
-                 for d in PROTOCOL for s in [protocol_settings(EVALUATION, d)]), "",
+                 for d, s in settings_by_dataset.items()), "",
              '| Dataset | ' + ' | '.join(f'Seed {s}' for s in SEEDS) + ' | n | Mean ± sample SD |',
              '|---|' + '---:|' * (len(SEEDS) + 2)]
     if model == "MR_SE_adLIF":

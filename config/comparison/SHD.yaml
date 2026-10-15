@@ -1,0 +1,15 @@
+# @package _global_
+defaults:
+  - common
+  - _self_
+paper_baseline_dataset: SHD
+dataset:
+  validate_on: ${paper_baseline.datasets.SHD.validate_on}
+  random_seed: ${paper_baseline.reproduction_policy.split_seed}
+  cache_namespace: ${paper_baseline.reproduction_policy.cache_namespace}
+  spatial_factor: ${paper_baseline.datasets.SHD.spatial_factor}
+  time_factor: ${paper_baseline.datasets.SHD.time_factor}
+  window_size: ${paper_baseline.datasets.SHD.window_size}
+  pad_to_min_size: ${paper_baseline.datasets.SHD.pad_to_min_size}
+  ignore_first_timesteps: ${paper_baseline.datasets.SHD.ignore_first_timesteps}
+  additional_test_set_validation: false

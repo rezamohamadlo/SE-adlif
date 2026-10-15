@@ -84,9 +84,11 @@ local reproduction choices are explicitly separated in this file.
   Do not silently update completed runs, frozen controlled_v2 settings or active
   processes. Using the baseline does not prove exact paper reproduction or
   guarantee the paper's reported accuracy.
-- Existing runner entry points do not automatically enforce this new file.
-  Verify config inheritance/overrides before launching future comparisons;
-  do not assume invoking `runner.py` alone applies the paper baseline.
+- `runner.py` applies `config/paper_baseline.yaml` by default through the
+  dataset-specific `config/comparison/` group. Outputs use
+  `results/valid/paper_classification_v1/`; no baseline flag is required.
+  Explicit tuning overrides use separate experiment outputs. `evaluation.yaml`
+  remains the historical controlled_v2 record and is not the runner default.
 
 ## Preserve fair comparisons
 

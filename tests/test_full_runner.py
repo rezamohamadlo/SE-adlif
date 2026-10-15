@@ -78,13 +78,13 @@ class FullRunnerTests(unittest.TestCase):
             plan = full_runner.build_plan(model)
             self.assertEqual([(x['dataset'], x['seed']) for x in plan],
                              [(d, s) for d in ("SHD", "SSC", "ECG") for s in (42,123,456)])
-            self.assertEqual([x['config']['batch_size'] for x in plan[::3]], [512,256,64])
+            self.assertEqual([x['config']['batch_size'] for x in plan[::3]], [256,256,64])
             self.assertEqual([x['config']['n_epochs'] for x in plan[::3]], [300,40,400])
             self.assertEqual([x['config']['early_stopping'] for x in plan[::3]],
-                             [True, False, True])
+                             [False, False, False])
             self.assertTrue(all(x['config']['early_stopping_patience'] == 50 for x in plan))
             self.assertTrue(all(x['config']['patience'] == 9999 for x in plan))
-            self.assertTrue(all(x['config']['evaluation_protocol'] == 'controlled_v2' for x in plan))
+            self.assertTrue(all(x['config']['evaluation_protocol'] == 'paper_classification_v1' for x in plan))
             self.assertEqual([x['config']['lr'] for x in plan[::3]], [.01, .006, .01])
             for item in plan[:3]:
                 self.assertEqual(item['config']['dataset']['validate_on'], .2)

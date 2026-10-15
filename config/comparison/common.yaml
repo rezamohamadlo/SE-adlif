@@ -1,0 +1,26 @@
+# @package _global_
+defaults:
+  - /paper_baseline
+  - _self_
+
+paper_baseline_version: ${paper_baseline.version}
+paper_baseline_deviations: []
+lr: ${paper_baseline.datasets.${paper_baseline_dataset}.lr}
+batch_size: ${paper_baseline.datasets.${paper_baseline_dataset}.batch_size}
+n_epochs: ${paper_baseline.datasets.${paper_baseline_dataset}.n_epochs}
+dropout: ${paper_baseline.common.dropout}
+alpha: ${paper_baseline.common.alpha}
+dt: ${paper_baseline.common.dt}
+gradient_clip_val: ${paper_baseline.common.gradient_clip_val}
+tracking_metric: ${paper_baseline.common.tracking_metric}
+tracking_mode: ${paper_baseline.common.tracking_mode}
+early_stopping: ${paper_baseline.reproduction_policy.early_stopping}
+scheduler: ${paper_baseline.reproduction_policy.scheduler}
+patience: ${paper_baseline.reproduction_policy.patience}
+factor: ${paper_baseline.reproduction_policy.factor}
+init_ckpt_path: null
+ckpt_path: null
+run_test: true
+dataset:
+  batch_size: ${batch_size}
+  num_workers: ${paper_baseline.reproduction_policy.num_workers}

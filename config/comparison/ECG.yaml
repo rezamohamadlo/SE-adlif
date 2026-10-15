@@ -1,0 +1,8 @@
+# @package _global_
+defaults:
+  - common
+  - _self_
+paper_baseline_dataset: ECG
+dataset:
+  valid_fraction: ${paper_baseline.datasets.ECG.valid_fraction}
+  random_seed: ${paper_baseline.reproduction_policy.split_seed}
