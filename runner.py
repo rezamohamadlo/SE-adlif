@@ -23,7 +23,7 @@ EVALUATION = {'name': _BASELINE.version,
               'seeds': list(_BASELINE.reproduction_policy.training_seeds),
               'common': {}, 'datasets': {name: {} for name in _BASELINE.datasets}}
 SEEDS = tuple(EVALUATION['seeds'])
-RUN_LOGDIR = f"results/valid/{EVALUATION['name']}"
+RUN_LOGDIR = "results/valid/protocol_v2"
 # One explicit protocol shared by reference and proposed models.
 PROTOCOL = EVALUATION['datasets']
 

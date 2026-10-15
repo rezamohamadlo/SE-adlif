@@ -86,7 +86,9 @@ local reproduction choices are explicitly separated in this file.
   guarantee the paper's reported accuracy.
 - `runner.py` applies `config/paper_baseline.yaml` by default through the
   dataset-specific `config/comparison/` group. Outputs use
-  `results/valid/paper_classification_v1/`; no baseline flag is required.
+  `results/valid/protocol_v2/`; no baseline flag is required. This directory
+  name does not identify the training protocol: use saved baseline metadata.
+  Archive incompatible historical runs before reusing their paths.
   Explicit tuning overrides use separate experiment outputs. `evaluation.yaml`
   remains the historical controlled_v2 record and is not the runner default.
 

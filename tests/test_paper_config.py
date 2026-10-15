@@ -1,5 +1,7 @@
 from pathlib import Path
 import unittest
+import shutil
+import tempfile
 from unittest.mock import patch
 
 from hydra import compose, initialize_config_dir
@@ -11,9 +13,12 @@ class PaperConfigurationTests(unittest.TestCase):
         captured = []
         def inspect_run(*args, **kwargs):
             captured.extend(runner.build_plan(*args, **kwargs))
-        with patch.object(runner, 'run', side_effect=inspect_run):
-            runner.main(['--models', 'DTH_SE_adLIF',
-                         '--datasets', 'SHD', '--seeds', '42', '123', '456'])
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            shutil.copytree(runner.ROOT / 'config', root / 'config')
+            with patch.object(runner, 'ROOT', root), patch.object(runner, 'run', side_effect=inspect_run):
+                runner.main(['--models', 'DTH_SE_adLIF',
+                             '--datasets', 'SHD', '--seeds', '42', '123', '456'])
         self.assertEqual([item['seed'] for item in captured], [42, 123, 456])
         for item in captured:
             cfg = item['config']
@@ -22,7 +27,7 @@ class PaperConfigurationTests(unittest.TestCase):
             self.assertEqual(cfg['n_epochs'], 300)
             self.assertFalse(cfg['early_stopping'])
             self.assertEqual(cfg['paper_baseline_version'], 'paper_classification_v1')
-            self.assertIn('paper_classification_v1', str(item['directory']))
+            self.assertIn('protocol_v2', str(item['directory']))
 
     def test_dth_matches_paper_training_and_preprocessing(self):
         root = Path(__file__).resolve().parents[1]
