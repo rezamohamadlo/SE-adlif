@@ -197,7 +197,7 @@ def main(argv=None):
     global EVALUATION, PROTOCOL, RUN_LOGDIR
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--models", nargs="+", required=True,
-                        help="SE_adLIF, DTH_SE_adLIF, MT_SE_adLIF, or configured future models")
+                        help="SE_adLIF, DTH_SE_adLIF, LG_DTH_SE_adLIF (including _slow/_transient), or configured future models")
     parser.add_argument("--adaptation-update-interval", type=int, default=2,
                         help="Fixed K for MR_SE_adLIF only (default: 2)")
     parser.add_argument("--seeds", nargs="+", type=int, choices=SEEDS, default=SEEDS,

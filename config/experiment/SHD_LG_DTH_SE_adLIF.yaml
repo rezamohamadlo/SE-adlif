@@ -1,0 +1,16 @@
+# @package _global_
+defaults:
+  - SHD_DTH_SE_adLIF
+  - _self_
+
+exp_name: SHD_LG_DTH_SE_adLIF
+l1:
+  cell: lg_dth_se_adlif
+  local_slow_enabled: true
+  local_transient_enabled: true
+  local_coefficient_bound: 5.0
+l2:
+  cell: lg_dth_se_adlif
+  local_slow_enabled: true
+  local_transient_enabled: true
+  local_coefficient_bound: 5.0

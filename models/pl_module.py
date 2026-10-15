@@ -7,6 +7,7 @@ from omegaconf import DictConfig
 
 from models.alif import EFAdLIF, SEAdLIF
 from models.ours.dth_adlif import DTHSEAdLIF
+from models.ours.lg_dth_adlif import LGDTHSEAdLIF
 from models.ours.mt_adlif import MTSEAdLIF
 from models.ours.mr_adlif import MRSEAdLIF
 from models.ours.fp_adlif import FPSEAdLIF
@@ -20,6 +21,7 @@ layer_map = {
     "lif": LIF,
     "se_adlif": SEAdLIF,
     "dth_se_adlif": DTHSEAdLIF,
+    "lg_dth_se_adlif": LGDTHSEAdLIF,
     "mt_se_adlif": MTSEAdLIF,
     "mr_se_adlif": MRSEAdLIF,
     "fp_se_adlif": FPSEAdLIF,
