@@ -14,6 +14,16 @@ Snapshot: 17 October 2026. Final test accuracy (%); all selected paper rows are 
 | SSC | 78.33 | 78.12 | 78.17 | [Seed 42 metrics](../results/valid/reference/SSC/seed_42/logs/mlp_snn/version_0/metrics.csv) / [Seed 123 metrics](../results/valid/reference/SSC/seed_123/logs/mlp_snn/version_0/metrics.csv) / [Seed 456 metrics](../results/valid/reference/SSC/seed_456/logs/mlp_snn/version_0/metrics.csv) |
 | ECG | 88.13 | 88.72 | 88.11 | [Seed 42 metrics](../results/valid/reference/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv) / [Seed 123 metrics](../results/valid/reference/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv) / [Seed 456 metrics](../results/valid/reference/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv) |
 
+## Published paper versus measured local reference: spikes and dense computation
+
+| Dataset | Paper hidden spikes/sample | Local reference hidden spikes/sample, mean and sample SD | Paper dense GFLOPs/sample | Local reference dense GFLOPs/test sample |
+|---|---|---:|---|---:|
+| SHD* | Not reported | 10,366 ± 726 | Not reported | 0.242895 |
+| SSC | Not reported | 9,038 ± 349 | Not reported | 1.008720 |
+| ECG | Not reported | 26,000 ± 2,013 | Not reported | 0.011053 |
+
+Not reported means the classification metric is absent from the paper; it does not mean zero. Local spike measurements sum L1 and L2 across each stored sequence, including preprocessing minimum padding and burn-in, excluding additional batch padding. Dense GFLOPs use the actual batch-padded official test lengths and count matrix operations only. Local results use three training seeds; the ECG training-setting mismatch remains. The paper's audio-compression spike rates are not used as classification values. Broader arithmetic/logical estimates and measurement evidence appear below.
+
 ## Local reference activity and computational cost
 
 | Dataset | Estimated dense GFLOPs / validation sample, local reference | Average padded validation timesteps/sample | Evidence |
