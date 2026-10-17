@@ -8,6 +8,10 @@ here; put changing scores, run progress, timing estimates and findings in
 
 - `run.py`: one classification training job, using Hydra and Lightning.
 - `runner.py`: shared controlled comparisons, preflight, resume and aggregation.
+- `measure_run_costs.py`: runner's post-test activity/compute evaluation; saves
+  per-seed `COST_RESULTS.json`/`.md` without training. New completions are measured
+  by default; existing completions require `--measure-existing-costs`. Cost
+  failures stay separate from training completion; never retrain to repair them.
 - `config/paper_baseline.yaml`: versioned paper-derived baseline for future
   fair classification comparisons and their results.
 - `evaluation.yaml` and `evaluation_protocol.py`: existing controlled_v2

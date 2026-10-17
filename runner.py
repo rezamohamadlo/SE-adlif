@@ -11,6 +11,7 @@ import re
 import statistics
 import subprocess
 import sys
+from datetime import datetime, timezone
 
 from hydra import compose, initialize_config_dir
 from omegaconf import OmegaConf
@@ -173,6 +174,80 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
     return plan
 
 
+def collect_costs(directory, dataset):
+    """A measurement failure must not make completed training resumable again."""
+    try:
+        result = subprocess.run([sys.executable, str(ROOT / 'measure_run_costs.py'),
+                                 '--run-dir', portable_path(directory, ROOT), '--dataset', dataset], cwd=ROOT)
+        if result.returncode:
+            raise RuntimeError(f'Cost evaluator exited with status {result.returncode}')
+        if not (directory / 'COST_RESULTS.json').exists():
+            raise RuntimeError('Cost evaluator produced no completion record')
+    except (OSError, RuntimeError) as error:
+        (directory / 'COST_ERROR.json').write_text(json.dumps(dict(
+            status='failed', created_utc=datetime.now(timezone.utc).isoformat(), error=str(error),
+            note='Training/test completed. Retry with --measure-existing-costs; no retraining needed.'), indent=2) + '\n', encoding='utf-8')
+        print(f'Warning: test-cost measurement pending for {directory}: {error}', file=sys.stderr)
+
+
+def cost_aggregate_lines(root):
+    """Aggregate only completed, independently seeded cost records."""
+    activity = ['| Dataset | n | Total parameters | Trainable parameters | Hidden spikes/sample | Spikes/sample L1 / L2 | Firing fraction (%) L1 / L2 |',
+                '|---|---:|---:|---:|---:|---|---|']
+    compute = ['| Dataset | n | SynOps/sample (M) | Dense matrix GFLOPs/sample | Matrix + scalar arithmetic GFLOPs/sample | Logical GOp/sample | Forward ms/sample |',
+               '|---|---:|---:|---:|---:|---:|---:|']
+    keys = ('total_parameters', 'trainable_parameters', 'spikes_total_per_sample',
+            'spikes_l1_per_sample', 'spikes_l2_per_sample', 'firing_l1_percent', 'firing_l2_percent',
+            'synops_per_sample', 'dense_gflops_test_padded', 'arithmetic_gflops_test_padded',
+            'logical_gops_test_padded', 'forward_ms_per_sample')
+    for dataset in PROTOCOL:
+        records = []
+        for seed in SEEDS:
+            directory = root / dataset / f'seed_{seed}'
+            path = directory / 'COST_RESULTS.json'
+            if not (directory / 'completed.txt').exists() or not path.exists():
+                continue
+            record = json.loads(path.read_text(encoding='utf-8'))
+            if (record.get('version') != 'runner_test_costs_v1' or record.get('status') != 'complete'
+                    or record.get('dataset') != dataset or record.get('seed') != seed
+                    or any(not isinstance(record.get('measurements', {}).get(k), (int, float))
+                           or not math.isfinite(record['measurements'][k]) for k in keys)):
+                raise ValueError(f'Invalid cost record: {path}')
+            records.append(record)
+        label = 'SHD*' if dataset == 'SHD' else dataset
+        if not records:
+            activity.append(f'| {label} | 0 | pending | pending | pending | pending | pending |')
+            compute.append(f'| {label} | 0 | pending | pending | pending | pending | pending |')
+            continue
+        if len({r['data_sha256'] for r in records}) != 1:
+            raise ValueError(f'Cost records use different test data/batching: {dataset}')
+        def cell(key, digits=2, scale=1):
+            values = [r['measurements'][key] / scale for r in records]
+            mean = f'{statistics.mean(values):,.{digits}f}'
+            return mean + (f' ± {statistics.stdev(values):,.{digits}f}' if len(values) > 1 else ' (n=1)')
+        pair = lambda a, b, digits: cell(a, digits) + ' / ' + cell(b, digits)
+        activity.append(f'| {label} | {len(records)} | ' + ' | '.join([
+            cell('total_parameters', 0), cell('trainable_parameters', 0), cell('spikes_total_per_sample', 0),
+            pair('spikes_l1_per_sample', 'spikes_l2_per_sample', 0),
+            pair('firing_l1_percent', 'firing_l2_percent', 2)]) + ' |')
+        hardware = {tuple(r['environment'].get(k) for k in ('gpu', 'torch', 'matmul_precision', 'device'))
+                    for r in records}
+        compute.append(f'| {label} | {len(records)} | ' + ' | '.join([
+            cell('synops_per_sample', 2, 1e6), cell('dense_gflops_test_padded', 6),
+            cell('arithmetic_gflops_test_padded', 6), cell('logical_gops_test_padded', 6),
+            cell('forward_ms_per_sample', 3) if len(hardware) == 1 else 'mixed hardware; see per-seed records']) + ' |')
+    return ['<!-- runner-costs:start -->', '## Automatically saved test-set activity and cost', '',
+            'Mean ± sample SD across measured completed training seeds. n=1 has no sample SD. Missing measurements remain pending.', '',
+            *activity, '', *compute, '',
+            'Per-seed evidence: `<dataset>/seed_<seed>/COST_RESULTS.json` and `COST_RESULTS.md`. '
+            'Spikes use stored sequence lengths including minimum padding/burn-in; compute/runtime includes batch padding. '
+            'ECG SynOps exclude analog input, whose dense MACs are stored separately. '
+            'Arithmetic excludes nonlinearities/comparisons; logical GOp is not hardware GFLOPs or energy. '
+            'Runtime covers uninstrumented forward only, excluding transfer/loading/loss/temporal aggregation. '
+            'Future measurement does not change training settings or validate baseline compatibility.',
+            '<!-- runner-costs:end -->', '']
+
+
 def write_aggregate(model, adaptation_update_interval=2):
     root = result_root(model, adaptation_update_interval)
     settings_by_dataset = {}
@@ -222,12 +297,25 @@ def write_aggregate(model, adaptation_update_interval=2):
                      if len(values) > 1 else "pending")
         lines.append(f"| {dataset} | {' | '.join(cells)} | {len(values)} | {aggregate} |")
     root.mkdir(parents=True, exist_ok=True)
+    # Preserve hand-maintained provenance/history sections while regenerating
+    # the runner's accuracy table and its explicitly delimited cost section.
+    existing = root / 'RESULTS.md'
+    tail = ''
+    if existing.exists():
+        previous = existing.read_text(encoding='utf-8')
+        previous = re.sub(r'<!-- runner-costs:start -->.*?<!-- runner-costs:end -->\s*', '', previous, flags=re.S)
+        if '\n## ' in previous:
+            tail = '\n## ' + previous.split('\n## ', 1)[1]
+    lines += ['', *cost_aggregate_lines(root)]
+    if tail:
+        lines.append(tail.rstrip())
     temporary = root / "RESULTS.md.tmp"
     temporary.write_text("\n".join(lines) + "\n", encoding="utf-8")
     temporary.replace(root / "RESULTS.md")
 
 
-def run(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, resume=1):
+def run(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, resume=1,
+        measure_costs=True, measure_existing_costs=False):
     plan = build_plan(model, adaptation_update_interval, seeds, datasets, resume)  # Preflight selected runs before writes.
     for item in plan:
         directory = item["directory"]
@@ -237,6 +325,8 @@ def run(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, resume=
                 json.dumps(item['compatibility'], indent=2, sort_keys=True) + '\n',
                 encoding='utf-8')
         if item["status"] == "complete":
+            if measure_costs and measure_existing_costs:
+                collect_costs(directory, item['dataset'])
             continue
         directory.mkdir(parents=True, exist_ok=True)
         if not item.get('compatibility'):
@@ -248,6 +338,8 @@ def run(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, resume=
             write_aggregate(model, adaptation_update_interval)
             raise RuntimeError(f"Run failed ({result.returncode}). Rerun the same command to resume: {directory}")
         (directory / "completed.txt").write_text("Training and final test evaluation completed.\n", encoding="utf-8")
+        if measure_costs:
+            collect_costs(directory, item['dataset'])
         write_aggregate(model, adaptation_update_interval)
     write_aggregate(model, adaptation_update_interval)
     print(f"Finished. Report: {result_root(model, adaptation_update_interval) / 'RESULTS.md'}")
@@ -263,6 +355,10 @@ def main(argv=None):
     parser.add_argument("--seeds", nargs="+", type=int, choices=SEEDS, default=SEEDS,
                         help="Training seeds to run (default: 42 123 456)")
     parser.add_argument("--dry-run", action="store_true", help="Validate and display plans without training or writes")
+    parser.add_argument('--no-measure-costs', action='store_true',
+                        help='Skip automatic post-test spike/compute/timing measurement')
+    parser.add_argument('--measure-existing-costs', action='store_true',
+                        help='Also collect missing costs for selected completed runs; reuse matching saved costs')
     parser.add_argument('--resume', type=int, choices=(0, 1), default=1,
                         help='1: resume/skip existing runs (default); 0: fresh runs in empty directories')
     parser.add_argument('--datasets', nargs='+', choices=tuple(PROTOCOL), default=None,
@@ -278,6 +374,8 @@ def main(argv=None):
     parser.add_argument('--lr-scheduler-factor', type=float)
     parser.add_argument('--logdir', help='Results root; overrides default to a separate experiments folder')
     args = parser.parse_args(argv)
+    if args.no_measure_costs and args.measure_existing_costs:
+        parser.error('--no-measure-costs and --measure-existing-costs cannot be combined')
     original = EVALUATION, PROTOCOL, RUN_LOGDIR
     try:
         overrides = {}
@@ -320,7 +418,8 @@ def main(argv=None):
             print(f"Validated {sum(len(plan) for _, plan in plans)} runs; no training or writes.")
         else:
             for model in models:
-                run(model, args.adaptation_update_interval, args.seeds, args.datasets, args.resume)
+                run(model, args.adaptation_update_interval, args.seeds, args.datasets, args.resume,
+                    measure_costs=not args.no_measure_costs, measure_existing_costs=args.measure_existing_costs)
     except KeyboardInterrupt:
         print("Interrupted. Rerun the same command to resume.", file=sys.stderr)
         sys.exit(130)
