@@ -1,0 +1,45 @@
+﻿{
+    "date":  "2026-10-17",
+    "runs":  [
+                 {
+                     "model":  "DTH_SE_adLIF",
+                     "original_path":  "results/valid/protocol_v2/DTH_SE_adLIF/ECG/seed_42",
+                     "archive_path":  "results/archive/unmatched_early_stopping_20261017/DTH_SE_adLIF/ECG/seed_42",
+                     "reason":  "Early stopping enabled; current paper baseline disables it. Retained historical evaluation, excluded from matched aggregates.",
+                     "verified_files":  11,
+                     "sha256":  {
+                                    ".hydra\\overrides.yaml":  "643E34AB700C066F105D95C48B595BC31741DDF0EB7BA90BDFBA55C2ADC750D2",
+                                    "out.log":  "00C3A52DEA72FE8171204C04A16C997E508AC25DA867BFFEBB5A76D38D34CFE7",
+                                    "ckpt\\epoch=189-step=1710.ckpt":  "FEB86F11F4E005292BEBBA6823B5372B2A2E544555073518C3A32C4D954B01DF",
+                                    ".hydra\\hydra.yaml":  "66C3979C5DC2FBB38D4F7386533AAAD0703D3F959BC1EBD125651D068A146A36",
+                                    "FULL_RUN_CONFIG.json":  "FA8F7D794CF951FFF85019464599CDF93BB3E717258A5C64F072087EB72D788E",
+                                    "logs\\mlp_snn\\version_0\\hparams.yaml":  "A90BC6C508D072428922982FC20BDB0B365A31717B1DA630DBF7FF5E4BBDFAF8",
+                                    "logs\\mlp_snn\\version_0\\metrics.csv":  "3779421E025B0565215444DC70331A59C6AF733033339E8F5B6AF7044F291686",
+                                    "ckpt\\last.ckpt":  "9D63D477ED2177EE9AA0A66DEFFF00A276627A949E7002DE80F78D00567C0AF6",
+                                    "TRAINING_SUMMARY.md":  "8B72624298F22F2D73C9909EBFF046510A18C61229C1256D8B6747C012230479",
+                                    "completed.txt":  "CF1703562174D900787A8F0FF56EFDCE4B6CD1D702CC6543E632DF37F289CA25",
+                                    ".hydra\\config.yaml":  "8077CB0B642AF0B13F7C3F1EEF45120BEDB287265E230758FC2A948A8BA20BCE"
+                                }
+                 },
+                 {
+                     "model":  "MT_SE_adLIF",
+                     "original_path":  "results/valid/protocol_v2/MT_SE_adLIF/ECG/seed_42",
+                     "archive_path":  "results/archive/unmatched_early_stopping_20261017/MT_SE_adLIF/ECG/seed_42",
+                     "reason":  "Early stopping enabled; current paper baseline disables it. Retained historical evaluation, excluded from matched aggregates.",
+                     "verified_files":  11,
+                     "sha256":  {
+                                    "ckpt\\epoch=258-step=2331.ckpt":  "7BD2B3AD4C37D38412F6DDAC139655AF3D86CBC795B7D89F6AA7CFCE7B4CA39F",
+                                    ".hydra\\overrides.yaml":  "20A3ADCC2AD8520B97A0202ECA7BC1B7459BE6D043517DED07818316110B807B",
+                                    "out.log":  "8DAF5BDC90FCA7DFA1A2C63AB09F0893BEC2BB9227EE1E1D7DCB5728BE2EB090",
+                                    ".hydra\\hydra.yaml":  "E20FA6593FFA9993A5456D8F70FB532C9821AF6CC5015A843EEDE0C7947EEF96",
+                                    "FULL_RUN_CONFIG.json":  "CCD9AC03C756BD24479EEB51A8EA9692B990079FE8DF639E1BA1257F914DDF6E",
+                                    "logs\\mlp_snn\\version_0\\hparams.yaml":  "F4785FB226C82B8A9CD61CB5907E501CD84C6ED115CE2855F81DF69167AAB3A3",
+                                    "logs\\mlp_snn\\version_0\\metrics.csv":  "864E5360DAD69AB9C0BD38269704BC02D182989B8F196BB9E030F7796767076C",
+                                    "ckpt\\last.ckpt":  "F89565F74CA50E230A291BE0EDE8371EDDBE943F716561ED464EAEF243706FCC",
+                                    "TRAINING_SUMMARY.md":  "B908500989C735F5A16A44FF134046AE54DDB8876D96022D1AB5EABF281F5921",
+                                    "completed.txt":  "CF1703562174D900787A8F0FF56EFDCE4B6CD1D702CC6543E632DF37F289CA25",
+                                    ".hydra\\config.yaml":  "CEAD6346CBCC03E89F4C0C3F34DC0EAD7CF51B10F81A61452B4A984EF6B44FA8"
+                                }
+                 }
+             ]
+}

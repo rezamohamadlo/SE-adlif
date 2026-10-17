@@ -1,39 +1,22 @@
 # LG-DTH-SE-adLIF results
 
-Final test accuracy from completed runs. SHD* uses 20% of the official training set for validation with split seed 42. Checkpoints are selected by validation accuracy before official test evaluation.
+Current SHD* baseline suite: seeds 42/123 completed; fresh seed 456 is interrupted and ready for full resume in `SHD/seed_456/`. Early stopping is disabled for all current baseline runs.
 
-| Dataset | Seed 42 | Seed 123 | Seed 456 | Completed | Mean ± sample SD |
+| Dataset | Seed 42 | Seed 123 | Seed 456 | Completed matched | Mean ± sample SD |
 |---|---:|---:|---:|---:|---:|
-| SHD* | 93.77% | 93.02% | 93.51% | 3 | 93.43% ± 0.38% |
+| SHD* | 93.77% | 93.02% | pending | 2 | 93.40% ± 0.53% |
 | SSC | pending | pending | pending | 0 | pending |
 | ECG | pending | pending | pending | 0 | pending |
 
-**The three-seed SHD* aggregate is descriptive: seed 456 enabled early stopping, while seeds 42 and 123 disabled it. It is not a fully matched three-seed paper-baseline result.**
-
-| SHD* seed | Test accuracy | Test loss | Early stopping | Training epochs completed |
-|---|---:|---:|---|---:|
-| 42 | 93.77% | 0.570668 | Disabled | 300 |
-| 123 | 93.02% | 0.637240 | Disabled | 300 |
-| 456 | 93.51% | 0.403493 | Enabled | 105 |
-
-| Settings / provenance | Record |
+| Run | State / provenance |
 |---|---|
-| Shared settings | Batch 256; initial LR 0.01; maximum 300 epochs; dropout 0.15; gradient clipping 1.5; scheduler patience 9999, factor 0.9 |
-| Seeds 42 and 123 | Shared settings match `config/paper_baseline.yaml`, SHD section; original protocol metadata remains in their saved configs |
-| Seed 456 | Protocol `paper_classification_v1_custom_af62d1bc3d42`; early-stopping patience 50, minimum delta 0.001; validation-selected test checkpoint `epoch=74-step=1875.ckpt` |
-| Matched baseline subset | Seeds 42 and 123 only: 93.40% ± 0.53% sample SD (n=2) |
-| Relocation | Completed seed 456 moved to `SHD/seed_456/`; see [relocation record](SHD/seed_456/RUN_RELOCATION.json). The older interrupted baseline attempt is preserved under `results/experiments/archived_runs/`. |
+| Fresh baseline seed 456 | Random initialization and fresh optimizer at epoch 0; last saved checkpoint is epoch 115 (116 saved epochs), step 2900. Continue toward 300 total epochs with early stopping disabled. |
+| Latest interrupted summary | Reports 117 epochs of progress; resume restores `last.ckpt`, so work after the last saved state may be replayed. |
+| Relocation | Moved from `results/experiments/lg_dth_shd_seed456_fresh_baseline/` to the canonical seed directory. Weights, optimizer, scheduler, epoch/loop state and checkpoint-selection scores verified unchanged. See [relocation record](SHD/seed_456/RUN_RELOCATION.json). |
+| Original state backups | `results/archive/lg_dth_seed456_relocation_20261017/`; original configs and checkpoints retained before location-only metadata edits. |
+| Prior early-stopping seed 456 | 93.51% test accuracy, 105 reported completed epochs. Preserved at [archived run](../../../archive/lg_dth_seed456_early_stopping_20261017/). Excluded from matched statistics. |
+| Historical mixed-stopping aggregate | 93.43% ± 0.38% across seeds 42/123 and the old early-stopped seed 456; descriptive only. |
 
-Sources: [seed 42 metrics](SHD/seed_42/logs/mlp_snn/version_0/metrics.csv), [seed 123 metrics](SHD/seed_123/logs/mlp_snn/version_0/metrics.csv), [seed 456 metrics](SHD/seed_456/logs/mlp_snn/version_0/metrics.csv). Statistics use unrounded test accuracies and sample SD across distinct training seeds. Completed epoch counts follow the saved training summaries.
+Shared settings: `paper_classification_v1`, SHD section of `config/paper_baseline.yaml`; batch 256, LR 0.01, maximum 300 epochs, dropout 0.15, gradient clipping 1.5, scheduler patience 9999/factor 0.9. Validation uses 20% of official training data with split seed 42. Checkpoints are selected by validation accuracy before official test evaluation.
 
-## Fresh baseline seed-456 rerun
-
-| Item | Status |
-|---|---|
-| Purpose | Complete the three-seed paper-baseline set without changing the retained early-stopping result |
-| State on 17 October 2026 | Launcher initialized; run manifest created, final test result pending |
-| Initialization | Fresh random weights and fresh optimizer at epoch 0; no checkpoint initialization or resume |
-| Settings | Paper baseline, SHD section: batch 256, LR 0.01, 300 epochs, early stopping disabled |
-| Output root | `results/experiments/lg_dth_shd_seed456_fresh_baseline/` |
-| Matched baseline result | Pending; existing seed-456 score above belongs to the separate early-stopping run |
-| Disclosure | Protocol-corrected rerun after the earlier test score was seen; selection uses validation only. Do not select the better repeated-seed result by test accuracy. |
+The fresh seed-456 run is a protocol-corrected rerun after the old test score was seen. Preserve this disclosure and do not choose between repeated seed-456 runs using test accuracy. No pending test score is inferred from validation accuracy.

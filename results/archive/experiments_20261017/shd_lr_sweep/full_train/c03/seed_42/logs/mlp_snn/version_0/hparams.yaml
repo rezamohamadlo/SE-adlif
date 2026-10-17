@@ -1,0 +1,84 @@
+cfg:
+  random_seed: 42
+  logdir: C:\Users\jafari.h.SPADANACO\Desktop\SE-adlif\results\experiments\shd_lr_sweep\full_train\c03\seed_42
+  datadir: ./data
+  cachedir: ./data/cache
+  ckpt_path: null
+  device: cuda:0
+  early_stopping: true
+  early_stopping_patience: 50
+  early_stopping_min_delta: 0.001
+  dataset:
+    _target_: datasets.shd.SHDLDM
+    data_path: ./data
+    spatial_factor: 0.2
+    time_factor: 0.001
+    pad_to_min_size: 250
+    window_size: 4
+    batch_size: 512
+    num_workers: 0
+    num_classes: 20
+    validate_on: 0.2
+    random_seed: 42
+    cache_namespace: controlled_v2
+    ignore_first_timesteps: 10
+    additional_test_set_validation: false
+  exp_name: SHD_SE_adLIF
+  two_layers: true
+  alpha: 5.0
+  c: 0.4
+  dt: 1.0
+  dropout: 0.15
+  l1:
+    cell: se_adlif
+    input_size: 140
+    n_neurons: 360
+    tau_u_range:
+    - 5
+    - 25
+    tau_w_range:
+    - 60
+    - 300
+    q: 120
+    alpha: 5.0
+    c: 0.4
+    dt: 1.0
+  l2:
+    cell: se_adlif
+    input_size: 360
+    n_neurons: 360
+    tau_u_range:
+    - 5
+    - 25
+    tau_w_range:
+    - 60
+    - 300
+    q: 120
+    alpha: 5.0
+    c: 0.4
+    dt: 1.0
+  l_out:
+    input_size: 360
+    n_neurons: 20
+    tau_u_range:
+    - 15
+    - 15
+    dt: 1.0
+  n_epochs: 300
+  batch_size: 512
+  loss_agg: sum_softmax_over_time
+  tracking_metric: val_acc
+  tracking_mode: max
+  lr: 0.0001
+  factor: 0.5
+  patience: 2
+  scheduler: plateau
+  init_ckpt_path: null
+  run_test: true
+  scheduler_min_lr: 1.0e-05
+  gradient_clip_val: 1.5
+  launcher_script: tune_shd.py
+  evaluation_protocol: shd_validation_tuning
+  sweep_trial: c03
+  sweep_checkpoint: C:\Users\jafari.h.SPADANACO\Desktop\SE-adlif\results\valid\reference\SHD\seed_42\hydra\2026-10-12\07-17-03\ckpt\epoch=162-step=1956.ckpt
+  sweep_output: C:\Users\jafari.h.SPADANACO\Desktop\SE-adlif\results\experiments\shd_lr_sweep

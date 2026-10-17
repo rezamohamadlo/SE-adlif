@@ -4,8 +4,8 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 ## Run status
 
-- **Status:** Training and testing finished
-- **Progress:** 105 epochs completed (`0` through `104`) out of 300
+- **Status:** Training interrupted; resumable
+- **Progress:** 117 epochs completed (`0` through `116`) out of 300
 - **Dataset:** SHD
 - **Model:** SHD_LG_DTH_SE_adLIF
 - **Seed:** 456
@@ -15,12 +15,12 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 | Metric | Value | Epoch |
 |---|---:|---:|
-| Best validation accuracy | **98.59%** | 74 |
-| Validation loss | **0.0854** | 74 |
-| Training accuracy | **99.91%** | 74 |
-| Training loss | **0.003439** | 74 |
-| Gradient norm | **0.0164** | 74 |
-| Learning rate | **0.01** | 74 |
+| Best validation accuracy | **98.96%** | 61 |
+| Validation loss | **0.0756** | 61 |
+| Training accuracy | **99.97%** | 61 |
+| Training loss | **0.000477** | 61 |
+| Gradient norm | **0.0021** | 61 |
+| Learning rate | **0.01** | 61 |
 
 ## Model size and computation
 
@@ -36,7 +36,7 @@ The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds
 ## Best checkpoint
 
 ```text
-ckpt/epoch=74-step=1875.ckpt
+ckpt/epoch=61-step=1550.ckpt
 ```
 
 ## Main hyperparameters
@@ -49,7 +49,7 @@ ckpt/epoch=74-step=1875.ckpt
 | LR scheduler | plateau |
 | LR scheduler factor | 0.9 |
 | LR scheduler patience | 9999 |
-| Early stopping | true |
+| Early stopping | false |
 | Early-stopping patience | 50 |
 | Early-stopping minimum delta | 0.001 |
 | Dropout | 0.15 |
@@ -67,18 +67,9 @@ ckpt/epoch=74-step=1875.ckpt
 ## Resume command
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models LG_DTH_SE_adLIF --datasets SHD --seeds 456 --epochs 300 --batch-size 256 --lr 0.01 --early-stopping true --early-stopping-patience 50 --early-stopping-min-delta 0.001 --lr-scheduler-patience 9999 --lr-scheduler-factor 0.9 --logdir "results/experiments/paper_classification_v1_custom_af62d1bc3d42"
+.\.venv\Scripts\python.exe runner.py --models LG_DTH_SE_adLIF --datasets SHD --seeds 456 --logdir "results/valid/protocol_v2"
 ```
 
 ## Evaluation note
 
 This run uses `validate_on: 0.2`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
-
-## Final test evaluation
-
-The best validation checkpoint was evaluated on the test split after training.
-
-| Metric | Value |
-|---|---:|
-| Test accuracy | **93.51%** |
-| Test loss | **0.4035** |

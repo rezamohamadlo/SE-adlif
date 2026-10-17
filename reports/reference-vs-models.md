@@ -30,14 +30,14 @@ Differences use unrounded metrics and matching training seeds. MT has the highes
 | DTH | All three completed runs were copied from the other computer. Configs pass runner guards; last checkpoints reach epoch 299 with optimizer state, and validation-selected best checkpoints are present. |
 | DA, FP, MT, MR | All 12 replacement runs completed with batch 256 and early stopping disabled. Older batch-512 results and historical mixed histories are excluded. |
 | LG-DTH seeds 42/123 | Completed matched baseline runs; retained unchanged. |
-| LG-DTH seed 456 fresh rerun | Launcher initialized locally: the run manifest exists, but no completed final-test result is available. Fresh weights and optimizer, 300 epochs, early stopping disabled. Intended root: `results/experiments/lg_dth_shd_seed456_fresh_baseline/`. |
+| LG-DTH seed 456 fresh rerun | Interrupted and ready to resume at the canonical `results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_456/` directory. Last checkpoint: epoch 115, step 2900; continue toward 300 epochs with early stopping disabled. Original weights/optimizer/scheduler state preserved. |
 | Rerun provenance | Protocol-corrected fresh rerun after viewing the earlier test result. Retain that disclosure; use validation alone for checkpoint selection, then evaluate the official test. Do not choose between repeated seed-456 runs using their test scores. |
 
 | Separate historical result | Test accuracy (%) | Early stopping | Included in matched table |
 |---|---:|---|---|
 | LG-DTH seed 456 | 93.51 | Enabled; 105 completed epochs | No |
 
-The early-stopping seed remains at `results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_456/`. Its mixed-stopping three-seed aggregate with seeds 42/123 is **93.43 ± 0.38%**, descriptive only. Preserve it when starting the fresh rerun in its separate directory.
+The earlier early-stopping run is preserved at `results/archive/lg_dth_seed456_early_stopping_20261017/`. Its mixed-stopping three-seed aggregate with seeds 42/123 is **93.43 ± 0.38%**, descriptive only. The fresh rerun now occupies the canonical seed directory; its final test result remains pending.
 
 | Shared setting | Paper-baseline requirement |
 |---|---|

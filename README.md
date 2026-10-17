@@ -44,7 +44,7 @@ are retained. Existing historical configs and summaries are not rewritten.
 To inspect a portable view of an existing saved config without changing it:
 
 ```powershell
-.\.ven\Scripts\python.exe project_paths.py --inspect results/experiments/shd_lr_sweep/c03/SWEEP_CONFIG.json
+.\.ven\Scripts\python.exe project_paths.py --inspect results/archive/experiments_20261017/shd_lr_sweep/c03/SWEEP_CONFIG.json
 ```
 
 Checkpoints and datasets are not transferred by Git. Copy the exact required
