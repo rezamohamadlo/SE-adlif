@@ -16,13 +16,13 @@ Snapshot: 17 October 2026. Final test accuracy (%); all selected paper rows are 
 
 ## Local reference activity and computational cost
 
-| Dataset | Total parameters | Trainable parameters | Total hidden spikes/sample | Spikes/sample, L1 / L2 | Firing fraction (%), L1 / L2 | Estimated synaptic operations/sample | Neuron-state operations/sample | Inference time (ms/sample) |
+| Dataset | Total parameters | Trainable parameters | Total hidden spikes/sample | Spikes/sample, L1 / L2 | Firing fraction (%), L1 / L2 | Estimated synaptic operations/sample (M) | Non-matrix logical operations/sample (M), padded | Inference time (ms/sample) |
 |---|---:|---:|---|---|---|---|---|---|
-| SHD* | 450,760 | 450,020 | Pending | Pending | Pending | Pending | Pending | Pending |
+| SHD* | 450,760 | 450,020 | 10,366 ± 726 | 8,434 ± 688 / 1,932 ± 120 | 9.37 ± 0.76 / 2.14 ± 0.13 | 9.76 ± 0.51 | 5.52 ± 0.00 | 1.241 ± 0.011 |
 | SSC | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
 | ECG | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
 
-Pending entries will be filled from saved configurations/checkpoints and a separate inference evaluation. LG-DTH training has completed. Activity, operation and timing values will be reported as mean +/- sample SD across matching seeds. The ECG protocol mismatch described above still applies. These are local-reference measurements; do not attribute them to the paper. Published parameter counts remain in [paper-results.md](paper-results.md); paper spike/cost values have not been extracted for this comparison. The measurement definitions and limitations are in the [seven-model report](reference-vs-models.md#spike-activity-and-inference-cost).
+SHD* activity and timing are measured from all three saved reference checkpoints; SSC/ECG measurements remain pending. Activity, operation and timing values will be reported as mean +/- sample SD across matching seeds. The ECG protocol mismatch described above still applies. These are local-reference measurements; do not attribute them to the paper. Published parameter counts remain in [paper-results.md](paper-results.md); paper spike/cost values have not been extracted for this comparison. The measurement definitions and limitations are in the [seven-model report](reference-vs-models.md#spike-activity-and-inference-cost).
 
 | Qualification | Meaning |
 |---|---|

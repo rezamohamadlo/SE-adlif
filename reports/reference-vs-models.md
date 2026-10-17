@@ -43,35 +43,37 @@ The earlier early-stopping run is preserved at `results/archive/lg_dth_seed456_e
 
 The parameter counts and dense matrix-compute estimates below are recorded in each model's per-seed `TRAINING_SUMMARY.md`; they agree across seeds 42, 123 and 456. All three LG-DTH seeds have now completed; these compute estimates describe recorded validation computation.
 
-| Model | Total parameters | Trainable parameters | Estimated dense GFLOPs / validation sample |
-|---|---:|---:|---:|
-| SE-adLIF reference | 450,760 | 450,020 | 0.2619 |
-| DTH | 451,484 | 450,744 | 0.2619 |
-| LG-DTH | 452,924 | 452,184 | 0.2619 |
-| DA | 453,640 | 452,900 | 0.2619 |
-| FP | 450,760 | 450,020 | 0.2619 |
-| MR (K=2) | 450,760 | 450,020 | 0.2619 |
-| MT | 452,200 | 451,460 | 0.2619 |
+| Model | Total parameters | Trainable parameters | Estimated dense GFLOPs / validation sample | Measured-shape dense GFLOPs / test sample |
+|---|---:|---:|---:|---:|
+| SE-adLIF reference | 450,760 | 450,020 | 0.2619 | 0.2429 |
+| DTH | 451,484 | 450,744 | 0.2619 | 0.2429 |
+| LG-DTH | 452,924 | 452,184 | 0.2619 | 0.2429 |
+| DA | 453,640 | 452,900 | 0.2619 | 0.2429 |
+| FP | 450,760 | 450,020 | 0.2619 | 0.2429 |
+| MR (K=2) | 450,760 | 450,020 | 0.2619 | 0.2429 |
+| MT | 452,200 | 451,460 | 0.2619 | 0.2429 |
 
-The existing estimate uses 293.31 average padded validation timesteps/sample and counts feed-forward and recurrent matrix multiply-adds as two FLOPs each. It excludes elementwise neuron updates, including the additional operations of proposed variants, and is not a complete compute or energy estimate. The shared matrix dimensions explain the identical estimates.
+The existing estimate uses 293.31 average padded validation timesteps/sample and counts feed-forward and recurrent matrix multiply-adds as two FLOPs each. It excludes elementwise neuron updates, including the additional operations of proposed variants, and is not a complete compute or energy estimate. The shared matrix dimensions explain the identical estimates. The new test-shape estimate uses 272.06 average batch-padded test timesteps/sample; the pre-batch stored sequence average is 250.15. Runtime was measured on an NVIDIA GeForce RTX 4090 with PyTorch 2.6.0+cu124, float32 and batch size 256 (final partial batch retained). See the [measurement record and reproducible command](../results/measurements/shd_costs_v1/README.md).
 
-| Model | Total hidden spikes/sample | Spikes/sample, L1 / L2 | Firing fraction (%), L1 / L2 | Estimated synaptic operations/sample | Neuron-state operations/sample | Inference time (ms/sample) |
+| Model | Total hidden spikes/sample | Spikes/sample, L1 / L2 | Firing fraction (%), L1 / L2 | Estimated synaptic operations/sample (M) | Non-matrix logical operations/sample (M), padded | Inference time (ms/sample) |
 |---|---|---|---|---|---|---|
-| SE-adLIF reference | Pending | Pending | Pending | Pending | Pending | Pending |
-| DTH | Pending | Pending | Pending | Pending | Pending | Pending |
-| LG-DTH | Pending | Pending | Pending | Pending | Pending | Pending |
-| DA | Pending | Pending | Pending | Pending | Pending | Pending |
-| FP | Pending | Pending | Pending | Pending | Pending | Pending |
-| MR (K=2) | Pending | Pending | Pending | Pending | Pending | Pending |
-| MT | Pending | Pending | Pending | Pending | Pending | Pending |
+| SE-adLIF reference | 10,366 ± 726 | 8,434 ± 688 / 1,932 ± 120 | 9.37 ± 0.76 / 2.14 ± 0.13 | 9.76 ± 0.51 | 5.52 ± 0.00 | 1.241 ± 0.011 |
+| DTH | 10,514 ± 613 | 8,320 ± 239 / 2,194 ± 434 | 9.24 ± 0.26 / 2.44 ± 0.48 | 9.78 ± 0.30 | 8.46 ± 0.00 | 1.610 ± 0.040 |
+| LG-DTH | 10,723 ± 669 | 8,652 ± 469 / 2,071 ± 381 | 9.61 ± 0.52 / 2.30 ± 0.42 | 9.97 ± 0.40 | 9.44 ± 0.00 | 1.901 ± 0.026 |
+| DA | 10,356 ± 353 | 8,486 ± 483 / 1,870 ± 134 | 9.42 ± 0.54 / 2.08 ± 0.15 | 9.78 ± 0.30 | 7.10 ± 0.00 | 1.542 ± 0.034 |
+| FP | 10,440 ± 310 | 8,337 ± 270 / 2,103 ± 277 | 9.26 ± 0.30 / 2.34 ± 0.31 | 9.76 ± 0.19 | 5.53 ± 0.00 | 1.734 ± 0.021 |
+| MR (K=2) | 10,431 ± 271 | 8,239 ± 522 / 2,191 ± 301 | 9.15 ± 0.58 / 2.43 ± 0.33 | 9.72 ± 0.27 | 5.42 ± 0.00 | 1.236 ± 0.039 |
+| MT | 10,637 ± 609 | 8,406 ± 556 / 2,232 ± 88 | 9.33 ± 0.62 / 2.48 ± 0.10 | 9.86 ± 0.42 | 6.70 ± 0.00 | 1.668 ± 0.026 |
 
-Fill the pending columns after a separate checkpoint activity/cost evaluation is performed. Total hidden spikes/sample is the sum of L1 and L2 counts. Neuron-state operations/sample must include each variant's elementwise state updates under a documented arithmetic-operation convention; keep these separate from spike-driven synaptic operations.
+Measured on the full official SHD* test set, n=3 training seeds per model; entries are mean ± sample SD. Per-seed JSONs, exact checkpoint hashes, operation breakdowns and timing repeats: `results/measurements/shd_costs_v1/`.
 
-Pending means not measured: existing accuracy logs and checkpoints do not contain these statistics. Do not interpret pending as zero or infer firing activity from parameter counts.
+Spikes and firing fractions use each stored sequence length before batch padding, including the configured minimum 250 frames and initial ignored frames. This is not the raw event-duration length. Additional batch-padding spikes and costs are retained separately in the JSON records. All models use identical test batches, batch size 256, float32 and validation-selected checkpoints.
 
-For the additional measurements, evaluate each seed's best validation-selected checkpoint in inference mode on the same SHD* evaluation split, with matching batching and padding. Report per-seed values and mean +/- sample SD over matching completed seeds. Count emitted spikes before dropout, separately for each hidden layer; firing fraction is spike count divided by valid neuron-timestep opportunities. Report valid-sequence activity separately from padded-timestep activity. Estimate synaptic operations from actual presynaptic activity and connection fan-out, including recurrent connections and input events; exclude final-step spikes that have no subsequent recurrent use. Describe the connectivity and event-counting assumptions explicitly.
+Synaptic operations are an ideal dense-fan-out event-driven addition estimate: input frame event multiplicity and hidden spikes times the number of receiving neurons, including the actual previous-step recurrent spikes. Recurrent spikes without a subsequent destination timestep are not counted; zero-valued weights are not pruned. Delay filtering and neuron updates are counted separately. These estimates do not describe the dense GPU execution.
 
-Measure runtime separately from instrumented spike counting, after warm-up, on the same device, software environment and batch size, with GPU synchronization. State whether data transfer is included. Spike-derived synaptic operations describe an event-driven execution estimate; the current implementation performs dense matrix operations each timestep. Neither statistic establishes energy savings without an energy measurement.
+Non-matrix logical operations count the executed cell code on all batch-padded timesteps, including parameter transforms, bias additions, surrogate forward arithmetic, reductions and state/threshold updates. A transcendental, comparison or scalar arithmetic operation each counts as one logical operation; softmax uses an explicit scalar reduction convention. Tensor allocation, indexing, memory movement and matrix multiplication are excluded. These are not hardware FLOPs and must not be added to event-driven SynOps as an energy estimate.
+
+Runtime is synchronized wall time for the uninstrumented `MLPSNN.forward`, after warm-up; data loading/transfer, loss and temporal prediction aggregation are excluded. Hardware, repeat counts and software versions are recorded in JSON. Runtime SD across seeds also reflects system variability; timing was sequential, not an energy benchmark.
 
 | Shared setting | Paper-baseline requirement |
 |---|---|

@@ -27,11 +27,12 @@ The previous early-stopped seed-456 run (93.51% test accuracy) is retained at `r
 | Total parameters | 452,924 | Per-seed training summaries; identical across all three seeds |
 | Trainable parameters | 452,184 | Per-seed training summaries; identical across all three seeds |
 | Estimated dense forward GFLOPs/sample | 0.2619 | Validation; average padded length 293.31 timesteps; matrix operations only |
-| Total hidden spikes/sample | Pending | Sum of L1 and L2 spikes per sample |
-| Spikes/sample, L1 / L2 | Pending | Requires inference instrumentation of validation-selected checkpoints |
-| Firing fraction (%), L1 / L2 | Pending | Requires spike counts and valid neuron-timestep denominators |
-| Estimated synaptic operations/sample | Pending | Requires presynaptic activity, fan-out and recurrent-use accounting |
-| Neuron-state operations/sample | Pending | Variant-specific elementwise updates under a documented operation-count convention |
-| Inference time (ms/sample) | Pending | Requires a separate benchmark on matching hardware and batching |
+| Estimated dense forward GFLOPs/test sample | 0.2429 | Actual batch-padded official-test lengths; matrix operations only |
+| Total hidden spikes/sample | 10,723 ± 669 | Mean ± sample SD across three seeds; definitions in linked comparison |
+| Spikes/sample, L1 / L2 | 8,652 ± 469 / 2,071 ± 381 | Mean ± sample SD across three seeds; definitions in linked comparison |
+| Firing fraction (%), L1 / L2 | 9.61 ± 0.52 / 2.30 ± 0.42 | Mean ± sample SD across three seeds; definitions in linked comparison |
+| Estimated synaptic operations/sample | 9,973,248 ± 396,815 | Mean ± sample SD across three seeds; definitions in linked comparison |
+| Non-matrix logical operations/sample, padded | 9,442,372 ± 0 | Mean ± sample SD across three seeds; definitions in linked comparison |
+| Inference time (ms/sample) | 1.901 ± 0.026 | Mean ± sample SD across three seeds; definitions in linked comparison |
 
-These pending measurements were not recorded during training. The dense estimate excludes elementwise neuron updates and does not measure energy. See the [seven-model comparison and measurement protocol](../../../../reports/reference-vs-models.md#spike-activity-and-inference-cost). All three seeds completed; spike and timing measurements remain pending a separate inference evaluation.
+All three seeds measured on the official test set. Activity uses pre-batch sequence lengths, including configured minimum padding; non-matrix operations and runtime include batch padding. See the [measurement protocol](../../../../reports/reference-vs-models.md#spike-activity-and-inference-cost).
