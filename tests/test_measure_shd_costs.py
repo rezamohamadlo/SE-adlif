@@ -126,7 +126,10 @@ class MeasurementTests(unittest.TestCase):
             self.assertIn('| LG-DTH | 10', first[0])
             self.assertNotIn('| Pending |', first[0])
             self.assertIn('| SHD* | 93.79', first[1])
-            self.assertIn('| SSC | Pending', first[1])
+            original_ssc = [line for line in (ROOT / reports[1]).read_text(encoding='utf-8').splitlines()
+                            if line.startswith('| SSC |')]
+            self.assertEqual(original_ssc, [line for line in first[1].splitlines()
+                                            if line.startswith('| SSC |')])
 
 
 if __name__ == '__main__':

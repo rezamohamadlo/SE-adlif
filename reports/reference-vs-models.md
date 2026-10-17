@@ -96,3 +96,17 @@ Runtime is synchronized wall time for the uninstrumented `MLPSNN.forward`, after
 | MT | [Per-seed configs, metrics and checkpoints](../results/valid/protocol_v2/MT_SE_adLIF/SHD/) |
 
 [LG-DTH detailed results](../results/valid/protocol_v2/LG_DTH_SE_adLIF/RESULTS.md) | [Paper versus reference](paper-vs-reference.md)
+
+## Test-set forward operation estimates
+
+| Model | Dense matrix GFLOPs/sample | Matrix + scalar arithmetic GFLOPs/sample | Matrix + all logical scalar GOp/sample |
+|---|---:|---:|---:|
+| SE-adLIF reference | 0.242895 ± 0.000000 | 0.247824 ± 0.000000 | 0.248414 ± 0.000000 |
+| DTH | 0.242895 ± 0.000000 | 0.250372 ± 0.000000 | 0.251353 ± 0.000000 |
+| LG-DTH | 0.242895 ± 0.000000 | 0.251550 ± 0.000000 | 0.252338 ± 0.000000 |
+| DA | 0.242895 ± 0.000000 | 0.249392 ± 0.000000 | 0.249993 ± 0.000000 |
+| FP | 0.242895 ± 0.000000 | 0.247837 ± 0.000000 | 0.248430 ± 0.000000 |
+| MR (K=2) | 0.242895 ± 0.000000 | 0.247724 ± 0.000000 | 0.248314 ± 0.000000 |
+| MT | 0.242895 ± 0.000000 | 0.249006 ± 0.000000 | 0.249597 ± 0.000000 |
+
+Mean and sample SD across three seeds, on the same official SHD* test batches. Arithmetic adds counted cell-forward additions, subtractions, multiplications, divisions, negations, reciprocals, bias additions and sum/mean reduction arithmetic to the dense matrix count. Nonlinear functions, powers and comparisons are excluded from the arithmetic estimate; the logical total counts each such scalar operation as one operation. Logical GOp is not hardware GFLOPs. Memory traffic, allocations, indexing, loss and temporal output aggregation are excluded, so these are not exact end-to-end inference FLOP totals or energy measurements. These columns are derived from the saved per-seed operation breakdowns; no SHD* checkpoint was rerun.

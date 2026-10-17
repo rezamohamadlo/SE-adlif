@@ -27,10 +27,10 @@ These are local-reference estimates, not published paper values; the paper does 
 | Dataset | Total parameters | Trainable parameters | Total hidden spikes/sample | Spikes/sample, L1 / L2 | Firing fraction (%), L1 / L2 | Estimated synaptic operations/sample (M) | Non-matrix logical operations/sample (M), padded | Inference time (ms/sample) |
 |---|---:|---:|---|---|---|---|---|---|
 | SHD* | 450,760 | 450,020 | 10,366 ± 726 | 8,434 ± 688 / 1,932 ± 120 | 9.37 ± 0.76 / 2.14 ± 0.13 | 9.76 ± 0.51 | 5.52 ± 0.00 | 1.241 ± 0.011 |
-| SSC | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
-| ECG | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
+| SSC | 1689910 | 1688435 | 9,038 ± 349 | 8,654 ± 343 / 383 ± 36 | 4.01 ± 0.16 / 0.18 ± 0.02 | 18.83 ± 0.50 | 12.16 ± 0.00 | 1.368 ± 0.099 |
+| ECG | 4692 | 4614 | 26,000 ± 2,013 | 10,164 ± 1,367 / 15,836 ± 646 | 21.70 ± 2.92 / 33.81 ± 1.38 | 1.40 ± 0.13 | 2.69 ± 0.00 | 33.874 ± 4.540 |
 
-SHD* activity and timing are measured from all three saved reference checkpoints; SSC/ECG measurements remain pending. Activity, operation and timing values will be reported as mean +/- sample SD across matching seeds. The ECG protocol mismatch described above still applies. These are local-reference measurements; do not attribute them to the paper. Published parameter counts remain in [paper-results.md](paper-results.md); paper spike/cost values have not been extracted for this comparison. The measurement definitions and limitations are in the [seven-model report](reference-vs-models.md#spike-activity-and-inference-cost).
+Activity and timing are measured on the official test sets from all three saved reference checkpoints per dataset. Activity, operation and timing values are reported as mean +/- sample SD across matching seeds. The ECG protocol mismatch described above still applies. These are local-reference measurements; do not attribute them to the paper. Published parameter counts remain in [paper-results.md](paper-results.md); paper spike/cost values have not been extracted for this comparison. The measurement definitions and limitations are in the [seven-model report](reference-vs-models.md#spike-activity-and-inference-cost).
 
 | Qualification | Meaning |
 |---|---|
@@ -41,3 +41,17 @@ SHD* activity and timing are measured from all three saved reference checkpoints
 | Uncertainty | The local and paper results use different sample sizes. A positive mean difference alone does not demonstrate superiority. |
 
 [Paper source table](paper-results.md) · [Reference versus proposed models](reference-vs-models.md)
+
+## Test-set forward computation
+
+| Dataset | Test sequences | Dense matrix GFLOPs/sample | Matrix + scalar arithmetic GFLOPs/sample | Matrix + all logical scalar GOp/sample |
+|---|---:|---:|---:|---:|
+| SHD* | 2,264 | 0.242895 ± 0.000000 | 0.247824 ± 0.000000 | 0.248414 ± 0.000000 |
+| SSC | 20,382 | 1.008720 ± 0.000000 | 1.019584 ± 0.000000 | 1.020884 ± 0.000000 |
+| ECG | 141 | 0.011053 ± 0.000000 | 0.013455 ± 0.000000 | 0.013740 ± 0.000000 |
+
+Entries are mean ± sample SD across three seeds, using actual batch-padded test lengths. The arithmetic estimate adds counted add/subtract/multiply/divide, negation, reciprocal, sum/mean reduction and bias operations in the cell forward code to the matrix estimate. Nonlinear functions (e.g. exp/sigmoid) and comparisons are excluded from that arithmetic GFLOP figure; they are included as one logical operation each in the last column. Memory traffic is excluded from all columns. That logical total is a counting convention, not hardware FLOPs or energy. Loss and temporal prediction aggregation are excluded from both estimates. Thus neither column should be called an exact full end-to-end inference FLOP count.
+
+SSC inputs are framed event counts. ECG inputs are analog: its first projection is counted as dense MACs, not spike events. The ECG SynOps activity-table cell therefore covers hidden-driven connections only; its analog first-projection MACs are stored separately. All hidden spikes count stored pre-batch sequence lengths (including configured minimum padding and burn-in); padded totals are retained separately. ECG accuracy is per labeled timestep, while the compute denominator is one input sequence. Dataset-specific batch sizes and lengths mean cross-dataset runtimes are not matched-workload comparisons.
+
+SSC/ECG checkpoint hashes, resolved configs, per-seed counts, timing repeats and reproducible command: [measurement records](../results/measurements/reference_test_costs_v1/README.md). Existing validation estimates remain separately labeled above. The ECG training-budget/stopping mismatch is unchanged. No checkpoint was retrained or selected using these test results.
