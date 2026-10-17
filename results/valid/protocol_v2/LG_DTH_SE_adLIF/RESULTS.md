@@ -25,3 +25,15 @@ Final test accuracy from completed runs. SHD* uses 20% of the official training 
 | Relocation | Completed seed 456 moved to `SHD/seed_456/`; see [relocation record](SHD/seed_456/RUN_RELOCATION.json). The older interrupted baseline attempt is preserved under `results/experiments/archived_runs/`. |
 
 Sources: [seed 42 metrics](SHD/seed_42/logs/mlp_snn/version_0/metrics.csv), [seed 123 metrics](SHD/seed_123/logs/mlp_snn/version_0/metrics.csv), [seed 456 metrics](SHD/seed_456/logs/mlp_snn/version_0/metrics.csv). Statistics use unrounded test accuracies and sample SD across distinct training seeds. Completed epoch counts follow the saved training summaries.
+
+## Fresh baseline seed-456 rerun
+
+| Item | Status |
+|---|---|
+| Purpose | Complete the three-seed paper-baseline set without changing the retained early-stopping result |
+| State on 17 October 2026 | Launcher initialized; run manifest created, final test result pending |
+| Initialization | Fresh random weights and fresh optimizer at epoch 0; no checkpoint initialization or resume |
+| Settings | Paper baseline, SHD section: batch 256, LR 0.01, 300 epochs, early stopping disabled |
+| Output root | `results/experiments/lg_dth_shd_seed456_fresh_baseline/` |
+| Matched baseline result | Pending; existing seed-456 score above belongs to the separate early-stopping run |
+| Disclosure | Protocol-corrected rerun after the earlier test score was seen; selection uses validation only. Do not select the better repeated-seed result by test accuracy. |

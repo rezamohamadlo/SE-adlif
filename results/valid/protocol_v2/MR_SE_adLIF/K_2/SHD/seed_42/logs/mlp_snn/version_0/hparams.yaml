@@ -1,27 +1,33 @@
 cfg:
   random_seed: 42
-  logdir: E:/AI_paper_nazari/SE-adlif/results/valid/protocol_v2/MR_SE_adLIF/K_2/SHD/seed_42
-  datadir: ./data
-  cachedir: ./data/cache
+  logdir: results/valid/protocol_v2/MR_SE_adLIF/K_2/SHD/seed_42
+  datadir: data
+  cachedir: data/cache
   ckpt_path: null
+  init_ckpt_path: null
+  run_test: true
+  scheduler: plateau
+  scheduler_min_lr: 0.0
+  gradient_clip_val: 1.5
   device: cuda:0
-  early_stopping: true
+  early_stopping: false
   early_stopping_patience: 50
   early_stopping_min_delta: 0.001
   dataset:
     _target_: datasets.shd.SHDLDM
-    data_path: ./data
+    data_path: data
     spatial_factor: 0.2
     time_factor: 0.001
     pad_to_min_size: 250
     window_size: 4
-    batch_size: 512
+    batch_size: 256
     num_workers: 0
     num_classes: 20
     validate_on: 0.2
     random_seed: 42
     cache_namespace: controlled_v2
     ignore_first_timesteps: 10
+    additional_test_set_validation: false
   exp_name: SHD_MR_SE_adLIF
   two_layers: true
   alpha: 5.0
@@ -66,7 +72,7 @@ cfg:
     - 15
     dt: 1.0
   n_epochs: 300
-  batch_size: 512
+  batch_size: 256
   loss_agg: sum_softmax_over_time
   tracking_metric: val_acc
   tracking_mode: max
@@ -74,8 +80,105 @@ cfg:
   factor: 0.9
   patience: 9999
   adaptation_update_interval: 2
-  launcher_script: full_runner.py
+  paper_baseline:
+    version: paper_classification_v1
+    source:
+      doi: 10.1038/s41467-025-60878-z
+      document: reference_paper.pdf
+      locations: Table 7 (page 35); training/preprocessing methods (pages 28-29)
+    common:
+      lr_optimizer: Adam
+      adam_betas:
+      - 0.9
+      - 0.999
+      adam_eps: 1.0e-08
+      dropout: 0.15
+      gradient_clip_val: 1.5
+      alpha: 5.0
+      dt: 1.0
+      tracking_metric: val_acc
+      tracking_mode: max
+    reproduction_policy:
+      training_seeds:
+      - 42
+      - 123
+      - 456
+      split_seed: 42
+      num_workers: 0
+      early_stopping: false
+      scheduler: plateau
+      patience: 9999
+      factor: 0.9
+      cache_namespace: controlled_v2
+    datasets:
+      SHD:
+        report_label: SHD*
+        lr: 0.01
+        batch_size: 256
+        n_epochs: 300
+        validate_on: 0.2
+        spatial_factor: 0.2
+        time_factor: 0.001
+        window_size: 4
+        pad_to_min_size: 250
+        ignore_first_timesteps: 10
+        reference_architecture:
+          layers: 2
+          neurons_per_layer: 360
+          q: 120
+          c: 0.4
+          tau_u_range:
+          - 5
+          - 25
+          tau_w_range:
+          - 60
+          - 300
+          output_tau: 15
+      SSC:
+        lr: 0.006
+        batch_size: 256
+        n_epochs: 40
+        validation: official
+        spatial_factor: 0.2
+        time_factor: 0.001
+        window_size: 4
+        pad_to_min_size: 300
+        ignore_first_timesteps: 10
+        reference_architecture:
+          layers: 2
+          neurons_per_layer: 720
+          q: 120
+          c: 0.4
+          tau_u_range:
+          - 5
+          - 25
+          tau_w_range:
+          - 60
+          - 300
+          output_tau: 15
+      ECG:
+        lr: 0.01
+        batch_size: 64
+        n_epochs: 400
+        valid_fraction: 0.05
+        reference_architecture:
+          layers: 2
+          neurons_per_layer: 36
+          q: 120
+          c: 0.2
+          tau_u_range:
+          - 5
+          - 25
+          tau_w_range:
+          - 60
+          - 300
+          output_tau: 3
+  paper_baseline_version: paper_classification_v1
+  paper_baseline_deviations:
+  - model_variant=MR_SE_adLIF
+  paper_baseline_dataset: SHD
+  launcher_script: runner.py
   model_variant: MR_SE_adLIF
   run_mode: ours
   launcher_logdir: results/valid/protocol_v2
-  evaluation_protocol: controlled_v2
+  evaluation_protocol: paper_classification_v1

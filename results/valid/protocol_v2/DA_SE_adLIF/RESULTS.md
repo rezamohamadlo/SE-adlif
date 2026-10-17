@@ -1,14 +1,15 @@
 # DA_SE_adLIF: full evaluation
 
 Statistics use final test accuracy from completed runs only.
-Controlled v2: SHD uses 20% training-derived validation; ECG uses 5%; split seed is 42.
+Protocol: paper_classification_v1. Baseline: config/paper_baseline.yaml; dataset settings: config/comparison/.
+SHD* training-derived validation: 20%; ECG: 5%; split seeds: SHD* 42, ECG 42.
 SSC uses official train/valid/test. Test evaluation follows validation checkpoint selection.
 
-Protocol: SHD 300/512, SSC 40/256, ECG 400/64 (epochs/batch).
-LR scheduler patience 9999; SHD/ECG early stopping patience 50, min_delta 0.001; SSC fixed 40 epochs.
+Epochs/batch: SHD 300/256, SSC 40/256, ECG 400/64
+Training settings: SHD: LR=0.01, early stopping=False, patience=50, delta=0.001, scheduler patience=9999, factor=0.9; SSC: LR=0.006, early stopping=False, patience=50, delta=0.001, scheduler patience=9999, factor=0.9; ECG: LR=0.01, early stopping=False, patience=50, delta=0.001, scheduler patience=9999, factor=0.9
 
 | Dataset | Seed 42 | Seed 123 | Seed 456 | n | Mean ± sample SD |
 |---|---:|---:|---:|---:|---:|
-| SHD | 91.83% | pending | pending | 1 | pending |
+| SHD | 93.73% | 93.99% | 92.27% | 3 | 93.33% ± 0.93% |
 | SSC | 77.88% | pending | pending | 1 | pending |
 | ECG | 87.20% | pending | pending | 1 | pending |

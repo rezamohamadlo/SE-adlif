@@ -5,7 +5,7 @@ This file is updated automatically whenever training saves a new best checkpoint
 ## Run status
 
 - **Status:** Training and testing finished
-- **Progress:** 104 epochs completed (`0` through `103`) out of 300
+- **Progress:** 300 epochs completed (`0` through `299`) out of 300
 - **Dataset:** SHD
 - **Model:** SHD_MR_SE_adLIF
 - **Seed:** 42
@@ -15,12 +15,12 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 | Metric | Value | Epoch |
 |---|---:|---:|
-| Best validation accuracy | **98.47%** | 93 |
-| Validation loss | **0.0871** | 93 |
-| Training accuracy | **99.95%** | 93 |
-| Training loss | **0.002343** | 93 |
-| Gradient norm | **0.0801** | 93 |
-| Learning rate | **0.01** | 93 |
+| Best validation accuracy | **99.02%** | 162 |
+| Validation loss | **0.0769** | 162 |
+| Training accuracy | **100.00%** | 162 |
+| Training loss | **0.000051** | 162 |
+| Gradient norm | **0.0003** | 162 |
+| Learning rate | **0.01** | 162 |
 
 ## Model size and computation
 
@@ -28,15 +28,15 @@ This file is updated automatically whenever training saves a new best checkpoint
 |---|---:|
 | Total parameters | **450,760** |
 | Trainable parameters | **450,020** |
-| Average padded validation timesteps/sample | **296.92** |
-| Estimated dense forward GFLOPs/sample | **0.2651** |
+| Average padded validation timesteps/sample | **293.31** |
+| Estimated dense forward GFLOPs/sample | **0.2619** |
 
 The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds, with one multiply-add equal to two FLOPs. It uses the actual average padded validation sequence length. Elementwise neuron-state updates, loss computation, backward propagation, and data loading are excluded. It is therefore a reproducible forward-compute estimate rather than measured GPU throughput.
 
 ## Best checkpoint
 
 ```text
-ckpt/epoch=93-step=1128.ckpt
+ckpt/epoch=162-step=4075.ckpt
 ```
 
 ## Main hyperparameters
@@ -44,11 +44,12 @@ ckpt/epoch=93-step=1128.ckpt
 | Hyperparameter | Value |
 |---|---:|
 | Epoch limit | 300 |
-| Batch size | 512 |
+| Batch size | 256 |
 | Initial learning rate | 0.01 |
+| LR scheduler | plateau |
 | LR scheduler factor | 0.9 |
 | LR scheduler patience | 9999 |
-| Early stopping | true |
+| Early stopping | false |
 | Early-stopping patience | 50 |
 | Early-stopping minimum delta | 0.001 |
 | Dropout | 0.15 |
@@ -66,7 +67,7 @@ ckpt/epoch=93-step=1128.ckpt
 ## Resume command
 
 ```powershell
-.\.venv\Scripts\python.exe full_runner.py MR_SE_adLIF --adaptation-update-interval 2
+.\.venv\Scripts\python.exe runner.py --models MR_SE_adLIF --adaptation-update-interval 2 --datasets SHD --seeds 42 --logdir "results/valid/protocol_v2"
 ```
 
 ## Evaluation note
@@ -79,5 +80,5 @@ The best validation checkpoint was evaluated on the test split after training.
 
 | Metric | Value |
 |---|---:|
-| Test accuracy | **92.58%** |
-| Test loss | **0.4764** |
+| Test accuracy | **94.04%** |
+| Test loss | **0.4811** |

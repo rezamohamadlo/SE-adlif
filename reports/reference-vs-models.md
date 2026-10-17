@@ -1,44 +1,62 @@
 # Reference versus six proposed models - SHD*
 
-Snapshot: 15 October 2026. Current scope: **7 models x 3 training seeds = 21 runs**. Completed final-test results are shown below; mixed stopping rules are explicitly marked. Pending and historical batch-512 runs remain excluded.
+Snapshot: 17 October 2026. Target: **7 models x 3 training seeds = 21 baseline-matched runs**. Twenty are completed and verified locally; LG-DTH seed 456 awaits a fresh baseline rerun. Completed early-stopping results are kept separately below.
 
-| Model | Seed 42 test (%) | Seed 123 test (%) | Seed 456 test (%) | Completed / 3 | Mean ± sample SD (%) |
+| Model | Seed 42 test (%) | Seed 123 test (%) | Seed 456 test (%) | Matched completed / 3 | Mean ± sample SD (%) |
 |---|---:|---:|---:|---:|---:|
 | SE-adLIF reference | 92.93 | 92.89 | 93.64 | 3 / 3 | 93.15 ± 0.42 |
-| DTH | pending | pending | pending | 0 / 3 | pending |
-| LG-DTH | 93.77 | 93.02 | 93.51 [ES] | 3 / 3 | 93.43 ± 0.38 [ES] |
-| DA | pending | pending | pending | 0 / 3 | pending |
-| FP | pending | pending | pending | 0 / 3 | pending |
-| MR (K=2) | pending | pending | pending | 0 / 3 | pending |
-| MT | pending | pending | pending | 0 / 3 | pending |
+| DTH | 94.70 | 94.88 | 93.90 | 3 / 3 | 94.49 ± 0.52 |
+| LG-DTH | 93.77 | 93.02 | pending fresh rerun | 2 / 3 | 93.40 ± 0.53 |
+| DA | 93.73 | 93.99 | 92.27 | 3 / 3 | 93.33 ± 0.93 |
+| FP | 93.51 | 92.49 | 94.04 | 3 / 3 | 93.35 ± 0.79 |
+| MR (K=2) | 94.04 | 93.95 | 93.68 | 3 / 3 | 93.89 ± 0.18 |
+| MT | 94.88 | 94.52 | 94.43 | 3 / 3 | 94.61 ± 0.23 |
 
-[ES] Seed 456 used early stopping (105 completed epochs); seeds 42 and 123 completed 300 epochs without early stopping. The three-seed LG-DTH aggregate is descriptive, not a fully matched paper-baseline comparison. The matched two-seed subset remains **93.40 ± 0.53%**.
+Means and sample SDs use only the completed matched seeds shown in each row. LG-DTH currently has n=2; the other rows have n=3. No repeated seed is counted as an independent training seed.
 
-| Model / evidence | Status and interpretation |
+| Model | Mean difference from reference over matching seeds (pp) |
+|---|---:|
+| DTH | +1.34 |
+| LG-DTH (seeds 42/123 only) | +0.49 |
+| DA | +0.18 |
+| FP | +0.19 |
+| MR (K=2) | +0.74 |
+| MT | +1.46 |
+
+Differences use unrounded metrics and matching training seeds. MT has the highest observed three-seed mean. Three seeds do not establish statistical significance.
+
+| Run / status | Details |
 |---|---|
-| [Reference](../results/valid/reference/SHD/REFERENCE_RESULTS.json) | Three completed canonical SHD* runs; do not substitute old dated reference scores. |
-| DTH | User reports baseline training on another computer. Handled externally; completion and final test results remain pending local verification/import. Local seed-42 files conflict, so no local DTH score is admitted. |
-| [LG-DTH](../results/valid/protocol_v2/LG_DTH_SE_adLIF/RESULTS.md) | Seeds 42 and 123 completed with matched baseline settings. Seed 456 completed with early stopping enabled (93.51% test); it is included only in the descriptive three-seed aggregate, not the matched baseline subset. |
-| DA, FP, MR, MT | Previous SHD* seed-42 runs used batch 512 and early stopping; their scores are excluded. Three fresh baseline-matched seeds are required per model (12 runs). |
-| [LG-DTH seed 456, early stopping](../results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_456/FULL_RUN_CONFIG.json) | Completed early-stopping experiment: 93.51% final test accuracy. Relocated into the main model directory with its original protocol retained. The earlier interrupted baseline attempt is archived separately. Its stopping-rule deviation is marked [ES] in the main table. |
-| History | MT SHD* has overlapping-history warnings. Historical scores remain archived evidence and are not independent matched comparison results. |
+| DTH | All three completed runs were copied from the other computer. Configs pass runner guards; last checkpoints reach epoch 299 with optimizer state, and validation-selected best checkpoints are present. |
+| DA, FP, MT, MR | All 12 replacement runs completed with batch 256 and early stopping disabled. Older batch-512 results and historical mixed histories are excluded. |
+| LG-DTH seeds 42/123 | Completed matched baseline runs; retained unchanged. |
+| LG-DTH seed 456 fresh rerun | Launcher initialized locally: the run manifest exists, but no completed final-test result is available. Fresh weights and optimizer, 300 epochs, early stopping disabled. Intended root: `results/experiments/lg_dth_shd_seed456_fresh_baseline/`. |
+| Rerun provenance | Protocol-corrected fresh rerun after viewing the earlier test result. Retain that disclosure; use validation alone for checkpoint selection, then evaluate the official test. Do not choose between repeated seed-456 runs using their test scores. |
 
-| Shared setting | Paper-baseline value (seed 456 stopping deviation noted above) |
+| Separate historical result | Test accuracy (%) | Early stopping | Included in matched table |
+|---|---:|---|---|
+| LG-DTH seed 456 | 93.51 | Enabled; 105 completed epochs | No |
+
+The early-stopping seed remains at `results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_456/`. Its mixed-stopping three-seed aggregate with seeds 42/123 is **93.43 ± 0.38%**, descriptive only. Preserve it when starting the fresh rerun in its separate directory.
+
+| Shared setting | Paper-baseline requirement |
 |---|---|
-| Configuration authority | [config/paper_baseline.yaml](../config/paper_baseline.yaml), SHD section, version `paper_classification_v1` |
-| Training seeds / split seed | Training: 42, 123, 456; fixed split: 42 |
-| Split and selection | 20% official training data for validation; best validation-accuracy checkpoint; official test afterward |
+| Authority | [config/paper_baseline.yaml](../config/paper_baseline.yaml), SHD section, `paper_classification_v1` |
+| Seeds | Training: 42, 123, 456; fixed split seed 42 |
+| Selection | 20% official training data for validation; best validation-accuracy checkpoint; official test afterward |
 | Optimization | Adam; LR 0.01; batch 256; gradient clipping 1.5 |
 | Budget / scheduler | 300 total epochs; early stopping disabled; plateau patience 9999, factor 0.9 |
 | Shared architecture | Two 360-neuron hidden layers; dropout 0.15; intended neuron mechanisms differ |
 | Preprocessing | Spatial factor 0.2; time factor 0.001; window 4; minimum padding 250; ignore first 10 timesteps |
 
-| Per-seed comparison | Proposed test (%) | Reference test (%) | Difference (pp) |
-|---|---:|---:|---:|
-| LG-DTH, seed 42 | 93.77 | 92.93 | +0.84 |
-| LG-DTH, seed 123 | 93.02 | 92.89 | +0.13 |
-| LG-DTH, seed 456 [ES] | 93.51 | 93.64 | -0.13 |
+| Evidence | Source |
+|---|---|
+| Reference | [Canonical records](../results/valid/reference/SHD/REFERENCE_RESULTS.json) |
+| DTH | [Per-seed configs, metrics and checkpoints](../results/valid/protocol_v2/DTH_SE_adLIF/SHD/) |
+| LG-DTH | [Per-seed configs, metrics and checkpoints](../results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/) |
+| DA | [Per-seed configs, metrics and checkpoints](../results/valid/protocol_v2/DA_SE_adLIF/SHD/) |
+| FP | [Per-seed configs, metrics and checkpoints](../results/valid/protocol_v2/FP_SE_adLIF/SHD/) |
+| MR (K=2) | [Per-seed configs, metrics and checkpoints](../results/valid/protocol_v2/MR_SE_adLIF/K_2/SHD/) |
+| MT | [Per-seed configs, metrics and checkpoints](../results/valid/protocol_v2/MT_SE_adLIF/SHD/) |
 
-Differences use unrounded test metrics and matching training seeds. LG-DTH now has three completed test evaluations. The seed-456 difference is descriptive because its stopping rule differs from the reference. Six completed evaluations are verified locally, of which five match the baseline stopping rule (three reference and LG-DTH seeds 42/123). No missing test score is inferred from validation accuracy.
-
-[LG-DTH seed-456 metrics](../results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_456/logs/mlp_snn/version_0/metrics.csv) | [LG-DTH seed-123 metrics](../results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_123/logs/mlp_snn/version_0/metrics.csv) | [LG-DTH seed-42 metrics](../results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv) · [Archived audit](archive/2026-10-15-report-consolidation/training-baseline-audit.md) · [Paper versus reference](paper-vs-reference.md)
+[LG-DTH detailed results](../results/valid/protocol_v2/LG_DTH_SE_adLIF/RESULTS.md) | [Paper versus reference](paper-vs-reference.md)
