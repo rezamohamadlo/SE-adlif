@@ -16,6 +16,14 @@ Snapshot: 17 October 2026. Final test accuracy (%); all selected paper rows are 
 
 ## Local reference activity and computational cost
 
+| Dataset | Estimated dense GFLOPs / validation sample, local reference | Average padded validation timesteps/sample | Evidence |
+|---|---:|---:|---|
+| SHD* | 0.2619 | 293.31 | [Reference summary](../results/valid/reference/SHD/seed_42/TRAINING_SUMMARY.md) |
+| SSC | 1.0087 | 300.00 | [Reference summary](../results/valid/reference/SSC/seed_42/TRAINING_SUMMARY.md) |
+| ECG | 0.0111 | 1301.00 | [Reference summary](../results/valid/reference/ECG/seed_42/TRAINING_SUMMARY.md) |
+
+These are local-reference estimates, not published paper values; the paper does not report dense GFLOPs for these datasets. Each estimate agrees across the three saved seed summaries. They count feed-forward and recurrent matrix multiply-adds as two FLOPs each, using padded validation lengths. Neuron-state updates, loss computation, backward propagation and data loading are excluded. The SHD* test-shape estimate (0.2429 GFLOPs/sample) in the seven-model report uses different sequence lengths and is labeled separately. The ECG budget/stopping mismatch remains applicable to its accuracy results.
+
 | Dataset | Total parameters | Trainable parameters | Total hidden spikes/sample | Spikes/sample, L1 / L2 | Firing fraction (%), L1 / L2 | Estimated synaptic operations/sample (M) | Non-matrix logical operations/sample (M), padded | Inference time (ms/sample) |
 |---|---:|---:|---|---|---|---|---|---|
 | SHD* | 450,760 | 450,020 | 10,366 ± 726 | 8,434 ± 688 / 1,932 ± 120 | 9.37 ± 0.76 / 2.14 ± 0.13 | 9.76 ± 0.51 | 5.52 ± 0.00 | 1.241 ± 0.011 |
