@@ -4,8 +4,8 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 ## Run status
 
-- **Status:** Training in progress
-- **Progress:** 227 epochs completed (`0` through `226`) out of 300
+- **Status:** Training and testing finished
+- **Progress:** 300 epochs completed (`0` through `299`) out of 300
 - **Dataset:** SHD
 - **Model:** SHD_LG_DTH_SE_adLIF
 - **Seed:** 456
@@ -73,3 +73,12 @@ ckpt/epoch=226-step=5675.ckpt
 ## Evaluation note
 
 This run uses `validate_on: 0.2`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
+
+## Final test evaluation
+
+The best validation checkpoint was evaluated on the test split after training.
+
+| Metric | Value |
+|---|---:|
+| Test accuracy | **94.43%** |
+| Test loss | **0.4174** |

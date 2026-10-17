@@ -1,23 +1,23 @@
 # Reference versus six proposed models - SHD*
 
-Snapshot: 17 October 2026. Target: **7 models x 3 training seeds = 21 baseline-matched runs**. Twenty are completed and verified locally; the fresh LG-DTH seed-456 rerun is in progress; its final test result is pending. Completed early-stopping results are kept separately below.
+Snapshot: 17 October 2026. Target: **7 models x 3 training seeds = 21 baseline-matched runs**. All 21 are completed locally; the final LG-DTH seed-456 result is verified against metrics and checkpoint metadata. Completed early-stopping results are kept separately below.
 
 | Model | Seed 42 test (%) | Seed 123 test (%) | Seed 456 test (%) | Matched completed / 3 | Mean ± sample SD (%) |
 |---|---:|---:|---:|---:|---:|
 | SE-adLIF reference | 92.93 | 92.89 | 93.64 | 3 / 3 | 93.15 ± 0.42 |
 | DTH | 94.70 | 94.88 | 93.90 | 3 / 3 | 94.49 ± 0.52 |
-| LG-DTH | 93.77 | 93.02 | pending (training) | 2 / 3 | 93.40 ± 0.53 |
+| LG-DTH | 93.77 | 93.02 | 94.43 | 3 / 3 | 93.74 ± 0.71 |
 | DA | 93.73 | 93.99 | 92.27 | 3 / 3 | 93.33 ± 0.93 |
 | FP | 93.51 | 92.49 | 94.04 | 3 / 3 | 93.35 ± 0.79 |
 | MR (K=2) | 94.04 | 93.95 | 93.68 | 3 / 3 | 93.89 ± 0.18 |
 | MT | 94.88 | 94.52 | 94.43 | 3 / 3 | 94.61 ± 0.23 |
 
-Means and sample SDs use only the completed matched seeds shown in each row. LG-DTH currently has n=2; the other rows have n=3. No repeated seed is counted as an independent training seed.
+Means and sample SDs use only the completed matched seeds shown in each row. All rows have n=3. No repeated seed is counted as an independent training seed.
 
 | Model | Mean difference from reference over matching seeds (pp) |
 |---|---:|
 | DTH | +1.34 |
-| LG-DTH (seeds 42/123 only) | +0.49 |
+| LG-DTH | +0.59 |
 | DA | +0.18 |
 | FP | +0.19 |
 | MR (K=2) | +0.74 |
@@ -30,18 +30,18 @@ Differences use unrounded metrics and matching training seeds. MT has the highes
 | DTH | All three completed runs were copied from the other computer. Configs pass runner guards; last checkpoints reach epoch 299 with optimizer state, and validation-selected best checkpoints are present. |
 | DA, FP, MT, MR | All 12 replacement runs completed with batch 256 and early stopping disabled. Older batch-512 results and historical mixed histories are excluded. |
 | LG-DTH seeds 42/123 | Completed matched baseline runs; retained unchanged. |
-| LG-DTH seed 456 fresh rerun | Training in progress at the canonical directory. 252/300 epochs completed (latest validation epoch 251, 98.96%); best validation 99.02% at epoch 226. Final test pending. Snapshot: 2026-10-17 10:56 Tehran. Early stopping disabled; resumed optimizer/scheduler state retained. |
+| LG-DTH seed 456 fresh rerun | Completed 300/300 epochs; last checkpoint epoch 299, step 7500. Best validation 99.02% at epoch 226; selected checkpoint `epoch=226-step=5675.ckpt`. Final test accuracy 94.43%, loss 0.417353. Batch 256; early stopping disabled. |
 | Rerun provenance | Protocol-corrected fresh rerun after viewing the earlier test result. Retain that disclosure; use validation alone for checkpoint selection, then evaluate the official test. Do not choose between repeated seed-456 runs using their test scores. |
 
 | Separate historical result | Test accuracy (%) | Early stopping | Included in matched table |
 |---|---:|---|---|
 | LG-DTH seed 456 | 93.51 | Enabled; 105 completed epochs | No |
 
-The earlier early-stopping run is preserved at `results/archive/lg_dth_seed456_early_stopping_20261017/`. Its mixed-stopping three-seed aggregate with seeds 42/123 is **93.43 ± 0.38%**, descriptive only. The fresh rerun now occupies the canonical seed directory; its final test result remains pending.
+The earlier early-stopping run is preserved at `results/archive/lg_dth_seed456_early_stopping_20261017/`. Its mixed-stopping three-seed aggregate with seeds 42/123 is **93.43 ± 0.38%**, descriptive only. The fresh rerun now occupies the canonical seed directory; its verified final test result is included above.
 
 ## Spike activity and inference cost
 
-The parameter counts and dense matrix-compute estimates below are recorded in each model's per-seed `TRAINING_SUMMARY.md`; they agree across seeds 42, 123 and 456. LG-DTH seed 456 is still training, so its entries describe architecture and recorded validation computation, not a completed final-test evaluation.
+The parameter counts and dense matrix-compute estimates below are recorded in each model's per-seed `TRAINING_SUMMARY.md`; they agree across seeds 42, 123 and 456. All three LG-DTH seeds have now completed; these compute estimates describe recorded validation computation.
 
 | Model | Total parameters | Trainable parameters | Estimated dense GFLOPs / validation sample |
 |---|---:|---:|---:|
@@ -55,15 +55,17 @@ The parameter counts and dense matrix-compute estimates below are recorded in ea
 
 The existing estimate uses 293.31 average padded validation timesteps/sample and counts feed-forward and recurrent matrix multiply-adds as two FLOPs each. It excludes elementwise neuron updates, including the additional operations of proposed variants, and is not a complete compute or energy estimate. The shared matrix dimensions explain the identical estimates.
 
-| Model | Spikes/sample, L1 / L2 | Firing fraction (%), L1 / L2 | Estimated synaptic operations/sample | Inference time (ms/sample) |
-|---|---|---|---|---|
-| SE-adLIF reference | Pending | Pending | Pending | Pending |
-| DTH | Pending | Pending | Pending | Pending |
-| LG-DTH | Pending | Pending | Pending | Pending |
-| DA | Pending | Pending | Pending | Pending |
-| FP | Pending | Pending | Pending | Pending |
-| MR (K=2) | Pending | Pending | Pending | Pending |
-| MT | Pending | Pending | Pending | Pending |
+| Model | Total hidden spikes/sample | Spikes/sample, L1 / L2 | Firing fraction (%), L1 / L2 | Estimated synaptic operations/sample | Neuron-state operations/sample | Inference time (ms/sample) |
+|---|---|---|---|---|---|---|
+| SE-adLIF reference | Pending | Pending | Pending | Pending | Pending | Pending |
+| DTH | Pending | Pending | Pending | Pending | Pending | Pending |
+| LG-DTH | Pending | Pending | Pending | Pending | Pending | Pending |
+| DA | Pending | Pending | Pending | Pending | Pending | Pending |
+| FP | Pending | Pending | Pending | Pending | Pending | Pending |
+| MR (K=2) | Pending | Pending | Pending | Pending | Pending | Pending |
+| MT | Pending | Pending | Pending | Pending | Pending | Pending |
+
+Fill the pending columns after a separate checkpoint activity/cost evaluation is performed. Total hidden spikes/sample is the sum of L1 and L2 counts. Neuron-state operations/sample must include each variant's elementwise state updates under a documented arithmetic-operation convention; keep these separate from spike-driven synaptic operations.
 
 Pending means not measured: existing accuracy logs and checkpoints do not contain these statistics. Do not interpret pending as zero or infer firing activity from parameter counts.
 
