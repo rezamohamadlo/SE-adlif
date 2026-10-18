@@ -31,6 +31,42 @@ Current results belong in `results/valid/`; tuning results belong in
 `results/experiments/`. Historical notes and document exports are under
 `reports/archive/`.
 
+### Automatic activity and cost records
+
+After each newly completed training/test job, `runner.py` evaluates its saved
+validation-selected checkpoint and writes `COST_RESULTS.json` and
+`COST_RESULTS.md` inside the seed directory. These record total/trainable
+parameters, L1/L2 and total spikes, firing fractions, estimated SynOps, dense
+matrix and scalar arithmetic GFLOPs, logical operations, and inference timing.
+The model's `RESULTS.md` aggregates completed measurements across seeds.
+This adds an inference pass and three timing passes; it does not change training.
+Definitions and limitations follow the existing measurement reports: logical
+operations are not hardware FLOPs/energy, and ECG's analog input is dense work.
+
+Existing completed runs stay skipped by default. Use `--measure-existing-costs`
+to backfill selected completed runs (matching saved cost records are reused),
+or `--no-measure-costs` to opt out of measurements. `--dry-run` performs no cost
+evaluation. For example, using this checkout's environment:
+
+```powershell
+.\.venv\Scripts\python.exe runner.py --models LG_DTH_SE_adLIF --datasets SHD --seeds 42 123 456 --dry-run
+.\.venv\Scripts\python.exe runner.py --models LG_DTH_SE_adLIF --datasets SHD --seeds 42 123 456 --measure-existing-costs
+```
+
+The second command runs any unfinished selected training jobs as well as
+collecting costs. To measure just one completed job without scheduling training:
+
+```powershell
+.\.venv\Scripts\python.exe measure_run_costs.py --run-dir results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_456 --dataset SHD
+```
+
+A measurement failure writes `COST_ERROR.json`, leaves completed training intact,
+and lets the queue continue; its costs stay pending. Unsupported future cells
+must add a valid operation-count convention before their costs can be reported.
+Runtime means are withheld when hardware/software settings differ across seeds.
+Preprocessing/baseline/manifest guards remain unchanged. Manual provenance
+sections in model result reports are retained when the runner refreshes tables.
+
 ### Working across computers
 
 New classification run manifests and checkpoint configuration fields use
@@ -44,7 +80,7 @@ are retained. Existing historical configs and summaries are not rewritten.
 To inspect a portable view of an existing saved config without changing it:
 
 ```powershell
-.\.ven\Scripts\python.exe project_paths.py --inspect results/experiments/shd_lr_sweep/c03/SWEEP_CONFIG.json
+.\.ven\Scripts\python.exe project_paths.py --inspect results/archive/experiments_20261017/shd_lr_sweep/c03/SWEEP_CONFIG.json
 ```
 
 Checkpoints and datasets are not transferred by Git. Copy the exact required

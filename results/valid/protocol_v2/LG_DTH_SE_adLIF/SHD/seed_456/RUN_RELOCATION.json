@@ -1,21 +1,40 @@
-﻿{
-    "previous_directory":  "results/experiments/paper_classification_v1_custom_af62d1bc3d42/LG_DTH_SE_adLIF/SHD/seed_456",
-    "current_directory":  "results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_456",
-    "archived_previous_attempt":  "results/experiments/archived_runs/LG_DTH_SE_adLIF/SHD/seed_456_baseline_interrupted_20261015",
-    "note":  "Completed early-stopping run relocated without changing its original configs, protocol, checkpoints or hyperparameters. Superseded interrupted baseline attempt preserved separately.",
-    "verified_moved_files":  11,
-    "verified_archived_files":  10,
-    "sha256":  {
-                   ".hydra\\overrides.yaml":  "39861D3CFD346AF9EA3D191D1C9578A4835FF4617E5B1B35C33F7805D2B6B058",
-                   "out.log":  "9C317BCDE97AB33CD12590F572BAAA590F6B3A8B3593C66047B0D637C36AB0A0",
-                   "ckpt\\last.ckpt":  "819FDD0087226F39D548FBEAE515CFB716C1BF8A02BD9224EA5FC4A63AD9F61F",
-                   ".hydra\\hydra.yaml":  "3727C4912B07E161E83E3BD211BF8C8DD7DAC9CA09229D2DB663C6EB23D99FC1",
-                   "FULL_RUN_CONFIG.json":  "175480F57384269E206FFA37F018090386DB2C8C8FA6E90772282D38167B34BE",
-                   "logs\\mlp_snn\\version_0\\hparams.yaml":  "C6582369337531F150EAD5F12750F2D1686769072559F90011D37178C3C99078",
-                   "logs\\mlp_snn\\version_0\\metrics.csv":  "7CDD8D2BC601468363630D5CB96F1D75191E70F7298553757EDA69205E1C8062",
-                   "ckpt\\epoch=74-step=1875.ckpt":  "70D0B4CBCD1730F8FB9471BAB621DB49F641C17D0B54B17195EF1C9BE52D5EAC",
-                   "TRAINING_SUMMARY.md":  "D128B01E8A6C9F98F1E883A9FCD0CBA5CD1B541396B81698E01ACC15C14E02B2",
-                   "completed.txt":  "CF1703562174D900787A8F0FF56EFDCE4B6CD1D702CC6543E632DF37F289CA25",
-                   ".hydra\\config.yaml":  "261EB7B80FCE2DFCDA68C876A4729AE244EC856314FCA2F19218EBE9BAC10B9B"
-               }
+{
+  "original_path": "results/experiments/lg_dth_shd_seed456_fresh_baseline/LG_DTH_SE_adLIF/SHD/seed_456",
+  "current_path": "results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_456",
+  "archived_early_stopping": "results/archive/lg_dth_seed456_early_stopping_20261017",
+  "original_checkpoint_backups": "results/archive/lg_dth_seed456_relocation_20261017",
+  "original_sha256": {
+    ".hydra\\overrides.yaml": "E935677C0B3C0E2D8FC5DBD7C0DF86F804068E0159A414E9DFE594E34D495024",
+    "out.log": "6970E4E02FB428D2BF268D02F724463B6ABBB878BD1FEA00A1E37223CE219454",
+    ".hydra\\hydra.yaml": "1DD718D4605025EC4B9FBE9FCFAA415BCEF674A56B968169D0CAFD0127C5214C",
+    "FULL_RUN_CONFIG.json": "8665036693ABEFD1C52894DB588252889F23380CF9E025C7D1B5D165B8A70062",
+    "ckpt\\epoch=61-step=1550.ckpt": "919DBFDF00436660A29016445B65B1DF060D395C42F166A6CB7998CD847862B1",
+    "logs\\mlp_snn\\version_0\\hparams.yaml": "4D21FA94464A081D6647AAD3886B60A96C3938978FBD580894F5BF7BD319E61A",
+    "logs\\mlp_snn\\version_0\\metrics.csv": "6C02156CD16728FD56748FF78EA00A1386CEC9DF26F55ACD6026347429837948",
+    "ckpt\\last.ckpt": "1AA75EAEABE1BD0E58EA5CD5931F46C91EA6543501E47059E511819A36681EEF",
+    "TRAINING_SUMMARY.md": "2210A262245A7E4CA6F9E21956FB96FD274633DEC0DCD62A9D6F84F6498890E7",
+    ".hydra\\config.yaml": "872B27DCCBEB862229AC58EA19515D6E11A097FFE50DF317FAD7F19ADC11E1B0"
+  },
+  "archived_early_stopping_sha256": {
+    ".hydra\\overrides.yaml": "39861D3CFD346AF9EA3D191D1C9578A4835FF4617E5B1B35C33F7805D2B6B058",
+    "RUN_RELOCATION.json": "7AA736620A45829F11D61A353B6AE6462050C748DAFE6C8129C15DD348813E3E",
+    "out.log": "9C317BCDE97AB33CD12590F572BAAA590F6B3A8B3593C66047B0D637C36AB0A0",
+    "ckpt\\last.ckpt": "819FDD0087226F39D548FBEAE515CFB716C1BF8A02BD9224EA5FC4A63AD9F61F",
+    ".hydra\\hydra.yaml": "3727C4912B07E161E83E3BD211BF8C8DD7DAC9CA09229D2DB663C6EB23D99FC1",
+    "FULL_RUN_CONFIG.json": "175480F57384269E206FFA37F018090386DB2C8C8FA6E90772282D38167B34BE",
+    "logs\\mlp_snn\\version_0\\hparams.yaml": "C6582369337531F150EAD5F12750F2D1686769072559F90011D37178C3C99078",
+    "logs\\mlp_snn\\version_0\\metrics.csv": "7CDD8D2BC601468363630D5CB96F1D75191E70F7298553757EDA69205E1C8062",
+    "ckpt\\epoch=74-step=1875.ckpt": "70D0B4CBCD1730F8FB9471BAB621DB49F641C17D0B54B17195EF1C9BE52D5EAC",
+    "TRAINING_SUMMARY.md": "D128B01E8A6C9F98F1E883A9FCD0CBA5CD1B541396B81698E01ACC15C14E02B2",
+    "completed.txt": "CF1703562174D900787A8F0FF56EFDCE4B6CD1D702CC6543E632DF37F289CA25",
+    ".hydra\\config.yaml": "261EB7B80FCE2DFCDA68C876A4729AE244EC856314FCA2F19218EBE9BAC10B9B"
+  },
+  "note": "Physical move verified before location metadata adaptation. Original configs and checkpoints preserved in relocation archive.",
+  "metadata_updates": [
+    "Run/output paths and launcher root updated in saved configs; original files backed up.",
+    "Checkpoint callback file locations and hyperparameter output paths updated; original checkpoints retained."
+  ],
+  "training_state_verified_unchanged": true,
+  "last_checkpoint_epoch": 115,
+  "next_epoch_zero_based": 116
 }

@@ -11,7 +11,9 @@ class PaperConfigurationTests(unittest.TestCase):
     def test_single_runner_paper_preflight(self):
         import runner
         captured = []
-        def inspect_run(*args, **kwargs):
+        def inspect_run(*args, measure_costs=True, measure_existing_costs=False, **kwargs):
+            self.assertTrue(measure_costs)
+            self.assertFalse(measure_existing_costs)
             captured.extend(runner.build_plan(*args, **kwargs))
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

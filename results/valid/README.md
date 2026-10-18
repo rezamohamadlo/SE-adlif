@@ -18,3 +18,10 @@ are unmatched against the new canonical paper-baseline SHD reference.
 calling it does not automatically apply the paper baseline. New fair model
 comparisons must explicitly inherit `config/paper_baseline.yaml` in separate
 configs/output directories. Main runners and existing model results are unchanged.
+
+Historical experiment outputs were moved to `results/archive/experiments_20261017/`.
+Its `ARCHIVE_MANIFEST.json` records original paths and verified file hashes.
+The fresh LG-DTH SHD* seed-456 run was relocated while stopped to
+`results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_456/` and has now completed all 300 epochs and final testing (94.43% test accuracy).
+Its former early-stopping run and original pre-relocation checkpoints/configs
+are retained separately under `results/archive/`.

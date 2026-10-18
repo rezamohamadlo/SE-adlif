@@ -8,6 +8,10 @@ here; put changing scores, run progress, timing estimates and findings in
 
 - `run.py`: one classification training job, using Hydra and Lightning.
 - `runner.py`: shared controlled comparisons, preflight, resume and aggregation.
+- `measure_run_costs.py`: runner's post-test activity/compute evaluation; saves
+  per-seed `COST_RESULTS.json`/`.md` without training. New completions are measured
+  by default; existing completions require `--measure-existing-costs`. Cost
+  failures stay separate from training completion; never retrain to repair them.
 - `config/paper_baseline.yaml`: versioned paper-derived baseline for future
   fair classification comparisons and their results.
 - `evaluation.yaml` and `evaluation_protocol.py`: existing controlled_v2
@@ -115,6 +119,18 @@ user asks to run it themselves, return the command and let them start it.
   an explicit root prefix, preserving the artifact suffix and checkpoint identity.
   Compare normalized paths in manifest guards while retaining historical records.
   Never substitute a different checkpoint because a recorded file is missing.
+- For future development and new experiment workflows, keep paths to project
+  files repository-relative in configs, manifests, reports and generated commands.
+  Do not introduce user names, drive letters or machine-specific checkout roots.
+  Resolve paths against the repository root only when accessing files; explicit
+  external storage paths are allowed when needed and must be documented.
+- Before proposing next-step commands or changing file-loading/saving code,
+  check that paths work from a different checkout location and when Hydra changes
+  the working directory. Check that the referenced artifacts exist locally;
+  Git pull does not transfer ignored checkpoints or datasets. Preserve the same
+  relative results layout when transferring files between computers. Apply this
+  portability convention when reusing this project's workflow in another project,
+  without changing that project's instructions unless requested.
 - Use the project's `.ven` Python explicitly in commands. Do not accidentally
   install dependencies into global Python. The tested Windows environment is
   described by `requirements.txt`; `environment.yml` is the legacy Conda setup.

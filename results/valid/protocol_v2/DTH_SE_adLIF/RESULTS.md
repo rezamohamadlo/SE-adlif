@@ -13,3 +13,13 @@ Training settings: SHD: LR=0.01, early stopping=False, patience=50, delta=0.001,
 | SHD | 94.70% | 94.88% | 93.90% | 3 | 94.49% ± 0.52% |
 | SSC | 78.22% | 78.31% | 78.04% | 3 | 78.19% ± 0.14% |
 | ECG | pending | pending | pending | 0 | pending |
+
+## Archived unmatched ECG result
+
+| Dataset | Seed | Historical test accuracy | Reason excluded | Archived record |
+|---|---:|---:|---|---|
+| ECG | 42 | 88.35% | Early stopping enabled; paper baseline disables it | [Original run](../../../archive/unmatched_early_stopping_20261017/DTH_SE_adLIF/ECG/seed_42/) |
+
+All configs, checkpoints, metrics and test evidence were retained. Their hashes
+are recorded in the [archive manifest](../../../archive/unmatched_early_stopping_20261017/ARCHIVE_MANIFEST.json).
+The current ECG table remains pending until matched training is completed.
