@@ -103,7 +103,7 @@ class MeasurementTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             reports = ['reports/reference-vs-models.md', 'reports/paper-vs-reference.md',
-                       'results/valid/protocol_v2/LG_DTH_SE_adLIF/RESULTS.md']
+                       'results/not_improved/LG_DTH_SE_adLIF/RESULTS.md']
             for name in reports:
                 target = root / name
                 target.parent.mkdir(parents=True, exist_ok=True)

@@ -29,7 +29,7 @@ class PaperConfigurationTests(unittest.TestCase):
             self.assertEqual(cfg['n_epochs'], 300)
             self.assertFalse(cfg['early_stopping'])
             self.assertEqual(cfg['paper_baseline_version'], 'paper_classification_v1')
-            self.assertIn('protocol_v2', str(item['directory']))
+            self.assertIn('valid', item['directory'].parts)
 
     def test_dth_matches_paper_training_and_preprocessing(self):
         root = Path(__file__).resolve().parents[1]

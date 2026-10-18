@@ -26,6 +26,7 @@ from torch.utils._python_dispatch import TorchDispatchMode
 from datasets.utils.pad_tensors import PadTensors
 from models.pl_module import MLPSNN
 from project_paths import local_path, portable_config, portable_path
+from cost_records import load_measurement, record_path, seed_directory
 
 ROOT = Path(__file__).resolve().parent
 MODELS = {'SE_adLIF': 'SE-adLIF reference', 'DTH_SE_adLIF': 'DTH',
@@ -50,10 +51,7 @@ def save_json(path, value):
 
 
 def run_directory(model, seed):
-    if model == 'SE_adLIF':
-        return ROOT / f'results/valid/reference/SHD/seed_{seed}'
-    mid = 'K_2/SHD' if model == 'MR_SE_adLIF' else 'SHD'
-    return ROOT / 'results/valid/protocol_v2' / model / mid / f'seed_{seed}'
+    return seed_directory(ROOT, model, 'SHD', seed)
 
 
 def selected_checkpoint(directory):
@@ -347,11 +345,11 @@ def measure(model, batches, device, repeats, warmup):
 
 def mean_sd(values, digits=2, scale=1):
     values = [v / scale for v in values]
-    return f'{statistics.mean(values):,.{digits}f} ± {statistics.stdev(values):,.{digits}f}'
+    return f'{statistics.mean(values):,.{digits}f} ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â± {statistics.stdev(values):,.{digits}f}'
 
 
-def update_reports(output):
-    records = [json.loads((output / model / f'seed_{seed}.json').read_text(encoding='utf-8'))
+def update_reports(output=None):
+    records = [load_measurement(ROOT, model, 'SHD', seed, output)
                for model in MODELS for seed in [42, 123, 456]]
     identities = {r['measurement_identity'] for r in records}
     if len(identities) != 1 or any(r['version'] != VERSION for r in records):
@@ -378,9 +376,9 @@ def update_reports(output):
         raise ValueError('Cannot identify activity table; report was not changed')
     start = text.index('Fill the pending columns') if 'Fill the pending columns' in text else text.index('Measured on the full official SHD* test set')
     end = text.index('| Shared setting |', start)
-    evidence = portable_path(output)
+    evidence = portable_path(output) if output is not None else 'results/valid'
     text = text[:start] + (
-        f'Measured on the full official SHD* test set, n=3 training seeds per model; entries are mean ± sample SD. Per-seed JSONs, exact checkpoint hashes, operation breakdowns and timing repeats: `{evidence}/`.\n\n'
+        f'Measured on the full official SHD* test set, n=3 training seeds per model; entries are mean ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â± sample SD. Per-seed JSONs, exact checkpoint hashes, operation breakdowns and timing repeats: `{evidence}/`.\n\n'
         'Spikes and firing fractions use each stored sequence length before batch padding, including the configured minimum 250 frames and initial ignored frames. This is not the raw event-duration length. Additional batch-padding spikes and costs are retained separately in the JSON records. All models use identical test batches, batch size 256, float32 and validation-selected checkpoints.\n\n'
         'Synaptic operations are an ideal dense-fan-out event-driven addition estimate: input frame event multiplicity and hidden spikes times the number of receiving neurons, including the actual previous-step recurrent spikes. Recurrent spikes without a subsequent destination timestep are not counted; zero-valued weights are not pruned. Delay filtering and neuron updates are counted separately. These estimates do not describe the dense GPU execution.\n\n'
         'Non-matrix logical operations count the executed cell code on all batch-padded timesteps, including parameter transforms, bias additions, surrogate forward arithmetic, reductions and state/threshold updates. A transcendental, comparison or scalar arithmetic operation each counts as one logical operation; softmax uses an explicit scalar reduction convention. Tensor allocation, indexing, memory movement and matrix multiplication are excluded. These are not hardware FLOPs and must not be added to event-driven SynOps as an energy estimate.\n\n'
@@ -399,7 +397,9 @@ def update_reports(output):
     text = text.replace('Pending entries will be filled from saved configurations/checkpoints and a separate inference evaluation. LG-DTH training has completed.',
                         'SHD* activity and timing are measured from all three saved reference checkpoints; SSC/ECG measurements remain pending.')
     report.write_text(text, encoding='utf-8', newline='\n')
-    report = ROOT / 'results/valid/protocol_v2/LG_DTH_SE_adLIF/RESULTS.md'
+    report = ROOT / 'results/not_improved/LG_DTH_SE_adLIF/RESULTS.md'
+    if not report.exists():
+        report = ROOT / 'results/valid/LG_DTH_SE_adLIF/RESULTS.md'
     text = report.read_text(encoding='utf-8')
     group = [r['measurements'] for r in records if r['model'] == 'LG_DTH_SE_adLIF']
     replacements = {
@@ -414,12 +414,13 @@ def update_reports(output):
                   if name == 'Neuron-state operations/sample' and '| Non-matrix logical operations/sample, padded |' in text
                   else name)
         text = re.sub(r'^\| ' + re.escape(lookup) + r' \|[^\n]*',
-                      lambda _: f'| {name} | {value} | Mean ± sample SD across three seeds; definitions in linked comparison |', text, flags=re.M)
+                      lambda _: f'| {name} | {value} | Mean ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â± sample SD across three seeds; definitions in linked comparison |', text, flags=re.M)
     text = text.replace('Neuron-state operations/sample', 'Non-matrix logical operations/sample, padded')
     text = re.sub(r'(?:These pending measurements|All three seeds measured)[^\n]+',
                   'All three seeds measured on the official test set. Activity uses pre-batch sequence lengths, including configured minimum padding; non-matrix operations and runtime include batch padding. See the [measurement protocol](../../../../reports/reference-vs-models.md#spike-activity-and-inference-cost).', text)
     report.write_text(text, encoding='utf-8', newline='\n')
-    save_json(output / 'AGGREGATE.json', dict(version=VERSION, records=records))
+    if output is not None:
+        save_json(output / 'AGGREGATE.json', dict(version=VERSION, records=records))
 
 
 def main():
@@ -427,24 +428,29 @@ def main():
     parser.add_argument('--models', nargs='+', choices=list(MODELS), default=list(MODELS))
     parser.add_argument('--seeds', nargs='+', type=int, default=[42, 123, 456])
     parser.add_argument('--device', default='cuda:0')
-    parser.add_argument('--output', default='results/measurements/shd_costs_v1')
+    parser.add_argument('--output', help='Optional separate benchmark output; default saves beside each training summary')
     parser.add_argument('--timing-repeats', type=int, default=3)
     parser.add_argument('--warmup', type=int, default=2)
     parser.add_argument('--dry-run', action='store_true')
     parser.add_argument('--update-reports', action='store_true')
+    parser.add_argument('--reports-only', action='store_true', help='Read saved measurements without inference')
     args = parser.parse_args()
     if args.timing_repeats < 2 or args.warmup < 1:
         parser.error('Use at least two timing repeats and one warm-up')
-    output = local_path(args.output)
+    output = local_path(args.output) if args.output else None
+    if args.reports_only:
+        update_reports(output)
+        return
     if args.dry_run:
         for model in args.models:
             for seed in args.seeds:
                 _, path, _, _ = load_run(model, seed)
                 print(model, seed, portable_path(path), flush=True)
         return
-    output.mkdir(parents=True, exist_ok=True)
+    session = output if output is not None else ROOT / 'results/valid'
+    session.mkdir(parents=True, exist_ok=True)
     # OS lock is released on exit/crash. Do not bypass a held lock.
-    with (output / '.evaluation.lock').open('a+b') as lock:
+    with (session / '.evaluation.lock').open('a+b') as lock:
         if platform.system() == 'Windows':
             import msvcrt
             lock.seek(0)
@@ -482,7 +488,7 @@ def main():
                     raise ValueError('Dataset/preprocessing differs across checkpoints')
                 identity = hashlib.sha256(json.dumps(dict(version=VERSION, environment=environment,
                     data_hash=data_hash, settings=settings), sort_keys=True).encode()).hexdigest()
-                destination = output / model_name / f'seed_{seed}.json'
+                destination = record_path(ROOT, model_name, 'SHD', seed, output)
                 ckpt_hash = sha256(path)
                 if destination.exists():
                     old = json.loads(destination.read_text(encoding='utf-8'))

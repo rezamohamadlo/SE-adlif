@@ -43,7 +43,7 @@ paper reproduction. Passing `evaluation_file=evaluation.yaml` applies the
 controlled settings over job overrides, so do not use it for paper reproduction.
 
 Reference records are under `results/valid/reference/`; matched proposed-model
-records are under `results/valid/protocol_v2/`. Tuning and reproduction use
+records are under `results/valid/`. Tuning and reproduction use
 separate directories under `results/experiments/`. Historical documentation is
 not the authority for current paths, commands or settings.
 
@@ -93,7 +93,7 @@ local reproduction choices are explicitly separated in this file.
   guarantee the paper's reported accuracy.
 - `runner.py` applies `config/paper_baseline.yaml` by default through the
   dataset-specific `config/comparison/` group. Outputs use
-  `results/valid/protocol_v2/`; no baseline flag is required. This directory
+  `results/valid/`; no baseline flag is required. This directory
   name does not identify the training protocol: use saved baseline metadata.
   Archive incompatible historical runs before reusing their paths.
   Explicit tuning overrides use separate experiment outputs. `evaluation.yaml`
@@ -214,6 +214,21 @@ actually verified and any material limitations.
 
 ## Artifacts, cleanup and Git
 
+- Keep evaluated SHD* candidates without accuracy improvement over DTH/MT in
+  `results/not_improved/`, preserving model/seed artifacts and documenting the
+  tested configuration and outcome in its README. These remain valid research
+  evidence. Assess SSC/ECG separately. Check this directory before proposing
+  duplicate experiments; intentional reruns require a separate output directory.
+- Store per-run measurements inside the actual training seed directory, beside
+  `TRAINING_SUMMARY.md`, as `COST_RESULTS.json` and `COST_RESULTS.md`. Keep this
+  layout for new models, datasets and launchers; do not recreate a shared
+  `results/measurements/` tree by default. The runner measures new completions
+  automatically unless `--no-measure-costs` is passed; use
+  `--measure-existing-costs` explicitly for already completed jobs. Preserve
+  checkpoint identity and existing measurement evidence when reusing records.
+  Keep superseded measurements in the seed's `measurement_history/` and shared
+  historical evaluator evidence in `archive/measurement_provenance/`.
+  See `results/valid/MEASUREMENTS.md` for the layout and compatibility rules.
 - Preserve summaries, manifests, test-result JSONs, aggregate reports and
   underlying metrics. Keep best checkpoints needed for evaluation and last
   checkpoints needed for resume. Large weights and raw metrics may remain local

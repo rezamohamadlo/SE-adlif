@@ -45,7 +45,7 @@ Current results belong in `results/valid/`; tuning results belong in
 
 After each newly completed training/test job, `runner.py` evaluates its saved
 validation-selected checkpoint and writes `COST_RESULTS.json` and
-`COST_RESULTS.md` inside the seed directory. These record total/trainable
+`COST_RESULTS.md` inside the seed directory. Older accepted measurements have been moved to the same layout; see [measurement locations](results/valid/MEASUREMENTS.md). These record total/trainable
 parameters, L1/L2 and total spikes, firing fractions, estimated SynOps, dense
 matrix and scalar arithmetic GFLOPs, logical operations, and inference timing.
 The model's `RESULTS.md` aggregates completed measurements across seeds.
@@ -67,7 +67,7 @@ The second command runs any unfinished selected training jobs as well as
 collecting costs. To measure just one completed job without scheduling training:
 
 ```powershell
-.\.venv\Scripts\python.exe measure_run_costs.py --run-dir results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_456 --dataset SHD
+.\.venv\Scripts\python.exe measure_run_costs.py --run-dir results/not_improved/LG_DTH_SE_adLIF/SHD/seed_456 --dataset SHD
 ```
 
 A measurement failure writes `COST_ERROR.json`, leaves completed training intact,
@@ -90,7 +90,7 @@ are retained. Existing historical configs and summaries are not rewritten.
 To inspect a portable view of an existing saved config without changing it:
 
 ```powershell
-.\.ven\Scripts\python.exe project_paths.py --inspect results/archive/experiments_20261017/shd_lr_sweep/c03/SWEEP_CONFIG.json
+.\.ven\Scripts\python.exe project_paths.py --inspect archive/experiments_20261017/shd_lr_sweep/c03/SWEEP_CONFIG.json
 ```
 
 Checkpoints and datasets are not transferred by Git. Copy the exact required

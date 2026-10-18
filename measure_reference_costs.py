@@ -21,6 +21,7 @@ import torch
 
 import measure_shd_costs as shared
 from project_paths import local_path, portable_config, portable_path
+from cost_records import load_measurement, record_path
 
 ROOT = shared.ROOT
 VERSION = 'reference_test_costs_v1'
@@ -179,10 +180,10 @@ def measure(model, batches, device, event_input, repeats, warmup):
         reproduced_test_acc=counts['correct'] / counts['targets'])
 
 
-def update_report(output):
-    records = {ds: [json.loads((output / ds / f'seed_{s}.json').read_text(encoding='utf-8'))
+def update_report(output=None):
+    records = {ds: [load_measurement(ROOT, 'SE_adLIF', ds, s, output)
                     for s in [42, 123, 456]] for ds in ['SSC', 'ECG']}
-    shd = [json.loads((ROOT / f'results/measurements/shd_costs_v1/SE_adLIF/seed_{s}.json').read_text(encoding='utf-8'))
+    shd = [load_measurement(ROOT, 'SE_adLIF', 'SHD', s)
            for s in [42, 123, 456]]
     records['SHD*'] = shd
     p = ROOT / 'reports/paper-vs-reference.md'
@@ -219,9 +220,10 @@ def update_report(output):
         '|---|---:|---:|---:|---:|\n' + '\n'.join(rows) + '\n\n'
         'Entries are mean ± sample SD across three seeds, using actual batch-padded test lengths. The arithmetic estimate adds counted add/subtract/multiply/divide, negation, reciprocal, sum/mean reduction and bias operations in the cell forward code to the matrix estimate. Nonlinear functions (e.g. exp/sigmoid) and comparisons are excluded from that arithmetic GFLOP figure; they are included as one logical operation each in the last column. Memory traffic is excluded from all columns. That logical total is a counting convention, not hardware FLOPs or energy. Loss and temporal prediction aggregation are excluded from both estimates. Thus neither column should be called an exact full end-to-end inference FLOP count.\n\n'
         'SSC inputs are framed event counts. ECG inputs are analog: its first projection is counted as dense MACs, not spike events. The ECG SynOps activity-table cell therefore covers hidden-driven connections only; its analog first-projection MACs are stored separately. All hidden spikes count stored pre-batch sequence lengths (including configured minimum padding and burn-in); padded totals are retained separately. ECG accuracy is per labeled timestep, while the compute denominator is one input sequence. Dataset-specific batch sizes and lengths mean cross-dataset runtimes are not matched-workload comparisons.\n\n'
-        f'SSC/ECG checkpoint hashes, resolved configs, per-seed counts, timing repeats and reproducible command: [measurement records](../{portable_path(output)}/README.md). Existing validation estimates remain separately labeled above. The ECG training-budget/stopping mismatch is unchanged. No checkpoint was retrained or selected using these test results.\n')
+        'SSC/ECG checkpoint hashes, resolved configs, per-seed counts and timing repeats are saved beside each training summary as `COST_RESULTS.json`; see [measurement layout](../results/valid/MEASUREMENTS.md). Existing validation estimates remain separately labeled above. The ECG training-budget/stopping mismatch is unchanged. No checkpoint was retrained or selected using these test results.\n')
     p.write_text(text, encoding='utf-8', newline='\n')
-    shared.save_json(output / 'AGGREGATE.json', dict(version=VERSION, datasets=records))
+    if output is not None:
+        shared.save_json(output / 'AGGREGATE.json', dict(version=VERSION, datasets=records))
 
 
 def main():
@@ -229,15 +231,15 @@ def main():
     parser.add_argument('--datasets', nargs='+', choices=['SSC', 'ECG'], default=['SSC', 'ECG'])
     parser.add_argument('--seeds', nargs='+', type=int, default=[42, 123, 456])
     parser.add_argument('--device', default='cuda:0')
-    parser.add_argument('--output', default='results/measurements/reference_test_costs_v1')
+    parser.add_argument('--output', help='Optional separate benchmark output; default saves beside each training summary')
     parser.add_argument('--dry-run', action='store_true')
     parser.add_argument('--update-reports', action='store_true')
     parser.add_argument('--reports-only', action='store_true', help='Refresh reports from existing records, without inference')
     args = parser.parse_args()
-    output = local_path(args.output)
+    output = local_path(args.output) if args.output else None
     if args.reports_only:
         for ds in ['SSC', 'ECG']:
-            records = [json.loads((output / ds / f'seed_{s}.json').read_text(encoding='utf-8'))
+            records = [load_measurement(ROOT, 'SE_adLIF', ds, s, output)
                        for s in [42, 123, 456]]
             if len({r['identity'] for r in records}) != 1 or any(
                     r['version'] != VERSION or r['dataset'] != ds or r['seed'] != s
@@ -251,8 +253,9 @@ def main():
                 _, path, _, _ = load_run(ds, seed)
                 print(ds, seed, portable_path(path), flush=True)
         return
-    output.mkdir(parents=True, exist_ok=True)
-    with (output / '.evaluation.lock').open('a+b') as lock:
+    session = output if output is not None else ROOT / 'results/valid/reference'
+    session.mkdir(parents=True, exist_ok=True)
+    with (session / '.evaluation.lock').open('a+b') as lock:
         if platform.system() == 'Windows':
             import msvcrt
             lock.seek(0)
@@ -283,7 +286,7 @@ def main():
                     raise ValueError(f'{ds}: differing preprocessing across seeds')
                 identity = hashlib.sha256(json.dumps(dict(version=VERSION, environment=environment,
                     data_hash=data_hash, signature=signature), sort_keys=True).encode()).hexdigest()
-                destination = output / ds / f'seed_{seed}.json'
+                destination = record_path(ROOT, 'SE_adLIF', ds, seed, output)
                 ckpt_hash = shared.sha256(path)
                 if destination.exists():
                     old = json.loads(destination.read_text(encoding='utf-8'))

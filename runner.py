@@ -17,6 +17,7 @@ from hydra import compose, initialize_config_dir
 from omegaconf import OmegaConf
 from evaluation_protocol import load_protocol, protocol_overrides, protocol_settings
 from project_paths import portable_config, portable_path
+from cost_records import normalized_record, VERSIONS as COST_VERSIONS
 
 
 ROOT = Path(__file__).resolve().parent
@@ -25,7 +26,7 @@ EVALUATION = {'name': _BASELINE.version,
               'seeds': list(_BASELINE.reproduction_policy.training_seeds),
               'common': {}, 'datasets': {name: {} for name in _BASELINE.datasets}}
 SEEDS = tuple(EVALUATION['seeds'])
-RUN_LOGDIR = "results/valid/protocol_v2"
+RUN_LOGDIR = "results/valid"
 # One explicit protocol shared by reference and proposed models.
 PROTOCOL = EVALUATION['datasets']
 
@@ -77,8 +78,12 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                 raise ValueError(f"Missing experiment config: config/experiment/{experiment}.yaml")
             for seed in seeds:
                 directory = result_root(model, adaptation_update_interval) / dataset / f"seed_{seed}"
+                if RUN_LOGDIR == 'results/valid' and model != 'SE_adLIF':
+                    retained = ROOT / 'results/not_improved' / directory.relative_to(ROOT / RUN_LOGDIR)
+                    if retained.exists():
+                        raise ValueError(f'Previous experiment retained at {retained}; use an explicit separate --logdir for an intentional new experiment')
                 # Leave active historical-layout jobs in place until they finish.
-                if RUN_LOGDIR == 'results/valid/protocol_v2' and not directory.exists():
+                if RUN_LOGDIR == 'results/valid' and not directory.exists():
                     legacy = ROOT / 'results/full_runs/protocol_v2' / model
                     if model == 'MR_SE_adLIF':
                         legacy /= f'K_{adaptation_update_interval}'
@@ -120,6 +125,12 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                 if manifest.exists():
                     original_config = json.loads(manifest.read_text(encoding="utf-8"))
                     previous = portable_config(copy.deepcopy(original_config), ROOT)
+                    # Directory-only relocation; preserve the original saved manifest.
+                    if RUN_LOGDIR == 'results/valid':
+                        for key in ('logdir', 'launcher_logdir'):
+                            value = previous.get(key)
+                            if isinstance(value, str):
+                                previous[key] = value.replace('results/valid/protocol_v2', 'results/valid')
                     # These newly explicit defaults preserve older runner behavior.
                     for key, value in {
                         'init_ckpt_path': None, 'run_test': True, 'scheduler': 'plateau',
@@ -129,10 +140,10 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                     # The public launcher rename does not change training settings.
                     if previous.get('launcher_script') == 'full_runner.py':
                         previous['launcher_script'] = 'runner.py'
-                    if (RUN_LOGDIR == 'results/valid/protocol_v2'
+                    if (RUN_LOGDIR == 'results/valid'
                             and previous.get('launcher_logdir') == 'results/full_runs/protocol_v2'
                             and str(previous.get('logdir', '')).replace('\\', '/') ==
-                            portable_path(directory, ROOT).replace('results/valid/protocol_v2/', 'results/full_runs/protocol_v2/')):
+                            portable_path(directory, ROOT).replace('results/valid/', 'results/full_runs/protocol_v2/')):
                         previous['logdir'] = resolved['logdir']
                         previous['launcher_logdir'] = resolved['launcher_logdir']
                     if previous != resolved:
@@ -207,8 +218,8 @@ def cost_aggregate_lines(root):
             path = directory / 'COST_RESULTS.json'
             if not (directory / 'completed.txt').exists() or not path.exists():
                 continue
-            record = json.loads(path.read_text(encoding='utf-8'))
-            if (record.get('version') != 'runner_test_costs_v1' or record.get('status') != 'complete'
+            record = normalized_record(json.loads(path.read_text(encoding='utf-8')))
+            if (record.get('version') not in COST_VERSIONS or record.get('status') != 'complete'
                     or record.get('dataset') != dataset or record.get('seed') != seed
                     or any(not isinstance(record.get('measurements', {}).get(k), (int, float))
                            or not math.isfinite(record['measurements'][k]) for k in keys)):

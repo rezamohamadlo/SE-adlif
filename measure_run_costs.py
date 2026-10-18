@@ -14,6 +14,7 @@ import measure_reference_costs as reference
 import measure_shd_costs as shared
 from models.pl_module import layer_map
 from project_paths import local_path, portable_config, portable_path
+from cost_records import normalized_record
 
 VERSION = 'runner_test_costs_v1'
 TARGETS = {'SHD': 'datasets.shd.SHDLDM', 'SSC': 'datasets.ssc.SSCLDM',
@@ -66,8 +67,8 @@ def _collect(directory, dataset, dry_run=False):
     digest = shared.sha256(path)
     result_path = directory / 'COST_RESULTS.json'
     if result_path.exists():
-        old = json.loads(result_path.read_text(encoding='utf-8'))
-        if (old.get('version') != VERSION or old.get('status') != 'complete' or old.get('checkpoint_sha256') != digest
+        old = normalized_record(json.loads(result_path.read_text(encoding='utf-8')))
+        if (old.get('status') != 'complete' or old.get('checkpoint_sha256') != digest
                 or old.get('dataset') != dataset or old.get('seed') != cfg.random_seed):
             raise ValueError('Existing cost record has a different checkpoint/protocol; preserve it before remeasurement')
         print(f'Reusing verified cost record: {portable_path(result_path)}')
@@ -94,7 +95,7 @@ def _collect(directory, dataset, dry_run=False):
             device=str(device), gpu=torch.cuda.get_device_name(device) if device.type == 'cuda' else platform.processor(),
             matmul_precision=torch.get_float32_matmul_precision(), timing_repeats=3, warmup=2,
             source_sha256={portable_path(p): shared.sha256(p) for p in
-                [Path(__file__), Path(shared.__file__), Path(reference.__file__),
+                [Path(__file__), Path(__file__).with_name('cost_records.py'), Path(shared.__file__), Path(reference.__file__),
                  *sorted((shared.ROOT / 'models').rglob('*.py'))]}),
         scopes=dict(activity='Stored sequence extent before batch padding, including configured minimum padding and burn-in',
             compute='Executed batch-padded timesteps; MLPSNN.forward only',

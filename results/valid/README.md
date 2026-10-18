@@ -19,9 +19,13 @@ calling it does not automatically apply the paper baseline. New fair model
 comparisons must explicitly inherit `config/paper_baseline.yaml` in separate
 configs/output directories. Main runners and existing model results are unchanged.
 
-Historical experiment outputs were moved to `results/archive/experiments_20261017/`.
+Historical experiment outputs were moved to `archive/experiments_20261017/`.
 Its `ARCHIVE_MANIFEST.json` records original paths and verified file hashes.
 The fresh LG-DTH SHD* seed-456 run was relocated while stopped to
-`results/valid/protocol_v2/LG_DTH_SE_adLIF/SHD/seed_456/` and has now completed all 300 epochs and final testing (94.43% test accuracy).
+`results/not_improved/LG_DTH_SE_adLIF/SHD/seed_456/` and has now completed all 300 epochs and final testing (94.43% test accuracy).
 Its former early-stopping run and original pre-relocation checkpoints/configs
-are retained separately under `results/archive/`.
+are retained separately under `archive/`.
+
+## Measurements
+
+All accepted per-seed test activity and compute records are stored as `COST_RESULTS.json` and `COST_RESULTS.md` beside their training summaries. See [the measurement layout](MEASUREMENTS.md). Shared historical evaluator evidence is archived separately; no measurement values were changed.

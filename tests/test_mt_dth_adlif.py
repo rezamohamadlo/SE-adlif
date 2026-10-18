@@ -1,4 +1,6 @@
 import unittest
+from unittest.mock import patch
+import tempfile
 
 import torch
 from omegaconf import OmegaConf
@@ -72,8 +74,9 @@ class MTDTHTests(unittest.TestCase):
             self.assertEqual(count.counts, batch_scalar_operations(profiles, 3, 7))
 
     def test_three_seed_baseline_plan_and_separate_paths(self):
-        plan = runner.build_plan('MT_DTH_SE_adLIF', datasets=('SHD',))
-        mt = runner.build_plan('MT_SE_adLIF', datasets=('SHD',))[0]['config']
+        with patch.object(runner, 'RUN_LOGDIR', 'results/test_plan_only'):
+            plan = runner.build_plan('MT_DTH_SE_adLIF', datasets=('SHD',))
+            mt = runner.build_plan('MT_SE_adLIF', datasets=('SHD',))[0]['config']
         self.assertEqual([p['seed'] for p in plan], [42, 123, 456])
         for p in plan:
             self.assertIn('MT_DTH_SE_adLIF', p['directory'].parts)

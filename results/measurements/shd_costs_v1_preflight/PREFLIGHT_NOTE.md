@@ -1,1 +1,0 @@
-Six accepted reference/DTH measurements from the first evaluation attempt. The suite stopped on an equivalent missing-vs-false dataset flag in older LG-DTH metadata. These records are preserved for audit, excluded from final aggregates; the complete suite is rerun under the normalized guard in ../shd_costs_v1/. No training settings or checkpoints were changed.
