@@ -10,6 +10,16 @@
 ## 📌 Getting Started
 
 ### Install Dependencies
+For a third PC, use the [complete Windows/Codex setup guide](SETUP_THIRD_PC.md)
+and `scripts/setup_windows.ps1`. It installs pinned packages with visible
+download progress, verifies CUDA/configs, and does not start training.
+
+From the repository root on the new Windows PC:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\setup_windows.ps1
+```
+
 For the tested Windows CUDA environment, use Python 3.11:
 ```powershell
 python -m venv .ven
