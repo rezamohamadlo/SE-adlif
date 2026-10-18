@@ -3,3 +3,12 @@
 repository_roots:
   - C:/Users/jafari.h.SPADANACO/Desktop/SE-adlif
   - E:/AI_paper_nazari/SE-adlif
+
+# Explicit directory-only migrations. Artifact suffixes and file bytes stay intact.
+artifact_prefixes:
+  results/valid/protocol_v2/DTH_SE_adLIF: results/valid/DTH_SE_adLIF
+  results/valid/protocol_v2/MT_SE_adLIF: results/valid/MT_SE_adLIF
+  results/valid/protocol_v2/DA_SE_adLIF: results/not_improved/DA_SE_adLIF
+  results/valid/protocol_v2/FP_SE_adLIF: results/not_improved/FP_SE_adLIF
+  results/valid/protocol_v2/LG_DTH_SE_adLIF: results/not_improved/LG_DTH_SE_adLIF
+  results/valid/protocol_v2/MR_SE_adLIF: results/not_improved/MR_SE_adLIF

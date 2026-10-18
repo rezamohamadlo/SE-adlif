@@ -4,8 +4,8 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 ## Run status
 
-- **Status:** Training in progress
-- **Progress:** 21 epochs completed (`0` through `20`) out of 40
+- **Status:** Training interrupted; resumable
+- **Progress:** 36 epochs completed (`0` through `35`) out of 40
 - **Dataset:** SSC
 - **Model:** SSC_MT_SE_adLIF
 - **Seed:** 123

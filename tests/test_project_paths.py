@@ -14,6 +14,14 @@ OLD_ROOT = 'C:/Users/jafari.h.SPADANACO/Desktop/SE-adlif'
 
 
 class ProjectPathTests(unittest.TestCase):
+    def test_explicit_results_layout_migration_preserves_checkpoint_suffix(self):
+        suffix = 'SSC/seed_123/ckpt/epoch=20-step=6174.ckpt'
+        for model, group in [('MT_SE_adLIF', 'valid'), ('FP_SE_adLIF', 'not_improved')]:
+            old = f'results/valid/protocol_v2/{model}/{suffix}'
+            expected = f'results/{group}/{model}/{suffix}'
+            self.assertEqual(portable_path(old), expected)
+            self.assertEqual(portable_path(OLD_ROOT + '/' + old), expected)
+
     def test_registered_roots_preserve_full_checkpoint_identity(self):
         suffix = 'results/valid/reference/SHD/seed_42/hydra/2026-10-12/07-17-03/ckpt/epoch=162-step=1956.ckpt'
         old = (OLD_ROOT + '/' + suffix).replace('/', '\\')

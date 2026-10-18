@@ -82,3 +82,31 @@ The best validation checkpoint was evaluated on the test split after training.
 |---|---:|
 | Test accuracy | **77.60%** |
 | Test loss | **1.3197** |
+
+<!-- test-costs:start -->
+## Test-set spike activity and inference cost
+
+Validation-selected checkpoint, epoch 35 (zero-based). No training performed.
+
+| Measurement | Value |
+|---|---:|
+| Total parameters | 1,692,790.000000 |
+| Trainable parameters | 1,691,315.000000 |
+| Hidden spikes/sample | 9,719.839859 |
+| L1 spikes/sample | 9,211.379354 |
+| L2 spikes/sample | 508.460504 |
+| L1 firing fraction (%) | 4.264527 |
+| L2 firing fraction (%) | 0.235398 |
+| Synaptic operations/sample | 19,723,873.138554 |
+| Analog input dense MACs/sample | 0.000000 |
+| Dense matrix GFLOPs/sample | 1.008720 |
+| Matrix + scalar arithmetic GFLOPs/sample | 1.022190 |
+| Logical GOp/sample | 1.023493 |
+| Forward runtime (ms/sample) | 1.924001 |
+
+Activity uses stored sequence lengths including minimum padding/burn-in; compute includes batch padding.
+ECG SynOps exclude analog input. Arithmetic excludes nonlinearities/comparisons; logical operations are not hardware FLOPs or energy.
+Runtime is forward-only, excluding data loading, transfer, loss and temporal aggregation.
+These test measurements are separate from the validation GFLOPs estimate above.
+Detailed measurements, checkpoint identity and environment: [COST_RESULTS.json](COST_RESULTS.json) / [COST_RESULTS.md](COST_RESULTS.md).
+<!-- test-costs:end -->

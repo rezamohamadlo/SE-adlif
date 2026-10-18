@@ -37,10 +37,10 @@ def result_root(model, adaptation_update_interval=2):
 
 
 def matches_paper_baseline(previous, resolved, dataset):
-    """Accept legacy SHD metadata only after comparing all effective settings."""
+    """Accept legacy metadata only after comparing all effective settings."""
     baseline_keys = ('paper_baseline', 'paper_baseline_version',
                      'paper_baseline_dataset', 'paper_baseline_deviations')
-    if (dataset != 'SHD'
+    if (dataset not in ('SHD', 'SSC', 'ECG')
             or not re.fullmatch(r'controlled_v2(?:_custom_[0-9a-f]{12})?',
                                 str(previous.get('evaluation_protocol', '')))
             or any(key in previous for key in baseline_keys)
@@ -52,7 +52,8 @@ def matches_paper_baseline(previous, resolved, dataset):
         old.pop(key, None)
         current.pop(key, None)
     # SHDLDM's omitted value has always defaulted to False.
-    old.setdefault('dataset', {}).setdefault('additional_test_set_validation', False)
+    if dataset == 'SHD':
+        old.setdefault('dataset', {}).setdefault('additional_test_set_validation', False)
     return old == current
 
 

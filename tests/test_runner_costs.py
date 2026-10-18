@@ -26,6 +26,7 @@ class RunnerCostTests(unittest.TestCase):
             ckpt = directory / 'best.ckpt'
             torch.save(dict(state_dict=model.state_dict(), hyper_parameters=dict(cfg=cfg), epoch=2), ckpt)
             (directory / 'completed.txt').touch()
+            (directory / 'TRAINING_SUMMARY.md').write_text('# Training\nOriginal epoch history\n')
             x = torch.ones(3, 4, 4)
             block = torch.ones(3, 4, dtype=torch.long)
             prediction = model(x).softmax(-1).sum(1).argmax(-1)
@@ -40,6 +41,11 @@ class RunnerCostTests(unittest.TestCase):
             self.assertEqual(record, cached)
             data.assert_called_once()
             self.assertTrue((directory / 'COST_RESULTS.md').exists())
+            summary = (directory / 'TRAINING_SUMMARY.md').read_text()
+            self.assertIn('Original epoch history', summary)
+            self.assertIn('Hidden spikes/sample', summary)
+            self.assertIn('Dense matrix GFLOPs/sample', summary)
+            self.assertEqual(summary.count('<!-- test-costs:start -->'), 1)
             self.assertEqual(record['measurements']['totals']['samples'], 3)
             self.assertEqual(record['measurements']['reproduced_test_acc'], 1)
             self.assertGreater(record['measurements']['arithmetic_gflops_test_padded'],

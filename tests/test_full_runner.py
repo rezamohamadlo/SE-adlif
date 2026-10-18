@@ -15,6 +15,25 @@ import runner as full_runner
 
 
 class FullRunnerTests(unittest.TestCase):
+    def test_legacy_ssc_ecg_require_identical_effective_settings(self):
+        for dataset in ('SSC', 'ECG'):
+            current = full_runner.build_plan('DTH_SE_adLIF', seeds=(42,), datasets=(dataset,))[0]['config']
+            legacy = copy.deepcopy(current)
+            for key in ('paper_baseline', 'paper_baseline_version',
+                        'paper_baseline_dataset', 'paper_baseline_deviations'):
+                legacy.pop(key)
+            legacy['evaluation_protocol'] = 'controlled_v2'
+            self.assertTrue(full_runner.matches_paper_baseline(legacy, current, dataset))
+            for key, value in [('early_stopping', True), ('n_epochs', 1),
+                               ('batch_size', 1), ('lr', .5), ('random_seed', 123)]:
+                changed = copy.deepcopy(legacy)
+                changed[key] = value
+                with self.subTest(dataset=dataset, key=key):
+                    self.assertFalse(full_runner.matches_paper_baseline(changed, current, dataset))
+            changed = copy.deepcopy(legacy)
+            changed['dataset']['num_workers'] = 8
+            self.assertFalse(full_runner.matches_paper_baseline(changed, current, dataset))
+
     def test_legacy_shd_baseline_match_preserves_provenance_and_resume(self):
         item = full_runner.build_plan('LG_DTH_SE_adLIF', seeds=(123,), datasets=('SHD',))[0]
         legacy = copy.deepcopy(item['config'])

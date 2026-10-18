@@ -1,0 +1,357 @@
+{
+  "version": "runner_test_costs_v1",
+  "status": "complete",
+  "dataset": "SSC",
+  "seed": 42,
+  "created_utc": "2026-10-18T04:33:10.561240+00:00",
+  "checkpoint": "results/valid/protocol_v2/DTH_SE_adLIF/SSC/seed_42/ckpt/epoch=30-step=9114.ckpt",
+  "checkpoint_sha256": "176b39d5d944a4a83751694618c7166aa7131e0114f67227ff40e15ea4ff99c2",
+  "best_epoch": 30,
+  "saved_config": {
+    "random_seed": 42,
+    "logdir": "results/full_runs/protocol_v2/DTH_SE_adLIF/SSC/seed_42",
+    "datadir": "data",
+    "cachedir": "data/cache",
+    "ckpt_path": "results/full_runs/protocol_v2/DTH_SE_adLIF/SSC/seed_42/ckpt/last.ckpt",
+    "device": "cuda:0",
+    "early_stopping": false,
+    "early_stopping_patience": 50,
+    "early_stopping_min_delta": 0.001,
+    "dataset": {
+      "_target_": "datasets.ssc.SSCLDM",
+      "data_path": "data",
+      "spatial_factor": 0.2,
+      "time_factor": 0.001,
+      "window_size": 4,
+      "batch_size": 256,
+      "num_workers": 0,
+      "num_classes": 35,
+      "pad_to_min_size": 300,
+      "ignore_first_timesteps": 10
+    },
+    "exp_name": "SSC_DTH_SE_adLIF",
+    "two_layers": true,
+    "alpha": 5.0,
+    "c": 0.4,
+    "dt": 1.0,
+    "dropout": 0.15,
+    "l1": {
+      "cell": "dth_se_adlif",
+      "input_size": 140,
+      "n_neurons": 720,
+      "tau_u_range": [
+        5,
+        25
+      ],
+      "tau_w_range": [
+        60,
+        300
+      ],
+      "q": 120,
+      "alpha": 5.0,
+      "c": 0.4,
+      "dt": 1.0,
+      "rho_fast": 0.9,
+      "rho_slow": 0.99,
+      "target_rate": 0.05,
+      "theta_min": 0.5,
+      "theta_max": 1.5
+    },
+    "l2": {
+      "cell": "dth_se_adlif",
+      "input_size": 720,
+      "n_neurons": 720,
+      "tau_u_range": [
+        5,
+        25
+      ],
+      "tau_w_range": [
+        60,
+        300
+      ],
+      "q": 120,
+      "alpha": 5.0,
+      "c": 0.4,
+      "dt": 1.0,
+      "rho_fast": 0.9,
+      "rho_slow": 0.99,
+      "target_rate": 0.05,
+      "theta_min": 0.5,
+      "theta_max": 1.5
+    },
+    "l_out": {
+      "input_size": 720,
+      "n_neurons": 35,
+      "tau_u_range": [
+        15,
+        15
+      ],
+      "dt": 1.0
+    },
+    "n_epochs": 40,
+    "batch_size": 256,
+    "loss_agg": "summed_membrane_potentials",
+    "tracking_metric": "val_acc",
+    "tracking_mode": "max",
+    "lr": 0.006,
+    "factor": 0.9,
+    "patience": 9999,
+    "launcher_script": "full_runner.py",
+    "model_variant": "DTH_SE_adLIF",
+    "run_mode": "ours",
+    "launcher_logdir": "results/full_runs/protocol_v2",
+    "evaluation_protocol": "controlled_v2"
+  },
+  "data_sha256": "cfadbed2d9e118c2c1a86441605f889171afa4d76e5ff35b6859f57afe6c808c",
+  "environment": {
+    "python": "3.11.0",
+    "torch": "2.6.0+cu124",
+    "cuda": "12.4",
+    "device": "cuda:0",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "matmul_precision": "high",
+    "timing_repeats": 3,
+    "warmup": 2,
+    "source_sha256": {
+      "measure_run_costs.py": "5e3c3532c7b09a512b152a770d6d4a6a8d5f6c65f1c1be69b7fa0a6b0d9ab01c",
+      "measure_shd_costs.py": "27a9ec2a48f247618cffe0772a036d69e68415b8a60337c28fa114db603d0c3b",
+      "measure_reference_costs.py": "753431bd336994418f6db61c8fd01a43bc780085e614ef35a15472df332bc165",
+      "models/alif.py": "a07e84b2a6238a67585b9f927be4c5f4f514fb28234d24acecfc6c2608aa480d",
+      "models/helpers.py": "d50e6d7f16a75b4c793ce16e8c6629469ffe60ca0ec4c792b30409fec606fadd",
+      "models/li.py": "8a299b75f580f419616b7b345e857b01c62d96f5fbd1e769d67675b0c2fc7826",
+      "models/lif.py": "2160d78d952f94cd222cf18def1277cc69b0447620d1e4d03a50fba737bf8500",
+      "models/ours/__init__.py": "1faa70f74752d4b3322495efae107f96ed979fdabfe33a22df921cb55c8a1b38",
+      "models/ours/da_adlif.py": "2ec0386304ad2baea2be7c9712e2ba84d4b7f16da7d75c1145c5a763725cd3c7",
+      "models/ours/dth_adlif.py": "a53181fbe8c8bf7b55d9b79eca47f6b5bd49ff1e324b9a8470fc16ffeeda026d",
+      "models/ours/fp_adlif.py": "fbdb51b844808fc1a713188a282fed1109043dd6c7293e6fdb7614648441572f",
+      "models/ours/lg_dth_adlif.py": "1d1fdbfd34d374ebbeeb90a6ca74533a6ff41c2eaab56aa15c3a3bb56c310e7d",
+      "models/ours/mr_adlif.py": "f0525868bb8bfd0265b837bf5ab5b60add8cd043c7524233b567cab00b20d8ed",
+      "models/ours/mt_adlif.py": "772c504f595cb28f170642870243d344c4fea749b94bcecc73486ad7ade4068a",
+      "models/ours/mt_dth_adlif.py": "45c3fb6298e636b4fb09c11c93ec3f02bb333ecb0ff88b7032fca3b74c50986b",
+      "models/pl_module.py": "a899c0c254d7c57fd6852fc76479862e07d81ffdb1a044de3b0219435b3ac937",
+      "models/pl_module_compress.py": "9e39ba081c9ddcfea67a2ac436d6dc527736b72371369ee965b4d8e55a756ed2",
+      "models/rnn.py": "a53c1a31c36a999e3417ce6dd156693683a0b88411bb88375403fa55389379ab"
+    }
+  },
+  "scopes": {
+    "activity": "Stored sequence extent before batch padding, including configured minimum padding and burn-in",
+    "compute": "Executed batch-padded timesteps; MLPSNN.forward only",
+    "timing": "Synchronized forward wall time; excludes transfer/loading/loss/temporal aggregation",
+    "synops": "Dense fan-out event estimate; ECG analog input projection excluded and stored as dense MACs",
+    "arithmetic": "Matrix MAC=2 FLOPs; selected scalar arithmetic; nonlinearities/comparisons excluded",
+    "logical": "Matrix operations plus scalar operations, nonlinearities/comparisons each counted as one; not hardware FLOPs"
+  },
+  "measurements": {
+    "totals": {
+      "correct": 15942,
+      "targets": 20382,
+      "samples": 20382,
+      "padded_sample_timesteps": 6114600,
+      "sequence_sample_timesteps": 6114600,
+      "synops_padded": 384708355535.0,
+      "synops_sequence": 384708355535.0,
+      "l1_spikes_padded": 176456935.0,
+      "l1_spikes_sequence": 176456935.0,
+      "l2_spikes_padded": 8847493.0,
+      "l2_spikes_sequence": 8847493.0
+    },
+    "operation_profiles": {
+      "l1": {
+        "period": 1,
+        "steps": [
+          {
+            "per_sample": {
+              "bias_add": 720,
+              "sub": 4320,
+              "abs": 1440,
+              "mean": 720,
+              "reciprocal": 720,
+              "mul": 12242,
+              "rsub": 720,
+              "sigmoid": 720,
+              "add": 7200,
+              "heaviside": 720,
+              "exp": 720
+            },
+            "per_batch": {
+              "bias_add": 0,
+              "sub": 0,
+              "abs": 0,
+              "mean": 0,
+              "reciprocal": 1440,
+              "mul": 5040,
+              "rsub": 2880,
+              "sigmoid": 0,
+              "add": 1440,
+              "heaviside": 0,
+              "exp": 1440
+            }
+          },
+          {
+            "per_sample": {
+              "bias_add": 720,
+              "sub": 4320,
+              "abs": 1440,
+              "mean": 720,
+              "reciprocal": 720,
+              "mul": 12962,
+              "rsub": 720,
+              "sigmoid": 720,
+              "add": 7200,
+              "heaviside": 720,
+              "exp": 720
+            },
+            "per_batch": {
+              "bias_add": 0,
+              "sub": 0,
+              "abs": 0,
+              "mean": 0,
+              "reciprocal": 1440,
+              "mul": 4320,
+              "rsub": 2880,
+              "sigmoid": 0,
+              "add": 1440,
+              "heaviside": 0,
+              "exp": 1440
+            }
+          }
+        ]
+      },
+      "l2": {
+        "period": 1,
+        "steps": [
+          {
+            "per_sample": {
+              "bias_add": 720,
+              "sub": 4320,
+              "abs": 1440,
+              "mean": 720,
+              "reciprocal": 720,
+              "mul": 12242,
+              "rsub": 720,
+              "sigmoid": 720,
+              "add": 7200,
+              "heaviside": 720,
+              "exp": 720
+            },
+            "per_batch": {
+              "bias_add": 0,
+              "sub": 0,
+              "abs": 0,
+              "mean": 0,
+              "reciprocal": 1440,
+              "mul": 5040,
+              "rsub": 2880,
+              "sigmoid": 0,
+              "add": 1440,
+              "heaviside": 0,
+              "exp": 1440
+            }
+          },
+          {
+            "per_sample": {
+              "bias_add": 720,
+              "sub": 4320,
+              "abs": 1440,
+              "mean": 720,
+              "reciprocal": 720,
+              "mul": 12962,
+              "rsub": 720,
+              "sigmoid": 720,
+              "add": 7200,
+              "heaviside": 720,
+              "exp": 720
+            },
+            "per_batch": {
+              "bias_add": 0,
+              "sub": 0,
+              "abs": 0,
+              "mean": 0,
+              "reciprocal": 1440,
+              "mul": 4320,
+              "rsub": 2880,
+              "sigmoid": 0,
+              "add": 1440,
+              "heaviside": 0,
+              "exp": 1440
+            }
+          }
+        ]
+      },
+      "out_layer": {
+        "period": 1,
+        "steps": [
+          {
+            "per_sample": {
+              "mul": 70,
+              "bias_add": 35,
+              "rsub": 0,
+              "add": 35,
+              "exp": 0,
+              "reciprocal": 0
+            },
+            "per_batch": {
+              "mul": 35,
+              "bias_add": 0,
+              "rsub": 35,
+              "add": 0,
+              "exp": 35,
+              "reciprocal": 35
+            }
+          },
+          {
+            "per_sample": {
+              "mul": 70,
+              "bias_add": 35,
+              "rsub": 0,
+              "add": 35,
+              "exp": 0,
+              "reciprocal": 0
+            },
+            "per_batch": {
+              "mul": 35,
+              "bias_add": 0,
+              "rsub": 35,
+              "add": 0,
+              "exp": 35,
+              "reciprocal": 35
+            }
+          }
+        ]
+      }
+    },
+    "nonmatrix_scalar_operations_by_kind": {
+      "bias_add": 9019035000,
+      "sub": 52830144000,
+      "abs": 17610048000,
+      "mean": 8805024000,
+      "reciprocal": 8874984000,
+      "mul": 159121877520,
+      "rsub": 8944104000,
+      "sigmoid": 8805024000,
+      "add": 88333371000,
+      "heaviside": 8805024000,
+      "exp": 8874984000
+    },
+    "total_parameters": 1691354,
+    "trainable_parameters": 1689879,
+    "spikes_total_per_sample": 9091.572367775489,
+    "spikes_l1_per_sample": 8657.488715533314,
+    "spikes_l2_per_sample": 434.0836522421745,
+    "firing_l1_percent": 4.008096627561719,
+    "firing_l2_percent": 0.20096465381582151,
+    "synops_per_sample": 18874907.052055735,
+    "nonmatrix_ops_per_sample": 18645060.32381513,
+    "dense_gflops_test_padded": 1.00872,
+    "arithmetic_gflops_test_padded": 1.0252016278834266,
+    "logical_gops_test_padded": 1.0273650603238151,
+    "analog_input_dense_macs_per_sample": 0,
+    "forward_ms_per_sample": 1.9130724871570686,
+    "timing_repeat_ms_per_sample": [
+      1.9115171965387139,
+      1.9152923118438328,
+      1.9124079530886589
+    ],
+    "reproduced_test_acc": 0.7821607300559317
+  }
+}

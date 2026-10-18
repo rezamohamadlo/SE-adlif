@@ -21,6 +21,50 @@ TARGETS = {'SHD': 'datasets.shd.SHDLDM', 'SSC': 'datasets.ssc.SSCLDM',
            'ECG': 'datasets.ecg.ECGLDM'}
 
 
+def update_training_summary(directory, record):
+    """Mirror completed test measurements without changing training history."""
+    path = directory / 'TRAINING_SUMMARY.md'
+    if not path.exists():
+        return
+    start, end = '<!-- test-costs:start -->', '<!-- test-costs:end -->'
+    text = path.read_text(encoding='utf-8')
+    if start in text:
+        before, rest = text.split(start, 1)
+        if end not in rest:
+            raise ValueError('Incomplete test-cost section in training summary')
+        _, after = rest.split(end, 1)
+    else:
+        before, after = text, ''
+    metrics = record['measurements']
+    labels = {
+        'total_parameters': 'Total parameters',
+        'trainable_parameters': 'Trainable parameters',
+        'spikes_total_per_sample': 'Hidden spikes/sample',
+        'spikes_l1_per_sample': 'L1 spikes/sample',
+        'spikes_l2_per_sample': 'L2 spikes/sample',
+        'firing_l1_percent': 'L1 firing fraction (%)',
+        'firing_l2_percent': 'L2 firing fraction (%)',
+        'synops_per_sample': 'Synaptic operations/sample',
+        'analog_input_dense_macs_per_sample': 'Analog input dense MACs/sample',
+        'dense_gflops_test_padded': 'Dense matrix GFLOPs/sample',
+        'arithmetic_gflops_test_padded': 'Matrix + scalar arithmetic GFLOPs/sample',
+        'logical_gops_test_padded': 'Logical GOp/sample',
+        'forward_ms_per_sample': 'Forward runtime (ms/sample)',
+    }
+    lines = [start, '## Test-set spike activity and inference cost', '',
+             f"Validation-selected checkpoint, epoch {record['best_epoch']} (zero-based). No training performed.", '',
+             '| Measurement | Value |', '|---|---:|']
+    lines += [f'| {label} | {metrics[key]:,.6f} |' for key, label in labels.items()]
+    lines += ['', 'Activity uses stored sequence lengths including minimum padding/burn-in; compute includes batch padding.',
+              'ECG SynOps exclude analog input. Arithmetic excludes nonlinearities/comparisons; logical operations are not hardware FLOPs or energy.',
+              'Runtime is forward-only, excluding data loading, transfer, loss and temporal aggregation.',
+              'These test measurements are separate from the validation GFLOPs estimate above.',
+              'Detailed measurements, checkpoint identity and environment: [COST_RESULTS.json](COST_RESULTS.json) / [COST_RESULTS.md](COST_RESULTS.md).', end]
+    temporary = path.with_suffix('.md.costs.tmp')
+    temporary.write_text(before.rstrip() + '\n\n' + '\n'.join(lines) + after.rstrip() + '\n', encoding='utf-8')
+    temporary.replace(path)
+
+
 def prepare_batches(dataset, cfg):
     return shared.prepare_batches(cfg) if dataset == 'SHD' else reference.prepare_batches(dataset, cfg)
 
@@ -72,6 +116,7 @@ def _collect(directory, dataset, dry_run=False):
                 or old.get('dataset') != dataset or old.get('seed') != cfg.random_seed):
             raise ValueError('Existing cost record has a different checkpoint/protocol; preserve it before remeasurement')
         print(f'Reusing verified cost record: {portable_path(result_path)}')
+        update_training_summary(directory, old)
         return old
     torch.manual_seed(cfg.random_seed)
     torch.set_float32_matmul_precision('high')
@@ -119,6 +164,7 @@ def _collect(directory, dataset, dry_run=False):
     temporary.replace(directory / 'COST_RESULTS.md')
     # JSON is the completion record; publish it after the human-readable summary.
     shared.save_json(result_path, record)
+    update_training_summary(directory, record)
     return record
 
 

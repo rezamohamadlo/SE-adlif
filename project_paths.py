@@ -12,6 +12,17 @@ PATH_KEYS = {'logdir', 'launcher_logdir', 'datadir', 'cachedir', 'data_path',
              'sweep_checkpoint', 'sweep_output', 'search_output', 'evaluation_file'}
 
 
+def relocated_artifact_path(value):
+    """Resolve explicit layout aliases without changing checkpoint identity."""
+    aliases = ROOT / 'config/path_aliases.yaml'
+    if aliases.exists():
+        mappings = OmegaConf.load(aliases).get('artifact_prefixes', {})
+        for previous in sorted(mappings, key=len, reverse=True):
+            if value == previous or value.startswith(previous + '/'):
+                return str(mappings[previous]) + value[len(previous):]
+    return value
+
+
 def portable_path(value, root=None):
     """Map only registered checkout prefixes; leave external paths explicit."""
     if value is None or not isinstance(value, (str, Path)):
@@ -33,12 +44,12 @@ def portable_path(value, root=None):
             suffix = posixpath.normpath(text[len(prefix):].lstrip('/') or '.')
             if suffix == '..' or suffix.startswith('../'):
                 raise ValueError(f'Path escapes registered checkout: {value}')
-            return suffix
+            return relocated_artifact_path(suffix)
     if PureWindowsPath(text).is_absolute() or text.startswith('/'):
         return text
     if PureWindowsPath(text).drive:
         raise ValueError(f'Ambiguous drive-relative path: {value}')
-    return posixpath.normpath(text)
+    return relocated_artifact_path(posixpath.normpath(text))
 
 
 def local_path(value, root=None, must_exist=False):
