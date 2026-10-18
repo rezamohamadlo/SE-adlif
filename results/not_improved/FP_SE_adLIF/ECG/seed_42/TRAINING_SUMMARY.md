@@ -72,7 +72,7 @@ ckpt/epoch=153-step=1386.ckpt
 
 ## Evaluation note
 
-This run uses `validate_on: validation`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
+ECG validation is reserved from the training file; the separate test file is used for final evaluation. Check saved stopping and epoch settings before claiming a matched baseline comparison.
 
 ## Final test evaluation
 
@@ -82,3 +82,7 @@ The best validation checkpoint was evaluated on the test split after training.
 |---|---:|
 | Test accuracy | **86.85%** |
 | Test loss | **0.3499** |
+
+## Evidence audit - 18 October 2026
+
+Historical unmatched ECG result: the saved config enables early stopping. Retain the score as descriptive evidence, not a completion under the current 400-epoch/no-early-stopping baseline.

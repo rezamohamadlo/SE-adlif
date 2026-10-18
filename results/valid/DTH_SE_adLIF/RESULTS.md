@@ -1,7 +1,7 @@
 # DTH_SE_adLIF: full evaluation
 
 Statistics use final test accuracy from completed runs only.
-Protocol: paper_classification_v1. Baseline: config/paper_baseline.yaml; dataset settings: config/comparison/.
+Target comparison protocol: paper_classification_v1; original per-run provenance is retained. Baseline: config/paper_baseline.yaml; dataset settings: config/comparison/.
 SHD* training-derived validation: 20%; ECG: 5%; split seeds: SHD* 42, ECG 42.
 SSC uses official train/valid/test. Test evaluation follows validation checkpoint selection.
 
@@ -10,8 +10,8 @@ Training settings: SHD: LR=0.01, early stopping=False, patience=50, delta=0.001,
 
 | Dataset | Seed 42 | Seed 123 | Seed 456 | n | Mean ± sample SD |
 |---|---:|---:|---:|---:|---:|
-| SHD | pending | pending | pending | 0 | pending |
-| SSC | pending | pending | pending | 0 | pending |
+| SHD* | 94.70% | 94.88% | 93.90% | 3 | 94.49% ± 0.52% |
+| SSC | 78.22% | 78.31% | 78.04% | 3 | 78.19% ± 0.14% |
 | ECG | pending | pending | pending | 0 | pending |
 
 <!-- runner-costs:start -->
@@ -34,7 +34,6 @@ Mean ± sample SD across measured completed training seeds. n=1 has no sample SD
 Per-seed evidence: `<dataset>/seed_<seed>/COST_RESULTS.json` and `COST_RESULTS.md`. Spikes use stored sequence lengths including minimum padding/burn-in; compute/runtime includes batch padding. ECG SynOps exclude analog input, whose dense MACs are stored separately. Arithmetic excludes nonlinearities/comparisons; logical GOp is not hardware GFLOPs or energy. Runtime covers uninstrumented forward only, excluding transfer/loading/loss/temporal aggregation. Future measurement does not change training settings or validate baseline compatibility.
 <!-- runner-costs:end -->
 
-
 ## Archived unmatched ECG result
 
 | Dataset | Seed | Historical test accuracy | Reason excluded | Archived record |
@@ -44,3 +43,7 @@ Per-seed evidence: `<dataset>/seed_<seed>/COST_RESULTS.json` and `COST_RESULTS.m
 All configs, checkpoints, metrics and test evidence were retained. Their hashes
 are recorded in the [archive manifest](../../../archive/unmatched_early_stopping_20261017/ARCHIVE_MANIFEST.json).
 The current ECG table remains pending until matched training is completed.
+
+## Evidence audit - 18 October 2026
+
+SSC seeds 123/456 have complete metrics and baseline-versioned configs, but their original checkpoints are missing locally. SSC seed 42 has matching saved settings but retains its original `controlled_v2` label without baseline-version metadata. See per-seed audit notes. ECG remains pending; archived early-stopped scores are excluded.

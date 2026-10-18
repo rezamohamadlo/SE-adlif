@@ -72,7 +72,7 @@ ckpt/epoch=37-step=11172.ckpt
 
 ## Evaluation note
 
-This run uses `validate_on: validation`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
+SSC uses the official `valid` split for checkpoint selection and the separate official `test` split for final evaluation.
 
 ## Final test evaluation
 
@@ -110,3 +110,7 @@ Runtime is forward-only, excluding data loading, transfer, loss and temporal agg
 These test measurements are separate from the validation GFLOPs estimate above.
 Detailed measurements, checkpoint identity and environment: [COST_RESULTS.json](COST_RESULTS.json) / [COST_RESULTS.md](COST_RESULTS.md).
 <!-- test-costs:end -->
+
+## Evidence audit - 18 October 2026
+
+The local metrics contain validation epochs 0-39 and one final test row. The saved full config identifies `paper_classification_v1`. Checkpoints and the runtime log are absent locally, so checkpoint identity and final-test reproducibility cannot be fully reverified here. Preserve the recorded score; transfer the original artifacts before checkpoint-based evaluation or resume.

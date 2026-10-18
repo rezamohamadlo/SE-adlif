@@ -71,7 +71,7 @@ ckpt/epoch=232-step=2097.ckpt
 
 ## Evaluation note
 
-This run uses `validate_on: validation`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
+ECG validation is reserved from the training file; the separate test file is used for final evaluation. Check saved stopping and epoch settings before claiming a matched baseline comparison.
 
 ## Final test evaluation
 
@@ -83,3 +83,7 @@ The best validation checkpoint was evaluated on the test split after training.
 | Test loss | **0.3045** |
 
 This runner command uses the shared evaluation settings and starts or resumes a runner-managed job. It does not import this retained historical run automatically.
+
+## Evidence audit - 18 October 2026
+
+Historical reference, excluded from matched 400-epoch/no-early-stopping comparisons: early stopping was enabled. The recorded final test value remains descriptive evidence.

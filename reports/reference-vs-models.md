@@ -1,4 +1,4 @@
-# Reference versus proposed models - SHD*
+# Reference versus proposed models
 
 SHD* records for DA, FP, LG-DTH, MR and MT-DTH are retained in [not_improved](../results/not_improved/README.md); their valid measurements remain included here. Whole model folders are retained there; the classification is based on SHD* accuracy, not separate SSC/ECG outcome assessments.
 
@@ -122,3 +122,26 @@ Mean and sample SD across three seeds, on the same official SHD* test batches. A
 ## MT-DTH combination follow-up
 
 All three fresh runs completed 300 epochs with batch 256, early stopping disabled and the same split/preprocessing. Test accuracies are lower than both MT and DTH on every matching seed. Mean accuracy is 0.87 percentage points below MT and 0.75 below DTH, while counted neuron-forward arithmetic is higher. Retain this as a negative combination ablation; the lower three-seed SD is not an accuracy improvement. The architecture was chosen after inspecting earlier test results, so retain that development provenance and do not use the new test scores to select further tuning settings.
+
+## SSC and ECG evidence status - 18 October 2026
+
+SSC final test accuracy (%). Means and sample SDs use distinct completed training seeds; single-seed results have no across-seed SD. Pending seeds are excluded. Values come from canonical per-seed metrics, not nested historical logs.
+
+| Model | Seed 42 | Seed 123 | Seed 456 | Accepted metric completions | Mean +/- sample SD (%) |
+|---|---:|---:|---:|---:|---:|
+| SE-adLIF reference | 78.33 | 78.12 | 78.17 | 3 | 78.21 +/- 0.11 |
+| DTH | 78.22 | 78.31 | 78.04 | 3 | 78.19 +/- 0.14 |
+| MT | 77.60 | pending | pending | 1 | 77.60 (n=1) |
+| DA | 77.88 | pending | pending | 1 | 77.88 (n=1) |
+| FP | 77.67 (unverified) | pending | pending | 0 | excluded |
+| MR (K=2) | 76.93 | pending | pending | 1 | 76.93 (n=1) |
+| LG-DTH | pending | pending | pending | 0 | pending |
+| MT-DTH | pending | pending | pending | 0 | pending |
+
+DTH's mean difference from reference is -0.016 pp using unrounded matching-seed metrics. MT's seed-42 difference is -0.736 pp against reference seed 42; it is not a three-seed comparison. DTH seeds 123/456 lack local checkpoints, so their complete metric records cannot yet be fully reverified against original weights. MT seed 123 is a partial summary snapshot without local metrics or checkpoints. Older SSC records retain historical protocol metadata even where shared settings match.
+
+FP SSC seed 42 has conflicting validation rows at epochs 3 and 4 with identical step numbers. Its displayed test score is preserved historical evidence, excluded from accepted comparisons until provenance is resolved. No rows were removed to construct a clean history.
+
+No current DTH/MT matched ECG results are available. Their archived early-stopped seed-42 scores are DTH 88.35% and MT 87.23%; these are historical only. Retained DA (87.20%), FP (86.85%) and MR (88.05%) ECG seed-42 results also enable early stopping and are excluded from matched baseline comparisons. The ECG reference itself is unmatched: seed 42 used 383 epochs, while seeds 123/456 enabled early stopping. Its 88.32 +/- 0.35% mean remains descriptive only.
+
+See the [per-seed evidence audit](results-audit-2026-10-18.md) for source links, missing artifacts and scope. The SHD* comparison above remains unchanged.

@@ -1,7 +1,7 @@
 # DA_SE_adLIF: full evaluation
 
 Statistics use final test accuracy from completed runs only.
-Protocol: paper_classification_v1. Baseline: config/paper_baseline.yaml; dataset settings: config/comparison/.
+Target comparison protocol: paper_classification_v1; historical exceptions are identified below. Baseline: config/paper_baseline.yaml; dataset settings: config/comparison/.
 SHD* training-derived validation: 20%; ECG: 5%; split seeds: SHD* 42, ECG 42.
 SSC uses official train/valid/test. Test evaluation follows validation checkpoint selection.
 
@@ -10,6 +10,10 @@ Training settings: SHD: LR=0.01, early stopping=False, patience=50, delta=0.001,
 
 | Dataset | Seed 42 | Seed 123 | Seed 456 | n | Mean ± sample SD |
 |---|---:|---:|---:|---:|---:|
-| SHD | 93.73% | 93.99% | 92.27% | 3 | 93.33% ± 0.93% |
+| SHD* | 93.73% | 93.99% | 92.27% | 3 | 93.33% ± 0.93% |
 | SSC | 77.88% | pending | pending | 1 | pending |
-| ECG | 87.20% | pending | pending | 1 | pending |
+| ECG (historical, unmatched) | 87.20% | pending | pending | 1 | pending |
+
+## Evidence audit - 18 October 2026
+
+The ECG seed-42 score is historical: its saved config enables early stopping, unlike the current baseline. It is excluded from matched ECG comparisons; no matched ECG completion is established by this table.

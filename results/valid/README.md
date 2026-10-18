@@ -1,31 +1,20 @@
 # Canonical reference and model results
 
-- `reference/SHD/`: current paper-baseline SE-adLIF SHD* reference, seeds
-  42/123/456; batch 256, 300 epochs, early stopping disabled. Validation is
-  20% of training with split seed 42. See `reference/SHD/RESULTS.md`.
-- `reference/SSC/`: existing official validation/test reference records.
-- `reference/ECG/`: existing reference records with historically inconsistent
-  early-stopping settings, explicitly documented in comparison reports.
-- `protocol_v2/`: proposed-model controlled-v2 runs and resumable artifacts.
-  A run is complete only after its completion marker and final test metrics.
+Snapshot: 18 October 2026.
 
-The old SHD reference tree has been replaced, not retained as another active
-reference. Prior sweeps keep numerical context in their REFERENCE_BASELINE.json.
-Proposed-model controlled-v2 SHD runs used batch 512 and early stopping and
-are unmatched against the new canonical paper-baseline SHD reference.
+- `reference/SHD/`: canonical paper-baseline SHD* reference, seeds 42/123/456; batch 256, 300 epochs, early stopping disabled, 20% training-derived validation with split seed 42.
+- `reference/SSC/`: official train/valid/test reference; three completed 40-epoch runs.
+- `reference/ECG/`: historical unmatched reference: seed 42 used 383 epochs; seeds 123/456 enabled early stopping.
+- `DTH_SE_adLIF/` and `MT_SE_adLIF/`: current proposed-model records. Use saved configs and metrics to establish each run's protocol and completion.
 
-`runner.py` still loads frozen `evaluation.yaml` and writes into protocol_v2;
-calling it does not automatically apply the paper baseline. New fair model
-comparisons must explicitly inherit `config/paper_baseline.yaml` in separate
-configs/output directories. Main runners and existing model results are unchanged.
+`runner.py` applies `config/paper_baseline.yaml` through the dataset-specific comparison group by default and writes to `results/valid/`. `evaluation.yaml` remains a separate historical controlled_v2 record. Older configs may retain former paths and protocol labels; do not rewrite their provenance or infer the protocol from the directory name.
 
-Historical experiment outputs were moved to `archive/experiments_20261017/`.
-Its `ARCHIVE_MANIFEST.json` records original paths and verified file hashes.
-The fresh LG-DTH SHD* seed-456 run was relocated while stopped to
-`results/not_improved/LG_DTH_SE_adLIF/SHD/seed_456/` and has now completed all 300 epochs and final testing (94.43% test accuracy).
-Its former early-stopping run and original pre-relocation checkpoints/configs
-are retained separately under `archive/`.
+DTH SSC has three completed metric histories (78.19 +/- 0.14%); original checkpoints for seeds 123/456 are missing locally. MT SSC has one completed seed (77.60%); seed 123 has only a partial summary snapshot and seed 456 is absent. Current DTH/MT ECG results remain pending. Historical early-stopped ECG records are archived separately.
+
+Other proposed models and their retained dataset evidence are under [not_improved](../not_improved/README.md). That classification concerns SHD* accuracy only. The completed SHD* comparison is in [the general report](../../reports/reference-vs-models.md); its SSC/ECG section distinguishes incomplete, unmatched and unverified records.
+
+Historical experiment outputs are retained in `archive/experiments_20261017/`; the prior LG-DTH early-stopping run is also retained separately under `archive/`. Preserve archive manifests and checkpoint identity.
 
 ## Measurements
 
-All accepted per-seed test activity and compute records are stored as `COST_RESULTS.json` and `COST_RESULTS.md` beside their training summaries. See [the measurement layout](MEASUREMENTS.md). Shared historical evaluator evidence is archived separately; no measurement values were changed.
+Per-seed test activity and compute records live beside training summaries as `COST_RESULTS.json` and `COST_RESULTS.md`. See [the measurement layout](MEASUREMENTS.md). Cost evidence and training completion are separate; this audit did not rerun measurements.

@@ -72,4 +72,8 @@ ckpt/epoch=20-step=6174.ckpt
 
 ## Evaluation note
 
-This run uses `validate_on: validation`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
+SSC uses the official `valid` split for checkpoint selection and the separate official `test` split for final evaluation.
+
+## Evidence audit - 18 October 2026
+
+This is a partial progress snapshot through epoch 20, not a verified live process status. No local metrics CSV, checkpoint or final test result is available. Do not count this seed as completed or infer test accuracy from validation. The saved config identifies `paper_classification_v1`.

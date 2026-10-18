@@ -1,6 +1,6 @@
 # Paper versus local reference
 
-Snapshot: 17 October 2026. Final test accuracy (%); all selected paper rows are two-layer SE-adLIF. Local mean and sample SD use training seeds 42, 123 and 456. Differences are local minus paper mean in percentage points (pp), computed from unrounded local metrics; paper means are published rounded values.
+Snapshot: 18 October 2026. Final test accuracy (%); all selected paper rows are two-layer SE-adLIF. Local mean and sample SD use training seeds 42, 123 and 456. Differences are local minus paper mean in percentage points (pp), computed from unrounded local metrics; paper means are published rounded values.
 
 | Dataset | Paper mean ± SD | Reference mean ± sample SD | Difference (pp) | Baseline compatibility |
 | --- | ---: | ---: | ---: | --- |
@@ -65,3 +65,5 @@ Entries are mean ± sample SD across three seeds, using actual batch-padded test
 SSC inputs are framed event counts. ECG inputs are analog: its first projection is counted as dense MACs, not spike events. The ECG SynOps activity-table cell therefore covers hidden-driven connections only; its analog first-projection MACs are stored separately. All hidden spikes count stored pre-batch sequence lengths (including configured minimum padding and burn-in); padded totals are retained separately. ECG accuracy is per labeled timestep, while the compute denominator is one input sequence. Dataset-specific batch sizes and lengths mean cross-dataset runtimes are not matched-workload comparisons.
 
 SSC/ECG checkpoint hashes, resolved configs, per-seed counts, timing repeats and reproducible command: [measurement records](../results/valid/MEASUREMENTS.md). Existing validation estimates remain separately labeled above. The ECG training-budget/stopping mismatch is unchanged. No checkpoint was retrained or selected using these test results.
+
+Accuracy tables were checked against canonical per-seed metrics on 18 October 2026; no numerical corrections were needed. See the [local evidence audit](results-audit-2026-10-18.md) for artifact availability and the separate proposed-model SSC/ECG limitations.

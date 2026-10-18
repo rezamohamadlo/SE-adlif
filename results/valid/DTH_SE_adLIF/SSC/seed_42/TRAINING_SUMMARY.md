@@ -63,15 +63,13 @@ ckpt/epoch=30-step=9114.ckpt
 - Runtime log: `out.log`
 - Checkpoints: `ckpt/`
 
-## Resume command
+## Continuation status
 
-```powershell
-.\.venv\Scripts\python.exe full_runner.py DTH_SE_adLIF
-```
+Training and testing are complete. The historical `full_runner.py` launcher is no longer present; do not use its old resume command.
 
 ## Evaluation note
 
-This run uses `validate_on: validation`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
+SSC uses the official `valid` split for checkpoint selection and the separate official `test` split for final evaluation.
 
 ## Final test evaluation
 
@@ -109,3 +107,7 @@ Runtime is forward-only, excluding data loading, transfer, loss and temporal agg
 These test measurements are separate from the validation GFLOPs estimate above.
 Detailed measurements, checkpoint identity and environment: [COST_RESULTS.json](COST_RESULTS.json) / [COST_RESULTS.md](COST_RESULTS.md).
 <!-- test-costs:end -->
+
+## Evidence audit - 18 October 2026
+
+Saved SSC settings match the current baseline values, but the original run records use `controlled_v2` and lack paper-baseline version metadata. Retain that provenance. The selected best checkpoint and `last.ckpt` are present locally; the latter reaches epoch 39, step 11760.

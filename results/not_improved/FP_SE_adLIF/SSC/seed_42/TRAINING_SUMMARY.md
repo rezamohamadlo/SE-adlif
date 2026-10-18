@@ -72,7 +72,7 @@ ckpt/epoch=29-step=8820.ckpt
 
 ## Evaluation note
 
-This run uses `validate_on: validation`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
+SSC uses the official `valid` split for checkpoint selection and the separate official `test` split for final evaluation.
 
 ## Final test evaluation
 
@@ -82,3 +82,7 @@ The best validation checkpoint was evaluated on the test split after training.
 |---|---:|
 | Test accuracy | **77.67%** |
 | Test loss | **1.5382** |
+
+## Evidence audit - 18 October 2026
+
+Unverified training history: metrics.csv contains different validation accuracies at epoch 3/step 1175 (75.55%, 76.28%) and epoch 4/step 1469 (76.05%, 75.37%). The cause is not established. Preserve the recorded 77.67% test score as historical evidence, but exclude it from accepted comparisons until provenance is resolved. No rows were deleted or selected to repair the history.
