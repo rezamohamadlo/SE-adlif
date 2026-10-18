@@ -12,4 +12,4 @@ Training settings: SHD: LR=0.01, early stopping=False, patience=50, delta=0.001,
 |---|---:|---:|---:|---:|---:|
 | SHD | 94.88% | 94.52% | 94.43% | 3 | 94.61% ± 0.23% |
 | SSC | 77.60% | pending | pending | 1 | pending |
-| ECG | 87.23% | pending | pending | 1 | pending |
+| ECG | pending | pending | pending | 0 | pending |

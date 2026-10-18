@@ -186,7 +186,9 @@ class MLPSNN(pl.LightningModule):
 
 
             outputs_reduce = block_output.reshape(-1, outputs.size(-1))
-            targets_reduce = targets.flatten()
+            # Class-index loss requires int64, including labels read from
+            # existing caches or NumPy's platform-dependent integer dtype.
+            targets_reduce = targets.flatten().long()
 
             block_mask = torch.where(targets_reduce != self.ignore_target_idx)
 

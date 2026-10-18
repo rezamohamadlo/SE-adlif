@@ -166,6 +166,15 @@ user asks to run it themselves, return the command and let them start it.
 
 ## Verification
 
+Classification cross-entropy targets must use `torch.int64` (`torch.long`).
+Converting integer class labels from int32 to int64 preserves their values and
+does not change the split, architecture, loss definition or training protocol;
+this compatibility fix does not invalidate a comparison. Keep the conversion
+in the classification branch so regression targets retain their original dtype.
+Verify loss equivalence and finite gradients on CPU and CUDA when available.
+A failed startup with no saved training checkpoint must restart from scratch;
+do not describe it as checkpoint continuation.
+
 Preflight before training where supported:
 
 ```powershell
