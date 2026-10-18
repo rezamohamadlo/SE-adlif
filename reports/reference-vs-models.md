@@ -15,17 +15,17 @@ Snapshot: 18 October 2026. **8 models x 3 training seeds = 24 completed SHD* run
 
 Means and sample SDs use only the completed matched seeds shown in each row. All rows have n=3. No repeated seed is counted as an independent training seed.
 
-| Model | Mean difference from reference over matching seeds (pp) |
-|---|---:|
-| DTH | +1.34 |
-| LG-DTH | +0.59 |
-| DA | +0.18 |
-| FP | +0.19 |
-| MR (K=2) | +0.74 |
-| MT | +1.46 |
-| MT-DTH | +0.59 |
+| Model | Mean difference from reference over matching seeds (pp) | Mean difference from paper SHD* (93.79%, pp) |
+|---|---:|---:|
+| DTH | +1.34 | +0.70 |
+| LG-DTH | +0.59 | -0.05 |
+| DA | +0.18 | -0.46 |
+| FP | +0.19 | -0.44 |
+| MR (K=2) | +0.74 | +0.10 |
+| MT | +1.46 | +0.82 |
+| MT-DTH | +0.59 | -0.05 |
 
-Differences use unrounded metrics and matching training seeds. MT has the highest observed three-seed mean. Three seeds do not establish statistical significance.
+Reference differences use unrounded metrics and matching training seeds. Paper differences are each local three-seed mean minus the published, rounded two-layer SHD* mean of 93.79% across 20 runs ([paper results](paper-results.md)); positive values favor the local model. The paper comparison is descriptive, with different sample sizes and no matching paper seeds. MT has the highest observed three-seed mean. Three seeds do not establish statistical significance.
 
 | Run / status | Details |
 |---|---|
