@@ -5,7 +5,7 @@ This file is updated automatically whenever training saves a new best checkpoint
 ## Run status
 
 - **Status:** Training in progress
-- **Progress:** 18 epochs completed (`0` through `17`) out of 40
+- **Progress:** 20 epochs completed (`0` through `19`) out of 40
 - **Dataset:** SSC
 - **Model:** SSC_DTH_SE_adLIF
 - **Seed:** 42
@@ -15,12 +15,12 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 | Metric | Value | Epoch |
 |---|---:|---:|
-| Best validation accuracy | **81.47%** | 17 |
-| Validation loss | **0.6210** | 17 |
-| Training accuracy | **86.09%** | 17 |
-| Training loss | **0.437087** | 17 |
-| Gradient norm | **0.2058** | 17 |
-| Learning rate | **0.006** | 17 |
+| Best validation accuracy | **81.84%** | 19 |
+| Validation loss | **0.6271** | 19 |
+| Training accuracy | **86.07%** | 19 |
+| Training loss | **0.440105** | 19 |
+| Gradient norm | **0.2012** | 19 |
+| Learning rate | **0.006** | 19 |
 
 ## Model size and computation
 
@@ -36,7 +36,7 @@ The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds
 ## Best checkpoint
 
 ```text
-ckpt/epoch=17-step=5292.ckpt
+ckpt/epoch=19-step=5880.ckpt
 ```
 
 ## Main hyperparameters

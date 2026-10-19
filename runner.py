@@ -116,6 +116,12 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                 ]
                 overrides += protocol_overrides(EVALUATION, dataset)
                 if dataset == 'SSC':
+                    # Enforce the runner's SSC default in the child command too,
+                    # rather than depending only on Hydra defaults ordering.
+                    ssc_loss = OmegaConf.load(ROOT / 'config/comparison/SSC.yaml').loss_agg
+                    if ssc_loss != 'mean_membrane_potentials':
+                        raise ValueError('SSC runner configuration must use mean_membrane_potentials')
+                    overrides.append(f'++loss_agg={ssc_loss}')
                     deviations = ([] if model == 'SE_adLIF' else [f'model_variant={model}'])
                     deviations.append('loss_agg=mean_membrane_potentials (released SSC implementation)')
                     overrides.append(f'++paper_baseline_deviations={json.dumps(deviations)}')
@@ -444,7 +450,8 @@ def main(argv=None):
         if args.dry_run:
             for model, plan in plans:
                 for item in plan:
-                    print(f"{model} {item['dataset']} seed {item['seed']}: {item['status']} -> {item['directory']}")
+                    print(f"{model} {item['dataset']} seed {item['seed']}: {item['status']} "
+                          f"(loss={item['config']['loss_agg']}) -> {item['directory']}")
             print(f"Validated {sum(len(plan) for _, plan in plans)} runs; no training or writes.")
         else:
             for model in models:

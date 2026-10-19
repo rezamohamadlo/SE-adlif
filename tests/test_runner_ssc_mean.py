@@ -42,6 +42,17 @@ class RunnerSSCMeanTests(unittest.TestCase):
                     runner.main(['--models', 'DTH_SE_adLIF', '--ssc-mean-loss', '--dry-run', *datasets])
                 self.assertEqual(error.exception.code, 1)
 
+    def test_all_ssc_models_and_seeds_pass_mean_to_training_command(self):
+        with tempfile.TemporaryDirectory(dir=runner.ROOT / 'results') as temp:
+            protocol = copy.deepcopy(runner.EVALUATION)
+            protocol['datasets']['SSC']['loss_agg'] = 'summed_membrane_potentials'
+            with patch.object(runner, 'RUN_LOGDIR', Path(temp).relative_to(runner.ROOT).as_posix()), \
+                    patch.object(runner, 'EVALUATION', protocol):
+                for model in ['SE_adLIF', 'DTH_SE_adLIF', 'MT_SE_adLIF']:
+                    for item in runner.build_plan(model, datasets=['SSC'], seeds=[42, 123, 456]):
+                        self.assertEqual(item['config']['loss_agg'], 'mean_membrane_potentials')
+                        self.assertIn('++loss_agg=mean_membrane_potentials', item['overrides'])
+
 
 if __name__ == '__main__':
     unittest.main()
