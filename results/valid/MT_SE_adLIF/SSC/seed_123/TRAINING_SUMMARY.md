@@ -4,8 +4,8 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 ## Run status
 
-- **Status:** Training interrupted; resumable
-- **Progress:** 36 epochs completed (`0` through `35`) out of 40
+- **Status:** Training and testing finished
+- **Progress:** 40 epochs completed (`0` through `39`) out of 40
 - **Dataset:** SSC
 - **Model:** SSC_MT_SE_adLIF
 - **Seed:** 123
@@ -72,8 +72,41 @@ ckpt/epoch=20-step=6174.ckpt
 
 ## Evaluation note
 
-SSC uses the official `valid` split for checkpoint selection and the separate official `test` split for final evaluation.
+This run uses `validate_on: validation`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
 
-## Evidence audit - 18 October 2026
+## Final test evaluation
 
-This is a partial progress snapshot through epoch 20, not a verified live process status. No local metrics CSV, checkpoint or final test result is available. Do not count this seed as completed or infer test accuracy from validation. The saved config identifies `paper_classification_v1`.
+The best validation checkpoint was evaluated on the test split after training.
+
+| Metric | Value |
+|---|---:|
+| Test accuracy | **78.14%** |
+| Test loss | **1.0857** |
+
+<!-- test-costs:start -->
+## Test-set spike activity and inference cost
+
+Validation-selected checkpoint, epoch 20 (zero-based). No training performed.
+
+| Measurement | Value |
+|---|---:|
+| Total parameters | 1,692,790.000000 |
+| Trainable parameters | 1,691,315.000000 |
+| Hidden spikes/sample | 9,560.651163 |
+| L1 spikes/sample | 9,174.480326 |
+| L2 spikes/sample | 386.170837 |
+| L1 firing fraction (%) | 4.247445 |
+| L2 firing fraction (%) | 0.178783 |
+| Synaptic operations/sample | 19,579,360.865960 |
+| Analog input dense MACs/sample | 0.000000 |
+| Dense matrix GFLOPs/sample | 1.008720 |
+| Matrix + scalar arithmetic GFLOPs/sample | 1.022190 |
+| Logical GOp/sample | 1.023493 |
+| Forward runtime (ms/sample) | 1.928310 |
+
+Activity uses stored sequence lengths including minimum padding/burn-in; compute includes batch padding.
+ECG SynOps exclude analog input. Arithmetic excludes nonlinearities/comparisons; logical operations are not hardware FLOPs or energy.
+Runtime is forward-only, excluding data loading, transfer, loss and temporal aggregation.
+These test measurements are separate from the validation GFLOPs estimate above.
+Detailed measurements, checkpoint identity and environment: [COST_RESULTS.json](COST_RESULTS.json) / [COST_RESULTS.md](COST_RESULTS.md).
+<!-- test-costs:end -->

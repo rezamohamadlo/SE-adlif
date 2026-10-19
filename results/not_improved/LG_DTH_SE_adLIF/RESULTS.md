@@ -35,4 +35,4 @@ The previous early-stopped seed-456 run (93.51% test accuracy) is retained at `a
 | Non-matrix logical operations/sample, padded | 9,442,372 ± 0 | Mean ± sample SD across three seeds; definitions in linked comparison |
 | Inference time (ms/sample) | 1.901 ± 0.026 | Mean ± sample SD across three seeds; definitions in linked comparison |
 
-All three seeds measured on the official test set. Activity uses pre-batch sequence lengths, including configured minimum padding; non-matrix operations and runtime include batch padding. See the [measurement protocol](../../../../reports/reference-vs-models.md#spike-activity-and-inference-cost).
+All three seeds measured on the official test set. Activity uses pre-batch sequence lengths, including configured minimum padding; non-matrix operations and runtime include batch padding. See the [measurement protocol](../../../reports/reference-vs-models.md#spike-activity-and-inference-cost).

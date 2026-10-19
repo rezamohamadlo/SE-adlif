@@ -1,0 +1,637 @@
+{
+  "split": {
+    "train": {
+      "count": 6525,
+      "index_sha256": "ea5c4e98950c760ebee6ada29ad1a995286c450ca6495f3812c87b14b249145b",
+      "first_indices": [
+        5194,
+        5708,
+        144,
+        5721,
+        6014,
+        6802,
+        7726,
+        4703,
+        3438,
+        6977
+      ]
+    },
+    "val": {
+      "count": 1631,
+      "index_sha256": "8422b613ab369538e5ad1f8ff42dbb31577ed2f746df7caa39cba619a8140606",
+      "first_indices": [
+        2236,
+        5494,
+        2727,
+        6491,
+        2480,
+        4968,
+        485,
+        5526,
+        6666,
+        5874
+      ]
+    },
+    "disjoint": true
+  },
+  "cache_samples": [
+    {
+      "split": "train",
+      "local_index": 0,
+      "raw_index": 5194,
+      "cache_present": true,
+      "fresh_shape": [
+        250,
+        140
+      ],
+      "tensor_equal": true,
+      "label_equal": true,
+      "mask_equal": true
+    },
+    {
+      "split": "train",
+      "local_index": 1,
+      "raw_index": 5708,
+      "cache_present": true,
+      "fresh_shape": [
+        250,
+        140
+      ],
+      "tensor_equal": true,
+      "label_equal": true,
+      "mask_equal": true
+    },
+    {
+      "split": "train",
+      "local_index": 2,
+      "raw_index": 144,
+      "cache_present": true,
+      "fresh_shape": [
+        250,
+        140
+      ],
+      "tensor_equal": true,
+      "label_equal": true,
+      "mask_equal": true
+    },
+    {
+      "split": "train",
+      "local_index": 1631,
+      "raw_index": 836,
+      "cache_present": true,
+      "fresh_shape": [
+        250,
+        140
+      ],
+      "tensor_equal": true,
+      "label_equal": true,
+      "mask_equal": true
+    },
+    {
+      "split": "train",
+      "local_index": 3262,
+      "raw_index": 1188,
+      "cache_present": true,
+      "fresh_shape": [
+        250,
+        140
+      ],
+      "tensor_equal": true,
+      "label_equal": true,
+      "mask_equal": true
+    },
+    {
+      "split": "train",
+      "local_index": 6524,
+      "raw_index": 4771,
+      "cache_present": true,
+      "fresh_shape": [
+        250,
+        140
+      ],
+      "tensor_equal": true,
+      "label_equal": true,
+      "mask_equal": true
+    },
+    {
+      "split": "val",
+      "local_index": 0,
+      "raw_index": 2236,
+      "cache_present": true,
+      "fresh_shape": [
+        250,
+        140
+      ],
+      "tensor_equal": true,
+      "label_equal": true,
+      "mask_equal": true
+    },
+    {
+      "split": "val",
+      "local_index": 1,
+      "raw_index": 5494,
+      "cache_present": true,
+      "fresh_shape": [
+        250,
+        140
+      ],
+      "tensor_equal": true,
+      "label_equal": true,
+      "mask_equal": true
+    },
+    {
+      "split": "val",
+      "local_index": 2,
+      "raw_index": 2727,
+      "cache_present": true,
+      "fresh_shape": [
+        250,
+        140
+      ],
+      "tensor_equal": true,
+      "label_equal": true,
+      "mask_equal": true
+    },
+    {
+      "split": "val",
+      "local_index": 407,
+      "raw_index": 4893,
+      "cache_present": true,
+      "fresh_shape": [
+        250,
+        140
+      ],
+      "tensor_equal": true,
+      "label_equal": true,
+      "mask_equal": true
+    },
+    {
+      "split": "val",
+      "local_index": 815,
+      "raw_index": 7508,
+      "cache_present": true,
+      "fresh_shape": [
+        250,
+        140
+      ],
+      "tensor_equal": true,
+      "label_equal": true,
+      "mask_equal": true
+    },
+    {
+      "split": "val",
+      "local_index": 1630,
+      "raw_index": 1373,
+      "cache_present": true,
+      "fresh_shape": [
+        250,
+        140
+      ],
+      "tensor_equal": true,
+      "label_equal": true,
+      "mask_equal": true
+    }
+  ],
+  "reference_runs": [
+    {
+      "seed": 123,
+      "config": {
+        "random_seed": 123,
+        "logdir": "./results/experiments/shd_paper/seed_123",
+        "datadir": "./data",
+        "cachedir": "./data/cache",
+        "ckpt_path": null,
+        "init_ckpt_path": null,
+        "run_test": true,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "gradient_clip_val": 1.5,
+        "device": "cuda:0",
+        "early_stopping": false,
+        "early_stopping_patience": 50,
+        "early_stopping_min_delta": 0.001,
+        "dataset": {
+          "_target_": "datasets.shd.SHDLDM",
+          "data_path": "./data",
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "pad_to_min_size": 250,
+          "window_size": 4,
+          "batch_size": 256,
+          "num_workers": 0,
+          "num_classes": 20,
+          "validate_on": 0.2,
+          "random_seed": 42,
+          "cache_namespace": "controlled_v2",
+          "ignore_first_timesteps": 10,
+          "additional_test_set_validation": false
+        },
+        "exp_name": "SHD_SE_adLIF_paper",
+        "two_layers": true,
+        "alpha": 5.0,
+        "c": 0.4,
+        "dt": 1.0,
+        "dropout": 0.15,
+        "l1": {
+          "cell": "se_adlif",
+          "input_size": 140,
+          "n_neurons": 360,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "q": 120,
+          "alpha": 5.0,
+          "c": 0.4,
+          "dt": 1.0
+        },
+        "l2": {
+          "cell": "se_adlif",
+          "input_size": 360,
+          "n_neurons": 360,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "q": 120,
+          "alpha": 5.0,
+          "c": 0.4,
+          "dt": 1.0
+        },
+        "l_out": {
+          "input_size": 360,
+          "n_neurons": 20,
+          "tau_u_range": [
+            15,
+            15
+          ],
+          "dt": 1.0
+        },
+        "n_epochs": 300,
+        "batch_size": 256,
+        "loss_agg": "sum_softmax_over_time",
+        "tracking_metric": "val_acc",
+        "tracking_mode": "max",
+        "lr": 0.01,
+        "factor": 0.9,
+        "patience": 9999,
+        "evaluation_protocol": "paper_shd_reproduction"
+      },
+      "checkpoints": [
+        {
+          "path": "results/valid/reference/SHD/seed_123/ckpt/epoch=204-step=5125.ckpt",
+          "epoch": 204,
+          "step": 5125,
+          "loss_agg": "sum_softmax_over_time",
+          "split_seed": 42,
+          "lightning": "2.2.1",
+          "adam": {
+            "lr": 0.01,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0
+          }
+        },
+        {
+          "path": "results/valid/reference/SHD/seed_123/ckpt/last.ckpt",
+          "epoch": 299,
+          "step": 7500,
+          "loss_agg": "sum_softmax_over_time",
+          "split_seed": 42,
+          "lightning": "2.2.1",
+          "adam": {
+            "lr": 0.01,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0
+          }
+        }
+      ],
+      "best_validation": {
+        "epoch": "204",
+        "val_acc": "0.9938687682151794",
+        "val_loss": "0.03837515413761139"
+      },
+      "validation_epoch_count": 300,
+      "observed_lr": [
+        0.01
+      ],
+      "test": [
+        {
+          "test_acc": "0.9288869500160217",
+          "test_loss": "0.6164538264274597"
+        }
+      ]
+    },
+    {
+      "seed": 42,
+      "config": {
+        "random_seed": 42,
+        "logdir": "./results/experiments/shd_paper/seed_42",
+        "datadir": "./data",
+        "cachedir": "./data/cache",
+        "ckpt_path": null,
+        "init_ckpt_path": null,
+        "run_test": true,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "gradient_clip_val": 1.5,
+        "device": "cuda:0",
+        "early_stopping": false,
+        "early_stopping_patience": 50,
+        "early_stopping_min_delta": 0.001,
+        "dataset": {
+          "_target_": "datasets.shd.SHDLDM",
+          "data_path": "./data",
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "pad_to_min_size": 250,
+          "window_size": 4,
+          "batch_size": 256,
+          "num_workers": 0,
+          "num_classes": 20,
+          "validate_on": 0.2,
+          "random_seed": 42,
+          "cache_namespace": "controlled_v2",
+          "ignore_first_timesteps": 10,
+          "additional_test_set_validation": false
+        },
+        "exp_name": "SHD_SE_adLIF_paper",
+        "two_layers": true,
+        "alpha": 5.0,
+        "c": 0.4,
+        "dt": 1.0,
+        "dropout": 0.15,
+        "l1": {
+          "cell": "se_adlif",
+          "input_size": 140,
+          "n_neurons": 360,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "q": 120,
+          "alpha": 5.0,
+          "c": 0.4,
+          "dt": 1.0
+        },
+        "l2": {
+          "cell": "se_adlif",
+          "input_size": 360,
+          "n_neurons": 360,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "q": 120,
+          "alpha": 5.0,
+          "c": 0.4,
+          "dt": 1.0
+        },
+        "l_out": {
+          "input_size": 360,
+          "n_neurons": 20,
+          "tau_u_range": [
+            15,
+            15
+          ],
+          "dt": 1.0
+        },
+        "n_epochs": 300,
+        "batch_size": 256,
+        "loss_agg": "sum_softmax_over_time",
+        "tracking_metric": "val_acc",
+        "tracking_mode": "max",
+        "lr": 0.01,
+        "factor": 0.9,
+        "patience": 9999,
+        "evaluation_protocol": "paper_shd_reproduction"
+      },
+      "checkpoints": [
+        {
+          "path": "results/valid/reference/SHD/seed_42/ckpt/epoch=261-step=6550.ckpt",
+          "epoch": 261,
+          "step": 6550,
+          "loss_agg": "sum_softmax_over_time",
+          "split_seed": 42,
+          "lightning": "2.2.1",
+          "adam": {
+            "lr": 0.01,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0
+          }
+        },
+        {
+          "path": "results/valid/reference/SHD/seed_42/ckpt/last.ckpt",
+          "epoch": 299,
+          "step": 7500,
+          "loss_agg": "sum_softmax_over_time",
+          "split_seed": 42,
+          "lightning": "2.2.1",
+          "adam": {
+            "lr": 0.01,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0
+          }
+        }
+      ],
+      "best_validation": {
+        "epoch": "261",
+        "val_acc": "0.991416335105896",
+        "val_loss": "0.06347879022359848"
+      },
+      "validation_epoch_count": 300,
+      "observed_lr": [
+        0.01
+      ],
+      "test": [
+        {
+          "test_acc": "0.9293286204338074",
+          "test_loss": "0.6220112442970276"
+        }
+      ]
+    },
+    {
+      "seed": 456,
+      "config": {
+        "random_seed": 456,
+        "logdir": "./results/experiments/shd_paper/seed_456",
+        "datadir": "./data",
+        "cachedir": "./data/cache",
+        "ckpt_path": null,
+        "init_ckpt_path": null,
+        "run_test": true,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "gradient_clip_val": 1.5,
+        "device": "cuda:0",
+        "early_stopping": false,
+        "early_stopping_patience": 50,
+        "early_stopping_min_delta": 0.001,
+        "dataset": {
+          "_target_": "datasets.shd.SHDLDM",
+          "data_path": "./data",
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "pad_to_min_size": 250,
+          "window_size": 4,
+          "batch_size": 256,
+          "num_workers": 0,
+          "num_classes": 20,
+          "validate_on": 0.2,
+          "random_seed": 42,
+          "cache_namespace": "controlled_v2",
+          "ignore_first_timesteps": 10,
+          "additional_test_set_validation": false
+        },
+        "exp_name": "SHD_SE_adLIF_paper",
+        "two_layers": true,
+        "alpha": 5.0,
+        "c": 0.4,
+        "dt": 1.0,
+        "dropout": 0.15,
+        "l1": {
+          "cell": "se_adlif",
+          "input_size": 140,
+          "n_neurons": 360,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "q": 120,
+          "alpha": 5.0,
+          "c": 0.4,
+          "dt": 1.0
+        },
+        "l2": {
+          "cell": "se_adlif",
+          "input_size": 360,
+          "n_neurons": 360,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "q": 120,
+          "alpha": 5.0,
+          "c": 0.4,
+          "dt": 1.0
+        },
+        "l_out": {
+          "input_size": 360,
+          "n_neurons": 20,
+          "tau_u_range": [
+            15,
+            15
+          ],
+          "dt": 1.0
+        },
+        "n_epochs": 300,
+        "batch_size": 256,
+        "loss_agg": "sum_softmax_over_time",
+        "tracking_metric": "val_acc",
+        "tracking_mode": "max",
+        "lr": 0.01,
+        "factor": 0.9,
+        "patience": 9999,
+        "evaluation_protocol": "paper_shd_reproduction"
+      },
+      "checkpoints": [
+        {
+          "path": "results/valid/reference/SHD/seed_456/ckpt/epoch=243-step=6100.ckpt",
+          "epoch": 243,
+          "step": 6100,
+          "loss_agg": "sum_softmax_over_time",
+          "split_seed": 42,
+          "lightning": "2.2.1",
+          "adam": {
+            "lr": 0.01,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0
+          }
+        },
+        {
+          "path": "results/valid/reference/SHD/seed_456/ckpt/last.ckpt",
+          "epoch": 299,
+          "step": 7500,
+          "loss_agg": "sum_softmax_over_time",
+          "split_seed": 42,
+          "lightning": "2.2.1",
+          "adam": {
+            "lr": 0.01,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0
+          }
+        }
+      ],
+      "best_validation": {
+        "epoch": "243",
+        "val_acc": "0.9908031821250916",
+        "val_loss": "0.07048723846673965"
+      },
+      "validation_epoch_count": 300,
+      "observed_lr": [
+        0.01
+      ],
+      "test": [
+        {
+          "test_acc": "0.9363957643508911",
+          "test_loss": "0.589467465877533"
+        }
+      ]
+    }
+  ],
+  "cache_directory": "data/cache/SHD/controlled_v2_61555efccb7a8796",
+  "loss_equivalence": {
+    "device": "cpu",
+    "logits_equal": true,
+    "cross_entropy_equal": true,
+    "gradients_equal": true
+  },
+  "selected_checkpoint_hashes_match_aggregate": true
+}

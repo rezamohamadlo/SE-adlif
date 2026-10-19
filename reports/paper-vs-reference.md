@@ -5,7 +5,7 @@ Snapshot: 18 October 2026. Final test accuracy (%); all selected paper rows are 
 | Dataset | Paper mean ± SD | Reference mean ± sample SD | Difference (pp) | Baseline compatibility |
 | --- | ---: | ---: | ---: | --- |
 | SHD* | 93.79 ± 0.76 | 93.15 ± 0.42 | -0.64 | Matched saved settings |
-| SSC | 80.44 ± 0.26 | 78.21 ± 0.11 | -2.23 | Matched saved settings |
+| SSC | 80.44 ± 0.26 | 78.21 ± 0.11 | -2.23 | Matches listed baseline; released-code loss differs |
 | ECG | 88.18 ± 0.36 | 88.32 ± 0.35 | +0.14 | Unmatched budget / stopping; descriptive only |
 
 | Dataset | Seed 42 | Seed 123 | Seed 456 | Evidence |
@@ -66,4 +66,8 @@ SSC inputs are framed event counts. ECG inputs are analog: its first projection 
 
 SSC/ECG checkpoint hashes, resolved configs, per-seed counts, timing repeats and reproducible command: [measurement records](../results/valid/MEASUREMENTS.md). Existing validation estimates remain separately labeled above. The ECG training-budget/stopping mismatch is unchanged. No checkpoint was retrained or selected using these test results.
 
-Accuracy tables were checked against canonical per-seed metrics on 18 October 2026; no numerical corrections were needed. See the [local evidence audit](results-audit-2026-10-18.md) for artifact availability and the separate proposed-model SSC/ECG limitations.
+Accuracy tables were checked against canonical per-seed metrics on 18 October 2026; no numerical corrections were needed. See the [local evidence audit](../docs/audits/results-audit-2026-10-18.md) for artifact availability and the separate proposed-model SSC/ECG limitations.
+
+The [SSC reproduction fidelity audit](../docs/audits/ssc-reproduction-audit-2026-10-18.md) found a paper/released-code disagreement: our saved reference uses temporal summation, while the pinned authors' SSC config uses a temporal mean. This is a confirmed objective difference, not a demonstrated explanation of the accuracy gap. The audit also records a current NumPy/Tonic dependency conflict; it does not infer the historical training environment from today's installation.
+
+The [SHD* fidelity investigation](../docs/audits/shd-reproduction-audit-2026-10-18.md) found no confirmed implementation error explaining its -0.64 pp gap: loss semantics match released code, six checkpoints confirm the intended settings, selected checkpoint hashes match, and 12 sampled train/validation cache entries agree with fresh preprocessing. Author-run provenance, execution details and the three-versus-twenty-seed comparison remain limitations.

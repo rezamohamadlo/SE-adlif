@@ -1,0 +1,958 @@
+{
+  "external_storage": "F:/reza/SE-adlif (user-provided external transfer directory; read-only inspection)",
+  "runs": [
+    {
+      "run": "results/valid/DTH_SE_adLIF/ECG/seed_123",
+      "config": {
+        "paper_baseline_version": "paper_classification_v1",
+        "paper_baseline_dataset": "ECG",
+        "evaluation_protocol": "paper_classification_v1",
+        "random_seed": 123,
+        "lr": 0.01,
+        "batch_size": 64,
+        "n_epochs": 400,
+        "early_stopping": false,
+        "loss_agg": "summed_membrane_potentials",
+        "dropout": 0.15,
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "patience": 9999,
+        "factor": 0.9,
+        "ckpt_path": null,
+        "init_ckpt_path": null,
+        "dataset": {
+          "_target_": "datasets.ecg.ECGLDM",
+          "batch_size": 64,
+          "data_path": "data",
+          "num_classes": 6,
+          "num_workers": 0,
+          "random_seed": 42,
+          "valid_fraction": 0.05
+        },
+        "l1": {
+          "alpha": 5.0,
+          "c": 0.2,
+          "cell": "dth_se_adlif",
+          "dt": 1.0,
+          "input_size": 4,
+          "n_neurons": 36,
+          "q": 120,
+          "rho_fast": 0.9,
+          "rho_slow": 0.99,
+          "target_rate": 0.05,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "theta_max": 1.5,
+          "theta_min": 0.5
+        },
+        "l2": {
+          "alpha": 5.0,
+          "c": 0.2,
+          "cell": "dth_se_adlif",
+          "dt": 1.0,
+          "input_size": 36,
+          "n_neurons": 36,
+          "q": 120,
+          "rho_fast": 0.9,
+          "rho_slow": 0.99,
+          "target_rate": 0.05,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "theta_max": 1.5,
+          "theta_min": 0.5
+        }
+      },
+      "metrics_files": 1,
+      "val_epochs": 400,
+      "duplicate_val_epochs": [],
+      "best_val": {
+        "epoch": "213",
+        "val_acc": "0.8629003167152405",
+        "val_loss": "0.3781505227088928"
+      },
+      "tests": [
+        {
+          "epoch": "400",
+          "grad_norm": "",
+          "lr-Adam": "",
+          "step": "3600",
+          "test_acc": "0.8780970573425293",
+          "test_loss": "0.33549007773399353",
+          "train_acc_epoch": "",
+          "train_acc_step": "",
+          "train_loss_epoch": "",
+          "train_loss_step": "",
+          "val_acc": "",
+          "val_loss": ""
+        }
+      ],
+      "checkpoints": [
+        {
+          "name": "epoch=213-step=1926.ckpt",
+          "epoch": 213,
+          "step": 1926,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        },
+        {
+          "name": "last.ckpt",
+          "epoch": 399,
+          "step": 3600,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        }
+      ],
+      "local_comparison": [],
+      "cost_checkpoint_hash_matches": true,
+      "cost_status": "complete",
+      "callback_best_score_matches_metrics": true
+    },
+    {
+      "run": "results/valid/DTH_SE_adLIF/ECG/seed_42",
+      "config": {
+        "paper_baseline_version": "paper_classification_v1",
+        "paper_baseline_dataset": "ECG",
+        "evaluation_protocol": "paper_classification_v1",
+        "random_seed": 42,
+        "lr": 0.01,
+        "batch_size": 64,
+        "n_epochs": 400,
+        "early_stopping": false,
+        "loss_agg": "summed_membrane_potentials",
+        "dropout": 0.15,
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "patience": 9999,
+        "factor": 0.9,
+        "ckpt_path": null,
+        "init_ckpt_path": null,
+        "dataset": {
+          "_target_": "datasets.ecg.ECGLDM",
+          "batch_size": 64,
+          "data_path": "data",
+          "num_classes": 6,
+          "num_workers": 0,
+          "random_seed": 42,
+          "valid_fraction": 0.05
+        },
+        "l1": {
+          "alpha": 5.0,
+          "c": 0.2,
+          "cell": "dth_se_adlif",
+          "dt": 1.0,
+          "input_size": 4,
+          "n_neurons": 36,
+          "q": 120,
+          "rho_fast": 0.9,
+          "rho_slow": 0.99,
+          "target_rate": 0.05,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "theta_max": 1.5,
+          "theta_min": 0.5
+        },
+        "l2": {
+          "alpha": 5.0,
+          "c": 0.2,
+          "cell": "dth_se_adlif",
+          "dt": 1.0,
+          "input_size": 36,
+          "n_neurons": 36,
+          "q": 120,
+          "rho_fast": 0.9,
+          "rho_slow": 0.99,
+          "target_rate": 0.05,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "theta_max": 1.5,
+          "theta_min": 0.5
+        }
+      },
+      "metrics_files": 1,
+      "val_epochs": 400,
+      "duplicate_val_epochs": [],
+      "best_val": {
+        "epoch": "385",
+        "val_acc": "0.8586984276771545",
+        "val_loss": "0.38362032175064087"
+      },
+      "tests": [
+        {
+          "epoch": "400",
+          "grad_norm": "",
+          "lr-Adam": "",
+          "step": "3600",
+          "test_acc": "0.8781188726425171",
+          "test_loss": "0.32940083742141724",
+          "train_acc_epoch": "",
+          "train_acc_step": "",
+          "train_loss_epoch": "",
+          "train_loss_step": "",
+          "val_acc": "",
+          "val_loss": ""
+        }
+      ],
+      "checkpoints": [
+        {
+          "name": "epoch=385-step=3474.ckpt",
+          "epoch": 385,
+          "step": 3474,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        },
+        {
+          "name": "last.ckpt",
+          "epoch": 399,
+          "step": 3600,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        }
+      ],
+      "local_comparison": [],
+      "cost_checkpoint_hash_matches": true,
+      "cost_status": "complete",
+      "callback_best_score_matches_metrics": true
+    },
+    {
+      "run": "results/valid/DTH_SE_adLIF/SSC/seed_123",
+      "config": {
+        "paper_baseline_version": "paper_classification_v1",
+        "paper_baseline_dataset": "SSC",
+        "evaluation_protocol": "paper_classification_v1",
+        "random_seed": 123,
+        "lr": 0.006,
+        "batch_size": 256,
+        "n_epochs": 40,
+        "early_stopping": false,
+        "loss_agg": "summed_membrane_potentials",
+        "dropout": 0.15,
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "patience": 9999,
+        "factor": 0.9,
+        "ckpt_path": null,
+        "init_ckpt_path": null,
+        "dataset": {
+          "_target_": "datasets.ssc.SSCLDM",
+          "batch_size": 256,
+          "data_path": "data",
+          "ignore_first_timesteps": 10,
+          "num_classes": 35,
+          "num_workers": 0,
+          "pad_to_min_size": 300,
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4
+        },
+        "l1": {
+          "alpha": 5.0,
+          "c": 0.4,
+          "cell": "dth_se_adlif",
+          "dt": 1.0,
+          "input_size": 140,
+          "n_neurons": 720,
+          "q": 120,
+          "rho_fast": 0.9,
+          "rho_slow": 0.99,
+          "target_rate": 0.05,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "theta_max": 1.5,
+          "theta_min": 0.5
+        },
+        "l2": {
+          "alpha": 5.0,
+          "c": 0.4,
+          "cell": "dth_se_adlif",
+          "dt": 1.0,
+          "input_size": 720,
+          "n_neurons": 720,
+          "q": 120,
+          "rho_fast": 0.9,
+          "rho_slow": 0.99,
+          "target_rate": 0.05,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "theta_max": 1.5,
+          "theta_min": 0.5
+        }
+      },
+      "metrics_files": 0,
+      "val_epochs": 0,
+      "duplicate_val_epochs": [],
+      "best_val": {
+        "epoch": null,
+        "val_acc": null,
+        "val_loss": null
+      },
+      "tests": [],
+      "checkpoints": [
+        {
+          "name": "epoch=37-step=11172.ckpt",
+          "epoch": 37,
+          "step": 11172,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        },
+        {
+          "name": "last.ckpt",
+          "epoch": 39,
+          "step": 11760,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        }
+      ],
+      "local_comparison": [
+        {
+          "file": "FULL_RUN_CONFIG.json",
+          "identical_bytes": true
+        }
+      ],
+      "cost_checkpoint_hash_matches": true,
+      "cost_status": "complete",
+      "local_metrics_test": 0.7831419706344604,
+      "local_metrics_best_validation": 0.8003206253051758,
+      "callback_best_score_matches_metrics": true
+    },
+    {
+      "run": "results/valid/DTH_SE_adLIF/SSC/seed_456",
+      "config": {
+        "paper_baseline_version": "paper_classification_v1",
+        "paper_baseline_dataset": "SSC",
+        "evaluation_protocol": "paper_classification_v1",
+        "random_seed": 456,
+        "lr": 0.006,
+        "batch_size": 256,
+        "n_epochs": 40,
+        "early_stopping": false,
+        "loss_agg": "summed_membrane_potentials",
+        "dropout": 0.15,
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "patience": 9999,
+        "factor": 0.9,
+        "ckpt_path": null,
+        "init_ckpt_path": null,
+        "dataset": {
+          "_target_": "datasets.ssc.SSCLDM",
+          "batch_size": 256,
+          "data_path": "data",
+          "ignore_first_timesteps": 10,
+          "num_classes": 35,
+          "num_workers": 0,
+          "pad_to_min_size": 300,
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4
+        },
+        "l1": {
+          "alpha": 5.0,
+          "c": 0.4,
+          "cell": "dth_se_adlif",
+          "dt": 1.0,
+          "input_size": 140,
+          "n_neurons": 720,
+          "q": 120,
+          "rho_fast": 0.9,
+          "rho_slow": 0.99,
+          "target_rate": 0.05,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "theta_max": 1.5,
+          "theta_min": 0.5
+        },
+        "l2": {
+          "alpha": 5.0,
+          "c": 0.4,
+          "cell": "dth_se_adlif",
+          "dt": 1.0,
+          "input_size": 720,
+          "n_neurons": 720,
+          "q": 120,
+          "rho_fast": 0.9,
+          "rho_slow": 0.99,
+          "target_rate": 0.05,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "theta_max": 1.5,
+          "theta_min": 0.5
+        }
+      },
+      "metrics_files": 0,
+      "val_epochs": 0,
+      "duplicate_val_epochs": [],
+      "best_val": {
+        "epoch": null,
+        "val_acc": null,
+        "val_loss": null
+      },
+      "tests": [],
+      "checkpoints": [
+        {
+          "name": "epoch=19-step=5880.ckpt",
+          "epoch": 19,
+          "step": 5880,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        },
+        {
+          "name": "last.ckpt",
+          "epoch": 39,
+          "step": 11760,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        }
+      ],
+      "local_comparison": [
+        {
+          "file": "FULL_RUN_CONFIG.json",
+          "identical_bytes": true
+        }
+      ],
+      "cost_checkpoint_hash_matches": true,
+      "cost_status": "complete",
+      "local_metrics_test": 0.7803944945335388,
+      "local_metrics_best_validation": 0.8024246096611023,
+      "callback_best_score_matches_metrics": true
+    },
+    {
+      "run": "results/valid/MT_SE_adLIF/ECG/seed_123",
+      "config": {
+        "paper_baseline_version": "paper_classification_v1",
+        "paper_baseline_dataset": "ECG",
+        "evaluation_protocol": "paper_classification_v1",
+        "random_seed": 123,
+        "lr": 0.01,
+        "batch_size": 64,
+        "n_epochs": 400,
+        "early_stopping": false,
+        "loss_agg": "summed_membrane_potentials",
+        "dropout": 0.15,
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "patience": 9999,
+        "factor": 0.9,
+        "ckpt_path": null,
+        "init_ckpt_path": null,
+        "dataset": {
+          "_target_": "datasets.ecg.ECGLDM",
+          "batch_size": 64,
+          "data_path": "data",
+          "num_classes": 6,
+          "num_workers": 0,
+          "random_seed": 42,
+          "valid_fraction": 0.05
+        },
+        "l1": {
+          "alpha": 5.0,
+          "c": 0.2,
+          "cell": "mt_se_adlif",
+          "dt": 1.0,
+          "input_size": 4,
+          "n_neurons": 36,
+          "q": 120,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "tau_w_slow_range": [
+            300,
+            600
+          ]
+        },
+        "l2": {
+          "alpha": 5.0,
+          "c": 0.2,
+          "cell": "mt_se_adlif",
+          "dt": 1.0,
+          "input_size": 36,
+          "n_neurons": 36,
+          "q": 120,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "tau_w_slow_range": [
+            300,
+            600
+          ]
+        }
+      },
+      "metrics_files": 1,
+      "val_epochs": 400,
+      "duplicate_val_epochs": [],
+      "best_val": {
+        "epoch": "396",
+        "val_acc": "0.8630796670913696",
+        "val_loss": "0.36984583735466003"
+      },
+      "tests": [
+        {
+          "epoch": "400",
+          "grad_norm": "",
+          "lr-Adam": "",
+          "step": "3600",
+          "test_acc": "0.8818639516830444",
+          "test_loss": "0.32125911116600037",
+          "train_acc_epoch": "",
+          "train_acc_step": "",
+          "train_loss_epoch": "",
+          "train_loss_step": "",
+          "val_acc": "",
+          "val_loss": ""
+        }
+      ],
+      "checkpoints": [
+        {
+          "name": "epoch=396-step=3573.ckpt",
+          "epoch": 396,
+          "step": 3573,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        },
+        {
+          "name": "last.ckpt",
+          "epoch": 399,
+          "step": 3600,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        }
+      ],
+      "local_comparison": [],
+      "cost_checkpoint_hash_matches": true,
+      "cost_status": "complete",
+      "callback_best_score_matches_metrics": true
+    },
+    {
+      "run": "results/valid/MT_SE_adLIF/ECG/seed_456",
+      "config": {
+        "paper_baseline_version": "paper_classification_v1",
+        "paper_baseline_dataset": "ECG",
+        "evaluation_protocol": "paper_classification_v1",
+        "random_seed": 456,
+        "lr": 0.01,
+        "batch_size": 64,
+        "n_epochs": 400,
+        "early_stopping": false,
+        "loss_agg": "summed_membrane_potentials",
+        "dropout": 0.15,
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "patience": 9999,
+        "factor": 0.9,
+        "ckpt_path": null,
+        "init_ckpt_path": null,
+        "dataset": {
+          "_target_": "datasets.ecg.ECGLDM",
+          "batch_size": 64,
+          "data_path": "data",
+          "num_classes": 6,
+          "num_workers": 0,
+          "random_seed": 42,
+          "valid_fraction": 0.05
+        },
+        "l1": {
+          "alpha": 5.0,
+          "c": 0.2,
+          "cell": "mt_se_adlif",
+          "dt": 1.0,
+          "input_size": 4,
+          "n_neurons": 36,
+          "q": 120,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "tau_w_slow_range": [
+            300,
+            600
+          ]
+        },
+        "l2": {
+          "alpha": 5.0,
+          "c": 0.2,
+          "cell": "mt_se_adlif",
+          "dt": 1.0,
+          "input_size": 36,
+          "n_neurons": 36,
+          "q": 120,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "tau_w_slow_range": [
+            300,
+            600
+          ]
+        }
+      },
+      "metrics_files": 1,
+      "val_epochs": 400,
+      "duplicate_val_epochs": [],
+      "best_val": {
+        "epoch": "393",
+        "val_acc": "0.8616704940795898",
+        "val_loss": "0.37701892852783203"
+      },
+      "tests": [
+        {
+          "epoch": "400",
+          "grad_norm": "",
+          "lr-Adam": "",
+          "step": "3600",
+          "test_acc": "0.8798032999038696",
+          "test_loss": "0.32121455669403076",
+          "train_acc_epoch": "",
+          "train_acc_step": "",
+          "train_loss_epoch": "",
+          "train_loss_step": "",
+          "val_acc": "",
+          "val_loss": ""
+        }
+      ],
+      "checkpoints": [
+        {
+          "name": "epoch=393-step=3546.ckpt",
+          "epoch": 393,
+          "step": 3546,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        },
+        {
+          "name": "last.ckpt",
+          "epoch": 399,
+          "step": 3600,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        }
+      ],
+      "local_comparison": [],
+      "cost_checkpoint_hash_matches": true,
+      "cost_status": "complete",
+      "callback_best_score_matches_metrics": true
+    },
+    {
+      "run": "results/valid/MT_SE_adLIF/SSC/seed_123",
+      "config": {
+        "paper_baseline_version": "paper_classification_v1",
+        "paper_baseline_dataset": "SSC",
+        "evaluation_protocol": "paper_classification_v1",
+        "random_seed": 123,
+        "lr": 0.006,
+        "batch_size": 256,
+        "n_epochs": 40,
+        "early_stopping": false,
+        "loss_agg": "summed_membrane_potentials",
+        "dropout": 0.15,
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "patience": 9999,
+        "factor": 0.9,
+        "ckpt_path": null,
+        "init_ckpt_path": null,
+        "dataset": {
+          "_target_": "datasets.ssc.SSCLDM",
+          "batch_size": 256,
+          "data_path": "data",
+          "ignore_first_timesteps": 10,
+          "num_classes": 35,
+          "num_workers": 0,
+          "pad_to_min_size": 300,
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4
+        },
+        "l1": {
+          "alpha": 5.0,
+          "c": 0.4,
+          "cell": "mt_se_adlif",
+          "dt": 1.0,
+          "input_size": 140,
+          "n_neurons": 720,
+          "q": 120,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "tau_w_slow_range": [
+            300,
+            600
+          ]
+        },
+        "l2": {
+          "alpha": 5.0,
+          "c": 0.4,
+          "cell": "mt_se_adlif",
+          "dt": 1.0,
+          "input_size": 720,
+          "n_neurons": 720,
+          "q": 120,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "tau_w_slow_range": [
+            300,
+            600
+          ]
+        }
+      },
+      "metrics_files": 1,
+      "val_epochs": 40,
+      "duplicate_val_epochs": [],
+      "best_val": {
+        "epoch": "20",
+        "val_acc": "0.8007213473320007",
+        "val_loss": "0.9860913753509521"
+      },
+      "tests": [
+        {
+          "epoch": "40",
+          "grad_norm": "",
+          "lr-Adam": "",
+          "step": "11760",
+          "test_acc": "0.7813757061958313",
+          "test_loss": "1.0857369899749756",
+          "train_acc_epoch": "",
+          "train_acc_step": "",
+          "train_loss_epoch": "",
+          "train_loss_step": "",
+          "val_acc": "",
+          "val_loss": ""
+        }
+      ],
+      "checkpoints": [
+        {
+          "name": "epoch=20-step=6174.ckpt",
+          "epoch": 20,
+          "step": 6174,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        },
+        {
+          "name": "last.ckpt",
+          "epoch": 39,
+          "step": 11760,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        }
+      ],
+      "local_comparison": [
+        {
+          "file": "FULL_RUN_CONFIG.json",
+          "identical_bytes": true
+        }
+      ],
+      "cost_checkpoint_hash_matches": true,
+      "cost_status": "complete",
+      "callback_best_score_matches_metrics": true
+    },
+    {
+      "run": "results/valid/MT_SE_adLIF/SSC/seed_456",
+      "config": {
+        "paper_baseline_version": "paper_classification_v1",
+        "paper_baseline_dataset": "SSC",
+        "evaluation_protocol": "paper_classification_v1",
+        "random_seed": 456,
+        "lr": 0.006,
+        "batch_size": 256,
+        "n_epochs": 40,
+        "early_stopping": false,
+        "loss_agg": "summed_membrane_potentials",
+        "dropout": 0.15,
+        "gradient_clip_val": 1.5,
+        "scheduler": "plateau",
+        "patience": 9999,
+        "factor": 0.9,
+        "ckpt_path": null,
+        "init_ckpt_path": null,
+        "dataset": {
+          "_target_": "datasets.ssc.SSCLDM",
+          "batch_size": 256,
+          "data_path": "data",
+          "ignore_first_timesteps": 10,
+          "num_classes": 35,
+          "num_workers": 0,
+          "pad_to_min_size": 300,
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4
+        },
+        "l1": {
+          "alpha": 5.0,
+          "c": 0.4,
+          "cell": "mt_se_adlif",
+          "dt": 1.0,
+          "input_size": 140,
+          "n_neurons": 720,
+          "q": 120,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "tau_w_slow_range": [
+            300,
+            600
+          ]
+        },
+        "l2": {
+          "alpha": 5.0,
+          "c": 0.4,
+          "cell": "mt_se_adlif",
+          "dt": 1.0,
+          "input_size": 720,
+          "n_neurons": 720,
+          "q": 120,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "tau_w_slow_range": [
+            300,
+            600
+          ]
+        }
+      },
+      "metrics_files": 1,
+      "val_epochs": 40,
+      "duplicate_val_epochs": [],
+      "best_val": {
+        "epoch": "15",
+        "val_acc": "0.7991183400154114",
+        "val_loss": "0.8846167325973511"
+      },
+      "tests": [
+        {
+          "epoch": "40",
+          "grad_norm": "",
+          "lr-Adam": "",
+          "step": "11760",
+          "test_acc": "0.7745559811592102",
+          "test_loss": "0.9850512146949768",
+          "train_acc_epoch": "",
+          "train_acc_step": "",
+          "train_loss_epoch": "",
+          "train_loss_step": "",
+          "val_acc": "",
+          "val_loss": ""
+        }
+      ],
+      "checkpoints": [
+        {
+          "name": "epoch=15-step=4704.ckpt",
+          "epoch": 15,
+          "step": 4704,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        },
+        {
+          "name": "last.ckpt",
+          "epoch": 39,
+          "step": 11760,
+          "optimizer": true,
+          "loss_agg": "summed_membrane_potentials",
+          "early_stopping": false
+        }
+      ],
+      "local_comparison": [],
+      "cost_checkpoint_hash_matches": true,
+      "cost_status": "complete",
+      "callback_best_score_matches_metrics": true
+    }
+  ]
+}

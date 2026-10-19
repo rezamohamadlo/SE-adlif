@@ -1,0 +1,501 @@
+{
+  "packages": {
+    "torch": "2.6.0+cu124",
+    "pytorch-lightning": "2.2.1",
+    "numpy": "2.4.6",
+    "tonic": "1.6.0",
+    "h5py": "3.16.0",
+    "torchmetrics": "1.9.0"
+  },
+  "cuda_available": true,
+  "references": [
+    {
+      "seed_directory": "results/valid/reference/SSC/seed_123",
+      "config": {
+        "random_seed": 123,
+        "logdir": "results/phase1_models/corrected/reference/SSC/seed_123",
+        "datadir": "./data",
+        "cachedir": "./data/cache",
+        "ckpt_path": null,
+        "device": "cuda:0",
+        "early_stopping": false,
+        "early_stopping_patience": 50,
+        "early_stopping_min_delta": 0.001,
+        "dataset": {
+          "_target_": "datasets.ssc.SSCLDM",
+          "data_path": "./data",
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4,
+          "batch_size": 256,
+          "num_workers": 0,
+          "num_classes": 35,
+          "pad_to_min_size": 300,
+          "ignore_first_timesteps": 10
+        },
+        "exp_name": "SSC_SE_adLIF",
+        "two_layers": true,
+        "alpha": 5.0,
+        "c": 0.4,
+        "dt": 1.0,
+        "dropout": 0.15,
+        "l1": {
+          "cell": "se_adlif",
+          "input_size": 140,
+          "n_neurons": 720,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "q": 120,
+          "alpha": 5.0,
+          "c": 0.4,
+          "dt": 1.0
+        },
+        "l2": {
+          "cell": "se_adlif",
+          "input_size": 720,
+          "n_neurons": 720,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "q": 120,
+          "alpha": 5.0,
+          "c": 0.4,
+          "dt": 1.0
+        },
+        "l_out": {
+          "input_size": 720,
+          "n_neurons": 35,
+          "tau_u_range": [
+            15,
+            15
+          ],
+          "dt": 1.0
+        },
+        "n_epochs": 40,
+        "batch_size": 256,
+        "loss_agg": "summed_membrane_potentials",
+        "tracking_metric": "val_acc",
+        "tracking_mode": "max",
+        "lr": 0.006,
+        "factor": 0.9,
+        "patience": 9999
+      },
+      "checkpoints": [
+        {
+          "file": "results/valid/reference/SSC/seed_123/ckpt/epoch=25-step=7644.ckpt",
+          "epoch": 25,
+          "global_step": 7644,
+          "loss_agg": "summed_membrane_potentials",
+          "lightning_version": "2.2.1",
+          "adam": {
+            "lr": 0.006,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0
+          }
+        },
+        {
+          "file": "results/valid/reference/SSC/seed_123/ckpt/last.ckpt",
+          "epoch": 39,
+          "global_step": 11760,
+          "loss_agg": "summed_membrane_potentials",
+          "lightning_version": "2.2.1",
+          "adam": {
+            "lr": 0.006,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0
+          }
+        }
+      ],
+      "validation_epochs": 40,
+      "best_validation_epoch": 25,
+      "best_validation_accuracy": 0.7978158593177795,
+      "test_accuracy": 0.7811794877052307,
+      "observed_lr": [
+        0.006
+      ]
+    },
+    {
+      "seed_directory": "results/valid/reference/SSC/seed_42",
+      "config": {
+        "random_seed": 42,
+        "logdir": "results/phase1_models/corrected/reference/SSC/seed_42",
+        "datadir": "./data",
+        "cachedir": "./data/cache",
+        "ckpt_path": null,
+        "device": "cuda:0",
+        "early_stopping": false,
+        "early_stopping_patience": 50,
+        "early_stopping_min_delta": 0.001,
+        "dataset": {
+          "_target_": "datasets.ssc.SSCLDM",
+          "data_path": "./data",
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4,
+          "batch_size": 256,
+          "num_workers": 0,
+          "num_classes": 35,
+          "pad_to_min_size": 300,
+          "ignore_first_timesteps": 10
+        },
+        "exp_name": "SSC_SE_adLIF",
+        "two_layers": true,
+        "alpha": 5.0,
+        "c": 0.4,
+        "dt": 1.0,
+        "dropout": 0.15,
+        "l1": {
+          "cell": "se_adlif",
+          "input_size": 140,
+          "n_neurons": 720,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "q": 120,
+          "alpha": 5.0,
+          "c": 0.4,
+          "dt": 1.0
+        },
+        "l2": {
+          "cell": "se_adlif",
+          "input_size": 720,
+          "n_neurons": 720,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "q": 120,
+          "alpha": 5.0,
+          "c": 0.4,
+          "dt": 1.0
+        },
+        "l_out": {
+          "input_size": 720,
+          "n_neurons": 35,
+          "tau_u_range": [
+            15,
+            15
+          ],
+          "dt": 1.0
+        },
+        "n_epochs": 40,
+        "batch_size": 256,
+        "loss_agg": "summed_membrane_potentials",
+        "tracking_metric": "val_acc",
+        "tracking_mode": "max",
+        "lr": 0.006,
+        "factor": 0.9,
+        "patience": 9999
+      },
+      "checkpoints": [
+        {
+          "file": "results/valid/reference/SSC/seed_42/ckpt/epoch=18-step=5586.ckpt",
+          "epoch": 18,
+          "global_step": 5586,
+          "loss_agg": "summed_membrane_potentials",
+          "lightning_version": "2.2.1",
+          "adam": {
+            "lr": 0.006,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0
+          }
+        },
+        {
+          "file": "results/valid/reference/SSC/seed_42/ckpt/last.ckpt",
+          "epoch": 39,
+          "global_step": 11760,
+          "loss_agg": "summed_membrane_potentials",
+          "lightning_version": "2.2.1",
+          "adam": {
+            "lr": 0.006,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0
+          }
+        }
+      ],
+      "validation_epochs": 40,
+      "best_validation_epoch": 18,
+      "best_validation_accuracy": 0.8029255867004395,
+      "test_accuracy": 0.7833382487297058,
+      "observed_lr": [
+        0.006
+      ]
+    },
+    {
+      "seed_directory": "results/valid/reference/SSC/seed_456",
+      "config": {
+        "random_seed": 456,
+        "logdir": "results/phase1_models/corrected/reference/SSC/seed_456",
+        "datadir": "./data",
+        "cachedir": "./data/cache",
+        "ckpt_path": null,
+        "device": "cuda:0",
+        "early_stopping": false,
+        "early_stopping_patience": 50,
+        "early_stopping_min_delta": 0.001,
+        "dataset": {
+          "_target_": "datasets.ssc.SSCLDM",
+          "data_path": "./data",
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4,
+          "batch_size": 256,
+          "num_workers": 0,
+          "num_classes": 35,
+          "pad_to_min_size": 300,
+          "ignore_first_timesteps": 10
+        },
+        "exp_name": "SSC_SE_adLIF",
+        "two_layers": true,
+        "alpha": 5.0,
+        "c": 0.4,
+        "dt": 1.0,
+        "dropout": 0.15,
+        "l1": {
+          "cell": "se_adlif",
+          "input_size": 140,
+          "n_neurons": 720,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "q": 120,
+          "alpha": 5.0,
+          "c": 0.4,
+          "dt": 1.0
+        },
+        "l2": {
+          "cell": "se_adlif",
+          "input_size": 720,
+          "n_neurons": 720,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "q": 120,
+          "alpha": 5.0,
+          "c": 0.4,
+          "dt": 1.0
+        },
+        "l_out": {
+          "input_size": 720,
+          "n_neurons": 35,
+          "tau_u_range": [
+            15,
+            15
+          ],
+          "dt": 1.0
+        },
+        "n_epochs": 40,
+        "batch_size": 256,
+        "loss_agg": "summed_membrane_potentials",
+        "tracking_metric": "val_acc",
+        "tracking_mode": "max",
+        "lr": 0.006,
+        "factor": 0.9,
+        "patience": 9999
+      },
+      "checkpoints": [
+        {
+          "file": "results/valid/reference/SSC/seed_456/ckpt/epoch=19-step=5880.ckpt",
+          "epoch": 19,
+          "global_step": 5880,
+          "loss_agg": "summed_membrane_potentials",
+          "lightning_version": "2.2.1",
+          "adam": {
+            "lr": 0.006,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0
+          }
+        },
+        {
+          "file": "results/valid/reference/SSC/seed_456/ckpt/last.ckpt",
+          "epoch": 39,
+          "global_step": 11760,
+          "loss_agg": "summed_membrane_potentials",
+          "lightning_version": "2.2.1",
+          "adam": {
+            "lr": 0.006,
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0
+          }
+        }
+      ],
+      "validation_epochs": 40,
+      "best_validation_epoch": 19,
+      "best_validation_accuracy": 0.7949103116989136,
+      "test_accuracy": 0.781670093536377,
+      "observed_lr": [
+        0.006
+      ]
+    }
+  ],
+  "data_samples": [
+    {
+      "file": "data/SSC/ssc_test.h5",
+      "samples": 20382,
+      "first_sample_time_dtype": "float16",
+      "events": 11671,
+      "old_scaled_finite": false,
+      "corrected_scaled_finite": true,
+      "corrected_duration_us": 993652.34375
+    },
+    {
+      "file": "data/SSC/ssc_train.h5",
+      "samples": 75466,
+      "first_sample_time_dtype": "float16",
+      "events": 12618,
+      "old_scaled_finite": false,
+      "corrected_scaled_finite": true,
+      "corrected_duration_us": 996093.75
+    },
+    {
+      "file": "data/SSC/ssc_valid.h5",
+      "samples": 9981,
+      "first_sample_time_dtype": "float16",
+      "events": 14591,
+      "old_scaled_finite": false,
+      "corrected_scaled_finite": true,
+      "corrected_duration_us": 995117.1875
+    },
+    {
+      "file": "data/SSCWrapper/ssc_test.h5",
+      "samples": 20382,
+      "first_sample_time_dtype": "float16",
+      "events": 11671,
+      "old_scaled_finite": false,
+      "corrected_scaled_finite": true,
+      "corrected_duration_us": 993652.34375
+    },
+    {
+      "file": "data/SSCWrapper/ssc_train.h5",
+      "samples": 75466,
+      "first_sample_time_dtype": "float16",
+      "events": 12618,
+      "old_scaled_finite": false,
+      "corrected_scaled_finite": true,
+      "corrected_duration_us": 996093.75
+    },
+    {
+      "file": "data/SSCWrapper/ssc_valid.h5",
+      "samples": 9981,
+      "first_sample_time_dtype": "float16",
+      "events": 14591,
+      "old_scaled_finite": false,
+      "corrected_scaled_finite": true,
+      "corrected_duration_us": 995117.1875
+    }
+  ],
+  "loss_diagnostics": [
+    {
+      "device": "cpu",
+      "summed_membrane_potentials": {
+        "logits": [
+          [
+            2.8999977111816406,
+            -2.8999977111816406,
+            0.0
+          ]
+        ],
+        "loss": 5.856423854827881,
+        "gradient_norm": 23.41320037841797,
+        "finite_gradients": true,
+        "argmax": 0
+      },
+      "mean_membrane_potentials": {
+        "logits": [
+          [
+            0.009999992325901985,
+            -0.009999992325901985,
+            0.0
+          ]
+        ],
+        "loss": 1.1086455583572388,
+        "gradient_norm": 0.048185862600803375,
+        "finite_gradients": true,
+        "argmax": 0
+      }
+    },
+    {
+      "device": "cuda",
+      "summed_membrane_potentials": {
+        "logits": [
+          [
+            2.8999977111816406,
+            -2.8999977111816406,
+            0.0
+          ]
+        ],
+        "loss": 5.856423854827881,
+        "gradient_norm": 23.413198471069336,
+        "finite_gradients": true,
+        "argmax": 0
+      },
+      "mean_membrane_potentials": {
+        "logits": [
+          [
+            0.009999992325901985,
+            -0.009999992325901985,
+            0.0
+          ]
+        ],
+        "loss": 1.1086455583572388,
+        "gradient_norm": 0.04818585887551308,
+        "finite_gradients": true,
+        "argmax": 0
+      }
+    }
+  ]
+}

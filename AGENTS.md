@@ -1,8 +1,24 @@
 # Project instructions for agents
 
 These instructions apply throughout this repository. Keep durable policies
-here; put changing scores, run progress, timing estimates and findings in
-`reports/` or the relevant results directory.
+here. Keep main comparison reports in `reports/`; put guides and audit
+documentation in `docs/`. Keep run progress, timing estimates and per-run
+provenance in the relevant results directory. Shared transfer manifests belong
+in `results/provenance/`.
+
+## Reports and documentation layout
+
+- Reserve the `reports/` root for the three main result comparisons:
+  `paper-results.md`, `paper-vs-reference.md`, and `reference-vs-models.md`.
+- Put experiment guides in `docs/experiments/`, audits and reproduction
+  investigations in `docs/audits/`, and transfer documentation in
+  `docs/transfers/`. Do not create guides, audit logs or transfer notes in
+  `reports/`.
+- Keep per-run configs, metrics, summaries and measurement evidence beside
+  their seed directory. Store shared cross-run transfer manifests in
+  `results/provenance/`, not in `reports/`.
+- Preserve existing historical archives. When relocating documentation,
+  update its consumers and relative links without changing evidence values.
 
 ## Project map and configuration authority
 
@@ -34,6 +50,8 @@ here; put changing scores, run progress, timing estimates and findings in
   their configuration/provenance limits; do not mix it into the current grid.
   `reports/archive/`: previous reports, guides, audits, document exports and
   audio measurement CSVs, including the `2026-10-15-report-consolidation/` snapshot.
+  New guides and audits belong in `docs/experiments/`, `docs/audits/` and
+  `docs/transfers/`; do not add documentation files to the `reports/` root.
 
 Paper reproduction uses `config/experiment/SHD_SE_adLIF_paper.yaml` separately
 from the controlled protocol. Its documented SHD settings are batch 256 and
