@@ -9,23 +9,23 @@ Checked per-seed best validation and final test values against summaries, model 
 | [results/valid/DTH_SE_adLIF/SHD/seed_123](../../results/valid/DTH_SE_adLIF/SHD/seed_123/TRAINING_SUMMARY.md) | 94.88 | 300 | No metric/config discrepancy found |
 | [results/valid/DTH_SE_adLIF/SHD/seed_42](../../results/valid/DTH_SE_adLIF/SHD/seed_42/TRAINING_SUMMARY.md) | 94.70 | 300 | No metric/config discrepancy found |
 | [results/valid/DTH_SE_adLIF/SHD/seed_456](../../results/valid/DTH_SE_adLIF/SHD/seed_456/TRAINING_SUMMARY.md) | 93.90 | 300 | No metric/config discrepancy found |
-| [results/valid/DTH_SE_adLIF/SSC/seed_123](../../results/valid/DTH_SE_adLIF/SSC/seed_123/TRAINING_SUMMARY.md) | 78.31 | 40 | Checkpoints missing locally |
-| [results/valid/DTH_SE_adLIF/SSC/seed_42](../../results/valid/DTH_SE_adLIF/SSC/seed_42/TRAINING_SUMMARY.md) | 78.22 | 40 | Historical metadata; checked shared settings match |
-| [results/valid/DTH_SE_adLIF/SSC/seed_456](../../results/valid/DTH_SE_adLIF/SSC/seed_456/TRAINING_SUMMARY.md) | 78.04 | 40 | Checkpoints missing locally |
+| [results/valid/DTH_SE_adLIF/SSC/seed_123](../../archive/ssc_summed_loss_20261019/DTH_SE_adLIF/SSC/seed_123/TRAINING_SUMMARY.md) | 78.31 | 40 | Checkpoints missing locally |
+| [results/valid/DTH_SE_adLIF/SSC/seed_42](../../archive/ssc_summed_loss_20261019/DTH_SE_adLIF/SSC/seed_42/TRAINING_SUMMARY.md) | 78.22 | 40 | Historical metadata; checked shared settings match |
+| [results/valid/DTH_SE_adLIF/SSC/seed_456](../../archive/ssc_summed_loss_20261019/DTH_SE_adLIF/SSC/seed_456/TRAINING_SUMMARY.md) | 78.04 | 40 | Checkpoints missing locally |
 | [results/valid/MT_SE_adLIF/SHD/seed_123](../../results/valid/MT_SE_adLIF/SHD/seed_123/TRAINING_SUMMARY.md) | 94.52 | 300 | No metric/config discrepancy found |
 | [results/valid/MT_SE_adLIF/SHD/seed_42](../../results/valid/MT_SE_adLIF/SHD/seed_42/TRAINING_SUMMARY.md) | 94.88 | 300 | No metric/config discrepancy found |
 | [results/valid/MT_SE_adLIF/SHD/seed_456](../../results/valid/MT_SE_adLIF/SHD/seed_456/TRAINING_SUMMARY.md) | 94.43 | 300 | No metric/config discrepancy found |
-| [results/valid/MT_SE_adLIF/SSC/seed_123](../../results/valid/MT_SE_adLIF/SSC/seed_123/TRAINING_SUMMARY.md) | pending | unavailable | Partial summary only; no local metrics/checkpoint |
-| [results/valid/MT_SE_adLIF/SSC/seed_42](../../results/valid/MT_SE_adLIF/SSC/seed_42/TRAINING_SUMMARY.md) | 77.60 | 40 | Historical metadata; checked shared settings match |
+| [results/valid/MT_SE_adLIF/SSC/seed_123](../../archive/ssc_summed_loss_20261019/MT_SE_adLIF/SSC/seed_123/TRAINING_SUMMARY.md) | pending | unavailable | Partial summary only; no local metrics/checkpoint |
+| [results/valid/MT_SE_adLIF/SSC/seed_42](../../archive/ssc_summed_loss_20261019/MT_SE_adLIF/SSC/seed_42/TRAINING_SUMMARY.md) | 77.60 | 40 | Historical metadata; checked shared settings match |
 | [results/valid/reference/ECG/seed_123](../../results/valid/reference/ECG/seed_123/TRAINING_SUMMARY.md) | 88.72 | 283 | Historical unmatched budget/stopping |
 | [results/valid/reference/ECG/seed_42](../../results/valid/reference/ECG/seed_42/TRAINING_SUMMARY.md) | 88.13 | 383 | Historical unmatched budget/stopping |
 | [results/valid/reference/ECG/seed_456](../../results/valid/reference/ECG/seed_456/TRAINING_SUMMARY.md) | 88.11 | 185 | Historical unmatched budget/stopping |
 | [results/valid/reference/SHD/seed_123](../../results/valid/reference/SHD/seed_123/TRAINING_SUMMARY.md) | 92.89 | 300 | No metric/config discrepancy found |
 | [results/valid/reference/SHD/seed_42](../../results/valid/reference/SHD/seed_42/TRAINING_SUMMARY.md) | 92.93 | 300 | No metric/config discrepancy found |
 | [results/valid/reference/SHD/seed_456](../../results/valid/reference/SHD/seed_456/TRAINING_SUMMARY.md) | 93.64 | 300 | No metric/config discrepancy found |
-| [results/valid/reference/SSC/seed_123](../../results/valid/reference/SSC/seed_123/TRAINING_SUMMARY.md) | 78.12 | 40 | Historical metadata; checked shared settings match |
-| [results/valid/reference/SSC/seed_42](../../results/valid/reference/SSC/seed_42/TRAINING_SUMMARY.md) | 78.33 | 40 | Historical metadata; checked shared settings match |
-| [results/valid/reference/SSC/seed_456](../../results/valid/reference/SSC/seed_456/TRAINING_SUMMARY.md) | 78.17 | 40 | Historical metadata; checked shared settings match |
+| [results/valid/reference/SSC/seed_123](../../archive/ssc_summed_loss_20261019/reference/SSC/seed_123/TRAINING_SUMMARY.md) | 78.12 | 40 | Historical metadata; checked shared settings match |
+| [results/valid/reference/SSC/seed_42](../../archive/ssc_summed_loss_20261019/reference/SSC/seed_42/TRAINING_SUMMARY.md) | 78.33 | 40 | Historical metadata; checked shared settings match |
+| [results/valid/reference/SSC/seed_456](../../archive/ssc_summed_loss_20261019/reference/SSC/seed_456/TRAINING_SUMMARY.md) | 78.17 | 40 | Historical metadata; checked shared settings match |
 | [results/not_improved/DA_SE_adLIF/ECG/seed_42](../../results/not_improved/DA_SE_adLIF/ECG/seed_42/TRAINING_SUMMARY.md) | 87.20 | 329 | Historical unmatched budget/stopping |
 | [results/not_improved/DA_SE_adLIF/SHD/seed_123](../../results/not_improved/DA_SE_adLIF/SHD/seed_123/TRAINING_SUMMARY.md) | 93.99 | 300 | No metric/config discrepancy found |
 | [results/not_improved/DA_SE_adLIF/SHD/seed_42](../../results/not_improved/DA_SE_adLIF/SHD/seed_42/TRAINING_SUMMARY.md) | 93.73 | 300 | No metric/config discrepancy found |

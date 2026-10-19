@@ -23,7 +23,7 @@ class FullRunnerTests(unittest.TestCase):
                         'paper_baseline_dataset', 'paper_baseline_deviations'):
                 legacy.pop(key)
             legacy['evaluation_protocol'] = 'controlled_v2'
-            self.assertTrue(full_runner.matches_paper_baseline(legacy, current, dataset))
+            self.assertEqual(full_runner.matches_paper_baseline(legacy, current, dataset), dataset == 'ECG')
             for key, value in [('early_stopping', True), ('n_epochs', 1),
                                ('batch_size', 1), ('lr', .5), ('random_seed', 123)]:
                 changed = copy.deepcopy(legacy)
@@ -153,7 +153,9 @@ class FullRunnerTests(unittest.TestCase):
                              [False, False, False])
             self.assertTrue(all(x['config']['early_stopping_patience'] == 50 for x in plan))
             self.assertTrue(all(x['config']['patience'] == 9999 for x in plan))
-            self.assertTrue(all(x['config']['evaluation_protocol'] == 'paper_classification_v1' for x in plan))
+            self.assertTrue(all(x['config']['evaluation_protocol'] ==
+                                ('ssc_mean_loss_v1' if x['dataset'] == 'SSC' else 'paper_classification_v1')
+                                for x in plan))
             self.assertEqual([x['config']['lr'] for x in plan[::3]], [.01, .006, .01])
             for item in plan[:3]:
                 self.assertEqual(item['config']['dataset']['validate_on'], .2)

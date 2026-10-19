@@ -125,8 +125,25 @@ reproduction. Do not change `run.py`, `runner.py`, shared model implementations
 or `evaluation.yaml` to implement a new search unless explicitly requested.
 Keep new results separate from existing runs and preserve their provenance.
 
-Do not launch training merely because you are providing a command. When the
-user asks to run it themselves, return the command and let them start it.
+For the SSC mean-loss reference/DTH/MT comparison, use the official
+`runner.py` workflow for new training, resume, final testing, aggregation and
+cost measurement. Do not substitute the separate SSC diagnostic/comparison
+launchers. Dataset-specific comparison configs select loss automatically: SHD uses
+`sum_softmax_over_time`, SSC uses `mean_membrane_potentials` under
+`ssc_mean_loss_v1`, and ECG uses `summed_membrane_potentials` on per-timestep
+blocks. No loss flag is needed; `--ssc-mean-loss` is a compatibility alias.
+Preserve archived summed-loss SSC records and other datasets' protocol metadata. The completed
+reference seed 42 is already retained under `results/valid/reference/SSC/`;
+do not retrain or overwrite it when scheduling DTH and MT.
+
+All training must be launched by the user. Never start, resume or restart
+training processes yourself, including fresh training, tuning, fine-tuning,
+weights-only continuation, and training queues. When training is needed,
+prepare the configs and launcher, perform non-training checks such as dry runs,
+then return the exact command line for the user to execute. Requests to prepare
+or run an experiment do not override this rule. Read-only inspection and
+explicitly requested standalone checkpoint evaluation without training remain
+allowed.
 
 ## Execution and checkpoint safety
 

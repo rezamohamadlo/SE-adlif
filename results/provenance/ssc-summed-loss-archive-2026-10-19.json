@@ -1,0 +1,515 @@
+{
+  "reason": "User requested archiving the active summed-loss SSC reference/DTH/MT before a separate mean-loss comparison. Not a declaration that prior training is invalid.",
+  "runs": [
+    {
+      "source": "results/valid/reference/SSC",
+      "archive": "archive/ssc_summed_loss_20261019/reference/SSC",
+      "files": [
+        {
+          "path": "seed_123/.hydra/config.yaml",
+          "sha256": "e186ff64186cdc72a1674c00138367ec6595bb055a431df57919309a820379e8"
+        },
+        {
+          "path": "seed_123/.hydra/hydra.yaml",
+          "sha256": "17fe132606763d0bd15983df987efe6932e584a5739bee20be54fd7238abfae5"
+        },
+        {
+          "path": "seed_123/.hydra/overrides.yaml",
+          "sha256": "ffa511f1c3905a2afe1bb726aa52c760be5f19805961335ff2f835e4e702a46b"
+        },
+        {
+          "path": "seed_123/ckpt/epoch=25-step=7644.ckpt",
+          "sha256": "4c7d0b983da2dcc0a210aefb33c5226a54f85aed6d220a204be8ea1adff3dd1a"
+        },
+        {
+          "path": "seed_123/ckpt/last.ckpt",
+          "sha256": "94ec7083db7ade904dc99057924d05a172d6db342fd4d6b9644a3822c6c69fef"
+        },
+        {
+          "path": "seed_123/completed.txt",
+          "sha256": "baff830a69fe0be9a23a75835533cff59dffd41487470ee91b7730e121b530e8"
+        },
+        {
+          "path": "seed_123/COST_RESULTS.json",
+          "sha256": "c340d41597d335845e25f209654e05a06d5ce8e4804d262de3673caee423f413"
+        },
+        {
+          "path": "seed_123/COST_RESULTS.md",
+          "sha256": "eb8edd98b333ccbde048f1e10ca90ffcedc7e4e8acaeda4a3f2fb9f633ae78e6"
+        },
+        {
+          "path": "seed_123/logs/mlp_snn/version_0/hparams.yaml",
+          "sha256": "8c5b8e8312069166eb714aa4182e0a076bc3ab40e8da12f4d47bde904ba68183"
+        },
+        {
+          "path": "seed_123/logs/mlp_snn/version_0/metrics.csv",
+          "sha256": "d1153f29aab27f222c01a58184d61ff2d4a49d579525fa14f60a80535a019555"
+        },
+        {
+          "path": "seed_123/out.log",
+          "sha256": "a145a9c64362fcbf1e2b499862062afaaa14c4ee6917f5817e783de45bbc07f7"
+        },
+        {
+          "path": "seed_123/TRAINING_SUMMARY.md",
+          "sha256": "94d456e8a0f3653f05d03c70d3a20de83ea1b1d424e1a66ef3551c64ea12a4bf"
+        },
+        {
+          "path": "seed_42/.hydra/config.yaml",
+          "sha256": "f25e84c4f9c0ab1bc7abc38987eefb88f9753314702c7b2e8a07e47db4d36616"
+        },
+        {
+          "path": "seed_42/.hydra/hydra.yaml",
+          "sha256": "918f3552c1564d2144dfdc1cfccede8cf462ef1ef56f433d3c160059060a150f"
+        },
+        {
+          "path": "seed_42/.hydra/overrides.yaml",
+          "sha256": "1bf16aacf46e283b954551de93785737e41318ec5f09c96e7c852e3fb4397620"
+        },
+        {
+          "path": "seed_42/ckpt/epoch=18-step=5586.ckpt",
+          "sha256": "f386a69a5c3359817acdd7967e231b2a97f9b2b432afe215ff6d21589ab6a66b"
+        },
+        {
+          "path": "seed_42/ckpt/last.ckpt",
+          "sha256": "1908ec4b00e4bae6f9dff8e9b8c1d112a3f8ab095c5edd98e2a2e9e21579f10d"
+        },
+        {
+          "path": "seed_42/completed.txt",
+          "sha256": "9f756614c6253ef56c682f84ebdcc464d4cbd9909e73355d125eeed1d333f676"
+        },
+        {
+          "path": "seed_42/COST_RESULTS.json",
+          "sha256": "877d518009ee2f6a456c34a96ac791019b52ff3b9ec685070dac3cf8cafe459a"
+        },
+        {
+          "path": "seed_42/COST_RESULTS.md",
+          "sha256": "90d8228e6412efbf9d08fc13141728a2841414cbb4910c8922981491a591d5e1"
+        },
+        {
+          "path": "seed_42/logs/mlp_snn/version_0/hparams.yaml",
+          "sha256": "33218f430d1579b097458eb29eac056f249a8def9ff71217a658bbc8bcb23569"
+        },
+        {
+          "path": "seed_42/logs/mlp_snn/version_0/metrics.csv",
+          "sha256": "49aad82853753e1402ac72372286972cecdf5e1829a437d63e22d7e358e1d648"
+        },
+        {
+          "path": "seed_42/out.log",
+          "sha256": "a96bfc235fb62ee374bb92e1bfea6bf4803a963f629b6cf4fafae83c1a21f7be"
+        },
+        {
+          "path": "seed_42/TRAINING_SUMMARY.md",
+          "sha256": "ff558952ecd76e79a7a17c64e5ceb8d54b4d3aa032260990a012826829361887"
+        },
+        {
+          "path": "seed_456/.hydra/config.yaml",
+          "sha256": "a9b40c4e7a640ee27be7532bc40bff810958bd61df666a37b9d3ce02bdf65e07"
+        },
+        {
+          "path": "seed_456/.hydra/hydra.yaml",
+          "sha256": "b1988a0fa21a48dd4fccc7710419539a3f8d075826d9ad1e25d6e2d14d044c87"
+        },
+        {
+          "path": "seed_456/.hydra/overrides.yaml",
+          "sha256": "35587813cd8cb84909115b2fa56e32f866eb125d02033ca9fc0ccf4ee510df7a"
+        },
+        {
+          "path": "seed_456/ckpt/epoch=19-step=5880.ckpt",
+          "sha256": "41550d39c10227ec3ae6fa15c0fe28c4f1d19578869dc4e13f29fc7fe0ea15b6"
+        },
+        {
+          "path": "seed_456/ckpt/last.ckpt",
+          "sha256": "652c4c098d19725a688a5a944e0708bf0dd284e6e9fc8a41467b14fd2bff3cd4"
+        },
+        {
+          "path": "seed_456/completed.txt",
+          "sha256": "01928f9fa8406e989a4145a3db523e67a77ab06ec48a532ca0a285a3717b5aea"
+        },
+        {
+          "path": "seed_456/COST_RESULTS.json",
+          "sha256": "054329a5da1658d6986161fbc5fa2acd13970c0c7cd07078c84cd5200c40021a"
+        },
+        {
+          "path": "seed_456/COST_RESULTS.md",
+          "sha256": "eebd41529f2d75dfb2768c9ec2dcb4585d658e76e23b9a9ef7a746968b997ed1"
+        },
+        {
+          "path": "seed_456/logs/mlp_snn/version_0/hparams.yaml",
+          "sha256": "3806a18db9ce0e99e9b4c0dcab3d5545f998871bed8f6a4f1a76a9dec090c601"
+        },
+        {
+          "path": "seed_456/logs/mlp_snn/version_0/metrics.csv",
+          "sha256": "20e5bddf603d5cb6dc6adc3a2a1e0bb6f4c7d04571c54b1235ac2120516944f0"
+        },
+        {
+          "path": "seed_456/out.log",
+          "sha256": "fceb8668fd1d4511f96d369348618e3a9373850c21f70417351389bc3f63d8ff"
+        },
+        {
+          "path": "seed_456/TRAINING_SUMMARY.md",
+          "sha256": "b9e90a7452c42f90d0d28da41cbc3347496ecf597745fab9cffffb6a57dba759"
+        }
+      ]
+    },
+    {
+      "source": "results/valid/DTH_SE_adLIF/SSC",
+      "archive": "archive/ssc_summed_loss_20261019/DTH_SE_adLIF/SSC",
+      "files": [
+        {
+          "path": "seed_123/.evaluation.lock",
+          "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "path": "seed_123/.hydra/config.yaml",
+          "sha256": "a78159dd8641d2b2a95dcf15a82b5f656cdab7b3c56dbc72534bc178971637f6"
+        },
+        {
+          "path": "seed_123/.hydra/hydra.yaml",
+          "sha256": "043cdc5a4e63bc7d60dbcd913c1b472419b10fb6f4958a0d091b4cf8a4997dce"
+        },
+        {
+          "path": "seed_123/.hydra/overrides.yaml",
+          "sha256": "22b6c31d83f7352116b04c753828cbe1f2125a91917b4464b8433d708a5abc12"
+        },
+        {
+          "path": "seed_123/ckpt/epoch=37-step=11172.ckpt",
+          "sha256": "5f921bdccab0c4bf8ffc382689168c0bb305c74cc0aa4a466b924e756aff24c0"
+        },
+        {
+          "path": "seed_123/ckpt/last.ckpt",
+          "sha256": "a8faaba2651766bc2cb303161edbe2055699feaf42eb11d686334b91d8651401"
+        },
+        {
+          "path": "seed_123/completed.txt",
+          "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+        },
+        {
+          "path": "seed_123/COST_RESULTS.json",
+          "sha256": "288dbb272e3fa8663a9a5a43c171789a9eddc5411b8fb673dbe5764f1e2cfe78"
+        },
+        {
+          "path": "seed_123/COST_RESULTS.md",
+          "sha256": "7e197e861dcb617e448fa20b1c26b4ad4aca35a0fae7bd0458eb6adfceaea865"
+        },
+        {
+          "path": "seed_123/FULL_RUN_CONFIG.json",
+          "sha256": "95d83b89f05ec1536d203e47766012b4b2613ffc412982e45d465bb7d1cf409d"
+        },
+        {
+          "path": "seed_123/logs/mlp_snn/version_0/hparams.yaml",
+          "sha256": "b888b500996985a88cbcef194674a72bb93a50f711d1bd6a13095158c17141f9"
+        },
+        {
+          "path": "seed_123/logs/mlp_snn/version_0/metrics.csv",
+          "sha256": "dbef1a6bc59a2e6b3f71bd9563b8f9490c7b9d491d203649644079fa67030f15"
+        },
+        {
+          "path": "seed_123/out.log",
+          "sha256": "df21d310c0403e69afe49bc7374704af38e084fcc59a4f77519bf6bbaed066ee"
+        },
+        {
+          "path": "seed_123/PAPER_BASELINE_COMPATIBILITY.json",
+          "sha256": "a3843420e55b5b4f71cd72562582b8c8bb5021187039ccf70c8c2dbe669913c3"
+        },
+        {
+          "path": "seed_123/TRAINING_SUMMARY.md",
+          "sha256": "9515805ae998bfba2b908805cdc00a90b82ae1ffe0ee0adb58884920bb19850c"
+        },
+        {
+          "path": "seed_42/.hydra/config.yaml",
+          "sha256": "81d9bfabbc374d07d67563f1830bfaaf2bfb19307a83c174649d70d60b1cd095"
+        },
+        {
+          "path": "seed_42/.hydra/hydra.yaml",
+          "sha256": "27e95f0301726c11a976b35922cc19d39f1ad0013f5719562f8f6bd59ae3ed47"
+        },
+        {
+          "path": "seed_42/.hydra/overrides.yaml",
+          "sha256": "e6e44632fa47999fa88566d72b606bdd9cfbfe41b100a3808030bff8515f3328"
+        },
+        {
+          "path": "seed_42/ckpt/epoch=30-step=9114.ckpt",
+          "sha256": "176b39d5d944a4a83751694618c7166aa7131e0114f67227ff40e15ea4ff99c2"
+        },
+        {
+          "path": "seed_42/ckpt/last.ckpt",
+          "sha256": "7c103a5e8ee7354fdba15e8e52d7b55b1fc58181915aa8dd2d90732ac887e705"
+        },
+        {
+          "path": "seed_42/completed.txt",
+          "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+        },
+        {
+          "path": "seed_42/COST_RESULTS.json",
+          "sha256": "211a9de6411828f3c9737b9db50c42f24599e57fa5818b332852d0c4d8afbe5a"
+        },
+        {
+          "path": "seed_42/COST_RESULTS.md",
+          "sha256": "90ea97866890c56ac40f1b3e7cb08bf55bd3ce3bac07ca26007297fcf4fd4a0a"
+        },
+        {
+          "path": "seed_42/FULL_RUN_CONFIG.json",
+          "sha256": "ef53d57f3af87720b243115612695994cb725c401909ad135b2a31257630a86d"
+        },
+        {
+          "path": "seed_42/logs/mlp_snn/version_0/hparams.yaml",
+          "sha256": "ac7b9c5d996a9e8d641c80d50c23fb5f092b16506d4438b26197a3ce790cb5de"
+        },
+        {
+          "path": "seed_42/logs/mlp_snn/version_0/metrics.csv",
+          "sha256": "cb0e493a2cbdb66df65e1f75ea123d444ef135f6c4bfe605077051346718930f"
+        },
+        {
+          "path": "seed_42/out.log",
+          "sha256": "3d0984067b94d70b02545cb3c333e53c116ee850880312bfb0a97701f9a11384"
+        },
+        {
+          "path": "seed_42/PAPER_BASELINE_COMPATIBILITY.json",
+          "sha256": "ea5b64836d43080da4bcaad1391372afdc62df4c13abf6d4acc2bf30197f68b8"
+        },
+        {
+          "path": "seed_42/TRAINING_SUMMARY.md",
+          "sha256": "e50eb884c120ca3acfe72e7e2658cfee7a13c0858242dce9dd4301f5616e9bfa"
+        },
+        {
+          "path": "seed_456/.evaluation.lock",
+          "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "path": "seed_456/.hydra/config.yaml",
+          "sha256": "0fac374e1a17f469afb1e3572d87f301dd709a6cb72e7e4fcf66c86804c0eca3"
+        },
+        {
+          "path": "seed_456/.hydra/hydra.yaml",
+          "sha256": "8a502b5ce982e2253f2d38b290b1f0838a9ee96a9f2442ee770980ca22a7dbee"
+        },
+        {
+          "path": "seed_456/.hydra/overrides.yaml",
+          "sha256": "6f770abdc7b4647ef3f25e692fec30305c2f1424e8105b4d4faa09ca307cd801"
+        },
+        {
+          "path": "seed_456/ckpt/epoch=19-step=5880.ckpt",
+          "sha256": "61e27bcadda5f35a4bf8b88741416b17b1c442249860eb1fa03c8253f8a11db7"
+        },
+        {
+          "path": "seed_456/ckpt/last.ckpt",
+          "sha256": "fc290201b76a705d43655778d0bb7bae6a2ec1874ae1d69bef3a190480430384"
+        },
+        {
+          "path": "seed_456/completed.txt",
+          "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+        },
+        {
+          "path": "seed_456/COST_RESULTS.json",
+          "sha256": "5504f0c06207ef4bfb2342d5f08631d3f7cb697173f8a07ac9ce85d54051b162"
+        },
+        {
+          "path": "seed_456/COST_RESULTS.md",
+          "sha256": "2dd9d35b331f9c8a2110aca3353fcbcfa3d3bd2bce4e000e36ab3bb8eead94f8"
+        },
+        {
+          "path": "seed_456/FULL_RUN_CONFIG.json",
+          "sha256": "ca26124282933d211f0b904bd7522b29bdc146dd88bb82550e28da6f677242e2"
+        },
+        {
+          "path": "seed_456/logs/mlp_snn/version_0/hparams.yaml",
+          "sha256": "a31dfd450cf7a4762b3d3806d5325d95813b276e91da62798159dba65962feac"
+        },
+        {
+          "path": "seed_456/logs/mlp_snn/version_0/metrics.csv",
+          "sha256": "9f3e61a1f6cb84144babb59b531f5cef37a1f7371640f36644819ab22cd12376"
+        },
+        {
+          "path": "seed_456/out.log",
+          "sha256": "2d5a8a65b782a126088eeaa43118cbd5b2dec375b4369fbf0de4394474092b68"
+        },
+        {
+          "path": "seed_456/PAPER_BASELINE_COMPATIBILITY.json",
+          "sha256": "43e933dcfe7c7d85e7436a1146664cc4b6f4261101c106c988196bad8c2ee256"
+        },
+        {
+          "path": "seed_456/TRAINING_SUMMARY.md",
+          "sha256": "d65cdcaad315f4c98f83545a247508ecd142ca6d8d2dfb6b0d4c5947d4173a8c"
+        }
+      ]
+    },
+    {
+      "source": "results/valid/MT_SE_adLIF/SSC",
+      "archive": "archive/ssc_summed_loss_20261019/MT_SE_adLIF/SSC",
+      "files": [
+        {
+          "path": "seed_123/.evaluation.lock",
+          "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "path": "seed_123/.hydra/config.yaml",
+          "sha256": "2b712e6d07fc4f79fd1ccc8bc50c7d8fb5dfbd3b7bc230650cf377214b8c0ce4"
+        },
+        {
+          "path": "seed_123/.hydra/hydra.yaml",
+          "sha256": "d53668edaf9ad4e68e6bbd613668554ecac10a3a4d9132b9ef68c01d50779319"
+        },
+        {
+          "path": "seed_123/.hydra/overrides.yaml",
+          "sha256": "7df2f3b710b282d98e87a869e9bf154a30b753e338faf814379156f536268789"
+        },
+        {
+          "path": "seed_123/ckpt/epoch=20-step=6174.ckpt",
+          "sha256": "8d6db685cf4207d3ad24da0e6f69d2aecc763d2530f49f9439a53b2ac067219c"
+        },
+        {
+          "path": "seed_123/ckpt/last.ckpt",
+          "sha256": "c55761ff057f3e4eb91a91dfc45718bbda54129b7127107ee791907452d3e45f"
+        },
+        {
+          "path": "seed_123/completed.txt",
+          "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+        },
+        {
+          "path": "seed_123/COST_RESULTS.json",
+          "sha256": "410d5ca97c4c86d00884b45a596f258181edefa41a124548cff5457b4ccb9385"
+        },
+        {
+          "path": "seed_123/COST_RESULTS.md",
+          "sha256": "c13ae26f3a2cc5a3aa9512014566c0f8e425079e908d9d53c5a34f584a6670fb"
+        },
+        {
+          "path": "seed_123/FULL_RUN_CONFIG.json",
+          "sha256": "8c08a52853a78a631e58ad9c53cfc23b3a31dd3571c582e8e2601c07328fab05"
+        },
+        {
+          "path": "seed_123/logs/mlp_snn/version_0/hparams.yaml",
+          "sha256": "8282d7aac19b4fdcbd5162a73a32f9e4f056e939492cb33e3d2f7bf31f5e4ba1"
+        },
+        {
+          "path": "seed_123/logs/mlp_snn/version_0/metrics.csv",
+          "sha256": "e94fe3a838a8b7724fac2a1b663f65355abe71a7cc0902e8ec09d7b010e7bb89"
+        },
+        {
+          "path": "seed_123/out.log",
+          "sha256": "e657b67d7d031a204fa028ddcb56bb5aa2484cd8ac84437bfecc33db1b43aa87"
+        },
+        {
+          "path": "seed_123/PAPER_BASELINE_COMPATIBILITY.json",
+          "sha256": "8fd40b82e7c56ae03c74654f226ca51fba2eacd4458114c75a56d50c279d154f"
+        },
+        {
+          "path": "seed_123/TRAINING_SUMMARY.md",
+          "sha256": "4eceb75653c1de6f825cf367bf81090715feaf821f8a62040e42427e3dc8edf4"
+        },
+        {
+          "path": "seed_42/.hydra/config.yaml",
+          "sha256": "a70bd35c59c378763a45891f0bc5250c7b5b11d30f111be3772cbd1d8df6ff2f"
+        },
+        {
+          "path": "seed_42/.hydra/hydra.yaml",
+          "sha256": "d9577bc29a638230a07a52b349d807da0af47ea2577eef18b17654da3f7561d1"
+        },
+        {
+          "path": "seed_42/.hydra/overrides.yaml",
+          "sha256": "1fb260bfd12c1242dbe215c6622367c07ee73f603f194139e92c5ae2c529bdca"
+        },
+        {
+          "path": "seed_42/ckpt/epoch=35-step=10584.ckpt",
+          "sha256": "b90159b6223ee67374dd864bfef9d45f01769603b1d7faa06b391b7a064dc238"
+        },
+        {
+          "path": "seed_42/ckpt/last.ckpt",
+          "sha256": "f85fbfd925eb9cae1a9b70d349306fc3c888371694c9916da23199e07e5dbc66"
+        },
+        {
+          "path": "seed_42/completed.txt",
+          "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+        },
+        {
+          "path": "seed_42/COST_RESULTS.json",
+          "sha256": "597152148ef45af3d768f1dd66b9a195eee52af8102ae79d07343b842b3a0fdf"
+        },
+        {
+          "path": "seed_42/COST_RESULTS.md",
+          "sha256": "d748b48d681c3b7519d0f71670f61bc6dc0ad3d3b506d3ab8bb9e09e7cda87d3"
+        },
+        {
+          "path": "seed_42/FULL_RUN_CONFIG.json",
+          "sha256": "b64bb5b61fd08f8c4a58d4398f9a90d11216e9ea95cf81310245951e497093ee"
+        },
+        {
+          "path": "seed_42/logs/mlp_snn/version_0/hparams.yaml",
+          "sha256": "42defcb6686766ae7affd6d165111138b049a07b9e0de86e2f71e7797eef4825"
+        },
+        {
+          "path": "seed_42/logs/mlp_snn/version_0/metrics.csv",
+          "sha256": "f740da326b98d02c4f32f0149902fe94cb4c70e35f034f42844dc490aef39c51"
+        },
+        {
+          "path": "seed_42/out.log",
+          "sha256": "1ae6cbae0fd40ac7473a3af36eee22f9833b3b043fbdee43fae97a8326dd9345"
+        },
+        {
+          "path": "seed_42/PAPER_BASELINE_COMPATIBILITY.json",
+          "sha256": "cd5d2c0c68e980df49913c34cc10955e0f8a6a542d879215a658e6e116dbb625"
+        },
+        {
+          "path": "seed_42/TRAINING_SUMMARY.md",
+          "sha256": "0b8f7b2aba67c1e133998405a5f982d783cebe7ec3ac35cb55e0c07775387c08"
+        },
+        {
+          "path": "seed_456/.evaluation.lock",
+          "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "path": "seed_456/.hydra/config.yaml",
+          "sha256": "49b4fefbdc638bcb98b1cae3c1dbb2dbdc95b17584dbf5f0aa0fe9c88b266914"
+        },
+        {
+          "path": "seed_456/.hydra/hydra.yaml",
+          "sha256": "7f168e8625ef9324f3f853ff1d608852f0b16380772ce82f464dd27f7fc53078"
+        },
+        {
+          "path": "seed_456/.hydra/overrides.yaml",
+          "sha256": "0ddb6b092a76226d7c49d26627d34839da47f21a160725c9e0cdfd27274a9711"
+        },
+        {
+          "path": "seed_456/ckpt/epoch=15-step=4704.ckpt",
+          "sha256": "148b7ed5a7ae5f1d0ef2779277395c36e588928450612b38d16ff7ae943031af"
+        },
+        {
+          "path": "seed_456/ckpt/last.ckpt",
+          "sha256": "a2b3ac4f8fd46d3c6003570ba4bc0b6f28078bc8f9dfa58ac9c9158d527a1db8"
+        },
+        {
+          "path": "seed_456/completed.txt",
+          "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+        },
+        {
+          "path": "seed_456/COST_RESULTS.json",
+          "sha256": "ae1125bc4fd1a1699713f3e0591f38c2e83a2c0eb8fe01c40c6b187ffb8152cd"
+        },
+        {
+          "path": "seed_456/COST_RESULTS.md",
+          "sha256": "15409e2ce9acd8fdfb745fb7fed16fc55969c9663a1f75f5f29897e49de967de"
+        },
+        {
+          "path": "seed_456/FULL_RUN_CONFIG.json",
+          "sha256": "87c24417bf911fd774a4c9d0246cfba34d754be51d4f3efdf754592f0eea2146"
+        },
+        {
+          "path": "seed_456/logs/mlp_snn/version_0/hparams.yaml",
+          "sha256": "a33e38c91a88e8d069df8d39ce101840dc6caad07a3e053366993822e78ea32e"
+        },
+        {
+          "path": "seed_456/logs/mlp_snn/version_0/metrics.csv",
+          "sha256": "bc67d7338f5ecaf3f7ded14e5e03ac3f3e2a038dcab223a610c730ca3a8e33ca"
+        },
+        {
+          "path": "seed_456/out.log",
+          "sha256": "583bf493bc4bbcbe449272e888b91ef3bd53cf92068c2e49c63495764c0a2dec"
+        },
+        {
+          "path": "seed_456/TRAINING_SUMMARY.md",
+          "sha256": "043b931b07e03c42c0ec7ba0c3f10076473c6e4493cdc931f9895d52cc90716a"
+        }
+      ]
+    }
+  ]
+}

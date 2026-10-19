@@ -1,0 +1,12 @@
+- experiment=SSC_SE_adLIF
+- random_seed=42
+- n_epochs=40
+- batch_size=256
+- dataset.batch_size=256
+- logdir=results/phase1_models/corrected/reference/SSC/seed_42
+- dataset.num_workers=0
+- early_stopping=False
+- early_stopping_patience=50
+- early_stopping_min_delta=0.001
+- patience=9999
+- factor=0.9

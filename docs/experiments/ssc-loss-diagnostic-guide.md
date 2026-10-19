@@ -1,3 +1,5 @@
+> Retired after reference seed-42 promotion on 19 October 2026. Use the [SSC mean comparison guide](ssc-mean-comparison.md) for DTH/MT. Commands below describe the historical diagnostic queue and no longer launch training after promotion.
+
 # SSC sum/mean diagnostic
 
 Prepared on 18 October 2026; training has not been launched by the agent.

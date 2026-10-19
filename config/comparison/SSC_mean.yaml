@@ -1,0 +1,13 @@
+# @package _global_
+defaults:
+  - SSC
+  - _self_
+
+# Explicit SSC-only alternative; historical baseline values stay unchanged.
+evaluation_protocol: ssc_mean_loss_v1
+loss_agg: mean_membrane_potentials
+paper_baseline_deviations:
+  - "loss_agg=mean_membrane_potentials (released SSC implementation)"
+  - "run_test=false; evaluate the validation-selected checkpoint separately"
+random_seed: 42
+run_test: false

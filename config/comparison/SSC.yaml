@@ -3,6 +3,7 @@ defaults:
   - common
   - _self_
 paper_baseline_dataset: SSC
+loss_agg: mean_membrane_potentials
 dataset:
   spatial_factor: ${paper_baseline.datasets.SSC.spatial_factor}
   time_factor: ${paper_baseline.datasets.SSC.time_factor}

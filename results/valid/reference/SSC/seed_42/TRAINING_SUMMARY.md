@@ -1,13 +1,13 @@
-# SSC_SE_adLIF Training Summary — Seed 42
+# SSC_SE_adLIF_loss_diagnostic Training Summary — Seed 42
 
 This file is updated automatically whenever training saves a new best checkpoint.
 
 ## Run status
 
-- **Status:** Training and testing finished
+- **Status:** Training finished
 - **Progress:** 40 epochs completed (`0` through `39`) out of 40
 - **Dataset:** SSC
-- **Model:** SSC_SE_adLIF
+- **Model:** SSC_SE_adLIF_loss_diagnostic
 - **Seed:** 42
 - **Device:** cuda:0
 
@@ -15,11 +15,11 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 | Metric | Value | Epoch |
 |---|---:|---:|
-| Best validation accuracy | **80.29%** | 18 |
-| Validation loss | **0.9095** | 18 |
-| Training accuracy | **82.29%** | 18 |
-| Training loss | **0.685440** | 18 |
-| Gradient norm | **14.0330** | 18 |
+| Best validation accuracy | **82.22%** | 18 |
+| Validation loss | **0.6016** | 18 |
+| Training accuracy | **86.42%** | 18 |
+| Training loss | **0.429068** | 18 |
+| Gradient norm | **0.2554** | 18 |
 | Learning rate | **0.006** | 18 |
 
 ## Model size and computation
@@ -46,6 +46,7 @@ ckpt/epoch=18-step=5586.ckpt
 | Epoch limit | 40 |
 | Batch size | 256 |
 | Initial learning rate | 0.006 |
+| LR scheduler | plateau |
 | LR scheduler factor | 0.9 |
 | LR scheduler patience | 9999 |
 | Early stopping | false |
@@ -63,23 +64,23 @@ ckpt/epoch=18-step=5586.ckpt
 - Runtime log: `out.log`
 - Checkpoints: `ckpt/`
 
-## Runner command
+## Resume command
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models SE_adLIF --datasets SSC --seeds 42
+.\.venv\Scripts\python.exe runner.py --models SE_adLIF_loss_diagnostic --datasets SSC --seeds 42
 ```
 
 ## Evaluation note
 
-SSC uses the official `valid` split for checkpoint selection and the separate official `test` split for final evaluation.
+This run uses `validate_on: validation`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
 
 ## Final test evaluation
 
-The best validation checkpoint was evaluated on the test split after training.
+The selected validation checkpoint was evaluated without further training.
+
+Checkpoint: `epoch=18-step=5586.ckpt`
 
 | Metric | Value |
 |---|---:|
-| Test accuracy | **78.33%** |
-| Test loss | **0.9854** |
-
-This runner command uses the shared evaluation settings and starts or resumes a runner-managed job. It does not import this retained historical run automatically.
+| Test accuracy | **80.69%** |
+| Test loss | **0.6706** |

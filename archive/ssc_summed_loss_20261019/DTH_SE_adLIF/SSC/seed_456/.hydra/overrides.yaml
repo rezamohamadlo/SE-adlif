@@ -1,0 +1,10 @@
+- experiment=SSC_DTH_SE_adLIF
+- random_seed=456
+- +comparison=SSC
+- logdir="results/valid/protocol_v2/DTH_SE_adLIF/SSC/seed_456"
+- ++launcher_script=runner.py
+- ++model_variant=DTH_SE_adLIF
+- ++run_mode=ours
+- ++launcher_logdir=results/valid/protocol_v2
+- ++evaluation_protocol=paper_classification_v1
+- ++paper_baseline_deviations=["model_variant=DTH_SE_adLIF"]

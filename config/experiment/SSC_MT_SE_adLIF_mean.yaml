@@ -1,0 +1,10 @@
+# @package _global_
+defaults:
+  - SSC_MT_SE_adLIF
+  - /comparison: SSC_mean
+  - _self_
+exp_name: SSC_MT_SE_adLIF_mean
+logdir: results/valid/MT_SE_adLIF/SSC/seed_${random_seed}
+hydra:
+  run:
+    dir: ${logdir}

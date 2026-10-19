@@ -1,0 +1,76 @@
+{
+  "source": "results/experiments/ssc_loss_diagnostic_v1/mean_membrane_potentials/seed_42",
+  "destination": "results/valid/reference/SSC/seed_42",
+  "comparison_protocol": "ssc_mean_loss_v1",
+  "original_protocol": "ssc_loss_diagnostic_v1",
+  "baseline": "paper_classification_v1",
+  "selection": "best validation accuracy, epoch 18",
+  "test_accuracy": 0.8069375157356262,
+  "files": [
+    {
+      "path": ".hydra/config.yaml",
+      "sha256": "bed7a74ca2bed754479642267600e7ca9c3dccbdf6b194132b14ce368bab307a"
+    },
+    {
+      "path": ".hydra/hydra.yaml",
+      "sha256": "28644bcb14bba5deecd37998f01f1598c6d0735a210fe88fa90557e11ea7913b"
+    },
+    {
+      "path": ".hydra/overrides.yaml",
+      "sha256": "916e7f414f610c32003f92bf2c6a74af77d0f0b61a8745b0b6f95be31d6fb757"
+    },
+    {
+      "path": "ckpt/epoch=18-step=5586.ckpt",
+      "sha256": "05d179a2a65e5574b17d6eefab0f959ca421e352819732c74e7c1a1b02231a58"
+    },
+    {
+      "path": "ckpt/last.ckpt",
+      "sha256": "ec21e78c55320dcf79c8e227ddcdf47e0bdff79604dddd46e5e4d65639abfc63"
+    },
+    {
+      "path": "console.log",
+      "sha256": "7c1354badbc13d07b62c824f4655eea53c5c26d9199aa9104514a00b9ae1949b"
+    },
+    {
+      "path": "DIAGNOSTIC_MANIFEST.json",
+      "sha256": "a6e9dada9ec37738de13b7cf5d5487d014e494a939e92855b09fc340816a3b09"
+    },
+    {
+      "path": "FULL_RUN_CONFIG.json",
+      "sha256": "dd32e11eaef85fc1d345b71bf93be11689907915d6c3c4ebfd7fffd7e2e66b04"
+    },
+    {
+      "path": "logs/mlp_snn/version_0/hparams.yaml",
+      "sha256": "7d56f4cd6d3d7a12f95035d8b0bd45cc537d7a40f7a6107bdd9dd940a1b2570e"
+    },
+    {
+      "path": "logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "263c7b87eb4e659233bedce6edf529d60c20c9817e4a72f0aadb0568ca64cda0"
+    },
+    {
+      "path": "out.log",
+      "sha256": "69dadbd586c59216149cd82e486397990687664d0299f4073d0f0073da8f6088"
+    },
+    {
+      "path": "RUN_STATUS.json",
+      "sha256": "db05caec84e303e0ab5f5848900e502bddd59e8f6292133523fa0609df6bf5d3"
+    },
+    {
+      "path": "TEST_EVALUATION_METADATA.json",
+      "sha256": "f25273836a9b3204195fb5414bdbc9de3c5d07c7c671ec6a65d774951f0f4c4c"
+    },
+    {
+      "path": "TEST_RESULTS.json",
+      "sha256": "ad9d9cf5bca40322d8cb9bec0b2f67c344d0c02b707e64735c227b514f0c1be3"
+    },
+    {
+      "path": "TRAINING_SUMMARY.md",
+      "sha256": "24fa60c16912ef680d48763b3c53579128d42c1cde50d0ca43b3510bc2ccc1d8"
+    },
+    {
+      "path": "VALIDATION_RESULTS.json",
+      "sha256": "36687ac035fe05f9dbb29486b55466bbafaf3e74454495e374b1e34df5e6b61b"
+    }
+  ],
+  "note": "Promotion preserves original checkpoint/config bytes and diagnostic provenance; single seed only."
+}

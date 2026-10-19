@@ -1,0 +1,69 @@
+random_seed: 123
+logdir: results/phase1_models/corrected/reference/SSC/seed_123
+datadir: ./data
+cachedir: ./data/cache
+ckpt_path: null
+device: cuda:0
+early_stopping: false
+early_stopping_patience: 50
+early_stopping_min_delta: 0.001
+dataset:
+  _target_: datasets.ssc.SSCLDM
+  data_path: ${datadir}
+  spatial_factor: 0.2
+  time_factor: 0.001
+  window_size: 4
+  batch_size: 256
+  num_workers: 0
+  num_classes: 35
+  pad_to_min_size: 300
+  ignore_first_timesteps: 10
+exp_name: SSC_SE_adLIF
+two_layers: true
+alpha: 5.0
+c: 0.4
+dt: 1.0
+dropout: 0.15
+l1:
+  cell: se_adlif
+  input_size: 140
+  n_neurons: 720
+  tau_u_range:
+  - 5
+  - 25
+  tau_w_range:
+  - 60
+  - 300
+  q: 120
+  alpha: ${alpha}
+  c: ${c}
+  dt: ${dt}
+l2:
+  cell: se_adlif
+  input_size: 720
+  n_neurons: 720
+  tau_u_range:
+  - 5
+  - 25
+  tau_w_range:
+  - 60
+  - 300
+  q: 120
+  alpha: ${alpha}
+  c: ${c}
+  dt: ${dt}
+l_out:
+  input_size: 720
+  n_neurons: ${dataset.num_classes}
+  tau_u_range:
+  - 15
+  - 15
+  dt: ${dt}
+n_epochs: 40
+batch_size: 256
+loss_agg: summed_membrane_potentials
+tracking_metric: val_acc
+tracking_mode: max
+lr: 0.006
+factor: 0.9
+patience: 9999

@@ -125,7 +125,7 @@ All three fresh runs completed 300 epochs with batch 256, early stopping disable
 
 ## SSC and ECG evidence status - updated 19 October 2026
 
-SSC final test accuracy (%). Means and sample SDs use distinct completed training seeds; single-seed results have no across-seed SD. Pending seeds are excluded. Values come from canonical per-seed metrics, not nested historical logs.
+Historical summed-loss SSC final test accuracy (%); reference/DTH/MT folders were archived on 19 October 2026. New mean-loss results are pending. Means and sample SDs use distinct completed training seeds; single-seed results have no across-seed SD. Pending seeds are excluded. Values come from canonical per-seed metrics, not nested historical logs.
 
 | Model | Seed 42 | Seed 123 | Seed 456 | Accepted metric completions | Mean +/- sample SD (%) |
 |---|---:|---:|---:|---:|---:|
@@ -156,3 +156,15 @@ See the [per-seed evidence audit](../docs/audits/results-audit-2026-10-18.md) fo
 Each run completed 400 epochs, batch 64, LR 0.01, early stopping disabled; validation fraction 0.05 and split seed 42. Checkpoints, full metric histories and existing per-seed cost measurements were verified and retained. The rows use different available seed sets and are not a paired model ranking. The historical ECG reference remains unmatched; do not calculate a fair reference improvement from it. DTH seed 456 and MT seed 42 remain pending. See the [move manifest and verification](../docs/transfers/ecg-transfer-2026-10-19.md).
 
 The [SSC transfer](../docs/transfers/ssc-transfer-2026-10-19.md) completed on 19 October 2026. Both DTH and MT now have three complete summed-loss SSC seeds. Archived pre-transfer snapshots do not count as additional independent runs. The separate mean-loss diagnostic is not included in this table.
+
+## Active SSC comparison - reset 19 October 2026
+
+| Model | Seed 42 final test | Completed active seeds |
+|---|---|---:|
+| SE-adLIF reference | 80.69% | 1 |
+| DTH | pending | 0 |
+| MT | pending | 0 |
+
+The summed-loss records above remain historical evidence, archived without deleting metrics or checkpoints. The reference mean-loss run has 82.22% best validation accuracy and a separately evaluated 80.69% final test accuracy for seed 42. The tested mean-loss diagnostic reference seed 42 has now been promoted, with its original provenance retained. No new training was launched. See the [archive record](../docs/transfers/ssc-summed-loss-archive-2026-10-19.md).
+
+The active [SSC mean-loss comparison](../results/valid/SSC_MEAN_COMPARISON.md) reuses reference seed 42 (80.69% test; 82.22% validation). DTH and MT seed-42 mean-loss training configs are prepared, for the official runner with automatic SSC mean loss; final tests follow validation-based checkpoint selection. Both remain pending. This protocol was chosen after the reference test score was observed; it is a disclosed development comparison.

@@ -115,6 +115,9 @@ def main():
     if len(set(args.seeds)) != len(args.seeds):
         parser.error('Seeds must be distinct')
     output = local_path(args.output)
+    if (output / 'PROMOTED_RUNS.json').exists() and not args.dry_run:
+        parser.error('This diagnostic queue is retired: reference seed 42 was promoted. '
+                     'Use ssc_mean_comparison.py for the new DTH/MT comparison.')
     jobs = [resolve_job(args.output, arm, seed) for seed in args.seeds for arm in ARMS]
     for name in ('ssc_train.h5', 'ssc_valid.h5', 'ssc_test.h5'):
         if not (ROOT / 'data/SSCWrapper' / name).exists():

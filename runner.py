@@ -36,6 +36,14 @@ def result_root(model, adaptation_update_interval=2):
     return root / f"K_{adaptation_update_interval}" if model == "MR_SE_adLIF" else root
 
 
+def dataset_protocol_name(dataset):
+    """SSC's explicit mean-loss protocol leaves SHD/ECG metadata unchanged."""
+    name = EVALUATION['name']
+    if dataset == 'SSC' and name.startswith(str(_BASELINE.version)):
+        return name.replace(str(_BASELINE.version), 'ssc_mean_loss_v1', 1)
+    return name
+
+
 def matches_paper_baseline(previous, resolved, dataset):
     """Accept legacy metadata only after comparing all effective settings."""
     baseline_keys = ('paper_baseline', 'paper_baseline_version',
@@ -103,10 +111,14 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                     "++launcher_script=runner.py", f"++model_variant={model}",
                     f"++run_mode={'reference' if model == 'SE_adLIF' else 'ours'}",
                     f"++launcher_logdir={launcher_logdir}",
-                    f"++evaluation_protocol={EVALUATION['name']}",
+                    f"++evaluation_protocol={dataset_protocol_name(dataset)}",
                     f"++paper_baseline_deviations={json.dumps([] if model == 'SE_adLIF' else [f'model_variant={model}'])}",
                 ]
                 overrides += protocol_overrides(EVALUATION, dataset)
+                if dataset == 'SSC':
+                    deviations = ([] if model == 'SE_adLIF' else [f'model_variant={model}'])
+                    deviations.append('loss_agg=mean_membrane_potentials (released SSC implementation)')
+                    overrides.append(f'++paper_baseline_deviations={json.dumps(deviations)}')
                 if model == "MR_SE_adLIF":
                     overrides.append(f"adaptation_update_interval={adaptation_update_interval}")
                 cfg = compose(config_name="main", overrides=overrides)
@@ -117,8 +129,7 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                 for layer in (cfg.l1, cfg.l2):
                     if layer.cell not in layer_map:
                         raise ValueError(f"Unregistered cell: {layer.cell}")
-                expected_loss = ("sum_softmax_over_time" if dataset == "SHD"
-                                 else "summed_membrane_potentials")
+                expected_loss = OmegaConf.load(ROOT / 'config' / 'comparison' / f'{dataset}.yaml').loss_agg
                 if cfg.loss_agg != expected_loss or not cfg.two_layers:
                     raise ValueError(f"{experiment} must use two layers and {expected_loss}")
                 manifest = directory / "FULL_RUN_CONFIG.json"
@@ -267,13 +278,15 @@ def write_aggregate(model, adaptation_update_interval=2):
         for dataset in PROTOCOL:
             cfg = compose(config_name='main', overrides=[f'+comparison={dataset}'] +
                           protocol_overrides(EVALUATION, dataset))
-            keys = ('n_epochs', 'batch_size', 'lr', 'early_stopping',
+            keys = ('loss_agg', 'n_epochs', 'batch_size', 'lr', 'early_stopping',
                     'early_stopping_patience', 'early_stopping_min_delta', 'patience', 'factor')
             settings_by_dataset[dataset] = {key: OmegaConf.select(cfg, key) for key in keys}
             for key in ('validate_on', 'valid_fraction', 'random_seed'):
                 settings_by_dataset[dataset][f'dataset.{key}'] = OmegaConf.select(cfg, f'dataset.{key}')
     lines = [f"# {model}: full evaluation", "", "Statistics use final test accuracy from completed runs only.",
              f"Protocol: {EVALUATION['name']}. Baseline: config/paper_baseline.yaml; dataset settings: config/comparison/.",
+             'Dataset losses/protocols: ' + '; '.join(
+                 f"{d}: {s['loss_agg']} ({dataset_protocol_name(d)})" for d, s in settings_by_dataset.items()),
              f"SHD* training-derived validation: {settings_by_dataset['SHD']['dataset.validate_on']:.0%}; "
              f"ECG: {settings_by_dataset['ECG']['dataset.valid_fraction']:.0%}; "
              f"split seeds: SHD* {settings_by_dataset['SHD']['dataset.random_seed']}, ECG {settings_by_dataset['ECG']['dataset.random_seed']}.",
@@ -385,11 +398,16 @@ def main(argv=None):
     parser.add_argument('--lr-scheduler-patience', type=int)
     parser.add_argument('--lr-scheduler-factor', type=float)
     parser.add_argument('--logdir', help='Results root; overrides default to a separate experiments folder')
+    parser.add_argument('--ssc-mean-loss', action='store_true',
+                        help='Compatibility flag: SSC mean loss is now automatic; requires --datasets SSC')
     args = parser.parse_args(argv)
     if args.no_measure_costs and args.measure_existing_costs:
         parser.error('--no-measure-costs and --measure-existing-costs cannot be combined')
     original = EVALUATION, PROTOCOL, RUN_LOGDIR
     try:
+        if args.ssc_mean_loss:
+            if args.datasets != ['SSC']:
+                raise ValueError('--ssc-mean-loss requires --datasets SSC; other datasets are unchanged')
         overrides = {}
         for argument, key in (
             ('epochs', 'n_epochs'), ('batch_size', 'batch_size'), ('lr', 'lr'),

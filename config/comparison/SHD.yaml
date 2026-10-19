@@ -3,6 +3,7 @@ defaults:
   - common
   - _self_
 paper_baseline_dataset: SHD
+loss_agg: sum_softmax_over_time
 dataset:
   validate_on: ${paper_baseline.datasets.SHD.validate_on}
   random_seed: ${paper_baseline.reproduction_policy.split_seed}

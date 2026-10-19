@@ -3,6 +3,7 @@ defaults:
   - common
   - _self_
 paper_baseline_dataset: ECG
+loss_agg: summed_membrane_potentials
 dataset:
   valid_fraction: ${paper_baseline.datasets.ECG.valid_fraction}
   random_seed: ${paper_baseline.reproduction_policy.split_seed}

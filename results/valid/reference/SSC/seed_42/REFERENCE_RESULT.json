@@ -1,0 +1,19 @@
+{
+  "seed": 42,
+  "dataset": "SSC",
+  "comparison_protocol": "ssc_mean_loss_v1",
+  "original_training_protocol": "ssc_loss_diagnostic_v1",
+  "paper_baseline_version": "paper_classification_v1",
+  "paper_baseline_dataset": "SSC",
+  "deviations": [
+    "loss_agg=mean_membrane_potentials",
+    "diagnostic reference reused; original provenance retained"
+  ],
+  "test_acc": 0.8069375157356262,
+  "test_loss": 0.6705818176269531,
+  "val_acc": 0.8221620917320251,
+  "best_epoch": 18,
+  "checkpoint": "results/valid/reference/SSC/seed_42/ckpt/epoch=18-step=5586.ckpt",
+  "checkpoint_sha256": "05d179a2a65e5574b17d6eefab0f959ca421e352819732c74e7c1a1b02231a58",
+  "training_seed_count": 1
+}
