@@ -2,7 +2,7 @@
 
 SHD* records for DA, FP, LG-DTH, MR and MT-DTH are retained in [not_improved](../results/not_improved/README.md); their valid measurements remain included here. Whole model folders are retained there; the classification is based on SHD* accuracy, not separate SSC/ECG outcome assessments.
 
-Snapshot: 18 October 2026. **8 models x 3 training seeds = 24 completed SHD* runs**, including the MT-DTH combination follow-up. The original seven-model suite is retained; MT-DTH was proposed after observing its results and is a disclosed follow-up, not a preregistered independent architecture comparison. Completed early-stopping results are kept separately below.
+Snapshot: 20 October 2026. SHD* accuracy values were rechecked; existing cost measurements were not rerun. **8 models x 3 training seeds = 24 completed SHD* runs**, including the MT-DTH combination follow-up. The original seven-model suite is retained; MT-DTH was proposed after observing its results and is a disclosed follow-up, not a preregistered independent architecture comparison. Completed early-stopping results are kept separately below.
 
 | Model | Seed 42 test (%) | Seed 123 test (%) | Seed 456 test (%) | Matched completed / 3 | Mean Â± sample SD (%) |
 |---|---:|---:|---:|---:|---:|
@@ -123,9 +123,39 @@ Mean and sample SD across three seeds, on the same official SHD* test batches. A
 
 All three fresh runs completed 300 epochs with batch 256, early stopping disabled and the same split/preprocessing. Test accuracies are lower than both MT and DTH on every matching seed. Mean accuracy is 0.87 percentage points below MT and 0.75 below DTH, while counted neuron-forward arithmetic is higher. Retain this as a negative combination ablation; the lower three-seed SD is not an accuracy improvement. The architecture was chosen after inspecting earlier test results, so retain that development provenance and do not use the new test scores to select further tuning settings.
 
-## SSC and ECG evidence status - updated 19 October 2026
+## Current 27-run grid - 20 October 2026
 
-Historical summed-loss SSC final test accuracy (%); reference/DTH/MT folders were archived on 19 October 2026. New mean-loss results are pending. Means and sample SDs use distinct completed training seeds; single-seed results have no across-seed SD. Pending seeds are excluded. Values come from canonical per-seed metrics, not nested historical logs.
+**21/27 accepted completed runs: 18 matched configurations plus 3 accepted historical ECG reference runs.** Six SSC runs remain missing locally (seeds 123/456 for each model).
+
+| Model | SHD* | SSC mean loss | ECG | Accepted / 9 | Matched / 9 |
+|---|---|---|---|---:|---:|
+| Reference | 42, 123, 456 | 42 | 42, 123, 456* | 7/9 | 4/9 |
+| DTH | 42, 123, 456 | 42 | 42, 123, 456 | 7/9 | 7/9 |
+| MT | 42, 123, 456 | 42 | 42, 123, 456 | 7/9 | 7/9 |
+
+*ECG reference results are accepted historical evidence by agreement, with stopping/budget deviations disclosed. ECG comparisons are descriptive, not fully controlled; closeness to paper accuracy does not establish configuration equivalence.
+
+## SSC mean-loss results
+
+| Model | Seed 42 test (%) | Seed 123 | Seed 456 | n | Mean (%) / sample SD |
+|---|---:|---|---|---:|---|
+| Reference | 80.69 | pending | pending | 1 | 80.69; SD unavailable |
+| DTH | 80.46 | pending | pending | 1 | 80.46; SD unavailable |
+| MT | 80.01 | pending | pending | 1 | 80.01; SD unavailable |
+
+Best validation accuracies: reference 82.22%, DTH 81.84%, MT 82.00%. These are separate from final test accuracy. Same-seed test differences from reference: DTH -0.231 pp, MT -0.687 pp, calculated from unrounded metrics. Each completed 40 epochs with mean loss, LR 0.006, batch 256 and no early stopping. The reference retains its diagnostic provenance; this comparison was chosen after its test score was observed. One seed does not establish a stable model ranking or isolate the cause of the paper gap.
+
+## ECG results - accepted historical reference
+
+| Model | Seed 42 test (%) | Seed 123 test (%) | Seed 456 test (%) | n | Mean +/- sample SD (%) |
+|---|---:|---:|---:|---:|---:|
+| Reference* | 88.13 | 88.72 | 88.11 | 3 | 88.32 +/- 0.35 |
+| DTH | 87.81 | 87.81 | 87.27 | 3 | 87.63 +/- 0.31 |
+| MT | 87.26 | 88.19 | 87.98 | 3 | 87.81 +/- 0.49 |
+
+*Reference seed 42 completed 383 epochs; seeds 123/456 enabled early stopping and completed 283/185 epochs. DTH/MT all completed 400 epochs with early stopping disabled. Validation fraction 0.05 and split seed 42 are shared. All three model rows are accepted evidence, but cross-model ECG differences are descriptive because budgets/stopping differ. No reference retraining is required under this reporting agreement. Original configs and metadata remain unchanged.
+
+## Historical SSC summed-loss evidence - excluded from current mean-loss grid
 
 | Model | Seed 42 | Seed 123 | Seed 456 | Accepted metric completions | Mean +/- sample SD (%) |
 |---|---:|---:|---:|---:|---:|
@@ -138,33 +168,6 @@ Historical summed-loss SSC final test accuracy (%); reference/DTH/MT folders wer
 | LG-DTH | pending | pending | pending | 0 | pending |
 | MT-DTH | pending | pending | pending | 0 | pending |
 
-DTH's mean difference from reference is -0.016 pp using unrounded matching-seed metrics. MT's mean difference over all three matching reference seeds is -0.476 pp from unrounded metrics. DTH seeds 123/456 now have verified original checkpoints. MT seeds 123/456 now have completed metrics and checkpoints, imported on 19 October 2026. Older SSC records retain historical protocol metadata even where shared settings match.
+These original results are preserved under `archive/ssc_summed_loss_20261019/` for reference/DTH/MT. They are not extra independent runs in the 27-run grid. Other retained models keep their own original protocols. FP SSC has conflicting validation history and remains unverified; its displayed score is historical only.
 
-FP SSC seed 42 has conflicting validation rows at epochs 3 and 4 with identical step numbers. Its displayed test score is preserved historical evidence, excluded from accepted comparisons until provenance is resolved. No rows were removed to construct a clean history.
-
-Four current full-budget DTH/MT ECG runs were imported on 19 October 2026 (table below). Their archived early-stopped seed-42 scores are DTH 88.35% and MT 87.23%; these are historical only. Retained DA (87.20%), FP (86.85%) and MR (88.05%) ECG seed-42 results also enable early stopping and are excluded from matched baseline comparisons. The ECG reference itself is unmatched: seed 42 used 383 epochs, while seeds 123/456 enabled early stopping. Its 88.32 +/- 0.35% mean remains descriptive only.
-
-See the [per-seed evidence audit](../docs/audits/results-audit-2026-10-18.md) for source links, missing artifacts and scope. The SHD* comparison above remains unchanged.
-
-## Imported full-budget ECG runs - 19 October 2026
-
-| Model | Seed 42 test (%) | Seed 123 test (%) | Seed 456 test (%) | Completed | Mean +/- sample SD (%) |
-|---|---:|---:|---:|---:|---:|
-| DTH | 87.81 | 87.81 | pending | 2 | 87.81 +/- 0.00 |
-| MT | pending | 88.19 | 87.98 | 2 | 88.08 +/- 0.15 |
-
-Each run completed 400 epochs, batch 64, LR 0.01, early stopping disabled; validation fraction 0.05 and split seed 42. Checkpoints, full metric histories and existing per-seed cost measurements were verified and retained. The rows use different available seed sets and are not a paired model ranking. The historical ECG reference remains unmatched; do not calculate a fair reference improvement from it. DTH seed 456 and MT seed 42 remain pending. See the [move manifest and verification](../docs/transfers/ecg-transfer-2026-10-19.md).
-
-The [SSC transfer](../docs/transfers/ssc-transfer-2026-10-19.md) completed on 19 October 2026. Both DTH and MT now have three complete summed-loss SSC seeds. Archived pre-transfer snapshots do not count as additional independent runs. The separate mean-loss diagnostic is not included in this table.
-
-## Active SSC comparison - reset 19 October 2026
-
-| Model | Seed 42 final test | Completed active seeds |
-|---|---|---:|
-| SE-adLIF reference | 80.69% | 1 |
-| DTH | pending | 0 |
-| MT | pending | 0 |
-
-The summed-loss records above remain historical evidence, archived without deleting metrics or checkpoints. The reference mean-loss run has 82.22% best validation accuracy and a separately evaluated 80.69% final test accuracy for seed 42. The tested mean-loss diagnostic reference seed 42 has now been promoted, with its original provenance retained. No new training was launched. See the [archive record](../docs/transfers/ssc-summed-loss-archive-2026-10-19.md).
-
-The active [SSC mean-loss comparison](../results/valid/SSC_MEAN_COMPARISON.md) reuses reference seed 42 (80.69% test; 82.22% validation). DTH and MT seed-42 mean-loss training configs are prepared, for the official runner with automatic SSC mean loss; final tests follow validation-based checkpoint selection. Both remain pending. This protocol was chosen after the reference test score was observed; it is a disclosed development comparison.
+See the [per-seed grid and evidence links](../results/valid/COMPARISON_STATUS.md), [SSC comparison](../results/valid/SSC_MEAN_COMPARISON.md), [accepted ECG reference](../results/valid/reference/ECG/RESULTS.md) and [20 October audit](../docs/audits/comparison-grid-2026-10-20.md). Per-model reports retain per-seed activity/cost records; no measurements were rerun for this update.

@@ -87,3 +87,7 @@ This runner command uses the shared evaluation settings and starts or resumes a 
 ## Evidence audit - 18 October 2026
 
 Historical reference, excluded from matched 400-epoch/no-early-stopping comparisons: seed 42 used a 383-epoch budget and resumed from its own checkpoint. The recorded final test value remains descriptive evidence.
+
+## Reporting status - 20 October 2026
+
+Accepted historical ECG reference evidence by user agreement; stopping/budget differs from the 400-epoch proposed-model protocol. Comparisons are descriptive, not fully controlled. Actual completed training: 383 epochs; last checkpoint epoch 382. Accuracy matching the paper does not remove the configuration deviation.

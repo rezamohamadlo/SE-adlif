@@ -1,19 +1,17 @@
 # Paper versus local reference
 
-SSC status (19 October 2026): the summed-loss reference is archived. All SSC values below are historical summed-loss measurements, not the new mean-loss reference. Active SSC mean-loss reference seed 42 is now available separately below.
-
-Snapshot: 18 October 2026. Final test accuracy (%); all selected paper rows are two-layer SE-adLIF. Local mean and sample SD use training seeds 42, 123 and 456. Differences are local minus paper mean in percentage points (pp), computed from unrounded local metrics; paper means are published rounded values.
+Snapshot: 20 October 2026. Reference test accuracy is reported separately by dataset. SHD* and ECG use three local seeds; SSC mean loss currently has seed 42 only (no across-seed SD). Differences are local minus published rounded paper means, using unrounded local metrics. The three ECG reference runs are accepted historical evidence under the reporting agreement, with unmatched stopping/budget disclosed.
 
 | Dataset | Paper mean ± SD | Reference mean ± sample SD | Difference (pp) | Baseline compatibility |
 | --- | ---: | ---: | ---: | --- |
 | SHD* | 93.79 ± 0.76 | 93.15 ± 0.42 | -0.64 | Matched saved settings |
-| SSC (archived sum loss) | 80.44 ± 0.26 | 78.21 ± 0.11 | -2.23 | Matches listed baseline; released-code loss differs |
-| ECG | 88.18 ± 0.36 | 88.32 ± 0.35 | +0.14 | Unmatched budget / stopping; descriptive only |
+| SSC (mean loss) | 80.44 +/- 0.26 (n=5) | 80.69 (n=1; SD unavailable) | +0.25 | Released-code mean loss; original diagnostic provenance retained |
+| ECG | 88.18 ± 0.36 | 88.32 ± 0.35 | +0.14 | Accepted historical; unmatched budget/stopping, descriptive only |
 
 | Dataset | Seed 42 | Seed 123 | Seed 456 | Evidence |
 |---|---:|---:|---:|---|
 | SHD* | 92.93 | 92.89 | 93.64 | [Canonical results](../results/valid/reference/SHD/REFERENCE_RESULTS.json) |
-| SSC (archived sum loss) | 78.33 | 78.12 | 78.17 | [Seed 42 metrics](../archive/ssc_summed_loss_20261019/reference/SSC/seed_42/logs/mlp_snn/version_0/metrics.csv) / [Seed 123 metrics](../archive/ssc_summed_loss_20261019/reference/SSC/seed_123/logs/mlp_snn/version_0/metrics.csv) / [Seed 456 metrics](../archive/ssc_summed_loss_20261019/reference/SSC/seed_456/logs/mlp_snn/version_0/metrics.csv) |
+| SSC (mean loss) | 80.69 | pending | pending | [Selected checkpoint result](../results/valid/reference/SSC/seed_42/REFERENCE_RESULT.json) |
 | ECG | 88.13 | 88.72 | 88.11 | [Seed 42 metrics](../results/valid/reference/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv) / [Seed 123 metrics](../results/valid/reference/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv) / [Seed 456 metrics](../results/valid/reference/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv) |
 
 ## Published paper versus measured local reference: spikes and dense computation
@@ -48,8 +46,8 @@ Activity and timing are measured on the official test sets from all three saved 
 |---|---|
 | Shared authority | [config/paper_baseline.yaml](../config/paper_baseline.yaml); matching saved settings do not establish exact paper reproduction. |
 | SHD* | Canonical reference: batch 256, 300 epochs, early stopping disabled; 20% training-derived validation, split seed 42. Retired dated SHD reference records are excluded. |
-| SSC (archived sum loss) | Retained reference settings match the SSC baseline section. |
-| ECG | Seed 42 used a 383-epoch budget instead of 400; seeds 123/456 enabled early stopping. The retained three-seed mean is descriptive, not a fully matched baseline result. |
+| SSC (archived sum loss) | Historical summed-loss measurements only; excluded from current mean-loss accuracy evidence. |
+| ECG | Accepted historical evidence: seed 42 completed 383 epochs; seeds 123/456 enabled early stopping and completed 283/185 epochs. Descriptive comparisons only. |
 | Uncertainty | The local and paper results use different sample sizes. A positive mean difference alone does not demonstrate superiority. |
 
 [Paper source table](paper-results.md) · [Reference versus proposed models](reference-vs-models.md)
@@ -81,3 +79,9 @@ The [SHD* fidelity investigation](../docs/audits/shd-reproduction-audit-2026-10-
 | ssc_mean_loss_v1 | 80.69 | 1 | unavailable | 80.44 +/- 0.26 (n=5) | +0.25 |
 
 Validation-selected epoch 18 (82.22% validation). This reuses the tested diagnostic checkpoint, with original provenance preserved. One local seed versus five paper seeds is descriptive only; it is not a multi-seed confirmation. See the [canonical SSC record](../results/valid/reference/SSC/RESULTS.md). Historical summed-loss values above remain separate.
+
+## Retained historical SSC accuracy
+
+The archived summed-loss reference was 78.21 +/- 0.11% (seeds 42/123/456: 78.33/78.12/78.17%). Its difference from the paper's rounded mean was -2.23 pp. Computation/activity tables marked archived sum loss describe those original checkpoints; mean-loss reference cost measurements remain pending. No archived measurement was reassigned to the new checkpoint.
+
+The current reference contributes 7/9 accepted results to the [27-run grid](../results/valid/COMPARISON_STATUS.md): four matched plus three accepted historical ECG results. The project total is 21/27 accepted, including 18 matched. See the [ECG acceptance record](../results/valid/reference/ECG/RESULTS.md).

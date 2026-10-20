@@ -29,3 +29,7 @@ Evaluated the validation-selected checkpoint without training. This is one seed,
 ## Reference promotion - 19 October 2026
 
 The completed mean-loss reference seed 42 was moved to [the canonical reference](../../valid/reference/SSC/RESULTS.md), with all original files verified. Its 82.22% validation and 80.69% official test scores remain the same result, not additional independent runs. This diagnostic queue is retired; use `ssc_mean_comparison.py` for the two fresh DTH/MT jobs.
+
+## Current comparison - 20 October 2026
+
+Reference seed 42 was promoted and tested (80.69%). DTH and MT mean-loss seed 42 also completed (80.46% and 80.01% test). See the [canonical SSC comparison](../../valid/SSC_MEAN_COMPARISON.md). This retired diagnostic report is a historical snapshot, not the current 27-run status.

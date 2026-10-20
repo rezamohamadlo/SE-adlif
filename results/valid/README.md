@@ -1,26 +1,27 @@
 # Canonical reference and model results
 
-Snapshot: 19 October 2026.
+Snapshot: 20 October 2026. **21/27 accepted completed runs; 18 matched and 3 accepted historical ECG reference runs.** Six SSC jobs are missing locally: seeds 123 and 456 for reference, DTH and MT.
 
-- `reference/SHD/`: canonical paper-baseline SHD* reference, seeds 42/123/456; batch 256, 300 epochs, early stopping disabled, 20% training-derived validation with split seed 42.
-- `reference/SSC/`: promoted mean-loss reference seed 42, 80.69% official test accuracy. Historical summed-loss reference/DTH/MT seeds remain archived; new DTH/MT mean-loss runs are pending.
-- `reference/ECG/`: historical unmatched reference: seed 42 used 383 epochs; seeds 123/456 enabled early stopping.
-- `DTH_SE_adLIF/` and `MT_SE_adLIF/`: current proposed-model records. Use saved configs and metrics to establish each run's protocol and completion.
+| Model | SHD* accepted | SSC mean-loss accepted | ECG accepted | Total |
+|---|---|---|---|---:|
+| Reference | 42, 123, 456 | 42 | 42, 123, 456* | 7/9 |
+| DTH | 42, 123, 456 | 42 | 42, 123, 456 | 7/9 |
+| MT | 42, 123, 456 | 42 | 42, 123, 456 | 7/9 |
 
-`runner.py` applies `config/paper_baseline.yaml` through the dataset-specific comparison group by default and writes to `results/valid/`. `evaluation.yaml` remains a separate historical controlled_v2 record. Older configs may retain former paths and protocol labels; do not rewrite their provenance or infer the protocol from the directory name.
+*ECG reference is accepted historical evidence: seed 42 completed 383 epochs, seeds 123/456 stopped early at 283/185 epochs. DTH/MT completed 400. Cross-model ECG comparisons remain descriptive, not fully controlled. Accuracy close to the paper does not erase the deviation.
 
-The mean-loss reference diagnostic seed 42 was moved into `reference/SSC/seed_42/`: 82.22% best validation and 80.69% official test accuracy, with original provenance retained. DTH ECG seeds 42/123 and MT ECG seeds 123/456 now have verified full 400-epoch completions; DTH seed 456 and MT seed 42 remain pending. The ECG reference is still unmatched. Historical early-stopped ECG records are archived separately.
+- `reference/SHD/`: canonical SHD* paper-based reference, with 20% training-derived validation and split seed 42.
+- `reference/SSC/`: promoted mean-loss seed 42, 82.22% best validation and 80.69% official test accuracy; diagnostic provenance retained.
+- DTH/MT SSC seed 42: complete training and test results, 80.46% and 80.01% test accuracy. Do not confuse these with archived summed-loss scores.
+- `reference/ECG/`: the accepted historical reference; per-seed configs remain unchanged.
+- DTH/MT ECG: all three full-budget training seeds verified locally.
 
-Other proposed models and their retained dataset evidence are under [not_improved](../not_improved/README.md). That classification concerns SHD* accuracy only. The completed SHD* comparison is in [the general report](../../reports/reference-vs-models.md); its SSC/ECG section distinguishes incomplete, unmatched and unverified records.
+The official `runner.py` chooses dataset losses automatically: SHD* sums per-timestep softmax, SSC averages membrane potentials, and ECG classifies each labeled timestep. SSC uses `ssc_mean_loss_v1`; SHD/ECG retain their saved baseline protocols. Only the user launches training; agents prepare/check configs and provide commands.
 
-Historical experiment outputs are retained in `archive/experiments_20261017/`; the prior LG-DTH early-stopping run is also retained separately under `archive/`. Preserve archive manifests and checkpoint identity.
+[Per-seed grid](COMPARISON_STATUS.md) and [machine-readable status](COMPARISON_STATUS.json), [SSC comparison](SSC_MEAN_COMPARISON.md), [general report](../../reports/reference-vs-models.md), [paper comparison](../../reports/paper-vs-reference.md).
+
+Historical summed-loss SSC runs remain in `archive/ssc_summed_loss_20261019/`; older early-stopped proposed-model ECG records remain archived separately. Retain manifests and checkpoint identity. Other proposed models remain under [not_improved](../not_improved/README.md), whose category concerns SHD* accuracy only.
 
 ## Measurements
 
-Per-seed test activity and compute records live beside training summaries as `COST_RESULTS.json` and `COST_RESULTS.md`. See [the measurement layout](MEASUREMENTS.md). Cost evidence and training completion are separate; this audit did not rerun measurements.
-
-Archiving did not change default loss settings. Use explicitly prepared mean-loss experiment configs for future training rather than assuming empty canonical directories select a new protocol. See the [archive documentation](../../docs/transfers/ssc-summed-loss-archive-2026-10-19.md).
-
-## SSC mean-loss comparison ready
-
-The tested mean-loss reference seed 42 is now in `reference/SSC/seed_42/`: 82.22% validation, 80.69% official test accuracy. Its original diagnostic config/checkpoint bytes and provenance were preserved. `SSC_MEAN_COMPARISON.md` tracks the comparison. Fresh DTH and MT seed-42 configs use `ssc_mean_loss_v1`; launch them yourself with `.\.venv\Scripts\python.exe runner.py --models DTH_SE_adLIF MT_SE_adLIF --datasets SSC --seeds 42 --resume 0`. The official runner shows progress in one terminal and performs validation-selected testing and cost measurements after training. SSC now defaults to mean loss; SHD/ECG defaults are unchanged. See the [guide](../../docs/experiments/ssc-mean-comparison.md).
+Per-seed `COST_RESULTS.json`/`.md` remain beside training summaries. See [measurement layout](MEASUREMENTS.md). DTH/MT new completions have measurements; promoted SSC reference costs remain pending. No measurement was rerun during this reporting update. Use the [official runner guide](../../docs/experiments/ssc-mean-comparison.md) for new SSC training and resume commands.

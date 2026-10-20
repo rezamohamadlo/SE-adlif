@@ -232,7 +232,7 @@ class FullRunnerTests(unittest.TestCase):
                 (directory / 'completed.txt').touch()
         full_runner.write_aggregate('MT_SE_adLIF')
         text = (full_runner.result_root('MT_SE_adLIF') / 'RESULTS.md').read_text(encoding='utf-8')
-        self.assertIn('| SHD | 90.00% | 92.00% | pending | 2 | 91.00% ± 1.41% |', text)
+        self.assertIn('| SHD* | 90.00% | 92.00% | pending | 2 | 91.00% ± 1.41% |', text)
 
     def test_mr_interval_isolation(self):
         first = full_runner.build_plan('MR_SE_adLIF', 2)[0]

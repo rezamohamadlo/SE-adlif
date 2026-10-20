@@ -72,7 +72,7 @@ ckpt/epoch=393-step=3546.ckpt
 
 ## Evaluation note
 
-This run uses `validate_on: validation`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
+Validation and official test evaluation are distinct; see saved dataset config for the selection protocol.
 
 ## Final test evaluation
 

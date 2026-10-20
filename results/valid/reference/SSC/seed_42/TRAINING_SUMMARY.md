@@ -72,7 +72,7 @@ ckpt/epoch=18-step=5586.ckpt
 
 ## Evaluation note
 
-This run uses `validate_on: validation`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
+SSC uses official validation for checkpoint selection and the separate official test set for final evaluation.
 
 ## Final test evaluation
 

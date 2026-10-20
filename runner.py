@@ -324,9 +324,10 @@ def write_aggregate(model, adaptation_update_interval=2):
             if value is not None:
                 values.append(value)
             cells.append(f"{value:.2f}%" if value is not None else "pending")
-        aggregate = (f"{statistics.mean(values):.2f}% ± {statistics.stdev(values):.2f}%"
-                     if len(values) > 1 else "pending")
-        lines.append(f"| {dataset} | {' | '.join(cells)} | {len(values)} | {aggregate} |")
+        aggregate = (f"{statistics.mean(values):.2f}% \u00b1 {statistics.stdev(values):.2f}%"
+                     if len(values) > 1 else f"{values[0]:.2f}% (n=1; SD unavailable)" if values else "pending")
+        label = 'SHD*' if dataset == 'SHD' else dataset
+        lines.append(f"| {label} | {' | '.join(cells)} | {len(values)} | {aggregate} |")
     root.mkdir(parents=True, exist_ok=True)
     # Preserve hand-maintained provenance/history sections while regenerating
     # the runner's accuracy table and its explicitly delimited cost section.

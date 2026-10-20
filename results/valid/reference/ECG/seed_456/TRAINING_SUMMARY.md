@@ -5,7 +5,7 @@ This file is updated automatically whenever training saves a new best checkpoint
 ## Run status
 
 - **Status:** Training and testing finished
-- **Progress:** 186 epochs completed (`0` through `185`) out of 400
+- **Progress:** 185 epochs completed (`0` through `184`) out of 400
 - **Dataset:** ECG
 - **Model:** ECG_SE_adLIF_2layer
 - **Seed:** 456
@@ -87,3 +87,7 @@ This runner command uses the shared evaluation settings and starts or resumes a 
 ## Evidence audit - 18 October 2026
 
 Historical reference, excluded from matched 400-epoch/no-early-stopping comparisons: early stopping was enabled. The recorded final test value remains descriptive evidence.
+
+## Reporting status - 20 October 2026
+
+Accepted historical ECG reference evidence by user agreement; stopping/budget differs from the 400-epoch proposed-model protocol. Comparisons are descriptive, not fully controlled. Actual completed training: 185 epochs; last checkpoint epoch 184. Accuracy matching the paper does not remove the configuration deviation.
