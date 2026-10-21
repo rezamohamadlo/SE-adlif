@@ -123,27 +123,30 @@ Mean and sample SD across three seeds, on the same official SHD* test batches. A
 
 All three fresh runs completed 300 epochs with batch 256, early stopping disabled and the same split/preprocessing. Test accuracies are lower than both MT and DTH on every matching seed. Mean accuracy is 0.87 percentage points below MT and 0.75 below DTH, while counted neuron-forward arithmetic is higher. Retain this as a negative combination ablation; the lower three-seed SD is not an accuracy improvement. The architecture was chosen after inspecting earlier test results, so retain that development provenance and do not use the new test scores to select further tuning settings.
 
-## Current 27-run grid - 20 October 2026
+## Current 27-run grid - 21 October 2026
 
-**21/27 accepted completed runs: 18 matched configurations plus 3 accepted historical ECG reference runs.** Six SSC runs remain missing locally (seeds 123/456 for each model).
+27/27 accepted completed results: 24 matched and 3 accepted historical ECG reference runs with unmatched stopping/budget. All expected combinations are available locally.
 
-| Model | SHD* | SSC mean loss | ECG | Accepted / 9 | Matched / 9 |
+| Model | SHD* accepted | SSC mean-loss accepted | ECG accepted | Total | Matched |
 |---|---|---|---|---:|---:|
-| Reference | 42, 123, 456 | 42 | 42, 123, 456* | 7/9 | 4/9 |
-| DTH | 42, 123, 456 | 42 | 42, 123, 456 | 7/9 | 7/9 |
-| MT | 42, 123, 456 | 42 | 42, 123, 456 | 7/9 | 7/9 |
+| Reference | 42, 123, 456 | 42, 123, 456 | 42, 123, 456* | 9/9 | 6/9 |
+| DTH | 42, 123, 456 | 42, 123, 456 | 42, 123, 456 | 9/9 | 9/9 |
+| MT | 42, 123, 456 | 42, 123, 456 | 42, 123, 456 | 9/9 | 9/9 |
 
-*ECG reference results are accepted historical evidence by agreement, with stopping/budget deviations disclosed. ECG comparisons are descriptive, not fully controlled; closeness to paper accuracy does not establish configuration equivalence.
+*Reference ECG is accepted historical evidence; cross-model ECG comparisons remain descriptive.
+
 
 ## SSC mean-loss results
 
-| Model | Seed 42 test (%) | Seed 123 | Seed 456 | n | Mean (%) / sample SD |
-|---|---:|---|---|---:|---|
-| Reference | 80.69 | pending | pending | 1 | 80.69; SD unavailable |
-| DTH | 80.46 | pending | pending | 1 | 80.46; SD unavailable |
-| MT | 80.01 | pending | pending | 1 | 80.01; SD unavailable |
+| Model | Seed 42 test (%) | Seed 123 test (%) | Seed 456 test (%) | n | Mean +/- sample SD (%) |
+|---|---:|---:|---:|---:|---:|
+| Reference | 80.69 | 80.33 | 80.38 | 3 | 80.47 +/- 0.20 |
+| DTH | 80.46 | 79.84 | 79.56 | 3 | 79.95 +/- 0.46 |
+| MT | 80.01 | 79.98 | 80.23 | 3 | 80.07 +/- 0.14 |
 
-Best validation accuracies: reference 82.22%, DTH 81.84%, MT 82.00%. These are separate from final test accuracy. Same-seed test differences from reference: DTH -0.231 pp, MT -0.687 pp, calculated from unrounded metrics. Each completed 40 epochs with mean loss, LR 0.006, batch 256 and no early stopping. The reference retains its diagnostic provenance; this comparison was chosen after its test score was observed. One seed does not establish a stable model ranking or isolate the cause of the paper gap.
+All nine runs completed 40 epochs with batch 256, LR 0.006, mean membrane-potential loss and no early stopping. Checkpoints were selected by validation accuracy. Reference seed 42 retains its diagnostic provenance; the comparison was planned after its test result was observed. Means and sample SD use independent training seeds 42, 123 and 456. No archived summed-loss results are included.
+
+Matching-seed mean test differences from reference, calculated before rounding: DTH -0.512 pp, MT -0.396 pp.
 
 ## ECG results - accepted historical reference
 

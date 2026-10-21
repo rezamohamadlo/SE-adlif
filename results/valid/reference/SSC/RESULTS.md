@@ -1,13 +1,15 @@
-# SSC mean-loss reference
+# SSC mean-loss reference - 21 October 2026
 
-Protocol: ssc_mean_loss_v1. Base: paper_classification_v1, SSC section; mean aggregation is an explicit alternative to historical sum loss. Reference seed 42 reuses the completed diagnostic, retaining its original config/checkpoint bytes and training provenance. More seeds are pending.
+All nine runs completed 40 epochs with batch 256, LR 0.006, mean membrane-potential loss and no early stopping. Checkpoints were selected by validation accuracy. Reference seed 42 retains its diagnostic provenance; the comparison was planned after its test result was observed. Means and sample SD use independent training seeds 42, 123 and 456. No archived summed-loss results are included.
 
-| Training seed | Best validation (%) | Selected epoch | Final test (%) | Test loss |
-|---|---:|---:|---:|---:|
-| 42 | 82.22 | 18 | 80.69 | 0.670582 |
+| Model | Seed 42 test (%) | Seed 123 test (%) | Seed 456 test (%) | n | Mean +/- sample SD (%) |
+|---|---:|---:|---:|---:|---:|
+| Reference | 80.69 | 80.33 | 80.38 | 3 | 80.47 +/- 0.20 |
+| DTH | 80.46 | 79.84 | 79.56 | 3 | 79.95 +/- 0.46 |
+| MT | 80.01 | 79.98 | 80.23 | 3 | 80.07 +/- 0.14 |
 
-One completed seed; across-seed SD is unavailable. Paper SSC mean is 80.44% across five runs; the +0.25 pp difference is descriptive only. Historical summed-loss seed-42 reference test accuracy was 78.33%; the new result is +2.36 pp, without isolating all execution differences. These are observed results, not proof of the full gap's cause.
+Reference mean minus published SSC mean (80.44%, n=5): +0.026 pp. Local n=3; this does not establish statistical superiority.
 
-[Per-seed result](seed_42/REFERENCE_RESULT.json) and [comparison guide](../../../../docs/experiments/ssc-mean-comparison.md). Measurement costs are pending; they were not inferred from archived summed-loss measurements.
+All three reference cost records are available beside their seed directories. Original imported config and measurement paths are preserved; the import manifest maps the former SE_adLIF location to reference/SSC without changing checkpoint identity.
 
-Reporting status (20 October 2026): reference, DTH and MT seed 42 have completed mean-loss SSC training and testing. This reference contributes one accepted matched result to the [21/27 accepted grid](../../COMPARISON_STATUS.md); its remaining seeds are missing locally.
+[Comparison](../../SSC_MEAN_COMPARISON.md). [Import provenance](../../../provenance/ssc-local-import-2026-10-21.json).

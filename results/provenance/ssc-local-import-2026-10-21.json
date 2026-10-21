@@ -1,0 +1,524 @@
+﻿{
+    "date":  "2026-10-21",
+    "purpose":  "Import six completed SSC ssc_mean_loss_v1 runs, seeds 123 and 456, without changing saved run evidence",
+    "source":  "F:\\reza",
+    "destination":  ".",
+    "source_preserved":  true,
+    "source_manifests":  [
+                             "ssc-completed-copy-2026-10-21.json",
+                             "ssc-dth-mt-seed456-copy-2026-10-21.json"
+                         ],
+    "reference_mapping":  "results/valid/SE_adLIF/SSC/ -\u003e results/valid/reference/SSC/",
+    "notes":  [
+                  "Saved configs and checkpoint identities preserved verbatim.",
+                  "Source seed-456 manifest records G:\\reza; actual imported source was F:\\reza.",
+                  "Existing reference seed 42 untouched."
+              ],
+    "verification":  "All 84 run files verified by byte size and SHA256 against source manifests",
+    "files":  [
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_123/.evaluation.lock",
+                      "destination_path":  "results/valid/reference/SSC/seed_123/.evaluation.lock",
+                      "bytes":  1,
+                      "sha256":  "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_123/completed.txt",
+                      "destination_path":  "results/valid/reference/SSC/seed_123/completed.txt",
+                      "bytes":  47,
+                      "sha256":  "CF1703562174D900787A8F0FF56EFDCE4B6CD1D702CC6543E632DF37F289CA25"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_123/COST_RESULTS.json",
+                      "destination_path":  "results/valid/reference/SSC/seed_123/COST_RESULTS.json",
+                      "bytes":  13715,
+                      "sha256":  "EE65F3B8ABDCB8E17F51889F980BCA37FEF36579117ADD355E07703150E82D8D"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_123/COST_RESULTS.md",
+                      "destination_path":  "results/valid/reference/SSC/seed_123/COST_RESULTS.md",
+                      "bytes":  932,
+                      "sha256":  "26CDAB64782D06B1F38D0354D402901CA0B5A20986338BA6E261B506727A5CC4"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_123/FULL_RUN_CONFIG.json",
+                      "destination_path":  "results/valid/reference/SSC/seed_123/FULL_RUN_CONFIG.json",
+                      "bytes":  4709,
+                      "sha256":  "B129E5BB0A446320C5D777BA3B34DEBF9FE3F304288AEE638DE7421125FA68C1"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_123/out.log",
+                      "destination_path":  "results/valid/reference/SSC/seed_123/out.log",
+                      "bytes":  145,
+                      "sha256":  "23EFAE0CAD7AAB238C549BD84496326B44E7D71507FE6ECDF71F7D58B852229B"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_123/TRAINING_SUMMARY.md",
+                      "destination_path":  "results/valid/reference/SSC/seed_123/TRAINING_SUMMARY.md",
+                      "bytes":  3846,
+                      "sha256":  "39D18DCA1307C6A516935E87E52467F156AB1849478D9A59C1B809598BB815B8"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_123/.hydra/config.yaml",
+                      "destination_path":  "results/valid/reference/SSC/seed_123/.hydra/config.yaml",
+                      "bytes":  3586,
+                      "sha256":  "4FAB2FB29BC36E7A9AE6AA5F8C94D8C2CCD38E5E3ED78E33CDC7733E18FB1409"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_123/.hydra/hydra.yaml",
+                      "destination_path":  "results/valid/reference/SSC/seed_123/.hydra/hydra.yaml",
+                      "bytes":  4123,
+                      "sha256":  "19D1C1D934DA3A09F250F0E5B57E9B5A2A15556474688E5664F7356F7F80D627"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_123/.hydra/overrides.yaml",
+                      "destination_path":  "results/valid/reference/SSC/seed_123/.hydra/overrides.yaml",
+                      "bytes":  511,
+                      "sha256":  "AC693EBC169871105BBC7E8714AE7EE40244D70D45D04F5FF70375B74058505E"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_123/ckpt/epoch=13-step=4116.ckpt",
+                      "destination_path":  "results/valid/reference/SSC/seed_123/ckpt/epoch=13-step=4116.ckpt",
+                      "bytes":  20323558,
+                      "sha256":  "BDAA0EBA88EA2915B63E10A11A142941A1005072F8AFB3FD11C76485AEF5C2D2"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_123/ckpt/last.ckpt",
+                      "destination_path":  "results/valid/reference/SSC/seed_123/ckpt/last.ckpt",
+                      "bytes":  20324006,
+                      "sha256":  "C301B9EA6653B6A76FCC9EB5AA6059A2312AAA5CF886D7DDB1BAFEC3BB890FAE"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+                      "destination_path":  "results/valid/reference/SSC/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+                      "bytes":  3944,
+                      "sha256":  "36E286085C8B8AFA45CC4589A046F4233911DB0B0A7086546799E81169260BAF"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/metrics.csv",
+                      "destination_path":  "results/valid/reference/SSC/seed_123/logs/mlp_snn/version_0/metrics.csv",
+                      "bytes":  25020,
+                      "sha256":  "53FD137B99DDFCADFD96E7988E0A8D1375D2885523E874BCC43E5A936035D532"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_456/.evaluation.lock",
+                      "destination_path":  "results/valid/reference/SSC/seed_456/.evaluation.lock",
+                      "bytes":  1,
+                      "sha256":  "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_456/completed.txt",
+                      "destination_path":  "results/valid/reference/SSC/seed_456/completed.txt",
+                      "bytes":  47,
+                      "sha256":  "CF1703562174D900787A8F0FF56EFDCE4B6CD1D702CC6543E632DF37F289CA25"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_456/COST_RESULTS.json",
+                      "destination_path":  "results/valid/reference/SSC/seed_456/COST_RESULTS.json",
+                      "bytes":  13713,
+                      "sha256":  "89D7E7DA3F679847AA0E6AF7440CC999012479996AE575CBD617ED6D03AD80BC"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_456/COST_RESULTS.md",
+                      "destination_path":  "results/valid/reference/SSC/seed_456/COST_RESULTS.md",
+                      "bytes":  932,
+                      "sha256":  "22BD74C539CB19A21DC3FE002C7639CBF042602E4B297E88D6DC29CBE1B06252"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_456/FULL_RUN_CONFIG.json",
+                      "destination_path":  "results/valid/reference/SSC/seed_456/FULL_RUN_CONFIG.json",
+                      "bytes":  4709,
+                      "sha256":  "5C476FE8B9C79267FF70A17A4F3B49EBF66C86C6341A1E28217A57D4C54D7B09"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_456/out.log",
+                      "destination_path":  "results/valid/reference/SSC/seed_456/out.log",
+                      "bytes":  113,
+                      "sha256":  "371F87FE63BAADF76278C0BD6AEEEA420E814FAF1F9CD1A28469BD25D6141618"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_456/TRAINING_SUMMARY.md",
+                      "destination_path":  "results/valid/reference/SSC/seed_456/TRAINING_SUMMARY.md",
+                      "bytes":  3846,
+                      "sha256":  "A171B3C5F1C523AE0E732C7E1C171F793B9992CD3D5096EE173DA6AD503EFE11"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_456/.hydra/config.yaml",
+                      "destination_path":  "results/valid/reference/SSC/seed_456/.hydra/config.yaml",
+                      "bytes":  3540,
+                      "sha256":  "7F903497AA2CB665E71F77D67D169B23B1F3B357C6267F5F2C5911F35C1723F2"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_456/.hydra/hydra.yaml",
+                      "destination_path":  "results/valid/reference/SSC/seed_456/.hydra/hydra.yaml",
+                      "bytes":  3990,
+                      "sha256":  "1F157AC9D811BA20674CC0EFCAFC11191F8CEB7FA96442CB7F2C81BE66836226"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_456/.hydra/overrides.yaml",
+                      "destination_path":  "results/valid/reference/SSC/seed_456/.hydra/overrides.yaml",
+                      "bytes":  445,
+                      "sha256":  "224D08888023E6A0D66AE0FC80467CD58152A63482A069277980876C6562A6C6"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_456/ckpt/epoch=27-step=8232.ckpt",
+                      "destination_path":  "results/valid/reference/SSC/seed_456/ckpt/epoch=27-step=8232.ckpt",
+                      "bytes":  20323558,
+                      "sha256":  "83D819678D155154742E124A3A5B8602ADDCAD20D14D7CCF58005646EA0BAD4D"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_456/ckpt/last.ckpt",
+                      "destination_path":  "results/valid/reference/SSC/seed_456/ckpt/last.ckpt",
+                      "bytes":  20323558,
+                      "sha256":  "191A32F20506F174C055B5A4E9E651821122BB1674153D4C54F8C649564165D9"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+                      "destination_path":  "results/valid/reference/SSC/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+                      "bytes":  3898,
+                      "sha256":  "83C12807E1F5EF0D34A01BD4912ACAC04326B465FD45FCCC014A4EEFDB312886"
+                  },
+                  {
+                      "source_path":  "results/valid/SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/metrics.csv",
+                      "destination_path":  "results/valid/reference/SSC/seed_456/logs/mlp_snn/version_0/metrics.csv",
+                      "bytes":  24939,
+                      "sha256":  "66084E8F3C801F30166245108455E072CADB41FB0075852BBFF7B0E6E99F357D"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/.evaluation.lock",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/.evaluation.lock",
+                      "bytes":  1,
+                      "sha256":  "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/completed.txt",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/completed.txt",
+                      "bytes":  47,
+                      "sha256":  "CF1703562174D900787A8F0FF56EFDCE4B6CD1D702CC6543E632DF37F289CA25"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/COST_RESULTS.json",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/COST_RESULTS.json",
+                      "bytes":  14547,
+                      "sha256":  "1E049D1AF0604222A195086BCDC743027A087CA39810B3DD89A1AF3189E08EEF"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/COST_RESULTS.md",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/COST_RESULTS.md",
+                      "bytes":  932,
+                      "sha256":  "D0622E5F8A2E7F6AA6C354687C164B2C2F883FBEC8F90C356F91FFEA308D39DD"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/FULL_RUN_CONFIG.json",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/FULL_RUN_CONFIG.json",
+                      "bytes":  4993,
+                      "sha256":  "5EDECCF7AE3619C8AD99BFF8EEF486BC0E62D985B4860FEFACDE739D05045CA3"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/out.log",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/out.log",
+                      "bytes":  118,
+                      "sha256":  "8D175FE7F9B3CDC7D26F4DAFA21AF361DC4DA1F404226A6E438DD2FE063D237C"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/TRAINING_SUMMARY.md",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/TRAINING_SUMMARY.md",
+                      "bytes":  3859,
+                      "sha256":  "4A199C8C606D950097A19283C34982044E38FFA6F7C414F99F03388FC2AE263A"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/.hydra/config.yaml",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/.hydra/config.yaml",
+                      "bytes":  3769,
+                      "sha256":  "557F6A45D4A181B142BA33C1C4ECF12EAC9D9F8676031092A5316C3666CAA438"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/.hydra/hydra.yaml",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/.hydra/hydra.yaml",
+                      "bytes":  4136,
+                      "sha256":  "61C994D9833AABB59620C728F90C7FE02B4692C8A6E50936E72AE4A84E6D2365"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/.hydra/overrides.yaml",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/.hydra/overrides.yaml",
+                      "bytes":  513,
+                      "sha256":  "FC27FE1DBCD743809B67447A5560D05F5580037A56EB1333403FDC7FDDADF956"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/ckpt/epoch=39-step=11760.ckpt",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/ckpt/epoch=39-step=11760.ckpt",
+                      "bytes":  20349154,
+                      "sha256":  "BD4EA98CEE51D66BFF611A5B31A19BCF5B76BCCC4066894430C79FB8C9F84384"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/ckpt/last.ckpt",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/ckpt/last.ckpt",
+                      "bytes":  20349154,
+                      "sha256":  "BD4EA98CEE51D66BFF611A5B31A19BCF5B76BCCC4066894430C79FB8C9F84384"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+                      "bytes":  4149,
+                      "sha256":  "436192887467EC2C0A740957945AE07D086C2091CBDA10415187B886DEC983BA"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/metrics.csv",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/metrics.csv",
+                      "bytes":  24905,
+                      "sha256":  "032062BBAD07772D6800F0AEB6563743EFB93EF6B0B3413845E4AA51C9E5686D"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/.evaluation.lock",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/.evaluation.lock",
+                      "bytes":  1,
+                      "sha256":  "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/completed.txt",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/completed.txt",
+                      "bytes":  47,
+                      "sha256":  "CF1703562174D900787A8F0FF56EFDCE4B6CD1D702CC6543E632DF37F289CA25"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/COST_RESULTS.json",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/COST_RESULTS.json",
+                      "bytes":  14220,
+                      "sha256":  "AD900FFD820807D591393B7A0EC8F8505040554F455288203318D977AB6311B1"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/COST_RESULTS.md",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/COST_RESULTS.md",
+                      "bytes":  933,
+                      "sha256":  "3D1E860F0D5A5D3CF4CE46BF49E35AD74230083EA3E771D76CFCBADF99042559"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/FULL_RUN_CONFIG.json",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/FULL_RUN_CONFIG.json",
+                      "bytes":  4869,
+                      "sha256":  "E69C56A7719C0C92B52E2C009D2E4ABB7C2946E08BA95C2F6CB099500D226503"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/out.log",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/out.log",
+                      "bytes":  185,
+                      "sha256":  "3EEFDA15F46ED35A19A5683218192904B5BD35FEEC3B862BE479C780FA1DCE12"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/TRAINING_SUMMARY.md",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/TRAINING_SUMMARY.md",
+                      "bytes":  3857,
+                      "sha256":  "2E44EFF01F26BC9186EB3EB2AA64F442643430A1DF7382649EBCB74B967432E3"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/.hydra/config.yaml",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/.hydra/config.yaml",
+                      "bytes":  3706,
+                      "sha256":  "C37F176FDB765BE9E6D9E9AC34CB7F53D55B083ED4E705F73533E7686E98A1B6"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/.hydra/hydra.yaml",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/.hydra/hydra.yaml",
+                      "bytes":  4261,
+                      "sha256":  "5CA4DBC11FFBC44BD92EBD8C19AAA727F2AE9CD53D4A3FB6DBFF8AAB7AD61390"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/.hydra/overrides.yaml",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/.hydra/overrides.yaml",
+                      "bytes":  577,
+                      "sha256":  "F7A8122AE27F1C1D70FEF4BFF1FC606CBB1FDD4E43AB4BAF361C321F19286BFF"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/ckpt/epoch=36-step=10878.ckpt",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/ckpt/epoch=36-step=10878.ckpt",
+                      "bytes":  20365354,
+                      "sha256":  "D4652F57EFBBB0E6890D8F8AF995E23826767B95AF787C93788C4B3E173A85D8"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/ckpt/last.ckpt",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/ckpt/last.ckpt",
+                      "bytes":  20365354,
+                      "sha256":  "4BF9ADFE79FB68D4D231B5BF1BFFEDF4CB6EA16F7EF5146169E1DECA1A56F215"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+                      "bytes":  4078,
+                      "sha256":  "859DA306015BB878C56F16E4F35CD0B2FD6553AC4516C6078588CC651E351F05"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/metrics.csv",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/metrics.csv",
+                      "bytes":  25540,
+                      "sha256":  "F4DCB0AF91FEA09FD7B111E4DC5DF3A3B3B3088FF3378AF1782793F067996FF8"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/.evaluation.lock",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/.evaluation.lock",
+                      "bytes":  1,
+                      "sha256":  "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/completed.txt",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/completed.txt",
+                      "bytes":  47,
+                      "sha256":  "CF1703562174D900787A8F0FF56EFDCE4B6CD1D702CC6543E632DF37F289CA25"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/COST_RESULTS.json",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/COST_RESULTS.json",
+                      "bytes":  14546,
+                      "sha256":  "1CDFF9ADF6DAECF288252E50F7D1ED468B46D04622444B159C38303F7990EF30"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/COST_RESULTS.md",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/COST_RESULTS.md",
+                      "bytes":  932,
+                      "sha256":  "7FDD67A12116A9C2227D86D10D6960395833FCC16D93E08F261691D5EB239515"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/FULL_RUN_CONFIG.json",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/FULL_RUN_CONFIG.json",
+                      "bytes":  4993,
+                      "sha256":  "A3F5C3D77C79F13054A6E6299B0EC6F1F69537D42B8C382834B35D3238B5EAE0"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/out.log",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/out.log",
+                      "bytes":  118,
+                      "sha256":  "C5B2CA8E85D2983DF8D18F10127FE9EC79B5FA593810E483930E56850D1EC0D2"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/TRAINING_SUMMARY.md",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/TRAINING_SUMMARY.md",
+                      "bytes":  3858,
+                      "sha256":  "BA827E644FBD6D1A917E1A5A60852CE6B4908E4847C343B303275261B4748412"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/.hydra/config.yaml",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/.hydra/config.yaml",
+                      "bytes":  3769,
+                      "sha256":  "15F397A6ECCC33592BF87F9B7AF81CE7D8C48B4B04DC10F26EBDE83AE5CFDADA"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/.hydra/hydra.yaml",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/.hydra/hydra.yaml",
+                      "bytes":  4301,
+                      "sha256":  "120C9906056A3668E01510B79C9F9F6E76754A93F9A32B2D35C98D01C946A441"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/.hydra/overrides.yaml",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/.hydra/overrides.yaml",
+                      "bytes":  513,
+                      "sha256":  "D51E183F246E322F3F6279DEA327187FB6592EDE61DC0B64130982ACE5075FF5"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/ckpt/epoch=11-step=3528.ckpt",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/ckpt/epoch=11-step=3528.ckpt",
+                      "bytes":  20349218,
+                      "sha256":  "BD7DC7F293A61275BDF772755E28797465F83F267FD0597B11DFBF85C7B790DF"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/ckpt/last.ckpt",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/ckpt/last.ckpt",
+                      "bytes":  20349218,
+                      "sha256":  "B9DFE2D700486C890865462BB1E0F1544E9A1ECB36195D28C12A90554FF824BE"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+                      "bytes":  4149,
+                      "sha256":  "C02C87897F4F8204967E7F212BE7D58E847E8068875DA61332F83E6020EB69F7"
+                  },
+                  {
+                      "source_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/metrics.csv",
+                      "destination_path":  "results/valid/DTH_SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/metrics.csv",
+                      "bytes":  24950,
+                      "sha256":  "5017E03D0D93AC50BFFD085C28AD6C584FA3C279987B12AEA9521004D241A98F"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/.evaluation.lock",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/.evaluation.lock",
+                      "bytes":  1,
+                      "sha256":  "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/completed.txt",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/completed.txt",
+                      "bytes":  47,
+                      "sha256":  "CF1703562174D900787A8F0FF56EFDCE4B6CD1D702CC6543E632DF37F289CA25"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/COST_RESULTS.json",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/COST_RESULTS.json",
+                      "bytes":  14167,
+                      "sha256":  "A9F0A96D56CE119AE1C548A78B7445F180CC94C55ADBDE9A9F8285057599936A"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/COST_RESULTS.md",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/COST_RESULTS.md",
+                      "bytes":  933,
+                      "sha256":  "7DCBD07CFB6A9854372E0B5641EFD8D2241127D2A73B4AA24F9F794D0C8AFC17"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/FULL_RUN_CONFIG.json",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/FULL_RUN_CONFIG.json",
+                      "bytes":  4869,
+                      "sha256":  "BA2E4C8F9FBE89ED16C3479AEFF1678712BB3B0375F8C575EDE454F1AF891E59"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/out.log",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/out.log",
+                      "bytes":  117,
+                      "sha256":  "100C2B168E598B756FFDE6A1E0827E0FC4EAB8B8F96361A0CF0066599425A6B9"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/TRAINING_SUMMARY.md",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/TRAINING_SUMMARY.md",
+                      "bytes":  3856,
+                      "sha256":  "A31602A99087E48C4144771E8F1487EF63648FE9F1E140A3B8CDC42E43B049EB"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/.hydra/config.yaml",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/.hydra/config.yaml",
+                      "bytes":  3657,
+                      "sha256":  "0E6280BC076564CCFB46A1B9AEB9B225C240FCE5D7BE8F6832AD04E55BCA7CA7"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/.hydra/hydra.yaml",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/.hydra/hydra.yaml",
+                      "bytes":  4287,
+                      "sha256":  "00B99305A639E10DFB6AE549C1CDE8D05C9080C32A8DFB7579F0C5C44148DC06"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/.hydra/overrides.yaml",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/.hydra/overrides.yaml",
+                      "bytes":  508,
+                      "sha256":  "EC6252C79005D1668A3BD1758D2397CBAB12F4FB25B261077C844280B8C51F55"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/ckpt/epoch=17-step=5292.ckpt",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/ckpt/epoch=17-step=5292.ckpt",
+                      "bytes":  20365162,
+                      "sha256":  "8839A9BE04FF077A87056B43E28A7FED97B1EB9C28FE99597FD64B949EE08B05"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/ckpt/last.ckpt",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/ckpt/last.ckpt",
+                      "bytes":  20365162,
+                      "sha256":  "78B3CC14B2BC8A3821D7F2DFCB2A434F34AF565B9DBAE875A227A0BFA85CE434"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+                      "bytes":  4029,
+                      "sha256":  "DFF49202AF7991F9C168628AFB9A60D2D38ACE9344057CD6975D8C250CA1B9D7"
+                  },
+                  {
+                      "source_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/metrics.csv",
+                      "destination_path":  "results/valid/MT_SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/metrics.csv",
+                      "bytes":  24966,
+                      "sha256":  "77F5D1E228ED2B4570EFCD40E58E7A93930D6B4DEAA3AA18A3C6ADD18C2F35AB"
+                  }
+              ]
+}
