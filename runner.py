@@ -407,11 +407,30 @@ def main(argv=None):
     parser.add_argument('--logdir', help='Results root; overrides default to a separate experiments folder')
     parser.add_argument('--ssc-mean-loss', action='store_true',
                         help='Compatibility flag: SSC mean loss is now automatic; requires --datasets SSC')
+    parser.add_argument('--tta', action='store_true', help='MT, DTH or MT-DTH test-time augmentation only; no training')
+    parser.add_argument('--tta-split', choices=('validation', 'test'), default='validation')
+    parser.add_argument('--tta-output', help='Separate evaluation output; defaults to <model>_tta_v1 experiments')
     args = parser.parse_args(argv)
     if args.no_measure_costs and args.measure_existing_costs:
         parser.error('--no-measure-costs and --measure-existing-costs cannot be combined')
     original = EVALUATION, PROTOCOL, RUN_LOGDIR
     try:
+        if args.tta:
+            selected_models = list(dict.fromkeys(args.models))
+            if len(selected_models) != 1 or selected_models[0] not in ('MT_SE_adLIF', 'DTH_SE_adLIF', 'MT_DTH_SE_adLIF'):
+                raise ValueError('--tta supports one model at a time: MT_SE_adLIF, DTH_SE_adLIF or MT_DTH_SE_adLIF')
+            if (args.resume == 0 or args.logdir or args.ssc_mean_loss or args.no_measure_costs
+                    or args.measure_existing_costs or any(getattr(args, k) is not None for k in
+                    ('epochs','batch_size','lr','early_stopping','early_stopping_patience',
+                     'early_stopping_min_delta','lr_scheduler_patience','lr_scheduler_factor'))):
+                raise ValueError('TTA reuses saved checkpoints; do not supply training/cost overrides')
+            from evaluate_tta import main as tta_main
+            model = selected_models[0]
+            tta_main(['--model', model, '--datasets', *(args.datasets or tuple(PROTOCOL)), '--seeds',
+                      *(str(s) for s in args.seeds), '--split', args.tta_split,
+                      '--output', args.tta_output or f'results/experiments/{model.removesuffix("_SE_adLIF").lower()}_tta_v1']
+                     + (['--dry-run'] if args.dry_run else []))
+            return
         if args.ssc_mean_loss:
             if args.datasets != ['SSC']:
                 raise ValueError('--ssc-mean-loss requires --datasets SSC; other datasets are unchanged')

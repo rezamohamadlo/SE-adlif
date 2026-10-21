@@ -8,8 +8,10 @@ in `results/provenance/`.
 
 ## Reports and documentation layout
 
-- Reserve the `reports/` root for the three main result comparisons:
-  `paper-results.md`, `paper-vs-reference.md`, and `reference-vs-models.md`.
+- Reserve the `reports/` root for main result comparisons:
+  `paper-results.md`, `paper-vs-reference.md`, `reference-vs-models.md`, and
+  `comparison-summary.md` (accuracy and inference-time tables with dataset rows
+  and paper/reference/DTH/MT/MT-DTH columns).
 - Put experiment guides in `docs/experiments/`, audits and reproduction
   investigations in `docs/audits/`, and transfer documentation in
   `docs/transfers/`. Do not create guides, audit logs or transfer notes in
@@ -44,8 +46,9 @@ in `results/provenance/`.
   shared data, loss/metric and neuron-parameter utilities.
 - `run_compress.py`, `generate_waves.py` and `evaluate_metrics.py`: audio
   compression workflows; do not confuse these with classification evaluation.
-- `tests/`: unittest checks. `reports/`: three current table reports:
-  `paper-results.md`, `paper-vs-reference.md`, and `reference-vs-models.md`.
+- `tests/`: unittest checks. `reports/`: current comparison tables:
+  `paper-results.md`, `paper-vs-reference.md`, `reference-vs-models.md`, and
+  `comparison-summary.md`.
   `reference-vs-models-legacy.md` separately summarizes archived results and
   their configuration/provenance limits; do not mix it into the current grid.
   `reports/archive/`: previous reports, guides, audits, document exports and

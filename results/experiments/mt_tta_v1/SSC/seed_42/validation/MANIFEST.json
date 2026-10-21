@@ -1,0 +1,270 @@
+{
+  "fingerprint": "392231e501a066e4af8a446f5476a2269af9613d8d786cf2a7608a4caf16e00f",
+  "dataset": "SSC",
+  "seed": 42,
+  "checkpoint": "results/valid/MT_SE_adLIF/SSC/seed_42/ckpt/epoch=23-step=7056.ckpt",
+  "checkpoint_sha256": "11baa18a6d147e56b4f3c98bac824af94dca7891f4db8b696a52058dbdfe1ded",
+  "selected_epoch": 23,
+  "config": {
+    "random_seed": 42,
+    "logdir": "results/valid/MT_SE_adLIF/SSC/seed_42",
+    "datadir": "data",
+    "cachedir": "data/cache",
+    "ckpt_path": null,
+    "init_ckpt_path": null,
+    "run_test": true,
+    "scheduler": "plateau",
+    "scheduler_min_lr": 0.0,
+    "gradient_clip_val": 1.5,
+    "device": "cuda:0",
+    "early_stopping": false,
+    "early_stopping_patience": 50,
+    "early_stopping_min_delta": 0.001,
+    "dataset": {
+      "_target_": "datasets.ssc.SSCLDM",
+      "data_path": "data",
+      "spatial_factor": 0.2,
+      "time_factor": 0.001,
+      "window_size": 4,
+      "batch_size": 256,
+      "num_workers": 0,
+      "num_classes": 35,
+      "pad_to_min_size": 300,
+      "ignore_first_timesteps": 10
+    },
+    "exp_name": "SSC_MT_SE_adLIF",
+    "two_layers": true,
+    "alpha": 5.0,
+    "c": 0.4,
+    "dt": 1.0,
+    "dropout": 0.15,
+    "l1": {
+      "cell": "mt_se_adlif",
+      "input_size": 140,
+      "n_neurons": 720,
+      "tau_u_range": [
+        5,
+        25
+      ],
+      "tau_w_range": [
+        60,
+        300
+      ],
+      "q": 120,
+      "alpha": 5.0,
+      "c": 0.4,
+      "dt": 1.0,
+      "tau_w_slow_range": [
+        300,
+        600
+      ]
+    },
+    "l2": {
+      "cell": "mt_se_adlif",
+      "input_size": 720,
+      "n_neurons": 720,
+      "tau_u_range": [
+        5,
+        25
+      ],
+      "tau_w_range": [
+        60,
+        300
+      ],
+      "q": 120,
+      "alpha": 5.0,
+      "c": 0.4,
+      "dt": 1.0,
+      "tau_w_slow_range": [
+        300,
+        600
+      ]
+    },
+    "l_out": {
+      "input_size": 720,
+      "n_neurons": 35,
+      "tau_u_range": [
+        15,
+        15
+      ],
+      "dt": 1.0
+    },
+    "n_epochs": 40,
+    "batch_size": 256,
+    "loss_agg": "mean_membrane_potentials",
+    "tracking_metric": "val_acc",
+    "tracking_mode": "max",
+    "lr": 0.006,
+    "factor": 0.9,
+    "patience": 9999,
+    "paper_baseline": {
+      "version": "paper_classification_v1",
+      "source": {
+        "doi": "10.1038/s41467-025-60878-z",
+        "document": "reference_paper.pdf",
+        "locations": "Table 7 (page 35); training/preprocessing methods (pages 28-29)"
+      },
+      "common": {
+        "lr_optimizer": "Adam",
+        "adam_betas": [
+          0.9,
+          0.999
+        ],
+        "adam_eps": 1e-08,
+        "dropout": 0.15,
+        "gradient_clip_val": 1.5,
+        "alpha": 5.0,
+        "dt": 1.0,
+        "tracking_metric": "val_acc",
+        "tracking_mode": "max"
+      },
+      "reproduction_policy": {
+        "training_seeds": [
+          42,
+          123,
+          456
+        ],
+        "split_seed": 42,
+        "num_workers": 0,
+        "early_stopping": false,
+        "scheduler": "plateau",
+        "patience": 9999,
+        "factor": 0.9,
+        "cache_namespace": "controlled_v2"
+      },
+      "datasets": {
+        "SHD": {
+          "report_label": "SHD*",
+          "lr": 0.01,
+          "batch_size": 256,
+          "n_epochs": 300,
+          "validate_on": 0.2,
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4,
+          "pad_to_min_size": 250,
+          "ignore_first_timesteps": 10,
+          "reference_architecture": {
+            "layers": 2,
+            "neurons_per_layer": 360,
+            "q": 120,
+            "c": 0.4,
+            "tau_u_range": [
+              5,
+              25
+            ],
+            "tau_w_range": [
+              60,
+              300
+            ],
+            "output_tau": 15
+          }
+        },
+        "SSC": {
+          "lr": 0.006,
+          "batch_size": 256,
+          "n_epochs": 40,
+          "validation": "official",
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4,
+          "pad_to_min_size": 300,
+          "ignore_first_timesteps": 10,
+          "reference_architecture": {
+            "layers": 2,
+            "neurons_per_layer": 720,
+            "q": 120,
+            "c": 0.4,
+            "tau_u_range": [
+              5,
+              25
+            ],
+            "tau_w_range": [
+              60,
+              300
+            ],
+            "output_tau": 15
+          }
+        },
+        "ECG": {
+          "lr": 0.01,
+          "batch_size": 64,
+          "n_epochs": 400,
+          "valid_fraction": 0.05,
+          "reference_architecture": {
+            "layers": 2,
+            "neurons_per_layer": 36,
+            "q": 120,
+            "c": 0.2,
+            "tau_u_range": [
+              5,
+              25
+            ],
+            "tau_w_range": [
+              60,
+              300
+            ],
+            "output_tau": 3
+          }
+        }
+      }
+    },
+    "paper_baseline_version": "paper_classification_v1",
+    "paper_baseline_deviations": [
+      "model_variant=MT_SE_adLIF",
+      "loss_agg=mean_membrane_potentials (released SSC implementation)"
+    ],
+    "paper_baseline_dataset": "SSC",
+    "launcher_script": "runner.py",
+    "model_variant": "MT_SE_adLIF",
+    "run_mode": "ours",
+    "launcher_logdir": "results/valid",
+    "evaluation_protocol": "ssc_mean_loss_v1"
+  },
+  "split": "validation",
+  "policy": {
+    "version": "mt_gain_tta_v1",
+    "datasets": {
+      "SHD": {
+        "gains": [
+          1.0,
+          0.95,
+          1.05
+        ]
+      },
+      "SSC": {
+        "gains": [
+          1.0,
+          0.95,
+          1.05
+        ]
+      },
+      "ECG": {
+        "gains": [
+          1.0,
+          0.95,
+          1.05
+        ]
+      }
+    }
+  },
+  "environment": {
+    "torch": "2.6.0+cu124",
+    "numpy": "1.26.4",
+    "pytorch-lightning": "2.2.1",
+    "tonic": "1.6.0"
+  },
+  "sources": {
+    "evaluate_tta.py": "1ed413894de97512c1ab49a1998ff5ba4bf2fa5235b42f9b1c88218ecffc9795",
+    "models/pl_module.py": "a899c0c254d7c57fd6852fc76479862e07d81ffdb1a044de3b0219435b3ac937",
+    "models/ours/mt_adlif.py": "0460a93c46fc14b748ef450a82c15b916c3679132288a1fe3d98d881409642b8",
+    "models/alif.py": "a07e84b2a6238a67585b9f927be4c5f4f514fb28234d24acecfc6c2608aa480d",
+    "models/li.py": "8a299b75f580f419616b7b345e857b01c62d96f5fbd1e769d67675b0c2fc7826",
+    "models/helpers.py": "d50e6d7f16a75b4c793ce16e8c6629469ffe60ca0ec4c792b30409fec606fadd",
+    "module/tau_trainers.py": "741c55450ca2a345a5a8247ef078a066d0b060ba06e009e4a9d7ebf07d12e1d5",
+    "datasets/shd.py": "8b7d51ab13d08747fd838cf77a54373b06f317d4a2fff950fd9f8a002342b7eb",
+    "datasets/ssc.py": "ebcd5a9f745a89c5e40c1bc022a14ad5228975db446ecbebc4cd15090ffc0b0a",
+    "datasets/ecg.py": "58b84ca005120931083fa3a909f8592a001d91f21d2da89d24dc964ca5d48408",
+    "datasets/utils/pad_tensors.py": "8e3a9e6f1670ccf995ee4c391bb922d7ca5eac5dfe73595806f0baaf0f6f4893"
+  }
+}

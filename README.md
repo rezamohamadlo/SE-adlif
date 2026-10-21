@@ -34,7 +34,11 @@ conda env create -f environment.yml
 
 Current tables: [paper results](reports/paper-results.md),
 [paper versus reference](reports/paper-vs-reference.md), and
-[reference versus six proposed models](reports/reference-vs-models.md).
+[reference versus proposed models](reports/reference-vs-models.md), and
+[accuracy, inference time and cost summary](reports/comparison-summary.md).
+As of 21 October 2026, all 27 reference/DTH/MT dataset-seed results are local:
+24 matched runs plus three accepted historical ECG reference runs with
+unmatched stopping/budget. See the [current grid](results/valid/COMPARISON_STATUS.md).
 The runner uses `config/paper_baseline.yaml`. Previous guides and tuning notes
 are retained in [the report archive](reports/archive/2026-10-15-report-consolidation/).
 Current results belong in `results/valid/`; tuning results belong in

@@ -7,3 +7,5 @@ Main result comparisons remain in [reports](../reports/). Documentation is organ
 - [Transfers](transfers/): [ECG](transfers/ecg-transfer-2026-10-19.md) and [SSC](transfers/ssc-transfer-2026-10-19.md) import records. Their shared machine-readable manifests live in [results/provenance](../results/provenance/).
 
 Per-run configs, metrics, checkpoints and cost evidence remain with their training seed directories. Historical material already under `reports/archive/` is preserved as an archive.
+
+[MT test-time augmentation](experiments/mt-tta.md) describes the separate frozen-checkpoint evaluation through `runner.py --tta`.

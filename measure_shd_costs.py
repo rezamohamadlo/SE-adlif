@@ -57,7 +57,10 @@ def run_directory(model, seed):
 def selected_checkpoint(directory):
     record = directory / 'REFERENCE_RESULT.json'
     if record.exists():
-        path = directory / json.loads(record.read_text(encoding='utf-8'))['checkpoint']
+        recorded = json.loads(record.read_text(encoding='utf-8'))['checkpoint']
+        normalized = portable_path(recorded)
+        path = (local_path(normalized) if Path(normalized).is_absolute()
+                or normalized.startswith('results/') else directory / normalized)
     else:
         text = (directory / 'TRAINING_SUMMARY.md').read_text(encoding='utf-8')
         match = re.search(r'## Best checkpoint\s+```text\s+([^\n]+)', text)

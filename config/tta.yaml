@@ -1,0 +1,9 @@
+# Exploratory, prespecified input-gain views; no time or label transformations.
+version: mt_gain_tta_v1
+datasets:
+  SHD:
+    gains: [1.0, 0.95, 1.05]
+  SSC:
+    gains: [1.0, 0.95, 1.05]
+  ECG:
+    gains: [1.0, 0.95, 1.05]

@@ -8,6 +8,6 @@ Accepted historical ECG reference evidence by user agreement; stopping/budget di
 | 123 | 283 | 400 | True | 88.72 |
 | 456 | 185 | 400 | True | 88.11 |
 
-Mean +/- sample SD: 88.32 +/- 0.35% (n=3). Counted among 21 accepted results, but not among 18 matched-configuration results.
+Mean +/- sample SD: 88.32 +/- 0.35% (n=3). Counted among 27 accepted results, but not among 24 matched-configuration results.
 
 [Verified aggregate](REFERENCE_RESULTS.json). No training or test evaluation was performed to update these reports.
