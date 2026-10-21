@@ -10,8 +10,11 @@ Separate exploratory evaluation. Identity plus input-gain views; frozen weights.
 | ECG | 42 | validation | 86.25 | 86.91 | +0.666 |
 | ECG | 456 | test | 87.98 | 88.74 | +0.757 |
 | ECG | 456 | validation | 86.17 | 86.46 | +0.297 |
+| SHD* | 123 | test | 94.52 | 94.61 | +0.088 |
 | SHD* | 123 | validation | 99.20 | 99.08 | -0.123 |
+| SHD* | 42 | test | 94.88 | 94.92 | +0.044 |
 | SHD* | 42 | validation | 99.26 | 99.26 | +0.000 |
+| SHD* | 456 | test | 94.43 | 94.30 | -0.133 |
 | SHD* | 456 | validation | 99.33 | 99.08 | -0.245 |
 | SSC | 42 | test | 80.01 | 80.40 | +0.393 |
 | SSC | 42 | validation | 82.00 | 82.41 | +0.411 |
@@ -20,6 +23,7 @@ Separate exploratory evaluation. Identity plus input-gain views; frozen weights.
 |---|---|---:|---:|---:|
 | ECG | test | 3 | 88.53 | 0.54 |
 | ECG | validation | 3 | 86.70 | 0.23 |
+| SHD* | test | 3 | 94.61 | 0.31 |
 | SHD* | validation | 3 | 99.14 | 0.11 |
 | SSC | test | 1 | 80.40 | unavailable |
 | SSC | validation | 1 | 82.41 | unavailable |

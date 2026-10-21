@@ -1,0 +1,396 @@
+{
+  "status": "complete",
+  "fingerprint": "7155a5339deb445e803fe83dfc559f548d7c01433f2b84ddd409079a30044714",
+  "identity": {
+    "version": "tta_costs_v1",
+    "job": {
+      "dataset": "SHD",
+      "seed": 123,
+      "checkpoint": "results/valid/MT_SE_adLIF/SHD/seed_123/ckpt/epoch=137-step=3450.ckpt",
+      "checkpoint_sha256": "667fafa34ad26556d74bb7ce5327dd38d300b4a6d27c364423ef41a17b69fa40",
+      "selected_epoch": 137,
+      "config": {
+        "random_seed": 123,
+        "logdir": "results/valid/MT_SE_adLIF/SHD/seed_123",
+        "datadir": "data",
+        "cachedir": "data/cache",
+        "ckpt_path": null,
+        "init_ckpt_path": null,
+        "run_test": true,
+        "scheduler": "plateau",
+        "scheduler_min_lr": 0.0,
+        "gradient_clip_val": 1.5,
+        "device": "cuda:0",
+        "early_stopping": false,
+        "early_stopping_patience": 50,
+        "early_stopping_min_delta": 0.001,
+        "dataset": {
+          "_target_": "datasets.shd.SHDLDM",
+          "data_path": "data",
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "pad_to_min_size": 250,
+          "window_size": 4,
+          "batch_size": 256,
+          "num_workers": 0,
+          "num_classes": 20,
+          "validate_on": 0.2,
+          "random_seed": 42,
+          "cache_namespace": "controlled_v2",
+          "ignore_first_timesteps": 10,
+          "additional_test_set_validation": false
+        },
+        "exp_name": "SHD_MT_SE_adLIF",
+        "two_layers": true,
+        "alpha": 5.0,
+        "c": 0.4,
+        "dt": 1.0,
+        "dropout": 0.15,
+        "l1": {
+          "cell": "mt_se_adlif",
+          "input_size": 140,
+          "n_neurons": 360,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "q": 120,
+          "alpha": 5.0,
+          "c": 0.4,
+          "dt": 1.0,
+          "tau_w_slow_range": [
+            300,
+            600
+          ]
+        },
+        "l2": {
+          "cell": "mt_se_adlif",
+          "input_size": 360,
+          "n_neurons": 360,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "q": 120,
+          "alpha": 5.0,
+          "c": 0.4,
+          "dt": 1.0,
+          "tau_w_slow_range": [
+            300,
+            600
+          ]
+        },
+        "l_out": {
+          "input_size": 360,
+          "n_neurons": 20,
+          "tau_u_range": [
+            15,
+            15
+          ],
+          "dt": 1.0
+        },
+        "n_epochs": 300,
+        "batch_size": 256,
+        "loss_agg": "sum_softmax_over_time",
+        "tracking_metric": "val_acc",
+        "tracking_mode": "max",
+        "lr": 0.01,
+        "factor": 0.9,
+        "patience": 9999,
+        "paper_baseline": {
+          "version": "paper_classification_v1",
+          "source": {
+            "doi": "10.1038/s41467-025-60878-z",
+            "document": "reference_paper.pdf",
+            "locations": "Table 7 (page 35); training/preprocessing methods (pages 28-29)"
+          },
+          "common": {
+            "lr_optimizer": "Adam",
+            "adam_betas": [
+              0.9,
+              0.999
+            ],
+            "adam_eps": 1e-08,
+            "dropout": 0.15,
+            "gradient_clip_val": 1.5,
+            "alpha": 5.0,
+            "dt": 1.0,
+            "tracking_metric": "val_acc",
+            "tracking_mode": "max"
+          },
+          "reproduction_policy": {
+            "training_seeds": [
+              42,
+              123,
+              456
+            ],
+            "split_seed": 42,
+            "num_workers": 0,
+            "early_stopping": false,
+            "scheduler": "plateau",
+            "patience": 9999,
+            "factor": 0.9,
+            "cache_namespace": "controlled_v2"
+          },
+          "datasets": {
+            "SHD": {
+              "report_label": "SHD*",
+              "lr": 0.01,
+              "batch_size": 256,
+              "n_epochs": 300,
+              "validate_on": 0.2,
+              "spatial_factor": 0.2,
+              "time_factor": 0.001,
+              "window_size": 4,
+              "pad_to_min_size": 250,
+              "ignore_first_timesteps": 10,
+              "reference_architecture": {
+                "layers": 2,
+                "neurons_per_layer": 360,
+                "q": 120,
+                "c": 0.4,
+                "tau_u_range": [
+                  5,
+                  25
+                ],
+                "tau_w_range": [
+                  60,
+                  300
+                ],
+                "output_tau": 15
+              }
+            },
+            "SSC": {
+              "lr": 0.006,
+              "batch_size": 256,
+              "n_epochs": 40,
+              "validation": "official",
+              "spatial_factor": 0.2,
+              "time_factor": 0.001,
+              "window_size": 4,
+              "pad_to_min_size": 300,
+              "ignore_first_timesteps": 10,
+              "reference_architecture": {
+                "layers": 2,
+                "neurons_per_layer": 720,
+                "q": 120,
+                "c": 0.4,
+                "tau_u_range": [
+                  5,
+                  25
+                ],
+                "tau_w_range": [
+                  60,
+                  300
+                ],
+                "output_tau": 15
+              }
+            },
+            "ECG": {
+              "lr": 0.01,
+              "batch_size": 64,
+              "n_epochs": 400,
+              "valid_fraction": 0.05,
+              "reference_architecture": {
+                "layers": 2,
+                "neurons_per_layer": 36,
+                "q": 120,
+                "c": 0.2,
+                "tau_u_range": [
+                  5,
+                  25
+                ],
+                "tau_w_range": [
+                  60,
+                  300
+                ],
+                "output_tau": 3
+              }
+            }
+          }
+        },
+        "paper_baseline_version": "paper_classification_v1",
+        "paper_baseline_deviations": [
+          "model_variant=MT_SE_adLIF"
+        ],
+        "paper_baseline_dataset": "SHD",
+        "launcher_script": "runner.py",
+        "model_variant": "MT_SE_adLIF",
+        "run_mode": "ours",
+        "launcher_logdir": "results/valid/protocol_v2",
+        "evaluation_protocol": "paper_classification_v1"
+      }
+    },
+    "gains": [
+      1.0,
+      0.95,
+      1.05
+    ],
+    "evidence": {
+      "path": "results/experiments/mt_tta_v1/SHD/seed_123/test/RESULT.json",
+      "sha256": "4e02af0618241bdbb7ac75dc0b62b5d2170c0cb65dc4299ed9fab27ee22eb46a",
+      "metrics": {
+        "evaluated_targets": 2264,
+        "baseline_accuracy": 0.9452296819787986,
+        "tta_accuracy": 0.946113074204947,
+        "difference_pp": 0.08833922261484099,
+        "baseline_loss": 0.45225005941761676,
+        "tta_nll": 0.3907764589828653,
+        "data_sha256": "a300aee34696fa8b6a578c8a99a9e2ee46f600dbe891f206541d057c6c61090d",
+        "device": "cuda:0",
+        "gpu": "NVIDIA GeForce RTX 4090",
+        "matmul_precision": "high"
+      }
+    },
+    "repeats": 3,
+    "warmup": 2,
+    "sources": {
+      "measure_tta_costs.py": "4ffd4f1fa77c9b521531dd89f28356027a1638049e49bf2f90487c791439c4c0",
+      "evaluate_tta.py": "3d2240c627856faf013e1d89e9d4b513a0549e80ba6fe34d1ee7ce0c40b9f1f7",
+      "measure_reference_costs.py": "6dc8ed1282541ff7d1dae0238af7bfbe9e9328b26df407fb048ff80c0be770cd",
+      "measure_shd_costs.py": "4420b98ba2bcb1e2aa54fde22747dcef6705f5b9cdea2be30290a243cd844946",
+      "measure_run_costs.py": "0848f48f91bb0d18eda610d7444d746ae6fff61d905df7cc672e2e6f4602fa9d",
+      "project_paths.py": "8cfd5f5ec1ba87a69c8f16db51ae046061ff353d48dcf1e291cbf375533010fa",
+      "config/tta.yaml": "08de6ae0dce940e8f230cb474721b9294675774bcf43d3c6e3e8b7e8fd111e09",
+      "models/alif.py": "a07e84b2a6238a67585b9f927be4c5f4f514fb28234d24acecfc6c2608aa480d",
+      "models/helpers.py": "d50e6d7f16a75b4c793ce16e8c6629469ffe60ca0ec4c792b30409fec606fadd",
+      "models/li.py": "8a299b75f580f419616b7b345e857b01c62d96f5fbd1e769d67675b0c2fc7826",
+      "models/lif.py": "2160d78d952f94cd222cf18def1277cc69b0447620d1e4d03a50fba737bf8500",
+      "models/ours/__init__.py": "cc76200abef5cf9313854de627bfbde6b7093cc9d861ba86084b9fecc4cb5232",
+      "models/ours/da_adlif.py": "a0dc9697ac5e5114c3215d21bc353dce252baea3462f0d87350f95c181e5d50a",
+      "models/ours/dth_adlif.py": "51efa18cf88c556dba8598ec351cdb50e9e7d4bf525b2bea993c449fcaf8f66d",
+      "models/ours/fp_adlif.py": "30b5b1191aed82014fe647e0bf754ca1b209e61a9105b263460e6c3aff83815e",
+      "models/ours/lg_dth_adlif.py": "36a4c00cfde45755a0538f66dee18fa0376e40fcf4460345912aab9280a3e468",
+      "models/ours/mr_adlif.py": "b709b3cd2cbfb63e27cc5c6189a76a64318e31e9dd3ba331a11fb043b50668f5",
+      "models/ours/mt_adlif.py": "0460a93c46fc14b748ef450a82c15b916c3679132288a1fe3d98d881409642b8",
+      "models/ours/mt_dth_adlif.py": "83eeafa33377ee677b41c0535bc97ca3e172b4019096bc55ea73a3fc86a00e65",
+      "models/pl_module.py": "a899c0c254d7c57fd6852fc76479862e07d81ffdb1a044de3b0219435b3ac937",
+      "models/pl_module_compress.py": "9e39ba081c9ddcfea67a2ac436d6dc527736b72371369ee965b4d8e55a756ed2",
+      "models/rnn.py": "a53c1a31c36a999e3417ce6dd156693683a0b88411bb88375403fa55389379ab",
+      "datasets/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "datasets/audio_compress.py": "ea939b28ac34259e692a58bbb69e40a4cf5f0ee5502031cf2d2c36dcf5e8a03c",
+      "datasets/bsd.py": "5ee2dcc5d0ef0276692689b81145dffa4e0fb8816b16991fe18ff19350ef7a17",
+      "datasets/ecg.py": "58b84ca005120931083fa3a909f8592a001d91f21d2da89d24dc964ca5d48408",
+      "datasets/oscillation.py": "d270bfc9c53967c1a406baf12517f8d7f5da61df31015d71c2f31da5c6bf25e8",
+      "datasets/shd.py": "8b7d51ab13d08747fd838cf77a54373b06f317d4a2fff950fd9f8a002342b7eb",
+      "datasets/ssc.py": "ebcd5a9f745a89c5e40c1bc022a14ad5228975db446ecbebc4cd15090ffc0b0a",
+      "datasets/utils/diskcache.py": "269c8e5035aac8abee4a95e4d3ffc41f53b3405e5ba75aa394afaace8b59b102",
+      "datasets/utils/pad_tensors.py": "8e3a9e6f1670ccf995ee4c391bb922d7ca5eac5dfe73595806f0baaf0f6f4893",
+      "datasets/utils/transforms.py": "35b8abbb84af2c91e0726abefe42bf6afdb99fb2ff9ae8e66684eec0d560b531"
+    },
+    "environment": {
+      "python": "3.11.0",
+      "torch": "2.6.0+cu124",
+      "packages": {
+        "numpy": "1.26.4",
+        "pytorch-lightning": "2.2.1",
+        "tonic": "1.6.0",
+        "hydra-core": "1.3.2"
+      },
+      "cuda": "12.4",
+      "device": "cuda:0",
+      "precision": "high",
+      "gpu": "NVIDIA GeForce RTX 4090"
+    }
+  },
+  "created_utc": "2026-10-21T12:28:49.742653+00:00",
+  "measurements": {
+    "samples": 2264,
+    "evaluated_targets": 2264,
+    "data_sha256": "a300aee34696fa8b6a578c8a99a9e2ee46f600dbe891f206541d057c6c61090d",
+    "baseline_accuracy": 0.9452296819787986,
+    "tta_accuracy": 0.946113074204947,
+    "total_parameters": 452200,
+    "single_dense_gflops": 0.24289523109540637,
+    "tta_dense_gflops": 0.7286856932862191,
+    "single_arithmetic_gflops": 0.24900585878975265,
+    "tta_arithmetic_gflops": 0.7470175763692579,
+    "single_synops_per_sample": 9994329.53180212,
+    "gain_scaling_gflops": 7.617681978798586e-05,
+    "tta_synops_per_sample": 29979052.120141342,
+    "tta_spikes_per_sample": 32613.000883392226,
+    "tta_analog_input_dense_macs_per_sample": 0,
+    "per_view": [
+      {
+        "gain": 1.0,
+        "synops_per_sample": 9994329.53180212,
+        "spikes_per_sample": 10873.063604240282
+      },
+      {
+        "gain": 0.95,
+        "synops_per_sample": 9676372.44081272,
+        "spikes_per_sample": 10381.075088339223
+      },
+      {
+        "gain": 1.05,
+        "synops_per_sample": 10308350.147526503,
+        "spikes_per_sample": 11358.86219081272
+      }
+    ],
+    "forward_scalar_operations_by_kind": {
+      "bias_add": 455798560,
+      "mul": 7578087220,
+      "sub": 1330439040,
+      "sigmoid": 1763280,
+      "add": 3565446160,
+      "reciprocal": 448818500,
+      "rsub": 455871620,
+      "heaviside": 443479680,
+      "abs": 443479680,
+      "exp": 448818500
+    },
+    "input_counts": {
+      "baseline_correct": 2140,
+      "tta_correct": 2142,
+      "targets": 2264,
+      "samples": 2264,
+      "timesteps": 615944,
+      "stored_timesteps": 566348,
+      "gain_multiplications": 172464320
+    },
+    "timing_ms_per_sample": {
+      "single_forward": 1.4682404446415758,
+      "tta_forwards": 4.425594464073659,
+      "single_pipeline": 1.5235936248524236,
+      "tta_pipeline": 4.540956787396275
+    },
+    "timing_repeats_ms_per_sample": {
+      "single_forward": [
+        1.4886459363908036,
+        1.4891629417006729,
+        1.4269124558332509
+      ],
+      "tta_forwards": [
+        4.480453798583935,
+        4.41085057420179,
+        4.385479019435251
+      ],
+      "single_pipeline": [
+        1.5625849381610895,
+        1.4818462455836259,
+        1.5263496908125551
+      ],
+      "tta_pipeline": [
+        4.67686788868718,
+        4.376051325089258,
+        4.569951148412386
+      ]
+    }
+  },
+  "scopes": {
+    "denominator": "One original input sequence, not one gain view",
+    "forward_timing": "Uninstrumented forwards; pre-scaled inputs; excludes transfer/loading/aggregation",
+    "pipeline_timing": "Gain scaling, forwards, temporal reduction, class softmax and averaging; excludes transfer/loading/loss/final decision",
+    "compute": "Executed batch-padded forwards; matrix MAC=2 FLOPs; aggregation excluded; gain scaling separate",
+    "activity": "Stored sequence extent including minimum padding and burn-in; batch padding excluded",
+    "synops": "Ideal dense fan-out additions; original event multiplicity preserved under gain scaling; ECG analog projection excluded"
+  }
+}

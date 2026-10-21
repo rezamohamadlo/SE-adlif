@@ -1,0 +1,24 @@
+{
+  "dataset": "SSC",
+  "seed": 123,
+  "split": "test",
+  "checkpoint": "results/valid/MT_SE_adLIF/SSC/seed_123/ckpt/epoch=36-step=10878.ckpt",
+  "checkpoint_sha256": "d4652f57efbbb0e6890d8f8af995e23826767b95af787c93788c4b3e173a85d8",
+  "gains": [
+    1.0,
+    0.95,
+    1.05
+  ],
+  "metrics": {
+    "evaluated_targets": 20382,
+    "baseline_accuracy": 0.7997743106662741,
+    "tta_accuracy": 0.8039446570503386,
+    "difference_pp": 0.41703463840643706,
+    "baseline_loss": 0.7376559278749996,
+    "tta_nll": 0.711075377480671,
+    "data_sha256": "de69f8fd5bf2ca828e46c4f08e193855e2a294405a178a06b689e0514ad9960a",
+    "device": "cuda:0",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "matmul_precision": "high"
+  }
+}
