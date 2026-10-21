@@ -12,6 +12,16 @@ Snapshot: 21 October 2026. Accuracy in percent; **bold** marks local means/value
 
 All local entries are mean +/- sample SD across training seeds 42, 123 and 456 (n=3). SSC uses ssc_mean_loss_v1. Paper entries retain published mean/SD: SHD* and ECG n=20, SSC n=5. Different sample sizes mean bold values do not establish statistical significance.
 
+SSC test accuracy includes the newly imported seeds 123 and 456. The following per-seed values produce the SSC means above; aggregates are calculated from unrounded metrics.
+
+| SSC model | Seed 42 test (%) | Seed 123 test (%) | Seed 456 test (%) | Mean +/- sample SD (%) |
+|---|---:|---:|---:|---:|
+| Reference | 80.69 | 80.33 | 80.38 | 80.47 +/- 0.20 |
+| DTH | 80.46 | 79.84 | 79.56 | 79.95 +/- 0.46 |
+| MT | 80.01 | 79.98 | 80.23 | 80.07 +/- 0.14 |
+
+Sources: [SSC per-seed results](../results/valid/SSC_MEAN_COMPARISON.md) and [reference aggregate](../results/valid/reference/SSC/REFERENCE_RESULTS.json).
+
 ECG reference results are accepted historical evidence with unmatched stopping/budget: 383 epochs for seed 42 and early stopping at 283/185 epochs for seeds 123/456, versus 400 epochs for DTH/MT. The ECG row is descriptive, not a fully controlled comparison.
 
 Sources: [published paper results](paper-results.md), [paper versus reference](paper-vs-reference.md), [reference versus models](reference-vs-models.md), and [per-seed evidence](../results/valid/COMPARISON_STATUS.md).
