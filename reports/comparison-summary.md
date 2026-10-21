@@ -7,7 +7,7 @@ Snapshot: 21 October 2026. Accuracy in percent; **bold** marks local means/value
 | Dataset | Paper | Reference | DTH | MT | MT-DTH |
 |---|---:|---:|---:|---:|---:|
 | SHD* | 93.79 ± 0.76 | 93.15 ± 0.42 | **94.49 ± 0.52** | **94.61 ± 0.23** | 93.74 ± 0.17 |
-| SSC | 80.44 ± 0.26 | 80.47 ± 0.20 | 79.95 ± 0.46 | 80.07 ± 0.14 | Not run |
+| SSC | 80.44 ± 0.26 | **80.47 ± 0.20** | 79.95 ± 0.46 | 80.07 ± 0.14 | Not run |
 | ECG | 88.18 ± 0.36 | **88.32 ± 0.35** | 87.63 ± 0.31 | 87.81 ± 0.49 | Not run |
 
 All local entries are mean +/- sample SD across training seeds 42, 123 and 456 (n=3). SSC uses ssc_mean_loss_v1. Paper entries retain published mean/SD: SHD* and ECG n=20, SSC n=5. Different sample sizes mean bold values do not establish statistical significance.
