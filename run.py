@@ -309,7 +309,7 @@ The best validation checkpoint was evaluated on the test split after training.
                 resume_command += f' --logdir "{self.cfg.launcher_logdir}"'
         if launcher_script == 'tune_shd.py':
             resume_command = (
-                f'.\\.ven\\Scripts\\python.exe tune_shd.py '
+                f'.\\.venv\\Scripts\\python.exe tune_shd.py '
                 f'--checkpoint "{self.cfg.sweep_checkpoint}" '
                 f'--output "{self.cfg.sweep_output}" --trial {self.cfg.sweep_trial}'
                 + (f' --full-train --seeds {self.cfg.random_seed}'

@@ -1,0 +1,15 @@
+# @package _global_
+defaults:
+  - ECG_MT_SE_adLIF_2layer
+  - /comparison/ECG
+  - _self_
+
+exp_name: ECG_AMT_SE_adLIF_2layer
+l1:
+  cell: amt_se_adlif
+  mix_rho_fast: 0.9
+  mix_rho_slow: 0.99
+l2:
+  cell: amt_se_adlif
+  mix_rho_fast: 0.9
+  mix_rho_slow: 0.99

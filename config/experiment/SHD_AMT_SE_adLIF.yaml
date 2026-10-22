@@ -1,0 +1,15 @@
+# @package _global_
+defaults:
+  - SHD_MT_SE_adLIF
+  - /comparison/SHD
+  - _self_
+
+exp_name: SHD_AMT_SE_adLIF
+l1:
+  cell: amt_se_adlif
+  mix_rho_fast: 0.9
+  mix_rho_slow: 0.99
+l2:
+  cell: amt_se_adlif
+  mix_rho_fast: 0.9
+  mix_rho_slow: 0.99

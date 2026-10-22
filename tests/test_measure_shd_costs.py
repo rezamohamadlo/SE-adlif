@@ -125,7 +125,10 @@ class MeasurementTests(unittest.TestCase):
                 self.assertEqual(first, [(root / p).read_text(encoding='utf-8') for p in reports])
             self.assertIn('| LG-DTH | 10', first[0])
             self.assertNotIn('| Pending |', first[0])
-            self.assertIn('| SHD* | 93.79', first[1])
+            # Accuracy evidence must survive cost updates regardless of whether
+            # the reference or paper column is displayed first.
+            original_accuracy = (ROOT / reports[1]).read_text(encoding='utf-8').split('\n\n')[2]
+            self.assertEqual(original_accuracy, first[1].split('\n\n')[2])
             original_ssc = [line for line in (ROOT / reports[1]).read_text(encoding='utf-8').splitlines()
                             if line.startswith('| SSC |')]
             self.assertEqual(original_ssc, [line for line in first[1].splitlines()

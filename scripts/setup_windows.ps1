@@ -4,7 +4,7 @@ Run from any directory; paths are resolved against this script's repository.
 #>
 [CmdletBinding()]
 param(
-    [ValidateSet('.ven', '.venv')][string]$VenvName = '.ven',
+    [ValidateSet('.ven', '.venv')][string]$VenvName = '.venv',
     [string]$PythonExe = '',
     [string]$ExpectedCommit = '',
     [switch]$PlanOnly,

@@ -199,7 +199,7 @@ def refresh_resume_command(directory, trial, seed, output):
     _, separator, after = rest.partition('\n```')
     if not separator:
         return
-    command = (f'.\\.ven\\Scripts\\python.exe search_shd.py --output "{output}" '
+    command = (f'.\\.venv\\Scripts\\python.exe search_shd.py --output "{output}" '
                f'--trials {trial} --seeds {seed}')
     updated = before + marker + command + separator + after
     if updated != text:

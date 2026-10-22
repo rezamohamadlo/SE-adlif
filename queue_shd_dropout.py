@@ -65,7 +65,7 @@ def report(output):
                 before, rest = text.split(marker, 1)
                 _, separator, after = rest.partition('\n```')
                 if separator:
-                    command = f'.\\.ven\\Scripts\\python.exe queue_shd_dropout.py --output "{output}" --trials {name} --hours 1 --seconds-per-epoch 20'
+                    command = f'.\\.venv\\Scripts\\python.exe queue_shd_dropout.py --output "{output}" --trials {name} --hours 1 --seconds-per-epoch 20'
                     search_shd.atomic_text(summary, before + marker + command + separator + after)
     search_shd.atomic_text(output / 'LEADERBOARD.md', '\n'.join(lines) + '\n')
 

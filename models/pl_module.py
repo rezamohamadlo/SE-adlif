@@ -9,6 +9,7 @@ from models.alif import EFAdLIF, SEAdLIF
 from models.ours.dth_adlif import DTHSEAdLIF
 from models.ours.lg_dth_adlif import LGDTHSEAdLIF
 from models.ours.mt_adlif import MTSEAdLIF
+from models.ours.amt_adlif import AMTSEAdLIF
 from models.ours.mt_dth_adlif import MTDTHSEAdLIF
 from models.ours.mr_adlif import MRSEAdLIF
 from models.ours.fp_adlif import FPSEAdLIF
@@ -24,6 +25,7 @@ layer_map = {
     "dth_se_adlif": DTHSEAdLIF,
     "lg_dth_se_adlif": LGDTHSEAdLIF,
     "mt_se_adlif": MTSEAdLIF,
+    "amt_se_adlif": AMTSEAdLIF,
     "mt_dth_se_adlif": MTDTHSEAdLIF,
     "mr_se_adlif": MRSEAdLIF,
     "fp_se_adlif": FPSEAdLIF,

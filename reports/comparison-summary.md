@@ -119,7 +119,7 @@ Sparsity is 100 minus the recorded firing percentage: the percentage of neuron-t
 
 ![Reference hidden-layer spike sparsity by dataset](figures/reference-layer-sparsity.png)
 
-[Download vector figure](figures/reference-layer-sparsity.svg). Reproduce from saved measurements with `.\.ven\Scripts\python.exe scripts/plot_reference_sparsity.py`; no inference or training is performed.
+[Download vector figure](figures/reference-layer-sparsity.svg). Reproduce from saved measurements with `.\.venv\Scripts\python.exe scripts/plot_reference_sparsity.py`; no inference or training is performed.
 
 ### Dense matrix cost (GFLOPs/sample)
 

@@ -169,7 +169,7 @@ allowed.
   relative results layout when transferring files between computers. Apply this
   portability convention when reusing this project's workflow in another project,
   without changing that project's instructions unless requested.
-- Use the project's `.ven` Python explicitly in commands. Do not accidentally
+- Use the project's `.venv` Python explicitly in commands. Do not accidentally
   install dependencies into global Python. The tested Windows environment is
   described by `requirements.txt`; `environment.yml` is the legacy Conda setup.
 - Before starting expensive work, inspect existing processes, output paths and
@@ -248,16 +248,16 @@ do not describe it as checkpoint continuation.
 Preflight before training where supported:
 
 ```powershell
-.\.ven\Scripts\python.exe runner.py --models SE_adLIF --datasets SHD --seeds 42 --dry-run
-.\.ven\Scripts\python.exe search_shd.py --dry-run
-.\.ven\Scripts\python.exe queue_shd_dropout.py --dry-run
-.\.ven\Scripts\python.exe run.py experiment=SHD_SE_adLIF_paper --cfg job --resolve
+.\.venv\Scripts\python.exe runner.py --models SE_adLIF --datasets SHD --seeds 42 --dry-run
+.\.venv\Scripts\python.exe search_shd.py --dry-run
+.\.venv\Scripts\python.exe queue_shd_dropout.py --dry-run
+.\.venv\Scripts\python.exe run.py experiment=SHD_SE_adLIF_paper --cfg job --resolve
 ```
 
 Run tests relevant to code/config changes. For example:
 
 ```powershell
-.\.ven\Scripts\python.exe -m unittest tests.test_search_shd tests.test_queue_shd_dropout tests.test_paper_config
+.\.venv\Scripts\python.exe -m unittest tests.test_search_shd tests.test_queue_shd_dropout tests.test_paper_config
 git diff --check
 ```
 
@@ -287,7 +287,7 @@ actually verified and any material limitations.
   underlying metrics. Keep best checkpoints needed for evaluation and last
   checkpoints needed for resume. Large weights and raw metrics may remain local
   or in external storage; retain enough provenance to audit reported results.
-- Keep `.ven`, datasets, preprocessing caches, verbose logs, weights, locks and
+- Keep `.venv`, datasets, preprocessing caches, verbose logs, weights, locks and
   generated launcher configs out of Git according to `.gitignore`. Generated
   `trial.yaml` is rebuilt from the manifest; ignoring it does not untrack an
   already committed copy.

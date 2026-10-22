@@ -22,8 +22,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\setup_windows.
 
 For the tested Windows CUDA environment, use Python 3.11:
 ```powershell
-python -m venv .ven
-.\.ven\Scripts\python.exe -m pip install -r requirements.txt
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
 `environment.yml` retains the original Conda/audio research setup. It is not
@@ -94,7 +94,7 @@ are retained. Existing historical configs and summaries are not rewritten.
 To inspect a portable view of an existing saved config without changing it:
 
 ```powershell
-.\.ven\Scripts\python.exe project_paths.py --inspect archive/experiments_20261017/shd_lr_sweep/c03/SWEEP_CONFIG.json
+.\.venv\Scripts\python.exe project_paths.py --inspect archive/experiments_20261017/shd_lr_sweep/c03/SWEEP_CONFIG.json
 ```
 
 Checkpoints and datasets are not transferred by Git. Copy the exact required

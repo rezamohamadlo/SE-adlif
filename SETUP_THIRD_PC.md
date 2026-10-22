@@ -90,7 +90,7 @@ execution-policy change is made. The script resolves paths from its own location
 so it also works when called by absolute path from another working directory.
 
 Run this in a visible PowerShell/VS Code terminal to watch downloads live.
-The script creates **`.ven`**, checks Python 3.11 x64, installs the source PC's
+The script creates **`.venv`**, checks Python 3.11 x64, installs the source PC's
 pip toolchain version **26.2.1**, then installs `requirements.txt`. Every package
 is pinned; the CUDA wheel index is already in that file. Installer output remains
 visible, with verbose download/install status and progress bars. Detailed pip
@@ -99,7 +99,7 @@ logs are saved under `results/setup/pip-<timestamp>.log`.
 The equivalent visible package command after creating the environment is:
 
 ```powershell
-.\.ven\Scripts\python.exe -m pip --log setup-pip.log install `
+.\.venv\Scripts\python.exe -m pip --log setup-pip.log install `
     --verbose --progress-bar on -r requirements.txt
 ```
 
@@ -115,8 +115,7 @@ failed package, interpreter, URL/error and log location. Do not loosen pins or
 install into global Python to make the command pass.
 
 For an explicitly chosen Python executable, add `-PythonExe 'C:\path\python.exe'`.
-To use `.venv` instead of `.ven`, add `-VenvName .venv` to every setup invocation
-and replace `.ven` with `.venv` in later commands. Do not copy another machine's
+The default environment directory is `.venv`. Do not copy another machine's
 virtual environment or delete/recreate an existing environment automatically.
 
 ## 4. Verify packages, CUDA and effective configs
@@ -222,7 +221,7 @@ a fresh experiment. Never delete canonical results to bypass those guards.
 Example preflight for a deliberately separate fresh baseline run:
 
 ```powershell
-.\.ven\Scripts\python.exe runner.py --models MT_SE_adLIF --datasets SHD `
+.\.venv\Scripts\python.exe runner.py --models MT_SE_adLIF --datasets SHD `
     --seeds 42 123 456 --logdir results/valid/new_baseline_runs --dry-run
 ```
 
@@ -242,7 +241,7 @@ Set up this SE-adlif checkout on this Windows/NVIDIA PC for future training.
 Read AGENTS.md and SETUP_THIRD_PC.md and follow scripts/setup_windows.ps1.
 The source-PC commit must be FULL_COMMIT_HASH. Preserve local edits and verify
 the checked-out commit before installing. Install missing Git/Python prerequisites
-through official sources as needed, create the repository-local .ven with Python
+through official sources as needed, create the repository-local .venv with Python
 3.11 x64, and use repository requirements.txt pins (including NumPy 1.26.4 and
 PyTorch 2.6.0+cu124). Keep pip verbose output and progress bars visible, save its log,
 and show me that log's path. Use a visible interactive PowerShell/VS Code terminal;

@@ -3,7 +3,7 @@
 `measure_tta_costs.py` measures existing DTH/MT official-test checkpoints without
 training. The training runners and ordinary `COST_RESULTS` remain unchanged.
 Run from the repository root with the local environment (this checkout uses
-`.venv`; use `.ven` instead where that is the environment directory).
+`.venv`).
 
 ```powershell
 .\.venv\Scripts\python.exe measure_tta_costs.py --models DTH_SE_adLIF MT_SE_adLIF --datasets SHD SSC ECG --seeds 42 123 456 --dry-run
