@@ -6,17 +6,24 @@ from functional.temporal_consistency import temporal_js_loss
 from models.pl_module import MLPSNN
 
 
+def validate_consistency_config(cfg):
+    """Validate the opt-in objective without allocating a model or dataset."""
+    if (cfg.get('auto_regression', False) or not cfg.two_layers
+            or any(layer.cell != 'mt_se_adlif' for layer in [cfg.l1, cfg.l2])):
+        raise ValueError('This experiment requires two-layer MT classification')
+    weight = float(cfg.temporal_consistency.weight)
+    window = cfg.temporal_consistency.window
+    if (isinstance(window, bool) or not isinstance(window, int) or window < 1
+            or not math.isfinite(weight) or weight < 0):
+        raise ValueError('Require nonnegative finite weight and positive integer window')
+    return weight, window
+
+
 class MTConsistencyMLPSNN(MLPSNN):
     def __init__(self, cfg):
+        weight, window = validate_consistency_config(cfg)
         super().__init__(cfg)
-        if self.auto_regression or any(layer.cell != 'mt_se_adlif'
-                                       for layer in [cfg.l1, cfg.l2]):
-            raise ValueError('This experiment requires two-layer MT classification')
-        self.consistency_weight = float(cfg.temporal_consistency.weight)
-        window = cfg.temporal_consistency.window
-        if (isinstance(window, bool) or not isinstance(window, int) or window < 1
-                or not math.isfinite(self.consistency_weight) or self.consistency_weight < 0):
-            raise ValueError('Require nonnegative finite weight and positive integer window')
+        self.consistency_weight = weight
         self.consistency_window = window
 
     def training_step(self, batch, batch_idx):

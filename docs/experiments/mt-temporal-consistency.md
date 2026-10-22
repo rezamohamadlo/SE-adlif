@@ -1,97 +1,84 @@
 # MT with training-only temporal consistency
 
-This is the second proposed direction, separate from AMT. It keeps MT's
-neurons and inference unchanged and adds an auxiliary training objective:
+`MT_TC_SE_adLIF` is an MT training-objective variant, supported by the official
+`runner.py` workflow. Its inference architecture and checkpoint keys match MT;
+its training loss adds an explicitly recorded auxiliary objective:
 
 ```
 training loss = original dataset classification loss + 0.1 * temporal JS
 ```
 
 Temporal JS is the mean Jensen-Shannon divergence between adjacent overlapping
-five-frame windows of class probabilities. Each window averages the per-frame
-softmax outputs. Only pairs fully inside the same valid target class are
-included. Burn-in, ignored labels, batch padding and ECG class transitions
-are excluded. The statistic weights eligible window pairs equally. When no
-pair is eligible it is zero, with a valid zero gradient.
+five-frame windows of class probabilities. Only pairs fully inside the same
+valid target class are included. Burn-in, ignored labels, batch padding and
+ECG class transitions are excluded. When no pair is eligible the penalty is
+zero with a valid zero gradient. This is a hypothesis, not a demonstrated
+improvement: smoothing may suppress useful temporal changes or have too little
+effect. Window 5 and weight 0.1 are frozen local experiment choices.
 
-The hypothesis is that weak temporal smoothness can reduce unstable predictions
-without adding a second excitability feedback mechanism or inference parameters.
-It may also suppress useful fast changes or have too little effect; improvement
-is not assumed. Five frames and weight 0.1 are local starting choices, not
-paper-derived values. Log `train_temporal_js`, `train_total_loss`, supervised
-`train_loss`, and ordinary validation accuracy to assess the effect.
+Temporal regularization is an established research direction. This variant
+is not an exact TET reproduction or an established novelty claim. Related
+primary sources: [TET](https://arxiv.org/abs/2202.11946),
+[Temporal-Spatial Self-Distillation](https://arxiv.org/abs/2406.07862), and
+[Selective Alignment Knowledge Distillation](https://www.ijcai.org/proceedings/2026/410).
 
-This is **not a reproduction of TET**. TET changes temporal training objectives;
-our proposed pilot uses same-label window consistency while retaining the
-original supervised aggregation. Temporal regularization and self-distillation
-are established research directions, so this experiment is not an established
-novel contribution. Relevant primary sources:
+## Shared runner and fair ablation
 
-- [TET, ICLR 2022](https://arxiv.org/abs/2202.11946).
-- [Temporal-Spatial Self-Distillation](https://arxiv.org/abs/2406.07862).
-- [Selective Alignment Knowledge Distillation, IJCAI 2026](https://www.ijcai.org/proceedings/2026/410).
+The new configs inherit MT architecture and the dataset comparison group,
+which inherits `config/paper_baseline.yaml`. Compare MT and MT_TC with matched
+training seeds 42, 123 and 456; supervised loss aggregation, LR, batch,
+preprocessing, split, epoch budget and stopping rules match. SHD* retains a
+20% training-derived validation split with split seed 42. SSC uses mean loss;
+ECG uses its timestep labels. The auxiliary loss is the intended experimental
+difference; the complete training objectives are not identical.
 
-## Protocol and isolation
+The main training entrypoint selects the consistency training module only
+when `training_objective: mt_temporal_consistency_v1` is explicit. Ordinary
+reference, MT, DTH and AMT runs keep their existing training behavior. The
+runner records the objective, weight and window in baseline deviations and
+appends `mt_temporal_consistency_v1` to the dataset-specific protocol identity.
+Resolved configs and checkpoint hyperparameters preserve the settings.
 
-The configs inherit MT architecture and the corresponding dataset comparison
-group, which inherits `config/paper_baseline.yaml`. The original supervised
-loss, LR, batch, epoch budget, split and stopping rule remain inherited.
-The training objective differs, so metadata labels this separate protocol
-`mt_temporal_consistency_v1`; do not describe it as an unchanged paper baseline.
-SHD* uses split seed 42 with 20% held out. SSC uses the existing mean loss.
-ECG keeps its timestep labels and does not smooth across class boundaries.
+## Commands
 
-Only `train_mt_consistency.py` applies this auxiliary objective. Do not launch
-these configs with `run.py` or `runner.py`, which instantiate the ordinary
-classification training module. The separate script reuses the established
-trainer within its own process without editing either main runner or the MT
-neuron implementation. This is an objective experiment, not a replacement
-for the official SSC reference/DTH/MT comparison workflow.
-
-Runs start with fresh random weights and a fresh optimizer at epoch zero.
-Repeating a matching command resumes only its own `ckpt/last.ckpt`; completed
-full-budget validation runs are skipped. Configuration/source/environment
-changes require a new output directory. A manifest mismatch is rejected before
-the saved Hydra config is rewritten. Per-seed manifests record fully resolved
-settings, baseline identity, deviations, seeds, source hashes and environment.
-Locks prevent concurrent training in the same seed directory. Preserve the
-relative output layout across PCs; Git does not transfer datasets or weights.
-
-## Non-training preflight
-
-From the repository root, resolve each dataset's config without training:
+Run from the repository root. Non-training preflight for all nine jobs:
 
 ```powershell
-.\.venv\Scripts\python.exe train_mt_consistency.py experiment=SHD_MT_consistency --cfg job --resolve
-.\.venv\Scripts\python.exe train_mt_consistency.py experiment=SSC_MT_consistency --cfg job --resolve
-.\.venv\Scripts\python.exe train_mt_consistency.py experiment=ECG_MT_consistency_2layer --cfg job --resolve
+.\.venv\Scripts\python.exe runner.py --models MT_TC_SE_adLIF --datasets SHD SSC ECG --seeds 42 123 456 --logdir results/experiments/mt_consistency_runner_v1 --dry-run
 ```
 
-## User-launched validation pilot
-
-These three commands run sequential seeds within each dataset. They can run
-on different PCs because their dataset directories are disjoint:
+The user launches fresh training, final testing and automatic cost measurement:
 
 ```powershell
-.\.venv\Scripts\python.exe train_mt_consistency.py --multirun experiment=SHD_MT_consistency random_seed=42,123,456
-.\.venv\Scripts\python.exe train_mt_consistency.py --multirun experiment=SSC_MT_consistency random_seed=42,123,456
-.\.venv\Scripts\python.exe train_mt_consistency.py --multirun experiment=ECG_MT_consistency_2layer random_seed=42,123,456
+.\.venv\Scripts\python.exe runner.py --models MT_TC_SE_adLIF --datasets SHD SSC ECG --seeds 42 123 456 --logdir results/experiments/mt_consistency_runner_v1
 ```
 
-Outputs: `results/experiments/mt_consistency_v1/<dataset>/seed_<seed>/`.
-Use saved validation results to assess the pilot against matched MT validation
-metrics. Different datasets' raw validation scores are not directly comparable.
-If tuning is needed, put every changed configuration in a separate output and
-record its deviations. A weight-zero control tests loss equivalence; it must
-have its own directory and is not an additional independent seed.
+Only the new variant is scheduled; reuse existing matched MT records for
+comparison. Outputs are under
+`results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/<dataset>/seed_<seed>/`.
+Fresh runs start with random weights and a fresh optimizer at epoch zero.
+Repeating the same command resumes each interrupted job from its own
+`last.ckpt` and skips matching completions. Final test evaluation uses the
+validation-selected best checkpoint. The runner provides aggregation and
+per-seed `COST_RESULTS.json`/`.md`; cost failures do not require retraining.
 
-Official test evaluation is **disabled** in this pilot. Freeze the design using
-validation before preparing standalone final testing and inference costs for
-the selected checkpoints. Base MT inference loads these checkpoints with the
-same state dictionary; no auxiliary objective runs during validation or test.
-Retain the prior-test-observation disclosure when reporting later test results.
+On different PCs, select disjoint datasets or seeds and keep the same relative
+output layout. Git does not transfer datasets or checkpoints. Paths resolve
+against the repository root even when Hydra changes the working directory.
+Changing the objective or other guarded settings requires a new directory.
 
-For subsequent paper comparisons, use `(Δ paper)` headings and signed
-parenthesized differences from unrounded local metrics, in percentage points.
-Report training-objective changes, matching seeds, mean and sample SD; do not
-infer final test improvements from validation gains.
+This is a fixed follow-up configuration, not a test-selected search. Select
+any later tuning using validation in separate outputs before evaluating its
+final test. Previous test scores have already been observed; retain that
+history. Log supervised `train_loss`, `train_temporal_js`, `train_total_loss`
+and ordinary validation/test metrics. Report mean and sample SD over matching
+seeds, use `(Δ paper)` labels where appropriate, and retain the historical ECG
+reference stopping/budget caveat if comparing against that reference.
+
+## Previous validation-only prototype
+
+`train_mt_consistency.py` and the earlier `*_MT_consistency` configs remain
+as the separate validation-only prototype record. Use the main-runner commands
+above for new comparisons. Their old `results/experiments/mt_consistency_v1/`
+outputs, if any, must not be reused or relabeled as the runner's completed
+final-test evidence. Do not change an active prototype process or its artifacts.

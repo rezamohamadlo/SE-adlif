@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - SHD_MT_SE_adLIF
+  - /comparison/SHD
+  - _self_
+
+exp_name: SHD_MT_TC_SE_adLIF
+training_objective: mt_temporal_consistency_v1
+temporal_consistency:
+  weight: 0.1
+  window: 5
+run_test: true

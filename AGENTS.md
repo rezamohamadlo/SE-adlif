@@ -128,6 +128,14 @@ reproduction. Do not change `run.py`, `runner.py`, shared model implementations
 or `evaluation.yaml` to implement a new search unless explicitly requested.
 Keep new results separate from existing runs and preserve their provenance.
 
+For new fair model comparisons, including training-objective variants, use
+`runner.py` for preflight, training, resume, final testing, aggregation and
+cost measurement. Register new objectives as explicit opt-in configurations;
+keep ordinary model behavior unchanged and record objective deviations and
+distinct protocol metadata. A shared runner matches the controlled settings,
+but does not make intentionally different training objectives identical.
+Do not substitute a separate candidate launcher unless explicitly requested.
+
 For the SSC mean-loss reference/DTH/MT comparison, use the official
 `runner.py` workflow for new training, resume, final testing, aggregation and
 cost measurement. Do not substitute the separate SSC diagnostic/comparison
@@ -255,6 +263,10 @@ Preflight before training where supported:
 ```
 
 Run tests relevant to code/config changes. For example:
+
+The user-launch-only training rule also covers synthetic training smoke
+tests. Exclude tests that call `Trainer.fit`, training entrypoints, or optimizer
+training steps from agent-run discovery; leave those for the user to launch.
 
 ```powershell
 .\.venv\Scripts\python.exe -m unittest tests.test_search_shd tests.test_queue_shd_dropout tests.test_paper_config

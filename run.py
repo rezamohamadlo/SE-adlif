@@ -19,7 +19,7 @@ from project_paths import local_path, portable_config, relocate_checkpoint_callb
 from pytorch_lightning.callbacks import EarlyStopping, LearningRateMonitor, ModelCheckpoint
 from pytorch_lightning.loggers.csv_logs import CSVLogger, ExperimentWriter
 import logging
-from models.pl_module import MLPSNN
+from models.pl_module import MLPSNN, build_training_model
 
 from pytorch_lightning.strategies import SingleDeviceStrategy
 
@@ -439,7 +439,7 @@ def main(cfg: DictConfig):
     dataset_paths = {key: str(local_path(cfg.dataset[key]))
                      for key in ('data_path', 'cache_root') if cfg.dataset.get(key)}
     datamodule = hydra.utils.instantiate(cfg.dataset, **dataset_paths)
-    model = MLPSNN(cfg)
+    model = build_training_model(cfg, default_class=MLPSNN)
     if cfg.get('init_ckpt_path'):
         if cfg.get('ckpt_path'):
             raise ValueError('Choose weights initialization or full resume, not both')

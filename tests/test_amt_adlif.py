@@ -101,9 +101,11 @@ class AMTTests(unittest.TestCase):
                 AMTSEAdLIF(config(mix_rho_fast=fast, mix_rho_slow=slow))
 
     def test_three_dataset_three_seed_matched_baseline_and_new_paths(self):
-        with patch.object(runner, 'RUN_LOGDIR', 'results/experiments/amt_v1'):
-            plan = runner.build_plan('AMT_SE_adLIF')
-            mt = runner.build_plan('MT_SE_adLIF')
+        with tempfile.TemporaryDirectory(dir=runner.ROOT / 'results') as temporary:
+            output = Path(temporary).relative_to(runner.ROOT).as_posix()
+            with patch.object(runner, 'RUN_LOGDIR', output):
+                plan = runner.build_plan('AMT_SE_adLIF')
+                mt = runner.build_plan('MT_SE_adLIF')
         self.assertEqual(len(plan), 9)
         self.assertEqual({p['seed'] for p in plan}, {42, 123, 456})
         for new, old in zip(plan, mt):

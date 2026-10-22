@@ -128,6 +128,20 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                 if model == "MR_SE_adLIF":
                     overrides.append(f"adaptation_update_interval={adaptation_update_interval}")
                 cfg = compose(config_name="main", overrides=overrides)
+                from models.pl_module import validate_training_objective
+                objective = validate_training_objective(cfg)
+                if objective != 'classification':
+                    # An auxiliary training loss is an explicit protocol change,
+                    # even though inference, supervised aggregation and budget match.
+                    cfg.evaluation_protocol = f'{dataset_protocol_name(dataset)}_{objective}'
+                    deviations = list(cfg.paper_baseline_deviations) + [
+                        f'training_objective={objective}',
+                        f'temporal_consistency.weight={cfg.temporal_consistency.weight}',
+                        f'temporal_consistency.window={cfg.temporal_consistency.window}',
+                    ]
+                    cfg.paper_baseline_deviations = deviations
+                    overrides += [f'++evaluation_protocol={cfg.evaluation_protocol}',
+                                  f'++paper_baseline_deviations={json.dumps(deviations)}']
                 resolved = portable_config(OmegaConf.to_container(cfg, resolve=True), ROOT)
                 # Validate model registry, architecture and temporal aggregation
                 # before launching any expensive training subprocess.

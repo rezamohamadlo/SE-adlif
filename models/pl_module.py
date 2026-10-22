@@ -35,6 +35,26 @@ layer_map = {
 }
 
 
+def validate_training_objective(cfg):
+    """Keep objective variants explicit while preserving ordinary model defaults."""
+    objective = cfg.get('training_objective', 'classification')
+    if objective == 'classification':
+        return objective
+    if objective == 'mt_temporal_consistency_v1':
+        from models.ours.mt_consistency import validate_consistency_config
+        validate_consistency_config(cfg)
+        return objective
+    raise ValueError(f'Unknown training objective: {objective}')
+
+
+def build_training_model(cfg, default_class=None):
+    objective = validate_training_objective(cfg)
+    if objective == 'mt_temporal_consistency_v1':
+        from models.ours.mt_consistency import MTConsistencyMLPSNN
+        return MTConsistencyMLPSNN(cfg)
+    return (default_class or MLPSNN)(cfg)
+
+
 def aggregate_temporal_outputs(
     outputs: torch.Tensor,
     block_idx: torch.Tensor,

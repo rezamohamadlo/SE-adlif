@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - ECG_MT_SE_adLIF_2layer
+  - /comparison/ECG
+  - _self_
+
+exp_name: ECG_MT_TC_SE_adLIF_2layer
+training_objective: mt_temporal_consistency_v1
+temporal_consistency:
+  weight: 0.1
+  window: 5
+run_test: true
