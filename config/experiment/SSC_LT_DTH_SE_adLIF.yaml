@@ -1,0 +1,15 @@
+# @package _global_
+defaults:
+  - SSC_DTH_SE_adLIF
+  - /comparison/SSC
+  - _self_
+
+exp_name: SSC_LT_DTH_SE_adLIF
+l1:
+  cell: lt_dth_se_adlif
+  trace_rho_fast_range: [0.5, 0.98]
+  trace_rho_slow_range: [0.985, 0.9995]
+l2:
+  cell: lt_dth_se_adlif
+  trace_rho_fast_range: [0.5, 0.98]
+  trace_rho_slow_range: [0.985, 0.9995]
