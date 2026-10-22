@@ -1,0 +1,23 @@
+# @package _global_
+defaults:
+  - ECG_MT_SE_adLIF_2layer
+  - /comparison/ECG
+  - _self_
+
+exp_name: ECG_MT_consistency_2layer
+evaluation_protocol: mt_temporal_consistency_v1
+paper_baseline_deviations:
+  - model_variant=MT_SE_adLIF
+  - training_only_temporal_js_weight=${temporal_consistency.weight}_window=${temporal_consistency.window}
+temporal_consistency:
+  weight: 0.1
+  window: 5
+run_test: false
+logdir: results/experiments/mt_consistency_v1/ECG/seed_${random_seed}
+hydra:
+  output_subdir: null
+  run:
+    dir: ${mt_tc_repo:${logdir}}
+  sweep:
+    dir: ${mt_tc_repo:results/experiments/mt_consistency_v1/ECG}
+    subdir: seed_${random_seed}
