@@ -1,26 +1,26 @@
 # Paper versus local reference
 
-Snapshot: 21 October 2026. Reference test accuracy is reported separately by dataset. All three datasets use three local training seeds (42, 123, 456). Differences are local minus published rounded paper means, using unrounded local metrics. The three ECG reference runs are accepted historical evidence under the reporting agreement, with unmatched stopping/budget disclosed.
+Snapshot: 21 October 2026. Reference test accuracy is reported separately by dataset. All three datasets use three local training seeds (42, 123, 456). Δ paper = local minus the published rounded paper mean, in percentage points (pp), using unrounded local metrics; differences appear in parentheses after local accuracy. Per-seed deltas compare each run with the paper mean; aggregate deltas compare means. The three ECG reference runs are accepted historical evidence under the reporting agreement, with unmatched stopping/budget disclosed.
 
-| Dataset | Paper mean ± SD | Reference mean ± sample SD | Difference (pp) | Baseline compatibility |
-| --- | ---: | ---: | ---: | --- |
-| SHD* | 93.79 ± 0.76 | 93.15 ± 0.42 | -0.64 | Matched saved settings |
-| SSC (mean loss) | 80.44 +/- 0.26 (n=5) | 80.47 +/- 0.20 (n=3) | +0.03 | Released-code mean loss; original diagnostic provenance retained |
-| ECG | 88.18 ± 0.36 | 88.32 ± 0.35 | +0.14 | Accepted historical; unmatched budget/stopping, descriptive only |
+| Dataset | Reference mean ± sample SD (Δ paper) | Paper mean ± SD | Baseline compatibility |
+|---|---:|---:|---|
+| SHD* | 93.15 ± 0.42 (-0.64 pp) | 93.79 ± 0.76 | Matched saved settings |
+| SSC (mean loss) | 80.47 +/- 0.20 (n=3) (+0.03 pp) | 80.44 +/- 0.26 (n=5) | Released-code mean loss; original diagnostic provenance retained |
+| ECG | 88.32 ± 0.35 (+0.14 pp) | 88.18 ± 0.36 | Accepted historical; unmatched budget/stopping, descriptive only |
 
-| Dataset | Seed 42 | Seed 123 | Seed 456 | Evidence |
+| Dataset | Seed 42 (Δ paper) | Seed 123 (Δ paper) | Seed 456 (Δ paper) | Evidence |
 |---|---:|---:|---:|---|
-| SHD* | 92.93 | 92.89 | 93.64 | [Canonical results](../results/valid/reference/SHD/REFERENCE_RESULTS.json) |
-| SSC (mean loss) | 80.69 | 80.33 | 80.38 | [Three-seed reference aggregate](../results/valid/reference/SSC/REFERENCE_RESULTS.json) |
-| ECG | 88.13 | 88.72 | 88.11 | [Seed 42 metrics](../results/valid/reference/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv) / [Seed 123 metrics](../results/valid/reference/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv) / [Seed 456 metrics](../results/valid/reference/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv) |
+| SHD* | 92.93 (-0.86 pp) | 92.89 (-0.90 pp) | 93.64 (-0.15 pp) | [Canonical results](../results/valid/reference/SHD/REFERENCE_RESULTS.json) |
+| SSC (mean loss) | 80.69 (+0.25 pp) | 80.33 (-0.11 pp) | 80.38 (-0.06 pp) | [Three-seed reference aggregate](../results/valid/reference/SSC/REFERENCE_RESULTS.json) |
+| ECG | 88.13 (-0.05 pp) | 88.72 (+0.54 pp) | 88.11 (-0.07 pp) | [Seed 42 metrics](../results/valid/reference/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv) / [Seed 123 metrics](../results/valid/reference/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv) / [Seed 456 metrics](../results/valid/reference/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv) |
 
 ## Published paper versus measured local reference: spikes and dense computation
 
-| Dataset | Paper hidden spikes/sample | Local reference hidden spikes/sample, mean and sample SD | Paper dense GFLOPs/sample | Local reference dense GFLOPs/test sample |
-|---|---|---:|---|---:|
-| SHD* | Not reported | 10,366 ± 726 | Not reported | 0.242895 |
-| SSC (mean loss) | Not reported | 45,301 +/- 1,640 | Not reported | 1.008720 +/- 0.000000 |
-| ECG | Not reported | 26,000 ± 2,013 | Not reported | 0.011053 |
+| Dataset | Local reference hidden spikes/sample, mean and sample SD | Paper hidden spikes/sample | Local reference dense GFLOPs/test sample | Paper dense GFLOPs/sample |
+|---|---:|---|---:|---|
+| SHD* | 10,366 ± 726 | Not reported | 0.242895 | Not reported |
+| SSC (mean loss) | 45,301 +/- 1,640 | Not reported | 1.008720 +/- 0.000000 | Not reported |
+| ECG | 26,000 ± 2,013 | Not reported | 0.011053 | Not reported |
 
 Not reported means the classification metric is absent from the paper; it does not mean zero. Local spike measurements sum L1 and L2 across each stored sequence, including preprocessing minimum padding and burn-in, excluding additional batch padding. Dense GFLOPs use the actual batch-padded official test lengths and count matrix operations only. Local results use three training seeds; the ECG training-setting mismatch remains. The paper's audio-compression spike rates are not used as classification values. Broader arithmetic/logical estimates and measurement evidence appear below.
 
@@ -74,11 +74,11 @@ The [SHD* fidelity investigation](../docs/audits/shd-reproduction-audit-2026-10-
 
 ## Active SSC mean-loss reference - three seeds
 
-| Model | Seed 42 test (%) | Seed 123 test (%) | Seed 456 test (%) | n | Mean +/- sample SD (%) |
+| Model | Seed 42 test (%, Δ paper) | Seed 123 test (%, Δ paper) | Seed 456 test (%, Δ paper) | n | Mean +/- sample SD (%, Δ paper) |
 |---|---:|---:|---:|---:|---:|
-| Reference | 80.69 | 80.33 | 80.38 | 3 | 80.47 +/- 0.20 |
-| DTH | 80.46 | 79.84 | 79.56 | 3 | 79.95 +/- 0.46 |
-| MT | 80.01 | 79.98 | 80.23 | 3 | 80.07 +/- 0.14 |
+| Reference | 80.69 (+0.25 pp) | 80.33 (-0.11 pp) | 80.38 (-0.06 pp) | 3 | 80.47 +/- 0.20 (+0.03 pp) |
+| DTH | 80.46 (+0.02 pp) | 79.84 (-0.60 pp) | 79.56 (-0.88 pp) | 3 | 79.95 +/- 0.46 (-0.49 pp) |
+| MT | 80.01 (-0.43 pp) | 79.98 (-0.46 pp) | 80.23 (-0.21 pp) | 3 | 80.07 +/- 0.14 (-0.37 pp) |
 
 All nine runs completed 40 epochs with batch 256, LR 0.006, mean membrane-potential loss and no early stopping. Checkpoints were selected by validation accuracy. Reference seed 42 retains its diagnostic provenance; the comparison was planned after its test result was observed. Means and sample SD use independent training seeds 42, 123 and 456. No archived summed-loss results are included.
 

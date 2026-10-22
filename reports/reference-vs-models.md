@@ -4,20 +4,22 @@ SHD* records for DA, FP, LG-DTH, MR and MT-DTH are retained in [not_improved](..
 
 Snapshot: 20 October 2026. SHD* accuracy values were rechecked; existing cost measurements were not rerun. **8 models x 3 training seeds = 24 completed SHD* runs**, including the MT-DTH combination follow-up. The original seven-model suite is retained; MT-DTH was proposed after observing its results and is a disclosed follow-up, not a preregistered independent architecture comparison. Completed early-stopping results are kept separately below.
 
-| Model | Seed 42 test (%) | Seed 123 test (%) | Seed 456 test (%) | Matched completed / 3 | Mean Â± sample SD (%) |
+| Model | Seed 42 test (%, Δ paper) | Seed 123 test (%, Δ paper) | Seed 456 test (%, Δ paper) | Matched completed / 3 | Mean Â± sample SD (%, Δ paper) |
 |---|---:|---:|---:|---:|---:|
-| SE-adLIF reference | 92.93 | 92.89 | 93.64 | 3 / 3 | 93.15 Â± 0.42 |
-| DTH | 94.70 | 94.88 | 93.90 | 3 / 3 | 94.49 Â± 0.52 |
-| LG-DTH | 93.77 | 93.02 | 94.43 | 3 / 3 | 93.74 Â± 0.71 |
-| DA | 93.73 | 93.99 | 92.27 | 3 / 3 | 93.33 Â± 0.93 |
-| FP | 93.51 | 92.49 | 94.04 | 3 / 3 | 93.35 Â± 0.79 |
-| MR (K=2) | 94.04 | 93.95 | 93.68 | 3 / 3 | 93.89 Â± 0.18 |
-| MT | 94.88 | 94.52 | 94.43 | 3 / 3 | 94.61 Â± 0.23 |
-| MT-DTH | 93.82 | 93.55 | 93.86 | 3 / 3 | 93.74 Â± 0.17 |
+| SE-adLIF reference | 92.93 (-0.86 pp) | 92.89 (-0.90 pp) | 93.64 (-0.15 pp) | 3 / 3 | 93.15 Â± 0.42 (-0.64 pp) |
+| DTH | 94.70 (+0.91 pp) | 94.88 (+1.09 pp) | 93.90 (+0.11 pp) | 3 / 3 | 94.49 Â± 0.52 (+0.70 pp) |
+| LG-DTH | 93.77 (-0.02 pp) | 93.02 (-0.77 pp) | 94.43 (+0.64 pp) | 3 / 3 | 93.74 Â± 0.71 (-0.05 pp) |
+| DA | 93.73 (-0.06 pp) | 93.99 (+0.20 pp) | 92.27 (-1.52 pp) | 3 / 3 | 93.33 Â± 0.93 (-0.46 pp) |
+| FP | 93.51 (-0.28 pp) | 92.49 (-1.30 pp) | 94.04 (+0.25 pp) | 3 / 3 | 93.35 Â± 0.79 (-0.44 pp) |
+| MR (K=2) | 94.04 (+0.25 pp) | 93.95 (+0.16 pp) | 93.68 (-0.11 pp) | 3 / 3 | 93.89 Â± 0.18 (+0.10 pp) |
+| MT | 94.88 (+1.09 pp) | 94.52 (+0.73 pp) | 94.43 (+0.64 pp) | 3 / 3 | 94.61 Â± 0.23 (+0.82 pp) |
+| MT-DTH | 93.82 (+0.03 pp) | 93.55 (-0.24 pp) | 93.86 (+0.07 pp) | 3 / 3 | 93.74 Â± 0.17 (-0.05 pp) |
+
+Δ paper = local accuracy minus the published rounded paper mean, in percentage points (pp), using unrounded local metrics. Per-seed differences compare an individual run with the paper mean; mean differences compare the local mean with the paper mean. No difference is a significance test.
 
 Means and sample SDs use only the completed matched seeds shown in each row. All rows have n=3. No repeated seed is counted as an independent training seed.
 
-| Model | Mean difference from reference over matching seeds (pp) | Mean difference from paper SHD* (93.79%, pp) |
+| Model | Mean difference from reference over matching seeds (pp) | Δ paper SHD* (93.79%, pp) |
 |---|---:|---:|
 | DTH | +1.34 | +0.70 |
 | LG-DTH | +0.59 | -0.05 |
@@ -138,11 +140,11 @@ All three fresh runs completed 300 epochs with batch 256, early stopping disable
 
 ## SSC mean-loss results
 
-| Model | Seed 42 test (%) | Seed 123 test (%) | Seed 456 test (%) | n | Mean +/- sample SD (%) |
+| Model | Seed 42 test (%, Δ paper) | Seed 123 test (%, Δ paper) | Seed 456 test (%, Δ paper) | n | Mean +/- sample SD (%, Δ paper) |
 |---|---:|---:|---:|---:|---:|
-| Reference | 80.69 | 80.33 | 80.38 | 3 | 80.47 +/- 0.20 |
-| DTH | 80.46 | 79.84 | 79.56 | 3 | 79.95 +/- 0.46 |
-| MT | 80.01 | 79.98 | 80.23 | 3 | 80.07 +/- 0.14 |
+| Reference | 80.69 (+0.25 pp) | 80.33 (-0.11 pp) | 80.38 (-0.06 pp) | 3 | 80.47 +/- 0.20 (+0.03 pp) |
+| DTH | 80.46 (+0.02 pp) | 79.84 (-0.60 pp) | 79.56 (-0.88 pp) | 3 | 79.95 +/- 0.46 (-0.49 pp) |
+| MT | 80.01 (-0.43 pp) | 79.98 (-0.46 pp) | 80.23 (-0.21 pp) | 3 | 80.07 +/- 0.14 (-0.37 pp) |
 
 All nine runs completed 40 epochs with batch 256, LR 0.006, mean membrane-potential loss and no early stopping. Checkpoints were selected by validation accuracy. Reference seed 42 retains its diagnostic provenance; the comparison was planned after its test result was observed. Means and sample SD use independent training seeds 42, 123 and 456. No archived summed-loss results are included.
 
@@ -150,11 +152,11 @@ Matching-seed mean test differences from reference, calculated before rounding: 
 
 ## ECG results - accepted historical reference
 
-| Model | Seed 42 test (%) | Seed 123 test (%) | Seed 456 test (%) | n | Mean +/- sample SD (%) |
+| Model | Seed 42 test (%, Δ paper) | Seed 123 test (%, Δ paper) | Seed 456 test (%, Δ paper) | n | Mean +/- sample SD (%, Δ paper) |
 |---|---:|---:|---:|---:|---:|
-| Reference* | 88.13 | 88.72 | 88.11 | 3 | 88.32 +/- 0.35 |
-| DTH | 87.81 | 87.81 | 87.27 | 3 | 87.63 +/- 0.31 |
-| MT | 87.26 | 88.19 | 87.98 | 3 | 87.81 +/- 0.49 |
+| Reference* | 88.13 (-0.05 pp) | 88.72 (+0.54 pp) | 88.11 (-0.07 pp) | 3 | 88.32 +/- 0.35 (+0.14 pp) |
+| DTH | 87.81 (-0.37 pp) | 87.81 (-0.37 pp) | 87.27 (-0.91 pp) | 3 | 87.63 +/- 0.31 (-0.55 pp) |
+| MT | 87.26 (-0.92 pp) | 88.19 (+0.01 pp) | 87.98 (-0.20 pp) | 3 | 87.81 +/- 0.49 (-0.37 pp) |
 
 *Reference seed 42 completed 383 epochs; seeds 123/456 enabled early stopping and completed 283/185 epochs. DTH/MT all completed 400 epochs with early stopping disabled. Validation fraction 0.05 and split seed 42 are shared. All three model rows are accepted evidence, but cross-model ECG differences are descriptive because budgets/stopping differ. No reference retraining is required under this reporting agreement. Original configs and metadata remain unchanged.
 

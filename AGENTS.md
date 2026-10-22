@@ -196,6 +196,22 @@ allowed.
 
 ## Evidence and result reporting
 
+- In all current reports and newly generated comparison tables, wherever local
+  results are compared with a numeric paper baseline, append `(Δ paper)` to
+  each applicable local metric column heading and a signed difference in
+  parentheses after each local value, e.g. `94.49 ± 0.52 (+0.70 pp)`.
+  Define Δ paper once per report as local minus paper, with explicit units.
+  Accuracy differences use percentage points and unrounded local metrics
+  against the published paper mean; compare means with means and clearly
+  label any per-seed comparisons to the paper mean. Do not subtract SDs or
+  annotate seed IDs, run counts, or the paper's own baseline with a delta.
+  For other comparable metrics use their native units; differences against
+  rounded paper counts must be marked approximate and identify the rounded
+  baseline. Missing, unreported or incompatible paper values have no numeric
+  delta. Preserve historical archives and provenance records; apply this
+  presentation rule to current reports and future generated reports without
+  rewriting historical evidence. Retain protocol and significance caveats.
+
 - Verify results against `metrics.csv`, `TEST_RESULTS.json`, verified
   `RESULT.json` records where present, saved configs and checkpoint metadata.
   `TRAINING_SUMMARY.md` can lag during training or contain historical text.
