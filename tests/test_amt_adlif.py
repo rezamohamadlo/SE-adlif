@@ -122,21 +122,21 @@ class AMTTests(unittest.TestCase):
     def test_configs_portable_to_other_checkout_and_working_directory(self):
         original_cwd = Path.cwd()
         with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary) / 'checkout'
+            root = Path(temporary).resolve() / 'checkout'
             shutil.copytree(runner.ROOT / 'config', root / 'config')
             hydra_cwd = Path(temporary) / 'hydra_job'
             hydra_cwd.mkdir()
             try:
                 os.chdir(hydra_cwd)
                 with patch.object(runner, 'ROOT', root), patch.object(
-                        runner, 'RUN_LOGDIR', 'results/experiments/amt_v1'):
+                        runner, 'RUN_LOGDIR', 'results/experiments/amt_portability_test'):
                     plan = runner.build_plan('AMT_SE_adLIF')
             finally:
                 os.chdir(original_cwd)
         self.assertEqual(len(plan), 9)
         for item in plan:
             self.assertTrue(item['directory'].is_relative_to(root))
-            self.assertTrue(item['config']['logdir'].startswith('results/experiments/amt_v1/'))
+            self.assertTrue(item['config']['logdir'].startswith('results/experiments/amt_portability_test/'))
 
 
 if __name__ == '__main__':

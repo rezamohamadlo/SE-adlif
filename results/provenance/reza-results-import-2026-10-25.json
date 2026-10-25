@@ -1,0 +1,1181 @@
+{
+  "version": "verified_results_import_v1",
+  "created_utc": "2026-10-25T04:02:06.606422+00:00",
+  "source_root": "F:\\reza",
+  "source_retained": true,
+  "training_launched": false,
+  "path_aliases": {
+    "results/experiments/mt_tc_v1": "results/experiments/mt_consistency_runner_v1",
+    "results/experiments/lt_dth_v1": "results/not_improved"
+  },
+  "runs": [
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "dataset": "SHD",
+      "seed": 42,
+      "source_directory": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_42",
+      "destination_directory": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42",
+      "test_accuracy": 0.9465547800064087,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "paper_classification_v1",
+      "checkpoint": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/ckpt/epoch=223-step=5600.ckpt",
+      "checkpoint_sha256": "455bb8ea256b2517bf0218e9e539ee32cafda43966e0027fc276538bf960ef04"
+    },
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "dataset": "SHD",
+      "seed": 123,
+      "source_directory": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_123",
+      "destination_directory": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123",
+      "test_accuracy": 0.9341872930526733,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "paper_classification_v1",
+      "checkpoint": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/ckpt/epoch=253-step=6350.ckpt",
+      "checkpoint_sha256": "06a6e61e6d2654a9ecda4eef5e2594f1960c7e9c0307c1f267b94b08c9aefa6e"
+    },
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "dataset": "SHD",
+      "seed": 456,
+      "source_directory": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_456",
+      "destination_directory": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456",
+      "test_accuracy": 0.9386042356491089,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "paper_classification_v1",
+      "checkpoint": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/ckpt/epoch=192-step=4825.ckpt",
+      "checkpoint_sha256": "15d2ecea89a3e382878be6515435d9b6e5eb4ee1107ccdfec6eb7f6a5b7bda19"
+    },
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "dataset": "SSC",
+      "seed": 42,
+      "source_directory": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_42",
+      "destination_directory": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42",
+      "test_accuracy": 0.7994799613952637,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "ssc_mean_loss_v1",
+      "checkpoint": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/ckpt/epoch=16-step=4998.ckpt",
+      "checkpoint_sha256": "97d1c43cbc08b3bc13332fd4cf54b82ecd17997e0d5a10f3f5d2d6f562298839"
+    },
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "dataset": "SSC",
+      "seed": 123,
+      "source_directory": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_123",
+      "destination_directory": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123",
+      "test_accuracy": 0.802521824836731,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "ssc_mean_loss_v1",
+      "checkpoint": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/ckpt/epoch=20-step=6174.ckpt",
+      "checkpoint_sha256": "03764c25684114ce64480c022b3617b52f423e363e9fede2e88f5452912e8617"
+    },
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "dataset": "SSC",
+      "seed": 456,
+      "source_directory": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_456",
+      "destination_directory": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456",
+      "test_accuracy": 0.8031105995178223,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "ssc_mean_loss_v1",
+      "checkpoint": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/ckpt/epoch=24-step=7350.ckpt",
+      "checkpoint_sha256": "0a927072b3a0b5e3d9fb72d99799276eee01bc09adf1626cb68fd5c4f6e2d78f"
+    },
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 42,
+      "source_directory": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_42",
+      "destination_directory": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42",
+      "test_accuracy": 0.8832812905311584,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "paper_classification_v1",
+      "checkpoint": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/ckpt/epoch=249-step=2250.ckpt",
+      "checkpoint_sha256": "47bea41b0d1b30efede00afe2f05382204c9d91e227b4c708c37318e9e117c33"
+    },
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 123,
+      "source_directory": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_123",
+      "destination_directory": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123",
+      "test_accuracy": 0.8711302280426025,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "paper_classification_v1",
+      "checkpoint": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/ckpt/epoch=324-step=2925.ckpt",
+      "checkpoint_sha256": "ed89b4bac1fdacf7d19fa3cb2aa8a9af75fa53e7a9840c0b3610b59eb492caac"
+    },
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 456,
+      "source_directory": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_456",
+      "destination_directory": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456",
+      "test_accuracy": 0.8757638931274414,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "paper_classification_v1",
+      "checkpoint": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/ckpt/epoch=321-step=2898.ckpt",
+      "checkpoint_sha256": "3bf9662f497047ee555ed42f64843a40b26911c925cb8a8ae596c969a4f92036"
+    },
+    {
+      "model": "MT_TC_SE_adLIF",
+      "dataset": "SHD",
+      "seed": 42,
+      "source_directory": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SHD\\seed_42",
+      "destination_directory": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42",
+      "test_accuracy": 0.9474381804466248,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "paper_classification_v1_mt_temporal_consistency_v1",
+      "checkpoint": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/ckpt/epoch=232-step=5825.ckpt",
+      "checkpoint_sha256": "4d84f9093e5dcb541d2013ca448988ddf032a04641f43a0202fbe448de633b64"
+    },
+    {
+      "model": "MT_TC_SE_adLIF",
+      "dataset": "SSC",
+      "seed": 42,
+      "source_directory": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SSC\\seed_42",
+      "destination_directory": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42",
+      "test_accuracy": 0.8011971116065979,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "ssc_mean_loss_v1_mt_temporal_consistency_v1",
+      "checkpoint": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/ckpt/epoch=16-step=4998.ckpt",
+      "checkpoint_sha256": "4ba69a9caf0d5b25e58c37383464d0ad282eeef1500156dcb821437bfe70511d"
+    },
+    {
+      "model": "MT_TC_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 42,
+      "source_directory": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\ECG\\seed_42",
+      "destination_directory": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42",
+      "test_accuracy": 0.877829909324646,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "paper_classification_v1_mt_temporal_consistency_v1",
+      "checkpoint": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/ckpt/epoch=288-step=2601.ckpt",
+      "checkpoint_sha256": "47b748ec912d74a21033dbbce53e3c3f647150bd1dbf277c4ab735b87dc59235"
+    }
+  ],
+  "files": [
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_42\\.evaluation.lock",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/.evaluation.lock",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_42\\completed.txt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/completed.txt",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_42\\COST_RESULTS.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/COST_RESULTS.json",
+      "bytes": 15320,
+      "sha256": "77619ad0615c998ca5c4e178eb95d3e50d19671d6dc272f85f52b03178e57571"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_42\\COST_RESULTS.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/COST_RESULTS.md",
+      "bytes": 926,
+      "sha256": "269d4550698bc543744096175cc2b4a3bd7bcb37d1766e80822966c1f3efb543"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_42\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/FULL_RUN_CONFIG.json",
+      "bytes": 5369,
+      "sha256": "15f933f64c0aea59dbe79f4859d518a854e2a1f42315f4d0aa02669cbd797712"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_42\\out.log",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/out.log",
+      "bytes": 160,
+      "sha256": "3b7813a39af83cc116cea37ae79869ac0c38576ad956a36b0804139cc6e936f7"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_42\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/TRAINING_SUMMARY.md",
+      "bytes": 3872,
+      "sha256": "0c72bdd7e8049af115007dd7b9d291df8d7958ca3b015412c68aab57d10180b5"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_42\\.hydra\\config.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/.hydra/config.yaml",
+      "bytes": 4120,
+      "sha256": "be43ad9be258cdfee7b9e0dba596c9ff77edc7f7d77639d12591517cc8f94f17"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_42\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/.hydra/hydra.yaml",
+      "bytes": 4281,
+      "sha256": "b84cbee8327d27eb75ec8cc355a2fa148b17e5f8689cb9136eac8bb27ef752b2"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_42\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/.hydra/overrides.yaml",
+      "bytes": 479,
+      "sha256": "1896adf3b312fe33986624cf82d81be4c65017b4f2d2b5be1d38e43faa9ffb28"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_42\\ckpt\\epoch=223-step=5600.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/ckpt/epoch=223-step=5600.ckpt",
+      "bytes": 5482946,
+      "sha256": "455bb8ea256b2517bf0218e9e539ee32cafda43966e0027fc276538bf960ef04"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_42\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/ckpt/last.ckpt",
+      "bytes": 5483010,
+      "sha256": "fd952722a658a130a4792209da29cc1d67af9b678ad1002a6272fe41967b03cb"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_42\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4530,
+      "sha256": "91fda485edf3a63565e2b4afca7a6176c5de888dec1db7ecdf28072f020c340c"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_42\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 44223,
+      "sha256": "a6d3194524de8b9ddd6877e152893b2f89df01756bbd4bbd945907351339a588"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_123\\.evaluation.lock",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/.evaluation.lock",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_123\\completed.txt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/completed.txt",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_123\\COST_RESULTS.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/COST_RESULTS.json",
+      "bytes": 15264,
+      "sha256": "b7f23cd5c3a25139da705ef6cf01959e62b983c91d67aa9029e4eba63a98074f"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_123\\COST_RESULTS.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/COST_RESULTS.md",
+      "bytes": 927,
+      "sha256": "d315cc4791c4d74dc6acdedfe2c1a9f596f5d8ed363fe805545466e6fcbfa41e"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_123\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/FULL_RUN_CONFIG.json",
+      "bytes": 5371,
+      "sha256": "313f2640c83e4c17e2784833b15aa7456e4799a05fb04e1af280af6f14f4a2c0"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_123\\out.log",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/out.log",
+      "bytes": 121,
+      "sha256": "de588a004ffa32bb0da5615962cb5d406ceade5d794404eb44f55a0bc14513e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_123\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/TRAINING_SUMMARY.md",
+      "bytes": 3876,
+      "sha256": "3aad70e99ec4a91bccc817f0c9f3cfdc96e6f23936eaa5a2ab17b129021ed0a9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_123\\.hydra\\config.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/.hydra/config.yaml",
+      "bytes": 4054,
+      "sha256": "590e981a16744112c8e5137615ac5167577761b831281eb02dcf6e1dfc95ff8b"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_123\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/.hydra/hydra.yaml",
+      "bytes": 4111,
+      "sha256": "75d03fcb3c733ac76b095775827a97121aa3164c3f62a0997a1b94a67986710f"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_123\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/.hydra/overrides.yaml",
+      "bytes": 393,
+      "sha256": "2990b2903ca66b1e47ebc4898ccf8ef31db28c18264b4038425e0d62925c4d75"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_123\\ckpt\\epoch=253-step=6350.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/ckpt/epoch=253-step=6350.ckpt",
+      "bytes": 5482626,
+      "sha256": "06a6e61e6d2654a9ecda4eef5e2594f1960c7e9c0307c1f267b94b08c9aefa6e"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_123\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/ckpt/last.ckpt",
+      "bytes": 5482626,
+      "sha256": "1ac5788043c582061853be2010e55a2ae0005ed3b378af94790679c7b9c64ae4"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_123\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4464,
+      "sha256": "5ec498a555b71984437d868e6fff14ae2c5354e9be6e5409677c1959990529a8"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_123\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 45192,
+      "sha256": "674d5c4c44884101329cb8bfebc822d5dc5663063b24c719f57064f650cbcfd5"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_456\\.evaluation.lock",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/.evaluation.lock",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_456\\completed.txt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/completed.txt",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_456\\COST_RESULTS.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/COST_RESULTS.json",
+      "bytes": 15261,
+      "sha256": "0d2efede7f85cf06835d170d2d491fd3c0e84bec601e1ca2e7f2aff43f58a330"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_456\\COST_RESULTS.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/COST_RESULTS.md",
+      "bytes": 925,
+      "sha256": "4c51006675a66350d36cf879591a8f62704da2a2056481d5f3d8612a6580130d"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_456\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/FULL_RUN_CONFIG.json",
+      "bytes": 5371,
+      "sha256": "dc935a4a782dc13c657241b1b36123a07e7d9c4b3469650b326d780b51acf7df"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_456\\out.log",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/out.log",
+      "bytes": 121,
+      "sha256": "a578fc92ee44b5c150ecc90fb36965a15d902218e7dc21c1ce4cb0386797f859"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_456\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/TRAINING_SUMMARY.md",
+      "bytes": 3874,
+      "sha256": "058f47de816bca7bcb228ffabc8f1c1ae006bea79da3274a23e07668d4b49e28"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_456\\.hydra\\config.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/.hydra/config.yaml",
+      "bytes": 4054,
+      "sha256": "f05e8e62cdba7a96175bc30ba157770ad81c64cea3683440378b29e4426ae113"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_456\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/.hydra/hydra.yaml",
+      "bytes": 4111,
+      "sha256": "c843b3c3e3793e7535601e97678606701b107bff66f6a9a00d103e1d7112e0aa"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_456\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/.hydra/overrides.yaml",
+      "bytes": 393,
+      "sha256": "3258195b381ac53d9654cb255ebfc2ed59deca75c068a275acf593872ad1964f"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_456\\ckpt\\epoch=192-step=4825.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/ckpt/epoch=192-step=4825.ckpt",
+      "bytes": 5482626,
+      "sha256": "15d2ecea89a3e382878be6515435d9b6e5eb4ee1107ccdfec6eb7f6a5b7bda19"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_456\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/ckpt/last.ckpt",
+      "bytes": 5482626,
+      "sha256": "8742fee2067cb1ec81c171a6abd79a1fb31a491d293165a94230c1abb951cff2"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_456\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4464,
+      "sha256": "8cb124cd26e3fca0aa5fcc787b35cb0dd817baf7582f4e681e7ac2caaa1c8b99"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SHD\\seed_456\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 45128,
+      "sha256": "77cd9c33ce13403c114440bb366186902b17d841edc2722c3b0d6e26436e3beb"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_42\\.evaluation.lock",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/.evaluation.lock",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_42\\completed.txt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/completed.txt",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_42\\COST_RESULTS.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/COST_RESULTS.json",
+      "bytes": 15222,
+      "sha256": "f8f48cad10deb23a5ffcd5f983fefd50e74296b15e485fe5f554b670ec28e3fd"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_42\\COST_RESULTS.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/COST_RESULTS.md",
+      "bytes": 932,
+      "sha256": "466a013032046478f6784fc3c93867c3121c847ff2263afff33b846ba1ec5c7f"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_42\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/FULL_RUN_CONFIG.json",
+      "bytes": 5301,
+      "sha256": "41ddd5ff6adc6be4ab64b1090e81ffdd55c5776787084566b0c2778b6d76e31f"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_42\\out.log",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/out.log",
+      "bytes": 121,
+      "sha256": "228faedd247d4bf6c67af963c2696d08f96a352b8c19d2f9bb003e73a155d296"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_42\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/TRAINING_SUMMARY.md",
+      "bytes": 3880,
+      "sha256": "1d67b8a1ebae92a13e8ed7c1666aebae3e8ffe490f045c83e12f6bd1f906ce00"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_42\\.hydra\\config.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/.hydra/config.yaml",
+      "bytes": 4001,
+      "sha256": "53716495ce0ef6f8106ca8ed5c3015d47fa06fcb91de56727ed75ab0efdbc5c8"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_42\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/.hydra/hydra.yaml",
+      "bytes": 4448,
+      "sha256": "af335cce2f8a64a2fdb815f0901ff61e8b338ffcc2cd8a1d552cd42de23e8d16"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_42\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/.hydra/overrides.yaml",
+      "bytes": 558,
+      "sha256": "3d26bd4f4b5a6bc14f4ad2c3c5c99e1b9aba9809000f2c335633ab6741d67930"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_42\\ckpt\\epoch=16-step=4998.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/ckpt/epoch=16-step=4998.ckpt",
+      "bytes": 20355714,
+      "sha256": "97d1c43cbc08b3bc13332fd4cf54b82ecd17997e0d5a10f3f5d2d6f562298839"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_42\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/ckpt/last.ckpt",
+      "bytes": 20355714,
+      "sha256": "c575111007719e9539af8c43a91f7e4638b8feef143a7384de206bada0dbbd4f"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_42\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4405,
+      "sha256": "fe8cb55b8812d022e2b5fc3a79ba283a48004f89e1c7b6e3f848aacf790373cb"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_42\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 24942,
+      "sha256": "7aa91dc3fe18561251033025e5c7a5517b87ae0a479d6ea654b5a1c8092fdf02"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_123\\.evaluation.lock",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/.evaluation.lock",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_123\\completed.txt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/completed.txt",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_123\\COST_RESULTS.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/COST_RESULTS.json",
+      "bytes": 15224,
+      "sha256": "82b955e2ffe1886b7f08b7f8f0cb2f16e35ac358d2d2efeb2cccd66f2d3bf27d"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_123\\COST_RESULTS.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/COST_RESULTS.md",
+      "bytes": 932,
+      "sha256": "b8d905af741a8165cd3ed7f14c36b890455f901c6672309acc7a60246a626aa5"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_123\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/FULL_RUN_CONFIG.json",
+      "bytes": 5303,
+      "sha256": "6c570a30893973a3ef52a725036bd8359621c9e7b8ec6fe695a707efaee9b35a"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_123\\out.log",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/out.log",
+      "bytes": 120,
+      "sha256": "f945c60cd7432af649691fe66cd0b66e181b2241f98a40f21fbe85531aba9c8b"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_123\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/TRAINING_SUMMARY.md",
+      "bytes": 3883,
+      "sha256": "3c846f521e039d416382b7ec44f9b3ff68cea11936b897c3eb77c8c6e2411257"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_123\\.hydra\\config.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/.hydra/config.yaml",
+      "bytes": 4003,
+      "sha256": "27a1f766b27a91ca71bef9a3ec1c9f0e4a0130f1cc4dc44baa83437b7e0cd193"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_123\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/.hydra/hydra.yaml",
+      "bytes": 4455,
+      "sha256": "3be30105965d266b8513747e36f6cb93f2bafc564d3c489f7f1f19b6eec75eb5"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_123\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/.hydra/overrides.yaml",
+      "bytes": 560,
+      "sha256": "4b714d4ce8ae16a0da05a882ddc3792150b4668369e1c4a9c8f0d0957d5bb107"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_123\\ckpt\\epoch=20-step=6174.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/ckpt/epoch=20-step=6174.ckpt",
+      "bytes": 20355714,
+      "sha256": "03764c25684114ce64480c022b3617b52f423e363e9fede2e88f5452912e8617"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_123\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/ckpt/last.ckpt",
+      "bytes": 20355714,
+      "sha256": "14f8fcbc9800f08ae26c1e97f2b89320c3c06edaedca05bf0a76d2b37bfb0954"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_123\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4407,
+      "sha256": "7de1a1b38cd5b5fc908c7283e49ba3d3838afc6edf9d53d87c73d3cf986eea68"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_123\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 24899,
+      "sha256": "e3f4f367b38ddb6ab4928b76ceb62dc132bd41eb29029501a112ea5157d5238c"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_456\\.evaluation.lock",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/.evaluation.lock",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_456\\completed.txt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/completed.txt",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_456\\COST_RESULTS.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/COST_RESULTS.json",
+      "bytes": 15294,
+      "sha256": "ea6acc860ac7e5ac51039a3404525838bb6bbb2f0ea7c8626b6d42d231f04622"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_456\\COST_RESULTS.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/COST_RESULTS.md",
+      "bytes": 932,
+      "sha256": "65aa4e8b9c5dc161c730c3a2457d860fe03e1af70ff9559039368e29c6a3674b"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_456\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/FULL_RUN_CONFIG.json",
+      "bytes": 5303,
+      "sha256": "a9eefd407c019a193a2192a3653338164ff26c2aae94e9860b4b592d9f4c610c"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_456\\out.log",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/out.log",
+      "bytes": 159,
+      "sha256": "fc02f9ad5d751a0a98bdafa8d33c953dfffce36a789accd20b892c1b649e672f"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_456\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/TRAINING_SUMMARY.md",
+      "bytes": 3883,
+      "sha256": "5601a1ce26362d0bb1d57c60deb2f62ed2fae13d64fc4a6a12b4b376378f85d3"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_456\\.hydra\\config.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/.hydra/config.yaml",
+      "bytes": 4072,
+      "sha256": "e2055b8667d09bf82b52f248ac122c76fe48300afbe2a9ca73b9f301a59171b1"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_456\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/.hydra/hydra.yaml",
+      "bytes": 4634,
+      "sha256": "905ffeafcdc2e141767a6c77b8bf01a31452b4380732d06238ae143a3a97c7bc"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_456\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/.hydra/overrides.yaml",
+      "bytes": 649,
+      "sha256": "cb91114a2403b37b7515864c9690d60677fd4e6726c55229a32eb5c04eff9ee1"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_456\\ckpt\\epoch=24-step=7350.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/ckpt/epoch=24-step=7350.ckpt",
+      "bytes": 20356098,
+      "sha256": "0a927072b3a0b5e3d9fb72d99799276eee01bc09adf1626cb68fd5c4f6e2d78f"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_456\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/ckpt/last.ckpt",
+      "bytes": 20356098,
+      "sha256": "41e38dc2723c06fb778024cb563b865a53af2edd98e7d13f966bc4670f60498b"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_456\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4476,
+      "sha256": "cee0b37444ba042a06af8af36decf463403b59fc17785d4ed16141e06a93941c"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\SSC\\seed_456\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 25011,
+      "sha256": "a94073aab3c94fbf21c821ccbcc1dd98538618e01861849de56d8788bd454eff"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_42\\.evaluation.lock",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/.evaluation.lock",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_42\\completed.txt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/completed.txt",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_42\\COST_RESULTS.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/COST_RESULTS.json",
+      "bytes": 14923,
+      "sha256": "be19d7e5325c5ec711ec4b4a1a1b9d64031c9aaaf02aa4ad773b71e62a4c8f79"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_42\\COST_RESULTS.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/COST_RESULTS.md",
+      "bytes": 932,
+      "sha256": "8678138747ba6ca3e6181e4576e608216c597e41cf903bb1da95ad374de91a20"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_42\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/FULL_RUN_CONFIG.json",
+      "bytes": 5144,
+      "sha256": "2e95347bb83f902751cfeb55139ea34b3fd8053d5611dbf8d1f5910644495ea1"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_42\\out.log",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/out.log",
+      "bytes": 128,
+      "sha256": "1e7c03e2a7322480ec0fd1a1532019593fb5875a32ddb349b1b8e836edc739fd"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_42\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/TRAINING_SUMMARY.md",
+      "bytes": 3894,
+      "sha256": "5099389a2a5e31ef12298c0fcf8a2bd7185c8b065bb46aad5f4d762a02aa0844"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_42\\.hydra\\config.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/.hydra/config.yaml",
+      "bytes": 3864,
+      "sha256": "aa8f9c4c9200028fd1562580f94271927a4af51d5746de253f555231166b85cb"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_42\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/.hydra/hydra.yaml",
+      "bytes": 4125,
+      "sha256": "5cc4bcd3f2349605ae65625c551ff7bedab57b8e59e0e1df0ea7df790213bea6"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_42\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/.hydra/overrides.yaml",
+      "bytes": 398,
+      "sha256": "cb47549ae7dd19ccb5b860698f27d14aa93ce0eab30fc8cec675d5bf2fc2a083"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_42\\ckpt\\epoch=249-step=2250.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/ckpt/epoch=249-step=2250.ckpt",
+      "bytes": 126466,
+      "sha256": "47bea41b0d1b30efede00afe2f05382204c9d91e227b4c708c37318e9e117c33"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_42\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/ckpt/last.ckpt",
+      "bytes": 126466,
+      "sha256": "c7b4064ddbb0728e94b0e518dc4d7d6c789e2447aceebedd6133ac2249da62f5"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_42\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4260,
+      "sha256": "55b36c2032d86f691a7a0fac00358c65e62a2e58f41b141af8ffaebd57f79053"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_42\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 51554,
+      "sha256": "9df8f32760724258bdbb109f333b59eb8473c73451d283d28393373c961ea1b8"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_123\\.evaluation.lock",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/.evaluation.lock",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_123\\completed.txt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/completed.txt",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_123\\COST_RESULTS.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/COST_RESULTS.json",
+      "bytes": 14931,
+      "sha256": "83300e080d9737fa5a88e563bea158d84c34a8d6676c46a63e8c7dd976940e4b"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_123\\COST_RESULTS.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/COST_RESULTS.md",
+      "bytes": 932,
+      "sha256": "7fef4eca273989e959d3994cd81aff40d4f4870589e97be13c0bb171cc433952"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_123\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/FULL_RUN_CONFIG.json",
+      "bytes": 5146,
+      "sha256": "415786cd54e1013f8273e2789434509b7790bab9d90e85a73249ac167fd633b0"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_123\\out.log",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/out.log",
+      "bytes": 128,
+      "sha256": "e036dc628aaa8108ed498a59160c6872deefdfc5ec2edd2edef9ff499f45f8da"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_123\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/TRAINING_SUMMARY.md",
+      "bytes": 3897,
+      "sha256": "7abfd9bfee44ac463fb5ba5cb10dee3a3111fb30ff32f9a0d94d61afe43c1229"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_123\\.hydra\\config.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/.hydra/config.yaml",
+      "bytes": 3866,
+      "sha256": "e268508e3360646ae82271aa9d3efc3f2cdbea3487bc7a17e163395f4aab9cd1"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_123\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/.hydra/hydra.yaml",
+      "bytes": 4132,
+      "sha256": "87d04bd4cb2aa4de76f655820e98659552361216e64cb03eae75d41c4b123b3a"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_123\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/.hydra/overrides.yaml",
+      "bytes": 400,
+      "sha256": "97c1fc7d05d9ddda913789cd66d1915d16f06d88495d5f7ac7f5d2227acf2c54"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_123\\ckpt\\epoch=324-step=2925.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/ckpt/epoch=324-step=2925.ckpt",
+      "bytes": 126466,
+      "sha256": "ed89b4bac1fdacf7d19fa3cb2aa8a9af75fa53e7a9840c0b3610b59eb492caac"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_123\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/ckpt/last.ckpt",
+      "bytes": 126466,
+      "sha256": "be815fb6ca6396ef5dfed9ca8843550e3443f98f44c920184066bc350e825162"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_123\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4262,
+      "sha256": "e50aa04f4b7683fc1ae327202ad69ed77eab1d9dad8dbcc3767b2c9415b5c793"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_123\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 51554,
+      "sha256": "4a37673ce745fcb37bc3253b162b6aa14099f0cde9f0633ac65df4e6f536b1d4"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_456\\.evaluation.lock",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/.evaluation.lock",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_456\\completed.txt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/completed.txt",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_456\\COST_RESULTS.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/COST_RESULTS.json",
+      "bytes": 14929,
+      "sha256": "e5e94d1b6d5d6f739d25b099db2094783b85f6eca4934e97363fa1aafa6f3fba"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_456\\COST_RESULTS.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/COST_RESULTS.md",
+      "bytes": 931,
+      "sha256": "1b3e42eb0c3b68219abd4f471485d764a31c403b2fa2edbb028daf549a644d5e"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_456\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/FULL_RUN_CONFIG.json",
+      "bytes": 5146,
+      "sha256": "1d86126a494a6240372c80d9e40bfb54717f79316bb46f2420a9d7faa7a04fca"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_456\\out.log",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/out.log",
+      "bytes": 129,
+      "sha256": "b6a7407a466ed6024ecd1f31bf8ffb12236ce3cf23002781cb55378e1ce5cf5c"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_456\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/TRAINING_SUMMARY.md",
+      "bytes": 3896,
+      "sha256": "8c8d3027b1c16dce7f1b4be3fcd02f26df4879390b0a446b95acf11ac7481eaf"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_456\\.hydra\\config.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/.hydra/config.yaml",
+      "bytes": 3866,
+      "sha256": "6f6e7faefdea47e1d661caa173267291943b77f650cdb63f75a3e656bd5444a1"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_456\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/.hydra/hydra.yaml",
+      "bytes": 4132,
+      "sha256": "2df137e8f9852f1eea5003a317426bc02e2e6608b3132ba5998f3458fd2c0920"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_456\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/.hydra/overrides.yaml",
+      "bytes": 400,
+      "sha256": "d4cf69bfde48d0a57f867547259405b9405ae55c270c5217f73c52cfc1415420"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_456\\ckpt\\epoch=321-step=2898.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/ckpt/epoch=321-step=2898.ckpt",
+      "bytes": 126466,
+      "sha256": "3bf9662f497047ee555ed42f64843a40b26911c925cb8a8ae596c969a4f92036"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_456\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/ckpt/last.ckpt",
+      "bytes": 126466,
+      "sha256": "e61561a5efcfa77bdef6baab710e1ccd2055799077ac3e4de268ffd900e56773"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_456\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4262,
+      "sha256": "d7499145001eabaec76b1c333de3c05ca82d4d8dda33ef9ce6ef0f2f47a26163"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\ECG\\seed_456\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 51543,
+      "sha256": "5bea979bacd9bc27ed636aca31bc594cb7d2b04ff231e8192c7187bc9d824868"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\.evaluation.lock",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/.evaluation.lock",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\completed.txt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/completed.txt",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\COST_RESULTS.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/COST_RESULTS.json",
+      "bytes": 14861,
+      "sha256": "99d1b98736bf3d62284bfab0006ec4db508754e8bc6ab0be242428d1d47313aa"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\COST_RESULTS.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/COST_RESULTS.md",
+      "bytes": 927,
+      "sha256": "a3b205a3678931436faa516a8281c35c8cb8e7542fcfce5768a5e6c71e88ada3"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/FULL_RUN_CONFIG.json",
+      "bytes": 5263,
+      "sha256": "b9f27e4af8947e42bcc7d714d175c3231e5faac6ec091b1c6c3badcc194bc837"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\out.log",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/out.log",
+      "bytes": 231,
+      "sha256": "9a03f023bd1a3ecd18e796afcd7a6b1d064fa4685b5a479b2471cc477bdf1a61"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\TRAINING_SUMMARY.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/TRAINING_SUMMARY.md",
+      "bytes": 3869,
+      "sha256": "ed16d3a231f2f70cbc414e4686847a6f32bb38b4bc28b72f369fe36b21e5d596"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\.hydra\\config.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/.hydra/config.yaml",
+      "bytes": 4057,
+      "sha256": "969dd30285dfe76361cc55efcd366d46fe48426581f146695b1dec8b0822c676"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\.hydra\\hydra.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/.hydra/hydra.yaml",
+      "bytes": 4630,
+      "sha256": "609a919ae81e450f845225c9cc980a44b9d2709e78821837f3723225753c3713"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\.hydra\\overrides.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/.hydra/overrides.yaml",
+      "bytes": 731,
+      "sha256": "8a94d9432c3eea7fc2b4e5c81b73ae28992744e89ab739f909d05fd122a49143"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\ckpt\\epoch=232-step=5825.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/ckpt/epoch=232-step=5825.ckpt",
+      "bytes": 5484714,
+      "sha256": "4d84f9093e5dcb541d2013ca448988ddf032a04641f43a0202fbe448de633b64"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\ckpt\\last.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/ckpt/last.ckpt",
+      "bytes": 5484714,
+      "sha256": "77ba68afb9e9224ce905281c0acd38c48bb7b657246417404a78b9208af96e39"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4449,
+      "sha256": "83eb1bad16c31374d90d9c6485e236476d319ff1458652c35e38a12a1f1b3376"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 67599,
+      "sha256": "7487e1a7327df5aeb8bff0bcd6cde8d40b1dfab15535e74fb55510296d3561fb"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\.evaluation.lock",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/.evaluation.lock",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\completed.txt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/completed.txt",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\COST_RESULTS.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/COST_RESULTS.json",
+      "bytes": 14734,
+      "sha256": "c1b1753b31ebf3e29b51ba2e0c813dc5527f0fd9458efa08e76277a31dd2d63f"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\COST_RESULTS.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/COST_RESULTS.md",
+      "bytes": 932,
+      "sha256": "af9f3db65fb029135e598fbd55e7de57979e996d6396332f22e5949d66f91d9c"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/FULL_RUN_CONFIG.json",
+      "bytes": 5195,
+      "sha256": "405a08d499235797911eb6aeac706c2c424c8c96432075a7386b1298ac8bbbb2"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\out.log",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/out.log",
+      "bytes": 120,
+      "sha256": "bca443d44d9e5fd6f2ecaa74252782ccf081bb5b1277c5fd953a77f37d7e6ac8"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\TRAINING_SUMMARY.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/TRAINING_SUMMARY.md",
+      "bytes": 3876,
+      "sha256": "0045cb87cc670a34710e10f93ef5a4a97b3b53a1a947f2fb5837687c1a349d8f"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\.hydra\\config.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/.hydra/config.yaml",
+      "bytes": 3940,
+      "sha256": "109525dc6c240eccfc186886ebdbd41815d3a2117b8d2bbdd1d941aae38c5e27"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\.hydra\\hydra.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/.hydra/hydra.yaml",
+      "bytes": 4926,
+      "sha256": "6eaf81e938315bd11dce3a8f6bae5c8119e148eb085442ceb4a66487ff277d6c"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\.hydra\\overrides.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/.hydra/overrides.yaml",
+      "bytes": 874,
+      "sha256": "d0e7b16ce89ff1b3d4fc000054dbf451f8b1db637d0bb5b5bc2512fdf68ea248"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\ckpt\\epoch=16-step=4998.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/ckpt/epoch=16-step=4998.ckpt",
+      "bytes": 20366442,
+      "sha256": "4ba69a9caf0d5b25e58c37383464d0ad282eeef1500156dcb821437bfe70511d"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\ckpt\\last.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/ckpt/last.ckpt",
+      "bytes": 20366442,
+      "sha256": "6b850ba9305fd7a7a039cd821e38974e5aea721b695e45ba67c9ba81c4ec4fa5"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4326,
+      "sha256": "1f9861273a4aedfffdf04acc09506e993d1aef24307f90728d40179000e9a547"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 37926,
+      "sha256": "9fe87f621c48405ffa7cb496bbfa350f09aaa80f6da07a2cbda5e0147c319f07"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\.evaluation.lock",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/.evaluation.lock",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\completed.txt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/completed.txt",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\COST_RESULTS.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/COST_RESULTS.json",
+      "bytes": 14532,
+      "sha256": "8fcacc32b9d7a86a69ed31ee346a3963bb6ac12d32c548de45acf6fea120f319"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\COST_RESULTS.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/COST_RESULTS.md",
+      "bytes": 932,
+      "sha256": "b5d000ac0e90708e89f00a93d197058915fd37ac6e8d2a4a239049b8f488c759"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/FULL_RUN_CONFIG.json",
+      "bytes": 5038,
+      "sha256": "7ebfc20b5a1134c45952cce20531e280263c67897496ce4b7ae5caba1cca58ef"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\out.log",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/out.log",
+      "bytes": 303,
+      "sha256": "ffe32e28e7d76c289281038dc95160c2bf527801512f88d64343090332143aac"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\TRAINING_SUMMARY.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/TRAINING_SUMMARY.md",
+      "bytes": 3890,
+      "sha256": "49d3c32da83c9638b20d13345525c429f16ec1264e448c9cd52de31ec8939123"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\.hydra\\config.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/.hydra/config.yaml",
+      "bytes": 3869,
+      "sha256": "65c5109ac5216c8adcfe4031fac3f63f4c1b108785182b5e61e97acf4b455fac"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\.hydra\\hydra.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/.hydra/hydra.yaml",
+      "bytes": 4651,
+      "sha256": "550c5b100522bcf8a21945e0ce93e1f59e2ce0ef3f143e252dff0db7b5c6650f"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\.hydra\\overrides.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/.hydra/overrides.yaml",
+      "bytes": 738,
+      "sha256": "c3f0168fcde1c897ce20ef52e49934f51b71c22dd6324f6afaeb6df780f9eb63"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\ckpt\\epoch=288-step=2601.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/ckpt/epoch=288-step=2601.ckpt",
+      "bytes": 120874,
+      "sha256": "47b748ec912d74a21033dbbce53e3c3f647150bd1dbf277c4ab735b87dc59235"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\ckpt\\last.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/ckpt/last.ckpt",
+      "bytes": 121066,
+      "sha256": "7b70ce7f2165965dcf4ba892ad23a7a5cc3d9bb3bacd9bd1658fa1d42be4f461"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4247,
+      "sha256": "41fe656d1e0b69f5e9dd447317fd7d71cca7b0ee36cc651a303ea9665eab0027"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 73896,
+      "sha256": "2f35d7fa6d0146d95b12ad1b4bd57d573679490cde4688f60a55d9cadd9cbd41"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\lt_dth_v1\\LT_DTH_SE_adLIF\\RESULTS.md",
+      "destination": "results/not_improved/LT_DTH_SE_adLIF/RESULTS.md",
+      "bytes": 3083,
+      "sha256": "117a9c441545c560230ff033f3afd3761a0e8aa2b6e866e8b32cc3d79ea3ab4f"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_tc_v1\\MT_TC_SE_adLIF\\RESULTS.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/transfer_history/2026-10-25-seed42/RESULTS.md",
+      "bytes": 3039,
+      "sha256": "f3fc14b7943d38cf7b2a7a95d44434e1e3a35d2a6226a641736a39d1e07a645d"
+    }
+  ],
+  "file_count": 170,
+  "total_bytes": 208747288
+}

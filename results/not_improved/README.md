@@ -12,6 +12,8 @@ significance, or failure on other datasets or efficiency measures.
 | LG-DTH | 93.74 Â± 0.71 | 42, 123, 456 |
 | MR (K=2) | 93.89 Â± 0.18 | 42, 123, 456 |
 | MT-DTH | 93.74 Â± 0.17 | 42, 123, 456 |
+| [LT-DTH](LT_DTH_SE_adLIF/README.md) | 93.98 +/- 0.63 | 42, 123, 456 |
+| [AMT](AMT_SE_adLIF/README.md) | 92.71 +/- 1.94 | 42, 123, 456 |
 
 DTH: 94.49 Â± 0.52%; MT: 94.61 Â± 0.23%. See
 [the full comparison](../../reports/reference-vs-models.md).

@@ -144,11 +144,11 @@ class LearnedTraceDTHTests(unittest.TestCase):
             root = Path(temporary)
             shutil.copytree(runner.ROOT / 'config', root / 'config')
             with patch.object(runner, 'ROOT', root), patch.object(
-                    runner, 'RUN_LOGDIR', 'results/experiments/lt_dth_v1'):
+                    runner, 'RUN_LOGDIR', 'results/experiments/lt_dth_portability_test'):
                 plan = runner.build_plan('LT_DTH_SE_adLIF')
         self.assertEqual(len(plan), 9)
         for item in plan:
-            self.assertTrue(item['config']['logdir'].startswith('results/experiments/lt_dth_v1/'))
+            self.assertTrue(item['config']['logdir'].startswith('results/experiments/lt_dth_portability_test/'))
 
 
 if __name__ == '__main__':

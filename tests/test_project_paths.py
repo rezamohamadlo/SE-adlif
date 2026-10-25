@@ -21,6 +21,24 @@ class ProjectPathTests(unittest.TestCase):
             expected = f'results/{group}/{model}/{suffix}'
             self.assertEqual(portable_path(old), expected)
             self.assertEqual(portable_path(OLD_ROOT + '/' + old), expected)
+        for previous, current, model in [
+                ('results/experiments/mt_tc_v1',
+                 'results/experiments/mt_consistency_runner_v1', 'MT_TC_SE_adLIF'),
+                ('results/experiments/lt_dth_v1',
+                 'results/not_improved', 'LT_DTH_SE_adLIF'),
+                ('results/experiments/amt_v1',
+                 'results/not_improved', 'AMT_SE_adLIF')]:
+            suffix = f'{model}/ECG/seed_42/ckpt/epoch=310-step=2799.ckpt'
+            original = dict(launcher_logdir=previous, checkpoint=f'{previous}/{suffix}')
+            snapshot = copy.deepcopy(original)
+            self.assertEqual(portable_config(original),
+                             dict(launcher_logdir=current, checkpoint=f'{current}/{suffix}'))
+            self.assertEqual(original, snapshot)
+            self.assertEqual(portable_path(OLD_ROOT + '/' + previous + '/' + suffix),
+                             f'{current}/{suffix}')
+            # Only the explicit root prefix moves, never a similarly named run.
+            sibling = f'{previous}_different/{suffix}'
+            self.assertEqual(portable_path(sibling), sibling)
 
     def test_registered_roots_preserve_full_checkpoint_identity(self):
         suffix = 'results/valid/reference/SHD/seed_42/hydra/2026-10-12/07-17-03/ckpt/epoch=162-step=1956.ckpt'

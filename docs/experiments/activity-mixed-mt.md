@@ -37,30 +37,35 @@ seed 42 and a 20% validation reserve; SSC uses the runner's mean loss.
 The historical ECG reference's budget/stopping mismatch remains a limitation
 when comparing existing records. Do not describe that row as fully controlled.
 
-Use the official runner. New AMT artifacts belong under
-`results/experiments/amt_v1/AMT_SE_adLIF/<dataset>/seed_<seed>/`.
+All nine runs were imported on 25 October 2026 and are retained under
+`results/not_improved/AMT_SE_adLIF/<dataset>/seed_<seed>/`.
 Existing reference and MT results remain at their recorded locations. Results
 must retain baseline identity, fully resolved configs and architecture choices.
 Do not merge artifacts from different devices into one seed directory or run
 multiple launchers writing the same directory. Distribute disjoint datasets
 or seeds across devices and preserve the relative output layout when copying.
 
+The retention category reflects SHD* accuracy; SSC/ECG outcomes remain separate.
+The old output root resolves here through an explicit path alias. Saved files
+retain their original bytes. See the [outcome record](../../results/not_improved/AMT_SE_adLIF/README.md)
+and [transfer audit](../transfers/reza-amt-import-2026-10-25.md).
+
 ## User-launched commands
 
 Run from the repository root using the project's `.venv` Python. Preflight:
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models AMT_SE_adLIF --datasets SHD SSC ECG --seeds 42 123 456 --logdir results/experiments/amt_v1 --dry-run
+.\.venv\Scripts\python.exe runner.py --models AMT_SE_adLIF --datasets SHD SSC ECG --seeds 42 123 456 --logdir results/not_improved --dry-run
 ```
 
-Fresh jobs (nine runs); an interrupted job's own `last.ckpt` is resumed if
+Completed jobs are skipped; an interrupted job's own `last.ckpt` is resumed if
 the same command is repeated, and matching completed jobs are skipped:
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models AMT_SE_adLIF --datasets SHD SSC ECG --seeds 42 123 456 --logdir results/experiments/amt_v1
+.\.venv\Scripts\python.exe runner.py --models AMT_SE_adLIF --datasets SHD SSC ECG --seeds 42 123 456 --logdir results/not_improved
 ```
 
-Only the new AMT model is scheduled: three datasets and three training seeds.
+These matching nine AMT runs are already complete and will be skipped.
 Reuse recorded reference/MT evidence for comparison, retaining the historical
 ECG reference budget/stopping caveat. Do not retrain those baselines as part
 of this follow-up.

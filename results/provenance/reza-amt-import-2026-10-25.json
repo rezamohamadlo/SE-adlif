@@ -1,0 +1,1051 @@
+{
+  "version": "verified_results_import_v1",
+  "created_utc": "2026-10-25T04:19:43.787379+00:00",
+  "source_root": "F:\\reza",
+  "source_retained": true,
+  "original_local_startup_files_retained": true,
+  "training_launched": false,
+  "path_aliases": {
+    "results/experiments/amt_v1": "results/not_improved"
+  },
+  "runs": [
+    {
+      "model": "AMT_SE_adLIF",
+      "dataset": "SHD",
+      "seed": 42,
+      "source_directory": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_42",
+      "destination_directory": "results/not_improved/AMT_SE_adLIF/SHD/seed_42",
+      "test_accuracy": 0.9447879791259766,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "paper_classification_v1",
+      "checkpoint": "results/not_improved/AMT_SE_adLIF/SHD/seed_42/ckpt/epoch=70-step=1775.ckpt",
+      "checkpoint_sha256": "1201b53120bb35afc1385460f10390c3ab6336f5710a6620aa674d0f757ea460"
+    },
+    {
+      "model": "AMT_SE_adLIF",
+      "dataset": "SHD",
+      "seed": 123,
+      "source_directory": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_123",
+      "destination_directory": "results/not_improved/AMT_SE_adLIF/SHD/seed_123",
+      "test_accuracy": 0.9063604474067688,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "paper_classification_v1",
+      "checkpoint": "results/not_improved/AMT_SE_adLIF/SHD/seed_123/ckpt/epoch=299-step=7500.ckpt",
+      "checkpoint_sha256": "47ec69ffbe57456ff12e90056adecf71a9b3ba3e7cbd29d2015fb5b2df022ddd"
+    },
+    {
+      "model": "AMT_SE_adLIF",
+      "dataset": "SHD",
+      "seed": 456,
+      "source_directory": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_456",
+      "destination_directory": "results/not_improved/AMT_SE_adLIF/SHD/seed_456",
+      "test_accuracy": 0.9302120208740234,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "paper_classification_v1",
+      "checkpoint": "results/not_improved/AMT_SE_adLIF/SHD/seed_456/ckpt/epoch=204-step=5125.ckpt",
+      "checkpoint_sha256": "179cffccb5375453105405cb00e6ad727710b913937469db8a6fb3ea6d3d66ed"
+    },
+    {
+      "model": "AMT_SE_adLIF",
+      "dataset": "SSC",
+      "seed": 42,
+      "source_directory": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_42",
+      "destination_directory": "results/not_improved/AMT_SE_adLIF/SSC/seed_42",
+      "test_accuracy": 0.8023746609687805,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "ssc_mean_loss_v1",
+      "checkpoint": "results/not_improved/AMT_SE_adLIF/SSC/seed_42/ckpt/epoch=35-step=10584.ckpt",
+      "checkpoint_sha256": "1032f84b6dc136931363752a3441d9d56ea057c322a6cbe59f256eb577675d18"
+    },
+    {
+      "model": "AMT_SE_adLIF",
+      "dataset": "SSC",
+      "seed": 123,
+      "source_directory": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_123",
+      "destination_directory": "results/not_improved/AMT_SE_adLIF/SSC/seed_123",
+      "test_accuracy": 0.8044843673706055,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "ssc_mean_loss_v1",
+      "checkpoint": "results/not_improved/AMT_SE_adLIF/SSC/seed_123/ckpt/epoch=27-step=8232.ckpt",
+      "checkpoint_sha256": "8b75ec256929244d0b1ed05ffd68031699a0fb839e71dd3b260c22fdbf73be40"
+    },
+    {
+      "model": "AMT_SE_adLIF",
+      "dataset": "SSC",
+      "seed": 456,
+      "source_directory": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_456",
+      "destination_directory": "results/not_improved/AMT_SE_adLIF/SSC/seed_456",
+      "test_accuracy": 0.800804615020752,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "ssc_mean_loss_v1",
+      "checkpoint": "results/not_improved/AMT_SE_adLIF/SSC/seed_456/ckpt/epoch=13-step=4116.ckpt",
+      "checkpoint_sha256": "2115814092a1b93abcf7301d69a6d8e5afd359dd3879e1caebde65a0fb83108a"
+    },
+    {
+      "model": "AMT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 42,
+      "source_directory": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_42",
+      "destination_directory": "results/not_improved/AMT_SE_adLIF/ECG/seed_42",
+      "test_accuracy": 0.8765324950218201,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "paper_classification_v1",
+      "checkpoint": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/ckpt/epoch=372-step=3357.ckpt",
+      "checkpoint_sha256": "5cef29dfeac771cf79d7d63e91cf593779ed3a91cf26aac9d2ac099a7b7ff1e6"
+    },
+    {
+      "model": "AMT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 123,
+      "source_directory": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_123",
+      "destination_directory": "results/not_improved/AMT_SE_adLIF/ECG/seed_123",
+      "test_accuracy": 0.8782169818878174,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "paper_classification_v1",
+      "checkpoint": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/ckpt/epoch=394-step=3555.ckpt",
+      "checkpoint_sha256": "6e8ca1f873e227eae5ac5e6d7c20abbde8cdab4d08b30acfdf1c26a9b32a8e91"
+    },
+    {
+      "model": "AMT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 456,
+      "source_directory": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_456",
+      "destination_directory": "results/not_improved/AMT_SE_adLIF/ECG/seed_456",
+      "test_accuracy": 0.8801576495170593,
+      "paper_baseline_version": "paper_classification_v1",
+      "evaluation_protocol": "paper_classification_v1",
+      "checkpoint": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/ckpt/epoch=386-step=3483.ckpt",
+      "checkpoint_sha256": "4968d97815a37e28e6cb371af6d623ac8519f5200030e5416f425fc8d2482715"
+    }
+  ],
+  "files": [
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_42\\.evaluation.lock",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_42/.evaluation.lock",
+      "kind": "external_completed_run",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_42\\completed.txt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_42/completed.txt",
+      "kind": "external_completed_run",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_42\\COST_RESULTS.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_42/COST_RESULTS.json",
+      "kind": "external_completed_run",
+      "bytes": 14831,
+      "sha256": "6979a2e60e0a4899340be37adf7cd81ddbadb72ff6fc4aff7f27ecf81365b825"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_42\\COST_RESULTS.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_42/COST_RESULTS.md",
+      "kind": "external_completed_run",
+      "bytes": 927,
+      "sha256": "5c3c30ed274194d538cf586d5668d37bb46b3df373cf2473b05ac5d929c9f972"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_42\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_42/FULL_RUN_CONFIG.json",
+      "kind": "external_completed_run",
+      "bytes": 5073,
+      "sha256": "5e06fa01aac310d2a49d1affc857daa206af6d000244b5b838553f145b021ff5"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_42\\out.log",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_42/out.log",
+      "kind": "external_completed_run",
+      "bytes": 119,
+      "sha256": "a5ac5da2c0e1cd3b67d8552dde37bdc092a3576aa585133064a699c21802148d"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_42\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_42/TRAINING_SUMMARY.md",
+      "kind": "external_completed_run",
+      "bytes": 3853,
+      "sha256": "7376bb73243c51c4a365c7b1056a17fe05f9d5348841e1391dbd758757fecf3c"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_42\\.hydra\\config.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_42/.hydra/config.yaml",
+      "kind": "external_completed_run",
+      "bytes": 3824,
+      "sha256": "ba96cd18209bb03d698e0e2eb585d988d6b6cd8e3b1afde4cb7baa80a473ebec"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_42\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_42/.hydra/hydra.yaml",
+      "kind": "external_completed_run",
+      "bytes": 3882,
+      "sha256": "0845d7aa02a348c233dfbce10a23040ef9ea16f9679eb37942578bdec7e07d4e"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_42\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_42/.hydra/overrides.yaml",
+      "kind": "external_completed_run",
+      "bytes": 373,
+      "sha256": "8d86ad61a1e5aeec20c4cbd89a97575ab26866d6ea637ab330a5d6b525aa8a59"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_42\\ckpt\\epoch=70-step=1775.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_42/ckpt/epoch=70-step=1775.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 5494490,
+      "sha256": "1201b53120bb35afc1385460f10390c3ab6336f5710a6620aa674d0f757ea460"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_42\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_42/ckpt/last.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 5494490,
+      "sha256": "326809f0970f72bd6d1d412aa59e8e6061f3844c76f58b8c7e543bd6c761e06d"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_42\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+      "kind": "external_completed_run",
+      "bytes": 4210,
+      "sha256": "7794495a7511a5df080e736025715322809ea9947ad64d754a730ce8f5cda853"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_42\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "kind": "external_completed_run",
+      "bytes": 44668,
+      "sha256": "af114dc860ff0172fa2d9f4c5a5bb39616d4acf3e51cda121b22eec6eb6e1b26"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_123\\.evaluation.lock",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_123/.evaluation.lock",
+      "kind": "external_completed_run",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_123\\completed.txt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_123/completed.txt",
+      "kind": "external_completed_run",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_123\\COST_RESULTS.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_123/COST_RESULTS.json",
+      "kind": "external_completed_run",
+      "bytes": 14902,
+      "sha256": "2d00dbb21794d43302fb3d374cb00817d3104d0d044a4d3ce5041b58bf08d822"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_123\\COST_RESULTS.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_123/COST_RESULTS.md",
+      "kind": "external_completed_run",
+      "bytes": 926,
+      "sha256": "2c01b35d0217c48890e91f5a4662823f3283641e3ff13db232ae90d8ac23c77f"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_123\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_123/FULL_RUN_CONFIG.json",
+      "kind": "external_completed_run",
+      "bytes": 5075,
+      "sha256": "2e3aea4968f7e84603bd08be3bd869a703dbc2e9d71b06a7dc354d7bc0f27c69"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_123\\out.log",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_123/out.log",
+      "kind": "external_completed_run",
+      "bytes": 153,
+      "sha256": "ac4a57ee43124c4babd2aedb0e40943220267e818b557df4c179506114805105"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_123\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_123/TRAINING_SUMMARY.md",
+      "kind": "external_completed_run",
+      "bytes": 3862,
+      "sha256": "f00a6adf106288851b8ee5fb0cb9b9420f10999b2146a341769b18f9af547869"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_123\\.hydra\\config.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_123/.hydra/config.yaml",
+      "kind": "external_completed_run",
+      "bytes": 3889,
+      "sha256": "fb6f2fafd9d9131f5ef175457272507b7c33b172898bfed760aeb50b5afc012b"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_123\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_123/.hydra/hydra.yaml",
+      "kind": "external_completed_run",
+      "bytes": 4056,
+      "sha256": "87bbdf8ade0f8766a6c7ab252dcca706650e894f5fc8b11f9054c265f21e8db4"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_123\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_123/.hydra/overrides.yaml",
+      "kind": "external_completed_run",
+      "bytes": 458,
+      "sha256": "47837f1adc83e815e715995507a23210cd083e0eafca5df255f42817bd3505b4"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_123\\ckpt\\epoch=299-step=7500.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_123/ckpt/epoch=299-step=7500.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 5494810,
+      "sha256": "47ec69ffbe57456ff12e90056adecf71a9b3ba3e7cbd29d2015fb5b2df022ddd"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_123\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_123/ckpt/last.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 5494810,
+      "sha256": "47ec69ffbe57456ff12e90056adecf71a9b3ba3e7cbd29d2015fb5b2df022ddd"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_123\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+      "kind": "external_completed_run",
+      "bytes": 4275,
+      "sha256": "39264324937e1d166b2dd5e6f6e3610e87d9e9a7883b95711f6a67f12b0c0398"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_123\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "kind": "external_completed_run",
+      "bytes": 45547,
+      "sha256": "78e049897e9f20e98b4cdae7051b4ec1b5f5f42e09e729fc665a0622498ca20c"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_456\\.evaluation.lock",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_456/.evaluation.lock",
+      "kind": "external_completed_run",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_456\\completed.txt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_456/completed.txt",
+      "kind": "external_completed_run",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_456\\COST_RESULTS.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_456/COST_RESULTS.json",
+      "kind": "external_completed_run",
+      "bytes": 14839,
+      "sha256": "584c5fadd1410710a64ae3f27548f80b135f8b63b9bbec1bcafdd206738c7223"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_456\\COST_RESULTS.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_456/COST_RESULTS.md",
+      "kind": "external_completed_run",
+      "bytes": 927,
+      "sha256": "90287c83de21a73668dacf554fef5e1c48d7ab051fe030597301931089e9b461"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_456\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_456/FULL_RUN_CONFIG.json",
+      "kind": "external_completed_run",
+      "bytes": 5075,
+      "sha256": "a97f043a5e8d6f9b0fa885aea9744a6744dc0a120fd396eb64d84a9f3213e5ef"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_456\\out.log",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_456/out.log",
+      "kind": "external_completed_run",
+      "bytes": 118,
+      "sha256": "1530f381c62c334115372764138d55b8e37181bb1752e49f9ee5a3cc99acd424"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_456\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_456/TRAINING_SUMMARY.md",
+      "kind": "external_completed_run",
+      "bytes": 3864,
+      "sha256": "cb04b8a543b5e09743413079b14e4b9c94257fb9ebeae89cc3e592d751657c4b"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_456\\.hydra\\config.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_456/.hydra/config.yaml",
+      "kind": "external_completed_run",
+      "bytes": 3826,
+      "sha256": "c2ce5bafc3b18ce8bc481d789c7e8294f699e13a91b164c1e74b87c00cccbfc2"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_456\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_456/.hydra/hydra.yaml",
+      "kind": "external_completed_run",
+      "bytes": 3889,
+      "sha256": "443fa97ea3f1700b6c4aae7f7f351b1f84ea13657764b2fcf496f3559572ffec"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_456\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_456/.hydra/overrides.yaml",
+      "kind": "external_completed_run",
+      "bytes": 375,
+      "sha256": "d4c8f2484ac9dc5c6bd72006c089c684a127052e8f7b02a47340ef28e81bb5c3"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_456\\ckpt\\epoch=204-step=5125.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_456/ckpt/epoch=204-step=5125.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 5494490,
+      "sha256": "179cffccb5375453105405cb00e6ad727710b913937469db8a6fb3ea6d3d66ed"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_456\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_456/ckpt/last.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 5494490,
+      "sha256": "11b9f1c06db96d42552f7e299df84ee3edaf1373a2637a61d9586c953fb6dea2"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_456\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+      "kind": "external_completed_run",
+      "bytes": 4212,
+      "sha256": "f3c18f7ad474324c7406511a978ff0e35e50eb80888a71092400b2614881c7cc"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SHD\\seed_456\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/AMT_SE_adLIF/SHD/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "kind": "external_completed_run",
+      "bytes": 45261,
+      "sha256": "74d0e141da830dec7d0b5bdd8c2479f27c856eaa1a1b67dff9c4181c8bf0b174"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_42\\.evaluation.lock",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_42/.evaluation.lock",
+      "kind": "external_completed_run",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_42\\completed.txt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_42/completed.txt",
+      "kind": "external_completed_run",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_42\\COST_RESULTS.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_42/COST_RESULTS.json",
+      "kind": "external_completed_run",
+      "bytes": 14787,
+      "sha256": "b9c18ff57fe4976e08d31c5964e8276134f45aa0aa70bc9850b75691d0801eab"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_42\\COST_RESULTS.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_42/COST_RESULTS.md",
+      "kind": "external_completed_run",
+      "bytes": 933,
+      "sha256": "a1fb18610e11b991dff96d58404b5fb3958a57d8da5f15c0b727bc64d4d2db69"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_42\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_42/FULL_RUN_CONFIG.json",
+      "kind": "external_completed_run",
+      "bytes": 5005,
+      "sha256": "ed0b70ae90fc9f8ec73159249a88bd9533b02d76b8d77aeaa5ad0adabbade2e0"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_42\\out.log",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_42/out.log",
+      "kind": "external_completed_run",
+      "bytes": 118,
+      "sha256": "d5d8907c536962e502dc997eeca851f15e4322597ebdd3b32bb2c9c38c8a4bca"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_42\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_42/TRAINING_SUMMARY.md",
+      "kind": "external_completed_run",
+      "bytes": 3870,
+      "sha256": "1836eda2bbc940a24e38d99c96f4c0fff75c3b45265153983372e3a48529ee41"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_42\\.hydra\\config.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_42/.hydra/config.yaml",
+      "kind": "external_completed_run",
+      "bytes": 3773,
+      "sha256": "076fd0711d4956f0b8617beb3b297ae49d19afb0d7135f161b393a5b0f1ab81e"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_42\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_42/.hydra/hydra.yaml",
+      "kind": "external_completed_run",
+      "bytes": 4220,
+      "sha256": "6bf6089b9acbffe8ad2741f20c24c175c7c1f7973a867aab2b16b01c4096db9a"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_42\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_42/.hydra/overrides.yaml",
+      "kind": "external_completed_run",
+      "bytes": 537,
+      "sha256": "b8e7387c374ac63df2c27ee8a7e00dbf77f4bb1b0f57d4a27f7ef6c7a99a29da"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_42\\ckpt\\epoch=35-step=10584.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_42/ckpt/epoch=35-step=10584.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 20385306,
+      "sha256": "1032f84b6dc136931363752a3441d9d56ea057c322a6cbe59f256eb577675d18"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_42\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_42/ckpt/last.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 20385306,
+      "sha256": "bbf4d5e9a768b99d46cec2bcc49df0ec6d7c43858920c166cf84daffc5aec4a1"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_42\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+      "kind": "external_completed_run",
+      "bytes": 4153,
+      "sha256": "70d24fcf3a85628d3f5f1fa9aa75536cc38807763394014e7569db6d353ef4c3"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_42\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "kind": "external_completed_run",
+      "bytes": 24981,
+      "sha256": "76ba06267259543ff3e57394de982d56c49f19f13c3f63516c37bbc61a54a8c3"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_123\\.evaluation.lock",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_123/.evaluation.lock",
+      "kind": "external_completed_run",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_123\\completed.txt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_123/completed.txt",
+      "kind": "external_completed_run",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_123\\COST_RESULTS.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_123/COST_RESULTS.json",
+      "kind": "external_completed_run",
+      "bytes": 14785,
+      "sha256": "c543671743699225bb86879ce90f00e8dad29febd2f8f794e003d578462081af"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_123\\COST_RESULTS.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_123/COST_RESULTS.md",
+      "kind": "external_completed_run",
+      "bytes": 932,
+      "sha256": "a5f820db6106a4fe66d3dc7ba06f4ec073049bade1c8e7ad047aa50ed24dfb54"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_123\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_123/FULL_RUN_CONFIG.json",
+      "kind": "external_completed_run",
+      "bytes": 5007,
+      "sha256": "9b43446289e605a127f6757034d0c0588541a36533231634df848182998aea65"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_123\\out.log",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_123/out.log",
+      "kind": "external_completed_run",
+      "bytes": 118,
+      "sha256": "00db65344fdc641a5139a7e5acd863d887e995057cb7fffb0b7d77895a182be3"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_123\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_123/TRAINING_SUMMARY.md",
+      "kind": "external_completed_run",
+      "bytes": 3871,
+      "sha256": "cb86aa86d1a6d50f65641432e5a1099c18fa2924719fbd9bcb893d20671ca56d"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_123\\.hydra\\config.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_123/.hydra/config.yaml",
+      "kind": "external_completed_run",
+      "bytes": 3775,
+      "sha256": "83b26a46181e334ab9a0d9ed6919b2c74703646cb7c056df8c03c1915915969d"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_123\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_123/.hydra/hydra.yaml",
+      "kind": "external_completed_run",
+      "bytes": 4227,
+      "sha256": "d9e2b16031eff7e7b1d7639a637e3a3a92878b7df3d604f30cc2576e20bfba47"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_123\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_123/.hydra/overrides.yaml",
+      "kind": "external_completed_run",
+      "bytes": 539,
+      "sha256": "e2dc42802cc230de8c758cd7346218449160fa2ae1928a03e3f6e5b2e2151bce"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_123\\ckpt\\epoch=27-step=8232.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_123/ckpt/epoch=27-step=8232.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 20385306,
+      "sha256": "8b75ec256929244d0b1ed05ffd68031699a0fb839e71dd3b260c22fdbf73be40"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_123\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_123/ckpt/last.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 20385306,
+      "sha256": "76859d404a6b775e53d13152b1f71a1cbe33a036faaf1cd5263c5153f3ce43d6"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_123\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+      "kind": "external_completed_run",
+      "bytes": 4155,
+      "sha256": "8254320e9e0af374eebc11ae3aaccb5e53b515207d9b85d55d3ed1c26cff1802"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_123\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "kind": "external_completed_run",
+      "bytes": 24925,
+      "sha256": "a7382103b1c49f76b1c9f8df8b57fc8af08a5183e71f113f8384e55e6c4efed8"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_456\\.evaluation.lock",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_456/.evaluation.lock",
+      "kind": "external_completed_run",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_456\\completed.txt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_456/completed.txt",
+      "kind": "external_completed_run",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_456\\COST_RESULTS.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_456/COST_RESULTS.json",
+      "kind": "external_completed_run",
+      "bytes": 14787,
+      "sha256": "b87bd28b555c059b97030e74a72fd04c743a9331aa84fe4aa0a621c25d5f0502"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_456\\COST_RESULTS.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_456/COST_RESULTS.md",
+      "kind": "external_completed_run",
+      "bytes": 932,
+      "sha256": "f4b8f102f7c3b158f61a970d5f8ebbd6a812221acaae1157b56284204afc76ef"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_456\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_456/FULL_RUN_CONFIG.json",
+      "kind": "external_completed_run",
+      "bytes": 5007,
+      "sha256": "b34a5621383d4b3ce0c8499d153290999d0de6217cdc18d341795468580dc915"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_456\\out.log",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_456/out.log",
+      "kind": "external_completed_run",
+      "bytes": 187,
+      "sha256": "a5fce18341fa0d2240c600935ec83e5c271c58ac812710af6d1a4a5cd1443a36"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_456\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_456/TRAINING_SUMMARY.md",
+      "kind": "external_completed_run",
+      "bytes": 3871,
+      "sha256": "ec70d3060f31b25d1a8375fd9891e4d8aaf3f8b20bc583bca7aba7691ff2f80c"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_456\\.hydra\\config.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_456/.hydra/config.yaml",
+      "kind": "external_completed_run",
+      "bytes": 3838,
+      "sha256": "4c1a38c5aaca89ecd5faef47bccc74d5434d5f448a31bae8e838bf84564e0448"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_456\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_456/.hydra/hydra.yaml",
+      "kind": "external_completed_run",
+      "bytes": 4394,
+      "sha256": "5cd1775bfa3280fbe24d6207c566bea3ef138ded3f1fec7c260280ff097f8735"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_456\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_456/.hydra/overrides.yaml",
+      "kind": "external_completed_run",
+      "bytes": 622,
+      "sha256": "95926319c85d565bf035abe7c3cc12e84132658c27c111fd4581383c2752f5c9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_456\\ckpt\\epoch=13-step=4116.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_456/ckpt/epoch=13-step=4116.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 20385306,
+      "sha256": "2115814092a1b93abcf7301d69a6d8e5afd359dd3879e1caebde65a0fb83108a"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_456\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_456/ckpt/last.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 20385818,
+      "sha256": "0e1c1dab57b46d86b3284f2a7dd9595191f8d3a055b0f8bea010fb2f0925880a"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_456\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+      "kind": "external_completed_run",
+      "bytes": 4218,
+      "sha256": "920e7876d8fd619cd96b6cb1b8db3379d8795373b6969e42e71563046a358137"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\SSC\\seed_456\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/AMT_SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "kind": "external_completed_run",
+      "bytes": 25553,
+      "sha256": "8305e82ebecaa4d7c5fb9eb2f2e0a23be9e209bc7b007dec05bcdf05e4308b3b"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_42\\.evaluation.lock",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/.evaluation.lock",
+      "kind": "external_completed_run",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_42\\completed.txt",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/completed.txt",
+      "kind": "external_completed_run",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_42\\COST_RESULTS.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/COST_RESULTS.json",
+      "kind": "external_completed_run",
+      "bytes": 14504,
+      "sha256": "ce56481288e2063e1d9c4400c06f03092f9d1b977c3ecc1ac3ddf6c9fc17d6f3"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_42\\COST_RESULTS.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/COST_RESULTS.md",
+      "kind": "external_completed_run",
+      "bytes": 932,
+      "sha256": "04dfac8f6819e0e6c2dc7446eb0d22aa04f61429e4355c2622c121a2250c34ba"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_42\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/FULL_RUN_CONFIG.json",
+      "kind": "external_completed_run",
+      "bytes": 4848,
+      "sha256": "804d0aae8d88f6051befe9fc10a21871df17eecd262f3e1d7d2411323448d4bb"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_42\\out.log",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/out.log",
+      "kind": "external_completed_run",
+      "bytes": 125,
+      "sha256": "070b0a05917d4e24fc2e6ab8533dafd03f33356a569fa427730fb2bc204fe33c"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_42\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/TRAINING_SUMMARY.md",
+      "kind": "external_completed_run",
+      "bytes": 3882,
+      "sha256": "6281854c1ace69861a59a32fdb2072d86cabbe2dd2943894b8dec543531e885a"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_42\\.hydra\\config.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/.hydra/config.yaml",
+      "kind": "external_completed_run",
+      "bytes": 3636,
+      "sha256": "d7a2c83171bd4f8eece3693b25f04c7ac422c9b61a96cdcf835c4e8c43ffca70"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_42\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/.hydra/hydra.yaml",
+      "kind": "external_completed_run",
+      "bytes": 3903,
+      "sha256": "c627472d07ceff8cdc5f2371259ab9bb85881f592576cc7e3248ae79290d98a1"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_42\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/.hydra/overrides.yaml",
+      "kind": "external_completed_run",
+      "bytes": 380,
+      "sha256": "f950d05317d328ef70b696521836f3fa96372bfd04f9a5605a090f0dd1fbd10e"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_42\\ckpt\\epoch=372-step=3357.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/ckpt/epoch=372-step=3357.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 122970,
+      "sha256": "5cef29dfeac771cf79d7d63e91cf593779ed3a91cf26aac9d2ac099a7b7ff1e6"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_42\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/ckpt/last.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 122970,
+      "sha256": "40c52f33b9cc99c58a67de49570fa3bbbc07c37b9d6dbbd2ac1012e2c18ba2a1"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_42\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+      "kind": "external_completed_run",
+      "bytes": 4008,
+      "sha256": "aad373270c723e571cd98a5caf67d4e779c9ba9dd5528fd13d1877543d21ac11"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_42\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "kind": "external_completed_run",
+      "bytes": 51562,
+      "sha256": "ee2df7014c558c0ac5fcc72109b7b40f36efdfdedaeb540e64f49067f72d46cb"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_123\\.evaluation.lock",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/.evaluation.lock",
+      "kind": "external_completed_run",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_123\\completed.txt",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/completed.txt",
+      "kind": "external_completed_run",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_123\\COST_RESULTS.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/COST_RESULTS.json",
+      "kind": "external_completed_run",
+      "bytes": 14502,
+      "sha256": "ea9bfcbc468a0cd89b4fbefd390ee5f1e15e99a6278de089318ccc648d693463"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_123\\COST_RESULTS.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/COST_RESULTS.md",
+      "kind": "external_completed_run",
+      "bytes": 932,
+      "sha256": "f4cd3b26c927792e89f5c3b16148be33323a3fc459cf53bd15a9d438a68b41b8"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_123\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/FULL_RUN_CONFIG.json",
+      "kind": "external_completed_run",
+      "bytes": 4850,
+      "sha256": "97c39e5676f4bd79a391df6c5ca195912e1f7b5c2310e60346ed34047860e6b4"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_123\\out.log",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/out.log",
+      "kind": "external_completed_run",
+      "bytes": 125,
+      "sha256": "779a5d0ede12ee76b57fe7cbf00ff4cd0ed315fc61baeff27ecadeb56ff6a344"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_123\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/TRAINING_SUMMARY.md",
+      "kind": "external_completed_run",
+      "bytes": 3885,
+      "sha256": "81ff44921df9bca4512e0f21c203b62814b212737fd9121545973c99f0a53d83"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_123\\.hydra\\config.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/.hydra/config.yaml",
+      "kind": "external_completed_run",
+      "bytes": 3638,
+      "sha256": "3b66b23fae666ccf603887943356782f6975650ddcdacd3bebce479d936d32ab"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_123\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/.hydra/hydra.yaml",
+      "kind": "external_completed_run",
+      "bytes": 3910,
+      "sha256": "b12788f1184ba5575fdb9013a706e0c8f8d329c070031762b26af9d2391a7f12"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_123\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/.hydra/overrides.yaml",
+      "kind": "external_completed_run",
+      "bytes": 382,
+      "sha256": "d2598a8bbac755004662ffbb5d85507024fb2a048a4c0dcdcd562388f4fa9bea"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_123\\ckpt\\epoch=394-step=3555.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/ckpt/epoch=394-step=3555.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 122970,
+      "sha256": "6e8ca1f873e227eae5ac5e6d7c20abbde8cdab4d08b30acfdf1c26a9b32a8e91"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_123\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/ckpt/last.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 122970,
+      "sha256": "bf61db21e8ff3d0e9ef5f2444624d3b6a95c39845c477bb48f61ae8965eeadcd"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_123\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+      "kind": "external_completed_run",
+      "bytes": 4010,
+      "sha256": "4939f28f9eda06ec6094259d360073ce87646ee91fb5d2b89a07f02112274402"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_123\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "kind": "external_completed_run",
+      "bytes": 51570,
+      "sha256": "59aef4c8057a4ad9b94310110df8d724f66ad78e83a21511e61a8c524b1ee9d2"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_456\\.evaluation.lock",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/.evaluation.lock",
+      "kind": "external_completed_run",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_456\\completed.txt",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/completed.txt",
+      "kind": "external_completed_run",
+      "bytes": 47,
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_456\\COST_RESULTS.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/COST_RESULTS.json",
+      "kind": "external_completed_run",
+      "bytes": 14507,
+      "sha256": "d0d6488fccf6927b687032d2b05bc66eb9b1041a27a90e1dd3636eeca5faee6f"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_456\\COST_RESULTS.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/COST_RESULTS.md",
+      "kind": "external_completed_run",
+      "bytes": 932,
+      "sha256": "c258122b6adfe068ca3516f49973e1f12ff417dc53b21687d6ecb59addde1d11"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_456\\FULL_RUN_CONFIG.json",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/FULL_RUN_CONFIG.json",
+      "kind": "external_completed_run",
+      "bytes": 4850,
+      "sha256": "22775458674dab3f8f7bd371abeda2b1fd71aeec68e40c54ad5b8e0978476b2d"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_456\\out.log",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/out.log",
+      "kind": "external_completed_run",
+      "bytes": 125,
+      "sha256": "0052d133e2fce0e8e88a67dba0e166f305289aa5797320a18f9a6e714ce6288c"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_456\\TRAINING_SUMMARY.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/TRAINING_SUMMARY.md",
+      "kind": "external_completed_run",
+      "bytes": 3885,
+      "sha256": "ef29bd3c01762dee59b2c5f0f5e22e845170bd81b43e58086e6e26cdcb8e43f8"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_456\\.hydra\\config.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/.hydra/config.yaml",
+      "kind": "external_completed_run",
+      "bytes": 3638,
+      "sha256": "acdf3a11d30252a9347fd9452eb07b56b920e5fd590af3d4a7418d654e3af032"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_456\\.hydra\\hydra.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/.hydra/hydra.yaml",
+      "kind": "external_completed_run",
+      "bytes": 3910,
+      "sha256": "3ed720f05f680148bed47b01f16b7edb1ab3315b96cffb986f6a8056f54b130e"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_456\\.hydra\\overrides.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/.hydra/overrides.yaml",
+      "kind": "external_completed_run",
+      "bytes": 382,
+      "sha256": "2f9e46d2762a05e9daccadd11686fa9b9c59c3df12677516724b11fe67178641"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_456\\ckpt\\epoch=386-step=3483.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/ckpt/epoch=386-step=3483.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 122970,
+      "sha256": "4968d97815a37e28e6cb371af6d623ac8519f5200030e5416f425fc8d2482715"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_456\\ckpt\\last.ckpt",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/ckpt/last.ckpt",
+      "kind": "external_completed_run",
+      "bytes": 122970,
+      "sha256": "170ef82756bf8b02a01dc20c5e1c08dcbae92033fa7fa7d70f9b213aba3e1d83"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_456\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+      "kind": "external_completed_run",
+      "bytes": 4010,
+      "sha256": "92fe18897454e14d12745769632f3c49d293e1763bf6f468c6dff676c7d49083"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\ECG\\seed_456\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "kind": "external_completed_run",
+      "bytes": 51592,
+      "sha256": "004894092e04bbcef3f6a9987528ff5f73afac2a2fef3aad67f5bff2ce2afa22"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\amt_v1\\AMT_SE_adLIF\\RESULTS.md",
+      "destination": "results/not_improved/AMT_SE_adLIF/RESULTS.md",
+      "kind": "external_aggregate",
+      "bytes": 3079,
+      "sha256": "650f3dce09f7e954e5d786b5abdc9d884c3b220ffdd144e7e18d5f5c80206d71"
+    },
+    {
+      "source": "results/experiments/amt_v1/AMT_SE_adLIF/SHD/seed_42/out.log",
+      "destination": "results/not_improved/AMT_SE_adLIF/startup_history/local-seed42-before-import/out.log",
+      "kind": "local_startup_history",
+      "bytes": 35,
+      "sha256": "c9b41899bd904cff537b203062ef8c1054d3fc8d5b70db0df8da8cf70f342bb8"
+    },
+    {
+      "source": "results/experiments/amt_v1/AMT_SE_adLIF/SHD/seed_42/.hydra/config.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/startup_history/local-seed42-before-import/.hydra/config.yaml",
+      "kind": "local_startup_history",
+      "bytes": 3824,
+      "sha256": "ba96cd18209bb03d698e0e2eb585d988d6b6cd8e3b1afde4cb7baa80a473ebec"
+    },
+    {
+      "source": "results/experiments/amt_v1/AMT_SE_adLIF/SHD/seed_42/.hydra/hydra.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/startup_history/local-seed42-before-import/.hydra/hydra.yaml",
+      "kind": "local_startup_history",
+      "bytes": 3962,
+      "sha256": "e4c720fe4932349830f7b9c10cfa1179da4e1c1d09ebd7601ff2997b9b3da537"
+    },
+    {
+      "source": "results/experiments/amt_v1/AMT_SE_adLIF/SHD/seed_42/.hydra/overrides.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/startup_history/local-seed42-before-import/.hydra/overrides.yaml",
+      "kind": "local_startup_history",
+      "bytes": 373,
+      "sha256": "8d86ad61a1e5aeec20c4cbd89a97575ab26866d6ea637ab330a5d6b525aa8a59"
+    },
+    {
+      "source": "results/experiments/amt_v1/AMT_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/not_improved/AMT_SE_adLIF/startup_history/local-seed42-before-import/logs/mlp_snn/version_0/hparams.yaml",
+      "kind": "local_startup_history",
+      "bytes": 4210,
+      "sha256": "7794495a7511a5df080e736025715322809ea9947ad64d754a730ce8f5cda853"
+    }
+  ],
+  "file_count": 132,
+  "external_file_count": 127,
+  "startup_file_count": 5,
+  "total_bytes": 156732487
+}

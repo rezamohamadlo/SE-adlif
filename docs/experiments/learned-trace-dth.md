@@ -61,18 +61,27 @@ and bounds. SHD* keeps its 20% training-derived validation split and seed 42.
 SSC uses mean loss. The existing ECG reference budget/stopping caveat remains
 if that reference is included in a broader table.
 
+## Completed records
+
+All nine runs were imported on 25 October 2026 and are retained at
+`results/not_improved/LT_DTH_SE_adLIF/`. The retention category reflects
+the SHD* result; SSC/ECG outcomes are assessed separately. Saved files retain
+their original bytes and paths, with explicit root aliases at runtime.
+See the [outcome record](../../results/not_improved/LT_DTH_SE_adLIF/README.md)
+and [transfer audit](../transfers/reza-results-import-2026-10-25.md).
+
 ## Main-runner commands
 
 Non-training preflight from the repository root:
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models LT_DTH_SE_adLIF --datasets SHD SSC ECG --seeds 42 123 456 --logdir results/experiments/lt_dth_v1 --dry-run
+.\.venv\Scripts\python.exe runner.py --models LT_DTH_SE_adLIF --datasets SHD SSC ECG --seeds 42 123 456 --logdir results/not_improved --dry-run
 ```
 
-The user launches the nine new jobs:
+The following command skips these matching completed runs; it does not schedule a fresh experiment:
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models LT_DTH_SE_adLIF --datasets SHD SSC ECG --seeds 42 123 456 --logdir results/experiments/lt_dth_v1
+.\.venv\Scripts\python.exe runner.py --models LT_DTH_SE_adLIF --datasets SHD SSC ECG --seeds 42 123 456 --logdir results/not_improved
 ```
 
 Fresh training starts with random weights and a fresh optimizer at epoch zero;
@@ -83,7 +92,7 @@ measurement and aggregation follow the main runner. A cost failure does not
 require retraining.
 
 Outputs are under
-`results/experiments/lt_dth_v1/LT_DTH_SE_adLIF/<dataset>/seed_<seed>/`.
+`results/not_improved/LT_DTH_SE_adLIF/<dataset>/seed_<seed>/`.
 No existing DTH, AMT or MT-consistency results are reused as output directories.
 Use disjoint dataset/seed selections across devices and preserve repository-
 relative layouts; Git does not transfer datasets or checkpoints.
