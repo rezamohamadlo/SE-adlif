@@ -4,8 +4,8 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 ## Run status
 
-- **Status:** Training interrupted; resumable
-- **Progress:** 7 epochs completed (`0` through `6`) out of 40
+- **Status:** Training and testing finished
+- **Progress:** 40 epochs completed (`0` through `39`) out of 40
 - **Dataset:** SSC
 - **Model:** SSC_MT_TC_SE_adLIF
 - **Seed:** 456
@@ -15,12 +15,12 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 | Metric | Value | Epoch |
 |---|---:|---:|
-| Best validation accuracy | **78.94%** | 5 |
-| Validation loss | **0.6934** | 5 |
-| Training accuracy | **79.78%** | 5 |
-| Training loss | **0.665705** | 5 |
-| Gradient norm | **0.2324** | 5 |
-| Learning rate | **0.006** | 5 |
+| Best validation accuracy | **81.91%** | 28 |
+| Validation loss | **0.6357** | 28 |
+| Training accuracy | **86.68%** | 28 |
+| Training loss | **0.413886** | 28 |
+| Gradient norm | **0.1965** | 28 |
+| Learning rate | **0.006** | 28 |
 
 ## Model size and computation
 
@@ -36,7 +36,7 @@ The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds
 ## Best checkpoint
 
 ```text
-ckpt/epoch=5-step=1764.ckpt
+ckpt/epoch=28-step=8526.ckpt
 ```
 
 ## Main hyperparameters
@@ -73,3 +73,40 @@ ckpt/epoch=5-step=1764.ckpt
 ## Evaluation note
 
 This run uses `validate_on: validation`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.
+
+## Final test evaluation
+
+The best validation checkpoint was evaluated on the test split after training.
+
+| Metric | Value |
+|---|---:|
+| Test accuracy | **80.26%** |
+| Test loss | **0.7036** |
+
+<!-- test-costs:start -->
+## Test-set spike activity and inference cost
+
+Validation-selected checkpoint, epoch 28 (zero-based). No training performed.
+
+| Measurement | Value |
+|---|---:|
+| Total parameters | 1,692,790.000000 |
+| Trainable parameters | 1,691,315.000000 |
+| Hidden spikes/sample | 50,825.767295 |
+| L1 spikes/sample | 23,001.770042 |
+| L2 spikes/sample | 27,823.997252 |
+| L1 firing fraction (%) | 10.648968 |
+| L2 firing fraction (%) | 12.881480 |
+| Synaptic operations/sample | 60,142,083.342165 |
+| Analog input dense MACs/sample | 0.000000 |
+| Dense matrix GFLOPs/sample | 1.008720 |
+| Matrix + scalar arithmetic GFLOPs/sample | 1.022190 |
+| Logical GOp/sample | 1.023493 |
+| Forward runtime (ms/sample) | 1.810521 |
+
+Activity uses stored sequence lengths including minimum padding/burn-in; compute includes batch padding.
+ECG SynOps exclude analog input. Arithmetic excludes nonlinearities/comparisons; logical operations are not hardware FLOPs or energy.
+Runtime is forward-only, excluding data loading, transfer, loss and temporal aggregation.
+These test measurements are separate from the validation GFLOPs estimate above.
+Detailed measurements, checkpoint identity and environment: [COST_RESULTS.json](COST_RESULTS.json) / [COST_RESULTS.md](COST_RESULTS.md).
+<!-- test-costs:end -->

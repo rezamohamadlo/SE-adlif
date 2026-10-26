@@ -1,0 +1,970 @@
+{
+  "version": "verified_results_import_v1",
+  "created_utc": "2026-10-26T06:31:02.039332+00:00",
+  "source_root": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF",
+  "source_retained": true,
+  "training_launched": false,
+  "runs": [
+    {
+      "dataset": "SHD",
+      "seed": 42,
+      "test_accuracy": 0.9474381804466248,
+      "checkpoint": "results/experiments/mt_tc_v1/MT_TC_SE_adLIF/SHD/seed_42/ckpt/epoch=232-step=5825.ckpt",
+      "checkpoint_sha256": "4d84f9093e5dcb541d2013ca448988ddf032a04641f43a0202fbe448de633b64"
+    },
+    {
+      "dataset": "SHD",
+      "seed": 123,
+      "test_accuracy": 0.9284452199935913,
+      "checkpoint": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_123/ckpt/epoch=249-step=6250.ckpt",
+      "checkpoint_sha256": "1bc3e337dc4cf85d381ad9ab4289e871bd41144bd6fbcba30c8985bccefad577"
+    },
+    {
+      "dataset": "SHD",
+      "seed": 456,
+      "test_accuracy": 0.9381625652313232,
+      "checkpoint": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/ckpt/epoch=226-step=5675.ckpt",
+      "checkpoint_sha256": "c7f93107397cb331d93cc5b717485ddd275c39561d4ecc34451b50db12740264"
+    },
+    {
+      "dataset": "SSC",
+      "seed": 42,
+      "test_accuracy": 0.8011971116065979,
+      "checkpoint": "results/experiments/mt_tc_v1/MT_TC_SE_adLIF/SSC/seed_42/ckpt/epoch=16-step=4998.ckpt",
+      "checkpoint_sha256": "4ba69a9caf0d5b25e58c37383464d0ad282eeef1500156dcb821437bfe70511d"
+    },
+    {
+      "dataset": "SSC",
+      "seed": 123,
+      "test_accuracy": 0.8004611730575562,
+      "checkpoint": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/ckpt/epoch=26-step=7938.ckpt",
+      "checkpoint_sha256": "079cddf16996198026cbae0fad7d7a58452072b3a69c843d43e370c3dcdf88e5"
+    },
+    {
+      "dataset": "SSC",
+      "seed": 456,
+      "test_accuracy": 0.8026199340820312,
+      "checkpoint": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/ckpt/epoch=28-step=8526.ckpt",
+      "checkpoint_sha256": "d429a1b79e72b45dbcda2b9125cc921f50a315ade4d98e054c56fa8396764e6b"
+    },
+    {
+      "dataset": "ECG",
+      "seed": 42,
+      "test_accuracy": 0.877829909324646,
+      "checkpoint": "results/experiments/mt_tc_v1/MT_TC_SE_adLIF/ECG/seed_42/ckpt/epoch=288-step=2601.ckpt",
+      "checkpoint_sha256": "47b748ec912d74a21033dbbce53e3c3f647150bd1dbf277c4ab735b87dc59235"
+    },
+    {
+      "dataset": "ECG",
+      "seed": 123,
+      "test_accuracy": 0.8798414468765259,
+      "checkpoint": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/ckpt/epoch=392-step=3537.ckpt",
+      "checkpoint_sha256": "224eed47c932d9010af995a0a88e07e43f1d539a5273f207774ab3e7cdebd629"
+    },
+    {
+      "dataset": "ECG",
+      "seed": 456,
+      "test_accuracy": 0.8862195611000061,
+      "checkpoint": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/ckpt/epoch=379-step=3420.ckpt",
+      "checkpoint_sha256": "5055fc93f0b4250ccce8fbcc59c0c4dbbaade01dcf199215090250756068c8a4"
+    }
+  ],
+  "files": [
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_123\\.evaluation.lock",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/.evaluation.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes": 1,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_123\\.hydra\\config.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/.hydra/config.yaml",
+      "sha256": "b1c734367cacd514aa6e1d5a6c7ca66f10f0c39ac20fa278f7183565971030f7",
+      "bytes": 3837,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_123\\.hydra\\hydra.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/.hydra/hydra.yaml",
+      "sha256": "779efe4b329587316e2db16125568b96a39802e57965de8fc21cd643e2447db5",
+      "bytes": 4762,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_123\\.hydra\\overrides.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/.hydra/overrides.yaml",
+      "sha256": "ab666850e09b22ab31ce00047f8919bf9f5c700d2b00b7210db2fc3b7d1262e0",
+      "bytes": 686,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_123\\ckpt\\epoch=392-step=3537.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/ckpt/epoch=392-step=3537.ckpt",
+      "sha256": "224eed47c932d9010af995a0a88e07e43f1d539a5273f207774ab3e7cdebd629",
+      "bytes": 120746,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_123\\ckpt\\last.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/ckpt/last.ckpt",
+      "sha256": "2297291531ee311e3ebdde8c7fcfdb1dec8c68a55b452df25ecdf0b4223fbf51",
+      "bytes": 120746,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_123\\completed.txt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/completed.txt",
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25",
+      "bytes": 47,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_123\\COST_RESULTS.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/COST_RESULTS.json",
+      "sha256": "0b59125e578b8b09bb5efb051aec1a6435badaa4915c6f518f54eae47fac44fe",
+      "bytes": 14727,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_123\\COST_RESULTS.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/COST_RESULTS.md",
+      "sha256": "1b75b24dafe2254c9ba3a982714a75144d463ec3d77ed09c0eb28a689acb7ccc",
+      "bytes": 932,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_123\\FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/FULL_RUN_CONFIG.json",
+      "sha256": "b84ffd8d90db5db9b998571a4fdfd0cd7b874836da4014688ace4d4b6474b1cf",
+      "bytes": 5072,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_123\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+      "sha256": "c5cccb64a2febe627027b1ef263e865a3409659711b19315e00492f0b64e974b",
+      "bytes": 4215,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_123\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "2e5b492ea0842b4277aafd5fbaff4760c03a30102a6574b77972a49bc5d9b8d0",
+      "bytes": 73864,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_123\\out.log",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/out.log",
+      "sha256": "3a6665bc7b5c2d653d0eab572ee0e7fbb1c130d3b565e26dd7d1cb37fd871b9a",
+      "bytes": 128,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_123\\TRAINING_SUMMARY.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/TRAINING_SUMMARY.md",
+      "sha256": "ccb701c708bb3e751440ad466caad7b7449e6ae0db6eedcb6fb981842fea88cd",
+      "bytes": 3909,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\.evaluation.lock",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/.evaluation.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes": 1,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\.hydra\\config.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/.hydra/config.yaml",
+      "sha256": "65c5109ac5216c8adcfe4031fac3f63f4c1b108785182b5e61e97acf4b455fac",
+      "bytes": 3869,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\.hydra\\hydra.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/.hydra/hydra.yaml",
+      "sha256": "550c5b100522bcf8a21945e0ce93e1f59e2ce0ef3f143e252dff0db7b5c6650f",
+      "bytes": 4651,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\.hydra\\overrides.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/.hydra/overrides.yaml",
+      "sha256": "c3f0168fcde1c897ce20ef52e49934f51b71c22dd6324f6afaeb6df780f9eb63",
+      "bytes": 738,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\ckpt\\epoch=288-step=2601.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/ckpt/epoch=288-step=2601.ckpt",
+      "sha256": "47b748ec912d74a21033dbbce53e3c3f647150bd1dbf277c4ab735b87dc59235",
+      "bytes": 120874,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\ckpt\\last.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/ckpt/last.ckpt",
+      "sha256": "7b70ce7f2165965dcf4ba892ad23a7a5cc3d9bb3bacd9bd1658fa1d42be4f461",
+      "bytes": 121066,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\completed.txt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/completed.txt",
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25",
+      "bytes": 47,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\COST_RESULTS.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/COST_RESULTS.json",
+      "sha256": "8fcacc32b9d7a86a69ed31ee346a3963bb6ac12d32c548de45acf6fea120f319",
+      "bytes": 14532,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\COST_RESULTS.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/COST_RESULTS.md",
+      "sha256": "b5d000ac0e90708e89f00a93d197058915fd37ac6e8d2a4a239049b8f488c759",
+      "bytes": 932,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/FULL_RUN_CONFIG.json",
+      "sha256": "7ebfc20b5a1134c45952cce20531e280263c67897496ce4b7ae5caba1cca58ef",
+      "bytes": 5038,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+      "sha256": "41fe656d1e0b69f5e9dd447317fd7d71cca7b0ee36cc651a303ea9665eab0027",
+      "bytes": 4247,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "2f35d7fa6d0146d95b12ad1b4bd57d573679490cde4688f60a55d9cadd9cbd41",
+      "bytes": 73896,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\out.log",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/out.log",
+      "sha256": "ffe32e28e7d76c289281038dc95160c2bf527801512f88d64343090332143aac",
+      "bytes": 303,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_42\\TRAINING_SUMMARY.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/TRAINING_SUMMARY.md",
+      "sha256": "49d3c32da83c9638b20d13345525c429f16ec1264e448c9cd52de31ec8939123",
+      "bytes": 3890,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_456\\.evaluation.lock",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/.evaluation.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes": 1,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_456\\.hydra\\config.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/.hydra/config.yaml",
+      "sha256": "4bbcebdaf329f4405dced86528c161407185b9b8a284e9d69354eb450f0d5712",
+      "bytes": 3837,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_456\\.hydra\\hydra.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/.hydra/hydra.yaml",
+      "sha256": "7dae0c91598d3abf529c68b7f3371d574ccdf166a84daa9bac9e8c970bd310cb",
+      "bytes": 4762,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_456\\.hydra\\overrides.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/.hydra/overrides.yaml",
+      "sha256": "cbcdd9bb1edb16a3a3a302014bee4befd100706c5646cb4531c26072953c538c",
+      "bytes": 686,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_456\\ckpt\\epoch=379-step=3420.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/ckpt/epoch=379-step=3420.ckpt",
+      "sha256": "5055fc93f0b4250ccce8fbcc59c0c4dbbaade01dcf199215090250756068c8a4",
+      "bytes": 120746,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_456\\ckpt\\last.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/ckpt/last.ckpt",
+      "sha256": "c3c7188fcb6f1682bb47f86ba7bd4ccfa5844d3d95c700958cae4eb526f845b1",
+      "bytes": 120746,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_456\\completed.txt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/completed.txt",
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25",
+      "bytes": 47,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_456\\COST_RESULTS.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/COST_RESULTS.json",
+      "sha256": "a96f2ef314f778d9a6dc99103516d32183b0fd04bba9c9fd64f5ca0cf2952d8d",
+      "bytes": 14728,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_456\\COST_RESULTS.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/COST_RESULTS.md",
+      "sha256": "b3c9942dad6d2a4855be00c789d5425f18858847e20625ecf3773ae4daa79f46",
+      "bytes": 932,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_456\\FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/FULL_RUN_CONFIG.json",
+      "sha256": "ab7c2c8709e23bfd1cfa38587c62f411f3941a661af0ea7392eb7f20dd141d79",
+      "bytes": 5072,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_456\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+      "sha256": "9a9f04e9b70fe9c05a5cc00f9924df232a21c8f7a153f2abc417ed2c0f748de1",
+      "bytes": 4215,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_456\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "a564cdeec1a73b5ac93c7ecb2a8e1e397fc78b9e675a3038e1b145e28613826f",
+      "bytes": 73916,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_456\\out.log",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/out.log",
+      "sha256": "99c4b769897d79f876e577b31b822d23b59f8cdccc5c2dd5229065ebaffb8b0e",
+      "bytes": 128,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\ECG\\seed_456\\TRAINING_SUMMARY.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/TRAINING_SUMMARY.md",
+      "sha256": "c3d6dac175b3f8754ae415f1c0e13f842c96a57135a78b2dedde6a3b5c764627",
+      "bytes": 3909,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\RESULTS.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/RESULTS.md",
+      "sha256": "51e883f4ae8a8091f76950ad2159297b428be072b2f706671cba510d789120d4",
+      "bytes": 3083,
+      "previous_local_preserved": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/transfer_history/2026-10-26-before-completion-import/RESULTS.md"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_123\\.evaluation.lock",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_123/.evaluation.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes": 1,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_123\\.hydra\\config.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_123/.hydra/config.yaml",
+      "sha256": "197a57620b0b6bc9d77d00f0d07dd6e56bd40045cf93a466105651389601ff15",
+      "bytes": 4025,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_123\\.hydra\\hydra.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_123/.hydra/hydra.yaml",
+      "sha256": "1837b9d632ae6cce44e73e98496cd1787059f4fe0d220db22c7806ccf3b20dee",
+      "bytes": 4656,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_123\\.hydra\\overrides.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_123/.hydra/overrides.yaml",
+      "sha256": "4b24be693ce91bdb569750bc9f7a15344825f31abf77ecd5039b05ab9e5cf48e",
+      "bytes": 679,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_123\\ckpt\\epoch=249-step=6250.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_123/ckpt/epoch=249-step=6250.ckpt",
+      "sha256": "1bc3e337dc4cf85d381ad9ab4289e871bd41144bd6fbcba30c8985bccefad577",
+      "bytes": 5484522,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_123\\ckpt\\last.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_123/ckpt/last.ckpt",
+      "sha256": "36a5bcf4e78854449c99a09874173c97cc1cc38428890cceaefe87a86b2ab6e8",
+      "bytes": 5484522,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_123\\completed.txt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_123/completed.txt",
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25",
+      "bytes": 47,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_123\\COST_RESULTS.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_123/COST_RESULTS.json",
+      "sha256": "7684ddbac5b9692bf04d9fc008fe64fc9dbfc73dbe7c33001f0d323513362f8d",
+      "bytes": 15054,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_123\\COST_RESULTS.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_123/COST_RESULTS.md",
+      "sha256": "d929a64076ed39a18c5e69a5d966419ebbb549ca4e3d5dd8ac4118b633d40056",
+      "bytes": 926,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_123\\FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_123/FULL_RUN_CONFIG.json",
+      "sha256": "d10875419be493701dbeb46236297287d02f3245e0bdfe0a0ad651f117e8fcbf",
+      "bytes": 5297,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_123\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+      "sha256": "861a299fadd62db8a5cc5f4cd71ebbe32d40d92aa21eca9f289b5612c402c8da",
+      "bytes": 4417,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_123\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "20db7fd5819ec37e64598d9de5a8a2a0ef1fabdb8c4ea2a041567228fe885a75",
+      "bytes": 67566,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_123\\out.log",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_123/out.log",
+      "sha256": "da009923673b0cd7a4266a64a4b4f24f2d1396802197b3897706149af74cc48a",
+      "bytes": 120,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_123\\TRAINING_SUMMARY.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_123/TRAINING_SUMMARY.md",
+      "sha256": "f07aff3e28223e5e72adcd29cec78e598da82ccb87858527a59534bc9dcd8fde",
+      "bytes": 3887,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\.evaluation.lock",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/.evaluation.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes": 1,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\.hydra\\config.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/.hydra/config.yaml",
+      "sha256": "969dd30285dfe76361cc55efcd366d46fe48426581f146695b1dec8b0822c676",
+      "bytes": 4057,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\.hydra\\hydra.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/.hydra/hydra.yaml",
+      "sha256": "609a919ae81e450f845225c9cc980a44b9d2709e78821837f3723225753c3713",
+      "bytes": 4630,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\.hydra\\overrides.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/.hydra/overrides.yaml",
+      "sha256": "8a94d9432c3eea7fc2b4e5c81b73ae28992744e89ab739f909d05fd122a49143",
+      "bytes": 731,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\ckpt\\epoch=232-step=5825.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/ckpt/epoch=232-step=5825.ckpt",
+      "sha256": "4d84f9093e5dcb541d2013ca448988ddf032a04641f43a0202fbe448de633b64",
+      "bytes": 5484714,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\ckpt\\last.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/ckpt/last.ckpt",
+      "sha256": "77ba68afb9e9224ce905281c0acd38c48bb7b657246417404a78b9208af96e39",
+      "bytes": 5484714,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\completed.txt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/completed.txt",
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25",
+      "bytes": 47,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\COST_RESULTS.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/COST_RESULTS.json",
+      "sha256": "99d1b98736bf3d62284bfab0006ec4db508754e8bc6ab0be242428d1d47313aa",
+      "bytes": 14861,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\COST_RESULTS.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/COST_RESULTS.md",
+      "sha256": "a3b205a3678931436faa516a8281c35c8cb8e7542fcfce5768a5e6c71e88ada3",
+      "bytes": 927,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/FULL_RUN_CONFIG.json",
+      "sha256": "b9f27e4af8947e42bcc7d714d175c3231e5faac6ec091b1c6c3badcc194bc837",
+      "bytes": 5263,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+      "sha256": "83eb1bad16c31374d90d9c6485e236476d319ff1458652c35e38a12a1f1b3376",
+      "bytes": 4449,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "7487e1a7327df5aeb8bff0bcd6cde8d40b1dfab15535e74fb55510296d3561fb",
+      "bytes": 67599,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\out.log",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/out.log",
+      "sha256": "9a03f023bd1a3ecd18e796afcd7a6b1d064fa4685b5a479b2471cc477bdf1a61",
+      "bytes": 231,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_42\\TRAINING_SUMMARY.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_42/TRAINING_SUMMARY.md",
+      "sha256": "ed16d3a231f2f70cbc414e4686847a6f32bb38b4bc28b72f369fe36b21e5d596",
+      "bytes": 3869,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_456\\.evaluation.lock",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/.evaluation.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes": 1,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_456\\.hydra\\config.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/.hydra/config.yaml",
+      "sha256": "731fba75982bc16d43a059d88806c3290d9bf51441ece742b2fb1faa4373ce91",
+      "bytes": 4025,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_456\\.hydra\\hydra.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/.hydra/hydra.yaml",
+      "sha256": "f92d7c847da286c71e935e778e9c537fbbc88043049ed90cbae029e1e9a50f82",
+      "bytes": 4656,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_456\\.hydra\\overrides.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/.hydra/overrides.yaml",
+      "sha256": "0f74e6741a9e38c6017fb87797824e735be80a196a9c49c7d33f5cf73eda21e2",
+      "bytes": 679,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_456\\ckpt\\epoch=226-step=5675.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/ckpt/epoch=226-step=5675.ckpt",
+      "sha256": "c7f93107397cb331d93cc5b717485ddd275c39561d4ecc34451b50db12740264",
+      "bytes": 5484522,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_456\\ckpt\\last.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/ckpt/last.ckpt",
+      "sha256": "88ed318303f152f95a708ce0617c936e0e3fafa542af91bd3c7065e87c3082bc",
+      "bytes": 5484522,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_456\\completed.txt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/completed.txt",
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25",
+      "bytes": 47,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_456\\COST_RESULTS.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/COST_RESULTS.json",
+      "sha256": "60dc57b07a517310db5fe94ee91c70e67cf8aabfcc34da8df191ee55b8a6cbbb",
+      "bytes": 15054,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_456\\COST_RESULTS.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/COST_RESULTS.md",
+      "sha256": "9aa4f80656efc4f44473998c4c6c231a339c6b0cfdb7a1a9a8b2ce8bacfd6d9f",
+      "bytes": 926,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_456\\FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/FULL_RUN_CONFIG.json",
+      "sha256": "48fdf3ae631e305755648a18b62e1e138137d2a8242ae0dea3a4761acb8593cd",
+      "bytes": 5297,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_456\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+      "sha256": "da1c8f3c589382d75c69ca54e2c339d21591ea2165f72580afcc71b6be6d327f",
+      "bytes": 4417,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_456\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "f6a27726b3cebcb898417e6d32337967045a0b0edf008ad3994a1813937d49d9",
+      "bytes": 67996,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_456\\out.log",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/out.log",
+      "sha256": "15cdb02d4371b8fd03f99ae29cfe6a71a62de20f522cf43ca3fa8857e07e2f75",
+      "bytes": 120,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SHD\\seed_456\\TRAINING_SUMMARY.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/TRAINING_SUMMARY.md",
+      "sha256": "e1fac4b02718e70c76d6fd1bfb5571081dadb8c9c3791163e5f5fd572ad2ff29",
+      "bytes": 3887,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_123\\.evaluation.lock",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/.evaluation.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes": 1,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_123\\.hydra\\config.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/.hydra/config.yaml",
+      "sha256": "f303fe63411f844d8daf4050f57458385074d05096465031697703c4b6969eb7",
+      "bytes": 3974,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_123\\.hydra\\hydra.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/.hydra/hydra.yaml",
+      "sha256": "15bb7511d224f53d061f3688dff93e481a63278396c4bc3b058e9b934a721dab",
+      "bytes": 5125,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_123\\.hydra\\overrides.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/.hydra/overrides.yaml",
+      "sha256": "988cda960476ebb10e0a3eef76345c9a8a13e292232de466cc82434bc55beb97",
+      "bytes": 908,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_123\\ckpt\\epoch=26-step=7938.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/ckpt/epoch=26-step=7938.ckpt",
+      "sha256": "079cddf16996198026cbae0fad7d7a58452072b3a69c843d43e370c3dcdf88e5",
+      "bytes": 20366570,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_123\\ckpt\\last.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/ckpt/last.ckpt",
+      "sha256": "858375247529d8765b6522e06c635e7291ca4d6aef8da4c40bfcf36f43d39547",
+      "bytes": 20366570,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_123\\completed.txt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/completed.txt",
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25",
+      "bytes": 47,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_123\\COST_RESULTS.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/COST_RESULTS.json",
+      "sha256": "8ca30dfd7b7525eeac564fe5a7e73206b17af60c652436f3e0edd0395f7301d9",
+      "bytes": 14997,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_123\\COST_RESULTS.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/COST_RESULTS.md",
+      "sha256": "124711327cf6c5f7acde37f2c5428f635d248fe0077513037153cfeb241d8fa3",
+      "bytes": 932,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_123\\FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/FULL_RUN_CONFIG.json",
+      "sha256": "2eb1bc32d0ce34109974e94bc66a8c5c6b1ce4c3a6ed5b91a1fbbd569894ee9d",
+      "bytes": 5229,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_123\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+      "sha256": "8fe9ed8ddad4a2131137754360d0fe3204bf03156c0f8e5eef89ec5a676e5767",
+      "bytes": 4360,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_123\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "11313eefb0973411a2e7f9a574a35bbaa0ef68a98778d732d99cb0836172e734",
+      "bytes": 37900,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_123\\out.log",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/out.log",
+      "sha256": "9982cca633949d80766acb1c8852c4f30c5f62df981f059d1cf84b9be2be6a09",
+      "bytes": 120,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_123\\TRAINING_SUMMARY.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/TRAINING_SUMMARY.md",
+      "sha256": "09200bda23eb4f06141edbc59b04626f2c555402c165a6ee750b1d7058919206",
+      "bytes": 3895,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\.evaluation.lock",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/.evaluation.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes": 1,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\.hydra\\config.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/.hydra/config.yaml",
+      "sha256": "109525dc6c240eccfc186886ebdbd41815d3a2117b8d2bbdd1d941aae38c5e27",
+      "bytes": 3940,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\.hydra\\hydra.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/.hydra/hydra.yaml",
+      "sha256": "6eaf81e938315bd11dce3a8f6bae5c8119e148eb085442ceb4a66487ff277d6c",
+      "bytes": 4926,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\.hydra\\overrides.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/.hydra/overrides.yaml",
+      "sha256": "d0e7b16ce89ff1b3d4fc000054dbf451f8b1db637d0bb5b5bc2512fdf68ea248",
+      "bytes": 874,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\ckpt\\epoch=16-step=4998.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/ckpt/epoch=16-step=4998.ckpt",
+      "sha256": "4ba69a9caf0d5b25e58c37383464d0ad282eeef1500156dcb821437bfe70511d",
+      "bytes": 20366442,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\ckpt\\last.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/ckpt/last.ckpt",
+      "sha256": "6b850ba9305fd7a7a039cd821e38974e5aea721b695e45ba67c9ba81c4ec4fa5",
+      "bytes": 20366442,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\completed.txt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/completed.txt",
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25",
+      "bytes": 47,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\COST_RESULTS.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/COST_RESULTS.json",
+      "sha256": "c1b1753b31ebf3e29b51ba2e0c813dc5527f0fd9458efa08e76277a31dd2d63f",
+      "bytes": 14734,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\COST_RESULTS.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/COST_RESULTS.md",
+      "sha256": "af9f3db65fb029135e598fbd55e7de57979e996d6396332f22e5949d66f91d9c",
+      "bytes": 932,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/FULL_RUN_CONFIG.json",
+      "sha256": "405a08d499235797911eb6aeac706c2c424c8c96432075a7386b1298ac8bbbb2",
+      "bytes": 5195,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+      "sha256": "1f9861273a4aedfffdf04acc09506e993d1aef24307f90728d40179000e9a547",
+      "bytes": 4326,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "9fe87f621c48405ffa7cb496bbfa350f09aaa80f6da07a2cbda5e0147c319f07",
+      "bytes": 37926,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\out.log",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/out.log",
+      "sha256": "bca443d44d9e5fd6f2ecaa74252782ccf081bb5b1277c5fd953a77f37d7e6ac8",
+      "bytes": 120,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_42\\TRAINING_SUMMARY.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/TRAINING_SUMMARY.md",
+      "sha256": "0045cb87cc670a34710e10f93ef5a4a97b3b53a1a947f2fb5837687c1a349d8f",
+      "bytes": 3876,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_456\\.evaluation.lock",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/.evaluation.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes": 1,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_456\\.hydra\\config.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/.hydra/config.yaml",
+      "sha256": "faa24cbc104fc9b94dbadf07c683ad89f0d5927367104ea47dd9029f26b6f709",
+      "bytes": 4057,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_456\\.hydra\\hydra.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/.hydra/hydra.yaml",
+      "sha256": "d0fc6348942ad5c790884df143da7043068f6575b6d05c1f7f5874c00d34c01a",
+      "bytes": 5417,
+      "previous_local_preserved": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/transfer_history/2026-10-26-before-completion-import/SSC/seed_456/.hydra/hydra.yaml"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_456\\.hydra\\overrides.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/.hydra/overrides.yaml",
+      "sha256": "158574fdfb4a462621bacadbe54c2192390e79cd5012d29519d51fafd77cb140",
+      "bytes": 1011,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_456\\ckpt\\epoch=28-step=8526.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/ckpt/epoch=28-step=8526.ckpt",
+      "sha256": "d429a1b79e72b45dbcda2b9125cc921f50a315ade4d98e054c56fa8396764e6b",
+      "bytes": 20366954,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_456\\ckpt\\last.ckpt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/ckpt/last.ckpt",
+      "sha256": "cece2d9284a57e2cda19a15799c84cfa6aae63a7ffcfd54414aa7415fcd7d890",
+      "bytes": 20366954,
+      "previous_local_preserved": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/transfer_history/2026-10-26-before-completion-import/SSC/seed_456/ckpt/last.ckpt"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_456\\completed.txt",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/completed.txt",
+      "sha256": "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25",
+      "bytes": 47,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_456\\COST_RESULTS.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/COST_RESULTS.json",
+      "sha256": "5fdb2fac0d60fd77bd8b85d5b26856b1b932eb3eb1ee125c07456747a9f08d43",
+      "bytes": 15086,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_456\\COST_RESULTS.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/COST_RESULTS.md",
+      "sha256": "4e0737216927e8e208a772dcc031bdc56e6ef1ace61cbaed6686adbf1a7272b2",
+      "bytes": 933,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_456\\FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/FULL_RUN_CONFIG.json",
+      "sha256": "93c5ef31c35cd1e0856cee55a3d9977e19b85af956f31398d6d4e518b6d4d3b6",
+      "bytes": 5229,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_456\\logs\\mlp_snn\\version_0\\hparams.yaml",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+      "sha256": "f7030d2377f1d06f15f8b4718be8224ce7d0cd0989f1bc3fc62b555b446c902b",
+      "bytes": 4443,
+      "previous_local_preserved": null
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_456\\logs\\mlp_snn\\version_0\\metrics.csv",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "243c59dd9f82f341fc082e4eb9da8874ea765577e40d60a99d0ded49d373472b",
+      "bytes": 38727,
+      "previous_local_preserved": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/transfer_history/2026-10-26-before-completion-import/SSC/seed_456/logs/mlp_snn/version_0/metrics.csv"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_456\\out.log",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/out.log",
+      "sha256": "0cfdcf190c87d390d561d63684e36b3ba0c3d0afe0d5e7b8a517b00b13581258",
+      "bytes": 231,
+      "previous_local_preserved": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/transfer_history/2026-10-26-before-completion-import/SSC/seed_456/out.log"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\SSC\\seed_456\\TRAINING_SUMMARY.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/TRAINING_SUMMARY.md",
+      "sha256": "13c8d8078d58f922af33cd3d94573cac8f5c0246f26788a5ae972d866cc09d73",
+      "bytes": 3896,
+      "previous_local_preserved": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/transfer_history/2026-10-26-before-completion-import/SSC/seed_456/TRAINING_SUMMARY.md"
+    },
+    {
+      "source": "F:\\reza\\results\\experiments\\mt_consistency_runner_v1\\MT_TC_SE_adLIF\\transfer_history\\2026-10-25-seed42\\RESULTS.md",
+      "destination": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/transfer_history/2026-10-25-seed42/RESULTS.md",
+      "sha256": "f3fc14b7943d38cf7b2a7a95d44434e1e3a35d2a6226a641736a39d1e07a645d",
+      "bytes": 3039,
+      "previous_local_preserved": null
+    }
+  ]
+}

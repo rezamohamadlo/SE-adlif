@@ -1,0 +1,478 @@
+{
+  "version": "runner_test_costs_v1",
+  "status": "complete",
+  "dataset": "ECG",
+  "seed": 123,
+  "created_utc": "2026-10-25T22:18:32.326024+00:00",
+  "checkpoint": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/ckpt/epoch=392-step=3537.ckpt",
+  "checkpoint_sha256": "224eed47c932d9010af995a0a88e07e43f1d539a5273f207774ab3e7cdebd629",
+  "best_epoch": 392,
+  "saved_config": {
+    "random_seed": 123,
+    "logdir": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123",
+    "datadir": "data",
+    "cachedir": "data/cache",
+    "ckpt_path": null,
+    "init_ckpt_path": null,
+    "run_test": true,
+    "scheduler": "plateau",
+    "scheduler_min_lr": 0.0,
+    "gradient_clip_val": 1.5,
+    "device": "cuda:0",
+    "early_stopping": false,
+    "early_stopping_patience": 50,
+    "early_stopping_min_delta": 0.001,
+    "dataset": {
+      "_target_": "datasets.ecg.ECGLDM",
+      "data_path": "data",
+      "batch_size": 64,
+      "num_workers": 0,
+      "num_classes": 6,
+      "valid_fraction": 0.05,
+      "random_seed": 42
+    },
+    "exp_name": "ECG_MT_TC_SE_adLIF_2layer",
+    "two_layers": true,
+    "alpha": 5.0,
+    "c": 0.2,
+    "dt": 1.0,
+    "l1": {
+      "cell": "mt_se_adlif",
+      "input_size": 4,
+      "n_neurons": 36,
+      "tau_u_range": [
+        5,
+        25
+      ],
+      "tau_w_range": [
+        60,
+        300
+      ],
+      "q": 120,
+      "alpha": 5.0,
+      "c": 0.2,
+      "dt": 1.0,
+      "tau_w_slow_range": [
+        300,
+        600
+      ]
+    },
+    "l2": {
+      "cell": "mt_se_adlif",
+      "input_size": 36,
+      "n_neurons": 36,
+      "tau_u_range": [
+        5,
+        25
+      ],
+      "tau_w_range": [
+        60,
+        300
+      ],
+      "q": 120,
+      "alpha": 5.0,
+      "c": 0.2,
+      "dt": 1.0,
+      "tau_w_slow_range": [
+        300,
+        600
+      ]
+    },
+    "l_out": {
+      "input_size": 36,
+      "n_neurons": 6,
+      "tau_u_range": [
+        3,
+        3
+      ],
+      "dt": 1.0
+    },
+    "n_epochs": 400,
+    "dropout": 0.15,
+    "batch_size": 64,
+    "loss_agg": "summed_membrane_potentials",
+    "tracking_metric": "val_acc",
+    "tracking_mode": "max",
+    "lr": 0.01,
+    "factor": 0.9,
+    "patience": 9999,
+    "paper_baseline": {
+      "version": "paper_classification_v1",
+      "source": {
+        "doi": "10.1038/s41467-025-60878-z",
+        "document": "reference_paper.pdf",
+        "locations": "Table 7 (page 35); training/preprocessing methods (pages 28-29)"
+      },
+      "common": {
+        "lr_optimizer": "Adam",
+        "adam_betas": [
+          0.9,
+          0.999
+        ],
+        "adam_eps": 1e-08,
+        "dropout": 0.15,
+        "gradient_clip_val": 1.5,
+        "alpha": 5.0,
+        "dt": 1.0,
+        "tracking_metric": "val_acc",
+        "tracking_mode": "max"
+      },
+      "reproduction_policy": {
+        "training_seeds": [
+          42,
+          123,
+          456
+        ],
+        "split_seed": 42,
+        "num_workers": 0,
+        "early_stopping": false,
+        "scheduler": "plateau",
+        "patience": 9999,
+        "factor": 0.9,
+        "cache_namespace": "controlled_v2"
+      },
+      "datasets": {
+        "SHD": {
+          "report_label": "SHD*",
+          "lr": 0.01,
+          "batch_size": 256,
+          "n_epochs": 300,
+          "validate_on": 0.2,
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4,
+          "pad_to_min_size": 250,
+          "ignore_first_timesteps": 10,
+          "reference_architecture": {
+            "layers": 2,
+            "neurons_per_layer": 360,
+            "q": 120,
+            "c": 0.4,
+            "tau_u_range": [
+              5,
+              25
+            ],
+            "tau_w_range": [
+              60,
+              300
+            ],
+            "output_tau": 15
+          }
+        },
+        "SSC": {
+          "lr": 0.006,
+          "batch_size": 256,
+          "n_epochs": 40,
+          "validation": "official",
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4,
+          "pad_to_min_size": 300,
+          "ignore_first_timesteps": 10,
+          "reference_architecture": {
+            "layers": 2,
+            "neurons_per_layer": 720,
+            "q": 120,
+            "c": 0.4,
+            "tau_u_range": [
+              5,
+              25
+            ],
+            "tau_w_range": [
+              60,
+              300
+            ],
+            "output_tau": 15
+          }
+        },
+        "ECG": {
+          "lr": 0.01,
+          "batch_size": 64,
+          "n_epochs": 400,
+          "valid_fraction": 0.05,
+          "reference_architecture": {
+            "layers": 2,
+            "neurons_per_layer": 36,
+            "q": 120,
+            "c": 0.2,
+            "tau_u_range": [
+              5,
+              25
+            ],
+            "tau_w_range": [
+              60,
+              300
+            ],
+            "output_tau": 3
+          }
+        }
+      }
+    },
+    "paper_baseline_version": "paper_classification_v1",
+    "paper_baseline_deviations": [
+      "model_variant=MT_TC_SE_adLIF",
+      "training_objective=mt_temporal_consistency_v1",
+      "temporal_consistency.weight=0.1",
+      "temporal_consistency.window=5"
+    ],
+    "paper_baseline_dataset": "ECG",
+    "training_objective": "mt_temporal_consistency_v1",
+    "temporal_consistency": {
+      "weight": 0.1,
+      "window": 5
+    },
+    "launcher_script": "runner.py",
+    "model_variant": "MT_TC_SE_adLIF",
+    "run_mode": "ours",
+    "launcher_logdir": "results/experiments/mt_consistency_runner_v1",
+    "evaluation_protocol": "paper_classification_v1_mt_temporal_consistency_v1"
+  },
+  "data_sha256": "ef9407704045ad4a6f05ea25e0ae214fd618c54b2e3c712e0a4ff83987872e15",
+  "environment": {
+    "python": "3.11.0",
+    "torch": "2.6.0+cu124",
+    "cuda": "12.4",
+    "device": "cuda:0",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "matmul_precision": "high",
+    "timing_repeats": 3,
+    "warmup": 2,
+    "source_sha256": {
+      "measure_run_costs.py": "0848f48f91bb0d18eda610d7444d746ae6fff61d905df7cc672e2e6f4602fa9d",
+      "cost_records.py": "27afa30e1b12377df10a20d85444fc5c73726321e31a441aa2a9a0558d26408c",
+      "measure_shd_costs.py": "e748071771bf1f60e3c3287fd8077b62f0afd9b8e7493bd6c0b8ebafcc90417b",
+      "measure_reference_costs.py": "ee96fe7617899d564a3c3acbb589c5dd717ed0e2ddab4eaa1e615c5f9004d289",
+      "models/alif.py": "a07e84b2a6238a67585b9f927be4c5f4f514fb28234d24acecfc6c2608aa480d",
+      "models/helpers.py": "d50e6d7f16a75b4c793ce16e8c6629469ffe60ca0ec4c792b30409fec606fadd",
+      "models/li.py": "8a299b75f580f419616b7b345e857b01c62d96f5fbd1e769d67675b0c2fc7826",
+      "models/lif.py": "2160d78d952f94cd222cf18def1277cc69b0447620d1e4d03a50fba737bf8500",
+      "models/ours/__init__.py": "1faa70f74752d4b3322495efae107f96ed979fdabfe33a22df921cb55c8a1b38",
+      "models/ours/amt_adlif.py": "3d347519cf69d1fde7dda1d9dcff1dea77e42b5d1abab9b21bb693310a12e9e5",
+      "models/ours/da_adlif.py": "2ec0386304ad2baea2be7c9712e2ba84d4b7f16da7d75c1145c5a763725cd3c7",
+      "models/ours/dth_adlif.py": "a53181fbe8c8bf7b55d9b79eca47f6b5bd49ff1e324b9a8470fc16ffeeda026d",
+      "models/ours/fp_adlif.py": "fbdb51b844808fc1a713188a282fed1109043dd6c7293e6fdb7614648441572f",
+      "models/ours/lg_dth_adlif.py": "1d1fdbfd34d374ebbeeb90a6ca74533a6ff41c2eaab56aa15c3a3bb56c310e7d",
+      "models/ours/lt_dth_adlif.py": "78848748b567429940be0771326442c44c0f6d148dac04a4a2c756f5037cd07c",
+      "models/ours/mr_adlif.py": "f0525868bb8bfd0265b837bf5ab5b60add8cd043c7524233b567cab00b20d8ed",
+      "models/ours/mt_adlif.py": "772c504f595cb28f170642870243d344c4fea749b94bcecc73486ad7ade4068a",
+      "models/ours/mt_consistency.py": "31b86ef93883ecb3b259f5ee5d6babd0f7ac5b0433204df0d2975e6806c7739a",
+      "models/ours/mt_dth_adlif.py": "45c3fb6298e636b4fb09c11c93ec3f02bb333ecb0ff88b7032fca3b74c50986b",
+      "models/ours/sa_mt_adlif.py": "20b6b462d3872cf959dd03eda4e9f0d686963542d949b0e406b56813571cf840",
+      "models/pl_module.py": "435f09ad63edde5f1e2aeb7a0ac4ae2c2b7e7cdc2fc28159dfa0851a23f9e1cf",
+      "models/pl_module_compress.py": "9e39ba081c9ddcfea67a2ac436d6dc527736b72371369ee965b4d8e55a756ed2",
+      "models/rnn.py": "a53c1a31c36a999e3417ce6dd156693683a0b88411bb88375403fa55389379ab"
+    }
+  },
+  "scopes": {
+    "activity": "Stored sequence extent before batch padding, including configured minimum padding and burn-in",
+    "compute": "Executed batch-padded timesteps; MLPSNN.forward only",
+    "timing": "Synchronized forward wall time; excludes transfer/loading/loss/temporal aggregation",
+    "synops": "Dense fan-out event estimate; ECG analog input projection excluded and stored as dense MACs",
+    "arithmetic": "Matrix MAC=2 FLOPs; selected scalar arithmetic; nonlinearities/comparisons excluded",
+    "logical": "Matrix operations plus scalar operations, nonlinearities/comparisons each counted as one; not hardware FLOPs"
+  },
+  "measurements": {
+    "totals": {
+      "correct": 161399,
+      "targets": 183441,
+      "samples": 141,
+      "padded_sample_timesteps": 183441,
+      "sequence_sample_timesteps": 183441,
+      "synops_padded": 222027084.0,
+      "synops_sequence": 222027084.0,
+      "l1_spikes_padded": 1651689.0,
+      "l1_spikes_sequence": 1651689.0,
+      "l2_spikes_padded": 2457618.0,
+      "l2_spikes_sequence": 2457618.0
+    },
+    "operation_profiles": {
+      "l1": {
+        "period": 1,
+        "steps": [
+          {
+            "per_sample": {
+              "exp": 36,
+              "mul": 576,
+              "add": 288,
+              "reciprocal": 36,
+              "sigmoid": 0,
+              "bias_add": 36,
+              "abs": 36,
+              "heaviside": 36,
+              "sub": 108,
+              "rsub": 36
+            },
+            "per_batch": {
+              "exp": 108,
+              "mul": 360,
+              "add": 108,
+              "reciprocal": 108,
+              "sigmoid": 36,
+              "bias_add": 0,
+              "abs": 0,
+              "heaviside": 0,
+              "sub": 0,
+              "rsub": 252
+            }
+          },
+          {
+            "per_sample": {
+              "exp": 36,
+              "mul": 612,
+              "add": 288,
+              "reciprocal": 36,
+              "sigmoid": 0,
+              "bias_add": 36,
+              "abs": 36,
+              "heaviside": 36,
+              "sub": 108,
+              "rsub": 36
+            },
+            "per_batch": {
+              "exp": 108,
+              "mul": 324,
+              "add": 108,
+              "reciprocal": 108,
+              "sigmoid": 36,
+              "bias_add": 0,
+              "abs": 0,
+              "heaviside": 0,
+              "sub": 0,
+              "rsub": 252
+            }
+          }
+        ]
+      },
+      "l2": {
+        "period": 1,
+        "steps": [
+          {
+            "per_sample": {
+              "exp": 36,
+              "mul": 576,
+              "add": 288,
+              "reciprocal": 36,
+              "sigmoid": 0,
+              "bias_add": 36,
+              "abs": 36,
+              "heaviside": 36,
+              "sub": 108,
+              "rsub": 36
+            },
+            "per_batch": {
+              "exp": 108,
+              "mul": 360,
+              "add": 108,
+              "reciprocal": 108,
+              "sigmoid": 36,
+              "bias_add": 0,
+              "abs": 0,
+              "heaviside": 0,
+              "sub": 0,
+              "rsub": 252
+            }
+          },
+          {
+            "per_sample": {
+              "exp": 36,
+              "mul": 612,
+              "add": 288,
+              "reciprocal": 36,
+              "sigmoid": 0,
+              "bias_add": 36,
+              "abs": 36,
+              "heaviside": 36,
+              "sub": 108,
+              "rsub": 36
+            },
+            "per_batch": {
+              "exp": 108,
+              "mul": 324,
+              "add": 108,
+              "reciprocal": 108,
+              "sigmoid": 36,
+              "bias_add": 0,
+              "abs": 0,
+              "heaviside": 0,
+              "sub": 0,
+              "rsub": 252
+            }
+          }
+        ]
+      },
+      "out_layer": {
+        "period": 1,
+        "steps": [
+          {
+            "per_sample": {
+              "bias_add": 6,
+              "exp": 0,
+              "mul": 12,
+              "add": 6,
+              "rsub": 0,
+              "reciprocal": 0
+            },
+            "per_batch": {
+              "bias_add": 0,
+              "exp": 6,
+              "mul": 6,
+              "add": 0,
+              "rsub": 6,
+              "reciprocal": 6
+            }
+          },
+          {
+            "per_sample": {
+              "bias_add": 6,
+              "exp": 0,
+              "mul": 12,
+              "add": 6,
+              "rsub": 0,
+              "reciprocal": 0
+            },
+            "per_batch": {
+              "bias_add": 0,
+              "exp": 6,
+              "mul": 6,
+              "add": 0,
+              "rsub": 6,
+              "reciprocal": 6
+            }
+          }
+        ]
+      }
+    },
+    "nonmatrix_scalar_operations_by_kind": {
+      "exp": 14074218,
+      "mul": 229275702,
+      "add": 107605710,
+      "reciprocal": 14074218,
+      "sigmoid": 281016,
+      "bias_add": 14308398,
+      "abs": 13207752,
+      "heaviside": 13207752,
+      "sub": 39623256,
+      "rsub": 15198282
+    },
+    "total_parameters": 4836,
+    "trainable_parameters": 4758,
+    "spikes_total_per_sample": 29144.021276595744,
+    "spikes_l1_per_sample": 11714.106382978724,
+    "spikes_l2_per_sample": 17429.91489361702,
+    "firing_l1_percent": 25.01090268805774,
+    "firing_l2_percent": 37.214781137622815,
+    "synops_per_sample": 1574660.170212766,
+    "nonmatrix_ops_per_sample": 3268484.425531915,
+    "dense_gflops_test_padded": 0.011053296,
+    "arithmetic_gflops_test_padded": 0.014032626255319149,
+    "logical_gops_test_padded": 0.014321780425531914,
+    "analog_input_dense_macs_per_sample": 187344.0,
+    "forward_ms_per_sample": 46.50236264772655,
+    "timing_repeat_ms_per_sample": [
+      46.577350354645276,
+      46.4602659573776,
+      46.469471631156765
+    ],
+    "reproduced_test_acc": 0.8798414749156405
+  }
+}
