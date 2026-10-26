@@ -1,0 +1,24 @@
+{
+  "dataset": "ECG",
+  "seed": 123,
+  "split": "test",
+  "checkpoint": "results/experiments/sa_mt_v1/SA_MT_SE_adLIF/ECG/seed_123/ckpt/epoch=368-step=3321.ckpt",
+  "checkpoint_sha256": "30b0c4c0705852dee79d05354f4b020f48b90b50c2612b911bb8e1ee8dab0050",
+  "gains": [
+    1.0,
+    0.95,
+    1.05
+  ],
+  "metrics": {
+    "evaluated_targets": 183441,
+    "baseline_accuracy": 0.8864539552226601,
+    "tta_accuracy": 0.8930500814975932,
+    "difference_pp": 0.6596126274933085,
+    "baseline_loss": 0.30300210306890224,
+    "tta_nll": 0.2850348750798963,
+    "data_sha256": "327247c2b0fc09e897cbb5d7785988ad7b34d3babea7da79bc092fc8ed57e9ab",
+    "device": "cuda:0",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "matmul_precision": "high"
+  }
+}

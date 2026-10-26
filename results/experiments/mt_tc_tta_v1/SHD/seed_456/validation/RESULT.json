@@ -1,0 +1,24 @@
+{
+  "dataset": "SHD",
+  "seed": 456,
+  "split": "validation",
+  "checkpoint": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SHD/seed_456/ckpt/epoch=226-step=5675.ckpt",
+  "checkpoint_sha256": "c7f93107397cb331d93cc5b717485ddd275c39561d4ecc34451b50db12740264",
+  "gains": [
+    1.0,
+    0.95,
+    1.05
+  ],
+  "metrics": {
+    "evaluated_targets": 1631,
+    "baseline_accuracy": 0.9926425505824648,
+    "tta_accuracy": 0.9908031882280809,
+    "difference_pp": -0.18393623543838136,
+    "baseline_loss": 0.05976948509327405,
+    "tta_nll": 0.05110629419108098,
+    "data_sha256": "8cf819c10254fa905a471bb289f8eddd8e98fe18365ad60fe26683b83f09b08b",
+    "device": "cuda:0",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "matmul_precision": "high"
+  }
+}

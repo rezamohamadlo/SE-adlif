@@ -1,6 +1,6 @@
 foreach ($split in @('validation', 'test')) {
     foreach ($model in @('AMT_SE_adLIF', 'MT_TC_SE_adLIF', 'LT_DTH_SE_adLIF', 'SA_MT_SE_adLIF')) {
-        .\.venv\Scripts\python.exe runner.py --models $model --datasets SHD SSC ECG --seeds 42 123 456 --tta --tta-split $split
+        .\.ven\Scripts\python.exe runner.py --models $model --datasets SHD SSC ECG --seeds 42 123 456 --tta --tta-split $split
         if ($LASTEXITCODE -ne 0) { throw "TTA failed: $model $split" }
     }
 }

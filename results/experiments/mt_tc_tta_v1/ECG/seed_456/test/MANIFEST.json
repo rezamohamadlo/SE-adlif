@@ -1,0 +1,281 @@
+{
+  "fingerprint": "a23b9697ab3a69a738db6ed1c0d9fab5bc53a9aa3e877dba53ceceed5c57e33d",
+  "dataset": "ECG",
+  "seed": 456,
+  "checkpoint": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/ckpt/epoch=379-step=3420.ckpt",
+  "checkpoint_sha256": "5055fc93f0b4250ccce8fbcc59c0c4dbbaade01dcf199215090250756068c8a4",
+  "selected_epoch": 379,
+  "config": {
+    "random_seed": 456,
+    "logdir": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456",
+    "datadir": "data",
+    "cachedir": "data/cache",
+    "ckpt_path": null,
+    "init_ckpt_path": null,
+    "run_test": true,
+    "scheduler": "plateau",
+    "scheduler_min_lr": 0.0,
+    "gradient_clip_val": 1.5,
+    "device": "cuda:0",
+    "early_stopping": false,
+    "early_stopping_patience": 50,
+    "early_stopping_min_delta": 0.001,
+    "dataset": {
+      "_target_": "datasets.ecg.ECGLDM",
+      "data_path": "data",
+      "batch_size": 64,
+      "num_workers": 0,
+      "num_classes": 6,
+      "valid_fraction": 0.05,
+      "random_seed": 42
+    },
+    "exp_name": "ECG_MT_TC_SE_adLIF_2layer",
+    "two_layers": true,
+    "alpha": 5.0,
+    "c": 0.2,
+    "dt": 1.0,
+    "l1": {
+      "cell": "mt_se_adlif",
+      "input_size": 4,
+      "n_neurons": 36,
+      "tau_u_range": [
+        5,
+        25
+      ],
+      "tau_w_range": [
+        60,
+        300
+      ],
+      "q": 120,
+      "alpha": 5.0,
+      "c": 0.2,
+      "dt": 1.0,
+      "tau_w_slow_range": [
+        300,
+        600
+      ]
+    },
+    "l2": {
+      "cell": "mt_se_adlif",
+      "input_size": 36,
+      "n_neurons": 36,
+      "tau_u_range": [
+        5,
+        25
+      ],
+      "tau_w_range": [
+        60,
+        300
+      ],
+      "q": 120,
+      "alpha": 5.0,
+      "c": 0.2,
+      "dt": 1.0,
+      "tau_w_slow_range": [
+        300,
+        600
+      ]
+    },
+    "l_out": {
+      "input_size": 36,
+      "n_neurons": 6,
+      "tau_u_range": [
+        3,
+        3
+      ],
+      "dt": 1.0
+    },
+    "n_epochs": 400,
+    "dropout": 0.15,
+    "batch_size": 64,
+    "loss_agg": "summed_membrane_potentials",
+    "tracking_metric": "val_acc",
+    "tracking_mode": "max",
+    "lr": 0.01,
+    "factor": 0.9,
+    "patience": 9999,
+    "paper_baseline": {
+      "version": "paper_classification_v1",
+      "source": {
+        "doi": "10.1038/s41467-025-60878-z",
+        "document": "reference_paper.pdf",
+        "locations": "Table 7 (page 35); training/preprocessing methods (pages 28-29)"
+      },
+      "common": {
+        "lr_optimizer": "Adam",
+        "adam_betas": [
+          0.9,
+          0.999
+        ],
+        "adam_eps": 1e-08,
+        "dropout": 0.15,
+        "gradient_clip_val": 1.5,
+        "alpha": 5.0,
+        "dt": 1.0,
+        "tracking_metric": "val_acc",
+        "tracking_mode": "max"
+      },
+      "reproduction_policy": {
+        "training_seeds": [
+          42,
+          123,
+          456
+        ],
+        "split_seed": 42,
+        "num_workers": 0,
+        "early_stopping": false,
+        "scheduler": "plateau",
+        "patience": 9999,
+        "factor": 0.9,
+        "cache_namespace": "controlled_v2"
+      },
+      "datasets": {
+        "SHD": {
+          "report_label": "SHD*",
+          "lr": 0.01,
+          "batch_size": 256,
+          "n_epochs": 300,
+          "validate_on": 0.2,
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4,
+          "pad_to_min_size": 250,
+          "ignore_first_timesteps": 10,
+          "reference_architecture": {
+            "layers": 2,
+            "neurons_per_layer": 360,
+            "q": 120,
+            "c": 0.4,
+            "tau_u_range": [
+              5,
+              25
+            ],
+            "tau_w_range": [
+              60,
+              300
+            ],
+            "output_tau": 15
+          }
+        },
+        "SSC": {
+          "lr": 0.006,
+          "batch_size": 256,
+          "n_epochs": 40,
+          "validation": "official",
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4,
+          "pad_to_min_size": 300,
+          "ignore_first_timesteps": 10,
+          "reference_architecture": {
+            "layers": 2,
+            "neurons_per_layer": 720,
+            "q": 120,
+            "c": 0.4,
+            "tau_u_range": [
+              5,
+              25
+            ],
+            "tau_w_range": [
+              60,
+              300
+            ],
+            "output_tau": 15
+          }
+        },
+        "ECG": {
+          "lr": 0.01,
+          "batch_size": 64,
+          "n_epochs": 400,
+          "valid_fraction": 0.05,
+          "reference_architecture": {
+            "layers": 2,
+            "neurons_per_layer": 36,
+            "q": 120,
+            "c": 0.2,
+            "tau_u_range": [
+              5,
+              25
+            ],
+            "tau_w_range": [
+              60,
+              300
+            ],
+            "output_tau": 3
+          }
+        }
+      }
+    },
+    "paper_baseline_version": "paper_classification_v1",
+    "paper_baseline_deviations": [
+      "model_variant=MT_TC_SE_adLIF",
+      "training_objective=mt_temporal_consistency_v1",
+      "temporal_consistency.weight=0.1",
+      "temporal_consistency.window=5"
+    ],
+    "paper_baseline_dataset": "ECG",
+    "training_objective": "mt_temporal_consistency_v1",
+    "temporal_consistency": {
+      "weight": 0.1,
+      "window": 5
+    },
+    "launcher_script": "runner.py",
+    "model_variant": "MT_TC_SE_adLIF",
+    "run_mode": "ours",
+    "launcher_logdir": "results/experiments/mt_consistency_runner_v1",
+    "evaluation_protocol": "paper_classification_v1_mt_temporal_consistency_v1"
+  },
+  "split": "test",
+  "policy": {
+    "version": "mt_gain_tta_v1",
+    "datasets": {
+      "SHD": {
+        "gains": [
+          1.0,
+          0.95,
+          1.05
+        ]
+      },
+      "SSC": {
+        "gains": [
+          1.0,
+          0.95,
+          1.05
+        ]
+      },
+      "ECG": {
+        "gains": [
+          1.0,
+          0.95,
+          1.05
+        ]
+      }
+    }
+  },
+  "environment": {
+    "torch": "2.6.0+cu124",
+    "numpy": "1.26.4",
+    "pytorch-lightning": "2.2.1",
+    "tonic": "1.6.0"
+  },
+  "sources": {
+    "evaluate_tta.py": "e0b99623e2c9a0e247a4d6e94bd7384cd478a17547d353bc767172cb00f0bb5e",
+    "models/pl_module.py": "435f09ad63edde5f1e2aeb7a0ac4ae2c2b7e7cdc2fc28159dfa0851a23f9e1cf",
+    "models/ours/mt_adlif.py": "772c504f595cb28f170642870243d344c4fea749b94bcecc73486ad7ade4068a",
+    "models/ours/dth_adlif.py": "a53181fbe8c8bf7b55d9b79eca47f6b5bd49ff1e324b9a8470fc16ffeeda026d",
+    "models/ours/mt_dth_adlif.py": "45c3fb6298e636b4fb09c11c93ec3f02bb333ecb0ff88b7032fca3b74c50986b",
+    "models/ours/amt_adlif.py": "3d347519cf69d1fde7dda1d9dcff1dea77e42b5d1abab9b21bb693310a12e9e5",
+    "models/ours/lt_dth_adlif.py": "78848748b567429940be0771326442c44c0f6d148dac04a4a2c756f5037cd07c",
+    "models/ours/sa_mt_adlif.py": "20b6b462d3872cf959dd03eda4e9f0d686963542d949b0e406b56813571cf840",
+    "models/ours/mt_consistency.py": "31b86ef93883ecb3b259f5ee5d6babd0f7ac5b0433204df0d2975e6806c7739a",
+    "functional/temporal_consistency.py": "521755091c95b2f9d455ed11e5f460dcfcb94bc0cc756e95b46c22b610230b86",
+    "models/alif.py": "a07e84b2a6238a67585b9f927be4c5f4f514fb28234d24acecfc6c2608aa480d",
+    "models/li.py": "8a299b75f580f419616b7b345e857b01c62d96f5fbd1e769d67675b0c2fc7826",
+    "models/helpers.py": "d50e6d7f16a75b4c793ce16e8c6629469ffe60ca0ec4c792b30409fec606fadd",
+    "module/tau_trainers.py": "741c55450ca2a345a5a8247ef078a066d0b060ba06e009e4a9d7ebf07d12e1d5",
+    "datasets/shd.py": "640d748f77c2f9897aff6ea2d810cef9992f818feeeebebad281af651b35c040",
+    "datasets/ssc.py": "4c86b3b968a07e16a0050a6eb1bc3d77cb67122cea91029f13a13fbefd18df0f",
+    "datasets/ecg.py": "58b84ca005120931083fa3a909f8592a001d91f21d2da89d24dc964ca5d48408",
+    "datasets/utils/pad_tensors.py": "8e3a9e6f1670ccf995ee4c391bb922d7ca5eac5dfe73595806f0baaf0f6f4893"
+  }
+}
