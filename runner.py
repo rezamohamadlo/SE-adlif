@@ -421,7 +421,7 @@ def main(argv=None):
     parser.add_argument('--logdir', help='Results root; overrides default to a separate experiments folder')
     parser.add_argument('--ssc-mean-loss', action='store_true',
                         help='Compatibility flag: SSC mean loss is now automatic; requires --datasets SSC')
-    parser.add_argument('--tta', action='store_true', help='MT, DTH or MT-DTH test-time augmentation only; no training')
+    parser.add_argument('--tta', action='store_true', help='Frozen-checkpoint test-time augmentation only; no training')
     parser.add_argument('--tta-split', choices=('validation', 'test'), default='validation')
     parser.add_argument('--tta-output', help='Separate evaluation output; defaults to <model>_tta_v1 experiments')
     args = parser.parse_args(argv)
@@ -430,9 +430,10 @@ def main(argv=None):
     original = EVALUATION, PROTOCOL, RUN_LOGDIR
     try:
         if args.tta:
+            from evaluate_tta import MODEL_CELLS
             selected_models = list(dict.fromkeys(args.models))
-            if len(selected_models) != 1 or selected_models[0] not in ('MT_SE_adLIF', 'DTH_SE_adLIF', 'MT_DTH_SE_adLIF'):
-                raise ValueError('--tta supports one model at a time: MT_SE_adLIF, DTH_SE_adLIF or MT_DTH_SE_adLIF')
+            if len(selected_models) != 1 or selected_models[0] not in MODEL_CELLS:
+                raise ValueError('--tta supports one registered TTA model at a time: ' + ', '.join(MODEL_CELLS))
             if (args.resume == 0 or args.logdir or args.ssc_mean_loss or args.no_measure_costs
                     or args.measure_existing_costs or any(getattr(args, k) is not None for k in
                     ('epochs','batch_size','lr','early_stopping','early_stopping_patience',

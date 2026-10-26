@@ -1,0 +1,135 @@
+{
+  "scope": "Four candidates plus MT and DTH, 54 saved configs",
+  "datasets": {
+    "SHD": {
+      "runs_checked": 18,
+      "matched_settings": {
+        "lr": 0.01,
+        "batch_size": 256,
+        "n_epochs": 300,
+        "loss_agg": "sum_softmax_over_time",
+        "early_stopping": false,
+        "scheduler": "plateau",
+        "patience": 9999,
+        "factor": 0.9,
+        "gradient_clip_val": 1.5,
+        "dropout": 0.15,
+        "tracking_metric": "val_acc",
+        "tracking_mode": "max",
+        "two_layers": true,
+        "alpha": 5.0,
+        "dt": 1.0,
+        "dataset": {
+          "_target_": "datasets.shd.SHDLDM",
+          "data_path": "data",
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "pad_to_min_size": 250,
+          "window_size": 4,
+          "batch_size": 256,
+          "num_workers": 0,
+          "num_classes": 20,
+          "validate_on": 0.2,
+          "random_seed": 42,
+          "cache_namespace": "controlled_v2",
+          "ignore_first_timesteps": 10,
+          "additional_test_set_validation": false
+        },
+        "out_layer": null,
+        "l1.n_neurons": 360,
+        "l2.n_neurons": 360,
+        "paper_baseline_version": "paper_classification_v1",
+        "paper_baseline_dataset": "SHD"
+      }
+    },
+    "SSC": {
+      "runs_checked": 18,
+      "matched_settings": {
+        "lr": 0.006,
+        "batch_size": 256,
+        "n_epochs": 40,
+        "loss_agg": "mean_membrane_potentials",
+        "early_stopping": false,
+        "scheduler": "plateau",
+        "patience": 9999,
+        "factor": 0.9,
+        "gradient_clip_val": 1.5,
+        "dropout": 0.15,
+        "tracking_metric": "val_acc",
+        "tracking_mode": "max",
+        "two_layers": true,
+        "alpha": 5.0,
+        "dt": 1.0,
+        "dataset": {
+          "_target_": "datasets.ssc.SSCLDM",
+          "data_path": "data",
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4,
+          "batch_size": 256,
+          "num_workers": 0,
+          "num_classes": 35,
+          "pad_to_min_size": 300,
+          "ignore_first_timesteps": 10
+        },
+        "out_layer": null,
+        "l1.n_neurons": 720,
+        "l2.n_neurons": 720,
+        "paper_baseline_version": "paper_classification_v1",
+        "paper_baseline_dataset": "SSC"
+      }
+    },
+    "ECG": {
+      "runs_checked": 18,
+      "matched_settings": {
+        "lr": 0.01,
+        "batch_size": 64,
+        "n_epochs": 400,
+        "loss_agg": "summed_membrane_potentials",
+        "early_stopping": false,
+        "scheduler": "plateau",
+        "patience": 9999,
+        "factor": 0.9,
+        "gradient_clip_val": 1.5,
+        "dropout": 0.15,
+        "tracking_metric": "val_acc",
+        "tracking_mode": "max",
+        "two_layers": true,
+        "alpha": 5.0,
+        "dt": 1.0,
+        "dataset": {
+          "_target_": "datasets.ecg.ECGLDM",
+          "data_path": "data",
+          "batch_size": 64,
+          "num_workers": 0,
+          "num_classes": 6,
+          "valid_fraction": 0.05,
+          "random_seed": 42
+        },
+        "out_layer": null,
+        "l1.n_neurons": 36,
+        "l2.n_neurons": 36,
+        "paper_baseline_version": "paper_classification_v1",
+        "paper_baseline_dataset": "ECG"
+      }
+    }
+  },
+  "unexpected_shared_config_differences": [],
+  "limitations": [
+    "MT-TC adds training-only JS objective, weight 0.1, window 5",
+    "ECG historical reference stopping/budget unmatched",
+    "Some runs resumed; stochastic sequence equivalence not established",
+    "TTA follows inspected test results; exploratory"
+  ],
+  "checkpoint_checks": {
+    "count": 36,
+    "strict_inference_state_load": "passed",
+    "optimizer_betas": [
+      0.9,
+      0.999
+    ],
+    "optimizer_eps": 1e-08,
+    "weight_decay": 0,
+    "saved_learning_rate_matches_config": true
+  }
+}

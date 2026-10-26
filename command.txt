@@ -1,13 +1,6 @@
-# On this PC: press Ctrl+C once in the runner terminal and wait for it to exit.
-# Then copy the entire folder below to the SAME relative location in the other checkout:
-# results/experiments/mt_consistency_runner_v1/
-# Include hidden .hydra folders, FULL_RUN_CONFIG.json, logs, completed.txt,
-# and ckpt/last.ckpt plus the best validation checkpoint. Git does not transfer these weights.
-# Also transfer the required SSC/ECG datasets, and use the same project code/dependencies.
-# Run these commands from the repository root on the destination PC, using its own .venv.
-# Preflight must show SSC 123 complete, SSC 456 resume, and ECG 123/456 new.
-.\.venv\Scripts\python.exe runner.py --models MT_TC_SE_adLIF --datasets SSC ECG --seeds 123 456 --logdir results/experiments/mt_consistency_runner_v1 --resume 1 --dry-run
-
-# Continue SSC 456 from its last saved training state, then train ECG 123 and 456.
-# SSC 123 is skipped because it is complete. Work after the last saved checkpoint may repeat.
-.\.venv\Scripts\python.exe runner.py --models MT_TC_SE_adLIF --datasets SSC ECG --seeds 123 456 --logdir results/experiments/mt_consistency_runner_v1 --resume 1
+foreach ($split in @('validation', 'test')) {
+    foreach ($model in @('AMT_SE_adLIF', 'MT_TC_SE_adLIF', 'LT_DTH_SE_adLIF', 'SA_MT_SE_adLIF')) {
+        .\.venv\Scripts\python.exe runner.py --models $model --datasets SHD SSC ECG --seeds 42 123 456 --tta --tta-split $split
+        if ($LASTEXITCODE -ne 0) { throw "TTA failed: $model $split" }
+    }
+}

@@ -53,6 +53,17 @@ class TTATests(unittest.TestCase):
             train.assert_not_called()
             self.assertIn('--dry-run', evaluate.call_args.args[0])
 
+    def test_candidate_dispatch_never_trains(self):
+        for model in ('AMT_SE_adLIF', 'MT_TC_SE_adLIF', 'LT_DTH_SE_adLIF', 'SA_MT_SE_adLIF'):
+            with self.subTest(model=model), patch('evaluate_tta.main') as evaluate, patch.object(runner, 'run') as train:
+                runner.main(['--models', model, '--datasets', 'SHD', 'SSC', 'ECG',
+                             '--seeds', '42', '123', '456', '--tta', '--dry-run'])
+                args = evaluate.call_args.args[0]
+                self.assertIn(model, args)
+                self.assertIn('--dry-run', args)
+                self.assertIn('results/experiments/' + model.removesuffix('_SE_adLIF').lower() + '_tta_v1', args)
+                train.assert_not_called()
+
     def test_runner_rejects_training_overrides_with_tta(self):
         with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
             runner.main(['--models', 'MT_SE_adLIF', '--tta', '--epochs', '1'])

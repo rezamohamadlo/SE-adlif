@@ -1,4 +1,4 @@
-"""Evaluation-only MT/DTH/MT-DTH input-gain TTA; invoked through runner.py --tta."""
+"""Evaluation-only classification input-gain TTA; invoked through runner.py --tta."""
 import argparse
 import contextlib
 import csv
@@ -19,6 +19,18 @@ from project_paths import ROOT, local_path, portable_config, portable_path
 from cost_records import seed_directory
 from search_shd import search_lock
 from ssc_loss_diagnostic import atomic_json
+
+
+MODEL_CELLS = {
+    'MT_SE_adLIF': 'mt_se_adlif', 'DTH_SE_adLIF': 'dth_se_adlif',
+    'MT_DTH_SE_adLIF': 'mt_dth_se_adlif', 'AMT_SE_adLIF': 'amt_se_adlif',
+    'LT_DTH_SE_adLIF': 'lt_dth_se_adlif', 'SA_MT_SE_adLIF': 'sa_mt_se_adlif',
+    'MT_TC_SE_adLIF': 'mt_se_adlif',
+}
+EXPERIMENT_ROOTS = {
+    'SA_MT_SE_adLIF': 'results/experiments/sa_mt_v1',
+    'MT_TC_SE_adLIF': 'results/experiments/mt_consistency_runner_v1',
+}
 
 
 def gains_for(policy, dataset):
@@ -50,16 +62,27 @@ def batch_predictions(model, batch, loss_agg, gains):
 
 
 def inspect_run(dataset, seed, model='MT_SE_adLIF'):
-    directory = seed_directory(ROOT, model, dataset, seed)
+    directory = (ROOT / EXPERIMENT_ROOTS[model] / model / dataset / f'seed_{seed}'
+                 if model in EXPERIMENT_ROOTS else seed_directory(ROOT, model, dataset, seed))
     choices = [p for p in (directory / 'ckpt').glob('*.ckpt') if p.name != 'last.ckpt']
     if not choices:
         return None
     if len(choices) != 1:
-        raise ValueError(f'Ambiguous best checkpoint in {portable_path(directory)}')
+        # A resumed/transferred run can retain an earlier best checkpoint.
+        # Use its verified cost record's exact identity, never a filename ranking.
+        record_path = directory / 'COST_RESULTS.json'
+        record = json.loads(record_path.read_text()) if record_path.exists() else {}
+        recorded = local_path(record['checkpoint']) if record.get('checkpoint') else None
+        choices = [p for p in choices if recorded is not None and p.resolve() == recorded.resolve()
+                   and hashlib.sha256(p.read_bytes()).hexdigest() == record.get('checkpoint_sha256')]
+        if record.get('status') != 'complete' or len(choices) != 1:
+            raise ValueError(f'Ambiguous best checkpoint in {portable_path(directory)}')
     checkpoint = choices[0]
     state = torch.load(checkpoint, map_location='cpu', weights_only=False)
     cfg = portable_config(OmegaConf.to_container(OmegaConf.create(state['hyper_parameters']['cfg']), resolve=True))
-    cell = {'MT_SE_adLIF': 'mt_se_adlif', 'DTH_SE_adLIF': 'dth_se_adlif', 'MT_DTH_SE_adLIF': 'mt_dth_se_adlif'}[model]
+    cell = MODEL_CELLS[model]
+    if model == 'MT_TC_SE_adLIF' and cfg.get('training_objective') != 'mt_temporal_consistency_v1':
+        raise ValueError('MT-TC checkpoint is missing its training objective identity')
     if (cfg['random_seed'] != seed or cfg['exp_name'].split('_')[0] != dataset
             or cfg['l1']['cell'] != cell or cfg['l2']['cell'] != cell):
         raise ValueError('Checkpoint does not match requested model/dataset/seed')
@@ -162,7 +185,7 @@ def write_report(output, model='MT_SE_adLIF'):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--model', choices=('MT_SE_adLIF', 'DTH_SE_adLIF', 'MT_DTH_SE_adLIF'), default='MT_SE_adLIF')
+    parser.add_argument('--model', choices=tuple(MODEL_CELLS), default='MT_SE_adLIF')
     parser.add_argument('--datasets', nargs='+', choices=('SHD','SSC','ECG'), required=True)
     parser.add_argument('--seeds', nargs='+', type=int, choices=(42,123,456), required=True)
     parser.add_argument('--split', choices=('validation','test'), default='validation')
@@ -191,7 +214,9 @@ def main(argv=None):
     output = local_path(args.output or f'results/experiments/{args.model.removesuffix("_SE_adLIF").lower()}_tta_v1')
     environment = {p: importlib.metadata.version(p) for p in ('torch','numpy','pytorch-lightning','tonic')}
     sources = {name: hashlib.sha256(local_path(name).read_bytes()).hexdigest() for name in
-               ('evaluate_tta.py','models/pl_module.py','models/ours/mt_adlif.py','models/ours/dth_adlif.py','models/ours/mt_dth_adlif.py','models/alif.py',
+               ('evaluate_tta.py','models/pl_module.py','models/ours/mt_adlif.py','models/ours/dth_adlif.py','models/ours/mt_dth_adlif.py','models/ours/amt_adlif.py',
+                'models/ours/lt_dth_adlif.py','models/ours/sa_mt_adlif.py',
+                'models/ours/mt_consistency.py','functional/temporal_consistency.py','models/alif.py',
                 'models/li.py','models/helpers.py','module/tau_trainers.py','datasets/shd.py',
                 'datasets/ssc.py','datasets/ecg.py','datasets/utils/pad_tensors.py')}
     with search_lock(output):
