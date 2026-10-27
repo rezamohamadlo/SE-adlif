@@ -8,7 +8,8 @@ import statistics
 
 from scipy.stats import t
 
-from extended_seed_study import cohort_definition, read_completed
+from extended_seed_study import (cohort_definition, read_completed, read_provenance,
+                                 reject_test_artifacts, validation_rows, baseline_definition)
 from project_paths import local_path, portable_config
 
 
@@ -57,6 +58,8 @@ def aggregate(roots, include_canonical=False):
     found, settings, provenance = {}, {}, {}
     for root in roots:
         root = local_path(root, must_exist=True)
+        if not root.is_dir():
+            raise ValueError(f'Imported result root is not a directory: {root}')
         for path in sorted(root.glob('*/*/seed_*')):
             if not path.is_dir():
                 continue
@@ -70,10 +73,11 @@ def aggregate(roots, include_canonical=False):
                 raise ValueError(f'Unexpected study run (or use --include-canonical): {path}')
             if key in found:
                 raise ValueError(f'Duplicate model/dataset/seed imported: {key}')
+            reject_test_artifacts(path)
             found[key] = dict(model=model, dataset=dataset, seed=seed, status='incomplete')
             if not (path / 'validation_completed.txt').exists():
-                if (path / 'completed.txt').exists():
-                    raise ValueError(f'Test evidence cannot enter validation aggregation: {path}')
+                # Even incomplete snapshots must not silently carry test metrics.
+                validation_rows(path, {'n_epochs': baseline_definition()['datasets'][dataset]['n_epochs']})
                 continue
             record, config = read_completed(path, require_checkpoints=False)
             check_frozen_config(config)
@@ -86,14 +90,15 @@ def aggregate(roots, include_canonical=False):
             if group in settings and settings[group] != signature:
                 raise ValueError(f'Incompatible effective configurations: {path}')
             settings[group] = signature
-            environments = json.loads((path / 'LAUNCH_ENVIRONMENTS.json').read_text(encoding='utf-8'))
-            if not environments or any(not e.get('git_commit') for e in environments):
-                raise ValueError(f'Missing source/environment provenance: {path}')
-            identity = {(e['git_commit'], e['tracked_diff_sha256']) for e in environments}
+            environments = read_provenance(path)
+            source_hash = next((e['source_files_sha256'] for e in environments if e.get('source_files_sha256')), None)
+            identity = {(e['git_commit'], e['tracked_diff_sha256'], source_hash) for e in environments}
             if len(identity) != 1 or (dataset in provenance and provenance[dataset] != identity):
                 raise ValueError(f'Mixed source revisions for paired study: {path}')
             provenance[dataset] = identity
             found[key].update(record)
+            found[key].update(source_directory=portable_config({'logdir': str(path)})['logdir'],
+                              effective_config=config, launch_environments=environments)
     rows = [found.get(key, dict(model=key[0], dataset=key[1], seed=key[2], status='missing'))
             for key in sorted(expected)]
     summaries, comparisons = [], []
@@ -138,6 +143,11 @@ def render(record):
     for r in record['runs']:
         accuracy = 100 * r['best_validation_accuracy'] if r['status'] == 'complete' else 'pending'
         lines.append(f"| {'SHD*' if r['dataset'] == 'SHD' else r['dataset']} | {r['model']} | {r['seed']} | {r['status']} | {accuracy} | {r.get('selected_epoch', 'pending')} |")
+    lines += ['', '## Provenance', '',
+              'The JSON report retains each completed run\'s source directory, effective configuration, '
+              'baseline identity and launch environments. Checkpoint paths retain their recorded identity.', '']
+    commits = sorted({e['git_commit'] for r in record['runs'] for e in r.get('launch_environments', [])})
+    lines.append('Source commits: ' + (', '.join(commits) if commits else 'pending'))
     return '\n'.join(lines) + '\n'
 
 

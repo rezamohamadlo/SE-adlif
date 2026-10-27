@@ -1,6 +1,10 @@
-foreach ($split in @('validation', 'test')) {
-    foreach ($model in @('AMT_SE_adLIF', 'MT_TC_SE_adLIF', 'LT_DTH_SE_adLIF', 'SA_MT_SE_adLIF')) {
-        .\.venv\Scripts\python.exe runner.py --models $model --datasets SHD SSC ECG --seeds 42 123 456 --tta --tta-split $split
-        if ($LASTEXITCODE -ne 0) { throw "TTA failed: $model $split" }
-    }
-}
+# Run only your PC's command, from the repository root.
+# Both PCs need the same reviewed code, their own .venv, and local dataset files.
+# Append --dry-run to check the 14-job plan without training or result writes.
+# Rerun the same command to resume from last.ckpt and skip completed validation runs.
+
+# PC1: ECG -- MT versus SA-MT; validation only, no test inference or cost measurement.
+.\.venv\Scripts\python.exe runner.py --models MT_SE_adLIF SA_MT_SE_adLIF --datasets ECG --seeds 1009 2027 3037 4049 5051 6067 7079 --seed-cohort extension_v1 --validation-only --logdir results/experiments/extended_seeds_v1/pc1_ecg
+
+# PC2: SHD* -- MT versus DTH; validation only, no test inference or cost measurement.
+.\.venv\Scripts\python.exe runner.py --models MT_SE_adLIF DTH_SE_adLIF --datasets SHD --seeds 1009 2027 3037 4049 5051 6067 7079 --seed-cohort extension_v1 --validation-only --logdir results/experiments/extended_seeds_v1/pc2_shd

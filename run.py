@@ -37,6 +37,14 @@ class TrustedLocalCheckpointIO(TorchCheckpointIO):
         return relocate_checkpoint_callbacks(checkpoint)
 
 
+class ValidationCheckpointIO(TrustedLocalCheckpointIO):
+    """Make the opt-in study's callback paths portable when checkpoints are saved."""
+
+    def save_checkpoint(self, checkpoint, path, storage_options=None):
+        from extended_seed_study import portable_checkpoint
+        super().save_checkpoint(portable_checkpoint(checkpoint), path, storage_options)
+
+
 class GradientNormProgressBar(pl.Callback):
     """Log the global L2 gradient norm before each optimizer step."""
 
@@ -297,6 +305,10 @@ The best validation checkpoint was evaluated on the test split after training.
             f"-Resume 1 -LogDir {launcher_logdir}"
         )
         if launcher_script in ('runner.py', 'full_runner.py'):
+            if self.cfg.get('validation_only', False):
+                resume_command += ' --validation-only'
+                if self.cfg.get('seed_cohort'):
+                    resume_command += f' --seed-cohort {self.cfg.seed_cohort}'
             if '_custom_' in str(self.cfg.get('evaluation_protocol', '')):
                 resume_command += (
                     f' --epochs {self.cfg.n_epochs} --batch-size {dataset_cfg.batch_size}'
@@ -488,7 +500,7 @@ def main(cfg: DictConfig):
         gradient_clip_val=cfg.get('gradient_clip_val', 1.5),
         enable_progress_bar=True,
         strategy=SingleDeviceStrategy(device=cfg.device),
-        plugins=[TrustedLocalCheckpointIO()],
+        plugins=[ValidationCheckpointIO() if cfg.get('validation_only', False) else TrustedLocalCheckpointIO()],
         )
 
     if cfg.get('init_ckpt_path'):

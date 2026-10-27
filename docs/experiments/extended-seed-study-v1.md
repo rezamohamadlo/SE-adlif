@@ -88,7 +88,9 @@ Each seed retains:
 - `FULL_RUN_CONFIG.json` and `.hydra/config.yaml`: resolved settings, baseline
   identity, cohort name and ordered ten-seed list, training and split seeds.
 - `LAUNCH_ENVIRONMENTS.json`: Git commit, tracked source diff fingerprint,
-  Python/package versions, OS, CUDA and GPU names, preserving resume environments.
+  source-file fingerprint (including untracked Python/config files), Python/package
+  versions, OS, CUDA and GPU names, preserving resume environments. New launchers
+  should use the same committed implementation on both PCs.
 - `ckpt/last.ckpt`, the validation-selected best checkpoint, and
   `logs/mlp_snn/version_0/metrics.csv`.
 - `TRAINING_SUMMARY.md`, `VALIDATION_SUMMARY.md`, `VALIDATION_RESULTS.json` and
@@ -105,6 +107,13 @@ verified and skipped, without testing. Interrupted jobs restore their own
 `ckpt/last.ckpt`. Configuration changes, missing recorded checkpoints, test artifacts
 and unidentified existing output directories are rejected. `--resume 0` requires
 empty seed directories. Never rename a different checkpoint to replace a missing one.
+Before resuming, preflight verifies the saved checkpoint config and validation
+selection state, the exact retained best checkpoint, source provenance, and CSV
+history. Nonempty test metrics, duplicate/out-of-order validation epochs, or metrics
+ahead of the retained last checkpoint are rejected. Preserve these histories and
+investigate/reconcile them before continuing; the runner does not silently discard
+rows or treat overlapping processes as independent evidence. A normal restart with
+a consistent last checkpoint and CSV history resumes automatically.
 A startup failure before any checkpoint is not continuation; preserve its evidence
 and choose a new explicit output root for a fresh restart. A crash between writing
 the result JSON and completion marker resumes from last.ckpt and republishes completion.
@@ -113,6 +122,10 @@ An OS-managed `.extension.lock` serializes launchers sharing an output root.
 It releases on process exit; do not remove a lock file to bypass a live launcher.
 Keep the source commit and tracked source fingerprint fixed on resume. New code or
 settings require a separate study/output root. Existing manifests are not rewritten.
+Validation-only checkpoint callback paths are serialized relative to the repository
+and resolved from that root when loaded, including when Hydra has changed directories.
+Older checkpoints with absolute callback paths still need explicit checkout-root
+aliases from `config/path_aliases.yaml` for a move to an unregistered checkout.
 
 ## Transfer and aggregation
 
@@ -140,6 +153,10 @@ Duplicate model/dataset/seed directories are rejected, even if identical. Config
 recomposed against the committed configs; validation scores/selected epochs are
 checked against CSV metrics. Mixed source revisions within a dataset comparison,
 incompatible configs, test evidence and inconsistent completion records are rejected.
+The JSON aggregate retains each completed run's source directory, resolved config,
+baseline identity and launch environment records; the Markdown report lists source
+commits. Evidence-only aggregation validates recorded checkpoint identities and CSV
+scores, but cannot verify the contents of checkpoint files omitted from the transfer.
 
 The default report expects seven seeds for each of four model/dataset groups,
 including explicit missing/incomplete rows. It reports each completed seed's best

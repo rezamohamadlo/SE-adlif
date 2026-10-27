@@ -113,7 +113,7 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                     f"experiment={experiment}", f"random_seed={seed}",
                     f"+comparison={dataset}",
                     f"logdir={json.dumps(portable_path(directory, ROOT))}",
-                    f"hydra.run.dir={json.dumps(directory.as_posix())}",
+                    f"hydra.run.dir={json.dumps(portable_path(directory, ROOT) if VALIDATION_ONLY else directory.as_posix())}",
                     "++launcher_script=runner.py", f"++model_variant={model}",
                     f"++run_mode={'reference' if model == 'SE_adLIF' else 'ours'}",
                     f"++launcher_logdir={launcher_logdir}",
@@ -157,8 +157,9 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                 if VALIDATION_ONLY:
                     from extended_seed_study import validate_config
                     validate_config(resolved)
-                    if inspect_existing and (directory / 'completed.txt').exists():
-                        raise ValueError(f'Full-test artifacts in validation-only directory: {directory}')
+                    if inspect_existing:
+                        from extended_seed_study import reject_test_artifacts
+                        reject_test_artifacts(directory)
                 # Validate model registry, architecture and temporal aggregation
                 # before launching any expensive training subprocess.
                 from models.pl_module import layer_map
@@ -225,6 +226,9 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                         read_completed(directory)
                     status = "complete"
                 elif (directory / "ckpt" / "last.ckpt").exists():
+                    if VALIDATION_ONLY:
+                        from extended_seed_study import inspect_resume
+                        inspect_resume(directory, resolved, ROOT)
                     status = "resume"
                     overrides.append(f"ckpt_path={json.dumps(portable_path(directory / 'ckpt' / 'last.ckpt', ROOT))}")
                 elif (directory / "ckpt").exists() and any((directory / "ckpt").iterdir()):

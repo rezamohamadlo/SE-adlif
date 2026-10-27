@@ -34,6 +34,12 @@ class ExtendedSeedsTests(unittest.TestCase):
             p = patch.object(runner, key, value)
             p.start()
             self.addCleanup(p.stop)
+        self.source = dict(git_commit='a' * 40, tracked_diff_sha256='b' * 64,
+                           source_files_sha256='c' * 64)
+        self.actual_source_identity = study.source_identity
+        source_patch = patch.object(study, 'source_identity', return_value=self.source)
+        source_patch.start()
+        self.addCleanup(source_patch.stop)
 
     def plan(self, model='MT_SE_adLIF', dataset='ECG', seeds=(1009,)):
         return runner.build_plan(model, seeds=seeds, datasets=(dataset,))
@@ -43,14 +49,17 @@ class ExtendedSeedsTests(unittest.TestCase):
         directory, cfg = item['directory'], item['config']
         (directory / 'ckpt').mkdir(parents=True)
         best = directory / 'ckpt/best.ckpt'
-        torch.save({'epoch': 2}, best)
-        torch.save({'epoch': cfg['n_epochs'] - 1}, directory / 'ckpt/last.ckpt')
+        state = {'hyper_parameters': {'cfg': cfg}, 'callbacks': {'checkpoint': {
+            'monitor': 'val_acc', 'best_model_path': str(best), 'best_model_score': accuracy,
+            'dirpath': str(best.parent), 'best_k_models': {str(best): accuracy}}}}
+        torch.save(dict(state, epoch=2), best)
+        torch.save(dict(state, epoch=cfg['n_epochs'] - 1), directory / 'ckpt/last.ckpt')
         metrics = directory / 'logs/mlp_snn/version_0/metrics.csv'
         metrics.parent.mkdir(parents=True)
         metrics.write_text(f'epoch,val_acc\n1,{accuracy - .1}\n2,{accuracy}\n')
         (directory / 'FULL_RUN_CONFIG.json').write_text(json.dumps(cfg))
         (directory / 'LAUNCH_ENVIRONMENTS.json').write_text(json.dumps([
-            dict(git_commit='abc', tracked_diff_sha256='clean', python='fixture')]))
+            dict(self.source, python='fixture')]))
         trainer = SimpleNamespace(checkpoint_callback=SimpleNamespace(best_model_path=str(best), best_model_score=accuracy))
         study.finish_validation(OmegaConf.create(cfg), trainer)
         return item
@@ -78,6 +87,7 @@ class ExtendedSeedsTests(unittest.TestCase):
                 self.assertFalse(cfg['run_test'])
                 self.assertIsNone(cfg['init_ckpt_path'])
                 self.assertIn('run_test=false', i['overrides'])
+                self.assertIn(f'hydra.run.dir="{cfg["logdir"]}"', i['overrides'])
                 self.assertEqual(cfg['n_epochs'], 400 if assignment['dataset'] == 'ECG' else 300)
                 self.assertEqual(cfg['batch_size'], 64 if assignment['dataset'] == 'ECG' else 256)
                 self.assertEqual(cfg['lr'], .01)
@@ -110,7 +120,7 @@ class ExtendedSeedsTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Unrecognized'):
             self.plan()
         (directory / 'completed.txt').touch()
-        with self.assertRaisesRegex(ValueError, 'Full-test artifacts'):
+        with self.assertRaisesRegex(ValueError, 'Test artifacts'):
             self.plan()
 
     def test_full_budget_and_metrics_required(self):
@@ -119,13 +129,16 @@ class ExtendedSeedsTests(unittest.TestCase):
         trainer = SimpleNamespace(checkpoint_callback=SimpleNamespace(
             best_model_path=str(directory / 'ckpt/best.ckpt'), best_model_score=.8))
         (directory / 'validation_completed.txt').unlink()
-        torch.save({'epoch': 1}, directory / 'ckpt/last.ckpt')
+        last = torch.load(directory / 'ckpt/last.ckpt', weights_only=False)
+        last['epoch'] = 1
+        torch.save(last, directory / 'ckpt/last.ckpt')
         with self.assertRaisesRegex(RuntimeError, 'full epoch budget'):
             study.finish_validation(OmegaConf.create(cfg), trainer)
         self.assertFalse((directory / 'validation_completed.txt').exists())
-        torch.save({'epoch': cfg['n_epochs'] - 1}, directory / 'ckpt/last.ckpt')
+        last['epoch'] = cfg['n_epochs'] - 1
+        torch.save(last, directory / 'ckpt/last.ckpt')
         trainer.checkpoint_callback.best_model_score = .9
-        with self.assertRaisesRegex(ValueError, 'metrics disagree'):
+        with self.assertRaisesRegex(ValueError, 'checkpoint selection'):
             study.finish_validation(OmegaConf.create(cfg), trainer)
 
     def test_guarded_test_call_and_validation_branch_has_no_costs(self):
@@ -240,6 +253,160 @@ class ExtendedSeedsTests(unittest.TestCase):
             study.atomic_json(directory / 'LAUNCH_ENVIRONMENTS.json', record)
             with self.assertRaisesRegex(ValueError, 'Source revision'):
                 study.write_provenance(directory, study.ROOT)
+
+    def test_csv_test_metrics_are_rejected_for_completion_and_resume(self):
+        item = self.completed()
+        directory = item['directory']
+        metrics = directory / 'logs/mlp_snn/version_0/metrics.csv'
+        metrics.write_text('epoch,val_acc,test_acc\n1,0.7,\n2,0.8,0.9\n')
+        with self.assertRaisesRegex(ValueError, 'Test metrics'):
+            study.read_completed(directory)
+        (directory / 'validation_completed.txt').unlink()
+        with self.assertRaisesRegex(ValueError, 'Test metrics'):
+            self.plan()
+
+    def test_repeated_validation_epochs_are_not_valid_evidence(self):
+        item = self.completed()
+        metrics = item['directory'] / 'logs/mlp_snn/version_0/metrics.csv'
+        with metrics.open('a') as stream:
+            stream.write('2,0.8\n')
+        with self.assertRaisesRegex(ValueError, 'Repeated|monotonic'):
+            study.read_completed(item['directory'])
+
+    def test_resume_requires_best_checkpoint_and_saved_checkpoint_config(self):
+        item = self.completed()
+        directory = item['directory']
+        (directory / 'validation_completed.txt').unlink()
+        torch.save({'epoch': 3, 'hyper_parameters': {'cfg': {'random_seed': 42}}},
+                   directory / 'ckpt/last.ckpt')
+        with self.assertRaisesRegex(ValueError, 'checkpoint.*configuration'):
+            self.plan()
+
+    def test_missing_resume_provenance_is_rejected(self):
+        item = self.completed()
+        directory = item['directory']
+        (directory / 'validation_completed.txt').unlink()
+        (directory / 'LAUNCH_ENVIRONMENTS.json').unlink()
+        with self.assertRaisesRegex(ValueError, 'provenance'):
+            self.plan()
+
+    def test_resume_rejects_missing_best_and_metrics_ahead_of_checkpoint(self):
+        item = self.completed()
+        directory = item['directory']
+        (directory / 'validation_completed.txt').unlink()
+        last = torch.load(directory / 'ckpt/last.ckpt', weights_only=False)
+        last['epoch'] = 1
+        torch.save(last, directory / 'ckpt/last.ckpt')
+        with self.assertRaisesRegex(ValueError, 'ahead of last checkpoint'):
+            self.plan()
+        last['epoch'] = 3
+        torch.save(last, directory / 'ckpt/last.ckpt')
+        (directory / 'ckpt/best.ckpt').unlink()
+        with self.assertRaises(FileNotFoundError):
+            self.plan()
+
+    def test_resume_rejects_changed_source_in_preflight(self):
+        item = self.completed()
+        (item['directory'] / 'validation_completed.txt').unlink()
+        with patch.object(study, 'source_identity', return_value=dict(self.source, source_files_sha256='different')):
+            with self.assertRaisesRegex(ValueError, 'Source revision'):
+                self.plan()
+
+    def test_portable_checkpoint_io_restores_actual_callback_in_another_checkout(self):
+        from run import ValidationCheckpointIO
+        from pytorch_lightning.callbacks import ModelCheckpoint
+        item = self.completed()
+        directory = item['directory']
+        callback = ModelCheckpoint(dirpath=directory / 'ckpt', monitor='val_acc', mode='max')
+        callback.best_model_path = str(directory / 'ckpt/best.ckpt')
+        callback.best_model_score = torch.tensor(.8)
+        callback.best_k_models = {callback.best_model_path: callback.best_model_score}
+        checkpoint = {'callbacks': {'checkpoint': callback.state_dict()}, 'epoch': 2}
+        saved = directory / 'ckpt/portable.ckpt'
+        ValidationCheckpointIO().save_checkpoint(checkpoint, saved)
+        state = torch.load(saved, weights_only=False)['callbacks']['checkpoint']
+        self.assertFalse(Path(state['dirpath']).is_absolute())
+        self.assertEqual(checkpoint['callbacks']['checkpoint']['dirpath'], str((directory / 'ckpt').resolve()))
+        other_root = self.root / 'other_checkout'
+        copied = other_root / saved.relative_to(self.root)
+        copied.parent.mkdir(parents=True)
+        shutil.copyfile(saved, copied)
+        with patch.object(project_paths, 'ROOT', other_root):
+            restored = ValidationCheckpointIO().load_checkpoint(copied, map_location='cpu')
+            other_callback = ModelCheckpoint(dirpath=copied.parent, monitor='val_acc', mode='max')
+            other_callback.load_state_dict(restored['callbacks']['checkpoint'])
+            self.assertEqual(other_callback.best_model_path, str((copied.parent / 'best.ckpt').resolve()))
+            self.assertEqual(other_callback.best_model_score, callback.best_model_score)
+
+    def test_generated_summary_retains_validation_resume_flags(self):
+        from run import TrainingSummaryCallback
+        item = self.completed()
+        directory = item['directory']
+        callback = TrainingSummaryCallback(SimpleNamespace(
+            best_model_path=str(directory / 'ckpt/best.ckpt'), best_model_score=.8), OmegaConf.create(item['config']))
+        callback._latest_validation_snapshot = dict(epoch=2, val_loss=.3, train_acc=.7, train_loss=.4,
+            grad_norm=1., total_parameters=1, trainable_parameters=1, average_timesteps=3., dense_forward_gflops=.1)
+        import os
+        previous = Path.cwd()
+        try:
+            os.chdir(directory)
+            callback._write_if_new_best(SimpleNamespace(optimizers=[SimpleNamespace(param_groups=[{'lr': .01}])]), 'training')
+        finally:
+            os.chdir(previous)
+        summary = (directory / 'TRAINING_SUMMARY.md').read_text(encoding='utf-8')
+        self.assertIn('--validation-only', summary)
+        self.assertIn('--seed-cohort extension_v1', summary)
+        self.assertIn('--logdir "results/experiments/study"', summary)
+
+    def test_baseline_cannot_authorize_its_own_changed_values(self):
+        cfg = self.plan()[0]['config']
+        cfg['lr'] = cfg['paper_baseline']['datasets']['ECG']['lr'] = .5
+        with self.assertRaisesRegex(ValueError, 'Unsafe'):
+            study.validate_config(cfg)
+
+    def test_aggregate_preserves_source_config_and_environment(self):
+        self.completed()
+        result = aggregate([self.root / runner.RUN_LOGDIR])
+        completed = next(r for r in result['runs'] if r['status'] == 'complete')
+        self.assertEqual(completed['launch_environments'][0]['git_commit'], self.source['git_commit'])
+        self.assertEqual(completed['effective_config']['dataset']['random_seed'], 42)
+        self.assertFalse(Path(completed['source_directory']).is_absolute())
+
+    def test_source_fingerprint_detects_untracked_module_changes(self):
+        tracked, untracked = self.root / 'tracked.py', self.root / 'new_module.py'
+        tracked.write_text('value = 1\n')
+        untracked.write_text('value = 2\n')
+        def git(args, **kwargs):
+            if args[1] == 'ls-files':
+                return b'tracked.py\0new_module.py\0'
+            if args[1] == 'rev-parse':
+                return self.source['git_commit']
+            return ''
+        with patch.object(study.subprocess, 'check_output', side_effect=git):
+            before = self.actual_source_identity(self.root)
+            untracked.write_text('value = 3\n')
+            after = self.actual_source_identity(self.root)
+        self.assertEqual(before['git_commit'], after['git_commit'])
+        self.assertEqual(before['tracked_diff_sha256'], after['tracked_diff_sha256'])
+        self.assertNotEqual(before['source_files_sha256'], after['source_files_sha256'])
+
+    def test_test_artifacts_rejected_on_incomplete_import(self):
+        directory = self.plan()[0]['directory']
+        directory.mkdir(parents=True)
+        (directory / 'TEST_RESULTS.json').write_text('{}')
+        with self.assertRaisesRegex(ValueError, 'Test artifacts'):
+            aggregate([self.root / runner.RUN_LOGDIR])
+
+    def test_adding_environment_fingerprint_preserves_legacy_provenance(self):
+        directory = self.root / 'legacy_provenance'
+        directory.mkdir()
+        old = {k: v for k, v in self.source.items() if k != 'source_files_sha256'}
+        study.atomic_json(directory / 'LAUNCH_ENVIRONMENTS.json', [old])
+        with patch('torch.cuda.device_count', return_value=0):
+            study.write_provenance(directory, self.root)
+        records = study.read_provenance(directory, self.root)
+        self.assertEqual(records[0], old)
+        self.assertEqual(records[-1]['source_files_sha256'], self.source['source_files_sha256'])
 
 
 if __name__ == '__main__':

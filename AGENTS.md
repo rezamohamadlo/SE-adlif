@@ -317,6 +317,8 @@ actually verified and any material limitations.
   exclude generated artifacts. Check for conflicts and verify the final remote
   state after pushing. Never force-push or discard user work without explicit
   authorization.
+- Never push to a remote without first obtaining explicit user confirmation
+  for that push. Permission to commit does not authorize pushing.
 - Status updates should distinguish completed work from queued, running,
   interrupted or unverified work. Keep explanations concise and candid.
 
@@ -331,3 +333,66 @@ Historical experiments retain their original baseline in REFERENCE_BASELINE.json
 do not retroactively substitute current reference scores into those records.
 Proposed controlled-v2 SHD results remain unmatched until rerun with this
 baseline. Prefer metadata/metrics over hard-coded reference numbers.
+
+
+## Codex Model and Reasoning Efficiency Rules
+
+I use ChatGPT Plus and want to maximize coding quality while minimizing unnecessary usage.
+
+### 1. Default Settings
+
+For most development tasks, recommend:
+
+- **Model:** GPT-6.1 Sol
+- **Reasoning:** Medium
+
+This is the preferred balance between implementation quality, speed, and usage efficiency.
+
+### 2. Task-Based Recommendations
+
+Recommend model and reasoning settings according to task complexity:
+
+| Task Type | Model | Reasoning |
+|---|---|---|
+| Normal coding and feature implementation | GPT-6.1 Sol | Medium |
+| Complex debugging and refactoring | GPT-6.1 Sol | High |
+| Research algorithms and mathematical correctness | GPT-6.1 Sol | High |
+| Experimental protocol and scientific validity reviews | GPT-6.1 Sol | High |
+| Extremely difficult problems unresolved by Sol | GPT-6 Astra | Medium |
+| Simple scripts, documentation, formatting, and minor fixes | GPT-6 Luna | Low |
+
+Only recommend models that are actually available in the user's Codex environment. Otherwise, suggest the closest available alternative.
+
+### 3. Automatic Reminders
+
+- At the beginning of a substantial new task, evaluate whether the current model and reasoning level are appropriate.
+- If a different setting would significantly improve efficiency or reliability, recommend switching before beginning implementation.
+- If the current settings are appropriate, continue without unnecessary reminders.
+- Reevaluate when task complexity changes significantly.
+- Never interrupt an ongoing task merely to suggest a model change.
+- Do not repeat recommendations in every response.
+
+### 4. Plus Usage Optimization
+
+- Prefer Medium reasoning unless the task genuinely requires High.
+- Reserve expensive models and higher reasoning levels for difficult problems.
+- Use targeted code inspection and tests instead of repeatedly analyzing the entire repository.
+- Avoid unnecessary tool calls, repeated searches, and redundant analysis.
+- Never sacrifice correctness, testing, or scientific validity solely to reduce usage.
+- Do not assume access to account usage information or automatically change model settings.
+
+### 5. Reminder Format
+
+When a model change is recommended, briefly display:
+
+**Recommended Codex settings:** `[Model]` — `[Reasoning Level]`
+
+**Reason:** One concise sentence explaining why these settings fit the current task.
+
+Then proceed according to the user's instructions.
+
+### 6. Research Project Priority
+
+For the SE-adLIF research repository, prioritize correctness, reproducibility, experiment isolation, validation integrity, and checkpoint safety over speed or token savings.
+
+Use High reasoning when reviewing changes that could affect experimental results, training dynamics, evaluation protocols, or scientific conclusions.
