@@ -1,0 +1,11 @@
+name: extension_v1
+canonical_seeds: [42, 123, 456]
+additional_seeds: [1009, 2027, 3037, 4049, 5051, 6067, 7079]
+ordered_seeds: [42, 123, 456, 1009, 2027, 3037, 4049, 5051, 6067, 7079]
+assignments:
+  pc1_ecg:
+    dataset: ECG
+    models: [MT_SE_adLIF, SA_MT_SE_adLIF]
+  pc2_shd:
+    dataset: SHD
+    models: [MT_SE_adLIF, DTH_SE_adLIF]

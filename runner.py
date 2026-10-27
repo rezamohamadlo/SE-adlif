@@ -12,6 +12,7 @@ import statistics
 import subprocess
 import sys
 from datetime import datetime, timezone
+from contextlib import ExitStack
 
 from hydra import compose, initialize_config_dir
 from omegaconf import OmegaConf
@@ -27,6 +28,8 @@ EVALUATION = {'name': _BASELINE.version,
               'common': {}, 'datasets': {name: {} for name in _BASELINE.datasets}}
 SEEDS = tuple(EVALUATION['seeds'])
 RUN_LOGDIR = "results/valid"
+SEED_COHORT = None
+VALIDATION_ONLY = False
 # One explicit protocol shared by reference and proposed models.
 PROTOCOL = EVALUATION['datasets']
 
@@ -65,12 +68,15 @@ def matches_paper_baseline(previous, resolved, dataset):
     return old == current
 
 
-def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, resume=1):
+def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, resume=1,
+               inspect_existing=True):
     if resume not in (0, 1):
         raise ValueError('resume must be 0 or 1')
+    from extended_seed_study import cohort_definition
+    allowed_seeds = tuple(cohort_definition()["ordered_seeds"]) if SEED_COHORT else SEEDS
     seeds = tuple(dict.fromkeys(seeds))
-    if not seeds or any(isinstance(seed, bool) or seed not in SEEDS for seed in seeds):
-        raise ValueError(f"Select one or more canonical seeds: {SEEDS}")
+    if not seeds or any(isinstance(seed, bool) or seed not in allowed_seeds for seed in seeds):
+        raise ValueError(f"Select one or more supported seeds: {allowed_seeds}")
     if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]*", model):
         raise ValueError("Model must be an experiment suffix, for example MT_SE_adLIF")
     if (isinstance(adaptation_update_interval, bool)
@@ -101,7 +107,7 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                         directory = legacy
                 launcher_root = directory.parents[2] if model != 'MR_SE_adLIF' else directory.parents[3]
                 launcher_logdir = launcher_root.relative_to(ROOT).as_posix()
-                if resume == 0 and directory.exists() and any(directory.iterdir()):
+                if inspect_existing and resume == 0 and directory.exists() and any(directory.iterdir()):
                     raise ValueError(f'--resume 0 requires an empty output directory; use --logdir for a fresh run: {directory}')
                 overrides = [
                     f"experiment={experiment}", f"random_seed={seed}",
@@ -114,6 +120,11 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                     f"++evaluation_protocol={dataset_protocol_name(dataset)}",
                     f"++paper_baseline_deviations={json.dumps([] if model == 'SE_adLIF' else [f'model_variant={model}'])}",
                 ]
+                if SEED_COHORT:
+                    overrides += [f"++seed_cohort={SEED_COHORT}",
+                                  f"++seed_cohort_order={json.dumps(list(allowed_seeds))}"]
+                if VALIDATION_ONLY:
+                    overrides += ["run_test=false", "++validation_only=true", "early_stopping=false"]
                 overrides += protocol_overrides(EVALUATION, dataset)
                 if dataset == 'SSC':
                     # Enforce the runner's SSC default in the child command too,
@@ -143,6 +154,11 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                     overrides += [f'++evaluation_protocol={cfg.evaluation_protocol}',
                                   f'++paper_baseline_deviations={json.dumps(deviations)}']
                 resolved = portable_config(OmegaConf.to_container(cfg, resolve=True), ROOT)
+                if VALIDATION_ONLY:
+                    from extended_seed_study import validate_config
+                    validate_config(resolved)
+                    if inspect_existing and (directory / 'completed.txt').exists():
+                        raise ValueError(f'Full-test artifacts in validation-only directory: {directory}')
                 # Validate model registry, architecture and temporal aggregation
                 # before launching any expensive training subprocess.
                 from models.pl_module import layer_map
@@ -152,6 +168,11 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                 expected_loss = OmegaConf.load(ROOT / 'config' / 'comparison' / f'{dataset}.yaml').loss_agg
                 if cfg.loss_agg != expected_loss or not cfg.two_layers:
                     raise ValueError(f"{experiment} must use two layers and {expected_loss}")
+                if not inspect_existing:
+                    plan.append(dict(dataset=dataset, seed=seed, directory=directory,
+                                     config=resolved, overrides=overrides, status='unchecked',
+                                     compatibility=None))
+                    continue
                 manifest = directory / "FULL_RUN_CONFIG.json"
                 compatibility = None
                 if manifest.exists():
@@ -198,7 +219,10 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                         }
                 elif directory.exists() and any(directory.iterdir()):
                     raise ValueError(f"Unrecognized existing results; refusing to overwrite {directory}")
-                if (directory / "completed.txt").exists():
+                if (directory / ("validation_completed.txt" if VALIDATION_ONLY else "completed.txt")).exists():
+                    if VALIDATION_ONLY:
+                        from extended_seed_study import read_completed
+                        read_completed(directory)
                     status = "complete"
                 elif (directory / "ckpt" / "last.ckpt").exists():
                     status = "resume"
@@ -362,6 +386,8 @@ def write_aggregate(model, adaptation_update_interval=2):
 
 def run(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, resume=1,
         measure_costs=True, measure_existing_costs=False):
+    if VALIDATION_ONLY:
+        return run_validation(model, adaptation_update_interval, seeds, datasets, resume)
     plan = build_plan(model, adaptation_update_interval, seeds, datasets, resume)  # Preflight selected runs before writes.
     for item in plan:
         directory = item["directory"]
@@ -391,15 +417,38 @@ def run(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, resume=
     print(f"Finished. Report: {result_root(model, adaptation_update_interval) / 'RESULTS.md'}")
 
 
+def run_validation(model, interval, seeds, datasets, resume):
+    from extended_seed_study import write_provenance, read_completed
+    plan = build_plan(model, interval, seeds, datasets, resume)
+    for item in plan:
+        directory = item['directory']
+        print(f"{model} {item['dataset']} seed {item['seed']}: {item['status']}", flush=True)
+        if item['status'] == 'complete':
+            continue
+        directory.mkdir(parents=True, exist_ok=True)
+        manifest = directory / 'FULL_RUN_CONFIG.json'
+        if not manifest.exists():
+            manifest.write_text(json.dumps(item['config'], indent=2, sort_keys=True) + '\n', encoding='utf-8')
+        write_provenance(directory, ROOT)
+        result = subprocess.run([sys.executable, str(ROOT / 'run.py'), *item['overrides']], cwd=ROOT)
+        if result.returncode:
+            raise RuntimeError(f"Validation training failed; rerun the same command to resume: {directory}")
+        read_completed(directory)
+
+
 def main(argv=None):
-    global EVALUATION, PROTOCOL, RUN_LOGDIR
+    global EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--models", nargs="+", required=True,
                         help="SE_adLIF, DTH_SE_adLIF, LG_DTH_SE_adLIF (including _slow/_transient), or configured future models")
     parser.add_argument("--adaptation-update-interval", type=int, default=2,
                         help="Fixed K for MR_SE_adLIF only (default: 2)")
-    parser.add_argument("--seeds", nargs="+", type=int, choices=SEEDS, default=SEEDS,
-                        help="Training seeds to run (default: 42 123 456)")
+    parser.add_argument("--seeds", nargs="+", type=int, default=None,
+                        help="Training seeds (default: canonical three, or seven new seeds with extension_v1)")
+    parser.add_argument("--seed-cohort", choices=("extension_v1",),
+                        help="Opt in to the frozen extension seed cohort")
+    parser.add_argument("--validation-only", action="store_true",
+                        help="Full-budget validation selection; no final test or test-cost measurement")
     parser.add_argument("--dry-run", action="store_true", help="Validate and display plans without training or writes")
     parser.add_argument('--no-measure-costs', action='store_true',
                         help='Skip automatic post-test spike/compute/timing measurement')
@@ -427,8 +476,22 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.no_measure_costs and args.measure_existing_costs:
         parser.error('--no-measure-costs and --measure-existing-costs cannot be combined')
-    original = EVALUATION, PROTOCOL, RUN_LOGDIR
+    original = EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY
     try:
+        SEED_COHORT, VALIDATION_ONLY = args.seed_cohort, args.validation_only
+        from extended_seed_study import cohort_definition
+        args.seeds = args.seeds if args.seeds is not None else (
+            cohort_definition()['additional_seeds'] if SEED_COHORT else SEEDS)
+        allowed = cohort_definition()['ordered_seeds'] if SEED_COHORT else SEEDS
+        if any(seed not in allowed for seed in args.seeds):
+            raise ValueError(f'Select supported seeds: {allowed}')
+        if (SEED_COHORT or VALIDATION_ONLY) and (not args.logdir or args.tta or args.measure_existing_costs):
+            raise ValueError('Cohort/validation mode requires a separate --logdir and forbids TTA/test cost backfill')
+        if SEED_COHORT and not VALIDATION_ONLY:
+            raise ValueError('extension_v1 requires --validation-only; final tests require a separately frozen evaluation procedure')
+        if VALIDATION_ONLY and (not str(args.logdir).replace('\\', '/').startswith('results/experiments/')
+                                or '..' in Path(args.logdir).parts):
+            raise ValueError('Validation-only outputs must be repository-relative under results/experiments/')
         if args.tta:
             from evaluate_tta import MODEL_CELLS
             selected_models = list(dict.fromkeys(args.models))
@@ -468,6 +531,8 @@ def main(argv=None):
             overrides['dataset.batch_size'] = args.batch_size
         if args.early_stopping is not None:
             overrides['early_stopping'] = args.early_stopping == 'true'
+        if (SEED_COHORT or VALIDATION_ONLY) and overrides:
+            raise ValueError('Frozen validation study does not accept training overrides')
         if overrides:
             EVALUATION = copy.deepcopy(EVALUATION)
             fingerprint = hashlib.sha256(json.dumps(overrides, sort_keys=True).encode()).hexdigest()[:12]
@@ -489,16 +554,23 @@ def main(argv=None):
                           f"(loss={item['config']['loss_agg']}) -> {item['directory']}")
             print(f"Validated {sum(len(plan) for _, plan in plans)} runs; no training or writes.")
         else:
-            for model in models:
-                run(model, args.adaptation_update_interval, args.seeds, args.datasets, args.resume,
-                    measure_costs=not args.no_measure_costs, measure_existing_costs=args.measure_existing_costs)
+            with ExitStack() as stack:
+                if VALIDATION_ONLY:
+                    from extended_seed_study import study_lock
+                    stack.enter_context(study_lock(ROOT / RUN_LOGDIR))
+                    # Recheck every selected model after acquiring the lock, before any launch.
+                    for model in models:
+                        build_plan(model, args.adaptation_update_interval, args.seeds, args.datasets, args.resume)
+                for model in models:
+                    run(model, args.adaptation_update_interval, args.seeds, args.datasets, args.resume,
+                        measure_costs=not args.no_measure_costs, measure_existing_costs=args.measure_existing_costs)
     except KeyboardInterrupt:
         print("Interrupted. Rerun the same command to resume.", file=sys.stderr)
         sys.exit(130)
     except (ValueError, RuntimeError) as error:
         parser.exit(1, f"Error: {error}\n")
     finally:
-        EVALUATION, PROTOCOL, RUN_LOGDIR = original
+        EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY = original
 
 
 if __name__ == '__main__':

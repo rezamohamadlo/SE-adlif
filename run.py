@@ -429,6 +429,9 @@ def main(cfg: DictConfig):
     from evaluation_protocol import apply_protocol
     apply_protocol(cfg)
     cfg = OmegaConf.create(portable_config(OmegaConf.to_container(cfg, resolve=True)))
+    if cfg.get('validation_only', False):
+        from extended_seed_study import validate_config
+        validate_config(OmegaConf.to_container(cfg, resolve=True))
     if Path('.hydra').is_dir():
         OmegaConf.save(cfg, '.hydra/config.yaml')
     logging.getLogger().addHandler(logging.FileHandler("out.log"))
@@ -499,6 +502,10 @@ def main(cfg: DictConfig):
     if cfg.get('run_test', True):
         result = trainer.test(model, ckpt_path="best", datamodule=datamodule)
         logging.info(f"Final result: {result}")
+
+    if cfg.get('validation_only', False):
+        from extended_seed_study import finish_validation
+        finish_validation(cfg, trainer)
 
     return trainer.checkpoint_callback.best_model_score.cpu().detach().numpy()
 
