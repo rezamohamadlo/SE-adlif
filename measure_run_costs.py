@@ -95,9 +95,18 @@ def collect(directory, dataset, dry_run=False):
 
 def _collect(directory, dataset, dry_run=False):
     directory = local_path(directory, must_exist=True)
+    frozen_ssc_test = None
     if not (directory / 'completed.txt').is_file():
-        raise ValueError('Only completed training/test runs may be measured')
+        manifest = directory / 'FULL_RUN_CONFIG.json'
+        if dataset == 'SSC' and manifest.is_file() and json.loads(manifest.read_text(encoding='utf-8')).get('ssc_study'):
+            from ssc_validation_study import validate_final_evidence
+            frozen_ssc_test = validate_final_evidence(directory)
+        else:
+            raise ValueError('Only completed training/test runs may be measured')
     path = shared.selected_checkpoint(directory)
+    if frozen_ssc_test and (local_path(frozen_ssc_test['checkpoint']) != path.resolve()
+                            or shared.sha256(path) != frozen_ssc_test['checkpoint_sha256']):
+        raise ValueError('Cost checkpoint differs from frozen SSC final-test checkpoint')
     checkpoint = torch.load(path, map_location='cpu', weights_only=False)
     cfg = OmegaConf.create(portable_config(OmegaConf.to_container(
         OmegaConf.create(checkpoint['hyper_parameters']['cfg']), resolve=True)))
@@ -129,7 +138,8 @@ def _collect(directory, dataset, dry_run=False):
     batches, data_hash = prepare_batches(dataset, cfg)
     with torch.inference_mode():
         metrics = reference.measure(model, batches, device, dataset != 'ECG', 3, 2)
-    expected = shared.saved_test_accuracy(directory)
+    expected = (frozen_ssc_test['metrics']['test_acc'] if frozen_ssc_test
+                else shared.saved_test_accuracy(directory))
     if abs(metrics['reproduced_test_acc'] - expected) > 1e-6:
         raise ValueError(f'Reproduced test accuracy differs: {metrics["reproduced_test_acc"]} vs {expected}')
     record = dict(version=VERSION, status='complete', dataset=dataset, seed=int(cfg.random_seed),

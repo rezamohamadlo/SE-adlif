@@ -30,6 +30,7 @@ SEEDS = tuple(EVALUATION['seeds'])
 RUN_LOGDIR = "results/valid"
 SEED_COHORT = None
 VALIDATION_ONLY = False
+SSC_STUDY_JOB = None  # Explicit opt-in; ordinary and extension_v1 plans are unchanged.
 # One explicit protocol shared by reference and proposed models.
 PROTOCOL = EVALUATION['datasets']
 
@@ -73,7 +74,8 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
     if resume not in (0, 1):
         raise ValueError('resume must be 0 or 1')
     from extended_seed_study import cohort_definition
-    allowed_seeds = tuple(cohort_definition()["ordered_seeds"]) if SEED_COHORT else SEEDS
+    allowed_seeds = (tuple(SSC_STUDY_JOB['seeds']) if SSC_STUDY_JOB else
+                     tuple(cohort_definition()["ordered_seeds"]) if SEED_COHORT else SEEDS)
     seeds = tuple(dict.fromkeys(seeds))
     if not seeds or any(isinstance(seed, bool) or seed not in allowed_seeds for seed in seeds):
         raise ValueError(f"Select one or more supported seeds: {allowed_seeds}")
@@ -138,6 +140,9 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                     overrides.append(f'++paper_baseline_deviations={json.dumps(deviations)}')
                 if model == "MR_SE_adLIF":
                     overrides.append(f"adaptation_update_interval={adaptation_update_interval}")
+                if SSC_STUDY_JOB:
+                    from ssc_validation_study import job_overrides
+                    overrides += job_overrides(SSC_STUDY_JOB, model, dataset, seed)
                 cfg = compose(config_name="main", overrides=overrides)
                 from models.pl_module import validate_training_objective
                 objective = validate_training_objective(cfg)
@@ -441,6 +446,10 @@ def run_validation(model, interval, seeds, datasets, resume):
 
 
 def main(argv=None):
+    arguments = list(sys.argv[1:] if argv is None else argv)
+    if any(arg == '--ssc-study-stage' or arg.startswith('--ssc-study-stage=') for arg in arguments):
+        from ssc_validation_study import main as study_main
+        return study_main(arguments, runner=sys.modules[__name__])
     global EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--models", nargs="+", required=True,

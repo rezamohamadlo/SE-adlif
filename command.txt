@@ -8,3 +8,53 @@
 
 # PC2: SHD* -- MT versus DTH; validation only, no test inference or cost measurement.
 .\.venv\Scripts\python.exe runner.py --models MT_SE_adLIF DTH_SE_adLIF --datasets SHD --seeds 1009 2027 3037 4049 5051 6067 7079 --seed-cohort extension_v1 --validation-only --logdir results/experiments/extended_seeds_v1/pc2_shd
+
+# PC3/PC4: SSC validation search v1. Execute only your PC's CURRENT stage.
+# Keep the same committed code throughout this study; do not update an active checkout.
+# Each PC needs its own .venv and data/SSCWrapper/ssc_train.h5 + ssc_valid.h5.
+# Fresh weights; 40 epochs, batch 256; no test/TTA during development or confirmation training.
+# Full instructions and result-transfer requirements:
+# docs/experiments/ssc-validation-search-plan-v1.md
+
+# START HERE -- PC3: 9 LR-screening runs, seed 42.
+.\.venv\Scripts\python.exe runner.py --ssc-study-stage lr --study-pc pc3 --dry-run
+.\.venv\Scripts\python.exe runner.py --ssc-study-stage lr --study-pc pc3
+
+# START HERE -- PC4: 9 LR-screening runs, seed 123.
+.\.venv\Scripts\python.exe runner.py --ssc-study-stage lr --study-pc pc4 --dry-run
+.\.venv\Scripts\python.exe runner.py --ssc-study-stage lr --study-pc pc4
+
+# STOP after LR screening. Merge both PCs' small records, preserving pc3/pc4 paths.
+# On the coordinator ONLY, freeze the top two model/LR candidates:
+# .\.venv\Scripts\python.exe runner.py --ssc-study-stage select-lr --dry-run
+# .\.venv\Scripts\python.exe runner.py --ssc-study-stage select-lr
+# Copy selection/select-lr.json to BOTH PCs, preserving the study root.
+
+# NEXT -- 4 dropout runs on each PC. Append --dry-run first.
+# PC3: .\.venv\Scripts\python.exe runner.py --ssc-study-stage dropout --study-pc pc3
+# PC4: .\.venv\Scripts\python.exe runner.py --ssc-study-stage dropout --study-pc pc4
+# Merge small records again; coordinator freezes dropout choices:
+# .\.venv\Scripts\python.exe runner.py --ssc-study-stage select-dropout
+# Copy all selection JSONs to BOTH PCs.
+
+# NEXT -- 1 seed-456 check on each PC. Append --dry-run first.
+# PC3: .\.venv\Scripts\python.exe runner.py --ssc-study-stage check --study-pc pc3
+# PC4: .\.venv\Scripts\python.exe runner.py --ssc-study-stage check --study-pc pc4
+# Merge records; coordinator freezes the winner using validation only:
+# .\.venv\Scripts\python.exe runner.py --ssc-study-stage select-winner
+# Copy all selection JSONs to BOTH PCs. A failed improvement gate stops the study.
+
+# NEXT -- fresh confirmation, winner + fixed reference; each seed pair stays on one PC.
+# PC3 runs 6 jobs (seeds 1009/3037/5051); PC4 runs 4 jobs (seeds 2027/4049).
+# PC3: .\.venv\Scripts\python.exe runner.py --ssc-study-stage confirm --study-pc pc3
+# PC4: .\.venv\Scripts\python.exe runner.py --ssc-study-stage confirm --study-pc pc4
+# Merge all small records; coordinator freezes ALL TEN validation-selected checkpoints:
+# .\.venv\Scripts\python.exe runner.py --ssc-study-stage freeze-test
+# Copy all selection JSONs to BOTH PCs; local best/last weights must still exist.
+
+# FINAL -- ordinary test inference + per-seed costs, NO training. Append --dry-run first.
+# PC3 (6 checkpoints): .\.venv\Scripts\python.exe runner.py --ssc-study-stage test --study-pc pc3
+# PC4 (4 checkpoints): .\.venv\Scripts\python.exe runner.py --ssc-study-stage test --study-pc pc4
+# Existing tests are skipped; retry pending cost measurements with --measure-existing-costs.
+# Merge final test/cost records; coordinator generates the paired five-seed report:
+# .\.venv\Scripts\python.exe runner.py --ssc-study-stage report

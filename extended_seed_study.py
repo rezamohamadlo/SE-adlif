@@ -27,6 +27,9 @@ def baseline_definition():
 
 
 def validate_config(cfg):
+    if cfg.get('ssc_study'):
+        from ssc_validation_study import validate_training_config
+        return validate_training_config(cfg)
     dataset = cfg['paper_baseline_dataset']
     authority = baseline_definition()
     if (dataset not in ('SHD', 'ECG') or cfg['run_test'] is not False
@@ -230,6 +233,10 @@ def finish_validation(cfg, trainer):
                   best_validation_accuracy=accuracy, selected_epoch=best_epoch,
                   completed_epochs=last_epoch + 1, best_checkpoint=portable_path(best),
                   last_checkpoint=portable_path(last))
+    if config.get('ssc_study'):
+        from ssc_validation_study import sha256
+        record.update(ssc_study=config['ssc_study'], checkpoint_sha256=sha256(best),
+                      last_checkpoint_sha256=sha256(last))
     check_record(directory, record, config)
     atomic_json(directory / 'VALIDATION_RESULTS.json', record)
     (directory / 'VALIDATION_SUMMARY.md').write_text(
@@ -241,6 +248,11 @@ def finish_validation(cfg, trainer):
 
 def reject_test_artifacts(directory):
     if any((directory / name).exists() for name in ('completed.txt', 'TEST_RESULTS.json', 'COST_RESULTS.json')):
+        config = directory / 'FULL_RUN_CONFIG.json'
+        if config.is_file() and json.loads(config.read_text(encoding='utf-8')).get('ssc_study'):
+            from ssc_validation_study import validate_final_evidence
+            validate_final_evidence(directory)
+            return
         raise ValueError(f'Test artifacts in validation-only results: {directory}')
 
 

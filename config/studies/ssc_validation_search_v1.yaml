@@ -1,0 +1,13 @@
+name: ssc_validation_search_v1
+paper_baseline_version: paper_classification_v1
+models: [MT_SE_adLIF, SA_MT_SE_adLIF, AMT_SE_adLIF]
+learning_rates: [0.003, 0.006, 0.009]
+dropouts: [0.10, 0.15, 0.20]
+screening_seeds: [42, 123]
+check_seed: 456
+confirmation_seeds: [1009, 2027, 3037, 4049, 5051]
+confirmation_assignment: paired_seeds_alternating_pc3_pc4
+reference: SE_adLIF
+output_root: results/experiments/ssc_validation_search_v1
+selection: mean_validation_then_sample_sd_then_candidate_id
+historical_baseline_reuse: false

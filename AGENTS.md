@@ -26,6 +26,10 @@ in `results/provenance/`.
 
 - `run.py`: one classification training job, using Hydra and Lightning.
 - `runner.py`: shared controlled comparisons, preflight, resume and aggregation.
+- `ssc_validation_study.py`: explicit `runner.py --ssc-study-stage` workflow for
+  PC3/PC4 SSC validation tuning and frozen confirmation. Its versioned study
+  config is separate from `extension_v1`; never mix its tuning results into
+  the default baseline grid or launch training as an agent.
 - `measure_run_costs.py`: runner's post-test activity/compute evaluation; saves
   per-seed `COST_RESULTS.json`/`.md` without training. New completions are measured
   by default; existing completions require `--measure-existing-costs`. Cost
@@ -203,6 +207,10 @@ allowed.
   registered model; cross-dataset evaluation is not automatically compatible.
 
 ## Evidence and result reporting
+
+- Use ordinary inference without test-time augmentation (TTA) in all current
+  comparison reports. Do not select between ordinary and TTA results using test
+  accuracy. Preserve historical exploratory TTA evidence separately.
 
 - In all current reports and newly generated comparison tables, wherever local
   results are compared with a numeric paper baseline, append `(Δ paper)` to
