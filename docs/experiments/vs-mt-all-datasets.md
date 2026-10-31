@@ -54,9 +54,12 @@ data/QTDB/QTDB_train.mat
 data/QTDB/QTDB_test.mat
 ```
 
-The SSC comparison additionally uses the existing MT SSC seed records and
-validation-selected baseline checkpoints. Git does not transfer ignored data
-or weights. Preflight verifies data presence without loading data or training.
+The SSC comparison reads compatible MT SSC resolved configs and verified
+`RESULT.json` records. MT is never a training/resume target. Git transfers
+these records but not ignored data, CSV logs, completion flags or weights.
+Missing baseline evidence is labeled unavailable; missing baseline weights
+only prevent parameter export and do not block VS-MT training. Preflight
+verifies dataset presence without loading data or training.
 Effective baseline epochs/batch/LR are SSC 40/256/0.006,
 SHD* 300/256/0.01, and ECG 400/64/0.01; configs remain authoritative.
 SHD* uses 20% training-derived validation with split seed 42. Each dataset's

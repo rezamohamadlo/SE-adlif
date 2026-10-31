@@ -92,6 +92,14 @@ costs. It never retrains the baseline. Pending scores remain pending. Test JSON
 and CSV disagreements or mismatched cost checkpoint identities are errors.
 Different timing sessions/environments limit runtime comparisons.
 
+MT is inspected as read-only evidence, not as a training/resume job. Compatible
+resolved configs and verified `RESULT.json` records can supply the baseline
+comparison without local MT checkpoints, completion flags or CSV logs. Where
+CSV/test JSONs are local they must agree with the result record. Costs must
+match its checkpoint hash and test score. Missing evidence is labeled
+unavailable and mismatched configs are excluded; neither schedules baseline
+training. Missing MT weights only prevent baseline parameter export.
+
 Each completed VS-MT seed also receives `NEURON_PARAMETERS.json` from its
 validation-selected checkpoint. Aligned neuron arrays include `a_fast`,
 `a_slow`, shared `b`, fast/slow mixture weights, mixture-weighted voltage

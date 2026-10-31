@@ -99,3 +99,48 @@ class VSMTSSCRunnerTests(unittest.TestCase):
                 os.chdir(previous)
         self.assertTrue(new[0]['config']['logdir'].startswith(study.OUTPUT+'/'))
         self.assertNotIn(str(root), json.dumps(new[0]['config']))
+
+    def test_metadata_only_baselines_allow_preflight_and_reporting(self):
+        import runner_vs_mt_all as sequence
+        original = runner.ROOT
+        from project_paths import local_path as resolve
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)/'checkout'
+            shutil.copytree(original/'config', root/'config')
+            for seed in (42, 123, 456):
+                relative = Path('results/valid/MT_SE_adLIF/SSC')/f'seed_{seed}'
+                destination = root/relative
+                destination.mkdir(parents=True)
+                for name in ('FULL_RUN_CONFIG.json', 'RESULT.json', 'COST_RESULTS.json'):
+                    shutil.copy2(original/relative/name, destination/name)
+            for names in sequence.FILES.values():
+                for name in names:
+                    p = root/'data'/name
+                    p.parent.mkdir(parents=True, exist_ok=True)
+                    p.touch()  # Presence-only dry run; no data loading.
+            with patch.object(runner, 'ROOT', root), \
+                 patch.object(study, 'local_path', side_effect=lambda value, **kw: resolve(value, root=kw.get('root', root))), \
+                 patch.object(runner, 'run', side_effect=AssertionError('Training forbidden')), \
+                 contextlib.redirect_stdout(io.StringIO()) as output:
+                sequence.main(['--dry-run'])
+                self.assertEqual(output.getvalue().count('Validated 3 runs; no training or writes.'), 3)
+                study.write_comparison([42, 123, 456])
+            report = json.loads((root/study.OUTPUT/'COMPARISON.json').read_text())
+            self.assertEqual(report['summaries']['MT']['n'], 3)
+            self.assertEqual(report['summaries']['VS-MT']['n'], 0)
+            baseline = [row for row in report['rows'] if row['model'] == 'MT']
+            self.assertTrue(all(row['costs'] is not None for row in baseline))
+            self.assertTrue(all('parameters_note' in row for row in baseline))
+            self.assertFalse(any((root/'results/valid').rglob('completed.txt')))
+
+    def test_incompatible_baseline_is_excluded_without_becoming_training_job(self):
+        item = runner.build_plan('MT_SE_adLIF', seeds=[42], datasets=['SSC'], inspect_existing=False)[0]
+        with tempfile.TemporaryDirectory() as temp:
+            d = Path(temp)
+            item['directory'] = d
+            changed = dict(item['config'], lr=.9)
+            (d/'FULL_RUN_CONFIG.json').write_text(json.dumps(changed))
+            (d/'RESULT.json').write_text('{}')
+            study.read_baseline(item)
+            self.assertEqual(item['status'], 'incompatible')
+            self.assertIsNone(study.test_accuracy(item))
