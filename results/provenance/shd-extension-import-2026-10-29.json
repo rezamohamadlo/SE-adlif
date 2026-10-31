@@ -1,0 +1,1132 @@
+{
+  "schema": "research_transfer_v1",
+  "status": "copied_hash_and_checkpoint_verified",
+  "created_utc": "2026-10-29T08:56:56.847392+00:00",
+  "source_external": "F:\\reza\\results\\experiments\\extended_seeds_v1",
+  "destinations": [
+    "results/experiments/extended_seeds_v1/pc2_shd",
+    "results/experiments/extended_seeds_v1/test_mt_shd_v1"
+  ],
+  "copied_files": 151,
+  "reused_identical_files": 0,
+  "total_bytes": 110406988,
+  "files": [
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_1009/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/.hydra/config.yaml",
+      "bytes": 4033,
+      "sha256": "3430c601171ef34e3d7e694d945c8e123f7fd8056ece3f7e5e5e51ff9f5e56f8"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_1009/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/.hydra/hydra.yaml",
+      "bytes": 4373,
+      "sha256": "fe452588ccd00bc897229e22fa9987d76aa57cc40ba7406017ba25d23e051390"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_1009/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/.hydra/overrides.yaml",
+      "bytes": 593,
+      "sha256": "05b09c95370e90fbd5e4509005a13097640eee0bd043cf09d29070da6e5b8922"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_1009/ckpt/epoch=205-step=5150.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/ckpt/epoch=205-step=5150.ckpt",
+      "bytes": 5478306,
+      "sha256": "2fafd54d5b7010c123bbf49c95977c71af293fb7a9013afbffd0952e6e598030"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_1009/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/ckpt/last.ckpt",
+      "bytes": 5478370,
+      "sha256": "940a6f960c7e52e6f534537556868c4d3391f582782f8b980771b24c25f25b82"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_1009/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/FULL_RUN_CONFIG.json",
+      "bytes": 5327,
+      "sha256": "fca5c57c9ee07b83bb30b6f535707a49a1b8171106af6824f17c89d05f277ef0"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_1009/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 710,
+      "sha256": "18fe41e9c448c3810810f578363fee777e8fef7ad84ec5b68fe1d1f9ad59a42b"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_1009/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4445,
+      "sha256": "52a752340aa9fe7e54a5e70fd37f4f9b79d15968ffb77f7aeaeab34631cda61c"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_1009/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 43043,
+      "sha256": "8737459fcab2695d31bf9262da79d19ec55620e629038da5c9ffe1746eb60018"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_1009/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/out.log",
+      "bytes": 35,
+      "sha256": "65326ee79c5612e96caee461ff4f2902d6c41909c304e36186691fc4e347bfdc"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_1009/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/TRAINING_SUMMARY.md",
+      "bytes": 2386,
+      "sha256": "81efab7d32aa545bdc9c411eba5d7626403d8f7d45c99aa6023eb991393030e4"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_1009/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_1009/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/VALIDATION_RESULTS.json",
+      "bytes": 684,
+      "sha256": "0bbe0daf1f895262d5d811bf96325dc86e61fe98d23688bf74ba5d1198178227"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_1009/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "d884d282eab19884c5786e576d21ba79f0fea63b70562845873bd5cd2040b0a1"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_2027/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/.hydra/config.yaml",
+      "bytes": 4033,
+      "sha256": "9026afc2a1dc414ca4b2b37852e8896d97c48ed3501ed217e82dd0c70768eb0c"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_2027/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/.hydra/hydra.yaml",
+      "bytes": 4373,
+      "sha256": "028d92336c792a3060db53ad06647940cee508662f062c3f81e123d74c8d34e8"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_2027/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/.hydra/overrides.yaml",
+      "bytes": 593,
+      "sha256": "71aa6449e0d82f887907266f25e1f4717d6e7de68bc6a63abb29427858403b50"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_2027/ckpt/epoch=212-step=5325.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/ckpt/epoch=212-step=5325.ckpt",
+      "bytes": 5478306,
+      "sha256": "b298b4d720e5c4ce7a091d3441bc872dd974df8f1726c75a971b2174bec28696"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_2027/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/ckpt/last.ckpt",
+      "bytes": 5478370,
+      "sha256": "03a765205ca3f541bcdc31fed710be786dbef8435ffef96d4b386997539416c0"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_2027/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/FULL_RUN_CONFIG.json",
+      "bytes": 5327,
+      "sha256": "099cf2524e44379b8533c3f8f35446afa734c1bbb53e3a6fe699655925f51df2"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_2027/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 710,
+      "sha256": "18fe41e9c448c3810810f578363fee777e8fef7ad84ec5b68fe1d1f9ad59a42b"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_2027/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4445,
+      "sha256": "39e5b7b92000196f194afdce8d830158338a6a490ee7fa7c4add78047ad90322"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_2027/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 44209,
+      "sha256": "ff71a70ad7c9f2e6dc63373fa70d804e781a55772c8c3087253c75b0e86c08a3"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_2027/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/out.log",
+      "bytes": 35,
+      "sha256": "65326ee79c5612e96caee461ff4f2902d6c41909c304e36186691fc4e347bfdc"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_2027/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/TRAINING_SUMMARY.md",
+      "bytes": 2386,
+      "sha256": "b78951e9296a60a5bc000e4675d93a492203d9f732e5466ea253b7ee421f0e92"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_2027/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_2027/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/VALIDATION_RESULTS.json",
+      "bytes": 683,
+      "sha256": "1b01ef13bc670da6688b0bbb91fd7198ee537e9f235f0406b0efd56b74b0e525"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_2027/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "a1a9be7517eab9884e54c32c5b7407e178de264076203a2b4491a28b61d58ee5"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_3037/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/.hydra/config.yaml",
+      "bytes": 4033,
+      "sha256": "1cccd93c7437e5da90585c419c1ad5bd611dd4932fef833bf8691ca9ae7eeb41"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_3037/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/.hydra/hydra.yaml",
+      "bytes": 4373,
+      "sha256": "15ad30567ea038aeae01ebc9a4d07d81840bf7029c4a0e3ca42064d480512d8d"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_3037/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/.hydra/overrides.yaml",
+      "bytes": 593,
+      "sha256": "d6a1038d4661fdabaf5dbbb02bbba35b430a7883e4e7b45d1b572faee72f3302"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_3037/ckpt/epoch=172-step=4325.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/ckpt/epoch=172-step=4325.ckpt",
+      "bytes": 5478306,
+      "sha256": "31c1e75b03423a449e19501ad6443eabafce68519a4df2423ce65ffc9b46c4c9"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_3037/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/ckpt/last.ckpt",
+      "bytes": 5478370,
+      "sha256": "7b8424e34ca8727668c8c5035763f3a362af991619bd506053a0c27933c487f4"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_3037/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/FULL_RUN_CONFIG.json",
+      "bytes": 5327,
+      "sha256": "182eee24e98345a2650a9cd2de0df369eaaf53bc5f7755830849d366dd10c54b"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_3037/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 710,
+      "sha256": "18fe41e9c448c3810810f578363fee777e8fef7ad84ec5b68fe1d1f9ad59a42b"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_3037/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4445,
+      "sha256": "11f86eb4e20bda2632ce58b4413cb1a6a987c8ca858c5cbdd24fcdd659fd7bf2"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_3037/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 42272,
+      "sha256": "62282054de1e7bd3b3c308b5d2a6e39b5f1ba9b655abbcfa5ad656e5c2751623"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_3037/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/out.log",
+      "bytes": 35,
+      "sha256": "65326ee79c5612e96caee461ff4f2902d6c41909c304e36186691fc4e347bfdc"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_3037/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/TRAINING_SUMMARY.md",
+      "bytes": 2386,
+      "sha256": "218d85f87497ad84630367679992b1064c93fb4d91a6b16618fa642d168d048a"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_3037/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_3037/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/VALIDATION_RESULTS.json",
+      "bytes": 684,
+      "sha256": "60e95294a9ea3790796d97f2b88f71368d3a774683680cd7975409f24465b139"
+    },
+    {
+      "source_relative": "pc2_shd/DTH_SE_adLIF/SHD/seed_3037/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "9e895c508718c3e941eb18a03b8a408608fa25fd5aa60a6c1ac816072a746c88"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_1009/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/.hydra/config.yaml",
+      "bytes": 3921,
+      "sha256": "5fda55d4b0ebf568ffb5d5a75e5e197edffefab47c8131589e74cacfcb6d91f8"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_1009/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/.hydra/hydra.yaml",
+      "bytes": 4361,
+      "sha256": "1836b21af3002e8c3e64f5333a808b3c9a70652f80f1d133db84f6addeb31683"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_1009/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/.hydra/overrides.yaml",
+      "bytes": 589,
+      "sha256": "a33022257bac83537963e2ca957d4f13518b3c8220d5d819999a555ecb587412"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_1009/ckpt/epoch=268-step=6725.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/ckpt/epoch=268-step=6725.ckpt",
+      "bytes": 5485290,
+      "sha256": "ddea4af724a83c03997110705ee4607912273e97f69771a97b77993962054fd4"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_1009/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/ckpt/last.ckpt",
+      "bytes": 5485290,
+      "sha256": "419ab1b2165c0635480d3d76563b87b48b2844d4d56425bb49beb93cf6ae0ffd"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_1009/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/FULL_RUN_CONFIG.json",
+      "bytes": 5203,
+      "sha256": "a1f12c42d0bb6cf89a18cbc527e08c9be07c5674ca0e668c356a55870f2518bc"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_1009/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 710,
+      "sha256": "18fe41e9c448c3810810f578363fee777e8fef7ad84ec5b68fe1d1f9ad59a42b"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_1009/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4325,
+      "sha256": "ac43350fb4ffb04dc58ea60956b1b86c633baa4bd232eac7f2f9c16aed001083"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_1009/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 42508,
+      "sha256": "7d14f010d13f3c433472878a27171e56ffbe3703997e08efb477692e8cbef2d8"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_1009/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/out.log",
+      "bytes": 34,
+      "sha256": "09e4e0ae91c79ba78f92fe2f65d784284ef5ad45df76b39d62890e788adddaee"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_1009/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/TRAINING_SUMMARY.md",
+      "bytes": 2383,
+      "sha256": "77f45949a3a12bfc4316390425c4917feb05053fb05173ba86b99cd11b98fea8"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_1009/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_1009/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/VALIDATION_RESULTS.json",
+      "bytes": 681,
+      "sha256": "bd41fc8c2866fcc5ebf3dafafd8e079ac1610ff7e2df36326dbf2dfa6da8a67f"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_1009/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "ebb4cbc21e0602fb0c20bb1e2945cf69035538dd7dcbeeb6b95fefeab9028b91"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_2027/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/.hydra/config.yaml",
+      "bytes": 3921,
+      "sha256": "256279fb9f1836b375dcf7557a228174669eb4b476938e7e86d4faf3ff4899c9"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_2027/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/.hydra/hydra.yaml",
+      "bytes": 4361,
+      "sha256": "e6139055c9055f27dd9f934811a83349a66cbe2afa4a43ed6770e9e08c7e001d"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_2027/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/.hydra/overrides.yaml",
+      "bytes": 589,
+      "sha256": "a1d64f8da6b312276c14316d369d7fabdd018a10005bed1b95059dea3776d84f"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_2027/ckpt/epoch=193-step=4850.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/ckpt/epoch=193-step=4850.ckpt",
+      "bytes": 5485290,
+      "sha256": "9a1e15f392438ba818822a0dc8ea684906399fbae584221c88b5aab45801b6bd"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_2027/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/ckpt/last.ckpt",
+      "bytes": 5485290,
+      "sha256": "38de037680ea82f09770abea9999a0500ffdff8cdd0ac8b511cab63e0a3e54da"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_2027/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/FULL_RUN_CONFIG.json",
+      "bytes": 5203,
+      "sha256": "d8b7f6175596830c4a20c1687aa0b9ababe01c3880a7ef3a65847dfd1e9c296d"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_2027/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 710,
+      "sha256": "18fe41e9c448c3810810f578363fee777e8fef7ad84ec5b68fe1d1f9ad59a42b"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_2027/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4325,
+      "sha256": "4581bb8733b6046c2dbd3313ff01d2d0ef0ff1042005f06c36504df8ea8c7a16"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_2027/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 43975,
+      "sha256": "be3bfe9416be79bdf9253fd3981f9b246ac0544011afafb2ce87e34303f7309a"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_2027/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/out.log",
+      "bytes": 34,
+      "sha256": "09e4e0ae91c79ba78f92fe2f65d784284ef5ad45df76b39d62890e788adddaee"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_2027/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/TRAINING_SUMMARY.md",
+      "bytes": 2382,
+      "sha256": "b0b7fbce912e217e2c4f4a99ef1ed85437175fdf1018c1b9aaaaf28f9893b509"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_2027/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_2027/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/VALIDATION_RESULTS.json",
+      "bytes": 681,
+      "sha256": "73d2079691529f37e191808ad84790ef86431ae3355a151e26c4f8e4a7fbf1af"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_2027/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "d8422c9faf56625b768edc1a4f7d75faef2c8af9fb5935f5a3c8af1f07ee82a3"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_3037/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/.hydra/config.yaml",
+      "bytes": 3921,
+      "sha256": "13226336032e2c4e8c6efc8775e7822f25df99ef12b3494c749a928d0357763c"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_3037/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/.hydra/hydra.yaml",
+      "bytes": 4361,
+      "sha256": "8a759197667e132a9f27a249850c8a44092dd557587ab3cbd8ab0a65f17808e6"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_3037/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/.hydra/overrides.yaml",
+      "bytes": 589,
+      "sha256": "fcb1329230bcb8bb19605491178919e1e29611b2f7f2755a0623c93472082946"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_3037/ckpt/epoch=155-step=3900.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/ckpt/epoch=155-step=3900.ckpt",
+      "bytes": 5485290,
+      "sha256": "8e620c9c0bcfcba0b322837371dd267aa9fcc4c47085c523f1a1f3a7a8c6b375"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_3037/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/ckpt/last.ckpt",
+      "bytes": 5485290,
+      "sha256": "07e4f8b73ebd9073d4792bb5855d46b401eb0972821e735a26b2acdf404aefb8"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_3037/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/FULL_RUN_CONFIG.json",
+      "bytes": 5203,
+      "sha256": "1eeeadd22880c1a2c193d07ddc4c28a022133e6d2eef7e9dc8456d1fb1c44c9a"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_3037/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 710,
+      "sha256": "18fe41e9c448c3810810f578363fee777e8fef7ad84ec5b68fe1d1f9ad59a42b"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_3037/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4325,
+      "sha256": "ebbdb1c0f683917227ca13282ee0ae55f4ee8f314664f8d897426f51cf8f2fb6"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_3037/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 44655,
+      "sha256": "cac9dd1e63ce579f1b3048a94676f55902fd69506c722807c2186fa21866a13a"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_3037/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/out.log",
+      "bytes": 34,
+      "sha256": "09e4e0ae91c79ba78f92fe2f65d784284ef5ad45df76b39d62890e788adddaee"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_3037/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/TRAINING_SUMMARY.md",
+      "bytes": 2382,
+      "sha256": "86c76dbe028cf45d3981e767898abcc895b26fa50179cdf63aa7589a9c86b5fc"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_3037/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_3037/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/VALIDATION_RESULTS.json",
+      "bytes": 681,
+      "sha256": "65d55ef5145cad343ac8b10fe90b15ddd36ffad92579e6ea208349f8f6dd2c00"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_3037/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "2184f5b0575e14d62a2a2e8e38d12e57036f10469a8f6466bddb8b65254a6909"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_4049/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/.hydra/config.yaml",
+      "bytes": 3921,
+      "sha256": "f839018b514f71ba35212dc873e9b5c38834fa5e8e161160e18154feb069bb4c"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_4049/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/.hydra/hydra.yaml",
+      "bytes": 4361,
+      "sha256": "6f60e29ded38252066b653ec7c28a5c603f49a0b866055160db374302d8df9ba"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_4049/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/.hydra/overrides.yaml",
+      "bytes": 589,
+      "sha256": "6fb3942fade18898c77601a6416770b9b761739e23d681db246abbdfd0086936"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_4049/ckpt/epoch=249-step=6250.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/ckpt/epoch=249-step=6250.ckpt",
+      "bytes": 5485290,
+      "sha256": "261750b02d2a2a4f4ae4c58875c4d5387bd797434c1a1182ec415b0815ef3fe6"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_4049/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/ckpt/last.ckpt",
+      "bytes": 5485290,
+      "sha256": "82471cb06696d3f32603d535c5fdf2351667cecbb16696504280459247435b6f"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_4049/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/FULL_RUN_CONFIG.json",
+      "bytes": 5203,
+      "sha256": "7f6f6c831e27bb3ce439764f880a4f83dfa32384532c61a6e3d04ef8c0270c3f"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_4049/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 710,
+      "sha256": "18fe41e9c448c3810810f578363fee777e8fef7ad84ec5b68fe1d1f9ad59a42b"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_4049/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4325,
+      "sha256": "c41e8f534c7dfbcfe22b0e17d43e90a0da6b02b7e5feda2c0d45e8ef327e3702"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_4049/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 42678,
+      "sha256": "6ab1fec909c85c188ca262408cc1214ee178c3310c0d1ec7cbeb0abf765203ce"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_4049/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/out.log",
+      "bytes": 34,
+      "sha256": "09e4e0ae91c79ba78f92fe2f65d784284ef5ad45df76b39d62890e788adddaee"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_4049/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/TRAINING_SUMMARY.md",
+      "bytes": 2383,
+      "sha256": "e371082ec98f8434294a56cbc5b1064b028262ed8dbe731012ff4f8220fed4eb"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_4049/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_4049/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/VALIDATION_RESULTS.json",
+      "bytes": 681,
+      "sha256": "32c4a0ffeef8403a76c4e65873cbb3a6a953bb0972b27103e46adcab44b2a7b9"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_4049/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "4b33c9d2ac39d69fd2fa5c4da8c716f371ff0323fcac063221cefbaa68d8a2fa"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_5051/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/.hydra/config.yaml",
+      "bytes": 3921,
+      "sha256": "8c32dff021193dca2c4b7f4662af77256c2f92748855059a775735586b72b9a6"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_5051/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/.hydra/hydra.yaml",
+      "bytes": 4361,
+      "sha256": "bcca3869947c9ae215777e31dfabcf9e3c3e1c6154ec2352079b1147982ced8a"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_5051/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/.hydra/overrides.yaml",
+      "bytes": 589,
+      "sha256": "90254b1a6b50d8cf35e0bdb4aee68aa841d19405c483ff74843e8c2f7cc3f5d7"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_5051/ckpt/epoch=188-step=4725.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/ckpt/epoch=188-step=4725.ckpt",
+      "bytes": 5485290,
+      "sha256": "438810a36b68e408b731b4e0bb2405a94d75b4d7cb8dc772296f2036255d08d2"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_5051/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/ckpt/last.ckpt",
+      "bytes": 5485290,
+      "sha256": "a22d9f0f14f57345ae49d1f84ed73a6b93bd1c5ce11b7b33425faf06a18ded44"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_5051/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/FULL_RUN_CONFIG.json",
+      "bytes": 5203,
+      "sha256": "e9ef836b687a7343fb96d3554003f169b9c5494a5c302e400741a71cf073c5ff"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_5051/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 710,
+      "sha256": "18fe41e9c448c3810810f578363fee777e8fef7ad84ec5b68fe1d1f9ad59a42b"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_5051/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4325,
+      "sha256": "989252e64b429ef9bcd6d4dc8e1292e469bb4e948d188e63193487494b03057b"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_5051/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 43557,
+      "sha256": "84934c1fde5f6ae0662f80b67d434a79b2a27f91dafc97691efd606b0f70479a"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_5051/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/out.log",
+      "bytes": 34,
+      "sha256": "09e4e0ae91c79ba78f92fe2f65d784284ef5ad45df76b39d62890e788adddaee"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_5051/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/TRAINING_SUMMARY.md",
+      "bytes": 2383,
+      "sha256": "faf0e8734dce4df8ebe978ebc737aac08bd5a51c0f5008e539e22484dc007cfd"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_5051/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_5051/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/VALIDATION_RESULTS.json",
+      "bytes": 681,
+      "sha256": "5513bdf4b79e2a1814a06ccf90aee400c37597c9b7be91c34230209fa05baa3c"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_5051/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "36f1c2d33ab78a5bdb4b762fcc74725a3333b2e3483e378a4899483f48cf6353"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_6067/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/.hydra/config.yaml",
+      "bytes": 4003,
+      "sha256": "e267c970e0d6f3f8402092c6e96353a38af15d48087951f682fdd5620068f16c"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_6067/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/.hydra/hydra.yaml",
+      "bytes": 4566,
+      "sha256": "720ba81bd99060c2b3d9b976a603f143b69184ec3d8fbc3fef7cf1c096529bd0"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_6067/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/.hydra/overrides.yaml",
+      "bytes": 691,
+      "sha256": "680c7406e8a58d57e1339ecd142a837e181c942d5b71b4593a638e010c67b7cf"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_6067/ckpt/epoch=100-step=2525.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/ckpt/epoch=100-step=2525.ckpt",
+      "bytes": 5485610,
+      "sha256": "b034051255f24a8a48a68fa59e6b4532f13595a4dbef0a77deca00b9204e2cc8"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_6067/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/ckpt/last.ckpt",
+      "bytes": 5485610,
+      "sha256": "101fc49ab348bcc3f69a16d1f47cdaa0cca7e4d9d511f378861a246f8d5fa0a1"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_6067/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/FULL_RUN_CONFIG.json",
+      "bytes": 5203,
+      "sha256": "ce7d4ef5f644e7e55f9f21332fa6faeb4f8db8c2419bfe3af35b0cf1ab7df20e"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_6067/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 710,
+      "sha256": "18fe41e9c448c3810810f578363fee777e8fef7ad84ec5b68fe1d1f9ad59a42b"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_6067/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4407,
+      "sha256": "ca299d6a34696e60a1fd21d08812981644333df8e0893601b0e7e9436ab41843"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_6067/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 42828,
+      "sha256": "e29416d0b3ff4969d9fd5aadc4e817ab015610cffa083a41f88dc3c104eea1be"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_6067/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/out.log",
+      "bytes": 68,
+      "sha256": "d854192552f08ede28b68016885c8295a5e3edb51299ba8f2295521438a73604"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_6067/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/TRAINING_SUMMARY.md",
+      "bytes": 2383,
+      "sha256": "e647cdb166d5a9e39c38629fa91c8a988659c9221deb31d444e7ddfd40394b09"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_6067/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_6067/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/VALIDATION_RESULTS.json",
+      "bytes": 681,
+      "sha256": "cb00b2861a56aff365a4ec585316888c61a85ab5209e339abc9b68557ca940c3"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_6067/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "691800580ddf6e11bb7dc393c0ef78733d65f6f0856234104be0c436ec37ca1c"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_7079/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/.hydra/config.yaml",
+      "bytes": 3921,
+      "sha256": "a3fc538de3bf4411716ff98274c2068f3dff599b7f156412a9c55c58cb6cc4e7"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_7079/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/.hydra/hydra.yaml",
+      "bytes": 4361,
+      "sha256": "3bd3eefdb3015b0a59c50bba6a46021bbbdcdb164536fdcd2fb4d3753e5fb354"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_7079/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/.hydra/overrides.yaml",
+      "bytes": 589,
+      "sha256": "ec8b2d26ffbc028bcb5fe3ef0cba709c316370f1d10a0f1bd5aa42d703ebb965"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_7079/ckpt/epoch=73-step=1850.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/ckpt/epoch=73-step=1850.ckpt",
+      "bytes": 5485290,
+      "sha256": "d7800fc7c8883ddfb7eaf25bd19af3349009afab5cd3af67314e398595255c5d"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_7079/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/ckpt/last.ckpt",
+      "bytes": 5485290,
+      "sha256": "fc410c039f03f5de4a99657c66242a2c967596da07bead3092e4b37ce6b79ae4"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_7079/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/FULL_RUN_CONFIG.json",
+      "bytes": 5203,
+      "sha256": "61dabe93ba9c3502db463d89d7fd8cb32638e4bb0ac0d97e99bdf2fa55857c91"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_7079/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 710,
+      "sha256": "18fe41e9c448c3810810f578363fee777e8fef7ad84ec5b68fe1d1f9ad59a42b"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_7079/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4325,
+      "sha256": "f31b376803553f22b5c70ea87757e85f5ef63daaf8001aa4b7645f3f6fd93cee"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_7079/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 42563,
+      "sha256": "e8e2967f8358f009f0a51dd20bc5b59178079e607f2a30e9137722e0e74de6ef"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_7079/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/out.log",
+      "bytes": 34,
+      "sha256": "09e4e0ae91c79ba78f92fe2f65d784284ef5ad45df76b39d62890e788adddaee"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_7079/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/TRAINING_SUMMARY.md",
+      "bytes": 2376,
+      "sha256": "f9ad9cf38252be8b89a78e5e2dbee9ab5b339185dda0bfd331d651e55fcc5660"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_7079/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_7079/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/VALIDATION_RESULTS.json",
+      "bytes": 679,
+      "sha256": "dc4127477bc202cd3d9cbb503e419d80c9b84ef48b29556d97e45b1be8602251"
+    },
+    {
+      "source_relative": "pc2_shd/MT_SE_adLIF/SHD/seed_7079/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/VALIDATION_SUMMARY.md",
+      "bytes": 170,
+      "sha256": "df5a0eec89cb98e354870e36708b8a03f3c33f472a86f459ac3f6841c3bb97a9"
+    },
+    {
+      "source_relative": "test_mt_shd_v1/evaluate_frozen.py",
+      "destination": "results/experiments/extended_seeds_v1/test_mt_shd_v1/evaluate_frozen.py",
+      "bytes": 1555,
+      "sha256": "4698e5c1f5949fa0cd03a4dd63a08524a141f0ad8f4963906e1e1aabef4873c4"
+    },
+    {
+      "source_relative": "test_mt_shd_v1/evaluation.log",
+      "destination": "results/experiments/extended_seeds_v1/test_mt_shd_v1/evaluation.log",
+      "bytes": 77714,
+      "sha256": "d237cfcbbb346ad6b5c815169f629b02e4866250f960d90f4b5fcf4914dad34f"
+    },
+    {
+      "source_relative": "test_mt_shd_v1/FROZEN_TEST_PLAN.json",
+      "destination": "results/experiments/extended_seeds_v1/test_mt_shd_v1/FROZEN_TEST_PLAN.json",
+      "bytes": 2465,
+      "sha256": "e8389c1a6d39c34fd721231009fc38d9fbae90fa5d73541e8bc65882bed2b70d"
+    },
+    {
+      "source_relative": "test_mt_shd_v1/seed_1009/TEST_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/test_mt_shd_v1/seed_1009/TEST_RESULTS.json",
+      "bytes": 224,
+      "sha256": "2a0a481b3e0fe5426c54a356189667996d6798bfd577f225bfee7eb6d6349764"
+    },
+    {
+      "source_relative": "test_mt_shd_v1/seed_2027/TEST_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/test_mt_shd_v1/seed_2027/TEST_RESULTS.json",
+      "bytes": 223,
+      "sha256": "40a62990cd51ab01c075cebb5e2bb78afbfda8eb6a3035e9c48c1dc9c5148a8d"
+    },
+    {
+      "source_relative": "test_mt_shd_v1/seed_3037/TEST_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/test_mt_shd_v1/seed_3037/TEST_RESULTS.json",
+      "bytes": 223,
+      "sha256": "43f842150faa91fc6a93ecc85c3184f4bb55650f522b191b43544ef2a47a5c73"
+    },
+    {
+      "source_relative": "test_mt_shd_v1/seed_4049/TEST_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/test_mt_shd_v1/seed_4049/TEST_RESULTS.json",
+      "bytes": 223,
+      "sha256": "fbd757ca0a78f812f0788d7497c53e6b0a4ad7ca84e150d453b344b000d2eea3"
+    },
+    {
+      "source_relative": "test_mt_shd_v1/seed_5051/TEST_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/test_mt_shd_v1/seed_5051/TEST_RESULTS.json",
+      "bytes": 223,
+      "sha256": "d98f7315a3be34b795f02b2a277c01ebb553a79b9ad8849115336ac1e6b983c8"
+    },
+    {
+      "source_relative": "test_mt_shd_v1/seed_6067/TEST_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/test_mt_shd_v1/seed_6067/TEST_RESULTS.json",
+      "bytes": 224,
+      "sha256": "d562ad2701e42d48b0d516edceceddf8a7b76496c13d90238904100695d3be37"
+    },
+    {
+      "source_relative": "test_mt_shd_v1/seed_7079/TEST_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/test_mt_shd_v1/seed_7079/TEST_RESULTS.json",
+      "bytes": 222,
+      "sha256": "3e44d52c273ce09edca0effc79512e51d460b61c376695f8f26e015e8a6f9bf9"
+    },
+    {
+      "source_relative": "test_mt_shd_v1/SUMMARY.json",
+      "destination": "results/experiments/extended_seeds_v1/test_mt_shd_v1/SUMMARY.json",
+      "bytes": 777,
+      "sha256": "142121f3f022c8ef6251ea2510653a79de4d8750e2fc7af91ec87be0bf16af18"
+    }
+  ],
+  "note": "Copied only the requested extension snapshots and accompanying MT evaluation evidence. Existing valid/reference runs and previously imported ECG snapshots were not overwritten. No source artifact was modified. Imported evaluate_frozen.py is retained as historical provenance only and was not executed.",
+  "expected_but_missing": "User reports an unfinished DTH SHD seed; no fourth DTH seed directory or archive is present in the supplied snapshot.",
+  "runs": [
+    {
+      "model": "DTH_SE_adLIF",
+      "dataset": "SHD",
+      "report_label": "SHD*",
+      "seed": 1009,
+      "directory": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009",
+      "status": "completed_training_validation",
+      "completed_epochs": 300,
+      "best_validation_accuracy": 0.9944819211959839,
+      "selected_epoch": 205,
+      "best_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/ckpt/epoch=205-step=5150.ckpt",
+      "last_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/ckpt/last.ckpt",
+      "source_commits": [
+        "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+      ],
+      "effective_config_matches_frozen_study": true,
+      "checkpoint_and_csv_verified": true
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "dataset": "SHD",
+      "report_label": "SHD*",
+      "seed": 2027,
+      "directory": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027",
+      "status": "completed_training_validation",
+      "completed_epochs": 300,
+      "best_validation_accuracy": 0.991416335105896,
+      "selected_epoch": 212,
+      "best_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/ckpt/epoch=212-step=5325.ckpt",
+      "last_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/ckpt/last.ckpt",
+      "source_commits": [
+        "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+      ],
+      "effective_config_matches_frozen_study": true,
+      "checkpoint_and_csv_verified": true
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "dataset": "SHD",
+      "report_label": "SHD*",
+      "seed": 3037,
+      "directory": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037",
+      "status": "completed_training_validation",
+      "completed_epochs": 300,
+      "best_validation_accuracy": 0.9920294284820557,
+      "selected_epoch": 172,
+      "best_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/ckpt/epoch=172-step=4325.ckpt",
+      "last_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/ckpt/last.ckpt",
+      "source_commits": [
+        "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+      ],
+      "effective_config_matches_frozen_study": true,
+      "checkpoint_and_csv_verified": true
+    },
+    {
+      "model": "MT_SE_adLIF",
+      "dataset": "SHD",
+      "report_label": "SHD*",
+      "seed": 1009,
+      "directory": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009",
+      "status": "completed_training_validation",
+      "completed_epochs": 300,
+      "best_validation_accuracy": 0.9908031821250916,
+      "selected_epoch": 268,
+      "best_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/ckpt/epoch=268-step=6725.ckpt",
+      "last_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/ckpt/last.ckpt",
+      "source_commits": [
+        "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+      ],
+      "effective_config_matches_frozen_study": true,
+      "checkpoint_and_csv_verified": true,
+      "test_record": "results/experiments/extended_seeds_v1/test_mt_shd_v1/seed_1009/TEST_RESULTS.json",
+      "saved_test_accuracy": 0.9465547800064087
+    },
+    {
+      "model": "MT_SE_adLIF",
+      "dataset": "SHD",
+      "report_label": "SHD*",
+      "seed": 2027,
+      "directory": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027",
+      "status": "completed_training_validation",
+      "completed_epochs": 300,
+      "best_validation_accuracy": 0.9920294284820557,
+      "selected_epoch": 193,
+      "best_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/ckpt/epoch=193-step=4850.ckpt",
+      "last_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/ckpt/last.ckpt",
+      "source_commits": [
+        "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+      ],
+      "effective_config_matches_frozen_study": true,
+      "checkpoint_and_csv_verified": true,
+      "test_record": "results/experiments/extended_seeds_v1/test_mt_shd_v1/seed_2027/TEST_RESULTS.json",
+      "saved_test_accuracy": 0.9187279343605042
+    },
+    {
+      "model": "MT_SE_adLIF",
+      "dataset": "SHD",
+      "report_label": "SHD*",
+      "seed": 3037,
+      "directory": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037",
+      "status": "completed_training_validation",
+      "completed_epochs": 300,
+      "best_validation_accuracy": 0.9908031821250916,
+      "selected_epoch": 155,
+      "best_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/ckpt/epoch=155-step=3900.ckpt",
+      "last_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/ckpt/last.ckpt",
+      "source_commits": [
+        "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+      ],
+      "effective_config_matches_frozen_study": true,
+      "checkpoint_and_csv_verified": true,
+      "test_record": "results/experiments/extended_seeds_v1/test_mt_shd_v1/seed_3037/TEST_RESULTS.json",
+      "saved_test_accuracy": 0.9284452199935913
+    },
+    {
+      "model": "MT_SE_adLIF",
+      "dataset": "SHD",
+      "report_label": "SHD*",
+      "seed": 4049,
+      "directory": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049",
+      "status": "completed_training_validation",
+      "completed_epochs": 300,
+      "best_validation_accuracy": 0.9932556748390198,
+      "selected_epoch": 249,
+      "best_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/ckpt/epoch=249-step=6250.ckpt",
+      "last_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/ckpt/last.ckpt",
+      "source_commits": [
+        "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+      ],
+      "effective_config_matches_frozen_study": true,
+      "checkpoint_and_csv_verified": true,
+      "test_record": "results/experiments/extended_seeds_v1/test_mt_shd_v1/seed_4049/TEST_RESULTS.json",
+      "saved_test_accuracy": 0.9280035495758057
+    },
+    {
+      "model": "MT_SE_adLIF",
+      "dataset": "SHD",
+      "report_label": "SHD*",
+      "seed": 5051,
+      "directory": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051",
+      "status": "completed_training_validation",
+      "completed_epochs": 300,
+      "best_validation_accuracy": 0.9926425218582153,
+      "selected_epoch": 188,
+      "best_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/ckpt/epoch=188-step=4725.ckpt",
+      "last_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/ckpt/last.ckpt",
+      "source_commits": [
+        "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+      ],
+      "effective_config_matches_frozen_study": true,
+      "checkpoint_and_csv_verified": true,
+      "test_record": "results/experiments/extended_seeds_v1/test_mt_shd_v1/seed_5051/TEST_RESULTS.json",
+      "saved_test_accuracy": 0.9350706934928894
+    },
+    {
+      "model": "MT_SE_adLIF",
+      "dataset": "SHD",
+      "report_label": "SHD*",
+      "seed": 6067,
+      "directory": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067",
+      "status": "completed_training_validation",
+      "completed_epochs": 300,
+      "best_validation_accuracy": 0.9926425218582153,
+      "selected_epoch": 100,
+      "best_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/ckpt/epoch=100-step=2525.ckpt",
+      "last_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/ckpt/last.ckpt",
+      "source_commits": [
+        "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+      ],
+      "effective_config_matches_frozen_study": true,
+      "checkpoint_and_csv_verified": true,
+      "test_record": "results/experiments/extended_seeds_v1/test_mt_shd_v1/seed_6067/TEST_RESULTS.json",
+      "saved_test_accuracy": 0.9553886651992798
+    },
+    {
+      "model": "MT_SE_adLIF",
+      "dataset": "SHD",
+      "report_label": "SHD*",
+      "seed": 7079,
+      "directory": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079",
+      "status": "completed_training_validation",
+      "completed_epochs": 300,
+      "best_validation_accuracy": 0.9926425218582153,
+      "selected_epoch": 73,
+      "best_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/ckpt/epoch=73-step=1850.ckpt",
+      "last_checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/ckpt/last.ckpt",
+      "source_commits": [
+        "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+      ],
+      "effective_config_matches_frozen_study": true,
+      "checkpoint_and_csv_verified": true,
+      "test_record": "results/experiments/extended_seeds_v1/test_mt_shd_v1/seed_7079/TEST_RESULTS.json",
+      "saved_test_accuracy": 0.9381625652313232
+    }
+  ],
+  "verified_utc": "2026-10-29T08:58:00.487063+00:00",
+  "scope_update": "User instructed to ignore the unavailable unfinished DTH seed and copy the available runs only. Seven completed MT and three completed DTH runs were imported.",
+  "separate_mt_test_evidence_verified": {
+    "n": 7,
+    "checkpoint_hashes_match_frozen_plan": true,
+    "selected_checkpoint_identities_match_validation": true,
+    "per_seed_summary_values_match_test_records": true,
+    "note": "Existing external evaluations were preserved and inspected, not rerun. The test set has already been observed."
+  },
+  "limitations": [
+    "Source launch revisions were preserved; compatibility with the current checkout for training resume has not been established.",
+    "No new training, test inference, or main comparison report update was performed."
+  ]
+}

@@ -1,0 +1,1031 @@
+{
+  "schema": "research_transfer_v1",
+  "status": "copied_hash_and_checkpoint_verified",
+  "created_utc": "2026-10-29T08:46:05.365158+00:00",
+  "source_external": "F:\\reza\\pc1_ecg_9seeds",
+  "destination": "results/experiments/extended_seeds_v1/pc1_ecg",
+  "note": "External source path explicitly supplied by user. All seed files copied without modifying saved configs, checkpoints, test or validation evidence. No training/evaluation launched.",
+  "copied_files": 130,
+  "reused_identical_files": 0,
+  "total_bytes": 2800945,
+  "files": [
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_1009/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/.hydra/config.yaml",
+      "bytes": 3733,
+      "sha256": "e678ebcf8fbd520164adb8bd95d7651fd0b40066642d1c17a683555639ef0ef5"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_1009/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/.hydra/hydra.yaml",
+      "bytes": 4481,
+      "sha256": "620c6bb8cfdb86d76d39fc7b273c7b73ebfccf1bcd7a9b7be808db6506422e40"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_1009/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/.hydra/overrides.yaml",
+      "bytes": 596,
+      "sha256": "a2f7853aebd9c89779cf99cd927b99b05b4cc662d01db696b8a6f8d9a01e02ad"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_1009/ckpt/epoch=360-step=3249.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/ckpt/epoch=360-step=3249.ckpt",
+      "bytes": 121450,
+      "sha256": "5b9a9fc8f7ee21a1fc12b7cb489d17e467a0f523dc18b2dffc70071e3cb01e27"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_1009/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/ckpt/last.ckpt",
+      "bytes": 121450,
+      "sha256": "2d240f8493e463e1ce3dde296138d12c3f76eabcfe46269c690681cad9fdc831"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_1009/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/FULL_RUN_CONFIG.json",
+      "bytes": 4978,
+      "sha256": "a99cdaa294c786a09c3403bd899eff90b0ee2420a28b0a07d43a3e3d2b38f065"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_1009/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 694,
+      "sha256": "57b982e1289345445b6aeac87a47c20ae9bf5a15942b6d9a0ca562d98c2ca9f7"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_1009/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4123,
+      "sha256": "62395c21cf2d8c12e5be2bc4092acca45645b85bf699f6f906bcc13eed8de0c5"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_1009/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 49556,
+      "sha256": "16f402cf58b6f2c7dc3e1d2ff1f7c872ad631c56e39a1d7a8efa92cd9f678bd9"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_1009/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/out.log",
+      "bytes": 41,
+      "sha256": "e90defc8cbf77ac32301cb04b9833d43af15951fa021f8ce805139106f339606"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_1009/TEST_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/TEST_RESULTS.json",
+      "bytes": 223,
+      "sha256": "4e78a4aaafc219b5f15764c34bd61f1e56f6a2119486753b51aa8d0cb9487c2b"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_1009/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/TRAINING_SUMMARY.md",
+      "bytes": 2640,
+      "sha256": "4d4a89e0b6c2b93dd94206d1ad4e871004a30252e3eb1d2a62bc537fc740d8ef"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_1009/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_1009/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/VALIDATION_RESULTS.json",
+      "bytes": 681,
+      "sha256": "f43c6fa974b66d851a122ff20785135d4fd3aa545c161d2dd12cbb627daad1cb"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_1009/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "97dc3d41754457fb9644c6399e8c3d57fa53335b5ad934659eeaf8b9de2308bb"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_2027/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/.hydra/config.yaml",
+      "bytes": 3733,
+      "sha256": "f114ef06421dccb2c742c635b3db35b7dbc63633ccc097fad67306453f0d9db7"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_2027/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/.hydra/hydra.yaml",
+      "bytes": 4481,
+      "sha256": "c26076dfa31efee5e1460d2a729057babb678eff0f68efe6164cfc6ed38a406c"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_2027/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/.hydra/overrides.yaml",
+      "bytes": 596,
+      "sha256": "9038465fdb781c9e2f3f19b39675819986808ccf8beb5174db7299cd9c0f3d41"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_2027/ckpt/epoch=396-step=3573.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/ckpt/epoch=396-step=3573.ckpt",
+      "bytes": 121450,
+      "sha256": "d5be29403fe587f80370a6ed3a8e0f0cf8814b23b360a8393a7aa1d522b2933a"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_2027/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/ckpt/last.ckpt",
+      "bytes": 121450,
+      "sha256": "cc50053b657c52f002cd34230b5c6ed7b1fa96ba7816ec1b36424e5ebb720fb2"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_2027/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/FULL_RUN_CONFIG.json",
+      "bytes": 4978,
+      "sha256": "50ca5b2fa4309529e1c3efb149f5b5de3285d81ce71bcb4104b86c4917748b76"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_2027/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 694,
+      "sha256": "57b982e1289345445b6aeac87a47c20ae9bf5a15942b6d9a0ca562d98c2ca9f7"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_2027/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4123,
+      "sha256": "49931742f89060a29c0cf9067668bd9bc8b08e816a03a81767872fecb44650b4"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_2027/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 49589,
+      "sha256": "6335d3bcc4f31c547fe66fc62ce6009af31b09eea15b19cb1a759a4a33c010de"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_2027/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/out.log",
+      "bytes": 41,
+      "sha256": "e90defc8cbf77ac32301cb04b9833d43af15951fa021f8ce805139106f339606"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_2027/TEST_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/TEST_RESULTS.json",
+      "bytes": 223,
+      "sha256": "7f904dcf5e9430b7605170a14abdc977229a67b8882adb913aa0fc9c5e976358"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_2027/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/TRAINING_SUMMARY.md",
+      "bytes": 2640,
+      "sha256": "082ddbe4cba938fc4a22c56dde5cdc818b6e19d2ab56f06d29b478592a2ec9cf"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_2027/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_2027/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/VALIDATION_RESULTS.json",
+      "bytes": 681,
+      "sha256": "67d3a4d81747f4e4762760f080306be676f85aab9859ae4d76191e93ed8f8bf3"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_2027/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "13aab1a555130839bdf21fec526d02346ca2f473c532d5e60cb8e98e692d20b4"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_3037/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/.hydra/config.yaml",
+      "bytes": 3733,
+      "sha256": "220ee305001d4f694e2372e7650af43fbdfb9ec85180bfc64fc88ae729a2ec5f"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_3037/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/.hydra/hydra.yaml",
+      "bytes": 4481,
+      "sha256": "e7f662a365cd30a0e908474fbe073a71d88efc787b9004a488e3b012c7dc3f8d"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_3037/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/.hydra/overrides.yaml",
+      "bytes": 596,
+      "sha256": "1e7c936f6f4b6db885e674a636a257b7a3b48efef75bfe82e10fcf1e4efb73b1"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_3037/ckpt/epoch=183-step=1656.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/ckpt/epoch=183-step=1656.ckpt",
+      "bytes": 121450,
+      "sha256": "3b3b05291aecbfc7d229cc9028b5c934a7774b9aba599223d326fb1eb688a224"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_3037/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/ckpt/last.ckpt",
+      "bytes": 121450,
+      "sha256": "83f9467758a7726cd45eac8fe81674589f09f6a4fc533b6c9526b22cdd117e38"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_3037/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/FULL_RUN_CONFIG.json",
+      "bytes": 4978,
+      "sha256": "1af4065e3b55d3ca54c8a521655b6db2bfd9c9fcb5b5cf4dde53ca5c54747964"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_3037/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 694,
+      "sha256": "57b982e1289345445b6aeac87a47c20ae9bf5a15942b6d9a0ca562d98c2ca9f7"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_3037/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4123,
+      "sha256": "efe1f8d608375b9c0271c8c587bd79166d7fd8c5c6626ebab4f986155c4134c1"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_3037/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 49592,
+      "sha256": "c802d4a90b7dbc8d14480b7abb21079f260a2b7b36061d59818a68cdc0121605"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_3037/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/out.log",
+      "bytes": 41,
+      "sha256": "e90defc8cbf77ac32301cb04b9833d43af15951fa021f8ce805139106f339606"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_3037/TEST_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/TEST_RESULTS.json",
+      "bytes": 223,
+      "sha256": "dd47fb37d2ff7e98f41939626a93bdc06f024c96bdc801ed4192eaf7b4c0b6a0"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_3037/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/TRAINING_SUMMARY.md",
+      "bytes": 2640,
+      "sha256": "517489bb3bdca3c4820d765fb200cd015d2c54cae9c49e992a3258182f150f38"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_3037/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_3037/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/VALIDATION_RESULTS.json",
+      "bytes": 681,
+      "sha256": "1b564820264dbe0c13bd3e29afccd9917eac52c3cc8a628c1e72a4f2e47f6201"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_3037/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "27f1f071854d64e5d477f42de1f223d33604ddeae63d914425482fcaae22e619"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_4049/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/.hydra/config.yaml",
+      "bytes": 3733,
+      "sha256": "04146944efaa7bb6192e17e8266a9e5d4c67dd9c953971d64d23301031f74556"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_4049/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/.hydra/hydra.yaml",
+      "bytes": 4481,
+      "sha256": "907556fa70f5466220754f76fab72130473b9bc1fc6ab4839c9fc0eb1e5bb52e"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_4049/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/.hydra/overrides.yaml",
+      "bytes": 596,
+      "sha256": "8601e5d0f080d54e9ba413af399fda6a1ad3bec159f6e04a1be5b6e695f2dafd"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_4049/ckpt/epoch=383-step=3456.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/ckpt/epoch=383-step=3456.ckpt",
+      "bytes": 121450,
+      "sha256": "d6995a0a5054055f04532980e10882a6768993ee030686b72575483e02801109"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_4049/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/ckpt/last.ckpt",
+      "bytes": 121450,
+      "sha256": "f38dc2f6dd767a754ab54b3f0598d785318848522d8c0ad361193e4186794018"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_4049/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/FULL_RUN_CONFIG.json",
+      "bytes": 4978,
+      "sha256": "d26b4ad16560e543ea8bc79ba2675994cbd9867a0820030da7f05ecb5428821f"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_4049/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 694,
+      "sha256": "57b982e1289345445b6aeac87a47c20ae9bf5a15942b6d9a0ca562d98c2ca9f7"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_4049/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4123,
+      "sha256": "908b91eda16fb78f7febf1bf3b9d1c4a1be91026c83d7bdbd633cbfc10e58de9"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_4049/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 49567,
+      "sha256": "e07e9f31784966f678a32ca0e4a155c5c9047fc132fdb571a0f13f2041000281"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_4049/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/out.log",
+      "bytes": 41,
+      "sha256": "e90defc8cbf77ac32301cb04b9833d43af15951fa021f8ce805139106f339606"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_4049/TEST_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/TEST_RESULTS.json",
+      "bytes": 224,
+      "sha256": "d4f3402e4cbb5c6548dc5caebdaec3970386c667b4bab57343690a2c7c412d73"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_4049/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/TRAINING_SUMMARY.md",
+      "bytes": 2640,
+      "sha256": "cb40de2411b10939d87f70ba0ca924649d84bd1413f6309d92ce1faa7d20c1b8"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_4049/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_4049/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/VALIDATION_RESULTS.json",
+      "bytes": 681,
+      "sha256": "13c8c440f33fe769f9d7f9fd98332d6d049a2e094f8a5daee179c6300cf12b7b"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_4049/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "8c6555fbf147c738a997a0c8bd12a921bb98ff9f3e814d080cb15451040ab595"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_5051/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/.hydra/config.yaml",
+      "bytes": 3733,
+      "sha256": "0ec7d4ba4dd16be370392c12c485198e1be4406b12445488f31bb9f3501bfe5e"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_5051/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/.hydra/hydra.yaml",
+      "bytes": 4481,
+      "sha256": "a104b4d811c521cbfe17403b46fcf657fb98f467e55ef57d9abcade7520e1d30"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_5051/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/.hydra/overrides.yaml",
+      "bytes": 596,
+      "sha256": "c2270c5141573987aca3a0264ebd4f508a2c4ff3b455413483cc82421de599ce"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_5051/ckpt/epoch=373-step=3366.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/ckpt/epoch=373-step=3366.ckpt",
+      "bytes": 121450,
+      "sha256": "1421ae1cd5e8b59996b7c86d5b5f76f70731a7858dae1073f7df2b79ed6ed657"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_5051/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/ckpt/last.ckpt",
+      "bytes": 121450,
+      "sha256": "e8834e8205de544975d571f86012ce932c3b5bbec3ebf77ca2c01e7fec522dba"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_5051/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/FULL_RUN_CONFIG.json",
+      "bytes": 4978,
+      "sha256": "fd179b094e65cb256c2e2a5e41b7ded252c742839f02b2ea1270c56f3e508248"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_5051/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 694,
+      "sha256": "57b982e1289345445b6aeac87a47c20ae9bf5a15942b6d9a0ca562d98c2ca9f7"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_5051/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4123,
+      "sha256": "7579cd6d086fbe00bc17e6d3389e27ee49c733325d2fc33c83da7f8fb647f30a"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_5051/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 49615,
+      "sha256": "b6f2cc47400d9816e6eece2e01e5fe9cdd7d1f810c8c532dfae8ccf9dac0c7ad"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_5051/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/out.log",
+      "bytes": 41,
+      "sha256": "e90defc8cbf77ac32301cb04b9833d43af15951fa021f8ce805139106f339606"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_5051/TEST_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/TEST_RESULTS.json",
+      "bytes": 222,
+      "sha256": "fe8d15c25d7692e8a88e584678e30a29bea04c3f701dc06c53e36dbc85d094a5"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_5051/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/TRAINING_SUMMARY.md",
+      "bytes": 2640,
+      "sha256": "4787efaaf47fd2cb582ec3c49322daa4aa5fe18844cd935486cbbe689cf1890c"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_5051/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_5051/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/VALIDATION_RESULTS.json",
+      "bytes": 681,
+      "sha256": "b43f2f550ef35d5488557e3cfa40c969be04eb4ce1246ee5e045890918865648"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_5051/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "81a6096a6dc3893be709b3750db950e1e652f6c83c1fccf54f3f9dd598339497"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_6067/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/.hydra/config.yaml",
+      "bytes": 3733,
+      "sha256": "7d6581c5bb5a19d1043f91273bf84580a353537f2ccf2c6968e1bc0b24fa5ee5"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_6067/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/.hydra/hydra.yaml",
+      "bytes": 4481,
+      "sha256": "0edebcc379b1038028165d969af77f2b0d88eed4f70a37bda91986887b5c0a77"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_6067/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/.hydra/overrides.yaml",
+      "bytes": 596,
+      "sha256": "10b094a50338b1f6bc37271f496bca962b7ce7d7b3e02aa780f88c3135e14e60"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_6067/ckpt/epoch=318-step=2871.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/ckpt/epoch=318-step=2871.ckpt",
+      "bytes": 121450,
+      "sha256": "421edce09d883cd71a55aaa91d94fe9f4d9200ec8d528ab0acd890bd0cb35c6c"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_6067/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/ckpt/last.ckpt",
+      "bytes": 121450,
+      "sha256": "58ffcd2089eca30daf45e37681b89c62baecac7e30e174ef9538b3e6121abdcb"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_6067/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/FULL_RUN_CONFIG.json",
+      "bytes": 4978,
+      "sha256": "913f114551e2ca84985fb598a6841b1d0438ba0e19e42839be4ff03667a94472"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_6067/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 694,
+      "sha256": "57b982e1289345445b6aeac87a47c20ae9bf5a15942b6d9a0ca562d98c2ca9f7"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_6067/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4123,
+      "sha256": "e698e0a5dc0ad67b1496cec10148a051b0e5a7864668d18e0bd4d6f90b4dfa87"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_6067/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 49559,
+      "sha256": "6e53fe3d48a8012d0f5d93f5af781f886bdeebe6064501be2747a3d4412ad35e"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_6067/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/out.log",
+      "bytes": 41,
+      "sha256": "e90defc8cbf77ac32301cb04b9833d43af15951fa021f8ce805139106f339606"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_6067/TEST_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/TEST_RESULTS.json",
+      "bytes": 223,
+      "sha256": "aa2c2859d330abdacfeebf7a187e56c83a7d78bc3af897e94e2f2feea62d55e2"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_6067/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/TRAINING_SUMMARY.md",
+      "bytes": 2640,
+      "sha256": "21cd8a6b624c7b227a7fe5ee78095e8299d6b3542e432da348604cf73eb40f50"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_6067/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_6067/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/VALIDATION_RESULTS.json",
+      "bytes": 681,
+      "sha256": "6822c580adeacd2954d8273255639be1cbc368fd68c205c681d3798b294da1ca"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_6067/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "64a04ce8ca7ad16ded98179e1cef9fd07875b712bcbe4cdeb063951ace15d041"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_7079/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/.hydra/config.yaml",
+      "bytes": 3733,
+      "sha256": "6638827d39f61c81f3f11e8e98b5eabbab6d4143f55f94520ddcbc7c6c673261"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_7079/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/.hydra/hydra.yaml",
+      "bytes": 4481,
+      "sha256": "acbfdb117bbd8366e5aa65240e54e73c3a5dbc5a88f0cbb46d0deb0011a9d353"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_7079/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/.hydra/overrides.yaml",
+      "bytes": 596,
+      "sha256": "00747df481f2fffbd31d136a2df5e1d0731e68e250cb5a132788032776b8f3b9"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_7079/ckpt/epoch=268-step=2421.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/ckpt/epoch=268-step=2421.ckpt",
+      "bytes": 121450,
+      "sha256": "16ed293e0892c534c71b85dd88e92ad7775b2589829e5c174c8d43c50046d270"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_7079/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/ckpt/last.ckpt",
+      "bytes": 121450,
+      "sha256": "f683d4d57351ebad9c79ef337b84621e4e67eb9633c794ed84100bb5d8757f09"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_7079/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/FULL_RUN_CONFIG.json",
+      "bytes": 4978,
+      "sha256": "34c1b9fecb0f0229f33dc2fa3e4df20ced559846182067abbe8ea877d57a8d01"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_7079/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 694,
+      "sha256": "57b982e1289345445b6aeac87a47c20ae9bf5a15942b6d9a0ca562d98c2ca9f7"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_7079/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4123,
+      "sha256": "23610067b54e9d357424e56e945c74b878720e4d8acf99b4e019afcf0f75a1c8"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_7079/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 49567,
+      "sha256": "ec0f38bb73789e74686e43b96eeca4a707de69e484ab8d689f2204ca651697a1"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_7079/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/out.log",
+      "bytes": 41,
+      "sha256": "e90defc8cbf77ac32301cb04b9833d43af15951fa021f8ce805139106f339606"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_7079/TEST_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/TEST_RESULTS.json",
+      "bytes": 224,
+      "sha256": "1257bdb5922fc58e0cf0c208687b11c10afb4b322af6db72489401c1013dd91b"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_7079/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/TRAINING_SUMMARY.md",
+      "bytes": 2640,
+      "sha256": "a9b1b72d8e62d7bee5ff7c1a9b10af359539b45a058f78871fff5e7cacfc6ca7"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_7079/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_7079/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/VALIDATION_RESULTS.json",
+      "bytes": 681,
+      "sha256": "f38a0d91ea20e1f77e6da09feb2ba23f77e2f6ee9e70480c72c9310982e43821"
+    },
+    {
+      "source_relative": "MT_SE_adLIF/ECG/seed_7079/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "b3eec6b89dc1eb95b4ed5b9652599c9b4c56b8450285590e136358e2db300d07"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_1009/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/.hydra/config.yaml",
+      "bytes": 3836,
+      "sha256": "56f8312f98881c2d06d1134f4143d23e887dfd475b9c295f3e6150630b25da05"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_1009/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/.hydra/hydra.yaml",
+      "bytes": 4728,
+      "sha256": "f86d81a17189ae96404f16011d09c01dc49ecf4d8223fe6b18e38117060021f3"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_1009/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/.hydra/overrides.yaml",
+      "bytes": 713,
+      "sha256": "e29e24ca8e91ba300628dad5c4f5ca361fdffe52c6c7cc90cb548434a93cb427"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_1009/ckpt/epoch=316-step=2853.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/ckpt/epoch=316-step=2853.ckpt",
+      "bytes": 124890,
+      "sha256": "b39c4fb3c36ec897125bd943bca7168dcafe6f9f4dbaad36c40835e218f42aeb"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_1009/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/ckpt/last.ckpt",
+      "bytes": 124890,
+      "sha256": "236eedbe2a71d10db276c9eec94b2c1ad8c9403432e94ee0a03eaf6f600a2c0d"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_1009/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/FULL_RUN_CONFIG.json",
+      "bytes": 4996,
+      "sha256": "ba5828bd79f2aaa5be04d3a446dd3bacd0243c5b8b5646d8cb1f25e4a48fd706"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_1009/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 694,
+      "sha256": "57b982e1289345445b6aeac87a47c20ae9bf5a15942b6d9a0ca562d98c2ca9f7"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_1009/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4226,
+      "sha256": "bb0b88557a193889d467e70b83ac6bb1cdf6a8210cee5470bba52740bf290fe9"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_1009/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 49546,
+      "sha256": "81db6caf83d322e531747c600b3eadbde1f5530097ce9973d7ddea234fd783a3"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_1009/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/out.log",
+      "bytes": 88,
+      "sha256": "74f059f05f90defb609e4e2f44936d1a1f41279cc3270b54c72b0277412d726d"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_1009/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/TRAINING_SUMMARY.md",
+      "bytes": 2407,
+      "sha256": "0da652e576254d6ffdd479d0f9c4d298ab593f143117c6189e609959ae1d4dbe"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_1009/validation_completed.txt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/validation_completed.txt",
+      "bytes": 49,
+      "sha256": "47429fe6b267ad3d18eeba2de11557568d2ac1f3bd69d79e34e3543f83831e04"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_1009/VALIDATION_RESULTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/VALIDATION_RESULTS.json",
+      "bytes": 689,
+      "sha256": "5090d9b54a69ae7cd69b2c3ab8d797e48367bd7542562b0106e44a8b13e592e3"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_1009/VALIDATION_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/VALIDATION_SUMMARY.md",
+      "bytes": 171,
+      "sha256": "e181cba04e6f8bfd5c0d988d820c8aa7d7e59e337eb5c59bca04c9b732157052"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_2027/.hydra/config.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_2027/.hydra/config.yaml",
+      "bytes": 3751,
+      "sha256": "9b80645212b4feb6b66f14b93574c0f2626e268402a5a5e7ce1b4a771fa587a5"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_2027/.hydra/hydra.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_2027/.hydra/hydra.yaml",
+      "bytes": 4517,
+      "sha256": "8e09aa29f052adc90dc9190e1ce98299d5d12053c73c9a855d146da4a8e666bb"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_2027/.hydra/overrides.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_2027/.hydra/overrides.yaml",
+      "bytes": 608,
+      "sha256": "d8ad9ef44115761bfffcc9cc36b4fc6d18fa6eb2396c2421fb807d2f953fa0c0"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_2027/ckpt/epoch=37-step=342.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_2027/ckpt/epoch=37-step=342.ckpt",
+      "bytes": 124506,
+      "sha256": "d62cde92a86f923dad3f3bf122aa5162ca9dc0d2827bb3db1af72197c2081cea"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_2027/ckpt/last.ckpt",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_2027/ckpt/last.ckpt",
+      "bytes": 124506,
+      "sha256": "d62cde92a86f923dad3f3bf122aa5162ca9dc0d2827bb3db1af72197c2081cea"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_2027/FULL_RUN_CONFIG.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_2027/FULL_RUN_CONFIG.json",
+      "bytes": 4996,
+      "sha256": "d2e1be447858e9c4652be9d2eda7f14e5a4560fc2dec74db62692cd54b43b08c"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_2027/LAUNCH_ENVIRONMENTS.json",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_2027/LAUNCH_ENVIRONMENTS.json",
+      "bytes": 694,
+      "sha256": "57b982e1289345445b6aeac87a47c20ae9bf5a15942b6d9a0ca562d98c2ca9f7"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_2027/logs/mlp_snn/version_0/hparams.yaml",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_2027/logs/mlp_snn/version_0/hparams.yaml",
+      "bytes": 4141,
+      "sha256": "893752ed8a4e18406cc7dc6f12ef17a7fcd8e156d277723a9a3c6f02f7c03864"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_2027/logs/mlp_snn/version_0/metrics.csv",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_2027/logs/mlp_snn/version_0/metrics.csv",
+      "bytes": 4632,
+      "sha256": "3c4aa6eadcc0b544a2958b0d9f46c7e5ea05a587d1bee588dca1cd2d1ce0fed3"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_2027/out.log",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_2027/out.log",
+      "bytes": 44,
+      "sha256": "c90a6669138323bfa9f581857e738f5da0fefa0b2bff8df90d713726f1c19833"
+    },
+    {
+      "source_relative": "SA_MT_SE_adLIF/ECG/seed_2027/TRAINING_SUMMARY.md",
+      "destination": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_2027/TRAINING_SUMMARY.md",
+      "bytes": 2411,
+      "sha256": "08aca7766fb78a7709d58e61f3c5a8b5c6b0b349fed0ec01b7f626f0b08b9f01"
+    }
+  ],
+  "runs": [
+    {
+      "model": "MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 1009,
+      "directory": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009",
+      "validation_completed": true,
+      "validation_epochs": 400,
+      "test_record_present": true,
+      "last_checkpoint_present": true,
+      "audit": {
+        "effective_config_matches_frozen_study": true,
+        "checkpoint_configs_match_saved_run": true,
+        "last_epoch_zero_based": 399,
+        "completed_checkpoint_epochs": 400,
+        "best_checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_1009/ckpt/epoch=360-step=3249.ckpt",
+        "best_validation_accuracy": 0.8626441359519958,
+        "selected_epoch_zero_based": 360,
+        "last_checkpoint_has_optimizer_state": true,
+        "source_commits": [
+          "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+        ],
+        "saved_test_accuracy": 0.8714627623558044,
+        "strict_validation_only_aggregator_compatible": false,
+        "protocol_note": "TEST_RESULTS.json is preserved; strict validation-only aggregation rejects test artifacts. No test inference was rerun and no test-free claim is made."
+      }
+    },
+    {
+      "model": "MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 2027,
+      "directory": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027",
+      "validation_completed": true,
+      "validation_epochs": 400,
+      "test_record_present": true,
+      "last_checkpoint_present": true,
+      "audit": {
+        "effective_config_matches_frozen_study": true,
+        "checkpoint_configs_match_saved_run": true,
+        "last_epoch_zero_based": 399,
+        "completed_checkpoint_epochs": 400,
+        "best_checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_2027/ckpt/epoch=396-step=3573.ckpt",
+        "best_validation_accuracy": 0.8677939772605896,
+        "selected_epoch_zero_based": 396,
+        "last_checkpoint_has_optimizer_state": true,
+        "source_commits": [
+          "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+        ],
+        "saved_test_accuracy": 0.8766524195671082,
+        "strict_validation_only_aggregator_compatible": false,
+        "protocol_note": "TEST_RESULTS.json is preserved; strict validation-only aggregation rejects test artifacts. No test inference was rerun and no test-free claim is made."
+      }
+    },
+    {
+      "model": "MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 3037,
+      "directory": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037",
+      "validation_completed": true,
+      "validation_epochs": 400,
+      "test_record_present": true,
+      "last_checkpoint_present": true,
+      "audit": {
+        "effective_config_matches_frozen_study": true,
+        "checkpoint_configs_match_saved_run": true,
+        "last_epoch_zero_based": 399,
+        "completed_checkpoint_epochs": 400,
+        "best_checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_3037/ckpt/epoch=183-step=1656.ckpt",
+        "best_validation_accuracy": 0.8533691763877869,
+        "selected_epoch_zero_based": 183,
+        "last_checkpoint_has_optimizer_state": true,
+        "source_commits": [
+          "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+        ],
+        "saved_test_accuracy": 0.868431806564331,
+        "strict_validation_only_aggregator_compatible": false,
+        "protocol_note": "TEST_RESULTS.json is preserved; strict validation-only aggregation rejects test artifacts. No test inference was rerun and no test-free claim is made."
+      }
+    },
+    {
+      "model": "MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 4049,
+      "directory": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049",
+      "validation_completed": true,
+      "validation_epochs": 400,
+      "test_record_present": true,
+      "last_checkpoint_present": true,
+      "audit": {
+        "effective_config_matches_frozen_study": true,
+        "checkpoint_configs_match_saved_run": true,
+        "last_epoch_zero_based": 399,
+        "completed_checkpoint_epochs": 400,
+        "best_checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_4049/ckpt/epoch=383-step=3456.ckpt",
+        "best_validation_accuracy": 0.8633615374565125,
+        "selected_epoch_zero_based": 383,
+        "last_checkpoint_has_optimizer_state": true,
+        "source_commits": [
+          "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+        ],
+        "saved_test_accuracy": 0.8790782690048218,
+        "strict_validation_only_aggregator_compatible": false,
+        "protocol_note": "TEST_RESULTS.json is preserved; strict validation-only aggregation rejects test artifacts. No test inference was rerun and no test-free claim is made."
+      }
+    },
+    {
+      "model": "MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 5051,
+      "directory": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051",
+      "validation_completed": true,
+      "validation_epochs": 400,
+      "test_record_present": true,
+      "last_checkpoint_present": true,
+      "audit": {
+        "effective_config_matches_frozen_study": true,
+        "checkpoint_configs_match_saved_run": true,
+        "last_epoch_zero_based": 399,
+        "completed_checkpoint_epochs": 400,
+        "best_checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_5051/ckpt/epoch=373-step=3366.ckpt",
+        "best_validation_accuracy": 0.8660773634910583,
+        "selected_epoch_zero_based": 373,
+        "last_checkpoint_has_optimizer_state": true,
+        "source_commits": [
+          "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+        ],
+        "saved_test_accuracy": 0.8784568309783936,
+        "strict_validation_only_aggregator_compatible": false,
+        "protocol_note": "TEST_RESULTS.json is preserved; strict validation-only aggregation rejects test artifacts. No test inference was rerun and no test-free claim is made."
+      }
+    },
+    {
+      "model": "MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 6067,
+      "directory": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067",
+      "validation_completed": true,
+      "validation_epochs": 400,
+      "test_record_present": true,
+      "last_checkpoint_present": true,
+      "audit": {
+        "effective_config_matches_frozen_study": true,
+        "checkpoint_configs_match_saved_run": true,
+        "last_epoch_zero_based": 399,
+        "completed_checkpoint_epochs": 400,
+        "best_checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_6067/ckpt/epoch=318-step=2871.ckpt",
+        "best_validation_accuracy": 0.8654881119728088,
+        "selected_epoch_zero_based": 318,
+        "last_checkpoint_has_optimizer_state": true,
+        "source_commits": [
+          "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+        ],
+        "saved_test_accuracy": 0.8785658478736877,
+        "strict_validation_only_aggregator_compatible": false,
+        "protocol_note": "TEST_RESULTS.json is preserved; strict validation-only aggregation rejects test artifacts. No test inference was rerun and no test-free claim is made."
+      }
+    },
+    {
+      "model": "MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 7079,
+      "directory": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079",
+      "validation_completed": true,
+      "validation_epochs": 400,
+      "test_record_present": true,
+      "last_checkpoint_present": true,
+      "audit": {
+        "effective_config_matches_frozen_study": true,
+        "checkpoint_configs_match_saved_run": true,
+        "last_epoch_zero_based": 399,
+        "completed_checkpoint_epochs": 400,
+        "best_checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/MT_SE_adLIF/ECG/seed_7079/ckpt/epoch=268-step=2421.ckpt",
+        "best_validation_accuracy": 0.8695106506347656,
+        "selected_epoch_zero_based": 268,
+        "last_checkpoint_has_optimizer_state": true,
+        "source_commits": [
+          "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+        ],
+        "saved_test_accuracy": 0.8816022872924805,
+        "strict_validation_only_aggregator_compatible": false,
+        "protocol_note": "TEST_RESULTS.json is preserved; strict validation-only aggregation rejects test artifacts. No test inference was rerun and no test-free claim is made."
+      }
+    },
+    {
+      "model": "SA_MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 1009,
+      "directory": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009",
+      "validation_completed": true,
+      "validation_epochs": 400,
+      "test_record_present": false,
+      "last_checkpoint_present": true,
+      "audit": {
+        "effective_config_matches_frozen_study": true,
+        "checkpoint_configs_match_saved_run": true,
+        "last_epoch_zero_based": 399,
+        "completed_checkpoint_epochs": 400,
+        "best_checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/ckpt/epoch=316-step=2853.ckpt",
+        "best_validation_accuracy": 0.865667462348938,
+        "selected_epoch_zero_based": 316,
+        "last_checkpoint_has_optimizer_state": true,
+        "source_commits": [
+          "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+        ],
+        "strict_validation_only_aggregator_compatible": true
+      }
+    },
+    {
+      "model": "SA_MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 2027,
+      "directory": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_2027",
+      "validation_completed": false,
+      "validation_epochs": 38,
+      "test_record_present": false,
+      "last_checkpoint_present": true,
+      "audit": {
+        "effective_config_matches_frozen_study": true,
+        "checkpoint_configs_match_saved_run": true,
+        "last_epoch_zero_based": 37,
+        "completed_checkpoint_epochs": 38,
+        "best_checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_2027/ckpt/epoch=37-step=342.ckpt",
+        "best_validation_accuracy": 0.8026390075683594,
+        "selected_epoch_zero_based": 37,
+        "last_checkpoint_has_optimizer_state": true,
+        "source_commits": [
+          "b5ae11aef95bc7bcbcf9c046c77e151386d3c06d"
+        ],
+        "strict_validation_only_aggregator_compatible": true
+      }
+    }
+  ],
+  "verified_utc": "2026-10-29T08:46:56.488572+00:00",
+  "limitations": [
+    "Seven MT folders already contain standalone test evaluations and are not accepted by the strict validation-only aggregator.",
+    "Imported launch source commit b5ae11a differs from the current checkout; local resume compatibility has not been established and no training was launched.",
+    "SA-MT seed 2027 is an incomplete 38-epoch snapshot, not a completed run."
+  ]
+}

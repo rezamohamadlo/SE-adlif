@@ -2,17 +2,33 @@
 
 ## Test accuracy
 
+### Without TTA
+
 | Dataset | Paper | DTH (Δ paper) | MT (Δ paper) | AMT (Δ paper) | SA-MT (Δ paper) |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | SHD* | 93.79 ± 0.76 | **94.49 ± 0.52** (+0.70 pp) | **94.61 ± 0.23** (+0.82 pp) | 92.71 ± 1.94 (-1.08 pp) | 93.73 ± 0.52 (-0.06 pp) |
 | SSC | 80.44 ± 0.26 | 79.95 ± 0.46 (-0.49 pp) | 80.07 ± 0.14 (-0.37 pp) | 80.26 ± 0.18 (-0.18 pp) | 80.10 ± 0.25 (-0.34 pp) |
 | ECG | 88.18 ± 0.36 | 87.63 ± 0.31 (-0.55 pp) | 87.81 ± 0.49 (-0.37 pp) | 87.83 ± 0.18 (-0.35 pp) | **88.39 ± 0.22** (+0.21 pp) |
 
-Snapshot: 28 October 2026. Models: DTH, MT, AMT and SA-MT.
+Snapshot: 29 October 2026. Models: DTH, MT, AMT and SA-MT.
 
-All current comparison reports use **ordinary inference without test-time augmentation (TTA)** for accuracy and cost. Accuracy (%) is mean ± sample SD across matching training seeds 42, 123 and 456 (n=3), using final test evaluation of validation-selected checkpoints. **Bold** marks a local mean above the paper mean. Δ paper = local mean minus the published paper mean, in percentage points (pp), calculated before rounding. Paper sample sizes are SHD*/ECG n=20 and SSC n=5. These descriptive comparisons do not establish statistical significance. Historical exploratory TTA records are preserved separately and excluded from current comparisons.
+Main comparisons use **ordinary inference without test-time augmentation (TTA)** for accuracy and cost. Accuracy (%) is mean ± sample SD across matching training seeds 42, 123 and 456 (n=3), using final test evaluation of validation-selected checkpoints. **Bold** marks a local mean above the paper mean. Δ paper = local mean minus the published paper mean, in percentage points (pp), calculated before rounding. Paper sample sizes are SHD*/ECG n=20 and SSC n=5. These descriptive comparisons do not establish statistical significance. Exploratory TTA accuracy is presented separately below and does not determine the main reported result.
 
 All four models share the dataset-specific baseline optimization, preprocessing and budget. SSC uses `ssc_mean_loss_v1`. SHD* uses a fixed 20% training-derived validation split with split seed 42.
+
+### With TTA (exploratory)
+
+| Dataset | Paper | DTH (Δ paper) | MT (Δ paper) | AMT (Δ paper) | SA-MT (Δ paper) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| SHD* | 93.79 ± 0.76 | **94.64 ± 0.54** (+0.85 pp) | **94.61 ± 0.31** (+0.82 pp) | 92.76 ± 2.11 (-1.03 pp) | 93.77 ± 0.61 (-0.02 pp) |
+| SSC | 80.44 ± 0.26 | 80.34 ± 0.49 (-0.10 pp) | 80.39 ± 0.01 (-0.05 pp) | **80.72 ± 0.28** (+0.28 pp) | **80.54 ± 0.22** (+0.10 pp) |
+| ECG | 88.18 ± 0.36 | **88.40 ± 0.17** (+0.22 pp) | **88.53 ± 0.54** (+0.35 pp) | **88.60 ± 0.17** (+0.42 pp) | **89.06 ± 0.28** (+0.88 pp) |
+
+TTA uses frozen validation-selected checkpoints and averages class probabilities over input gains 1.0, 0.95 and 1.05 (three forward passes). Values are mean ± sample SD across training seeds 42, 123 and 456 (n=3); Δ paper uses the unrounded TTA mean. All entries in this table use TTA, including when ordinary inference has a higher score.
+
+These evaluations are exploratory because the test results were previously inspected; they do not establish independent improvements or statistical significance. The cost tables below describe ordinary inference and must not be interpreted as TTA latency or energy.
+
+Sources: [DTH SHD*/ECG](../results/experiments/dth_tta_v1/RESULTS.md), [DTH SSC](../results/experiments/dth_tta_v2/RESULTS.md), [MT SHD*/ECG](../results/experiments/mt_tta_v1/RESULTS.md), [MT SSC](../results/experiments/mt_tta_v2/RESULTS.md), [AMT](../results/experiments/amt_tta_v1/RESULTS.md), [SA-MT](../results/experiments/sa_mt_tta_v1/RESULTS.md).
 
 ## Inference time
 

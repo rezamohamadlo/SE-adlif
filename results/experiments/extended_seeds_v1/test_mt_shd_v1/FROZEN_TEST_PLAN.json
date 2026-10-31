@@ -1,0 +1,60 @@
+{
+  "model": "MT_SE_adLIF",
+  "dataset": "SHD*",
+  "seeds": [
+    1009,
+    2027,
+    3037,
+    4049,
+    5051,
+    6067,
+    7079
+  ],
+  "selection": "Saved maximum-validation-accuracy checkpoint per seed; no test-based selection",
+  "aggregation": "All seven seeds; arithmetic mean and sample standard deviation (ddof=1) of test accuracy; no exclusions or pairing; original three seeds excluded",
+  "evaluation": "Official test split, checkpoint saved configuration, no training or tuning",
+  "checkpoints": [
+    {
+      "seed": 1009,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_1009/ckpt/epoch=268-step=6725.ckpt",
+      "sha256": "ddea4af724a83c03997110705ee4607912273e97f69771a97b77993962054fd4",
+      "selected_epoch": 268
+    },
+    {
+      "seed": 2027,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_2027/ckpt/epoch=193-step=4850.ckpt",
+      "sha256": "9a1e15f392438ba818822a0dc8ea684906399fbae584221c88b5aab45801b6bd",
+      "selected_epoch": 193
+    },
+    {
+      "seed": 3037,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_3037/ckpt/epoch=155-step=3900.ckpt",
+      "sha256": "8e620c9c0bcfcba0b322837371dd267aa9fcc4c47085c523f1a1f3a7a8c6b375",
+      "selected_epoch": 155
+    },
+    {
+      "seed": 4049,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_4049/ckpt/epoch=249-step=6250.ckpt",
+      "sha256": "261750b02d2a2a4f4ae4c58875c4d5387bd797434c1a1182ec415b0815ef3fe6",
+      "selected_epoch": 249
+    },
+    {
+      "seed": 5051,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_5051/ckpt/epoch=188-step=4725.ckpt",
+      "sha256": "438810a36b68e408b731b4e0bb2405a94d75b4d7cb8dc772296f2036255d08d2",
+      "selected_epoch": 188
+    },
+    {
+      "seed": 6067,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_6067/ckpt/epoch=100-step=2525.ckpt",
+      "sha256": "b034051255f24a8a48a68fa59e6b4532f13595a4dbef0a77deca00b9204e2cc8",
+      "selected_epoch": 100
+    },
+    {
+      "seed": 7079,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/MT_SE_adLIF/SHD/seed_7079/ckpt/epoch=73-step=1850.ckpt",
+      "sha256": "d7800fc7c8883ddfb7eaf25bd19af3349009afab5cd3af67314e398595255c5d",
+      "selected_epoch": 73
+    }
+  ]
+}
