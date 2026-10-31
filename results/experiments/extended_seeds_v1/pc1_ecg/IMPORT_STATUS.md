@@ -9,3 +9,11 @@ Imported on 29 October 2026 from the user-supplied external snapshot `F:/reza/pc
 - Source launch commit is `b5ae11a`; resume with the current checkout has not been validated. No training or test inference was launched, and no current comparison report was updated.
 
 [Transfer manifest](../../../provenance/ecg-extension-import-2026-10-29.json)
+
+## Completion update ? 31 October 2026
+
+Imported completed SA-MT seeds 2027, 3037, 4049, 5051, 6067 and 7079 (400 epochs each). The earlier partial seed-2027 snapshot is preserved under `../import_history/`; its saved configs and launch records differ from the completed source snapshot, so current-checkout resume compatibility is not asserted.
+
+Both models assigned to this PC now have seven completed extension training/validation runs locally. This does not imply all standalone test evaluations are complete. All 140 source files across the ten newly imported runs were SHA-256 verified, including checkpoints and metrics. No training or inference was launched.
+
+[Completion transfer manifest](../../../provenance/extension-completion-import-2026-10-31.json)

@@ -4,8 +4,8 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 ## Run status
 
-- **Status:** Training interrupted; resumable
-- **Progress:** 39 epochs completed (`0` through `38`) out of 400
+- **Status:** Training finished
+- **Progress:** 400 epochs completed (`0` through `399`) out of 400
 - **Dataset:** ECG
 - **Model:** ECG_SA_MT_SE_adLIF_2layer
 - **Seed:** 2027
@@ -15,12 +15,12 @@ This file is updated automatically whenever training saves a new best checkpoint
 
 | Metric | Value | Epoch |
 |---|---:|---:|
-| Best validation accuracy | **80.26%** | 37 |
-| Validation loss | **0.5217** | 37 |
-| Training accuracy | **82.25%** | 37 |
-| Training loss | **0.481269** | 37 |
-| Gradient norm | **0.1393** | 37 |
-| Learning rate | **0.01** | 37 |
+| Best validation accuracy | **87.06%** | 382 |
+| Validation loss | **0.3495** | 382 |
+| Training accuracy | **87.65%** | 382 |
+| Training loss | **0.330043** | 382 |
+| Gradient norm | **0.0475** | 382 |
+| Learning rate | **0.01** | 382 |
 
 ## Model size and computation
 
@@ -36,7 +36,7 @@ The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds
 ## Best checkpoint
 
 ```text
-ckpt/epoch=37-step=342.ckpt
+ckpt/epoch=382-step=3447.ckpt
 ```
 
 ## Main hyperparameters

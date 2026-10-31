@@ -1,0 +1,149 @@
+{
+  "created_utc": "2026-10-31T11:07:46.917579+00:00",
+  "selection": "Saved validation-selected checkpoint; no test-based selection or exclusions",
+  "evaluation": "Official test set, ordinary inference without TTA; no training",
+  "aggregation": "Seven seeds per group, arithmetic mean and sample SD; original three reported separately; paired comparisons reuse saved matching MT test results",
+  "disclosure": "Historical test scores already observed; this is seed robustness evidence, not a previously untouched test dataset",
+  "checkpoints": [
+    {
+      "group": "dth_shd",
+      "model": "DTH_SE_adLIF",
+      "dataset": "SHD",
+      "seed": 1009,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/ckpt/epoch=205-step=5150.ckpt",
+      "sha256": "2fafd54d5b7010c123bbf49c95977c71af293fb7a9013afbffd0952e6e598030",
+      "validation_record": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_1009/VALIDATION_RESULTS.json",
+      "selected_epoch": 205
+    },
+    {
+      "group": "dth_shd",
+      "model": "DTH_SE_adLIF",
+      "dataset": "SHD",
+      "seed": 2027,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/ckpt/epoch=212-step=5325.ckpt",
+      "sha256": "b298b4d720e5c4ce7a091d3441bc872dd974df8f1726c75a971b2174bec28696",
+      "validation_record": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_2027/VALIDATION_RESULTS.json",
+      "selected_epoch": 212
+    },
+    {
+      "group": "dth_shd",
+      "model": "DTH_SE_adLIF",
+      "dataset": "SHD",
+      "seed": 3037,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/ckpt/epoch=172-step=4325.ckpt",
+      "sha256": "31c1e75b03423a449e19501ad6443eabafce68519a4df2423ce65ffc9b46c4c9",
+      "validation_record": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_3037/VALIDATION_RESULTS.json",
+      "selected_epoch": 172
+    },
+    {
+      "group": "dth_shd",
+      "model": "DTH_SE_adLIF",
+      "dataset": "SHD",
+      "seed": 4049,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_4049/ckpt/epoch=103-step=2600.ckpt",
+      "sha256": "6bd0fd818c08c79f2696bbe35528b1952ce533e75c332252d2c029bdae84b2e3",
+      "validation_record": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_4049/VALIDATION_RESULTS.json",
+      "selected_epoch": 103
+    },
+    {
+      "group": "dth_shd",
+      "model": "DTH_SE_adLIF",
+      "dataset": "SHD",
+      "seed": 5051,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_5051/ckpt/epoch=137-step=3450.ckpt",
+      "sha256": "a0e9b743aa1063b56a6ea2cbacdad88b5359b420ee6a9661e225f0ef55a4fbb0",
+      "validation_record": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_5051/VALIDATION_RESULTS.json",
+      "selected_epoch": 137
+    },
+    {
+      "group": "dth_shd",
+      "model": "DTH_SE_adLIF",
+      "dataset": "SHD",
+      "seed": 6067,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_6067/ckpt/epoch=246-step=6175.ckpt",
+      "sha256": "e71e2f0d0f18c643892feddb03dbf4f11d5f0c722ccb14c44276797866ae14c5",
+      "validation_record": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_6067/VALIDATION_RESULTS.json",
+      "selected_epoch": 246
+    },
+    {
+      "group": "dth_shd",
+      "model": "DTH_SE_adLIF",
+      "dataset": "SHD",
+      "seed": 7079,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_7079/ckpt/epoch=230-step=5775.ckpt",
+      "sha256": "1f4a944964f9f7cd0ee0a8732817bd2ed57cd7cc40c9f6418e2deb0465edc575",
+      "validation_record": "results/experiments/extended_seeds_v1/pc2_shd/DTH_SE_adLIF/SHD/seed_7079/VALIDATION_RESULTS.json",
+      "selected_epoch": 230
+    },
+    {
+      "group": "sa_mt_ecg",
+      "model": "SA_MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 1009,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/ckpt/epoch=316-step=2853.ckpt",
+      "sha256": "b39c4fb3c36ec897125bd943bca7168dcafe6f9f4dbaad36c40835e218f42aeb",
+      "validation_record": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_1009/VALIDATION_RESULTS.json",
+      "selected_epoch": 316
+    },
+    {
+      "group": "sa_mt_ecg",
+      "model": "SA_MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 2027,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_2027/ckpt/epoch=382-step=3447.ckpt",
+      "sha256": "a6805a229560bc721d80967cbe3064215624885a2cb64b1d368cbdd7209bedcc",
+      "validation_record": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_2027/VALIDATION_RESULTS.json",
+      "selected_epoch": 382
+    },
+    {
+      "group": "sa_mt_ecg",
+      "model": "SA_MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 3037,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_3037/ckpt/epoch=390-step=3519.ckpt",
+      "sha256": "cd0d53f3baa21875beb87b5fbac3c539df644ee305850067877e60d3b8beede2",
+      "validation_record": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_3037/VALIDATION_RESULTS.json",
+      "selected_epoch": 390
+    },
+    {
+      "group": "sa_mt_ecg",
+      "model": "SA_MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 4049,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_4049/ckpt/epoch=391-step=3528.ckpt",
+      "sha256": "d8b8d8c73c570ae8b93aebfdae27cef3e11f2243abdeb3a9077124dd5cec07bd",
+      "validation_record": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_4049/VALIDATION_RESULTS.json",
+      "selected_epoch": 391
+    },
+    {
+      "group": "sa_mt_ecg",
+      "model": "SA_MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 5051,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_5051/ckpt/epoch=388-step=3501.ckpt",
+      "sha256": "03cde3f8d325c84e6f78a9d265fbc74640867bb853001359838694498063deb1",
+      "validation_record": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_5051/VALIDATION_RESULTS.json",
+      "selected_epoch": 388
+    },
+    {
+      "group": "sa_mt_ecg",
+      "model": "SA_MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 6067,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_6067/ckpt/epoch=318-step=2871.ckpt",
+      "sha256": "458719c8a9317800f9c6889e0c749097334785d92ce5dd3ddf129cd6648a957c",
+      "validation_record": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_6067/VALIDATION_RESULTS.json",
+      "selected_epoch": 318
+    },
+    {
+      "group": "sa_mt_ecg",
+      "model": "SA_MT_SE_adLIF",
+      "dataset": "ECG",
+      "seed": 7079,
+      "checkpoint": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_7079/ckpt/epoch=381-step=3438.ckpt",
+      "sha256": "7792ae38579fc2c72bac8b945eba509233a15edb8ab71063f86517b36357ac20",
+      "validation_record": "results/experiments/extended_seeds_v1/pc1_ecg/SA_MT_SE_adLIF/ECG/seed_7079/VALIDATION_RESULTS.json",
+      "selected_epoch": 381
+    }
+  ]
+}
