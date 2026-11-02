@@ -6,6 +6,8 @@ import json
 import math
 from pathlib import Path
 import statistics
+import subprocess
+from functools import lru_cache
 
 from hydra import compose, initialize_config_dir
 from hydra.core.global_hydra import GlobalHydra
@@ -251,13 +253,37 @@ def runner_job(runner, j):
             setattr(runner, key, value)
 
 
+@lru_cache(maxsize=None)
+def committed_source_hash(root, revision):
+    """Rebuild the source fingerprint from Git, independent of report edits."""
+    if len(revision) != 40 or any(c not in '0123456789abcdef' for c in revision):
+        raise ValueError('Invalid recorded source revision')
+    names = subprocess.check_output(
+        ['git', 'ls-tree', '-r', '--name-only', '-z', revision], cwd=root).decode().split('\0')
+    fingerprint = hashlib.sha256()
+    for name in sorted(set(names) - {''}):
+        path = Path(name)
+        if path.parts[0] in ('results', 'data', 'docs', 'reports', 'archive'):
+            continue
+        if path.suffix not in ('.py', '.yaml', '.yml') and name != 'requirements.txt':
+            continue
+        content = subprocess.check_output(['git', 'show', f'{revision}:{name}'], cwd=root)
+        fingerprint.update(name.encode() + b'\0' + hashlib.sha256(content.replace(b'\r\n', b'\n')).digest())
+    return fingerprint.hexdigest()
+
+
 def evidence(j, checkpoints=False):
     from extended_seed_study import read_completed, read_provenance, validation_rows
     directory = job_directory(j)
     if not (directory / 'validation_completed.txt').exists():
         raise ValueError(f'Pending validation run: {portable_path(directory)}')
     record, cfg = read_completed(directory, require_checkpoints=checkpoints)
-    read_provenance(directory, ROOT)
+    # Selection reads completed historical evidence; it does not resume training.
+    # Keep internal provenance guards and verify the recorded source against Git.
+    provenance = read_provenance(directory)
+    for environment in provenance:
+        if environment.get('source_files_sha256') != committed_source_hash(str(ROOT), environment['git_commit']):
+            raise ValueError(f'Completed source differs from recorded Git revision: {directory}')
     if (cfg['ssc_study'] != j['metadata'] or record.get('ssc_study') != j['metadata']
             or cfg['random_seed'] != j['seed']
             or len(validation_rows(directory, cfg)) != cfg['n_epochs']

@@ -41,6 +41,10 @@ class SSCStudyTests(unittest.TestCase):
         p.start()
         self.addCleanup(p.stop)
 
+        p = patch.object(study, 'committed_source_hash', return_value=self.source['source_files_sha256'])
+        p.start()
+        self.addCleanup(p.stop)
+
     def plan(self, j):
         with study.runner_job(runner, j):
             return runner.build_plan(j['candidate']['model'], seeds=[j['seed']], datasets=['SSC'])[0]
@@ -149,6 +153,15 @@ class SSCStudyTests(unittest.TestCase):
             bad[key] = value
             with self.subTest(key=key), self.assertRaises(ValueError):
                 study.validate_training_config(bad)
+
+    def test_completed_evidence_checks_historical_source_without_resuming(self):
+        j = study.jobs('lr', 'pc3')[0]
+        self.completed(j)
+        with patch.object(validation, 'source_identity', side_effect=AssertionError('Current source is irrelevant')):
+            self.assertEqual(study.evidence(j)['seed'], 42)
+        with patch.object(study, 'committed_source_hash', return_value='0' * 64):
+            with self.assertRaisesRegex(ValueError, 'Completed source differs'):
+                study.evidence(j)
 
     def test_resume_complete_and_changed_manifest_guards(self):
         j = study.jobs('lr', 'pc3')[0]

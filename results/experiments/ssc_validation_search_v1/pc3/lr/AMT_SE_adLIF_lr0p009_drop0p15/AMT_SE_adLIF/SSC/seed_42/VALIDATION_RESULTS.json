@@ -1,0 +1,29 @@
+{
+  "best_checkpoint": "results/experiments/ssc_validation_search_v1/pc3/lr/AMT_SE_adLIF_lr0p009_drop0p15/AMT_SE_adLIF/SSC/seed_42/ckpt/epoch=25-step=7644.ckpt",
+  "best_validation_accuracy": 0.8180543184280396,
+  "checkpoint_sha256": "0e0b28822660d1b8b33ca2849531e92d141ec85fd5f21c76246c2ecb82108c8b",
+  "completed_epochs": 40,
+  "dataset": "SSC",
+  "last_checkpoint": "results/experiments/ssc_validation_search_v1/pc3/lr/AMT_SE_adLIF_lr0p009_drop0p15/AMT_SE_adLIF/SSC/seed_42/ckpt/last.ckpt",
+  "last_checkpoint_sha256": "f8152bfc424080c5501580dec5031a85bba892f38e30c6f319e5525fc17b889d",
+  "metric": "validation_accuracy",
+  "model": "AMT_SE_adLIF",
+  "schema": "validation_only_v1",
+  "seed": 42,
+  "seed_cohort": null,
+  "seed_cohort_order": [],
+  "selected_epoch": 25,
+  "ssc_study": {
+    "candidate": {
+      "dropout": 0.15,
+      "lr": 0.009,
+      "model": "AMT_SE_adLIF"
+    },
+    "definition_sha256": "5d78088c6759d6056311131450782a73ce2f2fb997a2b864f76e2171aacda18e",
+    "name": "ssc_validation_search_v1",
+    "pc": "pc3",
+    "selection_sha256": null,
+    "stage": "lr"
+  },
+  "status": "complete"
+}
