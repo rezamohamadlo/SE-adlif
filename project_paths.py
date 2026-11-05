@@ -9,7 +9,8 @@ from omegaconf import OmegaConf
 ROOT = Path(__file__).resolve().parent
 PATH_KEYS = {'logdir', 'launcher_logdir', 'datadir', 'cachedir', 'data_path',
              'cache_root', 'ckpt_path', 'init_ckpt_path', 'checkpoint',
-             'sweep_checkpoint', 'sweep_output', 'search_output', 'evaluation_file'}
+             'sweep_checkpoint', 'sweep_output', 'search_output', 'evaluation_file',
+             'speaker_split_manifest'}
 
 
 def relocated_artifact_path(value):

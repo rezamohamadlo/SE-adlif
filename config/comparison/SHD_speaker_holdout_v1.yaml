@@ -1,0 +1,12 @@
+# @package _global_
+# Opt-in only: inherit every matched setting from the SHD paper baseline.
+defaults:
+  - SHD
+  - _self_
+
+evaluation_protocol: shd_speaker_holdout_v1
+dataset:
+  validate_on: speaker_holdout
+  cache_namespace: shd_speaker_holdout_v1
+  speaker_split_manifest: null
+  speaker_split_fingerprint: null

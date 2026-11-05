@@ -1,0 +1,155 @@
+{
+  "baseline": {
+    "batch_size": 256,
+    "dataset": "SHD",
+    "early_stopping": false,
+    "epochs": 300,
+    "loss": "sum_softmax_over_time",
+    "lr": 0.01,
+    "version": "paper_classification_v1"
+  },
+  "checked_on": "2026-11-04",
+  "checks": [
+    "actual HDF5 schema/index alignment and loader speaker property",
+    "all 20 classes in both disjoint subsets",
+    "complete raw train/test SHA-256 identity",
+    "six resolved matched baseline configurations and distinct output paths",
+    "both actual datamodule constructions from a changed working directory",
+    "identical split/cache across DTH and LG-DTH; historical cache namespace preserved",
+    "44 selected non-training unit tests passed; training smoke tests excluded",
+    "git diff --check passed"
+  ],
+  "class_counts": {
+    "train": [
+      329,
+      325,
+      326,
+      330,
+      321,
+      324,
+      323,
+      329,
+      320,
+      333,
+      325,
+      325,
+      323,
+      324,
+      328,
+      333,
+      326,
+      324,
+      323,
+      330
+    ],
+    "validation": [
+      77,
+      76,
+      78,
+      77,
+      72,
+      75,
+      77,
+      71,
+      75,
+      73,
+      86,
+      87,
+      89,
+      89,
+      90,
+      88,
+      89,
+      88,
+      87,
+      91
+    ]
+  },
+  "dataset_identity": {
+    "dataset": "SHD",
+    "recording_axis": "HDF5 row index shared with labels/spikes",
+    "source": "official train/test HDF5",
+    "speaker_field": "extra/speaker",
+    "test_sha256": "47d8621a092cb483bea9448a93c0a3375a6726d370045090c2f7a77f70f95df3",
+    "train_sha256": "2bddb4bd46732f09982b7d1631b7c29c19853c73d3d240e3eb32bba909bdd6c1",
+    "training_metadata_sha256": "0e7e76d5854ada3d4d190f4f77b92a86028f57ac39b74ef57260f0ee5c74e80a"
+  },
+  "installed_loader": {
+    "package": "tonic",
+    "speaker_property_aligned": true,
+    "version": "1.6.0"
+  },
+  "jobs": [
+    {
+      "model": "DTH_SE_adLIF",
+      "output": "results/experiments/shd_speaker_holdout_v1/DTH_SE_adLIF/SHD/seed_42",
+      "seed": 42,
+      "status": "new"
+    },
+    {
+      "model": "LG_DTH_SE_adLIF",
+      "output": "results/experiments/shd_speaker_holdout_v1/LG_DTH_SE_adLIF/SHD/seed_42",
+      "seed": 42,
+      "status": "new"
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "output": "results/experiments/shd_speaker_holdout_v1/DTH_SE_adLIF/SHD/seed_123",
+      "seed": 123,
+      "status": "new"
+    },
+    {
+      "model": "LG_DTH_SE_adLIF",
+      "output": "results/experiments/shd_speaker_holdout_v1/LG_DTH_SE_adLIF/SHD/seed_123",
+      "seed": 123,
+      "status": "new"
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "output": "results/experiments/shd_speaker_holdout_v1/DTH_SE_adLIF/SHD/seed_456",
+      "seed": 456,
+      "status": "new"
+    },
+    {
+      "model": "LG_DTH_SE_adLIF",
+      "output": "results/experiments/shd_speaker_holdout_v1/LG_DTH_SE_adLIF/SHD/seed_456",
+      "seed": 456,
+      "status": "new"
+    }
+  ],
+  "metadata_schema": {
+    "extra/speaker": "uint16[8156]",
+    "labels": "uint16[8156]",
+    "spikes/times": "variable-length[8156]",
+    "spikes/units": "variable-length[8156]"
+  },
+  "module_version": "1.0.0",
+  "official_test_recordings": 2264,
+  "pending": [
+    "user-launched training",
+    "executed interruption/full resume",
+    "final official-test and cost execution"
+  ],
+  "protocol": "shd_speaker_holdout_v1",
+  "split_fingerprint": "e5a914f492e466b338b76e254dac5b404fe3cffd459b14a2973425266a08674a",
+  "split_manifest": "results/experiments/shd_speaker_holdout_v1/SPLIT_MANIFEST.json",
+  "status": "non_training_preflight_passed",
+  "training_launched": false,
+  "training_recordings": 6521,
+  "training_speaker_ids": [
+    1,
+    2,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "validation_fraction": 0.200465914664051,
+  "validation_recordings": 1635,
+  "validation_speaker_ids": [
+    0,
+    3
+  ]
+}

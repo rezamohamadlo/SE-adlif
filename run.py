@@ -319,6 +319,9 @@ The best validation checkpoint was evaluated on the test split after training.
                 )
             if self.cfg.get('launcher_logdir'):
                 resume_command += f' --logdir "{self.cfg.launcher_logdir}"'
+            if self.cfg.get('evaluation_protocol') == 'shd_speaker_holdout_v1':
+                phase = 1 if self.cfg.random_seed == 42 else 2
+                resume_command = f'.\\.venv\\Scripts\\python.exe runner.py --shd-speaker-phase {phase}'
         if launcher_script == 'tune_shd.py':
             resume_command = (
                 f'.\\.venv\\Scripts\\python.exe tune_shd.py '

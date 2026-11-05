@@ -80,11 +80,25 @@ class SHDLDM(pl.LightningDataModule):
         random_seed=42,
         ignore_first_timesteps: int = 10,
         cache_namespace: str = None,
+        speaker_split_manifest: str = None,
+        speaker_split_fingerprint: str = None,
     ) -> None:
         super().__init__()
         # workaround in order to use the same training loop
         # for classification and context processing
         
+        if validate_on == 'speaker_holdout':
+            from project_paths import local_path
+            from datasets.shd_speaker_split import load_manifest, PROTOCOL
+            data_path = str(local_path(data_path))
+            if (cache_namespace != PROTOCOL or not speaker_split_manifest
+                    or not speaker_split_fingerprint or random_seed != 42
+                    or additional_test_set_validation):
+                raise ValueError('Speaker holdout requires its frozen manifest/cache and split seed 42; no test validation')
+            self.speaker_split = load_manifest(speaker_split_manifest, data_path, speaker_split_fingerprint)
+        elif speaker_split_manifest is not None or speaker_split_fingerprint is not None:
+            raise ValueError('Speaker manifest requires validate_on=speaker_holdout')
+
         if not os.path.isabs(data_path):
             cwd = hydra.utils.get_original_cwd()
             data_path = os.path.abspath(os.path.join(cwd, data_path))
@@ -96,15 +110,20 @@ class SHDLDM(pl.LightningDataModule):
         if cache_namespace is not None:
             if not re.fullmatch(r"[A-Za-z0-9_-]+", cache_namespace):
                 raise ValueError("cache_namespace must contain only letters, digits, '_' or '-'")
-            signature = json.dumps(dict(
+            signature_fields = dict(
                 spatial_factor=spatial_factor, time_factor=time_factor,
                 window_size=window_size, pad_to_min_size=pad_to_min_size,
                 validate_on=validate_on, random_seed=random_seed,
                 ignore_first_timesteps=ignore_first_timesteps,
                 bias_for_test_set=bias_for_test_set, test_bias_variant=test_bias_variant,
-            ), sort_keys=True)
+            )
+            if speaker_split_fingerprint is not None:
+                signature_fields['speaker_split_fingerprint'] = speaker_split_fingerprint
+            signature = json.dumps(signature_fields, sort_keys=True)
             digest = hashlib.sha256(signature.encode()).hexdigest()[:16]
             self.cache_path = os.path.join(self.cache_path, f"{cache_namespace}_{digest}")
+            if speaker_split_fingerprint is not None:
+                self.cache_path = os.path.join(self.cache_path, speaker_split_fingerprint)
         self.spatial_factor = spatial_factor
         self.time_factor = time_factor
         self.window_size = window_size
@@ -218,8 +237,19 @@ class SHDLDM(pl.LightningDataModule):
             ignore_first_timesteps=self.ignore_first_timesteps,
         )
 
+        if self.validate_on == 'speaker_holdout':
+            from datasets.shd_speaker_split import check_loader
+            self.train_val_ds = SHDWrapper(
+                save_to=self.data_path, transform=self.static_data_transform_train_val,
+                train=True, ignore_first_timesteps=self.ignore_first_timesteps)
+            check_loader(self.train_val_ds, self.speaker_split)
+            self.data_train = torch.utils.data.Subset(
+                self.train_val_ds, self.speaker_split['subsets']['train']['indices'])
+            self.data_val = torch.utils.data.Subset(
+                self.train_val_ds, self.speaker_split['subsets']['validation']['indices'])
+
         # validate on the test set
-        if self.validate_on == "test":
+        elif self.validate_on == "test":
             self.data_train = SHDWrapper(
                 save_to=self.data_path,
                 transform=self.static_data_transform_train_val,

@@ -17,7 +17,7 @@ from contextlib import ExitStack
 from hydra import compose, initialize_config_dir
 from omegaconf import OmegaConf
 from evaluation_protocol import load_protocol, protocol_overrides, protocol_settings
-from project_paths import portable_config, portable_path
+from project_paths import portable_config, portable_path, local_path
 from cost_records import normalized_record, VERSIONS as COST_VERSIONS
 
 
@@ -31,6 +31,7 @@ RUN_LOGDIR = "results/valid"
 SEED_COHORT = None
 VALIDATION_ONLY = False
 SSC_STUDY_JOB = None  # Explicit opt-in; ordinary and extension_v1 plans are unchanged.
+SPEAKER_HOLDOUT = None  # Frozen split metadata, set only by the opt-in workflow.
 # One explicit protocol shared by reference and proposed models.
 PROTOCOL = EVALUATION['datasets']
 
@@ -113,9 +114,9 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                     raise ValueError(f'--resume 0 requires an empty output directory; use --logdir for a fresh run: {directory}')
                 overrides = [
                     f"experiment={experiment}", f"random_seed={seed}",
-                    f"+comparison={dataset}",
+                    f"+comparison={'SHD_speaker_holdout_v1' if SPEAKER_HOLDOUT else dataset}",
                     f"logdir={json.dumps(portable_path(directory, ROOT))}",
-                    f"hydra.run.dir={json.dumps(portable_path(directory, ROOT) if VALIDATION_ONLY else directory.as_posix())}",
+                    f"hydra.run.dir={json.dumps(portable_path(directory, ROOT) if VALIDATION_ONLY or SPEAKER_HOLDOUT else directory.as_posix())}",
                     "++launcher_script=runner.py", f"++model_variant={model}",
                     f"++run_mode={'reference' if model == 'SE_adLIF' else 'ours'}",
                     f"++launcher_logdir={launcher_logdir}",
@@ -143,6 +144,9 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                 if SSC_STUDY_JOB:
                     from ssc_validation_study import job_overrides
                     overrides += job_overrides(SSC_STUDY_JOB, model, dataset, seed)
+                if SPEAKER_HOLDOUT:
+                    from shd_speaker_holdout import job_overrides
+                    overrides += job_overrides(model, dataset, seed, SPEAKER_HOLDOUT)
                 cfg = compose(config_name="main", overrides=overrides)
                 from models.pl_module import validate_training_objective
                 objective = validate_training_objective(cfg)
@@ -159,6 +163,9 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                     overrides += [f'++evaluation_protocol={cfg.evaluation_protocol}',
                                   f'++paper_baseline_deviations={json.dumps(deviations)}']
                 resolved = portable_config(OmegaConf.to_container(cfg, resolve=True), ROOT)
+                if SPEAKER_HOLDOUT:
+                    from shd_speaker_holdout import validate_config
+                    validate_config(resolved, model, seed, SPEAKER_HOLDOUT)
                 if VALIDATION_ONLY:
                     from extended_seed_study import validate_config
                     validate_config(resolved)
@@ -244,6 +251,9 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                     ):
                         raise ValueError(f"Existing artifacts have no resumable checkpoint: {directory}")
                     status = "new"
+                if SPEAKER_HOLDOUT and status in ('complete', 'resume'):
+                    from shd_speaker_holdout import inspect_checkpoint
+                    inspect_checkpoint(directory, resolved, status == 'complete')
                 plan.append(dict(dataset=dataset, seed=seed, directory=directory,
                                  config=resolved, overrides=overrides, status=status,
                                  compatibility=compatibility))
@@ -325,6 +335,9 @@ def cost_aggregate_lines(root):
 
 
 def write_aggregate(model, adaptation_update_interval=2):
+    if SPEAKER_HOLDOUT:
+        from shd_speaker_holdout import write_aggregate as write_speaker_aggregate
+        return write_speaker_aggregate(model, sys.modules[__name__])
     root = result_root(model, adaptation_update_interval)
     settings_by_dataset = {}
     with initialize_config_dir(config_dir=str(ROOT / 'config'), version_base=None):
@@ -410,6 +423,9 @@ def run(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, resume=
                 collect_costs(directory, item['dataset'])
             continue
         directory.mkdir(parents=True, exist_ok=True)
+        if SPEAKER_HOLDOUT:
+            from datasets.shd_speaker_split import save_manifest
+            save_manifest(directory / 'SPLIT_MANIFEST.json', SPEAKER_HOLDOUT)
         if not item.get('compatibility'):
             (directory / "FULL_RUN_CONFIG.json").write_text(
                 json.dumps(item["config"], indent=2, sort_keys=True) + "\n", encoding="utf-8"
@@ -418,6 +434,9 @@ def run(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, resume=
         if result.returncode:
             write_aggregate(model, adaptation_update_interval)
             raise RuntimeError(f"Run failed ({result.returncode}). Rerun the same command to resume: {directory}")
+        if SPEAKER_HOLDOUT:
+            from shd_speaker_holdout import inspect_checkpoint
+            inspect_checkpoint(directory, item['config'], complete=True)
         (directory / "completed.txt").write_text("Training and final test evaluation completed.\n", encoding="utf-8")
         if measure_costs:
             collect_costs(directory, item['dataset'])
@@ -447,6 +466,9 @@ def run_validation(model, interval, seeds, datasets, resume):
 
 def main(argv=None):
     arguments = list(sys.argv[1:] if argv is None else argv)
+    if any(arg == '--shd-speaker-phase' or arg.startswith('--shd-speaker-phase=') for arg in arguments):
+        from shd_speaker_holdout import main as speaker_main
+        return speaker_main(arguments, runner=sys.modules[__name__])
     if any(arg == '--ssc-study-stage' or arg.startswith('--ssc-study-stage=') for arg in arguments):
         from ssc_validation_study import main as study_main
         return study_main(arguments, runner=sys.modules[__name__])
@@ -557,6 +579,9 @@ def main(argv=None):
             print('Training overrides: ' + json.dumps(overrides, sort_keys=True))
         if args.logdir:
             RUN_LOGDIR = portable_path(args.logdir, ROOT)
+            from shd_speaker_holdout import OUTPUT_ROOT
+            if local_path(RUN_LOGDIR, ROOT).is_relative_to(local_path(OUTPUT_ROOT, ROOT)):
+                raise ValueError('Speaker-holdout outputs require --shd-speaker-phase and its split/lock guards')
         # Preserve order and avoid scheduling duplicate model suites.
         models = list(dict.fromkeys(args.models))
         plans = [(model, build_plan(model, args.adaptation_update_interval, args.seeds, args.datasets, args.resume)) for model in models]

@@ -28,3 +28,12 @@ artifact exclusions; transfer ignored checkpoints separately.
 The default runner refuses to recreate a retained experiment. Intentional new
 experiments must use an explicit separate `--logdir`. Standalone measurement
 readers locate these relocated seeds automatically.
+
+## Discontinued experiments
+
+[SHD speaker holdout v1](shd_speaker_holdout_v1/README.md) was archived at the
+user's request on 5 November 2026. It contains two completed seed-42 runs and
+an incomplete DTH seed-123 run. Its speaker-disjoint validation protocol differs
+from random-recording SHD*, so it is not included in the completed comparison
+table above. All original artifacts are retained with a SHA-256 inventory;
+the retired phase launcher rejects accidental relaunch.
