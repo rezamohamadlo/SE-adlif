@@ -1,0 +1,12 @@
+# @package _global_
+# Opt-in overlay on comparison/SHD_speaker_holdout_v1, which inherits SHD's
+# paper baseline. A distinct protocol/output root preserves the retired study.
+evaluation_protocol: shd_speaker_augmented_v1
+dropout: 0.25
+dataset:
+  cache_namespace: shd_speaker_augmented_v1
+  train_augmentation:
+    version: shd_frame_augmentation_v1
+    time_scale: [0.9, 1.1]
+    channel_shift: 2
+    spike_delete_probability: 0.05

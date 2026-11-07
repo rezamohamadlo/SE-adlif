@@ -82,6 +82,7 @@ class SHDLDM(pl.LightningDataModule):
         cache_namespace: str = None,
         speaker_split_manifest: str = None,
         speaker_split_fingerprint: str = None,
+        train_augmentation: dict = None,
     ) -> None:
         super().__init__()
         # workaround in order to use the same training loop
@@ -91,13 +92,22 @@ class SHDLDM(pl.LightningDataModule):
             from project_paths import local_path
             from datasets.shd_speaker_split import load_manifest, PROTOCOL
             data_path = str(local_path(data_path))
-            if (cache_namespace != PROTOCOL or not speaker_split_manifest
+            allowed_cache = ('shd_speaker_augmented_v1' if train_augmentation is not None else PROTOCOL)
+            if (cache_namespace != allowed_cache or not speaker_split_manifest
                     or not speaker_split_fingerprint or random_seed != 42
                     or additional_test_set_validation):
                 raise ValueError('Speaker holdout requires its frozen manifest/cache and split seed 42; no test validation')
             self.speaker_split = load_manifest(speaker_split_manifest, data_path, speaker_split_fingerprint)
         elif speaker_split_manifest is not None or speaker_split_fingerprint is not None:
             raise ValueError('Speaker manifest requires validate_on=speaker_holdout')
+        if train_augmentation is not None and validate_on != 'speaker_holdout':
+            raise ValueError('SHD train augmentation requires the opt-in speaker holdout protocol')
+        self.train_augmentation = None
+        if train_augmentation is not None:
+            from datasets.shd_augmentation import SHDFrameAugmentation
+            self.train_augmentation = SHDFrameAugmentation(
+                **train_augmentation, ignore_first_timesteps=ignore_first_timesteps,
+                pad_to_min_size=pad_to_min_size)
 
         if not os.path.isabs(data_path):
             cwd = hydra.utils.get_original_cwd()
@@ -290,7 +300,8 @@ class SHDLDM(pl.LightningDataModule):
 
     def train_dataloader(self):
         return DataLoader(
-            DiskCachedDataset(self.data_train, self.cache_path + "/train"),
+            DiskCachedDataset(self.data_train, self.cache_path + "/train",
+                              full_transform=self.train_augmentation),
             shuffle=True,
             pin_memory=True,
             batch_size=self.batch_size,

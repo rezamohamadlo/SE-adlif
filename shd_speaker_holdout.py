@@ -18,6 +18,8 @@ from datasets.shd_speaker_split import (
 from project_paths import local_path, portable_path
 
 VERSION = '1.0.1'
+AUGMENTED_PROTOCOL = 'shd_speaker_augmented_v1'
+ACTIVE_PROFILE = None
 ROOT = Path(__file__).resolve().parent
 OUTPUT_ROOT = f'results/experiments/{PROTOCOL}'
 ARCHIVE_ROOT = f'results/not_improved/{PROTOCOL}'
@@ -25,6 +27,24 @@ SPLIT_PATH = f'{OUTPUT_ROOT}/SPLIT_MANIFEST.json'
 MODELS = ('DTH_SE_adLIF', 'LG_DTH_SE_adLIF')
 PHASES = {'1': ((MODELS[0], 42), (MODELS[1], 42)),
           '2': ((MODELS[0], 123), (MODELS[1], 123), (MODELS[0], 456), (MODELS[1], 456))}
+
+
+@contextmanager
+def selected_profile(profile):
+    """Scope the new opt-in study without modifying the shared runner/defaults."""
+    keys = ('PROTOCOL', 'VERSION', 'OUTPUT_ROOT', 'ARCHIVE_ROOT', 'SPLIT_PATH', 'ACTIVE_PROFILE')
+    original = {key: globals()[key] for key in keys}
+    try:
+        if profile == 'augmented_v1':
+            globals().update(PROTOCOL=AUGMENTED_PROTOCOL, VERSION='1.0.0', ACTIVE_PROFILE=profile,
+                             OUTPUT_ROOT=f'results/experiments/{AUGMENTED_PROTOCOL}',
+                             ARCHIVE_ROOT=f'results/not_improved/{AUGMENTED_PROTOCOL}',
+                             SPLIT_PATH=f'results/experiments/{AUGMENTED_PROTOCOL}/SPLIT_MANIFEST.json')
+        elif profile is not None:
+            raise ValueError(f'Unknown speaker study profile: {profile}')
+        yield
+    finally:
+        globals().update(original)
 
 
 def ordered_jobs(phase):
@@ -49,7 +69,15 @@ def job_overrides(model, dataset, seed, manifest):
         raise ValueError('Speaker holdout supports only DTH/LG-DTH SHD seeds 42/123/456')
     deviations = [f'model_variant={model}',
                   'validation=two held-out training speakers; replaces random-recording SHD* split']
-    return [f'++evaluation_protocol={PROTOCOL}',
+    profile_overrides = []
+    if ACTIVE_PROFILE:
+        profile_overrides = [f'+shd_speaker_study={ACTIVE_PROFILE}']
+        settings = OmegaConf.load(ROOT / f'config/shd_speaker_study/{ACTIVE_PROFILE}.yaml')
+        baseline = OmegaConf.load(ROOT / 'config/paper_baseline.yaml').paper_baseline
+        deviations += [f'dropout={settings.dropout} (paper baseline {baseline.common.dropout})',
+                       'training_augmentation=' + json.dumps(OmegaConf.to_container(
+                           settings.dataset.train_augmentation, resolve=True), sort_keys=True)]
+    return profile_overrides + [f'++evaluation_protocol={PROTOCOL}',
             f'++speaker_holdout_module_version={VERSION}',
             f'++paper_baseline_deviations={json.dumps(deviations)}',
             f'dataset.speaker_split_manifest={SPLIT_PATH}',
@@ -65,12 +93,14 @@ def validate_config(cfg, model, seed, manifest):
     if cfg['paper_baseline'] != baseline or cfg['paper_baseline_version'] != baseline['version']:
         raise ValueError('Speaker holdout must inherit the current paper baseline')
     # Compare every effective setting against the ordinary model's resolved baseline.
-    # Only protocol/split metadata and output routing may differ.
+    # Apply the explicit regularization overlay before checking all other fields.
     context = (nullcontext() if GlobalHydra.instance().is_initialized() else
                initialize_config_dir(config_dir=str(ROOT / 'config'), version_base=None))
     with context:
-        expected = compose(config_name='main', overrides=[
-            f'experiment=SHD_{model}', '+comparison=SHD', f'random_seed={seed}'])
+        expected_overrides = [f'experiment=SHD_{model}', '+comparison=SHD', f'random_seed={seed}']
+        if ACTIVE_PROFILE:
+            expected_overrides += [f'+shd_speaker_study={ACTIVE_PROFILE}']
+        expected = compose(config_name='main', overrides=expected_overrides)
         expected = OmegaConf.to_container(expected, resolve=True)
     actual = copy.deepcopy(cfg)
     routing = ('evaluation_protocol', 'model_variant', 'launcher_script', 'launcher_logdir',
@@ -114,6 +144,9 @@ def preflight_data():
     if local_path(SPLIT_PATH).exists():
         saved = json.loads(local_path(SPLIT_PATH).read_text(encoding='utf-8'))
         verify_manifest(saved, data_path, manifest['fingerprint'])
+    if ACTIVE_PROFILE and (len(manifest['subsets']['train']['speaker_ids']) != 8
+                           or len(manifest['subsets']['validation']['speaker_ids']) != 2):
+        raise ValueError('Augmented SHD study requires exactly 8 training / 2 validation speakers')
     return manifest
 
 
@@ -169,7 +202,8 @@ def inspect_checkpoint(directory, cfg, complete=False):
 
 def write_aggregate(model, runner):
     root, manifest = runner.result_root(model), runner.SPEAKER_HOLDOUT
-    lines = [f'# {model}: SHD speaker holdout (two validation speakers)', '',
+    title = 'SHD* speaker holdout + augmentation' if ACTIVE_PROFILE else 'SHD speaker holdout'
+    lines = [f'# {model}: {title} (two validation speakers)', '',
              f'Protocol: `{PROTOCOL}`; module {VERSION}. Baseline: `{runner._BASELINE.version}`.',
              'Final official-test accuracy (%) from speaker-validation-selected checkpoints; ordinary inference without TTA.',
              'This protocol differs from random-recording SHD*; paper accuracy is not a matched baseline.',
@@ -189,8 +223,9 @@ def write_aggregate(model, runner):
             cells.append('pending')
     aggregate = (f'{statistics.mean(values):.2f} ± {statistics.stdev(values):.2f}' if len(values) > 1
                  else f'{values[0]:.2f} (SD unavailable)' if values else 'pending')
-    lines += [f'| SHD speaker holdout v1 | {" | ".join(cells)} | {len(values)} | {aggregate} |', '',
-              *(line.replace('| SHD* |', '| SHD speaker holdout v1 |')
+    label = 'SHD* speaker holdout + augmentation v1' if ACTIVE_PROFILE else 'SHD speaker holdout v1'
+    lines += [f'| {label} | {" | ".join(cells)} | {len(values)} | {aggregate} |', '',
+              *(line.replace('| SHD* |', f'| {label} |')
                 for line in runner.cost_aggregate_lines(root))]
     root.mkdir(parents=True, exist_ok=True)
     temporary = root / 'RESULTS.md.tmp'
@@ -201,9 +236,16 @@ def write_aggregate(model, runner):
 def main(argv, runner):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--shd-speaker-phase', choices=('1', '2', 'all'), required=True)
+    parser.add_argument('--shd-speaker-profile', choices=('augmented_v1',),
+                        help='New isolated augmentation/dropout study; omitted selects retired v1')
     parser.add_argument('--dry-run', action='store_true', help='Check actual data and every planned run; no training/writes')
     parser.add_argument('--measure-existing-costs', action='store_true')
     args = parser.parse_args(argv)
+    with selected_profile(args.shd_speaker_profile):
+        return run_phase(args, parser, runner)
+
+
+def run_phase(args, parser, runner):
     try:
         if (ROOT / ARCHIVE_ROOT / 'ARCHIVE.json').is_file():
             raise ValueError(f'This experiment was retired by the user; results are preserved at {ARCHIVE_ROOT}. '
