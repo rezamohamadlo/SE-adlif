@@ -5,19 +5,19 @@
 # Run each block from the repository root. Rerun the same block after interruption.
 
 # PC1
-.\.venv\Scripts\python.exe .\run_shd_regularization_subset.ps1 -Job `
+.\run_shd_regularization_subset.ps1 -Job `
 'dropout030_v1:DTH_SE_adLIF:42','dropout030_v1:LG_DTH_SE_adLIF:42',`
 'dropout035_v1:DTH_SE_adLIF:42','dropout035_v1:LG_DTH_SE_adLIF:42',`
 'spike_delete010_v1:DTH_SE_adLIF:42','spike_delete010_v1:LG_DTH_SE_adLIF:42'
 
 # PC2
-.\.ven\Scripts\python.exe .\run_shd_regularization_subset.ps1 -Job `
+.\run_shd_regularization_subset.ps1 -Job `
 'dropout030_v1:DTH_SE_adLIF:123','dropout030_v1:LG_DTH_SE_adLIF:123',`
 'dropout030_v1:DTH_SE_adLIF:456','dropout030_v1:LG_DTH_SE_adLIF:456',`
 'dropout035_v1:DTH_SE_adLIF:123','dropout035_v1:LG_DTH_SE_adLIF:123'
 
 # PC3
-.\.ven\Scripts\python.exe .\run_shd_regularization_subset.ps1 -Job `
+.\run_shd_regularization_subset.ps1 -Job `
 'dropout035_v1:DTH_SE_adLIF:456','dropout035_v1:LG_DTH_SE_adLIF:456',`
 'spike_delete010_v1:DTH_SE_adLIF:123','spike_delete010_v1:LG_DTH_SE_adLIF:123',`
 'spike_delete010_v1:DTH_SE_adLIF:456','spike_delete010_v1:LG_DTH_SE_adLIF:456'
