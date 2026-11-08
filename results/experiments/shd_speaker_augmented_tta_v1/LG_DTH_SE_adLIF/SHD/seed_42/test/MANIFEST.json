@@ -1,0 +1,294 @@
+{
+  "dataset": "SHD",
+  "seed": 42,
+  "checkpoint": "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/ckpt/epoch=143-step=3600.ckpt",
+  "checkpoint_sha256": "b049aa4c7cf44a508eebf25c8918959d0bf16a5732322076c61f1a69443add38",
+  "selected_epoch": 143,
+  "config": {
+    "random_seed": 42,
+    "logdir": "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42",
+    "datadir": "data",
+    "cachedir": "data/cache",
+    "ckpt_path": null,
+    "init_ckpt_path": null,
+    "run_test": true,
+    "scheduler": "plateau",
+    "scheduler_min_lr": 0.0,
+    "gradient_clip_val": 1.5,
+    "device": "cuda:0",
+    "early_stopping": false,
+    "early_stopping_patience": 50,
+    "early_stopping_min_delta": 0.001,
+    "dataset": {
+      "_target_": "datasets.shd.SHDLDM",
+      "data_path": "data",
+      "spatial_factor": 0.2,
+      "time_factor": 0.001,
+      "pad_to_min_size": 250,
+      "window_size": 4,
+      "batch_size": 256,
+      "num_workers": 0,
+      "num_classes": 20,
+      "validate_on": "speaker_holdout",
+      "random_seed": 42,
+      "cache_namespace": "shd_speaker_augmented_v1",
+      "ignore_first_timesteps": 10,
+      "additional_test_set_validation": false,
+      "speaker_split_manifest": "results/experiments/shd_speaker_augmented_v1/SPLIT_MANIFEST.json",
+      "speaker_split_fingerprint": "e5a914f492e466b338b76e254dac5b404fe3cffd459b14a2973425266a08674a",
+      "train_augmentation": {
+        "version": "shd_frame_augmentation_v1",
+        "time_scale": [
+          0.9,
+          1.1
+        ],
+        "channel_shift": 2,
+        "spike_delete_probability": 0.05
+      }
+    },
+    "exp_name": "SHD_LG_DTH_SE_adLIF",
+    "two_layers": true,
+    "alpha": 5.0,
+    "c": 0.4,
+    "dt": 1.0,
+    "dropout": 0.25,
+    "l1": {
+      "cell": "lg_dth_se_adlif",
+      "input_size": 140,
+      "n_neurons": 360,
+      "tau_u_range": [
+        5,
+        25
+      ],
+      "tau_w_range": [
+        60,
+        300
+      ],
+      "q": 120,
+      "alpha": 5.0,
+      "c": 0.4,
+      "dt": 1.0,
+      "rho_fast": 0.9,
+      "rho_slow": 0.99,
+      "target_rate": 0.05,
+      "theta_min": 0.5,
+      "theta_max": 1.5,
+      "local_slow_enabled": true,
+      "local_transient_enabled": true,
+      "local_coefficient_bound": 5.0
+    },
+    "l2": {
+      "cell": "lg_dth_se_adlif",
+      "input_size": 360,
+      "n_neurons": 360,
+      "tau_u_range": [
+        5,
+        25
+      ],
+      "tau_w_range": [
+        60,
+        300
+      ],
+      "q": 120,
+      "alpha": 5.0,
+      "c": 0.4,
+      "dt": 1.0,
+      "rho_fast": 0.9,
+      "rho_slow": 0.99,
+      "target_rate": 0.05,
+      "theta_min": 0.5,
+      "theta_max": 1.5,
+      "local_slow_enabled": true,
+      "local_transient_enabled": true,
+      "local_coefficient_bound": 5.0
+    },
+    "l_out": {
+      "input_size": 360,
+      "n_neurons": 20,
+      "tau_u_range": [
+        15,
+        15
+      ],
+      "dt": 1.0
+    },
+    "n_epochs": 300,
+    "batch_size": 256,
+    "loss_agg": "sum_softmax_over_time",
+    "tracking_metric": "val_acc",
+    "tracking_mode": "max",
+    "lr": 0.01,
+    "factor": 0.9,
+    "patience": 9999,
+    "paper_baseline": {
+      "version": "paper_classification_v1",
+      "source": {
+        "doi": "10.1038/s41467-025-60878-z",
+        "document": "reference_paper.pdf",
+        "locations": "Table 7 (page 35); training/preprocessing methods (pages 28-29)"
+      },
+      "common": {
+        "lr_optimizer": "Adam",
+        "adam_betas": [
+          0.9,
+          0.999
+        ],
+        "adam_eps": 1e-08,
+        "dropout": 0.15,
+        "gradient_clip_val": 1.5,
+        "alpha": 5.0,
+        "dt": 1.0,
+        "tracking_metric": "val_acc",
+        "tracking_mode": "max"
+      },
+      "reproduction_policy": {
+        "training_seeds": [
+          42,
+          123,
+          456
+        ],
+        "split_seed": 42,
+        "num_workers": 0,
+        "early_stopping": false,
+        "scheduler": "plateau",
+        "patience": 9999,
+        "factor": 0.9,
+        "cache_namespace": "controlled_v2"
+      },
+      "datasets": {
+        "SHD": {
+          "report_label": "SHD*",
+          "lr": 0.01,
+          "batch_size": 256,
+          "n_epochs": 300,
+          "validate_on": 0.2,
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4,
+          "pad_to_min_size": 250,
+          "ignore_first_timesteps": 10,
+          "reference_architecture": {
+            "layers": 2,
+            "neurons_per_layer": 360,
+            "q": 120,
+            "c": 0.4,
+            "tau_u_range": [
+              5,
+              25
+            ],
+            "tau_w_range": [
+              60,
+              300
+            ],
+            "output_tau": 15
+          }
+        },
+        "SSC": {
+          "lr": 0.006,
+          "batch_size": 256,
+          "n_epochs": 40,
+          "validation": "official",
+          "spatial_factor": 0.2,
+          "time_factor": 0.001,
+          "window_size": 4,
+          "pad_to_min_size": 300,
+          "ignore_first_timesteps": 10,
+          "reference_architecture": {
+            "layers": 2,
+            "neurons_per_layer": 720,
+            "q": 120,
+            "c": 0.4,
+            "tau_u_range": [
+              5,
+              25
+            ],
+            "tau_w_range": [
+              60,
+              300
+            ],
+            "output_tau": 15
+          }
+        },
+        "ECG": {
+          "lr": 0.01,
+          "batch_size": 64,
+          "n_epochs": 400,
+          "valid_fraction": 0.05,
+          "reference_architecture": {
+            "layers": 2,
+            "neurons_per_layer": 36,
+            "q": 120,
+            "c": 0.2,
+            "tau_u_range": [
+              5,
+              25
+            ],
+            "tau_w_range": [
+              60,
+              300
+            ],
+            "output_tau": 3
+          }
+        }
+      }
+    },
+    "paper_baseline_version": "paper_classification_v1",
+    "paper_baseline_deviations": [
+      "model_variant=LG_DTH_SE_adLIF",
+      "validation=two held-out training speakers; replaces random-recording SHD* split",
+      "dropout=0.25 (paper baseline 0.15)",
+      "training_augmentation={\"channel_shift\": 2, \"spike_delete_probability\": 0.05, \"time_scale\": [0.9, 1.1], \"version\": \"shd_frame_augmentation_v1\"}"
+    ],
+    "paper_baseline_dataset": "SHD",
+    "evaluation_protocol": "shd_speaker_augmented_v1",
+    "launcher_script": "runner.py",
+    "model_variant": "LG_DTH_SE_adLIF",
+    "run_mode": "ours",
+    "launcher_logdir": "results/experiments/shd_speaker_augmented_v1",
+    "speaker_holdout_module_version": "1.0.0"
+  },
+  "model": "LG_DTH_SE_adLIF",
+  "ordinary_accuracy": 0.9368374347686768,
+  "split_fingerprint": "e5a914f492e466b338b76e254dac5b404fe3cffd459b14a2973425266a08674a",
+  "policy": {
+    "version": "mt_gain_tta_v1",
+    "datasets": {
+      "SHD": {
+        "gains": [
+          1.0,
+          0.95,
+          1.05
+        ]
+      },
+      "SSC": {
+        "gains": [
+          1.0,
+          0.95,
+          1.05
+        ]
+      },
+      "ECG": {
+        "gains": [
+          1.0,
+          0.95,
+          1.05
+        ]
+      }
+    }
+  },
+  "split": "test",
+  "provenance": {
+    "source": {
+      "git_commit": "f190954c936a2b82aa7c9a52cf46aedda9868368",
+      "source_files_sha256": "c82613c85aad7bdcaf61063a1a5a310c9e61dcedfa17b0ffba563758981ea297",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "recipe_sha256": "188d44b5a12f623d9f6203cb73a30a4e4c5bcdf2f7512883876bd0c6709eccc8",
+    "environment": {
+      "torch": "2.6.0+cu124",
+      "numpy": "1.26.4",
+      "pytorch-lightning": "2.2.1",
+      "tonic": "1.6.0"
+    }
+  },
+  "fingerprint": "fcfb9204f994be9ad8db83c96c04c39342123753d52296e75ca58575f1de7e16"
+}

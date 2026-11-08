@@ -1,4 +1,34 @@
-# SHD* speaker holdout + augmentation v1
+# SHD speaker holdout + augmentation v1
+
+## Completed results (8 November 2026)
+
+All six fresh-training runs completed 300 epochs, final official-test
+evaluation and per-seed cost measurement. Checkpoints were selected by held-out
+training-speaker validation accuracy. Ordinary inference uses no TTA.
+
+| Model | Seed 42 test (%) | Seed 123 test (%) | Seed 456 test (%) | n | Mean +/- sample SD (%) |
+|---|---:|---:|---:|---:|---:|
+| DTH | 92.8445 | 93.0654 | 93.5071 | 3 | 93.1390 +/- 0.3374 |
+| LG-DTH | 93.6837 | 96.6431 | 92.4470 | 3 | 94.2580 +/- 2.1562 |
+
+The underlying `metrics.csv`, resolved configs, best/last checkpoints and
+measurement evidence remain beside each seed. Raw metrics, logs, completion
+markers and weights are transferred separately because Git ignores them.
+Model-level `RESULTS.md` files contain the ordinary aggregates.
+
+The separate [exploratory TTA evaluation](../shd_speaker_augmented_tta_v1/RESULTS.md)
+uses these same validation-selected checkpoints, fixed input gains
+1.00/0.95/1.05 and mean class probabilities. It performs no training. TTA test
+means are 93.1095 +/- 0.3851% for DTH and 94.4641 +/- 2.0724% for LG-DTH
+(sample SD, n=3). Those results do not replace ordinary inference evidence.
+
+This speaker-holdout protocol differs from the random recording split used
+for the paper SHD* comparison. One fixed speaker pair and three training seeds
+do not establish robustness across arbitrary speaker splits.
+
+## Historical preparation record (7 November 2026)
+
+The following records the state before the completed runs above.
 
 Prepared on 7 November 2026; **training has not started**. Protocol:
 `shd_speaker_augmented_v1`, implementation 1.0.0. This fresh-training experiment

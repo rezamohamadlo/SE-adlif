@@ -1,0 +1,557 @@
+{
+    "schema":  "shd_speaker_augmented_transfer_v1",
+    "exported_on":  "2026-11-08",
+    "created_utc":  "2026-11-08T07:12:53.0284419Z",
+    "source_layout":  "repository-relative",
+    "source_revision":  "f190954c936a2b82aa7c9a52cf46aedda9868368",
+    "external_destination":  "G:/reza",
+    "originals_retained":  true,
+    "copy_verified":  true,
+    "experiment_roots":  [
+                             "results/experiments/shd_speaker_augmented_v1",
+                             "results/experiments/shd_speaker_augmented_tta_v1"
+                         ],
+    "ordinary_runs":  6,
+    "tta_runs":  6,
+    "checkpoint_files":  12,
+    "payload_file_count":  104,
+    "payload_bytes":  67364472,
+    "excluded_locks":  [
+                           "results/experiments/shd_speaker_augmented_v1/.extension.lock",
+                           "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_123/.evaluation.lock",
+                           "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42/.evaluation.lock",
+                           "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_456/.evaluation.lock",
+                           "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_123/.evaluation.lock",
+                           "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/.evaluation.lock",
+                           "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456/.evaluation.lock",
+                           "results/experiments/shd_speaker_augmented_tta_v1/.search.lock"
+                       ],
+    "notes":  [
+                  "Ordinary and exploratory fixed-gain TTA remain separate.",
+                  "All copied payload SHA-256 hashes and sizes were verified.",
+                  "This inventory excludes itself; its copied hash is checked separately.",
+                  "Dataset and Python environments are not included."
+              ],
+    "files":  [
+                  {
+                      "path":  "docs/transfers/shd-speaker-augmented-export-2026-11-08.md",
+                      "bytes":  3757,
+                      "sha256":  "8f2918615fc1348bbac45a61598809ed9110238044eae4abc4681bf45960fbd1"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_tta_v1/DTH_SE_adLIF/SHD/seed_123/test/MANIFEST.json",
+                      "bytes":  7878,
+                      "sha256":  "1a9f2bafc3580699d6b9c26e9a21a72d2f0514d02f5085de42832a4d0ed7ed3e"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_tta_v1/DTH_SE_adLIF/SHD/seed_123/test/RESULT.json",
+                      "bytes":  972,
+                      "sha256":  "6100ffa14fa67a6ce1de3b589944a3cfe8d7ec04b330becdc2c6bf330b2ced6e"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_tta_v1/DTH_SE_adLIF/SHD/seed_42/test/MANIFEST.json",
+                      "bytes":  7874,
+                      "sha256":  "a8c05ed54b3ac9c91fb1946f26a1c4dd4a34a575dceaf8b830b20595f718a4cc"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_tta_v1/DTH_SE_adLIF/SHD/seed_42/test/RESULT.json",
+                      "bytes":  952,
+                      "sha256":  "67b96628ab38bbd91671481fbf4a0934e349b3bb43f7753d222402939a7a4c17"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_tta_v1/DTH_SE_adLIF/SHD/seed_456/test/MANIFEST.json",
+                      "bytes":  7878,
+                      "sha256":  "772d3520dd4195992ac287d6efc4a30a7b788febf332c20e97198b182c1e247c"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_tta_v1/DTH_SE_adLIF/SHD/seed_456/test/RESULT.json",
+                      "bytes":  971,
+                      "sha256":  "233d134fa49b157370ebde8abe890067f8de34b70413f4175cd4c622b7c3ce32"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_tta_v1/EVALUATION.py",
+                      "bytes":  7164,
+                      "sha256":  "188d44b5a12f623d9f6203cb73a30a4e4c5bcdf2f7512883876bd0c6709eccc8"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_tta_v1/LG_DTH_SE_adLIF/SHD/seed_123/test/MANIFEST.json",
+                      "bytes":  8128,
+                      "sha256":  "6e5ec88e4dc9ad80da4311e726f97040abb7d0e1e77a55bce1cb2399b85bd110"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_tta_v1/LG_DTH_SE_adLIF/SHD/seed_123/test/RESULT.json",
+                      "bytes":  976,
+                      "sha256":  "ef2e24499832da2334ebf29e5303a1063a19ae7263d254020ca79b935f207bc2"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_tta_v1/LG_DTH_SE_adLIF/SHD/seed_42/test/MANIFEST.json",
+                      "bytes":  8126,
+                      "sha256":  "d16da9896c33968abd206ce7af5e26f81e57a124ec0a27c417f4efd23069fef0"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_tta_v1/LG_DTH_SE_adLIF/SHD/seed_42/test/RESULT.json",
+                      "bytes":  975,
+                      "sha256":  "dd97f5dc84e51550b5857b1eb1d8b55e85b38b373b769ffbf200f639d52a2819"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_tta_v1/LG_DTH_SE_adLIF/SHD/seed_456/test/MANIFEST.json",
+                      "bytes":  8130,
+                      "sha256":  "4f1ed078ffdcf065e059a7560ebc1ae2aa980e105aaad92c587d4098c781a688"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_tta_v1/LG_DTH_SE_adLIF/SHD/seed_456/test/RESULT.json",
+                      "bytes":  974,
+                      "sha256":  "e32332375b43378be90246c8af5f74f05ccc467ef452f1f829a61350e1d1fe97"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_tta_v1/RESULTS.md",
+                      "bytes":  1048,
+                      "sha256":  "7081c11f9d72e39f5121165ece7d01278818b83ea65f85ca1cf6491e4dea482c"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/RESULTS.md",
+                      "bytes":  2291,
+                      "sha256":  "78c25273c2d972d9b9176afc007c04f13eff59c794fa55919c972dcb15cc8a1b"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_123/.hydra/config.yaml",
+                      "bytes":  4564,
+                      "sha256":  "236c0ccf5b6b18916f853a07c2efa15e0ac6f1a701e5c9775173f8d98431281f"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_123/.hydra/hydra.yaml",
+                      "bytes":  5581,
+                      "sha256":  "c134c79756da7a7b1d1ef44cd8651f411450806d1a10a1f7faded14f18fde5a9"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_123/.hydra/overrides.yaml",
+                      "bytes":  1109,
+                      "sha256":  "5f1bee2b277ca0bfb4e834f3aa2417c5f8e6abc2653a077919713dc511bbfba8"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_123/ckpt/epoch=261-step=6550.ckpt",
+                      "bytes":  5478946,
+                      "sha256":  "b0d324c9b7198d3fb0aa6361dda1f404b27647927e099cdad92bf997ef982f70"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_123/ckpt/last.ckpt",
+                      "bytes":  5478946,
+                      "sha256":  "7efcb91dfde7d654b1c2dff42c4fa6796eaca5cbc308c62569ecbba4b5591871"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_123/completed.txt",
+                      "bytes":  47,
+                      "sha256":  "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_123/COST_RESULTS.json",
+                      "bytes":  16010,
+                      "sha256":  "aaf8dc833cfeae0193744da359e33761f7d38b94098da43753e92c370c44e2e6"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_123/COST_RESULTS.md",
+                      "bytes":  929,
+                      "sha256":  "eaf97f6ae7603c6ab350b09c4defe6433e1936b024d0e284b655708b102e8034"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_123/FULL_RUN_CONFIG.json",
+                      "bytes":  5899,
+                      "sha256":  "1f6a7253bab3a995b8202dc6ed40f3221742ba01504ca08f269cf3a47e7763ef"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+                      "bytes":  4978,
+                      "sha256":  "304d1b681e835a5d5f31f25d4b7f30603b39e61b59f6f453323931992ed1bcdf"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_123/logs/mlp_snn/version_0/metrics.csv",
+                      "bytes":  46662,
+                      "sha256":  "e85308bd9775d4ecf039c36a8f4cc0d49149ab6c3473cced167a42148b883cb3"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_123/out.log",
+                      "bytes":  118,
+                      "sha256":  "bea4e5ef757678616227d4f13e65d4c8701385a52887b474aa7c09f273905437"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_123/SPLIT_MANIFEST.json",
+                      "bytes":  123231,
+                      "sha256":  "a5c09f6bed5c8e0bbf4a1803074d4f52157fb8c7be24d81f11d309d1d1b7a97f"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_123/TRAINING_SUMMARY.md",
+                      "bytes":  3895,
+                      "sha256":  "f91dc3e3c4be880c25fb45895868d30e9c56c30c4499c86ad37ee030090d6289"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42/.hydra/config.yaml",
+                      "bytes":  4562,
+                      "sha256":  "50a4ca9d2853acddecb3e62dc5a738db4610e1b58728a04cef28258166b7efa1"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42/.hydra/hydra.yaml",
+                      "bytes":  5574,
+                      "sha256":  "3254c4ab3b56b46879cf33a2ce075934db83eed652a15f81ea59a1ceee950685"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42/.hydra/overrides.yaml",
+                      "bytes":  1107,
+                      "sha256":  "4eb2a4984819e7aebccb73d0bbfcc1df90cb190571c023a88d52cd00bc4487d3"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42/ckpt/epoch=290-step=7275.ckpt",
+                      "bytes":  5478946,
+                      "sha256":  "c98fd33d4ef9fa322ab23d6b1f850fb1ffbef7f89044853cdf7ff6d12642e514"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42/ckpt/last.ckpt",
+                      "bytes":  5478946,
+                      "sha256":  "7978ffcb82ad1a8686f3ac969118de62a3ca966acd20100e39f1815995f4a303"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42/completed.txt",
+                      "bytes":  47,
+                      "sha256":  "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42/COST_RESULTS.json",
+                      "bytes":  16006,
+                      "sha256":  "8b460c1db4e77bbd7e21df5745cef9b501d99e3f391f66680d17c0359e4e0bcb"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42/COST_RESULTS.md",
+                      "bytes":  929,
+                      "sha256":  "d50688bc5e14ac44c24fe331718343ee6f3ba1a2737bc3947e67dc3009f10373"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42/FULL_RUN_CONFIG.json",
+                      "bytes":  5897,
+                      "sha256":  "64f1abaf53a4ef96fd186992a7e11ab5a0f129af7967dc47572d06f225d0ed7e"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+                      "bytes":  4976,
+                      "sha256":  "3224669928528c4dc881e93360e58a9735862cd76bbb1388a267a2b8185f9324"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv",
+                      "bytes":  46715,
+                      "sha256":  "9240f91721a0a4326c8604bb74efada54a5bc69bb7d14e1d423bcdd74a838ac8"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42/out.log",
+                      "bytes":  118,
+                      "sha256":  "62bbbe1b56679d1025e0cb02aec77efcd83b1679fc5c12c676b8cbc02943ca3c"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42/SPLIT_MANIFEST.json",
+                      "bytes":  123231,
+                      "sha256":  "a5c09f6bed5c8e0bbf4a1803074d4f52157fb8c7be24d81f11d309d1d1b7a97f"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42/TRAINING_SUMMARY.md",
+                      "bytes":  3892,
+                      "sha256":  "7f09606a08f8750abb8da2c3ab7f825d8013b3691ca70dc1b610049013864967"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_456/.hydra/config.yaml",
+                      "bytes":  4564,
+                      "sha256":  "9633ab3cb72d78e9af6e9d225ddb2a70fef7d0b7f38c6426ec02b3571d8e69aa"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_456/.hydra/hydra.yaml",
+                      "bytes":  5581,
+                      "sha256":  "5642e54ceddc48becc2a946d93255e23b10e78503773a58b2a2a1e28c53b769e"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_456/.hydra/overrides.yaml",
+                      "bytes":  1109,
+                      "sha256":  "fc94b9a3ba9608c915d88f382560c1a4a02e82fcf25727b73329e5ff3e2bc9ca"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_456/ckpt/epoch=140-step=3525.ckpt",
+                      "bytes":  5478946,
+                      "sha256":  "25db19684ad350ae4a47d9030223734001fde3c5c1a16b7513f85da62c9f4547"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_456/ckpt/last.ckpt",
+                      "bytes":  5478946,
+                      "sha256":  "ef1e72b839a645c696dcc23d973757b9496a69da96a4910423becead3f670691"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_456/completed.txt",
+                      "bytes":  47,
+                      "sha256":  "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_456/COST_RESULTS.json",
+                      "bytes":  16012,
+                      "sha256":  "87d97053cb3d5ff01fb4b8dabd0191e6fb0d1faedf4dcebdb7969313f0403c1c"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_456/COST_RESULTS.md",
+                      "bytes":  929,
+                      "sha256":  "5a1e45c54f95670f5323647c6042e647b20f7d0f2e48fbf04b13a6d5cca1ff8f"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_456/FULL_RUN_CONFIG.json",
+                      "bytes":  5899,
+                      "sha256":  "953aecdad1a5a2943b0ae78f9feb0ecba46093a7b12231bbb8a8ea82ef97ed09"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+                      "bytes":  4978,
+                      "sha256":  "bb54228a4b53f970da2dea6c094c044aa28218736705892cdd8dfcca26359f27"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_456/logs/mlp_snn/version_0/metrics.csv",
+                      "bytes":  46699,
+                      "sha256":  "1f784dbc3302e5d4444221aa5937972bf58fdec024ddc863bcd71f9d30223a84"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_456/out.log",
+                      "bytes":  119,
+                      "sha256":  "d9463434c79572a9288a9c3b7163b387b7d51d689e8f57418345f5d882a7cad1"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_456/SPLIT_MANIFEST.json",
+                      "bytes":  123231,
+                      "sha256":  "a5c09f6bed5c8e0bbf4a1803074d4f52157fb8c7be24d81f11d309d1d1b7a97f"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_456/TRAINING_SUMMARY.md",
+                      "bytes":  3895,
+                      "sha256":  "fb6560ef02250d0a06d2df5811129c0ae3ba5ffd775357da79e484916c9a2527"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/RESULTS.md",
+                      "bytes":  2294,
+                      "sha256":  "e7ae734b47a5cea569d6f0d7093f461ca3728ce9ba44b4cbbd9cdfd414077096"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_123/.hydra/config.yaml",
+                      "bytes":  4768,
+                      "sha256":  "7f855228647e16c0ebce24f43025dfaccd5da7b03d82a7e039648743a052cf82"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_123/.hydra/hydra.yaml",
+                      "bytes":  5623,
+                      "sha256":  "77498bbd9a8bcfedb1f9b61ae012fc8863b40ed571353519e943a161c3b3951a"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_123/.hydra/overrides.yaml",
+                      "bytes":  1124,
+                      "sha256":  "7f2b797dbb1dfada97e449e5f065737ffdb3c2e7a818398b011f26e6dccf98a1"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_123/ckpt/epoch=94-step=2375.ckpt",
+                      "bytes":  5501442,
+                      "sha256":  "9a7ec4d6250be102e31c969db9d87c6ffb3243807fdf302e6fe6c70fba101667"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_123/ckpt/last.ckpt",
+                      "bytes":  5501442,
+                      "sha256":  "432bdee865855a15b0f23ba56fcb37e1880dd1c22b9903f8ebe52969b9a634b2"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_123/completed.txt",
+                      "bytes":  47,
+                      "sha256":  "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_123/COST_RESULTS.json",
+                      "bytes":  16496,
+                      "sha256":  "330283f92456585be1b168939c3fb0513a7d7c9413cec014e889cda403e50b64"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_123/COST_RESULTS.md",
+                      "bytes":  929,
+                      "sha256":  "aae5dd1d5d4f389fbc9ab3f613ee6e1eda7ff79b8c2c40a3f8642d008beb6337"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_123/FULL_RUN_CONFIG.json",
+                      "bytes":  6133,
+                      "sha256":  "70ac6f4bf4a5537486a8f02af75721a09400f218de1207aab49fa1bbfe301d92"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_123/logs/mlp_snn/version_0/hparams.yaml",
+                      "bytes":  5194,
+                      "sha256":  "e5b2dcd299da3f1f312d50ccc856433f2675a5ff012222ce1a7d70553fd8aecd"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_123/logs/mlp_snn/version_0/metrics.csv",
+                      "bytes":  46686,
+                      "sha256":  "90f6f2fddb36bdea9a15f967e7f7a2db62710e43ce9962cf0d65c3b7fa7eada9"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_123/out.log",
+                      "bytes":  122,
+                      "sha256":  "edbff856216f296091b2bdd03cda13e6c25ee1c8f405b96edac68ad9fc53472c"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_123/SPLIT_MANIFEST.json",
+                      "bytes":  123231,
+                      "sha256":  "a5c09f6bed5c8e0bbf4a1803074d4f52157fb8c7be24d81f11d309d1d1b7a97f"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_123/TRAINING_SUMMARY.md",
+                      "bytes":  3896,
+                      "sha256":  "884dc045d2e40d44c3bdee12ba0b32a2ca54a3acc5a118fc799c392856ff74f7"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/.hydra/config.yaml",
+                      "bytes":  4766,
+                      "sha256":  "4e7c8752f68ca9cd66c9c9ceb6b0d023ecc6b066c65e18301e2765819c80c600"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/.hydra/hydra.yaml",
+                      "bytes":  5616,
+                      "sha256":  "41f09a6b53e3577e4f4a91f3fd778a8e4cfbc5ac2b067f9352ce82e8edc51c29"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/.hydra/overrides.yaml",
+                      "bytes":  1122,
+                      "sha256":  "7be47b53b3c73af8970bb9c9d756188fbaa687eb440723618b5f171ea91a9fb2"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/ckpt/epoch=143-step=3600.ckpt",
+                      "bytes":  5501442,
+                      "sha256":  "b049aa4c7cf44a508eebf25c8918959d0bf16a5732322076c61f1a69443add38"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/ckpt/last.ckpt",
+                      "bytes":  5501442,
+                      "sha256":  "005ddb509e1ac3c3459ccc46442e51b5c3f4e77f09b08d0a90238af93e2fb2da"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/completed.txt",
+                      "bytes":  47,
+                      "sha256":  "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/COST_RESULTS.json",
+                      "bytes":  16499,
+                      "sha256":  "c24b759d10018676b9f991f165c577220f9c294f1447d11e90dd75d19ec1f2e1"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/COST_RESULTS.md",
+                      "bytes":  929,
+                      "sha256":  "aa41837d741aff3c2d838d8c9c1592760cf38f36307a7824bff1f210a333da3f"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/FULL_RUN_CONFIG.json",
+                      "bytes":  6131,
+                      "sha256":  "45df70d637342fcf3d3688044fc7fbdbd2c34bf2cefa39c73e997b31477fd815"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/hparams.yaml",
+                      "bytes":  5192,
+                      "sha256":  "ddbd6c8ae7f809306d9f61f06fa2c22f11ede18aae242ea1ecccd4aa7a2671f1"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv",
+                      "bytes":  46711,
+                      "sha256":  "e5dc6f0e9d9935e60bbf1888470c3d073d6752c5f69be3694a20b02fa473fd79"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/out.log",
+                      "bytes":  121,
+                      "sha256":  "702b73b1c860b4220403af7b885edd34150070ffdcd5211ed963158522596b19"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/SPLIT_MANIFEST.json",
+                      "bytes":  123231,
+                      "sha256":  "a5c09f6bed5c8e0bbf4a1803074d4f52157fb8c7be24d81f11d309d1d1b7a97f"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/TRAINING_SUMMARY.md",
+                      "bytes":  3901,
+                      "sha256":  "c5a0d96824b1845ad8279eaefc1e6445d3592ed3219600b150ff7b5bbc668dfc"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456/.hydra/config.yaml",
+                      "bytes":  4768,
+                      "sha256":  "61953da57d1f132146d6a2f9d9a928f55f45d3f033ab9dfe9cf07f8cb5824abb"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456/.hydra/hydra.yaml",
+                      "bytes":  5623,
+                      "sha256":  "42e0ee552156d96e278d8024520cfd685bd87f6cb72a565c5e8b87f6a9dd6dce"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456/.hydra/overrides.yaml",
+                      "bytes":  1124,
+                      "sha256":  "afc1b8127950d041d0dba90d0bf3147e3b27243cd1fed86b390057ef3bbb5683"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456/ckpt/epoch=249-step=6250.ckpt",
+                      "bytes":  5501442,
+                      "sha256":  "9398ff667d2a5646dc81d18966bfc1eb59e73c8b82ab715c25c30511b22da978"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456/ckpt/last.ckpt",
+                      "bytes":  5501442,
+                      "sha256":  "321e0e742191c817d68c21b1513ef5deae9808daf09c728cf3eb21fa6765769d"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456/completed.txt",
+                      "bytes":  47,
+                      "sha256":  "cf1703562174d900787a8f0ff56efdce4b6cd1d702cc6543e632df37f289ca25"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456/COST_RESULTS.json",
+                      "bytes":  16496,
+                      "sha256":  "c59183a19ba9bf779665c1f8e9c0852ffc7babd7732883ba0902d34bef1f4f85"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456/COST_RESULTS.md",
+                      "bytes":  929,
+                      "sha256":  "a3078031cccc57abd7de9d13df9b1758bbaacf35e750a9684d1e19894afcf011"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456/FULL_RUN_CONFIG.json",
+                      "bytes":  6133,
+                      "sha256":  "fc56ae83ae4093d4b4d1aa88419bf479296ce79d3f622e0a5cc635466d93f9e4"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456/logs/mlp_snn/version_0/hparams.yaml",
+                      "bytes":  5194,
+                      "sha256":  "a4d42bfad9aaacfbd3d3e5b1d40c4429247bb73ca5813600fd47ab24bb3ac448"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456/logs/mlp_snn/version_0/metrics.csv",
+                      "bytes":  46745,
+                      "sha256":  "6f1a1da75af8958fab7fd18870d9e87cecce21f2e05f1ad70cd70b3b643f9314"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456/out.log",
+                      "bytes":  121,
+                      "sha256":  "35ff974f40bb5565dce6e8bf135b7cd2a0a6ea334bee0aaabfd6283c6b55b306"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456/SPLIT_MANIFEST.json",
+                      "bytes":  123231,
+                      "sha256":  "a5c09f6bed5c8e0bbf4a1803074d4f52157fb8c7be24d81f11d309d1d1b7a97f"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456/TRAINING_SUMMARY.md",
+                      "bytes":  3904,
+                      "sha256":  "ebeeb66330f2852beff69e80fcc907890f9f386e5f8d3647bb4597060f3afc97"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/PREFLIGHT.md",
+                      "bytes":  2665,
+                      "sha256":  "7c7e8d8aa9ed4c3a3853e8bae3c396e3f8f8bb238fec04627b435c31c724ca09"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/README.md",
+                      "bytes":  3890,
+                      "sha256":  "f686bdb338e82b6fe8dbc2abf912ac2989792a269e9566c2faf6ff0d9406f40e"
+                  },
+                  {
+                      "path":  "results/experiments/shd_speaker_augmented_v1/SPLIT_MANIFEST.json",
+                      "bytes":  123231,
+                      "sha256":  "a5c09f6bed5c8e0bbf4a1803074d4f52157fb8c7be24d81f11d309d1d1b7a97f"
+                  }
+              ]
+}

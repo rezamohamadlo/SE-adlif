@@ -1,0 +1,28 @@
+{
+  "model": "LG_DTH_SE_adLIF",
+  "dataset": "SHD",
+  "seed": 42,
+  "split": "test",
+  "evaluation_protocol": "shd_speaker_augmented_tta_v1",
+  "selected_epoch": 143,
+  "checkpoint": "results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_42/ckpt/epoch=143-step=3600.ckpt",
+  "checkpoint_sha256": "b049aa4c7cf44a508eebf25c8918959d0bf16a5732322076c61f1a69443add38",
+  "gains": [
+    1.0,
+    0.95,
+    1.05
+  ],
+  "fingerprint": "fcfb9204f994be9ad8db83c96c04c39342123753d52296e75ca58575f1de7e16",
+  "metrics": {
+    "evaluated_targets": 2264,
+    "baseline_accuracy": 0.9368374558303887,
+    "tta_accuracy": 0.9399293286219081,
+    "difference_pp": 0.30918727915194344,
+    "baseline_loss": 0.36899570357251926,
+    "tta_nll": 0.3226723418218929,
+    "data_sha256": "73174c8dca92fba8e4d8b310520734ca91d03e0838d93a64c87c8692f6d9c1ba",
+    "device": "cuda:0",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "matmul_precision": "high"
+  }
+}
