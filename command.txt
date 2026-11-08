@@ -1,11 +1,11 @@
 ﻿# SHD speaker regularization: run exactly one block per PC.
 # PC1 keeps checkout f190954 until its resumed seed-42 job finishes.
 # PC2 and PC3 use the current main checkout for their new assigned jobs.
-# The virtual environment is .ven.
+# PC1 uses .venv; PC2 and PC3 use .ven.
 # Run each block from the repository root. Rerun the same block after interruption.
 
 # PC1
-.\.ven\Scripts\python.exe .\run_shd_regularization_subset.ps1 -Job `
+.\.venv\Scripts\python.exe .\run_shd_regularization_subset.ps1 -Job `
 'dropout030_v1:DTH_SE_adLIF:42','dropout030_v1:LG_DTH_SE_adLIF:42',`
 'dropout035_v1:DTH_SE_adLIF:42','dropout035_v1:LG_DTH_SE_adLIF:42',`
 'spike_delete010_v1:DTH_SE_adLIF:42','spike_delete010_v1:LG_DTH_SE_adLIF:42'

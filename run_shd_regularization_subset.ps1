@@ -5,9 +5,12 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$python = Join-Path (Get-Location) '.ven\Scripts\python.exe'
-if (-not (Test-Path -LiteralPath $python -PathType Leaf)) {
-    throw "Missing project Python: $python"
+$python = @('.venv\Scripts\python.exe', '.ven\Scripts\python.exe') |
+    ForEach-Object { Join-Path (Get-Location) $_ } |
+    Where-Object { Test-Path -LiteralPath $_ -PathType Leaf } |
+    Select-Object -First 1
+if (-not $python) {
+    throw "Missing project Python (.venv or .ven)"
 }
 
 $temporary = Join-Path $env:TEMP ("shd_regularization_subset_{0}.py" -f $PID)
