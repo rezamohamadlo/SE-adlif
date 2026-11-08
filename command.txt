@@ -1,31 +1,23 @@
-# SSC dropout tuning: run ONLY the block assigned to your computer.
-# Start from the MAIN repository root, not archive/pc3_resume_d42804a.
-# Update both computers to the same pushed commit BEFORE launching; do not pull
-# or edit source while training. Each needs its own .venv and SSC train/valid data.
-# Git transfers the frozen selection and small records, not datasets/checkpoints
-# or ignored metrics.csv files. Retain those locally for the later evidence merge.
-# PC1/PC2 below are physical computer labels; preserve the existing pc3/pc4 study
-# roles and result paths so prior LR evidence and training seeds remain matched.
-# Fresh training: 40 epochs, batch 256, validation only, no test/TTA.
-# Both PCs: SA-MT LR 0.009 and AMT LR 0.003, each dropout 0.10 and 0.20.
-# Execute lines individually. If dry-run fails, do not run the training line.
+﻿# SHD speaker regularization: run exactly one block per PC.
+# PC1 keeps checkout f190954 until its resumed seed-42 job finishes.
+# PC2 and PC3 use the current main checkout for their new assigned jobs.
+# The virtual environment is .ven.
+# Run each block from the repository root. Rerun the same block after interruption.
 
-# PC1 -- study role pc3, seed 42, four sequential jobs (~40-48 hours).
-.\.venv\Scripts\python.exe runner.py --ssc-study-stage dropout --study-pc pc3 --dry-run
-.\.venv\Scripts\python.exe runner.py --ssc-study-stage dropout --study-pc pc3
+# PC1
+.\.ven\Scripts\python.exe .\run_shd_regularization_subset.ps1 -Job `
+'dropout030_v1:DTH_SE_adLIF:42','dropout030_v1:LG_DTH_SE_adLIF:42',`
+'dropout035_v1:DTH_SE_adLIF:42','dropout035_v1:LG_DTH_SE_adLIF:42',`
+'spike_delete010_v1:DTH_SE_adLIF:42','spike_delete010_v1:LG_DTH_SE_adLIF:42'
 
-# PC2 -- study role pc4, seed 123, four sequential jobs; may run alongside PC1.
-.\.venv\Scripts\python.exe runner.py --ssc-study-stage dropout --study-pc pc4 --dry-run
-.\.venv\Scripts\python.exe runner.py --ssc-study-stage dropout --study-pc pc4
+# PC2
+.\.ven\Scripts\python.exe .\run_shd_regularization_subset.ps1 -Job `
+'dropout030_v1:DTH_SE_adLIF:123','dropout030_v1:LG_DTH_SE_adLIF:123',`
+'dropout030_v1:DTH_SE_adLIF:456','dropout030_v1:LG_DTH_SE_adLIF:456',`
+'dropout035_v1:DTH_SE_adLIF:123','dropout035_v1:LG_DTH_SE_adLIF:123'
 
-# Never run both blocks on one computer or duplicate a launcher for the same role.
-# Rerun your SAME training command after interruption: restores its last.ckpt
-# and skips completed jobs. Do not change checkout/source before resuming.
-# STOP after these four runs. Merge both PCs' dropout evidence before selection.
-# Coordinator only, after both finish (no training):
-# .\.venv\Scripts\python.exe runner.py --ssc-study-stage select-dropout --dry-run
-# .\.venv\Scripts\python.exe runner.py --ssc-study-stage select-dropout
-# Guide: docs/experiments/ssc-validation-search-plan-v1.md
-
-.\.ven\Scripts\python.exe runner.py --shd-speaker-phase all --shd-speaker-profile augmented_v1
-.\.ven\Scripts\python.exe runner.py --shd-speaker-phase all --shd-speaker-profile regularization_v1
+# PC3
+.\.ven\Scripts\python.exe .\run_shd_regularization_subset.ps1 -Job `
+'dropout035_v1:DTH_SE_adLIF:456','dropout035_v1:LG_DTH_SE_adLIF:456',`
+'spike_delete010_v1:DTH_SE_adLIF:123','spike_delete010_v1:LG_DTH_SE_adLIF:123',`
+'spike_delete010_v1:DTH_SE_adLIF:456','spike_delete010_v1:LG_DTH_SE_adLIF:456'
