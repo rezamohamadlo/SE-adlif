@@ -7,7 +7,7 @@ import math
 import statistics
 
 import shd_speaker_holdout as speaker
-from project_paths import local_path, portable_path
+from project_paths import local_path, portable_config, portable_path
 
 VERSION = 'shd_speaker_regularization_v1'
 OUTPUT_ROOT = f'results/experiments/{VERSION}'
@@ -56,9 +56,11 @@ def profile_plans(runner, manifest, jobs):
 
 
 def baseline_plans(runner, manifest):
+    """Resolve baseline identity without requiring local baseline checkpoints."""
     with speaker.selected_profile('augmented_v1'), speaker.configured_runner(runner, manifest):
         return [(model, item) for model in speaker.MODELS
-                for item in runner.build_plan(model, seeds=SEEDS, datasets=('SHD',))]
+                for item in runner.build_plan(model, seeds=SEEDS, datasets=('SHD',),
+                                              inspect_existing=False)]
 
 
 def frozen_json(path, value):
@@ -70,20 +72,42 @@ def frozen_json(path, value):
         atomic_json(path, value)
 
 
-def baseline_validation(directory):
+def baseline_validation(directory, config, manifest):
+    """Missing/incomplete transfers stay pending; completed evidence must match."""
+    if not (directory / 'completed.txt').exists():
+        return None
+    saved_config = portable_config(json.loads((directory / 'FULL_RUN_CONFIG.json').read_text(encoding='utf-8')))
+    expected = portable_config(copy.deepcopy(config))
+    saved_config.pop('ckpt_path', None)
+    expected.pop('ckpt_path', None)
+    if saved_config != expected:
+        raise ValueError(f'Baseline configuration differs from the matched augmented baseline: {directory}')
+    saved_split = json.loads((directory / 'SPLIT_MANIFEST.json').read_text(encoding='utf-8'))
+    if saved_split != manifest:
+        raise ValueError(f'Baseline speaker split differs from this experiment: {directory}')
     with (directory / 'logs/mlp_snn/version_0/metrics.csv').open(newline='', encoding='utf-8') as stream:
-        values = [float(row['val_acc']) for row in csv.DictReader(stream) if row.get('val_acc')]
-    if not values or any(not math.isfinite(value) or not 0 <= value <= 1 for value in values):
+        rows = [(float(row['epoch']), float(row['val_acc'])) for row in csv.DictReader(stream)
+                if row.get('val_acc')]
+    if ([epoch for epoch, _ in rows] != list(range(config['n_epochs']))
+            or any(not math.isfinite(value) or not 0 <= value <= 1 for _, value in rows)):
         raise ValueError(f'Invalid baseline validation history: {directory}')
-    return max(values)
+    return max(value for _, value in rows)
+
+
+def baseline_scores(runner, manifest):
+    return {(model, item['seed']): baseline_validation(item['directory'], item['config'], manifest)
+            for model, item in baseline_plans(runner, manifest)}
 
 
 def write_summary(manifest):
     """Rank only validation means; never read or rank by test scores."""
     from extended_seed_study import atomic_json, read_completed
+    import runner
+    baseline = baseline_scores(runner, manifest)
     root = local_path(OUTPUT_ROOT)
     lines = ['# SHD speaker holdout: regularization tuning', '',
              'Validation accuracy (%) only. Official test evaluation is deferred.',
+             'Missing or unfinished baseline runs remain pending; they do not block new training.',
              f'Split seed 42; validation speakers {manifest["validation_speaker_ids"]}; '
              f'fingerprint `{manifest["fingerprint"]}`.',
              'Fresh training: 300 epochs, batch 256, baseline LR/schedule; full resume only for interrupted runs.', '',
@@ -100,12 +124,13 @@ def write_summary(manifest):
                 for seed in SEEDS:
                     directory = local_path(f'{speaker.OUTPUT_ROOT}/{model}/SHD/seed_{seed}')
                     if profile == 'augmented_v1':
-                        value = baseline_validation(directory)
+                        value = baseline[(model, seed)]
                     elif (directory / 'validation_completed.txt').exists():
                         record, _ = read_completed(directory)
                         value = record['best_validation_accuracy']
                     else:
                         value = None
+                    if value is None:
                         all_done = False
                     cells.append('pending' if value is None else f'{100 * value:.4f}')
                     if value is not None:
@@ -142,21 +167,19 @@ def run_queue(args, parser, runner):
         with speaker.selected_profile('augmented_v1'):
             manifest = speaker.preflight_data()
         jobs = ordered_jobs(args.shd_speaker_phase)
-        baselines = baseline_plans(runner, manifest)
+        baselines = baseline_scores(runner, manifest)
         plans = profile_plans(runner, manifest, jobs)
         print(f'{VERSION}: validation speakers {manifest["validation_speaker_ids"]}; '
               f'split {manifest["fingerprint"]}', flush=True)
         for index, (profile, model, item) in enumerate(plans, 1):
             print(f'{index:02d}. {profile} / {model} / seed {item["seed"]}: '
                   f'{item["status"]} -> {portable_path(item["directory"])}', flush=True)
-        pending = [f'{model} seed {item["seed"]}' for model, item in baselines if item['status'] != 'complete']
+        pending = [f'{model} seed {seed}' for (model, seed), value in baselines.items() if value is None]
+        if pending:
+            print('Baseline comparison pending (new training can proceed): ' + ', '.join(pending), flush=True)
         if args.dry_run:
             print(f'Validated {len(plans)} sequential jobs; no training, downloads or writes.')
-            if pending:
-                print('Wait for the existing baseline queue before launching: ' + ', '.join(pending))
             return
-        if pending:
-            raise ValueError('Finish the existing augmented_v1 queue first: ' + ', '.join(pending))
         with ExitStack() as locks:
             # Exclude the current baseline launcher and competing regularization phases.
             locks.enter_context(study_lock(local_path(f'results/experiments/{speaker.AUGMENTED_PROTOCOL}')))

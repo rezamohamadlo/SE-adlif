@@ -101,25 +101,25 @@ class RegularizationTests(unittest.TestCase):
             self.plan()
 
     def test_actual_dry_run_dispatch_is_read_only_and_ordered(self):
-        baseline = [(model, dict(status='complete', seed=seed))
-                    for model in speaker.MODELS for seed in queue.SEEDS]
+        self.plan()  # Load the model registry before spying on launches; imports may probe CPU features.
+        baseline = {(model, seed): None for model in speaker.MODELS for seed in queue.SEEDS}
         with patch.object(speaker, 'preflight_data', return_value=self.manifest), \
-                patch.object(queue, 'baseline_plans', return_value=baseline), \
+                patch.object(queue, 'baseline_scores', return_value=baseline), \
                 patch.object(runner.subprocess, 'run') as launch, redirect_stdout(io.StringIO()) as output:
             runner.main(['--shd-speaker-phase', 'all', '--shd-speaker-profile',
                          'regularization_v1', '--dry-run'])
         launch.assert_not_called()
         self.assertFalse(any(self.root.iterdir()))
         text = output.getvalue()
+        self.assertIn('new training can proceed', text)
         positions = [text.index(f'{p} / {m} / seed {seed}:') for p, m, seed in queue.ordered_jobs('all')]
         self.assertEqual(positions, sorted(positions))
 
     def test_queue_stops_on_failure_and_phase_two_requires_seed42(self):
-        baseline = [(model, dict(status='complete', seed=seed))
-                    for model in speaker.MODELS for seed in queue.SEEDS]
+        baseline = {(model, seed): None for model in speaker.MODELS for seed in queue.SEEDS}
         args = SimpleNamespace(shd_speaker_phase='1', measure_existing_costs=False, dry_run=False)
         with patch.object(speaker, 'preflight_data', return_value=self.manifest), \
-                patch.object(queue, 'baseline_plans', return_value=baseline), \
+                patch.object(queue, 'baseline_scores', return_value=baseline), \
                 patch.object(evidence, 'study_lock', side_effect=lambda _: nullcontext()), \
                 patch.object(queue, 'write_summary'), \
                 patch.object(runner, 'run', side_effect=[None, RuntimeError('synthetic failure')]) as launch, \
@@ -129,7 +129,7 @@ class RegularizationTests(unittest.TestCase):
         self.assertEqual(launch.call_count, 2)
         args.shd_speaker_phase = '2'
         with patch.object(speaker, 'preflight_data', return_value=self.manifest), \
-                patch.object(queue, 'baseline_plans', return_value=baseline), \
+                patch.object(queue, 'baseline_scores', return_value=baseline), \
                 patch.object(evidence, 'study_lock', side_effect=lambda _: nullcontext()), \
                 patch.object(runner, 'run') as launch, redirect_stdout(io.StringIO()), \
                 redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
@@ -142,7 +142,8 @@ class RegularizationTests(unittest.TestCase):
         scores = dict(zip(queue.PROFILES, (.89, .91, .88)))
         def record(directory):
             return dict(best_validation_accuracy=scores[directory.parents[2].name]), {}
-        with patch.object(queue, 'baseline_validation', return_value=.90), \
+        baseline = {(model, seed): None for model in speaker.MODELS for seed in queue.SEEDS}
+        with patch.object(queue, 'baseline_scores', return_value=baseline), \
                 patch.object(evidence, 'read_completed', side_effect=record):
             queue.write_summary(self.manifest)
             self.assertFalse((root / 'VALIDATION_SELECTION.json').exists())
@@ -151,10 +152,43 @@ class RegularizationTests(unittest.TestCase):
                 directory.mkdir(parents=True)
                 (directory / 'validation_completed.txt').touch()
             queue.write_summary(self.manifest)
+            self.assertFalse((root / 'VALIDATION_SELECTION.json').exists())
+            for key in baseline:
+                baseline[key] = .90
+            queue.write_summary(self.manifest)
         saved = json.loads((root / 'VALIDATION_SELECTION.json').read_text())
         for model in speaker.MODELS:
             self.assertEqual(saved['selections'][model]['profiles'], [queue.PROFILES[1]])
         self.assertIn('augmented_v1', (root / 'VALIDATION_COMPARISON.md').read_text())
+
+    def test_transferred_baseline_needs_matching_completed_metrics_but_no_weights(self):
+        directory = self.root / 'baseline'
+        cfg = dict(n_epochs=300, dropout=.25, logdir=portable_path(directory))
+        self.assertIsNone(queue.baseline_validation(directory, cfg, self.manifest))
+        directory.mkdir()
+        (directory / 'completed.txt').touch()
+        config_path = directory / 'FULL_RUN_CONFIG.json'
+        config_path.write_text(json.dumps(cfg))
+        split.save_manifest(directory / 'SPLIT_MANIFEST.json', self.manifest)
+        metrics = directory / 'logs/mlp_snn/version_0/metrics.csv'
+        metrics.parent.mkdir(parents=True)
+        metrics.write_text('epoch,val_acc,test_acc\n' +
+                           ''.join(f'{epoch},0.9,\n' for epoch in range(300)) + '300,,0.99\n')
+        self.assertEqual(queue.baseline_validation(directory, cfg, self.manifest), .9)
+        self.assertFalse((directory / 'ckpt').exists())
+        config_path.write_text(json.dumps(dict(cfg, dropout=.35)))
+        with self.assertRaisesRegex(ValueError, 'Baseline configuration'):
+            queue.baseline_validation(directory, cfg, self.manifest)
+        config_path.write_text(json.dumps(cfg))
+        changed = copy.deepcopy(self.manifest)
+        changed['validation_speaker_ids'] = [8, 9]
+        (directory / 'SPLIT_MANIFEST.json').write_text(json.dumps(changed))
+        with self.assertRaisesRegex(ValueError, 'Baseline speaker split'):
+            queue.baseline_validation(directory, cfg, self.manifest)
+        (directory / 'SPLIT_MANIFEST.json').write_text(json.dumps(self.manifest))
+        metrics.write_text('epoch,val_acc\n0,0.9\n')
+        with self.assertRaisesRegex(ValueError, 'Invalid baseline validation history'):
+            queue.baseline_validation(directory, cfg, self.manifest)
 
     def test_completion_full_resume_split_copy_and_portability_without_training(self):
         item = self.plan()

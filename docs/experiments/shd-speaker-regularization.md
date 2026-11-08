@@ -36,9 +36,12 @@ not a new matched paper comparison.
 ## Launch sequence
 
 Run from the repository root, using the existing `.ven` environment in this
-checkout. All training is launched by the user. The current `augmented_v1`
-queue must finish all six baseline jobs before this queue can start. An active
-baseline launcher retains its lock; the new queue refuses to overlap it.
+checkout (`.venv` may be the environment name in another checkout). All training
+is launched by the user. The new candidates can run on another system while
+the existing `augmented_v1` baseline finishes. Missing baseline results stay
+pending and do not block training. Within one checkout, an active baseline
+launcher retains its lock; the new queue refuses to overlap it or write to its
+result directories.
 
 ```powershell
 .\.ven\Scripts\python.exe runner.py --shd-speaker-phase all --shd-speaker-profile regularization_v1
@@ -88,8 +91,33 @@ existing augmented baseline and only completed-seed best validation accuracies.
 It reports means, sample SDs and counts separately for each model and variant.
 Once all 18 new jobs finish, `VALIDATION_SELECTION.json` selects the maximum
 three-seed mean best validation accuracy per model, including the existing
-baseline as an eligible choice. Exact ties are retained. No winner is published
-from an incomplete set of seeds.
+baseline as an eligible choice, provided all six baseline results are also
+available and verified. Exact ties are retained. No winner is published from
+an incomplete set of seeds or while a baseline result is missing.
+
+## Running the new candidates on another system
+
+Pull the code, use that checkout's Python environment and retain the matching
+local SHD dataset. No baseline model weights initialize the new candidates;
+every new job starts fresh. A successful dry run confirms the local dataset
+identity. Git does not transfer local baseline metrics or checkpoints.
+
+After the baseline queue finishes on the original system, copy its completed
+evidence into the same repository-relative layout on the new system:
+`results/experiments/shd_speaker_augmented_v1/<model>/SHD/seed_<seed>/` for
+both models and all three seeds. For validation comparison, each seed requires
+`FULL_RUN_CONFIG.json`, `SPLIT_MANIFEST.json`, `completed.txt` and
+`logs/mlp_snn/version_0/metrics.csv`. Keep the best/last checkpoints on the
+original system for future evaluation/resume; weights need not be copied just
+to compute the validation comparison. Copy a run only after it finishes, and
+complete the transfer before asking the new queue to inspect its completion
+marker. Never replace a missing artifact with another seed or checkpoint.
+
+The comparison checks the entire resolved baseline config, the exact speaker
+split and all 300 validation epochs. Baseline test scores are not used in
+selection. The next completed candidate automatically refreshes the comparison.
+If the new queue has already finished, rerun its original command to refresh
+the comparison; verified completed candidates are skipped without training.
 
 These are validation-only tuning runs: `run_test=false` and
 `validation_only=true`. Test metrics and test artifacts are rejected. No
