@@ -19,6 +19,8 @@ from project_paths import local_path, portable_path
 
 VERSION = '1.0.1'
 AUGMENTED_PROTOCOL = 'shd_speaker_augmented_v1'
+REGULARIZATION_PROFILES = ('dropout030_v1', 'dropout035_v1', 'spike_delete010_v1')
+REGULARIZATION_OUTPUT_ROOT = 'results/experiments/shd_speaker_regularization_v1'
 ACTIVE_PROFILE = None
 ROOT = Path(__file__).resolve().parent
 OUTPUT_ROOT = f'results/experiments/{PROTOCOL}'
@@ -40,6 +42,12 @@ def selected_profile(profile):
                              OUTPUT_ROOT=f'results/experiments/{AUGMENTED_PROTOCOL}',
                              ARCHIVE_ROOT=f'results/not_improved/{AUGMENTED_PROTOCOL}',
                              SPLIT_PATH=f'results/experiments/{AUGMENTED_PROTOCOL}/SPLIT_MANIFEST.json')
+        elif profile in REGULARIZATION_PROFILES:
+            protocol = f'shd_speaker_{profile}'
+            output = f'{REGULARIZATION_OUTPUT_ROOT}/{profile}'
+            globals().update(PROTOCOL=protocol, VERSION='1.0.0', ACTIVE_PROFILE=profile,
+                             OUTPUT_ROOT=output, ARCHIVE_ROOT=f'results/not_improved/{protocol}',
+                             SPLIT_PATH=f'{output}/SPLIT_MANIFEST.json')
         elif profile is not None:
             raise ValueError(f'Unknown speaker study profile: {profile}')
         yield
@@ -72,7 +80,10 @@ def job_overrides(model, dataset, seed, manifest):
     profile_overrides = []
     if ACTIVE_PROFILE:
         profile_overrides = [f'+shd_speaker_study={ACTIVE_PROFILE}']
-        settings = OmegaConf.load(ROOT / f'config/shd_speaker_study/{ACTIVE_PROFILE}.yaml')
+        context = (nullcontext() if GlobalHydra.instance().is_initialized() else
+                   initialize_config_dir(config_dir=str(ROOT / 'config'), version_base=None))
+        with context:
+            settings = compose(config_name='main', overrides=[f'+shd_speaker_study={ACTIVE_PROFILE}'])
         baseline = OmegaConf.load(ROOT / 'config/paper_baseline.yaml').paper_baseline
         deviations += [f'dropout={settings.dropout} (paper baseline {baseline.common.dropout})',
                        'training_augmentation=' + json.dumps(OmegaConf.to_container(
@@ -116,7 +127,7 @@ def validate_config(cfg, model, seed, manifest):
     if portable_config(actual) != portable_config(expected):
         raise ValueError('Speaker-holdout training settings differ from the matched model baseline')
     if (cfg['evaluation_protocol'] != PROTOCOL or cfg['dataset']['validate_on'] != 'speaker_holdout'
-            or cfg['dataset']['cache_namespace'] != PROTOCOL
+            or cfg['dataset']['cache_namespace'] != (expected['dataset']['cache_namespace'] if ACTIVE_PROFILE else PROTOCOL)
             or cfg['dataset']['speaker_split_manifest'] != SPLIT_PATH
             or cfg['dataset']['speaker_split_fingerprint'] != manifest['fingerprint']
             or cfg['model_variant'] != model or cfg['random_seed'] != seed):
@@ -160,7 +171,7 @@ def configured_runner(runner, manifest):
         runner.PROTOCOL = runner.EVALUATION['datasets']
         runner.RUN_LOGDIR, runner.SPEAKER_HOLDOUT = OUTPUT_ROOT, manifest
         runner.SEED_COHORT = runner.SSC_STUDY_JOB = None
-        runner.VALIDATION_ONLY = False
+        runner.VALIDATION_ONLY = ACTIVE_PROFILE in REGULARIZATION_PROFILES
         yield
     finally:
         for key, value in original.items():
@@ -197,7 +208,11 @@ def inspect_checkpoint(directory, cfg, complete=False):
     if complete:
         if last['epoch'] + 1 != cfg['n_epochs']:
             raise ValueError(f'Completed run did not finish its full budget: {directory}')
-        test_accuracy(directory)
+        if cfg.get('shd_regularization_study'):
+            from extended_seed_study import reject_test_artifacts
+            reject_test_artifacts(directory)
+        else:
+            test_accuracy(directory)
 
 
 def write_aggregate(model, runner):
@@ -236,11 +251,14 @@ def write_aggregate(model, runner):
 def main(argv, runner):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--shd-speaker-phase', choices=('1', '2', 'all'), required=True)
-    parser.add_argument('--shd-speaker-profile', choices=('augmented_v1',),
+    parser.add_argument('--shd-speaker-profile', choices=('augmented_v1', 'regularization_v1'),
                         help='New isolated augmentation/dropout study; omitted selects retired v1')
     parser.add_argument('--dry-run', action='store_true', help='Check actual data and every planned run; no training/writes')
     parser.add_argument('--measure-existing-costs', action='store_true')
     args = parser.parse_args(argv)
+    if args.shd_speaker_profile == 'regularization_v1':
+        from shd_speaker_regularization import run_queue
+        return run_queue(args, parser, runner)
     with selected_profile(args.shd_speaker_profile):
         return run_phase(args, parser, runner)
 

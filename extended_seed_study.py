@@ -27,6 +27,9 @@ def baseline_definition():
 
 
 def validate_config(cfg):
+    if cfg.get('shd_regularization_study'):
+        from shd_speaker_regularization import validate_training_config
+        return validate_training_config(cfg)
     if cfg.get('ssc_study'):
         from ssc_validation_study import validate_training_config
         return validate_training_config(cfg)
@@ -101,6 +104,14 @@ def read_provenance(directory, root=None):
 
 
 def write_provenance(directory, root):
+    manifest_path = directory / 'FULL_RUN_CONFIG.json'
+    config = json.loads(manifest_path.read_text(encoding='utf-8')) if manifest_path.exists() else {}
+    if config.get('shd_regularization_study'):
+        from datasets.shd_speaker_split import save_manifest
+        split = json.loads(local_path(config['dataset']['speaker_split_manifest']).read_text(encoding='utf-8'))
+        if split['fingerprint'] != config['dataset']['speaker_split_fingerprint']:
+            raise ValueError('Regularization run disagrees with frozen speaker split')
+        save_manifest(directory / 'SPLIT_MANIFEST.json', split)
     import torch
     record = dict(**source_identity(root),
                   python=sys.version, platform=platform.platform(),

@@ -1,5 +1,5 @@
 """Non-training checks for speaker-disjoint augmentation, caching and resume."""
-from contextlib import redirect_stdout
+from contextlib import nullcontext, redirect_stdout
 import copy
 import io
 import json
@@ -141,6 +141,7 @@ class AugmentedStudyTests(unittest.TestCase):
     def test_dry_run_is_ordered_without_writes_or_subprocesses(self):
         with study.selected_profile('augmented_v1'), legacy.isolated_runner(self.manifest) as root:
             with patch.object(study, 'preflight_data', return_value=self.manifest), \
+                    patch.object(study, 'selected_profile', return_value=nullcontext()), \
                     patch.object(runner.subprocess, 'run') as launch, redirect_stdout(io.StringIO()) as output:
                 study.main(['--shd-speaker-phase', 'all', '--shd-speaker-profile', 'augmented_v1',
                             '--dry-run'], runner)

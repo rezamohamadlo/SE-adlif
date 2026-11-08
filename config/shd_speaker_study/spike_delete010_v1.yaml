@@ -1,0 +1,13 @@
+# @package _global_
+defaults:
+  - augmented_v1
+  - _self_
+evaluation_protocol: shd_speaker_spike_delete010_v1
+dataset:
+  train_augmentation:
+    spike_delete_probability: 0.10
+run_test: false
+validation_only: true
+shd_regularization_study:
+  version: shd_speaker_regularization_v1
+  profile: spike_delete010_v1

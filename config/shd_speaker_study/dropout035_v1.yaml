@@ -1,0 +1,11 @@
+# @package _global_
+defaults:
+  - augmented_v1
+  - _self_
+evaluation_protocol: shd_speaker_dropout035_v1
+dropout: 0.35
+run_test: false
+validation_only: true
+shd_regularization_study:
+  version: shd_speaker_regularization_v1
+  profile: dropout035_v1
