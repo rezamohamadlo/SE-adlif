@@ -1,0 +1,108 @@
+[
+  {
+    "trial": "lr0.0001_drop0.1",
+    "test_acc": 0.9310954213142395,
+    "status": "complete",
+    "overrides": {
+      "lr": 0.0001,
+      "dropout": 0.1
+    },
+    "val_acc": 0.991416335105896,
+    "val_loss": 0.06946384906768799,
+    "best_epoch": 0,
+    "latest_epoch": 79
+  },
+  {
+    "trial": "lr0.0001_drop0.15",
+    "test_acc": 0.9310954213142395,
+    "status": "complete",
+    "overrides": {
+      "lr": 0.0001,
+      "dropout": 0.15
+    },
+    "val_acc": 0.991416335105896,
+    "val_loss": 0.0694638192653656,
+    "best_epoch": 0,
+    "latest_epoch": 79
+  },
+  {
+    "trial": "lr0.0001_drop0.25",
+    "test_acc": 0.9310954213142395,
+    "status": "complete",
+    "overrides": {
+      "lr": 0.0001,
+      "dropout": 0.25
+    },
+    "val_acc": 0.991416335105896,
+    "val_loss": 0.0694638192653656,
+    "best_epoch": 0,
+    "latest_epoch": 79
+  },
+  {
+    "trial": "lr0.0004_batch128",
+    "test_acc": 0.9293286204338074,
+    "status": "complete",
+    "overrides": {
+      "lr": 0.0004,
+      "batch_size": 128,
+      "dropout": 0.15
+    },
+    "val_acc": 0.991416335105896,
+    "val_loss": 0.0694638192653656,
+    "best_epoch": 0,
+    "latest_epoch": 79
+  },
+  {
+    "trial": "lr0.0004_batch512",
+    "test_acc": 0.9306536912918091,
+    "status": "complete",
+    "overrides": {
+      "lr": 0.0004,
+      "batch_size": 512,
+      "dropout": 0.15
+    },
+    "val_acc": 0.991416335105896,
+    "val_loss": 0.0694638192653656,
+    "best_epoch": 0,
+    "latest_epoch": 79
+  },
+  {
+    "trial": "lr0.0004_drop0.1",
+    "test_acc": 0.935512363910675,
+    "status": "complete",
+    "overrides": {
+      "lr": 0.0004,
+      "dropout": 0.1
+    },
+    "val_acc": 0.991416335105896,
+    "val_loss": 0.0694638043642044,
+    "best_epoch": 0,
+    "latest_epoch": 79
+  },
+  {
+    "trial": "lr0.0004_drop0.15",
+    "test_acc": 0.9288869500160217,
+    "status": "complete",
+    "overrides": {
+      "lr": 0.0004,
+      "dropout": 0.15
+    },
+    "val_acc": 0.991416335105896,
+    "val_loss": 0.0694638192653656,
+    "best_epoch": 0,
+    "latest_epoch": 79
+  },
+  {
+    "trial": "lr0.0004_drop0.25",
+    "test_acc": 0.9306536912918091,
+    "status": "complete",
+    "overrides": {
+      "lr": 0.0004,
+      "dropout": 0.25
+    },
+    "val_acc": 0.991416335105896,
+    "val_loss": 0.06946384906768799,
+    "best_epoch": 0,
+    "latest_epoch": 79
+  }
+]

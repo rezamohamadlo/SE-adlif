@@ -1,0 +1,99 @@
+{
+  "baseline": "shd_speaker_augmented_v1",
+  "jobs": [
+    {
+      "model": "DTH_SE_adLIF",
+      "profile": "dropout030_v1",
+      "seed": 42
+    },
+    {
+      "model": "LG_DTH_SE_adLIF",
+      "profile": "dropout030_v1",
+      "seed": 42
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "profile": "dropout035_v1",
+      "seed": 42
+    },
+    {
+      "model": "LG_DTH_SE_adLIF",
+      "profile": "dropout035_v1",
+      "seed": 42
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "profile": "spike_delete010_v1",
+      "seed": 42
+    },
+    {
+      "model": "LG_DTH_SE_adLIF",
+      "profile": "spike_delete010_v1",
+      "seed": 42
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "profile": "dropout030_v1",
+      "seed": 123
+    },
+    {
+      "model": "LG_DTH_SE_adLIF",
+      "profile": "dropout030_v1",
+      "seed": 123
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "profile": "dropout030_v1",
+      "seed": 456
+    },
+    {
+      "model": "LG_DTH_SE_adLIF",
+      "profile": "dropout030_v1",
+      "seed": 456
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "profile": "dropout035_v1",
+      "seed": 123
+    },
+    {
+      "model": "LG_DTH_SE_adLIF",
+      "profile": "dropout035_v1",
+      "seed": 123
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "profile": "dropout035_v1",
+      "seed": 456
+    },
+    {
+      "model": "LG_DTH_SE_adLIF",
+      "profile": "dropout035_v1",
+      "seed": 456
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "profile": "spike_delete010_v1",
+      "seed": 123
+    },
+    {
+      "model": "LG_DTH_SE_adLIF",
+      "profile": "spike_delete010_v1",
+      "seed": 123
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "profile": "spike_delete010_v1",
+      "seed": 456
+    },
+    {
+      "model": "LG_DTH_SE_adLIF",
+      "profile": "spike_delete010_v1",
+      "seed": 456
+    }
+  ],
+  "selection_metric": "validation_accuracy",
+  "selection_rule": "maximum three-seed mean best-validation accuracy per model, including baseline",
+  "split_fingerprint": "e5a914f492e466b338b76e254dac5b404fe3cffd459b14a2973425266a08674a",
+  "study": "shd_speaker_regularization_v1"
+}

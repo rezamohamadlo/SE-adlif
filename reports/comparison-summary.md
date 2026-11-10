@@ -1,5 +1,29 @@
 # Paper and proposed-model comparison
 
+## SHD* speaker holdout + augmentation versus shuffled reference
+
+This descriptive comparison adds the imported `shd_speaker_augmented_v1`
+speaker-holdout experiment to the canonical shuffled SHD* runs and the local
+SE-adLIF reference. Train and validation values are taken at each
+validation-selected checkpoint; test accuracy is evaluated afterward. Values
+are percentages, with seeds shown in the order 42 / 123 / 456.
+
+| Model / protocol | Train by seed | Train mean +/- sample SD | Validation by seed | Validation mean +/- sample SD | Test by seed | Test mean +/- sample SD (Δ paper) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Local reference, shuffled | 99.89 / 100.00 / 100.00 | 99.96 +/- 0.06 | 99.14 / 99.39 / 99.08 | 99.20 +/- 0.16 | 92.93 / 92.89 / 93.64 | 93.15 +/- 0.42 (-0.64 pp) |
+| DTH, shuffled | 100.00 / 100.00 / 100.00 | 100.00 +/- 0.00 | 99.14 / 99.08 / 99.02 | 99.08 +/- 0.06 | 94.70 / 94.88 / 93.90 | 94.49 +/- 0.52 (+0.70 pp) |
+| DTH, speaker holdout + augmentation | 99.55 / 99.89 / 99.83 | 99.76 +/- 0.18 | 90.03 / 90.03 / 91.62 | 90.56 +/- 0.92 | 92.84 / 93.07 / 93.51 | 93.14 +/- 0.34 (-0.65 pp) |
+| LG-DTH, shuffled | 100.00 / 100.00 / 100.00 | 100.00 +/- 0.00 | 99.14 / 99.26 / 99.02 | 99.14 +/- 0.12 | 93.77 / 93.02 / 94.43 | 93.74 +/- 0.71 (-0.05 pp) |
+| LG-DTH, speaker holdout + augmentation | 99.70 / 99.55 / 99.58 | 99.61 +/- 0.08 | 91.19 / 92.35 / 91.74 | 91.76 +/- 0.58 | 93.68 / 96.64 / 92.45 | 94.26 +/- 2.16 (+0.47 pp) |
+| Paper SE-adLIF (20 runs) | Not reported | Not reported | Not reported | Not reported | Not reported by seed | 93.79 +/- 0.76 |
+
+Delta paper is the local test mean minus the published SHD* paper mean of
+93.79%, in percentage points. Relative to the matching shuffled protocol, the
+speaker-holdout test mean changes by -1.35 pp for DTH and +0.52 pp for LG-DTH.
+The speaker split uses validation speakers 0 and 3, so these results are not a
+matched replacement for the random-recording SHD* comparison. The paper does
+not report train or validation accuracy. Sources: [speaker-holdout results](../results/experiments/shd_speaker_augmented_v1/README.md), [local reference](../results/valid/reference/SHD/RESULTS.md), [shuffled DTH](../results/valid/DTH_SE_adLIF/RESULTS.md), [shuffled LG-DTH](../results/not_improved/LG_DTH_SE_adLIF/RESULTS.md), and [paper results](paper-results.md).
+
 ## Test accuracy
 
 ### Without TTA
