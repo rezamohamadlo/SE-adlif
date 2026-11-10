@@ -10,7 +10,7 @@ import shd_speaker_holdout as speaker
 from project_paths import local_path, portable_config, portable_path
 
 VERSION = 'shd_speaker_regularization_v1'
-OUTPUT_ROOT = f'results/experiments/{VERSION}'
+OUTPUT_ROOT = portable_path(f'results/experiments/{VERSION}')
 PROFILES = speaker.REGULARIZATION_PROFILES
 SEEDS = (42, 123, 456)
 
@@ -24,6 +24,7 @@ def ordered_jobs(phase):
 
 def validate_training_config(cfg):
     """Run in the training child too, without relying on parent globals/CWD."""
+    cfg = portable_config(cfg)
     identity = cfg.get('shd_regularization_study', {})
     profile = identity.get('profile')
     if (identity.get('version') != VERSION or profile not in PROFILES

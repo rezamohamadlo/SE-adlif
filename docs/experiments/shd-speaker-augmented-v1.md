@@ -1,5 +1,7 @@
 # SHD* speaker holdout with augmentation and dropout
 
+Current physical artifacts are consolidated under `results/experiments/shd_speaker_combined_v1/artifacts/`. Legacy paths resolve through `config/path_aliases.yaml`; see the [consolidation record](../transfers/shd-speaker-consolidation-2026-11-10.md).
+
 Protocol `shd_speaker_augmented_v1`, implementation 1.0.0. This is a new,
 fresh-training DTH/LG-DTH experiment. The retired
 [speaker-holdout experiment](shd-speaker-holdout.md) and its checkpoints remain
@@ -100,7 +102,7 @@ training/test remain complete and are not repeated to repair measurement.
 
 ## Evidence and isolation
 
-Outputs: `results/experiments/shd_speaker_augmented_v1/<model>/SHD/seed_<seed>/`.
+Outputs: `results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/<model>/SHD/seed_<seed>/`.
 Each seed records its `FULL_RUN_CONFIG.json`, Hydra config, split manifest,
 training metrics/summary, best/last checkpoints, and `COST_RESULTS.json`/`.md`.
 The shared split manifest belongs at the experiment root. Each model's

@@ -1,5 +1,7 @@
 # SHD speaker holdout: regularization tuning v1
 
+Current physical artifacts are consolidated under `results/experiments/shd_speaker_combined_v1/artifacts/`. Legacy paths resolve through `config/path_aliases.yaml`; see the [consolidation record](../transfers/shd-speaker-consolidation-2026-11-10.md).
+
 An explicit opt-in workflow through `runner.py` for DTH and LG-DTH. The three
 candidates inherit `config/shd_speaker_study/augmented_v1.yaml`, which overlays
 `config/comparison/SHD_speaker_holdout_v1.yaml` and the dataset-specific
@@ -76,7 +78,7 @@ inference or writes. It may inspect the current baseline while it is active.
 ## Outputs and validation selection
 
 All new evidence stays below
-`results/experiments/shd_speaker_regularization_v1/<profile>/<model>/SHD/seed_<seed>/`.
+`results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_regularization_v1/<profile>/<model>/SHD/seed_<seed>/`.
 Each run stores `FULL_RUN_CONFIG.json`, the baseline identity/deviations,
 the frozen per-run split, Hydra config, metrics, source/environment provenance,
 best/last checkpoints and `VALIDATION_RESULTS.json`/`VALIDATION_SUMMARY.md`.
@@ -104,7 +106,7 @@ identity. Git does not transfer local baseline metrics or checkpoints.
 
 After the baseline queue finishes on the original system, copy its completed
 evidence into the same repository-relative layout on the new system:
-`results/experiments/shd_speaker_augmented_v1/<model>/SHD/seed_<seed>/` for
+`results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/<model>/SHD/seed_<seed>/` for
 both models and all three seeds. For validation comparison, each seed requires
 `FULL_RUN_CONFIG.json`, `SPLIT_MANIFEST.json`, `completed.txt` and
 `logs/mlp_snn/version_0/metrics.csv`. Keep the best/last checkpoints on the

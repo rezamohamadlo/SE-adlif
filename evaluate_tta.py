@@ -64,6 +64,7 @@ def batch_predictions(model, batch, loss_agg, gains):
 def inspect_run(dataset, seed, model='MT_SE_adLIF'):
     directory = (ROOT / EXPERIMENT_ROOTS[model] / model / dataset / f'seed_{seed}'
                  if model in EXPERIMENT_ROOTS else seed_directory(ROOT, model, dataset, seed))
+    directory = local_path(directory, ROOT)
     choices = [p for p in (directory / 'ckpt').glob('*.ckpt') if p.name != 'last.ckpt']
     if not choices:
         return None

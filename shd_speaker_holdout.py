@@ -15,12 +15,12 @@ from omegaconf import OmegaConf
 from datasets.shd_speaker_split import (
     PROTOCOL, build_manifest, check_loader, save_manifest, verify_manifest,
 )
-from project_paths import local_path, portable_path
+from project_paths import local_path, portable_config, portable_path
 
 VERSION = '1.0.1'
 AUGMENTED_PROTOCOL = 'shd_speaker_augmented_v1'
 REGULARIZATION_PROFILES = ('dropout030_v1', 'dropout035_v1', 'spike_delete010_v1')
-REGULARIZATION_OUTPUT_ROOT = 'results/experiments/shd_speaker_regularization_v1'
+REGULARIZATION_OUTPUT_ROOT = portable_path('results/experiments/shd_speaker_regularization_v1')
 ACTIVE_PROFILE = None
 ROOT = Path(__file__).resolve().parent
 OUTPUT_ROOT = f'results/experiments/{PROTOCOL}'
@@ -38,10 +38,11 @@ def selected_profile(profile):
     original = {key: globals()[key] for key in keys}
     try:
         if profile == 'augmented_v1':
+            output = portable_path(f'results/experiments/{AUGMENTED_PROTOCOL}')
             globals().update(PROTOCOL=AUGMENTED_PROTOCOL, VERSION='1.0.0', ACTIVE_PROFILE=profile,
-                             OUTPUT_ROOT=f'results/experiments/{AUGMENTED_PROTOCOL}',
+                             OUTPUT_ROOT=output,
                              ARCHIVE_ROOT=f'results/not_improved/{AUGMENTED_PROTOCOL}',
-                             SPLIT_PATH=f'results/experiments/{AUGMENTED_PROTOCOL}/SPLIT_MANIFEST.json')
+                             SPLIT_PATH=f'{output}/SPLIT_MANIFEST.json')
         elif profile in REGULARIZATION_PROFILES:
             protocol = f'shd_speaker_{profile}'
             output = f'{REGULARIZATION_OUTPUT_ROOT}/{profile}'
@@ -96,6 +97,7 @@ def job_overrides(model, dataset, seed, manifest):
 
 
 def validate_config(cfg, model, seed, manifest):
+    cfg = portable_config(cfg)
     baseline = OmegaConf.to_container(OmegaConf.load(ROOT / 'config/paper_baseline.yaml').paper_baseline,
                                       resolve=True)
     shd, policy = baseline['datasets']['SHD'], baseline['reproduction_policy']
@@ -123,7 +125,6 @@ def validate_config(cfg, model, seed, manifest):
         actual['dataset'].pop(key, None)
     actual['dataset']['validate_on'] = expected['dataset']['validate_on']
     actual['dataset']['cache_namespace'] = expected['dataset']['cache_namespace']
-    from project_paths import portable_config
     if portable_config(actual) != portable_config(expected):
         raise ValueError('Speaker-holdout training settings differ from the matched model baseline')
     if (cfg['evaluation_protocol'] != PROTOCOL or cfg['dataset']['validate_on'] != 'speaker_holdout'

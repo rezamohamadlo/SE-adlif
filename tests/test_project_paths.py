@@ -14,6 +14,33 @@ OLD_ROOT = 'C:/Users/jafari.h.SPADANACO/Desktop/SE-adlif'
 
 
 class ProjectPathTests(unittest.TestCase):
+    def test_speaker_consolidation_preserves_legacy_checkpoint_identity(self):
+        names = ('shd_speaker_augmented_v1', 'shd_speaker_regularization_v1',
+                 'shd_regularization_test_seed42_v1', 'shd_speaker_regularization_tests_v1',
+                 'shd_speaker_regularization_test_v1', 'shd_speaker_augmented_tta_v1')
+        suffix = 'dropout030_v1/DTH_SE_adLIF/SHD/seed_123/ckpt/epoch=205-step=5150.ckpt'
+        for name in names:
+            previous = f'results/experiments/{name}'
+            current = f'results/experiments/shd_speaker_combined_v1/artifacts/{name}'
+            self.assertEqual(portable_path(previous + '/' + suffix), current + '/' + suffix)
+            self.assertEqual(portable_path(OLD_ROOT + '/' + previous + '/' + suffix), current + '/' + suffix)
+            self.assertEqual(portable_path(current + '/' + suffix), current + '/' + suffix)
+            self.assertEqual(portable_path(previous + '_other/' + suffix), previous + '_other/' + suffix)
+        with tempfile.TemporaryDirectory() as directory:
+            checkout = Path(directory)
+            relative = 'results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_regularization_v1/' + suffix
+            target = checkout / relative
+            target.parent.mkdir(parents=True)
+            target.touch()
+            import os
+            before = Path.cwd()
+            try:
+                os.chdir(checkout)
+                legacy = OLD_ROOT + '/results/experiments/shd_speaker_regularization_v1/' + suffix
+                self.assertEqual(local_path(legacy, checkout, must_exist=True), target.resolve())
+            finally:
+                os.chdir(before)
+
     def test_explicit_results_layout_migration_preserves_checkpoint_suffix(self):
         suffix = 'SSC/seed_123/ckpt/epoch=20-step=6174.ckpt'
         for model, group in [('MT_SE_adLIF', 'valid'), ('FP_SE_adLIF', 'not_improved')]:

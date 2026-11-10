@@ -1,0 +1,80 @@
+[
+  {
+    "profile": "dropout035_v1",
+    "model": "DTH_SE_adLIF",
+    "seed": 456,
+    "validation_record": "results/experiments/shd_speaker_regularization_v1/dropout035_v1/DTH_SE_adLIF/SHD/seed_456/VALIDATION_RESULTS.json",
+    "checkpoint": "results/experiments/shd_speaker_regularization_v1/dropout035_v1/DTH_SE_adLIF/SHD/seed_456/ckpt/epoch=147-step=3700.ckpt",
+    "selected_epoch": 147,
+    "validation_accuracy": 0.9045871496200562,
+    "test_metrics": {
+      "test_acc": 0.916077733039856,
+      "test_loss": 0.5735093951225281
+    }
+  },
+  {
+    "profile": "dropout035_v1",
+    "model": "LG_DTH_SE_adLIF",
+    "seed": 456,
+    "validation_record": "results/experiments/shd_speaker_regularization_v1/dropout035_v1/LG_DTH_SE_adLIF/SHD/seed_456/VALIDATION_RESULTS.json",
+    "checkpoint": "results/experiments/shd_speaker_regularization_v1/dropout035_v1/LG_DTH_SE_adLIF/SHD/seed_456/ckpt/epoch=193-step=4850.ckpt",
+    "selected_epoch": 193,
+    "validation_accuracy": 0.9125382304191589,
+    "test_metrics": {
+      "test_acc": 0.9271201491355896,
+      "test_loss": 0.5998871326446533
+    }
+  },
+  {
+    "profile": "spike_delete010_v1",
+    "model": "DTH_SE_adLIF",
+    "seed": 123,
+    "validation_record": "results/experiments/shd_speaker_regularization_v1/spike_delete010_v1/DTH_SE_adLIF/SHD/seed_123/VALIDATION_RESULTS.json",
+    "checkpoint": "results/experiments/shd_speaker_regularization_v1/spike_delete010_v1/DTH_SE_adLIF/SHD/seed_123/ckpt/epoch=108-step=2725.ckpt",
+    "selected_epoch": 108,
+    "validation_accuracy": 0.9137614965438843,
+    "test_metrics": {
+      "test_acc": 0.9368374347686768,
+      "test_loss": 0.41824018955230713
+    }
+  },
+  {
+    "profile": "spike_delete010_v1",
+    "model": "LG_DTH_SE_adLIF",
+    "seed": 123,
+    "validation_record": "results/experiments/shd_speaker_regularization_v1/spike_delete010_v1/LG_DTH_SE_adLIF/SHD/seed_123/VALIDATION_RESULTS.json",
+    "checkpoint": "results/experiments/shd_speaker_regularization_v1/spike_delete010_v1/LG_DTH_SE_adLIF/SHD/seed_123/ckpt/epoch=289-step=7250.ckpt",
+    "selected_epoch": 289,
+    "validation_accuracy": 0.9045871496200562,
+    "test_metrics": {
+      "test_acc": 0.9412544369697571,
+      "test_loss": 0.45321789383888245
+    }
+  },
+  {
+    "profile": "spike_delete010_v1",
+    "model": "DTH_SE_adLIF",
+    "seed": 456,
+    "validation_record": "results/experiments/shd_speaker_regularization_v1/spike_delete010_v1/DTH_SE_adLIF/SHD/seed_456/VALIDATION_RESULTS.json",
+    "checkpoint": "results/experiments/shd_speaker_regularization_v1/spike_delete010_v1/DTH_SE_adLIF/SHD/seed_456/ckpt/epoch=197-step=4950.ckpt",
+    "selected_epoch": 197,
+    "validation_accuracy": 0.9253822565078735,
+    "test_metrics": {
+      "test_acc": 0.9447879791259766,
+      "test_loss": 0.33743372559547424
+    }
+  },
+  {
+    "profile": "spike_delete010_v1",
+    "model": "LG_DTH_SE_adLIF",
+    "seed": 456,
+    "validation_record": "results/experiments/shd_speaker_regularization_v1/spike_delete010_v1/LG_DTH_SE_adLIF/SHD/seed_456/VALIDATION_RESULTS.json",
+    "checkpoint": "results/experiments/shd_speaker_regularization_v1/spike_delete010_v1/LG_DTH_SE_adLIF/SHD/seed_456/ckpt/epoch=124-step=3125.ckpt",
+    "selected_epoch": 124,
+    "validation_accuracy": 0.9235473871231079,
+    "test_metrics": {
+      "test_acc": 0.9315370917320251,
+      "test_loss": 0.4364226460456848
+    }
+  }
+]

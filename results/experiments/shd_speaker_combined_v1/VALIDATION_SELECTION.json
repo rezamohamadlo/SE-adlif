@@ -1,0 +1,21 @@
+{
+  "note": "Tuning on one fixed speaker pair; future independent confirmation is recommended. No new official-test results have been used for selection.",
+  "selections": {
+    "DTH_SE_adLIF": {
+      "mean_validation_accuracy": 0.9151885906855265,
+      "profiles": [
+        "spike_delete010_v1"
+      ],
+      "selection_rule": "maximum mean best-validation accuracy across seeds 42/123/456; ties retained"
+    },
+    "LG_DTH_SE_adLIF": {
+      "mean_validation_accuracy": 0.9176350633303324,
+      "profiles": [
+        "augmented_v1"
+      ],
+      "selection_rule": "maximum mean best-validation accuracy across seeds 42/123/456; ties retained"
+    }
+  },
+  "split_fingerprint": "e5a914f492e466b338b76e254dac5b404fe3cffd459b14a2973425266a08674a",
+  "study": "shd_speaker_regularization_v1"
+}

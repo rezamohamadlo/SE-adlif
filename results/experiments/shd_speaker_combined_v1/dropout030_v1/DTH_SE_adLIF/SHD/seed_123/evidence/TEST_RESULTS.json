@@ -1,0 +1,26 @@
+{
+  "model": "DTH_SE_adLIF",
+  "profile": "dropout030_v1",
+  "seed": 123,
+  "dataset": "SHD",
+  "dropout": 0.3,
+  "selected_epoch": 205,
+  "best_validation_accuracy": 0.8960244655609131,
+  "checkpoint": "results/experiments/shd_speaker_regularization_v1/dropout030_v1/DTH_SE_adLIF/SHD/seed_123/ckpt/epoch=205-step=5150.ckpt",
+  "checkpoint_sha256": "eb9628aa55aa66f00def0cdcf4a416df9ad08ef7002e034ad6908a18c5071e0b",
+  "source_run": "results/experiments/shd_speaker_regularization_v1/dropout030_v1/DTH_SE_adLIF/SHD/seed_123",
+  "fingerprint": "e71e2bb2e3fccaee3cc6fd6b0d8787eb11cf3c9f8ed4022c545c32314537238e",
+  "evaluation_protocol": "shd_speaker_regularization_tests_v1",
+  "selection_disclosure": "Exploratory official-test evaluation explicitly requested before full three-seed hyperparameter selection. Every checkpoint was selected by validation accuracy; these test scores must not select settings.",
+  "metrics": {
+    "test_acc": 0.9129858657243817,
+    "test_loss": 0.7563974124382747
+  },
+  "measurement": {
+    "evaluated_targets": 2264,
+    "data_sha256": "73174c8dca92fba8e4d8b310520734ca91d03e0838d93a64c87c8692f6d9c1ba",
+    "device": "cuda:0",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "matmul_precision": "high"
+  }
+}
