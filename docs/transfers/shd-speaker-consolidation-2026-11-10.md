@@ -35,6 +35,11 @@ review rejected the agent's removal command with the reason **blocked by
 policy**. The user subsequently removed the four regularization/test folders
 locally and deferred further deletion. The separate augmented-baseline and TTA
 folders still exist locally; canonical loading uses the consolidated copies.
+The subsequent merge of remote `main` preserved its tracked historical files
+and restored three of the manually removed roots (`shd_regularization_test_seed42_v1`,
+`shd_speaker_regularization_test_v1` and `shd_speaker_regularization_v1`). These
+copies remain alongside the canonical collection because further deletion was
+cancelled by the user.
 Only disposable locks/cache/temporary files were
 excluded from the preserved artifact copies. External PC1/PC2/PC3 bundles were
 not changed or deleted.
