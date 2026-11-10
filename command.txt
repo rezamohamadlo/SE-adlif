@@ -1,23 +1,14 @@
-﻿# SHD speaker regularization: run exactly one block per PC.
-# PC1 keeps checkout f190954 until its resumed seed-42 job finishes.
-# PC2 and PC3 use the current main checkout for their new assigned jobs.
-# PC1 uses .venv; PC2 and PC3 use .ven.
-# Run each block from the repository root. Rerun the same block after interruption.
+# Bounded SHD validation-only AMT/MT analysis pilot: run ONE command per PC.
+# No training, official-test evaluation, TTA, or automatic next round.
+# Pull the same commit on all PCs. Transfer ignored data/checkpoints/metrics separately.
+# Guide: docs/experiments/adaptation-mechanism-pilot-v1.md
+# Run from repository root. Append --self-check --check-only for checks without inference.
 
-# PC1
-.\run_shd_regularization_subset.ps1 -Job `
-'dropout030_v1:DTH_SE_adLIF:42','dropout030_v1:LG_DTH_SE_adLIF:42',`
-'dropout035_v1:DTH_SE_adLIF:42','dropout035_v1:LG_DTH_SE_adLIF:42',`
-'spike_delete010_v1:DTH_SE_adLIF:42','spike_delete010_v1:LG_DTH_SE_adLIF:42'
+# PC1: clean feature-association arm; project environment .venv.
+.\.venv\Scripts\python.exe scripts/adaptation_analysis/pilot.py --pc pc1
 
-# PC2
-.\run_shd_regularization_subset.ps1 -Job `
-'dropout030_v1:DTH_SE_adLIF:123','dropout030_v1:LG_DTH_SE_adLIF:123',`
-'dropout030_v1:DTH_SE_adLIF:456','dropout030_v1:LG_DTH_SE_adLIF:456',`
-'dropout035_v1:DTH_SE_adLIF:123','dropout035_v1:LG_DTH_SE_adLIF:123'
+# PC2: timing arm; project environment .ven.
+.\.ven\Scripts\python.exe scripts/adaptation_analysis/pilot.py --pc pc2
 
-# PC3
-.\run_shd_regularization_subset.ps1 -Job `
-'dropout035_v1:DTH_SE_adLIF:456','dropout035_v1:LG_DTH_SE_adLIF:456',`
-'spike_delete010_v1:DTH_SE_adLIF:123','spike_delete010_v1:LG_DTH_SE_adLIF:123',`
-'spike_delete010_v1:DTH_SE_adLIF:456','spike_delete010_v1:LG_DTH_SE_adLIF:456'
+# PC3: spike-density arm; project environment .ven.
+.\.ven\Scripts\python.exe scripts/adaptation_analysis/pilot.py --pc pc3

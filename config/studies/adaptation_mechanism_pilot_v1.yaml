@@ -1,0 +1,82 @@
+version: adaptation_mechanism_pilot_v1
+baseline_authority: config/paper_baseline.yaml
+baseline_version: paper_classification_v1
+dataset: SHD
+dataset_file: data/SHDWrapper/shd_train.h5
+dataset_sha256: 2bddb4bd46732f09982b7d1631b7c29c19853c73d3d240e3eb32bba909bdd6c1
+split_seed: 42
+validation_fraction: 0.2
+selection_seed: 20261110
+samples: 256
+max_samples: 512
+seeds:
+- 42
+- 123
+- 456
+parent: MT_SE_adLIF
+variant: AMT_SE_adLIF
+output_root: results/experiments/adaptation_mechanism_analysis_v1
+features:
+  bin_ms: 4.0
+  short_ms: 20.0
+  long_ms: 200.0
+arms:
+  pc1:
+    name: feature_association
+    conditions:
+    - clean
+  pc2:
+    name: timing
+    scales:
+    - 0.9
+    - 1.0
+    - 1.1
+  pc3:
+    name: spike_density
+    probabilities:
+    - 0.0
+    - 0.1
+    replicates: 3
+ordinary_inference: true
+training: false
+test_set_access: false
+full_validation_anchor_required: true
+accuracy_tolerance: 1.0e-06
+loss_tolerance: 0.001
+runs:
+- model: MT_SE_adLIF
+  seed: 42
+  cost_record: results/valid/MT_SE_adLIF/SHD/seed_42/COST_RESULTS.json
+  checkpoint: results/valid/MT_SE_adLIF/SHD/seed_42/ckpt/epoch=199-step=5000.ckpt
+  checkpoint_sha256: 617b926c02963a37782025d7df329bf8f87e28b8f4f2c037a57947438e11f76a
+  selected_epoch: 199
+- model: MT_SE_adLIF
+  seed: 123
+  cost_record: results/valid/MT_SE_adLIF/SHD/seed_123/COST_RESULTS.json
+  checkpoint: results/valid/MT_SE_adLIF/SHD/seed_123/ckpt/epoch=137-step=3450.ckpt
+  checkpoint_sha256: 667fafa34ad26556d74bb7ce5327dd38d300b4a6d27c364423ef41a17b69fa40
+  selected_epoch: 137
+- model: MT_SE_adLIF
+  seed: 456
+  cost_record: results/valid/MT_SE_adLIF/SHD/seed_456/COST_RESULTS.json
+  checkpoint: results/valid/MT_SE_adLIF/SHD/seed_456/ckpt/epoch=107-step=2700.ckpt
+  checkpoint_sha256: 365827d0402ae2724a94eabb0c86b20ed3355e09345ecfbb0d973c34e91b7344
+  selected_epoch: 107
+- model: AMT_SE_adLIF
+  seed: 42
+  cost_record: results/not_improved/AMT_SE_adLIF/SHD/seed_42/COST_RESULTS.json
+  checkpoint: results/not_improved/AMT_SE_adLIF/SHD/seed_42/ckpt/epoch=70-step=1775.ckpt
+  checkpoint_sha256: 1201b53120bb35afc1385460f10390c3ab6336f5710a6620aa674d0f757ea460
+  selected_epoch: 70
+- model: AMT_SE_adLIF
+  seed: 123
+  cost_record: results/not_improved/AMT_SE_adLIF/SHD/seed_123/COST_RESULTS.json
+  checkpoint: results/not_improved/AMT_SE_adLIF/SHD/seed_123/ckpt/epoch=299-step=7500.ckpt
+  checkpoint_sha256: 47ec69ffbe57456ff12e90056adecf71a9b3ba3e7cbd29d2015fb5b2df022ddd
+  selected_epoch: 299
+- model: AMT_SE_adLIF
+  seed: 456
+  cost_record: results/not_improved/AMT_SE_adLIF/SHD/seed_456/COST_RESULTS.json
+  checkpoint: results/not_improved/AMT_SE_adLIF/SHD/seed_456/ckpt/epoch=204-step=5125.ckpt
+  checkpoint_sha256: 179cffccb5375453105405cb00e6ad727710b913937469db8a6fb3ea6d3d66ed
+  selected_epoch: 204

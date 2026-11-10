@@ -1,0 +1,248 @@
+{
+  "accuracy_difference_definition": "100 * (variant_accuracy - parent_accuracy), percentage points",
+  "accuracy_units": "fraction",
+  "across_seed_aggregates": [
+    {
+      "complete_training_seed_cohort": true,
+      "condition": "clean",
+      "expected_training_seeds": [
+        123
+      ],
+      "metrics": {
+        "accuracy_difference_pp": {
+          "mean": 0.0,
+          "sample_sd": null
+        },
+        "mean_loss_benefit": {
+          "mean": 0.006699159275740385,
+          "sample_sd": null
+        },
+        "parent_accuracy": {
+          "mean": 1.0,
+          "sample_sd": null
+        },
+        "parent_mean_loss": {
+          "mean": 0.0069365836679935455,
+          "sample_sd": null
+        },
+        "variant_accuracy": {
+          "mean": 1.0,
+          "sample_sd": null
+        },
+        "variant_mean_loss": {
+          "mean": 0.00023742439225316048,
+          "sample_sd": null
+        }
+      },
+      "missing_training_seeds": [],
+      "n_training_seeds": 1,
+      "replicate": 0,
+      "training_seeds": [
+        123
+      ]
+    },
+    {
+      "complete_training_seed_cohort": true,
+      "condition": "time_scale_0.9",
+      "expected_training_seeds": [
+        123
+      ],
+      "metrics": {
+        "accuracy_difference_pp": {
+          "mean": 0.0,
+          "sample_sd": null
+        },
+        "mean_loss_benefit": {
+          "mean": 0.007033411695374525,
+          "sample_sd": null
+        },
+        "parent_accuracy": {
+          "mean": 1.0,
+          "sample_sd": null
+        },
+        "parent_mean_loss": {
+          "mean": 0.0070402659475803375,
+          "sample_sd": null
+        },
+        "variant_accuracy": {
+          "mean": 1.0,
+          "sample_sd": null
+        },
+        "variant_mean_loss": {
+          "mean": 6.854252205812372e-06,
+          "sample_sd": null
+        }
+      },
+      "missing_training_seeds": [],
+      "n_training_seeds": 1,
+      "replicate": 0,
+      "training_seeds": [
+        123
+      ]
+    },
+    {
+      "complete_training_seed_cohort": true,
+      "condition": "time_scale_1.1",
+      "expected_training_seeds": [
+        123
+      ],
+      "metrics": {
+        "accuracy_difference_pp": {
+          "mean": 0.0,
+          "sample_sd": null
+        },
+        "mean_loss_benefit": {
+          "mean": 0.0698757506899265,
+          "sample_sd": null
+        },
+        "parent_accuracy": {
+          "mean": 1.0,
+          "sample_sd": null
+        },
+        "parent_mean_loss": {
+          "mean": 0.0762942930051859,
+          "sample_sd": null
+        },
+        "variant_accuracy": {
+          "mean": 1.0,
+          "sample_sd": null
+        },
+        "variant_mean_loss": {
+          "mean": 0.006418542315259401,
+          "sample_sd": null
+        }
+      },
+      "missing_training_seeds": [],
+      "n_training_seeds": 1,
+      "replicate": 0,
+      "training_seeds": [
+        123
+      ]
+    }
+  ],
+  "aggregate_scope": "equal-weight per-training-seed means within each condition/replicate; sample SD (ddof=1), undefined for one seed; SD is not a confidence interval; missing members of the reported seed cohort are explicit",
+  "architecture_selection": false,
+  "association_scope": "descriptive Pearson correlation on finite clean-input pairs, separately per seed; no p-values",
+  "benefit_definition": "parent_loss - variant_loss; positive favors variant",
+  "feature_associations": [
+    {
+      "condition": "clean",
+      "feature": "mean_rate_hz",
+      "n_finite_pairs": 12,
+      "pearson_r": 0.3875029871381342,
+      "seed": 123,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "fast_slow_contrast",
+      "n_finite_pairs": 12,
+      "pearson_r": -0.18925041143336038,
+      "seed": 123,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "autocorr_tau_ms",
+      "n_finite_pairs": 12,
+      "pearson_r": 0.1213083635350224,
+      "seed": 123,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "active_channel_fraction",
+      "n_finite_pairs": 12,
+      "pearson_r": 0.019752664937723922,
+      "seed": 123,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "duration_ms",
+      "n_finite_pairs": 12,
+      "pearson_r": -0.008717059147621345,
+      "seed": 123,
+      "undefined_reason": null
+    }
+  ],
+  "final_test_evidence": false,
+  "grouping": [
+    "seed",
+    "condition",
+    "replicate"
+  ],
+  "groups": [
+    {
+      "accuracy_difference_pp": 0.0,
+      "condition": "clean",
+      "mean_loss_benefit": 0.006699159275740385,
+      "n_validation_samples": 12,
+      "parent_accuracy": 1.0,
+      "parent_mean_loss": 0.0069365836679935455,
+      "replicate": 0,
+      "seed": 123,
+      "variant_accuracy": 1.0,
+      "variant_mean_loss": 0.00023742439225316048
+    },
+    {
+      "accuracy_difference_pp": 0.0,
+      "condition": "time_scale_0.9",
+      "mean_loss_benefit": 0.007033411695374525,
+      "n_validation_samples": 12,
+      "parent_accuracy": 1.0,
+      "parent_mean_loss": 0.0070402659475803375,
+      "replicate": 0,
+      "seed": 123,
+      "variant_accuracy": 1.0,
+      "variant_mean_loss": 6.854252205812372e-06
+    },
+    {
+      "accuracy_difference_pp": 0.0,
+      "condition": "time_scale_1.1",
+      "mean_loss_benefit": 0.0698757506899265,
+      "n_validation_samples": 12,
+      "parent_accuracy": 1.0,
+      "parent_mean_loss": 0.0762942930051859,
+      "replicate": 0,
+      "seed": 123,
+      "variant_accuracy": 1.0,
+      "variant_mean_loss": 0.006418542315259401
+    }
+  ],
+  "metadata": {
+    "caution": "Exploratory frozen-model pilot; no test accuracy, TTA, training, or causal architectural proof.",
+    "dataset": "SHD* validation only",
+    "elapsed_seconds": 15.344000000040978,
+    "environment": {
+      "cuda": "12.4",
+      "device": "cuda:0",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "packages": {
+        "h5py": "3.16.0",
+        "matplotlib": "3.11.2",
+        "numpy": "1.26.4",
+        "omegaconf": "2.3.1",
+        "pytorch-lightning": "2.2.1",
+        "tonic": "1.6.0",
+        "torch": "2.6.0+cu124",
+        "torchmetrics": "1.9.0"
+      },
+      "platform": "Windows",
+      "python": "3.11.0"
+    },
+    "n_recordings": 12,
+    "parent": "MT_SE_adLIF",
+    "seeds": [
+      123
+    ],
+    "variant": "AMT_SE_adLIF"
+  },
+  "n_paired_records": 36,
+  "n_unique_validation_samples": 12,
+  "ordinary_inference": true,
+  "pc": "pc2",
+  "report_version": "adaptation_validation_pilot_v1",
+  "scope": "validation_only",
+  "test_time_augmentation": false
+}

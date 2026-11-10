@@ -1,0 +1,128 @@
+{
+  "accuracy_difference_definition": "100 * (variant_accuracy - parent_accuracy), percentage points",
+  "accuracy_units": "fraction",
+  "architecture_selection": false,
+  "association_scope": "descriptive Pearson correlation on finite clean-input pairs, separately per seed; no p-values",
+  "benefit_definition": "parent_loss - variant_loss; positive favors variant",
+  "feature_associations": [
+    {
+      "condition": "clean",
+      "feature": "mean_rate_hz",
+      "n_finite_pairs": 12,
+      "pearson_r": 0.3875029871381341,
+      "seed": 123,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "fast_slow_contrast",
+      "n_finite_pairs": 12,
+      "pearson_r": -0.18925041143336035,
+      "seed": 123,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "autocorr_tau_ms",
+      "n_finite_pairs": 12,
+      "pearson_r": 0.12130836353502239,
+      "seed": 123,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "active_channel_fraction",
+      "n_finite_pairs": 12,
+      "pearson_r": 0.019752664937723922,
+      "seed": 123,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "duration_ms",
+      "n_finite_pairs": 12,
+      "pearson_r": -0.008717059147621357,
+      "seed": 123,
+      "undefined_reason": null
+    }
+  ],
+  "final_test_evidence": false,
+  "grouping": [
+    "seed",
+    "condition",
+    "replicate"
+  ],
+  "groups": [
+    {
+      "accuracy_difference_pp": 0.0,
+      "condition": "clean",
+      "mean_loss_benefit": 0.006699186594535907,
+      "n_validation_samples": 12,
+      "parent_accuracy": 1.0,
+      "parent_mean_loss": 0.006936610986789067,
+      "replicate": 0,
+      "seed": 123,
+      "variant_accuracy": 1.0,
+      "variant_mean_loss": 0.00023742439225316048
+    },
+    {
+      "accuracy_difference_pp": 0.0,
+      "condition": "time_scale_0.9",
+      "mean_loss_benefit": 0.007033475646191316,
+      "n_validation_samples": 12,
+      "parent_accuracy": 1.0,
+      "parent_mean_loss": 0.007040329898397128,
+      "replicate": 0,
+      "seed": 123,
+      "variant_accuracy": 1.0,
+      "variant_mean_loss": 6.854252205812372e-06
+    },
+    {
+      "accuracy_difference_pp": 0.0,
+      "condition": "time_scale_1.1",
+      "mean_loss_benefit": 0.06987564017298098,
+      "n_validation_samples": 12,
+      "parent_accuracy": 1.0,
+      "parent_mean_loss": 0.07629417379589636,
+      "replicate": 0,
+      "seed": 123,
+      "variant_accuracy": 1.0,
+      "variant_mean_loss": 0.006418533622915372
+    }
+  ],
+  "metadata": {
+    "caution": "Exploratory frozen-model pilot; no test accuracy, TTA, training, or causal architectural proof.",
+    "dataset": "SHD* validation only",
+    "elapsed_seconds": 16.09299999999348,
+    "environment": {
+      "cuda": "12.4",
+      "device": "cuda:0",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "packages": {
+        "h5py": "3.16.0",
+        "matplotlib": "3.11.2",
+        "numpy": "1.26.4",
+        "omegaconf": "2.3.1",
+        "pytorch-lightning": "2.2.1",
+        "tonic": "1.6.0",
+        "torch": "2.6.0+cu124",
+        "torchmetrics": "1.9.0"
+      },
+      "platform": "Windows",
+      "python": "3.11.0"
+    },
+    "n_recordings": 12,
+    "parent": "MT_SE_adLIF",
+    "seeds": [
+      123
+    ],
+    "variant": "AMT_SE_adLIF"
+  },
+  "n_paired_records": 36,
+  "n_unique_validation_samples": 12,
+  "ordinary_inference": true,
+  "pc": "pc2",
+  "report_version": "adaptation_validation_pilot_v1",
+  "scope": "validation_only",
+  "test_time_augmentation": false
+}

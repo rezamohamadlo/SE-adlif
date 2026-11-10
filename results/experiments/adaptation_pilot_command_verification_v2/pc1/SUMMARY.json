@@ -1,0 +1,104 @@
+{
+  "accuracy_difference_definition": "100 * (variant_accuracy - parent_accuracy), percentage points",
+  "accuracy_units": "fraction",
+  "architecture_selection": false,
+  "association_scope": "descriptive Pearson correlation on finite clean-input pairs, separately per seed; no p-values",
+  "benefit_definition": "parent_loss - variant_loss; positive favors variant",
+  "feature_associations": [
+    {
+      "condition": "clean",
+      "feature": "mean_rate_hz",
+      "n_finite_pairs": 12,
+      "pearson_r": -0.38504311432373034,
+      "seed": 42,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "fast_slow_contrast",
+      "n_finite_pairs": 12,
+      "pearson_r": 0.1900954459895801,
+      "seed": 42,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "autocorr_tau_ms",
+      "n_finite_pairs": 12,
+      "pearson_r": -0.11991627691878405,
+      "seed": 42,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "active_channel_fraction",
+      "n_finite_pairs": 12,
+      "pearson_r": -0.021173010644435677,
+      "seed": 42,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "duration_ms",
+      "n_finite_pairs": 12,
+      "pearson_r": 0.007784968776567949,
+      "seed": 42,
+      "undefined_reason": null
+    }
+  ],
+  "final_test_evidence": false,
+  "grouping": [
+    "seed",
+    "condition",
+    "replicate"
+  ],
+  "groups": [
+    {
+      "accuracy_difference_pp": 0.0,
+      "condition": "clean",
+      "mean_loss_benefit": -0.000898698708823531,
+      "n_validation_samples": 12,
+      "parent_accuracy": 1.0,
+      "parent_mean_loss": 0.0005691341357305646,
+      "replicate": 0,
+      "seed": 42,
+      "variant_accuracy": 1.0,
+      "variant_mean_loss": 0.0014678328445540956
+    }
+  ],
+  "metadata": {
+    "caution": "Exploratory frozen-model pilot; no test accuracy, TTA, training, or causal architectural proof.",
+    "dataset": "SHD* validation only",
+    "elapsed_seconds": 14.14000000001397,
+    "environment": {
+      "cuda": "12.4",
+      "device": "cuda:0",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "packages": {
+        "h5py": "3.16.0",
+        "matplotlib": "3.11.2",
+        "numpy": "1.26.4",
+        "omegaconf": "2.3.1",
+        "pytorch-lightning": "2.2.1",
+        "tonic": "1.6.0",
+        "torch": "2.6.0+cu124",
+        "torchmetrics": "1.9.0"
+      },
+      "platform": "Windows",
+      "python": "3.11.0"
+    },
+    "n_recordings": 12,
+    "parent": "MT_SE_adLIF",
+    "seeds": [
+      42
+    ],
+    "variant": "AMT_SE_adLIF"
+  },
+  "n_paired_records": 12,
+  "n_unique_validation_samples": 12,
+  "ordinary_inference": true,
+  "pc": "pc1",
+  "report_version": "adaptation_validation_pilot_v1",
+  "scope": "validation_only",
+  "test_time_augmentation": false
+}

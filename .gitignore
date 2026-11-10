@@ -213,6 +213,10 @@ tensorboard/
 .search.lock
 .evaluation.lock
 .extension.lock
+.analysis.lock
+
+# Frozen-model pilot details are transferred separately; summaries retain provenance.
+results/**/diagnostic_rows/
 
 # Generated launcher files; SWEEP_CONFIG.json retains the reproducible config.
 results/**/trial.yaml
