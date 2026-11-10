@@ -22,7 +22,7 @@ Delta paper is the local test mean minus the published SHD* paper mean of
 speaker-holdout test mean changes by -1.35 pp for DTH and +0.52 pp for LG-DTH.
 The speaker split uses validation speakers 0 and 3, so these results are not a
 matched replacement for the random-recording SHD* comparison. The paper does
-not report train or validation accuracy. Sources: [speaker-holdout results](../results/experiments/shd_speaker_augmented_v1/README.md), [local reference](../results/valid/reference/SHD/RESULTS.md), [shuffled DTH](../results/valid/DTH_SE_adLIF/RESULTS.md), [shuffled LG-DTH](../results/not_improved/LG_DTH_SE_adLIF/RESULTS.md), and [paper results](paper-results.md).
+not report train or validation accuracy. Sources: [speaker-holdout results](../results/experiments/shd_speaker_combined_v1/README.md), [local reference](../results/valid/reference/SHD/RESULTS.md), [shuffled DTH](../results/valid/DTH_SE_adLIF/RESULTS.md), [shuffled LG-DTH](../results/not_improved/LG_DTH_SE_adLIF/RESULTS.md), and [paper results](paper-results.md).
 
 ## Test accuracy
 

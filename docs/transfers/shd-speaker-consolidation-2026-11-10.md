@@ -40,6 +40,11 @@ and restored three of the manually removed roots (`shd_regularization_test_seed4
 `shd_speaker_regularization_test_v1` and `shd_speaker_regularization_v1`). These
 copies remain alongside the canonical collection because further deletion was
 cancelled by the user.
+Subsequent cleanup: the user later removed all remaining separate roots after
+the duplicate audit. All 697 combined files were verified again, including the
+distinct remote partial summary preserved under `provenance/remote_main_7ccdc1b/`.
+The user requested committing and pushing these manual removals. This final
+state supersedes the preceding intermediate folder-status notes.
 Only disposable locks/cache/temporary files were
 excluded from the preserved artifact copies. External PC1/PC2/PC3 bundles were
 not changed or deleted.

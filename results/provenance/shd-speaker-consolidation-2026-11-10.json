@@ -9,7 +9,8 @@
   },
   "cleanup_attempt_utc": "2026-11-10T06:16:02.397764+00:00",
   "cleanup_rejection_reason": "blocked by policy",
-  "cleanup_status": "further_deletion_deferred_by_user",
+  "cleanup_status": "completed_manually_by_user",
+  "cleanup_verified_utc": "2026-11-10T06:30:05.506458+00:00",
   "created_utc": "2026-11-10T06:07:25.544609+00:00",
   "excluded_disposable_files": [
     "results/experiments/shd_speaker_augmented_v1/.extension.lock",
@@ -2552,12 +2553,24 @@
   "manual_cleanup_script": "docs/transfers/finish-shd-speaker-cleanup-2026-11-10.ps1",
   "manually_removed_source_folders": [
     "results/experiments/shd_regularization_test_seed42_v1",
+    "results/experiments/shd_speaker_augmented_tta_v1",
+    "results/experiments/shd_speaker_augmented_v1",
     "results/experiments/shd_speaker_regularization_test_v1",
     "results/experiments/shd_speaker_regularization_tests_v1",
     "results/experiments/shd_speaker_regularization_v1"
   ],
   "note": "Original checkpoint and result bytes retained; aliases preserve legacy identities.",
-  "original_folders_removed": false,
+  "original_folders_removed": true,
+  "post_merge_source_variants": [
+    {
+      "bytes": 1436,
+      "note": "Historical partial validation summary restored by remote merge. The complete canonical summary is retained unchanged under artifacts/. No experiment metrics changed.",
+      "preserved_copy": "results/experiments/shd_speaker_combined_v1/provenance/remote_main_7ccdc1b/shd_speaker_regularization_v1/VALIDATION_COMPARISON.md",
+      "sha256": "d760b60bfd8df9bf7f2c2690eae7712cb34adb47ed5723ca62f0d6f8377a8150",
+      "source": "results/experiments/shd_speaker_regularization_v1/VALIDATION_COMPARISON.md",
+      "upstream_commit": "7ccdc1b"
+    }
+  ],
   "pre_consolidation_view": [
     {
       "archived": "results/experiments/shd_speaker_combined_v1/provenance/pre_consolidation/BUILD_COLLECTION.py",
@@ -2725,13 +2738,7 @@
       "source": "results/experiments/shd_speaker_combined_v1/spike_delete010_v1/LG_DTH_SE_adLIF/SHD/seed_456/RESULT.json"
     }
   ],
-  "remaining_duplicate_source_folders": [
-    "results/experiments/shd_regularization_test_seed42_v1",
-    "results/experiments/shd_speaker_augmented_tta_v1",
-    "results/experiments/shd_speaker_augmented_v1",
-    "results/experiments/shd_speaker_regularization_test_v1",
-    "results/experiments/shd_speaker_regularization_v1"
-  ],
+  "remaining_duplicate_source_folders": [],
   "remote_integration": {
     "further_deletion_cancelled_by_user": true,
     "historical_tracked_copies_preserved": true,
@@ -2848,5 +2855,6 @@
       "external_source": "G:/reza/SE-adlif-2026-11-10/results/not_improved/LG_DTH_SE_adLIF/SHD/seed_456/COST_RESULTS.json",
       "sha256": "ce42817d0cf168a32369ba4bf4d1515454cd9c7bfd8bff524946d6b3555fa99f"
     }
-  ]
+  ],
+  "verified_collection_files": 697
 }
