@@ -1,0 +1,19 @@
+- experiment=SHD_LG_DTH_SE_adLIF
+- random_seed=456
+- +comparison=SHD_speaker_holdout_v1
+- logdir="results/experiments/shd_speaker_augmented_v1/LG_DTH_SE_adLIF/SHD/seed_456"
+- ++launcher_script=runner.py
+- ++model_variant=LG_DTH_SE_adLIF
+- ++run_mode=ours
+- ++launcher_logdir=results/experiments/shd_speaker_augmented_v1
+- ++evaluation_protocol=shd_speaker_augmented_v1
+- ++paper_baseline_deviations=["model_variant=LG_DTH_SE_adLIF"]
+- +shd_speaker_study=augmented_v1
+- ++evaluation_protocol=shd_speaker_augmented_v1
+- ++speaker_holdout_module_version=1.0.0
+- '++paper_baseline_deviations=["model_variant=LG_DTH_SE_adLIF", "validation=two held-out
+  training speakers; replaces random-recording SHD* split", "dropout=0.25 (paper baseline
+  0.15)", "training_augmentation={\"channel_shift\": 2, \"spike_delete_probability\":
+  0.05, \"time_scale\": [0.9, 1.1], \"version\": \"shd_frame_augmentation_v1\"}"]'
+- dataset.speaker_split_manifest=results/experiments/shd_speaker_augmented_v1/SPLIT_MANIFEST.json
+- dataset.speaker_split_fingerprint=e5a914f492e466b338b76e254dac5b404fe3cffd459b14a2973425266a08674a

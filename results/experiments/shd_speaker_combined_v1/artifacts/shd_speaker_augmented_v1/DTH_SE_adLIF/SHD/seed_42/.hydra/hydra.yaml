@@ -1,0 +1,166 @@
+hydra:
+  run:
+    dir: results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42
+  sweep:
+    dir: ${logdir}/hydra/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}
+  launcher:
+    _target_: hydra._internal.core_plugins.basic_launcher.BasicLauncher
+  sweeper:
+    _target_: hydra._internal.core_plugins.basic_sweeper.BasicSweeper
+    max_batch_size: null
+    params: null
+  help:
+    app_name: ${hydra.job.name}
+    header: '${hydra.help.app_name} is powered by Hydra.
+
+      '
+    footer: 'Powered by Hydra (https://hydra.cc)
+
+      Use --hydra-help to view Hydra specific help
+
+      '
+    template: '${hydra.help.header}
+
+      == Configuration groups ==
+
+      Compose your configuration from those groups (group=option)
+
+
+      $APP_CONFIG_GROUPS
+
+
+      == Config ==
+
+      Override anything in the config (foo.bar=value)
+
+
+      $CONFIG
+
+
+      ${hydra.help.footer}
+
+      '
+  hydra_help:
+    template: 'Hydra (${hydra.runtime.version})
+
+      See https://hydra.cc for more info.
+
+
+      == Flags ==
+
+      $FLAGS_HELP
+
+
+      == Configuration groups ==
+
+      Compose your configuration from those groups (For example, append hydra/job_logging=disabled
+      to command line)
+
+
+      $HYDRA_CONFIG_GROUPS
+
+
+      Use ''--cfg hydra'' to Show the Hydra config.
+
+      '
+    hydra_help: ???
+  hydra_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '[%(asctime)s][HYDRA] %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+    root:
+      level: INFO
+      handlers:
+      - console
+    loggers:
+      logging_example:
+        level: DEBUG
+    disable_existing_loggers: false
+  job_logging:
+    version: 1
+    root: null
+    disable_existing_loggers: false
+  env: {}
+  mode: RUN
+  searchpath: []
+  callbacks: {}
+  output_subdir: .hydra
+  overrides:
+    hydra:
+    - hydra.run.dir="results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42"
+    - hydra.mode=RUN
+    task:
+    - experiment=SHD_DTH_SE_adLIF
+    - random_seed=42
+    - +comparison=SHD_speaker_holdout_v1
+    - logdir="results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42"
+    - ++launcher_script=runner.py
+    - ++model_variant=DTH_SE_adLIF
+    - ++run_mode=ours
+    - ++launcher_logdir=results/experiments/shd_speaker_augmented_v1
+    - ++evaluation_protocol=shd_speaker_augmented_v1
+    - ++paper_baseline_deviations=["model_variant=DTH_SE_adLIF"]
+    - +shd_speaker_study=augmented_v1
+    - ++evaluation_protocol=shd_speaker_augmented_v1
+    - ++speaker_holdout_module_version=1.0.0
+    - '++paper_baseline_deviations=["model_variant=DTH_SE_adLIF", "validation=two
+      held-out training speakers; replaces random-recording SHD* split", "dropout=0.25
+      (paper baseline 0.15)", "training_augmentation={\"channel_shift\": 2, \"spike_delete_probability\":
+      0.05, \"time_scale\": [0.9, 1.1], \"version\": \"shd_frame_augmentation_v1\"}"]'
+    - dataset.speaker_split_manifest=results/experiments/shd_speaker_augmented_v1/SPLIT_MANIFEST.json
+    - dataset.speaker_split_fingerprint=e5a914f492e466b338b76e254dac5b404fe3cffd459b14a2973425266a08674a
+  job:
+    name: run
+    chdir: true
+    override_dirname: '++evaluation_protocol=shd_speaker_augmented_v1,++evaluation_protocol=shd_speaker_augmented_v1,++launcher_logdir=results/experiments/shd_speaker_augmented_v1,++launcher_script=runner.py,++model_variant=DTH_SE_adLIF,++paper_baseline_deviations=["model_variant=DTH_SE_adLIF",
+      "validation=two held-out training speakers; replaces random-recording SHD* split",
+      "dropout=0.25 (paper baseline 0.15)", "training_augmentation={\"channel_shift\":
+      2, \"spike_delete_probability\": 0.05, \"time_scale\": [0.9, 1.1], \"version\":
+      \"shd_frame_augmentation_v1\"}"],++paper_baseline_deviations=["model_variant=DTH_SE_adLIF"],++run_mode=ours,++speaker_holdout_module_version=1.0.0,+comparison=SHD_speaker_holdout_v1,+shd_speaker_study=augmented_v1,dataset.speaker_split_fingerprint=e5a914f492e466b338b76e254dac5b404fe3cffd459b14a2973425266a08674a,dataset.speaker_split_manifest=results/experiments/shd_speaker_augmented_v1/SPLIT_MANIFEST.json,experiment=SHD_DTH_SE_adLIF,logdir="results/experiments/shd_speaker_augmented_v1/DTH_SE_adLIF/SHD/seed_42",random_seed=42'
+    id: ???
+    num: ???
+    config_name: main
+    env_set: {}
+    env_copy: []
+    config:
+      override_dirname:
+        kv_sep: '='
+        item_sep: ','
+        exclude_keys: []
+  runtime:
+    version: 1.3.2
+    version_base: '1.3'
+    cwd: C:\Users\jafari.h.SPADANACO\Desktop\SE-adlif
+    config_sources:
+    - path: hydra.conf
+      schema: pkg
+      provider: hydra
+    - path: C:\Users\jafari.h.SPADANACO\Desktop\SE-adlif\config
+      schema: file
+      provider: main
+    - path: ''
+      schema: structured
+      provider: schema
+    output_dir: C:\Users\jafari.h.SPADANACO\Desktop\SE-adlif\results\experiments\shd_speaker_augmented_v1\DTH_SE_adLIF\SHD\seed_42
+    choices:
+      shd_speaker_study: augmented_v1
+      comparison: SHD_speaker_holdout_v1
+      experiment: SHD_DTH_SE_adLIF
+      dataset: shd
+      hydra/env: default
+      hydra/callbacks: null
+      hydra/job_logging: none
+      hydra/hydra_logging: default
+      hydra/hydra_help: default
+      hydra/help: default
+      hydra/sweeper: basic
+      hydra/launcher: basic
+      hydra/output: default
+  verbose: false

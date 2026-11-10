@@ -1,0 +1,8 @@
+# Preserve the original bytes of explicitly tracked historical SHD evidence.
+results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/*/SHD/seed_*/.hydra/config.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/*/SHD/seed_*/.hydra/hydra.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/*/SHD/seed_*/.hydra/overrides.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/*/SHD/seed_*/completed.txt -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/*/SHD/seed_*/logs/mlp_snn/version_0/hparams.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/*/SHD/seed_*/logs/mlp_snn/version_0/metrics.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/*/SHD/seed_*/out.log -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
