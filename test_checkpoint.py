@@ -17,6 +17,8 @@ ROOT = Path(__file__).resolve().parent
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--checkpoint', type=Path, required=True)
+    parser.add_argument('--output-dir', type=Path,
+                        help='Save standalone test evidence separately from training artifacts')
     args = parser.parse_args()
     checkpoint_path = local_path(args.checkpoint, must_exist=True)
     checkpoint = torch.load(checkpoint_path, map_location='cpu', weights_only=False)
@@ -37,7 +39,8 @@ def main():
         logger=False, enable_checkpointing=False,
     )
     results = trainer.test(model, datamodule=datamodule)[0]
-    directory = checkpoint_path.parent.parent
+    directory = local_path(args.output_dir) if args.output_dir else checkpoint_path.parent.parent
+    directory.mkdir(parents=True, exist_ok=True)
     (directory / 'TEST_RESULTS.json').write_text(
         json.dumps(dict(checkpoint=portable_path(checkpoint_path), metrics=results), indent=2) + '\n',
         encoding='utf-8',
