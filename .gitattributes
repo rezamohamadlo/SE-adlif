@@ -4,6 +4,7 @@
 scripts/adaptation_analysis/*.py -text
 config/studies/adaptation_mechanism_pilot_v1.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 results/experiments/adaptation_pilot_command_verification_v*/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_mechanism_analysis_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 
 results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/*/SHD/seed_*/.hydra/config.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/*/SHD/seed_*/.hydra/hydra.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

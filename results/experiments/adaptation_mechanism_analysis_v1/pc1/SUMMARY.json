@@ -1,0 +1,256 @@
+{
+  "accuracy_difference_definition": "100 * (variant_accuracy - parent_accuracy), percentage points",
+  "accuracy_units": "fraction",
+  "across_seed_aggregates": [
+    {
+      "complete_training_seed_cohort": true,
+      "condition": "clean",
+      "expected_training_seeds": [
+        123,
+        42,
+        456
+      ],
+      "metrics": {
+        "accuracy_difference_pp": {
+          "mean": 0.0,
+          "sample_sd": 0.6765823467065927
+        },
+        "mean_loss_benefit": {
+          "mean": 0.0037174342098469926,
+          "sample_sd": 0.03902979490862101
+        },
+        "parent_accuracy": {
+          "mean": 0.9947916666666666,
+          "sample_sd": 0.002255274489021976
+        },
+        "parent_mean_loss": {
+          "mean": 0.042190653330590445,
+          "sample_sd": 0.013230725693159215
+        },
+        "variant_accuracy": {
+          "mean": 0.9947916666666666,
+          "sample_sd": 0.005966895436140416
+        },
+        "variant_mean_loss": {
+          "mean": 0.03847321912074345,
+          "sample_sd": 0.03052030519920168
+        }
+      },
+      "missing_training_seeds": [],
+      "n_training_seeds": 3,
+      "replicate": 0,
+      "training_seeds": [
+        123,
+        42,
+        456
+      ]
+    }
+  ],
+  "aggregate_scope": "equal-weight per-training-seed means within each condition/replicate; sample SD (ddof=1), undefined for one seed; SD is not a confidence interval; missing members of the reported seed cohort are explicit",
+  "architecture_selection": false,
+  "association_scope": "descriptive Pearson correlation on finite clean-input pairs, separately per seed; no p-values",
+  "benefit_definition": "parent_loss - variant_loss; positive favors variant",
+  "feature_associations": [
+    {
+      "condition": "clean",
+      "feature": "mean_rate_hz",
+      "n_finite_pairs": 256,
+      "pearson_r": 0.030862298072196623,
+      "seed": 123,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "fast_slow_contrast",
+      "n_finite_pairs": 256,
+      "pearson_r": -0.07536963465767553,
+      "seed": 123,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "autocorr_tau_ms",
+      "n_finite_pairs": 256,
+      "pearson_r": 0.05409073452557965,
+      "seed": 123,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "active_channel_fraction",
+      "n_finite_pairs": 256,
+      "pearson_r": -0.09664178452858499,
+      "seed": 123,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "duration_ms",
+      "n_finite_pairs": 256,
+      "pearson_r": -0.09610416080148354,
+      "seed": 123,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "mean_rate_hz",
+      "n_finite_pairs": 256,
+      "pearson_r": -0.043168938152945084,
+      "seed": 42,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "fast_slow_contrast",
+      "n_finite_pairs": 256,
+      "pearson_r": 0.03503212554913038,
+      "seed": 42,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "autocorr_tau_ms",
+      "n_finite_pairs": 256,
+      "pearson_r": -0.06797888584964651,
+      "seed": 42,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "active_channel_fraction",
+      "n_finite_pairs": 256,
+      "pearson_r": 0.01621980393652025,
+      "seed": 42,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "duration_ms",
+      "n_finite_pairs": 256,
+      "pearson_r": 0.05385183771887414,
+      "seed": 42,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "mean_rate_hz",
+      "n_finite_pairs": 256,
+      "pearson_r": 0.04521967341436102,
+      "seed": 456,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "fast_slow_contrast",
+      "n_finite_pairs": 256,
+      "pearson_r": 0.06613574933033188,
+      "seed": 456,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "autocorr_tau_ms",
+      "n_finite_pairs": 256,
+      "pearson_r": 0.00602531517051011,
+      "seed": 456,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "active_channel_fraction",
+      "n_finite_pairs": 256,
+      "pearson_r": 0.12427971186839037,
+      "seed": 456,
+      "undefined_reason": null
+    },
+    {
+      "condition": "clean",
+      "feature": "duration_ms",
+      "n_finite_pairs": 256,
+      "pearson_r": 0.03353953417954003,
+      "seed": 456,
+      "undefined_reason": null
+    }
+  ],
+  "final_test_evidence": false,
+  "grouping": [
+    "seed",
+    "condition",
+    "replicate"
+  ],
+  "groups": [
+    {
+      "accuracy_difference_pp": 0.390625,
+      "condition": "clean",
+      "mean_loss_benefit": 0.04715306811005307,
+      "n_validation_samples": 256,
+      "parent_accuracy": 0.99609375,
+      "parent_mean_loss": 0.050395189457640155,
+      "replicate": 0,
+      "seed": 123,
+      "variant_accuracy": 1.0,
+      "variant_mean_loss": 0.0032421213475870847
+    },
+    {
+      "accuracy_difference_pp": 0.390625,
+      "condition": "clean",
+      "mean_loss_benefit": -0.00759201248480923,
+      "n_validation_samples": 256,
+      "parent_accuracy": 0.9921875,
+      "parent_mean_loss": 0.04924931231514612,
+      "replicate": 0,
+      "seed": 42,
+      "variant_accuracy": 0.99609375,
+      "variant_mean_loss": 0.05684132479995535
+    },
+    {
+      "accuracy_difference_pp": -0.78125,
+      "condition": "clean",
+      "mean_loss_benefit": -0.028408752995702863,
+      "n_validation_samples": 256,
+      "parent_accuracy": 0.99609375,
+      "parent_mean_loss": 0.026927458218985068,
+      "replicate": 0,
+      "seed": 456,
+      "variant_accuracy": 0.98828125,
+      "variant_mean_loss": 0.05533621121468793
+    }
+  ],
+  "metadata": {
+    "caution": "Exploratory frozen-model pilot; no test accuracy, TTA, training, or causal architectural proof.",
+    "dataset": "SHD* validation only",
+    "elapsed_seconds": 33.375,
+    "environment": {
+      "cuda": "12.4",
+      "device": "cuda:0",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "packages": {
+        "h5py": "3.16.0",
+        "matplotlib": "3.11.2",
+        "numpy": "1.26.4",
+        "omegaconf": "2.3.1",
+        "pytorch-lightning": "2.2.1",
+        "tonic": "1.6.0",
+        "torch": "2.6.0+cu124",
+        "torchmetrics": "1.9.0"
+      },
+      "platform": "Windows",
+      "python": "3.11.0"
+    },
+    "n_recordings": 256,
+    "parent": "MT_SE_adLIF",
+    "seeds": [
+      42,
+      123,
+      456
+    ],
+    "variant": "AMT_SE_adLIF"
+  },
+  "n_paired_records": 768,
+  "n_unique_validation_samples": 256,
+  "ordinary_inference": true,
+  "pc": "pc1",
+  "report_version": "adaptation_validation_pilot_v1",
+  "scope": "validation_only",
+  "test_time_augmentation": false
+}
