@@ -1,0 +1,215 @@
+{
+  "random_seed": 42,
+  "logdir": "results/experiments/complementary_speaker_dev_v2/transfer_A002_gain_v1/SE_adLIF/ECG/seed_42",
+  "datadir": "data",
+  "cachedir": "data/cache",
+  "ckpt_path": null,
+  "init_ckpt_path": null,
+  "run_test": false,
+  "scheduler": "plateau",
+  "scheduler_min_lr": 0.0,
+  "gradient_clip_val": 1.5,
+  "device": "cuda:0",
+  "early_stopping": false,
+  "early_stopping_patience": 50,
+  "early_stopping_min_delta": 0.001,
+  "dataset": {
+    "_target_": "datasets.ecg.ECGLDM",
+    "data_path": "data",
+    "batch_size": 256,
+    "num_workers": 0,
+    "num_classes": 6,
+    "valid_fraction": 0.05,
+    "random_seed": 42,
+    "validation_batch_size": 64,
+    "validation_only_data": true
+  },
+  "exp_name": "ECG_SE_adLIF_2layer",
+  "two_layers": true,
+  "alpha": 5.0,
+  "c": 0.2,
+  "dt": 1.0,
+  "l1": {
+    "cell": "se_adlif",
+    "input_size": 4,
+    "n_neurons": 36,
+    "tau_u_range": [
+      5,
+      25
+    ],
+    "tau_w_range": [
+      60,
+      300
+    ],
+    "q": 120,
+    "alpha": 5.0,
+    "c": 0.2,
+    "dt": 1.0
+  },
+  "l2": {
+    "cell": "se_adlif",
+    "input_size": 36,
+    "n_neurons": 36,
+    "tau_u_range": [
+      5,
+      25
+    ],
+    "tau_w_range": [
+      60,
+      300
+    ],
+    "q": 120,
+    "alpha": 5.0,
+    "c": 0.2,
+    "dt": 1.0
+  },
+  "l_out": {
+    "input_size": 36,
+    "n_neurons": 6,
+    "tau_u_range": [
+      3,
+      3
+    ],
+    "dt": 1.0
+  },
+  "n_epochs": 400,
+  "dropout": 0.15,
+  "batch_size": 256,
+  "loss_agg": "summed_membrane_potentials",
+  "tracking_metric": "val_acc",
+  "tracking_mode": "max",
+  "lr": 0.01,
+  "factor": 0.9,
+  "patience": 9999,
+  "paper_baseline": {
+    "version": "paper_classification_v1",
+    "source": {
+      "doi": "10.1038/s41467-025-60878-z",
+      "document": "reference_paper.pdf",
+      "locations": "Table 7 (page 35); training/preprocessing methods (pages 28-29)"
+    },
+    "common": {
+      "lr_optimizer": "Adam",
+      "adam_betas": [
+        0.9,
+        0.999
+      ],
+      "adam_eps": 1e-08,
+      "dropout": 0.15,
+      "gradient_clip_val": 1.5,
+      "alpha": 5.0,
+      "dt": 1.0,
+      "tracking_metric": "val_acc",
+      "tracking_mode": "max"
+    },
+    "reproduction_policy": {
+      "training_seeds": [
+        42,
+        123,
+        456
+      ],
+      "split_seed": 42,
+      "num_workers": 0,
+      "early_stopping": false,
+      "scheduler": "plateau",
+      "patience": 9999,
+      "factor": 0.9,
+      "cache_namespace": "controlled_v2"
+    },
+    "datasets": {
+      "SHD": {
+        "report_label": "SHD*",
+        "lr": 0.01,
+        "batch_size": 256,
+        "n_epochs": 300,
+        "validate_on": 0.2,
+        "spatial_factor": 0.2,
+        "time_factor": 0.001,
+        "window_size": 4,
+        "pad_to_min_size": 250,
+        "ignore_first_timesteps": 10,
+        "reference_architecture": {
+          "layers": 2,
+          "neurons_per_layer": 360,
+          "q": 120,
+          "c": 0.4,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "output_tau": 15
+        }
+      },
+      "SSC": {
+        "lr": 0.006,
+        "batch_size": 256,
+        "n_epochs": 40,
+        "validation": "official",
+        "spatial_factor": 0.2,
+        "time_factor": 0.001,
+        "window_size": 4,
+        "pad_to_min_size": 300,
+        "ignore_first_timesteps": 10,
+        "reference_architecture": {
+          "layers": 2,
+          "neurons_per_layer": 720,
+          "q": 120,
+          "c": 0.4,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "output_tau": 15
+        }
+      },
+      "ECG": {
+        "lr": 0.01,
+        "batch_size": 64,
+        "n_epochs": 400,
+        "valid_fraction": 0.05,
+        "reference_architecture": {
+          "layers": 2,
+          "neurons_per_layer": 36,
+          "q": 120,
+          "c": 0.2,
+          "tau_u_range": [
+            5,
+            25
+          ],
+          "tau_w_range": [
+            60,
+            300
+          ],
+          "output_tau": 3
+        }
+      }
+    }
+  },
+  "paper_baseline_version": "paper_classification_v1",
+  "paper_baseline_deviations": [
+    "validation-only staged discovery; official tests disabled",
+    "batch_size=256; LR unchanged",
+    "full_schedule_epochs=400; explicit staged stops"
+  ],
+  "paper_baseline_dataset": "ECG",
+  "launcher_script": "runner.py",
+  "model_variant": "SE_adLIF",
+  "run_mode": "reference",
+  "launcher_logdir": "results/experiments/complementary_speaker_dev_v2/transfer_A002_gain_v1",
+  "evaluation_protocol": "paper_classification_v1_complementary_speaker_dev_v2",
+  "validation_only": true,
+  "complementary_study": "complementary_speaker_dev_v2",
+  "study_file": "config/studies/complementary_transfer_A002_gain_v1.yaml",
+  "study_idea": "A002_INPUT_GAIN",
+  "study_stage": 4,
+  "study_hypothesis": "Fresh matched dataset-specific reference control; no historical weights or changed optimization.",
+  "stage_ceiling": 50
+}

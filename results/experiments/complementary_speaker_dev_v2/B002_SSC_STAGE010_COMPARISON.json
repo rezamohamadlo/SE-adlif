@@ -1,0 +1,46 @@
+{
+  "status": "verified_matched_SSC10_validation_screen_complete",
+  "training_seed": 42,
+  "records": [
+    {
+      "model": "SE_adLIF",
+      "selected_validation_accuracy": 0.7842901349067688,
+      "selected_completed_epoch": 10,
+      "training_accuracy_at_selection": 0.7947613596916199,
+      "validation_loss_at_selection": 0.7035662531852722,
+      "training_hard_ce_at_selection": 0.6813738346099854,
+      "training_objective_loss_at_selection": 0.6813738346099854,
+      "last3_mean_accuracy": 0.7763082981109619,
+      "epoch8_to10_accuracy_gain_pp": 1.4427423477172852,
+      "epoch8_to10_loss_change": -0.056132733821868896,
+      "resume_checkpoint": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/SE_adLIF/SSC/seed_42/stages/010/last.ckpt",
+      "resume_checkpoint_sha256": "3e471b022500dd8d3adfdb0f558f8a250cf0fcf96202a9729c6dcc5491f4851a",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/SE_adLIF/SSC/seed_42/stages/010/RESULT.json"
+    },
+    {
+      "model": "LS_SE_adLIF",
+      "selected_validation_accuracy": 0.7880973815917969,
+      "selected_completed_epoch": 10,
+      "training_accuracy_at_selection": 0.799149215221405,
+      "validation_loss_at_selection": 0.797377347946167,
+      "training_hard_ce_at_selection": 0.7869496941566467,
+      "training_objective_loss_at_selection": 1.300018548965454,
+      "last3_mean_accuracy": 0.7766089042027792,
+      "epoch8_to10_accuracy_gain_pp": 1.122128963470459,
+      "epoch8_to10_loss_change": -0.0397525429725647,
+      "resume_checkpoint": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/LS_SE_adLIF/SSC/seed_42/stages/010/last.ckpt",
+      "resume_checkpoint_sha256": "72accdb47cf9fcd87f318b8a3019ea2ca9a71930638c95f397258a5ddd57276f",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/LS_SE_adLIF/SSC/seed_42/stages/010/RESULT.json"
+    }
+  ],
+  "LS_minus_Baseline_pp": 0.3807246685028076,
+  "practical_threshold_pp": 0.5,
+  "shared_configuration_match_verified": true,
+  "source_archive_unchanged_verified": true,
+  "decision": "EXTEND_INCONCLUSIVE_MATCHED10_TO40",
+  "interpretation": "Nominal+0.380725pp is below+0.5threshold; LS ordinary validation CE is worse. Both selected epoch10 and improved accuracy/loss between8and10. Train accuracy remains~80%. This is genuinely still-learning/inconclusive within declared40budget, not positive transfer evidence or loss/gap-only success.",
+  "next_action": "Full resume each own last state to original40epoch budget, unchanged optimizer/scheduler/settings/source; preserve10snapshots. No tuning, official tests or extension beyond40.",
+  "official_test_evaluated": false,
+  "full_goal_complete": false,
+  "training_accuracy_definition": "Training accuracy is the logged online epoch aggregate with dropout active and weights changing across batches. It is not a clean full-training-set reevaluation of the fixed selected checkpoint. Validation is a clean fixed-checkpoint pass; the gap alone is not a success criterion."
+}

@@ -1,0 +1,48 @@
+{
+  "A_minus_Baseline_pp": -0.34064650535583496,
+  "dataset": "SSC",
+  "decision": "REVISE_TRANSFER_HYPOTHESIS",
+  "interpretation": "No practical SSC gain under this matched seed42protocol; A selected loss is also higher. One seed does not establish population inferiority. Preserve SHD development gains and SSC regression; no extension beyond40 or test-driven rescue.",
+  "next_action": "Investigate with preregistered primary-only gain control before investing in further B; ECG remains planned/pending, not silently omitted.",
+  "official_test_evaluated": false,
+  "practical_threshold_pp": 0.5,
+  "protocol": "ssc_mean_loss_v1_complementary_speaker_dev_v2",
+  "records": [
+    {
+      "arm": "Baseline",
+      "completed_epochs": 40,
+      "final_training_accuracy": 0.8745183944702148,
+      "final_validation_accuracy": 0.8089369535446167,
+      "final_validation_loss": 0.6410871148109436,
+      "model": "SE_adLIF",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/transfer_A001/SE_adLIF/SSC/seed_42/stages/040/RESULT.json",
+      "selected_checkpoint_epoch_index": 23,
+      "selected_completed_epoch": 24,
+      "tail10_epoch_sample_sd": 0.01061548529214161,
+      "tail10_mean_accuracy": 0.8040777444839478,
+      "total_epoch_seconds": 3720.279907099437,
+      "training_accuracy_at_selection": 0.8640437722206116,
+      "validation_accuracy": 0.8126440048217773,
+      "validation_loss_at_selection": 0.6187962889671326
+    },
+    {
+      "arm": "A",
+      "completed_epochs": 40,
+      "final_training_accuracy": 0.8958556056022644,
+      "final_validation_accuracy": 0.8046287894248962,
+      "final_validation_loss": 0.6957621574401855,
+      "model": "FIR_SE_adLIF",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/transfer_A001/FIR_SE_adLIF/SSC/seed_42/stages/040/RESULT.json",
+      "selected_checkpoint_epoch_index": 32,
+      "selected_completed_epoch": 33,
+      "tail10_epoch_sample_sd": 0.005254253830764885,
+      "tail10_mean_accuracy": 0.8017934083938598,
+      "total_epoch_seconds": 3744.9708365997067,
+      "training_accuracy_at_selection": 0.876043438911438,
+      "validation_accuracy": 0.809237539768219,
+      "validation_loss_at_selection": 0.6659694910049438
+    }
+  ],
+  "status": "verified_full_training_budget_validation_only",
+  "training_seed": 42
+}

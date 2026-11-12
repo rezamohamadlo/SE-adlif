@@ -1,0 +1,23 @@
+version: complementary_mechanisms_v1
+plan: docs/experiments/complementary-mechanisms-study-v1.md
+output_root: results/experiments/complementary_mechanisms_v1/A001
+idea: A001
+hypothesis: Per-input-channel causal filtering before projection improves feature timing while preserving initial reference dynamics.
+training_seed: 42
+split_seed: 42
+datasets:
+  SHD:
+    batch_size: 1024
+    validation_batch_size: 1024
+    ceilings: [30, 75, 150, 300]
+    stage: 1
+  SSC:
+    batch_size: 256
+    ceilings: [10, 40]
+    stage: 2
+  ECG:
+    batch_size: 256
+    validation_batch_size: 64
+    ceilings: [50, 100, 400]
+    stage: 3
+models: [SE_adLIF, FIR_SE_adLIF]

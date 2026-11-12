@@ -1,0 +1,87 @@
+"""One-off primary-validation backend replay; execute only after the GPU queue closes."""
+import contextlib,csv,gc,hashlib,io,json,time
+from pathlib import Path
+import h5py,numpy as np,torch
+from hydra.utils import instantiate
+from omegaconf import OmegaConf
+from models.pl_module import build_training_model
+from module.study_control import forward_identity
+from project_paths import ROOT,local_path
+
+OUT=ROOT/'results/experiments/complementary_speaker_dev_v2';TARGET=OUT/'B002_PRIMARY_GPU_REPLAY.json'
+assert not TARGET.exists(),'Preserve existing replay evidence'
+assert torch.cuda.is_available();torch.manual_seed(42)
+manifest=json.loads((OUT/'primary_0_3/SPLIT_MANIFEST.json').read_text())
+with h5py.File(local_path('data/SHDWrapper/shd_train.h5',must_exist=True),'r') as source:
+    raw_labels=source['labels'][:];raw_speakers=source['extra/speaker'][:]
+records=[]
+for name in ['SE_adLIF','LS_SE_adLIF']:
+    run=OUT/'b002_label_smoothing_v1/primary_0_3'/name/'SHD/seed_42'
+    receipt=json.loads((run/'stages/030/RESULT.json').read_text())
+    ckpt=local_path(receipt['best_checkpoint'],must_exist=True)
+    assert hashlib.sha256(ckpt.read_bytes()).hexdigest()==receipt['best_checkpoint_sha256']
+    assert json.loads((run/'MODEL_SOURCE_IDENTITY.json').read_text())==forward_identity('SHD')
+    state=torch.load(ckpt,map_location='cpu',weights_only=False);assert state['epoch']==receipt['selected_epoch_index']
+    original=OmegaConf.to_container(OmegaConf.create(state['hyper_parameters']['cfg']),resolve=True)
+    assert original['dataset']['validation_only_data'] is True and original['run_test'] is False
+    assert original['dataset']['speaker_split_fingerprint']==manifest['fingerprint']
+    cpu_record=json.loads((run/'VALIDATION_CPU_DIAGNOSTICS_STAGE030.json').read_text())
+    cpu_file=local_path(cpu_record['prediction_rows'],must_exist=True)
+    assert hashlib.sha256(cpu_file.read_bytes()).hexdigest()==cpu_record['prediction_rows_sha256']
+    with np.load(cpu_file,allow_pickle=False) as archive:cpu={k:archive[k].copy() for k in archive.files}
+    selected=[row for row in csv.DictReader((run/'logs/mlp_snn/version_0/metrics.csv').open()) if row.get('val_loss') not in ('',None,'nan') and int(float(row['epoch']))==receipt['selected_epoch_index']]
+    assert len(selected)==1;original_ce=float(selected[0]['val_loss'])
+    modes=[]
+    for mode in ['high','highest']:
+        torch.set_float32_matmul_precision(mode);torch.manual_seed(42)
+        cfg=OmegaConf.create(original);cfg.dataset.num_workers=0
+        dm=instantiate(cfg.dataset,data_path=str(local_path(cfg.dataset.data_path)));assert not hasattr(dm,'data_test')
+        indices=np.asarray(dm.data_val.indices,dtype=np.int64);assert indices.tolist()==manifest['subsets']['validation']['indices']
+        with contextlib.redirect_stdout(io.StringIO()):model=build_training_model(cfg)
+        model.load_state_dict(state['state_dict'],strict=True);model.cuda().eval()
+        passes=[];arrays=[]
+        for replay in [1,2]:
+            ps=[];ys=[];ces=[];torch.cuda.synchronize();torch.cuda.reset_peak_memory_stats();start=time.perf_counter()
+            with torch.inference_mode():
+                for x,y,blocks in dm.val_dataloader():
+                    x,y,blocks=x.cuda(),y.cuda(),blocks.cuda()
+                    assert x.dtype==torch.float32
+                    reduced,loss,_=model.process_predictions_and_compute_losses(model(x),y,blocks)
+                    mask=y.flatten().ne(-1);assert int(mask.sum())==len(x)
+                    scores=reduced[mask].float();target=y.flatten()[mask].long()
+                    ps.append(scores.softmax(-1).cpu().numpy());ys.append(target.cpu().numpy())
+                    ces.append(torch.nn.functional.cross_entropy(scores,target,reduction='none').cpu().numpy())
+            torch.cuda.synchronize();elapsed=time.perf_counter()-start
+            probability=np.concatenate(ps);target=np.concatenate(ys);ce=np.concatenate(ces);pred=probability.argmax(1)
+            assert len(target)==1635 and np.array_equal(target,raw_labels[indices]) and np.array_equal(indices,cpu['row_indices'])
+            assert np.isfinite(probability).all() and np.isfinite(ce).all()
+            correct=pred==target;cpu_correct=cpu['predictions']==target;speakers=raw_speakers[indices]
+            row_file=run/'diagnostic_rows'/f'stage030_primary_GPU_{mode}_replay{replay}.npz';assert not row_file.exists()
+            with row_file.open('xb') as stream:np.savez_compressed(stream,row_indices=indices,speaker_ids=speakers,targets=target,predictions=pred,probabilities=probability,cross_entropy=ce)
+            rec=dict(replay=replay,accuracy=float(correct.mean()),cross_entropy=float(ce.mean()),
+                original_GPU_selected_accuracy=receipt['best_validation_accuracy'],original_GPU_selected_CE=original_ce,
+                original_GPU_accuracy_difference_pp=100*(float(correct.mean())-receipt['best_validation_accuracy']),
+                original_GPU_CE_difference=float(ce.mean())-original_ce,
+                original_GPU_correct_count_difference=int(correct.sum())-round(receipt['best_validation_accuracy']*len(target)),
+                changed_predictions_vs_CPU=int((pred!=cpu['predictions']).sum()),changed_correctness_vs_CPU=int((correct!=cpu_correct).sum()),
+                CPU_only_correct=int((cpu_correct&~correct).sum()),GPU_only_correct=int((~cpu_correct&correct).sum()),
+                max_abs_probability_difference_vs_CPU=float(np.max(np.abs(probability-cpu['probabilities']))),
+                per_speaker={str(int(s)):dict(recordings=int((speakers==s).sum()),accuracy=float(correct[speakers==s].mean())) for s in np.unique(speakers)},
+                seconds=elapsed,peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30,
+                peak_reserved_gib=torch.cuda.max_memory_reserved()/2**30,
+                prediction_rows=row_file.relative_to(ROOT).as_posix(),prediction_rows_sha256=hashlib.sha256(row_file.read_bytes()).hexdigest())
+            passes.append(rec);arrays.append((pred.copy(),probability.copy()))
+            print('[GPU_REPLAY] '+json.dumps(dict(model=name,mode=mode,**rec)),flush=True)
+        modes.append(dict(matmul_precision=mode,allow_tf32=bool(torch.backends.cuda.matmul.allow_tf32),diagnostic_only=(mode!='high'),replays=passes,
+                          repeated_changed_predictions=int((arrays[0][0]!=arrays[1][0]).sum()),repeated_max_probability_difference=float(np.max(np.abs(arrays[0][1]-arrays[1][1])))))
+        del model,dm,x,y,blocks,reduced,scores,ps,ys,ces,arrays;gc.collect();torch.cuda.empty_cache()
+    records.append(dict(model=name,checkpoint=receipt['best_checkpoint'],checkpoint_sha256=receipt['best_checkpoint_sha256'],modes=modes))
+# Preserve the established mode for any later work in this process.
+torch.set_float32_matmul_precision('high')
+result=dict(status='complete_primary_validation_backend_diagnostic',records=records,
+    source_code='results/experiments/complementary_speaker_dev_v2/B002_PRIMARY_GPU_REPLAY_SOURCE.txt',
+    source_sha256=hashlib.sha256((OUT/'B002_PRIMARY_GPU_REPLAY_SOURCE.txt').read_bytes()).hexdigest(),
+    model_source_identity=forward_identity('SHD'),device=torch.cuda.get_device_name(0),torch_version=torch.__version__,
+    precision_policy='Original GPU high selection scores remain authoritative. Highest is numerical diagnosis only, never mode selection or changed training/testing protocol.',
+    official_test_opened=False,selection_scores_replaced=False,new_hyperparameters_selected=False)
+TARGET.write_text(json.dumps(result,indent=2)+'\n');print('[GPU_REPLAY_COMPLETE] no training or official tests',flush=True)

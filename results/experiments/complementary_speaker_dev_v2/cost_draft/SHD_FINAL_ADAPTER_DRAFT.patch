@@ -1,0 +1,292 @@
+diff --git a/module/shd_final_evaluation.py b/module/shd_final_evaluation.py
+new file mode 100644
+--- /dev/null
++++ b/module/shd_final_evaluation.py
+@@ -0,0 +1,124 @@
++"""Draft adapters for a future frozen SHD* final test, never development.
++
++No training and no candidate selection. The entrypoint remains responsible
++for the complete final-cohort/checkpoint/config/source gate BEFORE calling.
++"""
++import hashlib
++import json
++import math
++from pathlib import Path
++
++import h5py
++from omegaconf import OmegaConf
++from torch.utils.data import DataLoader, Subset
++
++from datasets.shd import SHDWrapper
++from project_paths import local_path, portable_path
++from module.shd_final_provenance import (
++    verify_canonical_fitting_membership, verify_original_row_loader,
++)
++from module.ordinary_prediction_capture import capture_ordinary_classification
++from module.speaker_generalization import summarize_speaker_generalization
++
++
++def _sha256(path):
++    with Path(path).open('rb') as stream:
++        return hashlib.file_digest(stream, 'sha256').hexdigest()
++
++
++def prepare_final_shd_evaluation(cfg, datamodule, plan, authorization, test_file):
++    """After the full gate, bind actual metadata and build one original-row loader.
++
++    Returns ephemeral raw metadata separately from serializable provenance.
++    The original SHDLDM constructor already builds its subsets; its setup and
++    prepare_data are no-ops. No model inference is performed here.
++    """
++    if (plan.get('status') != 'frozen' or plan.get('purpose') != 'final'
++            or plan.get('test_selects_ideas') is not False
++            or authorization.get('purpose') != 'final'
++            or authorization.get('verified_configurations') != 36
++            or authorization.get('dataset') != 'SHD'):
++        raise ValueError('Complete frozen four-arm final authorization must precede SHD data access')
++    settings = plan.get('shd_generalization', {})
++    if settings.get('ordinary_speaker_breakdown') is not True:
++        raise ValueError('Final plan must preregister the ordinary SHD speaker breakdown')
++    cfg = OmegaConf.to_container(cfg, resolve=True) if OmegaConf.is_config(cfg) else cfg
++    dataset_cfg = cfg.get('dataset', {})
++    if (cfg.get('paper_baseline_dataset') != 'SHD'
++            or dataset_cfg.get('bias_for_test_set', 0) != 0
++            or dataset_cfg.get('test_bias_variant', 'bias') not in ('bias', 'none')
++            or dataset_cfg.get('train_augmentation')):
++        raise ValueError('Final SHD evaluation requires the frozen clean ordinary pipeline')
++    if (type(datamodule.train_val_ds) is not SHDWrapper
++            or type(datamodule.data_train) is not Subset
++            or type(datamodule.data_val) is not Subset
++            or datamodule.data_train.dataset is not datamodule.train_val_ds
++            or datamodule.data_val.dataset is not datamodule.train_val_ds):
++        raise ValueError('Actual fitting/validation subsets must share the original training source')
++    train_file = Path(datamodule.train_val_ds.location_on_system, datamodule.train_val_ds.data_filename)
++    if train_file.name != 'shd_train.h5':
++        raise ValueError('Fitting metadata must come from the official training file')
++    manifest_path = local_path(settings['canonical_split_manifest'], must_exist=True)
++    manifest_bytes = manifest_path.read_bytes()
++    train_sha = _sha256(train_file)
++    with h5py.File(train_file, 'r') as source:
++        train_labels = source['labels'][:].reshape(-1).tolist()
++        train_speakers = source['extra/speaker'][:].reshape(-1).tolist()
++    membership = verify_canonical_fitting_membership(
++        manifest_bytes, settings['canonical_split_manifest_sha256'], train_sha,
++        train_labels, train_speakers, datamodule.data_train.indices,
++        datamodule.data_val.indices, cfg,
++    )
++    raw = datamodule.data_test
++    test_file = local_path(test_file, must_exist=True)
++    if (type(raw) is not SHDWrapper or raw.data_filename != 'shd_test.h5'
++            or Path(raw.location_on_system, raw.data_filename).resolve() != test_file.resolve()
++            or authorization.get('test_data_sha256') != _sha256(test_file)):
++        raise ValueError('Original test source differs from final authorized identity')
++    with h5py.File(test_file, 'r') as source:
++        labels = source['labels'][:].reshape(-1).tolist()
++        speakers = source['extra/speaker'][:].reshape(-1).tolist()
++    if datamodule.batch_size != cfg.get('batch_size'):
++        raise ValueError('Final evaluation batch differs from the frozen checkpoint')
++    loader = DataLoader(raw, shuffle=False, drop_last=False,
++                        batch_size=datamodule.batch_size, collate_fn=datamodule.collate_fn,
++                        num_workers=datamodule.num_workers, pin_memory=True,
++                        persistent_workers=datamodule.num_workers > 0)
++    loader_evidence = verify_original_row_loader(
++        loader, raw, test_file, len(labels), datamodule.batch_size,
++        datamodule.static_data_transform_test,
++    )
++    return dict(loader=loader, metadata_labels=labels, metadata_speakers=speakers,
++                provenance=dict(membership=membership, loader=loader_evidence,
++                                canonical_split_manifest=portable_path(manifest_path),
++                                test_data=portable_path(test_file),
++                                test_data_sha256=authorization['test_data_sha256'],
++                                evaluation_workers=datamodule.num_workers,
++                                ordinary_inference=True, test_time_augmentation=False))
++
++
++def evaluate_prepared_shd(model, trainer, prepared):
++    """Capture exactly the existing ordinary test forwards; verify all totals.
++
++    The caller persists the returned summary/rows with the checkpoint and plan
++    identities. Preparing/calling this outside the frozen gate is prohibited.
++    """
++    count = prepared['provenance']['loader']['recordings']
++    if model.output_size != 20:
++        raise ValueError('Final SHD speaker accounting requires the declared20classes')
++    with capture_ordinary_classification(model, count) as capture:
++        results = trainer.test(model, dataloaders=prepared['loader'])
++        rows = capture.finalize()
++    if len(results) != 1:
++        raise ValueError('Require one complete ordinary SHD test loader')
++    result = results[0]
++    summary = summarize_speaker_generalization(
++        rows['predictions'], rows['observed_labels'], rows['row_ids'],
++        prepared['metadata_labels'], prepared['metadata_speakers'],
++        prepared['provenance']['membership']['fitting_speaker_ids'], num_classes=20,
++    )
++    if (not math.isfinite(float(result['test_acc']))
++            or not math.isclose(float(result['test_acc']), summary['groups']['all']['accuracy'],
++                                rel_tol=0, abs_tol=2e-7)):
++        raise ValueError('Speaker-group counts disagree with the ordinary overall test metric')
++    return result, dict(summary, provenance=prepared['provenance']), rows
+diff --git a/tests/test_shd_final_evaluation.py b/tests/test_shd_final_evaluation.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_shd_final_evaluation.py
+@@ -0,0 +1,158 @@
++"""Synthetic component integration, CPU Trainer.test only; never fit/train.
++
++The 36-checkpoint gate is tested separately. Here authorization is a fixture;
++no actual project data, checkpoints, official tests or CUDA work are used.
++"""
++import copy
++import hashlib
++import json
++from pathlib import Path
++from types import SimpleNamespace
++import tempfile
++import unittest
++from unittest.mock import patch
++
++import h5py
++import numpy as np
++import pytorch_lightning as pl
++import torch
++import torchmetrics
++from torch.utils.data import Subset
++
++from datasets.shd import SHDWrapper
++from datasets.utils.pad_tensors import PadTensors
++from module.shd_final_evaluation import prepare_final_shd_evaluation, evaluate_prepared_shd
++from tests import test_shd_final_provenance as provenance_fixtures
++from tests.test_ordinary_prediction_capture import LoggingFixture
++
++
++class SyntheticOrdinaryModel(pl.LightningModule):
++    """Known ordinary predictions with the existing classification logging shape."""
++    def __init__(self):
++        super().__init__()
++        self.auto_regression=False;self.ignore_target_idx=-1;self.output_size=20
++        self.dummy=torch.nn.Parameter(torch.ones(()));self.forward_calls=0
++        self.metric=torchmetrics.Accuracy(task='multiclass',num_classes=20,ignore_index=-1)
++
++    def forward(self,x):
++        self.forward_calls+=1
++        scores=torch.zeros((x.shape[0]*2,20),device=x.device)
++        scores[torch.arange(x.shape[0],device=x.device)*2+1,(x[:,0,0].long()//2)]=self.dummy
++        return scores
++
++    def update_and_log_metrics(self,outputs,targets,loss,metrics,prefix):
++        metrics.update(outputs,targets.flatten())
++        self.log(prefix+'acc',metrics,on_step=False,on_epoch=True)
++        self.log(prefix+'loss',loss,on_step=False,on_epoch=True,batch_size=targets.shape[0])
++
++    def test_step(self,batch,batch_idx):
++        x,y,b=batch;outputs=self(x);valid=y.flatten().ne(-1)
++        # Match the real classification path's existing int64 compatibility conversion.
++        loss=torch.nn.functional.cross_entropy(outputs[valid],y.flatten()[valid].long())
++        self.update_and_log_metrics(outputs,y,loss,self.metric,'test_')
++        return loss
++
++
++class SyntheticTrainerFixture:
++    """No model forward; only exercise negative accounting/capture cases."""
++    def __init__(self,reported_accuracy=1.):self.reported_accuracy=reported_accuracy
++
++    def test(self,model,dataloaders):
++        model.eval()
++        for x,y,b in dataloaders:
++            scores=torch.zeros((y.numel(),20));valid=y.flatten().ne(-1)
++            scores[valid.nonzero().flatten(),y.flatten()[valid]]=1
++            model.update_and_log_metrics(scores,y,'loss','metrics','test_')
++        return [dict(test_acc=self.reported_accuracy,test_loss=0.)]
++
++
++class FinalSHDAdapterTests(unittest.TestCase):
++    def setUp(self):
++        self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
++        self.root=Path(self.temp.name)
++        fitting=provenance_fixtures.FittingMembershipTests();fitting.setUp()
++        self.train_file=self.root/'shd_train.h5';self.test_file=self.root/'shd_test.h5'
++        with h5py.File(self.train_file,'w') as f:
++            f['labels']=np.asarray(fitting.labels);f['extra/speaker']=np.asarray(fitting.speakers)
++        with h5py.File(self.test_file,'w') as f:
++            f['labels']=np.asarray([0,1,2]);f['extra/speaker']=np.asarray([0,10,10])
++            f['spikes/times']=np.array([[.01,.02]]*3,dtype=np.float16)
++            f['spikes/units']=np.arange(6).reshape(3,2)
++        self.transform=lambda events:torch.tensor(events['x'].astype(np.float32)).unsqueeze(1)
++        def raw(path):
++            ds=object.__new__(SHDWrapper)  # No dataset constructors/downloads.
++            ds.location_on_system=str(path.parent);ds.data_filename=path.name
++            ds.ignore_first_timesteps=0;ds.target_transform=None;ds.transform=self.transform
++            return ds
++        train=raw(self.train_file)
++        self.dm=SimpleNamespace(train_val_ds=train,data_train=Subset(train,fitting.fitting),
++                                data_val=Subset(train,fitting.validation),data_test=raw(self.test_file),
++                                static_data_transform_test=self.transform,batch_size=2,
++                                num_workers=0,collate_fn=PadTensors())
++        manifest=fitting.manifest();manifest['source_sha256']=hashlib.sha256(self.train_file.read_bytes()).hexdigest()
++        manifest_file=self.root/'frozen_split.json';manifest_file.write_text(json.dumps(manifest))
++        self.cfg=dict(paper_baseline_dataset='SHD',batch_size=2,init_ckpt_path=None,
++                      dataset=dict(validate_on=.2,random_seed=42))
++        self.plan=dict(status='frozen',purpose='final',test_selects_ideas=False,
++                       shd_generalization=dict(ordinary_speaker_breakdown=True,
++                            canonical_split_manifest=str(manifest_file),
++                            canonical_split_manifest_sha256=hashlib.sha256(manifest_file.read_bytes()).hexdigest()))
++        self.authorization=dict(purpose='final',verified_configurations=36,dataset='SHD',
++                                test_data_sha256=hashlib.sha256(self.test_file.read_bytes()).hexdigest())
++
++    def prepare(self,**changes):
++        values=dict(cfg=self.cfg,datamodule=self.dm,plan=self.plan,
++                    authorization=self.authorization,test_file=self.test_file)
++        values.update(changes)
++        return prepare_final_shd_evaluation(**values)
++
++    def test_authorization_failure_precedes_any_hdf5_access(self):
++        with patch('module.shd_final_evaluation.h5py.File',side_effect=AssertionError('No data access')):
++            for auth in [{},dict(self.authorization,verified_configurations=35)]:
++                with self.assertRaisesRegex(ValueError,'authorization'):self.prepare(authorization=auth)
++
++    def test_frozen_manifest_test_identity_and_fitting_exposure_are_bound(self):
++        plan=copy.deepcopy(self.plan);plan['shd_generalization']['canonical_split_manifest_sha256']='b'*64
++        with self.assertRaises(ValueError):self.prepare(plan=plan)
++        with self.assertRaises(ValueError):self.prepare(authorization=dict(self.authorization,test_data_sha256='b'*64))
++        self.dm.data_train=Subset(self.dm.train_val_ds,list(reversed(self.dm.data_train.indices)))
++        with self.assertRaises(ValueError):self.prepare()
++
++    def test_test_wrappers_augmentation_and_batch_changes_are_rejected(self):
++        cfg=copy.deepcopy(self.cfg);cfg['dataset']['bias_for_test_set']=.1
++        with self.assertRaises(ValueError):self.prepare(cfg=cfg)
++        self.dm.batch_size=1
++        with self.assertRaises(ValueError):self.prepare()
++        self.dm.batch_size=2;self.dm.data_test=Subset(self.dm.data_test,[2,1,0])
++        with self.assertRaises(ValueError):self.prepare()
++
++    def test_cpu_lightning_ordinary_pass_matches_capture_without_extra_forwards(self):
++        prepared=self.prepare()
++        def trainer():
++            return pl.Trainer(accelerator='cpu',devices=1,logger=False,
++                              enable_checkpointing=False,enable_progress_bar=False,
++                              enable_model_summary=False)
++        ordinary=SyntheticOrdinaryModel();before={k:v.clone() for k,v in ordinary.state_dict().items()}
++        ordinary_result=trainer().test(ordinary,dataloaders=prepared['loader'])[0]
++        observed=SyntheticOrdinaryModel()
++        result,summary,rows=evaluate_prepared_shd(observed,trainer(),prepared)
++        self.assertEqual(result,ordinary_result)
++        self.assertEqual(ordinary.forward_calls,2);self.assertEqual(observed.forward_calls,2)
++        self.assertEqual(rows['row_ids'],[0,1,2]);self.assertEqual(rows['observed_labels'],[0,1,2])
++        self.assertEqual(summary['groups']['all']['accuracy'],1.)
++        self.assertEqual(summary['groups']['seen']['recordings'],1)
++        self.assertEqual(summary['groups']['unseen']['recordings'],2)
++        self.assertFalse(summary['provenance']['loader']['cached'])
++        self.assertTrue(all(torch.equal(v,ordinary.state_dict()[k]) for k,v in before.items()))
++        self.assertTrue(torch.equal(ordinary.dummy,observed.dummy))
++
++    def test_metric_or_raw_label_disagreement_fails_closed(self):
++        prepared=self.prepare();model=LoggingFixture();model.output_size=20
++        with self.assertRaisesRegex(ValueError,'overall test metric'):
++            evaluate_prepared_shd(model,SyntheticTrainerFixture(.5),prepared)
++        prepared['metadata_labels']=[2,1,0]
++        with self.assertRaisesRegex(ValueError,'original-row metadata'):
++            evaluate_prepared_shd(model,SyntheticTrainerFixture(),prepared)
++
++
++if __name__=='__main__':unittest.main()

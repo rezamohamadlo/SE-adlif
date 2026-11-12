@@ -1,0 +1,1147 @@
+diff --git a/.gitignore b/.gitignore
+index 031a62e..39a90a9 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -230,3 +230,7 @@ results/experiments/shd_scratch_search_overlap_*/
+ 
+ # Local historical research artifacts; transfer separately between PCs.
+ /archive/
++
++# Generated source copies for isolated development; retain their small patches/manifests.
++results/experiments/**/cost_draft/checkout/
++results/experiments/**/gain_control_draft/checkout/
+diff --git a/command.txt b/command.txt
+index 338e633..d8f6c14 100644
+--- a/command.txt
++++ b/command.txt
+@@ -1,3 +1,170 @@
++# CURRENT: C001 primary and fixed6/10sensitivity30 COMPLETE; no local training at verified closure.
++# Secondary: baseline85.68%, LS87.86%, combination88.27%; increment+0.40pp misses+0.5pp gate.
++# Do not tune/extend the secondary pair. Next: primary-only static/dynamic mechanism review.
++# Official tests excluded; prior commands below are historical/recovery context.
++
++# ACTIVE C001 fixed6/10sensitivity: fresh Baseline/LS/DTH+LS, seed42,30epochs.
++# Primary30: Baseline83.30%, DTH80.98%, DTH+LS86.91%, LS85.38%; validation only.
++# Combination-LS+1.53pp, uneven across speakers; DTH-alone failed. No synergy/test claim.
++# Only shortlisted frozen candidates; no primary-weight reuse, pair search or tuning.
++# Agent-owned queue may be active: inspect processes before using recovery commands.
++# Watch results/experiments/complementary_speaker_dev_v2/c001_sensitivity_stage030_stdout.log
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF DTH_LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C001_dth_ls_sensitivity_v1.yaml --stage-ceiling 30 --dry-run
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF DTH_LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C001_dth_ls_sensitivity_v1.yaml --stage-ceiling 30
++
++# Prior stage commands below are historical/recovery references.
++# ACTIVE C001 primary0/3: fresh Baseline/DTH/DTH+LS/LS, seed42,30epoch screen.
++# Existing agent-owned queue may be active: inspect processes before launch; do not duplicate.
++# Same split/batch1024/LR0.01/dropout0.15; full300schedule. Official tests disabled.
++# Two complementary mechanisms remain unproven; preregistered+0.5pp gates and B-only control.
++# Watch results/experiments/complementary_speaker_dev_v2/c001_primary_stage030_stdout.log
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF DTH_SE_adLIF DTH_LS_SE_adLIF LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C001_dth_ls_primary_v1.yaml --stage-ceiling 30 --dry-run
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF DTH_SE_adLIF DTH_LS_SE_adLIF LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C001_dth_ls_primary_v1.yaml --stage-ceiling 30
++
++# Earlier completed-stage commands/status are historical/recovery context.
++# CURRENT: B002 ECG100 both arms COMPLETE; no local training process at verified closure.
++# Result: baseline77.48%, LS76.94% validation (-0.54pp); no official tests.
++# No automatic400epoch extension. Review a distinct hypothesis before the next fresh screen.
++# Earlier launch/recovery commands below are historical; do not run the whole file.
++
++# ACTIVE ECG100 STAGE: full resume both own last states, from completed50; seed42.
++# Baseline/LS-only; unchanged400epoch schedule, train256/validation64; tests disabled.
++# Inspect live processes before use. Do not duplicate the existing bounded queue.
++# Watch: results/experiments/complementary_speaker_dev_v2/b002_ls_ecg_stage100_stdout.log
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets ECG --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 100 --dry-run
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets ECG --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 100
++
++# Historical status/commands below describe earlier observations.
++# PLAN REVIEW 2026-11-12: no local Python training process observed; ECG50 both arms complete.
++# Active stage order: docs/experiments/complementary-mechanisms-study-v2.md#revised-stage-order
++# Screen ideas on frozen train-only SHD speakers0/3; shortlist-only sensitivity6/10.
++# Official tests excluded. Canonical SHD* requires later fresh four-arm training.
++# Commands below retain historical bounded-stage/recovery context; do not run the whole file.
++
++# CURRENT BOUNDED STUDY: fresh ECG Baseline/LS-only, seed42,50epoch screen.
++# SSC40complete: Baseline81.52%, LS81.96% (+0.43pp), below+0.5threshold; no furtherSSCtraining.
++# ECG current-source calibration passed: train256/validation64, full1301timesteps, LR0.01 unchanged.
++# Fixed588/30record split42; no patient-independence claim. Full400schedule retained.
++# Fresh weights/optimizer; no calibration/historical weights. Tests/TTA disabled.
++# Agent-owned queue may be active: inspect processes before launch; never duplicate.
++# Watch results/experiments/complementary_speaker_dev_v2/b002_ls_ecg_stage050_stdout.log
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets ECG --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 50 --dry-run
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets ECG --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 50
++
++# Completed SSC/speaker commands below are historical/recovery references.
++# CURRENT BOUNDED STUDY: SSC Baseline/LS-only full resume10->40, seed42.
++# SSC10: Baseline78.43%, LS78.81% (+0.38pp), inconclusive; LS ordinary CE worse.
++# Both best at10 and still learning; original40budget/scheduler retained unchanged.
++# Own last.ckpt resumes optimizer/scheduler/epoch, not weights-only or fresh training.
++# Prior10snapshots preserved. No official tests/TTA or source/config edits during queue.
++# Agent-owned queue may be active: inspect processes before launch; never duplicate.
++# Watch results/experiments/complementary_speaker_dev_v2/b002_ls_ssc_stage040_stdout.log
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 40 --dry-run
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 40
++
++# Completed SSC10/speaker commands below are historical/recovery references.
++# CURRENT BOUNDED STUDY: fresh matched SSC Baseline/LS-only, seed42,10epoch screen.
++# SHD primary LS-only+4.71pp; fixed6/10sensitivity+5.18pp (validation only).
++# Gain adds only0.18pp over LS in primary; two complementary ideas not established.
++# Current-objective real-data calibration passed; train/val1024, workers8, LR0.006 unchanged.
++# Full40epoch scheduler preserved; tests disabled; no calibration/old weights reused.
++# Agent-owned queue may be active. Inspect processes before launch; never duplicate.
++# Watch results/experiments/complementary_speaker_dev_v2/b002_ls_ssc_stage010_stdout.log
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 10 --dry-run
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 10
++
++# Completed sensitivity/primary commands below are historical/recovery references.
++# CURRENT BOUNDED STUDY: fixed6/10pair sensitivity, fresh Baseline/LS-only, seed42.
++# Primary four-arm30screen: Baseline81.83%, gain82.32%, LS86.54%, gain+LS86.73%.
++# Gain adds only0.18pp over LS; no complementarity established. Only LS shortlisted.
++# Agent-owned queue may be active: inspect processes before launch; never duplicate.
++# No pair/epsilon tuning, primary-weight reuse, official tests or TTA.
++# Watch results/experiments/complementary_speaker_dev_v2/b002_ls_sensitivity_stage030_stdout.log
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_B002_sensitivity_v1.yaml --stage-ceiling 30 --dry-run
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_B002_sensitivity_v1.yaml --stage-ceiling 30
++
++# Completed B-only/three-arm commands below are historical/recovery references.
++# CURRENT BOUNDED STUDY: fresh B-only label-smoothing control, primary0/3, seed42.
++# Three-arm30screen complete: Baseline81.83%, gain82.32%, gain+LS86.73% (validation only).
++# Do not duplicate the agent-owned B-only queue. Source/configs remain frozen.
++# Watch results/experiments/complementary_speaker_dev_v2/b002_b_only_stage030_stdout.log
++.\.ven\Scripts\python.exe runner.py --models LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_B002_primary_v1.yaml --stage-ceiling 30 --dry-run
++.\.ven\Scripts\python.exe runner.py --models LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_B002_primary_v1.yaml --stage-ceiling 30
++
++# Completed three-arm commands below are historical/recovery references.
++# ACTIVE NEXT BOUNDED STUDY: B002 primary speaker development, fresh Baseline/A/A+B.
++# Hold out0/3, train other8; seed42; matched batch1024/dropout0.15/LR0.01.
++# A=input gain; B=train-only label smoothing epsilon0.1; ordinary validation CE.
++# 30epoch ceiling within300epoch schedule. No official tests/TTA or old weights.
++# Agent-owned queue may be active: inspect processes before running; never duplicate.
++# Watch results/experiments/complementary_speaker_dev_v2/b002_primary_stage030_stdout.log
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF GAIN_SE_adLIF GAIN_LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_B002_primary_v1.yaml --stage-ceiling 30 --dry-run
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF GAIN_SE_adLIF GAIN_LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_B002_primary_v1.yaml --stage-ceiling 30
++
++# Commands below are historical/recovery references, not new launch requests.
++# Completed A002 ECG100screen: Baseline77.61%, gain78.69% (+1.08pp), validation only.
++# Screen50: Baseline35.56%, gain64.16%; both still underlearned, no final gain claim.
++# Baseline interrupted at77; full-state recovery logs: a002_ecg_stage100_recovery077_stdout.log.
++# Extra baseline restart is recorded as an operational deviation; screen remains exploratory.
++# Train256 / validation64 / LR0.01 / dropout0.15; full400epoch schedule retained.
++# Calibration passed on real full1301step data; states discarded. No official tests/TTA.
++# Queue is terminal; commands below are recovery/reference, not a new training request.
++# Next: B002label-smoothing primary-speaker screen after implementation and non-training checks.
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF GAIN_SE_adLIF --datasets ECG --seeds 42 --study-file config/studies/complementary_transfer_A002_gain_v1.yaml --stage-ceiling 100 --dry-run
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF GAIN_SE_adLIF --datasets ECG --seeds 42 --study-file config/studies/complementary_transfer_A002_gain_v1.yaml --stage-ceiling 100
++
++# A002 SSC transfer completed40epochs: Baseline81.45%, gain-only81.55% (+0.10pp).
++# Validation only; below practical+0.5pp threshold. No official test data or TTA.
++# Commands below are completed-stage recovery/reference; do not retrain completed jobs.
++# Next: preregistered ECG calibration, then fresh matched50epoch screen after it passes.
++# Calibration batch1024/workers8; LR0.006unchanged; full40epoch scheduler retained.
++# The SSC queue is terminal. No duplicate launcher is needed.
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF GAIN_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_transfer_A002_gain_v1.yaml --stage-ceiling 40 --dry-run
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF GAIN_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_transfer_A002_gain_v1.yaml --stage-ceiling 40
++
++# Completed pair-sensitivity commands below are historical/source-specific.
++# Active next check: only primary-shortlisted FIR and gain-only, plus fresh baseline.
++# Predefined6/10speaker pair; all weights fresh; same30epoch budget; no tuning/test.
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF GAIN_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_gain_sensitivity_A001_v1.yaml --stage-ceiling 30 --dry-run
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF GAIN_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_gain_sensitivity_A001_v1.yaml --stage-ceiling 30
++
++# Completed primary gain-control commands below are historical/source-specific.
++# Next bounded stage: gain-only mechanism control after completed SSC40.
++# SSC40: no A improvement; investigate on frozen primary0/3, no pair search/test.
++# All3arms start fresh under the updated isolated-control protocol, seed42,30epochs.
++# Do not launch a duplicate while the agent-owned queue is active.
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF GAIN_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_gain_control_A001_v1.yaml --stage-ceiling 30 --dry-run
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF GAIN_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_gain_control_A001_v1.yaml --stage-ceiling 30
++
++# Completed SSC commands below are historical. Source was snapshotted before revision.
++# Do not bypass changed-source guards or reuse old paths for new settings.
++# Active SSC extension: preliminary10epoch gain+0.23pp was inconclusive.
++# Both arms fully resume their own last.ckpt to40; optimizer/scheduler restored.
++# Do not launch a duplicate while the queue is active. No official tests.
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_transfer_A001_v2.yaml --stage-ceiling 40 --dry-run
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_transfer_A001_v2.yaml --stage-ceiling 40
++
++# Completed10epoch screen commands below; preserve as historical/recovery references.
++# Active stage: A001 transfer after completed primary + fixed-pair SHD development.
++# Both SHD pairs favored A; event-deletion B001 was unpromising. No official tests.
++# SSC training and validation batches1024 separately calibrated; LR unchanged.
++# Study authorization permits agent execution; do not launch a second copy of an active queue.
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_transfer_A001_v2.yaml --stage-ceiling 10 --dry-run
++# Fresh matched10epoch screen, retaining full40epoch scheduler metadata:
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_transfer_A001_v2.yaml --stage-ceiling 10
++
++# Completed SHD development commands below are historical/recovery references.
++# Their original source snapshot is preserved; do not bypass changed-source guards.
++# Active plan: docs/experiments/complementary-mechanisms-study-v2.md
++# Speaker-disjoint DEVELOPMENT, seed 42: fresh Baseline / A / A+B; no official tests.
++# Local environment is .ven; replace with .venv on PCs using .venv.
++# Non-training preflight:
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF FIR_THIN_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_speaker_dev_v2.yaml --stage-ceiling 30 --dry-run
++# User launches the bounded primary screen only after preflight:
++.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF FIR_THIN_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_speaker_dev_v2.yaml --stage-ceiling 30
++# Do not launch sensitivity or canonical final comparisons before their stage gates.
++
++# Historical analysis pilot commands below; not the current discovery training stage.
+ # Bounded SHD validation-only AMT/MT analysis pilot: run ONE command per PC.
+ # No training, official-test evaluation, TTA, or automatic next round.
+ # Pull the same commit on all PCs. Transfer ignored data/checkpoints/metrics separately.
+diff --git a/cost_records.py b/cost_records.py
+index 0d732ed..fe7f89f 100644
+--- a/cost_records.py
++++ b/cost_records.py
+@@ -5,7 +5,7 @@ from pathlib import Path
+ 
+ ARITHMETIC = {'add', 'sub', 'rsub', 'mul', 'div', 'neg', 'reciprocal',
+               'sum', 'mean', 'bias_add', 'square'}
+-VERSIONS = {'runner_test_costs_v1', 'shd_costs_v1', 'reference_test_costs_v1'}
++VERSIONS = {'runner_test_costs_v1', 'runner_test_costs_v2_fir', 'shd_costs_v1', 'reference_test_costs_v1'}
+ 
+ 
+ def seed_directory(root, model, dataset, seed):
+@@ -44,7 +44,7 @@ def normalized_record(record):
+         raise ValueError('Unknown measurement record version')
+     if r['version'] == 'shd_costs_v1':
+         r.setdefault('dataset', 'SHD')
+-    if r['version'] != 'runner_test_costs_v1':
++    if r['version'] not in {'runner_test_costs_v1', 'runner_test_costs_v2_fir'}:
+         if not isinstance(r.get('measurements', {}).get('reproduced_test_acc'), (int, float)):
+             raise ValueError('Historical measurement lacks its test-accuracy check')
+         r.setdefault('status', 'complete')
+diff --git a/datasets/ecg.py b/datasets/ecg.py
+index b98f704..a8a93f3 100644
+--- a/datasets/ecg.py
++++ b/datasets/ecg.py
+@@ -66,6 +66,8 @@ class ECGLDM(pl.LightningDataModule):
+         num_workers=0,
+         burn_in_time=0,
+         num_classes: int = 6,  # for hydra
++        validation_only_data: bool = False,
++        validation_batch_size: int = None,
+     ) -> None:
+         super().__init__()
+         if not os.path.isabs(data_path):
+@@ -76,6 +78,8 @@ class ECGLDM(pl.LightningDataModule):
+         self.cache_root = data_path if cache_root is None else cache_root
+         self.valid_fraction = valid_fraction
+         self.batch_size = batch_size
++        self.validation_only_data = validation_only_data
++        self.validation_batch_size = validation_batch_size or batch_size
+         self.num_workers = num_workers
+         self.random_seed = random_seed
+         self.burn_in_time = burn_in_time
+@@ -84,7 +88,9 @@ class ECGLDM(pl.LightningDataModule):
+         self.generator = torch.Generator().manual_seed(random_seed)
+         
+         self.data_path.mkdir(exist_ok=True, parents=True)
+-        self.download_if_not_exist(self.data_path, self.files_to_url)
++        files = ({k:v for k,v in self.files_to_url.items() if k.endswith('train.mat')}
++                 if self.validation_only_data else self.files_to_url)
++        self.download_if_not_exist(self.data_path, files)
+ 
+         
+     def prepare_data(self):
+@@ -92,28 +98,30 @@ class ECGLDM(pl.LightningDataModule):
+         assert os.path.exists(
+             os.path.join(self.data_path, "QTDB/QTDB_train.mat")
+         ), f"Data path {self.data_path} does not contain QTDB/QTDB_train.mat"
+-        assert os.path.exists(
+-            os.path.join(self.data_path, "QTDB/QTDB_test.mat")
+-        ), f"Data path {self.data_path} does not contain QTDB/QTDB_test.mat"
++        if not self.validation_only_data:
++            assert os.path.exists(
++                os.path.join(self.data_path, "QTDB/QTDB_test.mat")
++            ), f"Data path {self.data_path} does not contain QTDB/QTDB_test.mat"
+         
+ 
+     def setup(self, stage: Optional[str] = None) -> None:
+         train_mat = scipy.io.loadmat(
+             os.path.join(self.data_path, "QTDB/QTDB_train.mat")
+         )
+-        test_mat = scipy.io.loadmat(os.path.join(self.data_path, "QTDB/QTDB_test.mat"))
+         train_dt, train_x, train_y = convert_dataset_wtime(train_mat)
+-        test_dt, test_x, test_y = convert_dataset_wtime(test_mat)
+         self.train_val_dataset_ = QTDB_ECGWrapper(
+             ds=TensorDataset(
+                 torch.from_numpy(train_x * 1.0), torch.from_numpy(train_y)
+             ),
+             burn_in_time=self.burn_in_time,
+         )
+-        self.data_test = QTDB_ECGWrapper(
+-            ds=TensorDataset(torch.from_numpy(test_x * 1.0), torch.from_numpy(test_y)),
+-            burn_in_time=self.burn_in_time,
+-        )
++        if not self.validation_only_data:
++            test_mat = scipy.io.loadmat(os.path.join(self.data_path, "QTDB/QTDB_test.mat"))
++            test_dt, test_x, test_y = convert_dataset_wtime(test_mat)
++            self.data_test = QTDB_ECGWrapper(
++                ds=TensorDataset(torch.from_numpy(test_x * 1.0), torch.from_numpy(test_y)),
++                burn_in_time=self.burn_in_time,
++            )
+         valid_len = math.floor(len(self.train_val_dataset_) * self.valid_fraction)
+         self.data_train, self.data_val = torch.utils.data.random_split(
+             self.train_val_dataset_,
+@@ -139,7 +147,7 @@ class ECGLDM(pl.LightningDataModule):
+             self.data_val,
+             shuffle=False,
+             pin_memory=True,
+-            batch_size=self.batch_size,
++            batch_size=self.validation_batch_size,
+             drop_last=False,
+             collate_fn=self.collate_fn,
+             num_workers=self.num_workers,
+diff --git a/datasets/shd.py b/datasets/shd.py
+index 16a7893..ef7b28e 100644
+--- a/datasets/shd.py
++++ b/datasets/shd.py
+@@ -83,6 +83,8 @@ class SHDLDM(pl.LightningDataModule):
+         speaker_split_manifest: str = None,
+         speaker_split_fingerprint: str = None,
+         train_augmentation: dict = None,
++        validation_only_data: bool = False,
++        validation_batch_size: int = None,
+     ) -> None:
+         super().__init__()
+         # workaround in order to use the same training loop
+@@ -90,14 +92,20 @@ class SHDLDM(pl.LightningDataModule):
+         
+         if validate_on == 'speaker_holdout':
+             from project_paths import local_path
+-            from datasets.shd_speaker_split import load_manifest, PROTOCOL
++            from datasets.shd_speaker_split import load_manifest, PROTOCOL, DEVELOPMENT_PROTOCOL
+             data_path = str(local_path(data_path))
+             allowed_cache = ('shd_speaker_augmented_v1' if train_augmentation is not None else PROTOCOL)
+-            if (cache_namespace != allowed_cache or not speaker_split_manifest
++            if (cache_namespace not in (allowed_cache, DEVELOPMENT_PROTOCOL) or not speaker_split_manifest
+                     or not speaker_split_fingerprint or random_seed != 42
+                     or additional_test_set_validation):
+                 raise ValueError('Speaker holdout requires its frozen manifest/cache and split seed 42; no test validation')
+             self.speaker_split = load_manifest(speaker_split_manifest, data_path, speaker_split_fingerprint)
++            if cache_namespace==DEVELOPMENT_PROTOCOL:
++                if (not validation_only_data or train_augmentation is not None
++                        or self.speaker_split['protocol']!=DEVELOPMENT_PROTOCOL):
++                    raise ValueError('Speaker development requires its train-only manifest and clean dataset transforms')
++            elif self.speaker_split['protocol']!=PROTOCOL:
++                raise ValueError('Historical and new speaker protocols cannot share a cache namespace')
+         elif speaker_split_manifest is not None or speaker_split_fingerprint is not None:
+             raise ValueError('Speaker manifest requires validate_on=speaker_holdout')
+         if train_augmentation is not None and validate_on != 'speaker_holdout':
+@@ -139,6 +147,7 @@ class SHDLDM(pl.LightningDataModule):
+         self.window_size = window_size
+         self.split_percent = split_percent
+         self.batch_size = batch_size
++        self.validation_batch_size = validation_batch_size or batch_size
+         self.num_workers = num_workers
+         self.collate_fn = PadTensors()
+         self.validate_on = validate_on
+@@ -240,12 +249,15 @@ class SHDLDM(pl.LightningDataModule):
+             )
+ 
+         self.generator = torch.Generator().manual_seed(self.random_seed)
+-        self.data_test = SHDWrapper(
+-            save_to=self.data_path,
+-            transform=self.static_data_transform_test,
+-            train=False,
+-            ignore_first_timesteps=self.ignore_first_timesteps,
+-        )
++        if validation_only_data and (self.validate_on == 'test' or additional_test_set_validation):
++            raise ValueError('Training-only data access forbids official test validation')
++        if not validation_only_data:
++            self.data_test = SHDWrapper(
++                save_to=self.data_path,
++                transform=self.static_data_transform_test,
++                train=False,
++                ignore_first_timesteps=self.ignore_first_timesteps,
++            )
+ 
+         if self.validate_on == 'speaker_holdout':
+             from datasets.shd_speaker_split import check_loader
+@@ -316,7 +328,7 @@ class SHDLDM(pl.LightningDataModule):
+             DiskCachedDataset(self.data_val, self.cache_path + "/val"),
+             shuffle=False,
+             pin_memory=True,
+-            batch_size=self.batch_size,
++            batch_size=self.validation_batch_size,
+             drop_last=False,
+             collate_fn=self.collate_fn,
+             num_workers=self.num_workers,
+diff --git a/datasets/shd_speaker_split.py b/datasets/shd_speaker_split.py
+index 561c3a0..33e248d 100644
+--- a/datasets/shd_speaker_split.py
++++ b/datasets/shd_speaker_split.py
+@@ -12,6 +12,7 @@ import numpy as np
+ from project_paths import local_path, portable_path
+ 
+ PROTOCOL = 'shd_speaker_holdout_v1'
++DEVELOPMENT_PROTOCOL = 'shd_speaker_development_v2'
+ ALGORITHM = 'sha256_seed_speaker_rank_v1'
+ SPLIT_SEED = 42
+ 
+@@ -93,8 +94,49 @@ def build_manifest(data_path):
+     return manifest
+ 
+ 
++def build_development_manifest(data_path, validation_speakers, role):
++    """Predeclared two-speaker split using ONLY official training recordings."""
++    if role not in ('development', 'pair_sensitivity'):
++        raise ValueError('Unknown speaker development role')
++    selected = sorted(validation_speakers)
++    if len(selected) != 2 or len(set(selected)) != 2 or any(type(s) is not int for s in selected):
++        raise ValueError('Exactly two distinct integer speaker IDs must be declared in advance')
++    train = local_path(data_path)/'SHDWrapper/shd_train.h5'
++    if not train.is_file():
++        raise FileNotFoundError('Official SHD training file is required; no fallback or test-file access')
++    speakers, labels = read_metadata(train)
++    available = sorted(int(s) for s in np.unique(speakers))
++    if len(available) != 10 or not set(selected).issubset(available):
++        raise ValueError('Expected ten official-training speakers including the two frozen IDs')
++    heldout = np.isin(speakers, selected)
++    subsets = {}
++    for name, mask in [('train', ~heldout), ('validation', heldout)]:
++        counts = np.bincount(labels[mask].astype(np.int64), minlength=20).tolist()
++        if len(counts)!=20 or any(c==0 for c in counts):
++            raise ValueError(f'{name} lacks full class coverage; do not search for another pair')
++        subsets[name] = dict(indices=np.flatnonzero(mask).tolist(), sample_count=int(mask.sum()),
++                             class_counts=counts, speaker_ids=sorted(int(s) for s in np.unique(speakers[mask])))
++    if (set(subsets['train']['indices']) & set(subsets['validation']['indices'])
++            or len(subsets['train']['speaker_ids'])!=8
++            or set(subsets['train']['speaker_ids']) & set(selected)):
++        raise ValueError('Speaker or recording overlap in frozen split')
++    manifest = dict(protocol=DEVELOPMENT_PROTOCOL, algorithm_version='predeclared_two_speaker_ids_v2',
++                    role=role, split_seed=42, available_speaker_ids=available,
++                    validation_speaker_ids=selected, total_training_recordings=len(labels), subsets=subsets,
++                    validation_fraction=subsets['validation']['sample_count']/len(labels),
++                    official_test_opened=False,
++                    dataset_identity=dict(dataset='SHD', source='official train HDF5 only',
++                        train_sha256=file_sha256(train),
++                        training_metadata_sha256=digest(dict(speakers=speakers.tolist(), labels=labels.tolist())),
++                        speaker_field='extra/speaker', recording_axis='Original HDF5 row index'))
++    manifest['fingerprint']=digest(manifest)
++    return manifest
++
++
+ def verify_manifest(manifest, data_path, expected_fingerprint):
+-    if manifest.get('fingerprint') != expected_fingerprint or manifest != build_manifest(data_path):
++    rebuilt = (build_development_manifest(data_path,manifest['validation_speaker_ids'],manifest['role'])
++               if manifest.get('protocol')==DEVELOPMENT_PROTOCOL else build_manifest(data_path))
++    if manifest.get('fingerprint') != expected_fingerprint or manifest != rebuilt:
+         raise ValueError('Speaker split manifest/dataset/fingerprint changed; refusing reuse')
+     return manifest
+ 
+diff --git a/datasets/ssc.py b/datasets/ssc.py
+index 2101797..76c1b2a 100644
+--- a/datasets/ssc.py
++++ b/datasets/ssc.py
+@@ -18,6 +18,26 @@ from tonic.io import make_structured_array
+ from tonic.transforms import ToFrame
+ import hydra
+ 
++
++class _FrameToFloatTensor:
++    """Spawn-pickleable equivalent of the existing frame conversion lambda."""
++    def __init__(self, sensor_size, window_size):
++        self.to_frame = ToFrame(sensor_size=sensor_size, time_window=window_size)
++
++    def __call__(self, events):
++        return torch.from_numpy(self.to_frame(events)).float()
++
++
++class _PadMinimumFrames:
++    def __init__(self, minimum):
++        self.minimum = minimum
++
++    def __call__(self, frames):
++        if self.minimum > 0 and frames.shape[0] < self.minimum:
++            return torch.cat((frames, torch.zeros((self.minimum - frames.shape[0], 1, frames.shape[-1]))), dim=0)
++        return frames
++
++
+ class SSCLDM(pl.LightningDataModule):
+     def __init__(
+         self,
+@@ -30,6 +50,9 @@ class SSCLDM(pl.LightningDataModule):
+         pad_to_min_size: int = 300,
+         num_classes: int = 35,
+         ignore_first_timesteps: int = 10,
++        validation_only_data: bool = False,
++        validation_batch_size: int = None,
++        spawn_safe_transforms: bool = False,
+     ) -> None:
+         super().__init__()
+         # workaround in order to use the same training loop
+@@ -42,6 +65,8 @@ class SSCLDM(pl.LightningDataModule):
+         self.time_factor = time_factor
+         self.window_size = window_size
+         self.batch_size = batch_size
++        self.validation_only_data = validation_only_data
++        self.validation_batch_size = validation_batch_size or batch_size
+         self.num_workers = num_workers
+         self.collate_fn = PadTensors()
+         self.min_len = pad_to_min_size
+@@ -84,6 +109,16 @@ class SSCLDM(pl.LightningDataModule):
+             Flatten(),
+         ]
+         self.static_data_transform = tonic.transforms.Compose(transform_list)
++        if spawn_safe_transforms:
++            # Same deterministic operations/order; avoid local functions when
++            # Windows DataLoader workers pickle the dataset. Ordinary configs
++            # retain their existing transform path.
++            self.static_data_transform = tonic.transforms.Compose([
++                tonic.transforms.Downsample(time_factor=self.time_factor, spatial_factor=self.spatial_factor),
++                _FrameToFloatTensor(sensor_size, self.window_size),
++                _PadMinimumFrames(self.min_len),
++                Flatten(),
++            ])
+ 
+     def prepare_data(self):
+         pass
+@@ -95,12 +130,13 @@ class SSCLDM(pl.LightningDataModule):
+             transform=self.static_data_transform,
+             ignore_first_timesteps=self.ignore_first_timesteps
+         )
+-        self.data_test = SSCWrapper(
+-            save_to=self.data_path,
+-            split="test",
+-            transform=self.static_data_transform,
+-            ignore_first_timesteps=self.ignore_first_timesteps
+-        )
++        if not self.validation_only_data:
++            self.data_test = SSCWrapper(
++                save_to=self.data_path,
++                split="test",
++                transform=self.static_data_transform,
++                ignore_first_timesteps=self.ignore_first_timesteps
++            )
+         self.data_val = SSCWrapper(
+             save_to=self.data_path,
+             split="valid",
+@@ -125,7 +161,7 @@ class SSCLDM(pl.LightningDataModule):
+             self.data_val,
+             shuffle=False,
+             pin_memory=True,
+-            batch_size=self.batch_size,
++            batch_size=self.validation_batch_size,
+             drop_last=False,
+             collate_fn=self.collate_fn,
+             num_workers=self.num_workers,
+diff --git a/docs/experiments/supervisor-guideline-roadmap-fa.md b/docs/experiments/supervisor-guideline-roadmap-fa.md
+index f98131b..1b30681 100644
+--- a/docs/experiments/supervisor-guideline-roadmap-fa.md
++++ b/docs/experiments/supervisor-guideline-roadmap-fa.md
+@@ -1,5 +1,19 @@
+ <div dir="rtl" lang="fa">
+ 
++> **به‌روزرسانی برنامه، ۱۱ نوامبر ۲۰۲۶:** مسئلهٔ اصلی تعمیم به گویندهٔ ندیده است.
++> برنامهٔ اجرایی فعال در [مطالعهٔ توسعه با گویندگان جدا](complementary-mechanisms-study-v2.md)
++> ثبت شده است و در موارد تعارض بر ترتیب قدیمی این سند اولویت دارد.
++> غربال اولیه فقط با فایل آموزش رسمی، گویندگان اعتبارسنجی ثابت ۰ و ۳،
++> و آموزش تازهٔ Baseline، A و A+B انجام می‌شود. زوج ثابت ۶ و ۱۰ فقط برای
++> بررسی حساسیت گزینه‌های منتخب است؛ وزن‌ها بین دو تقسیم منتقل نمی‌شوند.
++> سپس اعتبارسنجی SSC و ECG، تثبیت روش، مقایسهٔ چهارگانه با آموزش تازه روی
++> تقسیم استاندارد SHD*، تکرار بذرها و در پایان آزمون رسمی انجام می‌شود.
++> دقت اعتبارسنجی تصادفی یا کوچک‌شدن شکاف آموزش–اعتبارسنجی به‌تنهایی معیار موفقیت نیست.
++> نتایج توسعهٔ گوینده‌محور و مقایسهٔ استاندارد جدا گزارش می‌شوند؛ آزمون رسمی
++> در انتخاب ایده دخالت ندارد. شواهد و اجراهای قبلی حفظ می‌شوند.
++
++> **Active plan, 2026-11-12:** Follow the [revised speaker-development stage order](complementary-mechanisms-study-v2.md#revised-stage-order). Pilot status below is historical. Clean held-out-speaker accuracy now drives idea screening; canonical SHD* follows a later freeze. No training was launched in this plan review.
++
+ # نقشهٔ راه اجرای راهنمای استاد: ویژگی‌های ورودی و سازوکارهای تطبیقی
+ 
+ تاریخ: **۱۰ نوامبر ۲۰۲۶**
+diff --git a/extended_seed_study.py b/extended_seed_study.py
+index 5ffab7a..9233e46 100644
+--- a/extended_seed_study.py
++++ b/extended_seed_study.py
+@@ -27,6 +27,9 @@ def baseline_definition():
+ 
+ 
+ def validate_config(cfg):
++    if cfg.get('complementary_study'):
++        from module.study_control import validate_config as validate_complementary
++        return validate_complementary(cfg)
+     if cfg.get('shd_regularization_study'):
+         from shd_speaker_regularization import validate_training_config
+         return validate_training_config(cfg)
+diff --git a/measure_reference_costs.py b/measure_reference_costs.py
+index 54c3335..61e504c 100644
+--- a/measure_reference_costs.py
++++ b/measure_reference_costs.py
+@@ -115,13 +115,42 @@ def prepare_batches(dataset, cfg):
+     return batches, digest.hexdigest()
+ 
+ 
++def input_fir_operations(model, inputs):
++    """Executed scalar work, including zero coefficients and padded slots.
++
++    Count tanh as one logical operation, as for neuron special functions.
++    The shared counter deliberately excludes shape/memory operations. This
++    probe neither mutates weights nor samples randomness.
++    """
++    fir = getattr(model, 'input_fir', None)
++    if fir is None:
++        return Counter()
++    with torch.inference_mode(), shared.ScalarOperations() as counter:
++        fir(inputs)
++    return counter.counts
++
++
+ def measure(model, batches, device, event_input, repeats, warmup):
+     profiles = shared.operation_profiles(model)
+     counts, operations = Counter(), Counter()
++    fir_operations = Counter()
++    has_fir = getattr(model, 'input_fir', None) is not None
++    # A weighted FIR output is analog even when its source was event counts.
++    # Hidden spikes remain binary and retain the existing activity definition.
++    projection_event_input = event_input and not has_fir
++    raw_input_events = 0.0
+     for cpu_batch in batches:
+         inputs, targets, block_idx, lengths = [x.to(device) for x in cpu_batch]
+         b, t = inputs.shape[:2]
+-        counter = ReferenceCounter(model, lengths, event_input)
++        if has_fir:
++            component = input_fir_operations(model, inputs)
++            fir_operations.update(component)
++            operations.update(component)
++            if event_input:
++                if (inputs < 0).any() or not torch.equal(inputs, inputs.round()):
++                    raise ValueError('FIR event-source costs require original nonnegative integer counts')
++                raw_input_events += float(inputs.sum(dtype=torch.float64))
++        counter = ReferenceCounter(model, lengths, projection_event_input)
+         try:
+             outputs = model(inputs)
+         finally:
+@@ -161,7 +190,7 @@ def measure(model, batches, device, event_input, repeats, warmup):
+                for cell in [model.l1, model.l2, model.out_layer])
+     dense = 2 * macs * counts['padded_sample_timesteps'] / n / 1e9
+     arith = sum(v for k, v in operations.items() if k in ARITHMETIC) / n / 1e9
+-    return dict(totals=dict(counts), operation_profiles=profiles,
++    result = dict(totals=dict(counts), operation_profiles=profiles,
+         nonmatrix_scalar_operations_by_kind=dict(operations),
+         total_parameters=sum(p.numel() for p in model.parameters()),
+         trainable_parameters=sum(p.numel() for p in model.parameters() if p.requires_grad),
+@@ -174,10 +203,20 @@ def measure(model, batches, device, event_input, repeats, warmup):
+         nonmatrix_ops_per_sample=sum(operations.values()) / n,
+         dense_gflops_test_padded=dense, arithmetic_gflops_test_padded=dense + arith,
+         logical_gops_test_padded=dense + sum(operations.values()) / n / 1e9,
+-        analog_input_dense_macs_per_sample=(0 if event_input else
++        analog_input_dense_macs_per_sample=(0 if projection_event_input else
+             model.l1.weight.numel() * counts['padded_sample_timesteps'] / n),
+         forward_ms_per_sample=statistics.mean(times), timing_repeat_ms_per_sample=times,
+         reproduced_test_acc=counts['correct'] / counts['targets'])
++    if has_fir:
++        result.update(
++            first_projection_input_kind='FIR-filtered analog values',
++            synops_scope='Hidden-driven connections only; filtered analog first projection excluded',
++            raw_input_events_per_sample=raw_input_events / n if event_input else None,
++            input_fir_scalar_operations_by_kind=dict(fir_operations),
++            input_fir_arithmetic_ops_per_sample=sum(v for k, v in fir_operations.items() if k in ARITHMETIC) / n,
++            input_fir_logical_ops_per_sample=sum(fir_operations.values()) / n,
++        )
++    return result
+ 
+ 
+ def update_report(output=None):
+diff --git a/measure_run_costs.py b/measure_run_costs.py
+index db25935..0792d78 100644
+--- a/measure_run_costs.py
++++ b/measure_run_costs.py
+@@ -5,6 +5,7 @@ from datetime import datetime, timezone
+ import io
+ import json
+ import platform
++import importlib.metadata
+ from pathlib import Path
+ 
+ from omegaconf import OmegaConf
+@@ -12,11 +13,11 @@ import torch
+ 
+ import measure_reference_costs as reference
+ import measure_shd_costs as shared
+-from models.pl_module import layer_map
++from models.pl_module import layer_map, build_training_model
+ from project_paths import local_path, portable_config, portable_path
+ from cost_records import normalized_record
+ 
+-VERSION = 'runner_test_costs_v1'
++VERSION = 'runner_test_costs_v2_fir'
+ TARGETS = {'SHD': 'datasets.shd.SHDLDM', 'SSC': 'datasets.ssc.SSCLDM',
+            'ECG': 'datasets.ecg.ECGLDM'}
+ 
+@@ -60,6 +61,10 @@ def update_training_summary(directory, record):
+               'Runtime is forward-only, excluding data loading, transfer, loss and temporal aggregation.',
+               'These test measurements are separate from the validation GFLOPs estimate above.',
+               'Detailed measurements, checkpoint identity and environment: [COST_RESULTS.json](COST_RESULTS.json) / [COST_RESULTS.md](COST_RESULTS.md).', end]
++    if 'input_fir_arithmetic_ops_per_sample' in metrics:
++        lines.insert(-1,
++            'Input FIR is included in forward runtime and scalar arithmetic. Its first projection is analog: '
++            'SynOps here cover hidden-driven connections only and are incompatible with raw-event total SynOps.')
+     temporary = path.with_suffix('.md.costs.tmp')
+     temporary.write_text(before.rstrip() + '\n\n' + '\n'.join(lines) + after.rstrip() + '\n', encoding='utf-8')
+     temporary.replace(path)
+@@ -121,6 +126,8 @@ def _collect(directory, dataset, dry_run=False):
+     result_path = directory / 'COST_RESULTS.json'
+     if result_path.exists():
+         old = normalized_record(json.loads(result_path.read_text(encoding='utf-8')))
++        if cfg.get('input_fir') and old.get('version') != VERSION:
++            raise ValueError('Preserve the older FIR cost record before explicit versioned remeasurement')
+         if (old.get('status') != 'complete' or old.get('checkpoint_sha256') != digest
+                 or old.get('dataset') != dataset or old.get('seed') != cfg.random_seed):
+             raise ValueError('Existing cost record has a different checkpoint/protocol; preserve it before remeasurement')
+@@ -131,7 +138,7 @@ def _collect(directory, dataset, dry_run=False):
+     torch.set_float32_matmul_precision('high')
+     device = torch.device(str(cfg.device))
+     with redirect_stdout(io.StringIO()):
+-        model = shared.MLPSNN(cfg)
++        model = build_training_model(cfg)
+     model.load_state_dict(checkpoint['state_dict'], strict=True)
+     model.to(device).eval()
+     print(f'Measuring {dataset} test activity/cost: {portable_path(path)}', flush=True)
+@@ -147,15 +154,22 @@ def _collect(directory, dataset, dry_run=False):
+         checkpoint_sha256=digest, best_epoch=int(checkpoint['epoch']),
+         saved_config=portable_config(OmegaConf.to_container(cfg, resolve=True)), data_sha256=data_hash,
+         environment=dict(python=platform.python_version(), torch=torch.__version__, cuda=torch.version.cuda,
++            packages={name:importlib.metadata.version(name) for name in
++                      ['torch','tonic','numpy','h5py','pytorch-lightning','hydra-core','omegaconf']},
+             device=str(device), gpu=torch.cuda.get_device_name(device) if device.type == 'cuda' else platform.processor(),
+             matmul_precision=torch.get_float32_matmul_precision(), timing_repeats=3, warmup=2,
+             source_sha256={portable_path(p): shared.sha256(p) for p in
+                 [Path(__file__), Path(__file__).with_name('cost_records.py'), Path(shared.__file__), Path(reference.__file__),
++                 shared.ROOT / 'functional/count_thinning.py',
++                 shared.ROOT / f'datasets/{dataset.lower()}.py',
++                 shared.ROOT / 'datasets/utils/pad_tensors.py',
++                 shared.ROOT / 'datasets/utils/transforms.py',
+                  *sorted((shared.ROOT / 'models').rglob('*.py'))]}),
+         scopes=dict(activity='Stored sequence extent before batch padding, including configured minimum padding and burn-in',
+-            compute='Executed batch-padded timesteps; MLPSNN.forward only',
++            compute='Executed batch-padded timesteps; registered model forward including optional input FIR',
+             timing='Synchronized forward wall time; excludes transfer/loading/loss/temporal aggregation',
+-            synops='Dense fan-out event estimate; ECG analog input projection excluded and stored as dense MACs',
++            synops=('Hidden-driven event fan-out only; FIR-filtered analog first projection stored as dense MACs; incompatible with raw-event total SynOps'
++                    if cfg.get('input_fir') else 'Dense fan-out event estimate; ECG analog input projection excluded and stored as dense MACs'),
+             arithmetic='Matrix MAC=2 FLOPs; selected scalar arithmetic; nonlinearities/comparisons excluded',
+             logical='Matrix operations plus scalar operations, nonlinearities/comparisons each counted as one; not hardware FLOPs'),
+         measurements=metrics)
+@@ -169,6 +183,11 @@ def _collect(directory, dataset, dry_run=False):
+         lines.append(f'| {key} | {metrics[key]:.6f} |')
+     lines += ['', 'Activity is per stored sequence (including minimum padding/burn-in); compute includes batch padding.',
+               'ECG SynOps exclude analog input; arithmetic/logical estimates are not exact full end-to-end FLOPs or energy.']
++    if cfg.get('input_fir'):
++        lines += ['', 'FIR source counts and filtered analog values are distinct. First-projection dense MACs and FIR scalar arithmetic are included. '
++                  'FIR SynOps cover hidden-driven connections only and must not be directly compared with raw-event-input total SynOps.',
++                  f'FIR arithmetic operations/sample: {metrics["input_fir_arithmetic_ops_per_sample"]:.6f}',
++                  f'FIR logical operations/sample: {metrics["input_fir_logical_ops_per_sample"]:.6f}']
+     temporary = directory / 'COST_RESULTS.md.tmp'
+     temporary.write_text('\n'.join(lines) + '\n', encoding='utf-8')
+     temporary.replace(directory / 'COST_RESULTS.md')
+diff --git a/measure_shd_costs.py b/measure_shd_costs.py
+index fa3d685..0847dcf 100644
+--- a/measure_shd_costs.py
++++ b/measure_shd_costs.py
+@@ -130,7 +130,7 @@ class ScalarOperations(TorchDispatchMode):
+               'index_select', 'cat', 'stack', 'clone', 'copy_', 'lift_fresh',
+               'lift_fresh_copy', '_to_copy', 'to', 'empty', 'empty_like',
+               'empty_strided', 'zeros', 'zeros_like', 'ones_like', 'full_like',
+-              'fill_', 'new_zeros', 'new_empty', 'constant_pad_nd'}
++              'fill_', 'new_zeros', 'new_empty', 'constant_pad_nd', 'pad'}
+ 
+     def __init__(self):
+         super().__init__()
+diff --git a/models/pl_module.py b/models/pl_module.py
+index 83eb64c..7d1399b 100644
+--- a/models/pl_module.py
++++ b/models/pl_module.py
+@@ -7,6 +7,7 @@ from omegaconf import DictConfig
+ 
+ from models.alif import EFAdLIF, SEAdLIF
+ from models.ours.dth_adlif import DTHSEAdLIF
++from models.ours.static_threshold_adlif import StaticThresholdSEAdLIF
+ from models.ours.lt_dth_adlif import LTDTHSEAdLIF
+ from models.ours.lg_dth_adlif import LGDTHSEAdLIF
+ from models.ours.mt_adlif import MTSEAdLIF
+@@ -26,6 +27,7 @@ layer_map = {
+     "lif": LIF,
+     "se_adlif": SEAdLIF,
+     "dth_se_adlif": DTHSEAdLIF,
++    "static_threshold_se_adlif": StaticThresholdSEAdLIF,
+     "lt_dth_se_adlif": LTDTHSEAdLIF,
+     "lg_dth_se_adlif": LGDTHSEAdLIF,
+     "mt_se_adlif": MTSEAdLIF,
+@@ -46,6 +48,10 @@ def validate_training_objective(cfg):
+     objective = cfg.get('training_objective', 'classification')
+     if objective == 'classification':
+         return objective
++    if objective == 'classification_label_smoothing_v1':
++        from models.ours.label_smoothing import validate_label_smoothing_config
++        validate_label_smoothing_config(cfg)
++        return objective
+     if objective == 'mt_temporal_consistency_v1':
+         from models.ours.mt_consistency import validate_consistency_config
+         validate_consistency_config(cfg)
+@@ -55,6 +61,19 @@ def validate_training_objective(cfg):
+ 
+ def build_training_model(cfg, default_class=None):
+     objective = validate_training_objective(cfg)
++    if objective == 'classification_label_smoothing_v1':
++        from models.ours.label_smoothing import build_label_smoothed_model
++        return build_label_smoothed_model(cfg)
++    if cfg.get('input_fir'):
++        if objective != 'classification':
++            raise ValueError('Input FIR and objective variants require a separately declared ablation')
++        from models.ours.input_fir import InputFIRMLPSNN
++        return InputFIRMLPSNN(cfg)
++    if cfg.get('spike_delete_probability',0):
++        if objective != 'classification':
++            raise ValueError('Event deletion plus objective variants requires a separately declared study')
++        from models.ours.count_thinning import CountThinningMLPSNN
++        return CountThinningMLPSNN(cfg)
+     if objective == 'mt_temporal_consistency_v1':
+         from models.ours.mt_consistency import MTConsistencyMLPSNN
+         return MTConsistencyMLPSNN(cfg)
+diff --git a/run.py b/run.py
+index 6c4e423..91fe001 100644
+--- a/run.py
++++ b/run.py
+@@ -19,6 +19,8 @@ from project_paths import local_path, portable_config, relocate_checkpoint_callb
+ from pytorch_lightning.callbacks import EarlyStopping, LearningRateMonitor, ModelCheckpoint
+ from pytorch_lightning.loggers.csv_logs import CSVLogger, ExperimentWriter
+ import logging
++import contextlib
++import io
+ from models.pl_module import MLPSNN, build_training_model
+ 
+ from pytorch_lightning.strategies import SingleDeviceStrategy
+@@ -447,6 +449,9 @@ def main(cfg: DictConfig):
+     if cfg.get('validation_only', False):
+         from extended_seed_study import validate_config
+         validate_config(OmegaConf.to_container(cfg, resolve=True))
++        if cfg.get('complementary_study'):
++            from module.study_control import validate_resume_checkpoint
++            validate_resume_checkpoint(OmegaConf.to_container(cfg,resolve=True))
+     if Path('.hydra').is_dir():
+         OmegaConf.save(cfg, '.hydra/config.yaml')
+     logging.getLogger().addHandler(logging.FileHandler("out.log"))
+@@ -457,7 +462,11 @@ def main(cfg: DictConfig):
+     dataset_paths = {key: str(local_path(cfg.dataset[key]))
+                      for key in ('data_path', 'cache_root') if cfg.dataset.get(key)}
+     datamodule = hydra.utils.instantiate(cfg.dataset, **dataset_paths)
+-    model = build_training_model(cfg, default_class=MLPSNN)
++    if cfg.get('complementary_study'):
++        with contextlib.redirect_stdout(io.StringIO()):
++            model = build_training_model(cfg, default_class=MLPSNN)
++    else:
++        model = build_training_model(cfg, default_class=MLPSNN)
+     if cfg.get('init_ckpt_path'):
+         if cfg.get('ckpt_path'):
+             raise ValueError('Choose weights initialization or full resume, not both')
+@@ -484,6 +493,9 @@ def main(cfg: DictConfig):
+         ApplyLRSchedulerConfig(factor=cfg.factor, patience=cfg.patience),
+         TrainingSummaryCallback(model_ckpt_tracker, cfg),
+     ]
++    if cfg.get('complementary_study'):
++        from module.study_control import StudyProgress
++        callbacks.append(StudyProgress(cfg))
+     if cfg.get("early_stopping", False):
+         callbacks.append(
+             EarlyStopping(
+@@ -501,7 +513,8 @@ def main(cfg: DictConfig):
+         logger=AppendCSVLogger("logs", name="mlp_snn", version=0),
+         max_epochs=cfg.n_epochs,
+         gradient_clip_val=cfg.get('gradient_clip_val', 1.5),
+-        enable_progress_bar=True,
++        enable_progress_bar=not bool(cfg.get('complementary_study')),
++        enable_model_summary=not bool(cfg.get('complementary_study')),
+         strategy=SingleDeviceStrategy(device=cfg.device),
+         plugins=[ValidationCheckpointIO() if cfg.get('validation_only', False) else TrustedLocalCheckpointIO()],
+         )
+@@ -519,8 +532,12 @@ def main(cfg: DictConfig):
+         logging.info(f"Final result: {result}")
+ 
+     if cfg.get('validation_only', False):
+-        from extended_seed_study import finish_validation
+-        finish_validation(cfg, trainer)
++        if cfg.get('complementary_study'):
++            from module.study_control import finish_stage
++            finish_stage(cfg, trainer)
++        else:
++            from extended_seed_study import finish_validation
++            finish_validation(cfg, trainer)
+ 
+     return trainer.checkpoint_callback.best_model_score.cpu().detach().numpy()
+ 
+diff --git a/runner.py b/runner.py
+index 981005d..1213841 100644
+--- a/runner.py
++++ b/runner.py
+@@ -30,6 +30,8 @@ SEEDS = tuple(EVALUATION['seeds'])
+ RUN_LOGDIR = "results/valid"
+ SEED_COHORT = None
+ VALIDATION_ONLY = False
++COMPLEMENTARY_STUDY = None  # Explicit opt-in; no ordinary comparison changes.
++STAGE_CEILING = None
+ SSC_STUDY_JOB = None  # Explicit opt-in; ordinary and extension_v1 plans are unchanged.
+ SPEAKER_HOLDOUT = None  # Frozen split metadata, set only by the opt-in workflow.
+ # One explicit protocol shared by reference and proposed models.
+@@ -147,18 +149,39 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None,
+                 if SPEAKER_HOLDOUT:
+                     from shd_speaker_holdout import job_overrides
+                     overrides += job_overrides(model, dataset, seed, SPEAKER_HOLDOUT)
++                if COMPLEMENTARY_STUDY:
++                    from module.study_control import study_overrides
++                    overrides += study_overrides(COMPLEMENTARY_STUDY, STAGE_CEILING, model, dataset, seed)
++                    deviations = ([] if model == 'SE_adLIF' else [f'model_variant={model}'])
++                    deviations += ['validation-only staged discovery; official tests disabled',
++                                   f'batch_size={COMPLEMENTARY_STUDY["datasets"][dataset]["batch_size"]}; LR unchanged',
++                                   f'full_schedule_epochs={_BASELINE.datasets[dataset].n_epochs}; explicit staged stops']
++                    loading = COMPLEMENTARY_STUDY['datasets'][dataset]
++                    if 'num_workers' in loading:
++                        deviations.append(f'num_workers={loading["num_workers"]}; separately measured deterministic data loading')
++                    if loading.get('spawn_safe_transforms'):
++                        deviations.append('spawn-safe preprocessing; exact tensor/label/mask parity verified')
++                    if COMPLEMENTARY_STUDY['version']=='complementary_speaker_dev_v2' and dataset=='SHD':
++                        deviations.append(f'speaker-disjoint development pair={COMPLEMENTARY_STUDY["pair_id"]}; not canonical SHD*')
++                    overrides += [f'++paper_baseline_deviations={json.dumps(deviations)}']
+                 cfg = compose(config_name="main", overrides=overrides)
++                if COMPLEMENTARY_STUDY and cfg.get('spike_delete_probability',0):
++                    cfg.paper_baseline_deviations=list(cfg.paper_baseline_deviations)+[
++                        f'training-only per-event deletion probability={cfg.spike_delete_probability}; clean validation/inference']
++                    overrides.append(f'++paper_baseline_deviations={json.dumps(list(cfg.paper_baseline_deviations))}')
+                 from models.pl_module import validate_training_objective
+                 objective = validate_training_objective(cfg)
+                 if objective != 'classification':
+                     # An auxiliary training loss is an explicit protocol change,
+                     # even though inference, supervised aggregation and budget match.
+-                    cfg.evaluation_protocol = f'{dataset_protocol_name(dataset)}_{objective}'
+-                    deviations = list(cfg.paper_baseline_deviations) + [
+-                        f'training_objective={objective}',
+-                        f'temporal_consistency.weight={cfg.temporal_consistency.weight}',
+-                        f'temporal_consistency.window={cfg.temporal_consistency.window}',
+-                    ]
++                    cfg.evaluation_protocol = f'{cfg.evaluation_protocol}_{objective}'
++                    deviations = list(cfg.paper_baseline_deviations) + [f'training_objective={objective}']
++                    if objective == 'mt_temporal_consistency_v1':
++                        deviations += [f'temporal_consistency.weight={cfg.temporal_consistency.weight}',
++                                       f'temporal_consistency.window={cfg.temporal_consistency.window}']
++                    elif objective == 'classification_label_smoothing_v1':
++                        deviations += [f'label_smoothing_epsilon={cfg.label_smoothing_epsilon}; training only',
++                                       'validation/inference use ordinary hard-label CE; train_hard_ce logged separately']
+                     cfg.paper_baseline_deviations = deviations
+                     overrides += [f'++evaluation_protocol={cfg.evaluation_protocol}',
+                                   f'++paper_baseline_deviations={json.dumps(deviations)}']
+@@ -186,6 +209,15 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None,
+                                      config=resolved, overrides=overrides, status='unchecked',
+                                      compatibility=None))
+                     continue
++                if COMPLEMENTARY_STUDY:
++                    from module.study_control import inspect_run
++                    status, checkpoint = inspect_run(directory, resolved)
++                    if checkpoint:
++                        overrides.append(f'ckpt_path={json.dumps(portable_path(checkpoint, ROOT))}')
++                    plan.append(dict(dataset=dataset, seed=seed, directory=directory,
++                                     config=resolved, overrides=overrides, status=status,
++                                     compatibility=None))
++                    continue
+                 manifest = directory / "FULL_RUN_CONFIG.json"
+                 compatibility = None
+                 if manifest.exists():
+@@ -461,7 +493,12 @@ def run_validation(model, interval, seeds, datasets, resume):
+         result = subprocess.run([sys.executable, str(ROOT / 'run.py'), *item['overrides']], cwd=ROOT)
+         if result.returncode:
+             raise RuntimeError(f"Validation training failed; rerun the same command to resume: {directory}")
+-        read_completed(directory)
++        if COMPLEMENTARY_STUDY:
++            from module.study_control import inspect_run
++            if inspect_run(directory, item['config'])[0] != 'complete':
++                raise RuntimeError(f'Staged validation run lacks its verified receipt: {directory}')
++        else:
++            read_completed(directory)
+ 
+ 
+ def main(argv=None):
+@@ -472,7 +509,7 @@ def main(argv=None):
+     if any(arg == '--ssc-study-stage' or arg.startswith('--ssc-study-stage=') for arg in arguments):
+         from ssc_validation_study import main as study_main
+         return study_main(arguments, runner=sys.modules[__name__])
+-    global EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY
++    global EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY, COMPLEMENTARY_STUDY, STAGE_CEILING
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("--models", nargs="+", required=True,
+                         help="SE_adLIF, DTH_SE_adLIF, LG_DTH_SE_adLIF (including _slow/_transient), or configured future models")
+@@ -508,11 +545,27 @@ def main(argv=None):
+     parser.add_argument('--tta', action='store_true', help='Frozen-checkpoint test-time augmentation only; no training')
+     parser.add_argument('--tta-split', choices=('validation', 'test'), default='validation')
+     parser.add_argument('--tta-output', help='Separate evaluation output; defaults to <model>_tta_v1 experiments')
++    parser.add_argument('--study-file', help='Opt-in matched staged discovery definition, repository relative')
++    parser.add_argument('--stage-ceiling', type=int, help='Enforced completed-epoch boundary for --study-file')
+     args = parser.parse_args(argv)
+     if args.no_measure_costs and args.measure_existing_costs:
+         parser.error('--no-measure-costs and --measure-existing-costs cannot be combined')
+-    original = EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY
++    original = EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY, COMPLEMENTARY_STUDY, STAGE_CEILING
+     try:
++        if args.study_file:
++            from module.study_control import load_study
++            COMPLEMENTARY_STUDY = load_study(args.study_file)
++            if COMPLEMENTARY_STUDY['version']=='complementary_speaker_dev_v2':
++                print('[STAGE ORDER] primary speaker-disjoint screen -> fixed-pair sensitivity of shortlist -> SSC validation -> ECG validation -> freeze -> fresh canonical four-arm comparisons -> replication -> official tests/costs',flush=True)
++            STAGE_CEILING = args.stage_ceiling
++            if args.seed_cohort or args.tta or args.logdir or args.measure_existing_costs:
++                raise ValueError('Staged study owns its output/configuration and forbids TTA/test costs')
++            args.validation_only = True
++            args.logdir = COMPLEMENTARY_STUDY['output_root']
++            EVALUATION = copy.deepcopy(EVALUATION)
++            EVALUATION['name'] += '_' + COMPLEMENTARY_STUDY['version']
++        elif args.stage_ceiling is not None:
++            raise ValueError('--stage-ceiling requires --study-file')
+         SEED_COHORT, VALIDATION_ONLY = args.seed_cohort, args.validation_only
+         from extended_seed_study import cohort_definition
+         args.seeds = args.seeds if args.seeds is not None else (
+@@ -608,7 +661,7 @@ def main(argv=None):
+     except (ValueError, RuntimeError) as error:
+         parser.exit(1, f"Error: {error}\n")
+     finally:
+-        EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY = original
++        EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY, COMPLEMENTARY_STUDY, STAGE_CEILING = original
+ 
+ 
+ if __name__ == '__main__':
+diff --git a/test_checkpoint.py b/test_checkpoint.py
+index cd4f6e9..0ce7a6a 100644
+--- a/test_checkpoint.py
++++ b/test_checkpoint.py
+@@ -1,6 +1,9 @@
+ """Evaluate a trusted local classification checkpoint without training."""
+ import argparse
+ import json
++import hashlib
++import contextlib
++import io
+ from pathlib import Path
+ 
+ import hydra
+@@ -8,28 +11,107 @@ from omegaconf import OmegaConf
+ import pytorch_lightning as pl
+ import torch
+ 
+-from models.pl_module import MLPSNN
++from models.pl_module import MLPSNN, build_training_model
+ from project_paths import local_path, portable_path, portable_config
+ 
+ ROOT = Path(__file__).resolve().parent
+ 
+ 
++def sha256(path):
++    with Path(path).open('rb') as stream:
++        return hashlib.file_digest(stream,'sha256').hexdigest()
++
++
++def validate_study_evaluation(plan, checkpoint_path, checkpoint, cfg, output):
++    """A frozen receipt authorizes a particular checkpoint, never a test winner."""
++    if cfg.get('complementary_study')=='complementary_speaker_dev_v2':
++        raise ValueError('Speaker-development weights are not canonical test evidence; train the frozen SHD* comparison separately')
++    if (plan.get('status')!='frozen' or plan.get('purpose') not in ('exploratory','final')
++            or plan.get('test_selects_ideas') is not False or not output):
++        raise ValueError('Study testing requires a frozen evaluation plan and separate output directory')
++    directory=local_path(output)
++    if not directory.is_relative_to(ROOT/'results/experiments/complementary_mechanisms_v1/evaluations'):
++        raise ValueError('Study test evidence must remain in the isolated evaluations directory')
++    key=portable_path(checkpoint_path)
++    entry=plan.get('checkpoints',{}).get(key)
++    if not entry or entry.get('sha256')!=sha256(checkpoint_path):
++        raise ValueError('Checkpoint is absent from the frozen plan or its hash differs')
++    from module.study_control import forward_identity
++    if entry.get('model_source_sha256') != forward_identity(cfg.paper_baseline_dataset):
++        raise ValueError('Frozen evaluation model/data implementation differs from its recorded identity')
++    receipt=json.loads(local_path(entry['stage_receipt'],must_exist=True).read_text(encoding='utf-8'))
++    if (receipt['best_checkpoint']!=key or receipt['best_checkpoint_sha256']!=entry['sha256']
++            or receipt['selected_epoch_index']!=checkpoint['epoch']
++            or receipt['model']!=cfg.model_variant or receipt['seed']!=cfg.random_seed
++            or receipt['dataset']!=cfg.paper_baseline_dataset):
++        raise ValueError('Evaluation must use the exact validation-selected stage checkpoint')
++    if plan['purpose']=='final':
++        arms={'Baseline','A','B','A+B'}
++        datasets={'SHD','SSC','ECG'}
++        seeds={42,123,456}
++        if (set(plan.get('arms',[]))!=arms or set(plan.get('datasets',[]))!=datasets
++                or set(plan.get('training_seeds',[]))!=seeds
++                or plan.get('architecture_and_settings_frozen') is not True):
++            raise ValueError('Final evidence requires all four frozen arms, three datasets and three matching seeds')
++        cohorts=set()
++        for path,item in plan['checkpoints'].items():
++            result=json.loads(local_path(item['stage_receipt'],must_exist=True).read_text(encoding='utf-8'))
++            identity=(item.get('arm'),result.get('dataset'),result.get('seed'))
++            budget={'SHD':300,'SSC':40,'ECG':400}.get(result.get('dataset'))
++            if (identity in cohorts or result.get('status')!='stage_complete' or result.get('preliminary') is not False
++                    or result.get('completed_epochs')!=budget or result.get('full_budget')!=budget
++                    or result.get('best_checkpoint')!=path or result.get('best_checkpoint_sha256')!=item.get('sha256')
++                    or sha256(local_path(path,must_exist=True))!=item['sha256']):
++                raise ValueError('Final plan contains incomplete, duplicated or incompatible training evidence')
++            cohorts.add(identity)
++        if cohorts!={(a,d,s) for a in arms for d in datasets for s in seeds}:
++            raise ValueError('Final plan omits part of the four-arm replicated comparison')
++    return dict(purpose=plan['purpose'],completed_training_epochs=receipt['completed_epochs'],
++                full_budget=receipt['full_budget'],preliminary=receipt['preliminary'],
++                checkpoint_sha256=entry['sha256'],selected_epoch_index=checkpoint['epoch'],
++                model=cfg.model_variant,dataset=cfg.paper_baseline_dataset,seed=int(cfg.random_seed),
++                test_selects_ideas=False)
++
++
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument('--checkpoint', type=Path, required=True)
+     parser.add_argument('--output-dir', type=Path,
+                         help='Save standalone test evidence separately from training artifacts')
++    parser.add_argument('--evaluation-plan',type=Path,
++                        help='Required frozen plan for the complementary study; exploratory/final scope is recorded')
+     args = parser.parse_args()
+     checkpoint_path = local_path(args.checkpoint, must_exist=True)
+     checkpoint = torch.load(checkpoint_path, map_location='cpu', weights_only=False)
+     cfg = OmegaConf.create(portable_config(OmegaConf.to_container(
+         OmegaConf.create(checkpoint['hyper_parameters']['cfg']), resolve=True)))
++    study_evidence=None
++    if cfg.get('complementary_study'):
++        if not args.evaluation_plan:
++            raise ValueError('Study checkpoints require --evaluation-plan; test access remains gated')
++        plan_path=local_path(args.evaluation_plan,must_exist=True)
++        plan=json.loads(plan_path.read_text(encoding='utf-8'))
++        study_evidence=validate_study_evaluation(plan,checkpoint_path,checkpoint,cfg,args.output_dir)
++        study_evidence.update(evaluation_plan=portable_path(plan_path),evaluation_plan_sha256=sha256(plan_path))
++        test_name={'SHD':'SHDWrapper/shd_test.h5','SSC':'SSCWrapper/ssc_test.h5','ECG':'QTDB/QTDB_test.mat'}[cfg.paper_baseline_dataset]
++        test_path=local_path(cfg.dataset.data_path)/test_name
++        if not test_path.is_file():
++            raise FileNotFoundError(f'Missing exact official test file: {portable_path(test_path)}')
++        study_evidence.update(test_data=portable_path(test_path),test_data_sha256=sha256(test_path))
++        previous=local_path(args.output_dir)/'TEST_RESULTS.json'
++        if previous.exists():
++            saved=json.loads(previous.read_text(encoding='utf-8'))
++            if saved.get('study_evidence')!=study_evidence or saved.get('checkpoint')!=portable_path(checkpoint_path):
++                raise ValueError('Output directory belongs to a different evaluation; preserve it')
++            print(f'Already evaluated: {100*saved["metrics"]["test_acc"]:.6f}%');return
++        cfg.dataset.validation_only_data=False
+     pl.seed_everything(cfg.random_seed, workers=True)
+     torch.set_float32_matmul_precision('high')
+     # Standalone execution has no Hydra working directory to resolve data paths.
+     cfg.dataset.data_path = str(local_path(cfg.dataset.data_path))
+     cfg.dataset.num_workers = 0
+-    model = MLPSNN(cfg)
++    with contextlib.redirect_stdout(io.StringIO()):
++        model = build_training_model(cfg,default_class=MLPSNN)
+     model.load_state_dict(checkpoint['state_dict'], strict=True)
+     datamodule = hydra.utils.instantiate(cfg.dataset)
+     device = torch.device(str(cfg.device))
+@@ -37,12 +119,16 @@ def main():
+         accelerator='gpu' if device.type == 'cuda' else 'cpu',
+         devices=[device.index or 0] if device.type == 'cuda' else 1,
+         logger=False, enable_checkpointing=False,
++        enable_progress_bar=not bool(study_evidence),enable_model_summary=not bool(study_evidence),
+     )
+     results = trainer.test(model, datamodule=datamodule)[0]
+     directory = local_path(args.output_dir) if args.output_dir else checkpoint_path.parent.parent
+     directory.mkdir(parents=True, exist_ok=True)
++    evidence=dict(checkpoint=portable_path(checkpoint_path),metrics=results)
++    if study_evidence is not None:
++        evidence.update(study_evidence=study_evidence,ordinary_inference=True,test_time_augmentation=False)
+     (directory / 'TEST_RESULTS.json').write_text(
+-        json.dumps(dict(checkpoint=portable_path(checkpoint_path), metrics=results), indent=2) + '\n',
++        json.dumps(evidence, indent=2) + '\n',
+         encoding='utf-8',
+     )
+     summary_path = directory / 'TRAINING_SUMMARY.md'

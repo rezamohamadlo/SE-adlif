@@ -1,0 +1,24 @@
+{
+  "verified_at": "2026-11-12T12:58:34.685459+00:00",
+  "status": "first2_actual_fresh_starts_match_on_common_tensors_and_rng",
+  "models": [
+    "SE_adLIF",
+    "STATIC_SE_adLIF"
+  ],
+  "actual_common_tensor_values_dtype_shape_match": true,
+  "cpu_and_cuda_rng_hashes_match": true,
+  "execution_flags_match": true,
+  "intended_extra_static_tensor_names": [
+    "l1.homeostatic_gain",
+    "l1.threshold_logits",
+    "l1.transient_gain",
+    "l2.homeostatic_gain",
+    "l2.threshold_logits",
+    "l2.transient_gain"
+  ],
+  "baseline_initial_model_sha256": "6830e803aa1acda8558c1b87f7c4302599a13a52187b08b61aae3a1f5738301e",
+  "static_initial_model_sha256": "31f756a527f2a81ca98ffb5c56358ede3f5dd3a9ee3783b0ea46b0ae62c9846c",
+  "remaining2starts_pending": true,
+  "does_not_prove_later_numerical_determinism": true,
+  "official_tests": false
+}

@@ -1,0 +1,10 @@
+{
+  "registered_at": "2026-11-12T13:39:11.036399+00:00",
+  "source": "results/experiments/complementary_speaker_dev_v2/C004_SHD_CONFIRMATION_SOURCE.txt",
+  "source_sha256": "90466857d73a9bf4010c4ae6a6021f12349f25111fff98ba6c7a475049729671",
+  "scope": "All6registered currentnorm/gaincontrol/baseline/LSarms, freshdisposable117states,full342steps/1024batch/128longestfitrecords,2warmup+3measuredrealsteps each. Verify currentgatesgetfinitegradientsand learnedbiasstillpreservedonzeroinput. Full1635validationnumericalparity256vs1024.",
+  "acceptance": "finite losses/gradients,>=15percentmemoryheadroom,0changedpredictions,ordinaryCEdifference<1e-5",
+  "no_main_initialization_from_calibration": true,
+  "official_test_allowed": false,
+  "correctness_tests_passed": 53
+}

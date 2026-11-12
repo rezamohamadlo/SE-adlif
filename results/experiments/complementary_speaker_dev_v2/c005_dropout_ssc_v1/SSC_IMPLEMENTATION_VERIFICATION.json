@@ -1,0 +1,24 @@
+{
+  "verified_at": "2026-11-12T15:56:11.253052+00:00",
+  "status": "verified_before_main_training",
+  "nontraining_tests": {
+    "passed": 16,
+    "seconds": 4.994,
+    "fit_or_optimizer_steps": false,
+    "command": ".ven/Scripts/python.exe -m unittest tests.test_dropout_consistency tests.test_speaker_development tests.test_ssc_spawn_preprocessing"
+  },
+  "correctness": "OwnSSCbaselineinheritance/LR/full40/meanmembraneloss/720x2/35classes,SE-RDropinitialtensors/RNG,existingCPUCUDAKL/mask/alpha0/eval/regression andspawntransformsemantics.",
+  "data_audit": "SSC_DATA_AUDIT.json",
+  "calibration": "SSC_BATCH_CALIBRATION.json",
+  "training_batch": 512,
+  "validation_batch": 1024,
+  "LR_scaled": false,
+  "worker_evidence": "SSC_WORKER_CALIBRATION.json;explicitold1024benchmarkreusewithunchangeddata/preprocessingsourceandproducerbound",
+  "root_runner_dry_run": "2runs validatednewpaths/no writes",
+  "source_files": 280,
+  "source_and_protocol_archive_content_verified": true,
+  "main_modelcode_or_numerical_settings_changed": false,
+  "calibration_weights_reused": false,
+  "official_tests": false,
+  "external_TEMP_runner_dry_run": "BothSSCarmspassednewpaths/meanmembraneloss,notraining/writes"
+}

@@ -1,0 +1,14 @@
+{
+  "registered_at": "2026-11-12T12:13:39.401688+00:00",
+  "source": "results/experiments/complementary_speaker_dev_v2/C002_SHD_CONFIRMATION_SOURCE.txt",
+  "source_sha256": "45ade20cacf8bbfcae7d936e83530fd393bc01b2595aa433f1d447413cd5ef10",
+  "status": "syntax_checked_before_disposable_run",
+  "models": [
+    "LS_SE_adLIF",
+    "STATIC_LS_SE_adLIF",
+    "DTH_LS_SE_adLIF"
+  ],
+  "scope": "Fresh seed117disposable states,128longest+896otherfitrecords,full342steps,batch1024;2warmup+3measuredsteps each. Verify static gains remain zero/frozen/no grad after all realoptimizersteps. Full1635validationrecords numerical parity256vs1024. Discard allstates, export no checkpoints.",
+  "acceptance": "finite losses/gradients,>=15percentmemoryheadroom,0changedvalidationpredictions,ordinaryCEdifference<1e-5",
+  "official_test_allowed": false
+}

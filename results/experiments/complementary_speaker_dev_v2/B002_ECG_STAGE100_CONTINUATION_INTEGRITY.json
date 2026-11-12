@@ -1,0 +1,22 @@
+{
+  "observed_at": "2026-11-12T10:55:06.073070+00:00",
+  "snapshot_files_checked": 246,
+  "unchanged_snapshot_files": 245,
+  "changed_files": [
+    "docs/experiments/complementary-mechanisms-study-v2.md"
+  ],
+  "change_explanation": "Active plan documentation updated on user request before100launch; no training source/config/test code changed. Official runner100preflight and resume guards passed. Original archived plan remains in B002 source snapshot.",
+  "training_source_and_config_unchanged": true,
+  "stage050_snapshots": [
+    {
+      "model": "SE_adLIF",
+      "stage050_best_and_last_immutable": true
+    },
+    {
+      "model": "LS_SE_adLIF",
+      "stage050_best_and_last_immutable": true
+    }
+  ],
+  "official_tests_opened": false,
+  "audit_correction": "Initial blanket unchanged-all246 assertion identified plan-document difference; preserve and disclose it rather than restoring historical text or claiming all246unchanged."
+}

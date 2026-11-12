@@ -1,0 +1,24 @@
+{
+  "mode": "Fresh30epoch starts; full resume from ownlast for75; calibration never initializes experiments.",
+  "official_test_evaluated": false,
+  "plan": "docs/experiments/complementary-mechanisms-study-v1.md",
+  "stages": [
+    {
+      "ceiling": 30,
+      "evidence": [
+        "A001/SE_adLIF/SHD/seed_42/stages/030/RESULT.json",
+        "A001/FIR_SE_adLIF/SHD/seed_42/stages/030/RESULT.json"
+      ],
+      "launcher_pid": 2960,
+      "status": "complete"
+    },
+    {
+      "ceiling": 75,
+      "command": ".ven/Scripts/python.exe runner.py --models SE_adLIF FIR_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_mechanisms_v1.yaml --stage-ceiling 75",
+      "launcher_pid": 29756,
+      "status": "launched",
+      "stderr": "A001_stage075_stderr.log",
+      "stdout": "A001_stage075_stdout.log"
+    }
+  ]
+}

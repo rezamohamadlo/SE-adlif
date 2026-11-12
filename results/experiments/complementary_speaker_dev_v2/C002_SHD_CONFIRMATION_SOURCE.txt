@@ -1,0 +1,141 @@
+"""Disposable real-data calibration, no Trainer or study checkpoint export."""
+import contextlib, gc, hashlib, io, json, math, statistics, time
+from datetime import datetime, timezone
+import h5py
+import numpy as np
+import hydra
+from hydra import compose, initialize_config_dir
+from omegaconf import OmegaConf
+import pytorch_lightning as pl
+import torch
+from models.pl_module import build_training_model
+from module.study_control import load_study, study_overrides, validate_config, forward_identity
+from project_paths import ROOT, portable_config
+
+OUT = ROOT/'results/experiments/complementary_speaker_dev_v2'
+TARGET = OUT/'C002_SHD_BATCH1024_CONFIRMATION.json'
+assert not TARGET.exists()
+torch.set_num_threads(2)
+torch.set_float32_matmul_precision('high')
+assert torch.cuda.is_available()
+study = load_study('config/studies/complementary_C002_static_control_v1.yaml')
+manifest = json.loads((ROOT/study['split_manifest']).read_text())
+fit = manifest['subsets']['train']['indices']
+with h5py.File(ROOT/'data/SHDWrapper/shd_train.h5', 'r') as f:
+    lengths = [(float(np.max(f['spikes/times'][i])) if len(f['spikes/times'][i]) else 0.) for i in fit]
+longest = sorted(range(len(fit)), key=lambda i: (-lengths[i], i))[:128]
+remaining = np.array(sorted(set(range(len(fit)))-set(longest)))
+chosen = longest+np.random.default_rng(117).choice(remaining, 896, replace=False).tolist()
+assert len(set(chosen)) == 1024
+records = []
+data = None
+for variant in study['models']:
+    pl.seed_everything(117, workers=True)
+    overrides = study_overrides(study, 30, variant, 'SHD', 42)
+    with initialize_config_dir(config_dir=str(ROOT/'config'), version_base=None):
+        cfg = compose(config_name='main', overrides=[f'experiment=SHD_{variant}', '+comparison=SHD',
+            f'++model_variant={variant}', 'early_stopping=false']+overrides)
+    cfg = OmegaConf.create(OmegaConf.to_container(cfg, resolve=True))
+    validate_config(OmegaConf.to_container(cfg, resolve=True))
+    # This is a discarded calibration state, never a study initialization.
+    cfg.random_seed = 117
+    if data is None:
+        cfg.dataset.data_path = str(ROOT/'data')
+        data = hydra.utils.instantiate(cfg.dataset)
+        data.setup('fit')
+        assert not hasattr(data, 'data_test')
+        assert list(data.data_train.indices) == fit
+        assert list(data.data_val.indices) == manifest['subsets']['validation']['indices']
+        train_samples = [data.data_train[i] for i in chosen]
+        val_samples = [data.data_val[i] for i in range(len(data.data_val))]
+    with contextlib.redirect_stdout(io.StringIO()):
+        model = build_training_model(cfg).cuda().train()
+    configured = model.configure_optimizers()
+    optimizer = configured['optimizer'] if isinstance(configured, dict) else configured
+    batch = tuple(t.cuda() for t in data.collate_fn(train_samples))
+    assert batch[0].shape[:2] == (1024, 342)
+    times = []
+    losses = []
+    for step in range(5):
+        optimizer.zero_grad(set_to_none=True)
+        torch.cuda.synchronize()
+        if step == 2:
+            torch.cuda.reset_peak_memory_stats()
+        start = time.perf_counter()
+        outputs = model(batch[0])
+        _, loss, _ = model.process_predictions_and_compute_losses(outputs, batch[1], batch[2])
+        loss.backward()
+        torch.nn.utils.clip_grad_norm_(model.parameters(), float(cfg.gradient_clip_val))
+        optimizer.step()
+        model.on_train_batch_end(None, batch, step)
+        if variant == 'STATIC_LS_SE_adLIF':
+            for layer in (model.l1, model.l2):
+                for gain in (layer.homeostatic_gain, layer.transient_gain):
+                    assert not gain.requires_grad and gain.grad is None and float(gain.detach()) == 0.
+        torch.cuda.synchronize()
+        elapsed = time.perf_counter()-start
+        losses.append(float(loss.detach()))
+        assert math.isfinite(losses[-1])
+        assert all(torch.isfinite(p.grad).all().item() for p in model.parameters() if p.grad is not None)
+        if step >= 2:
+            times.append(elapsed)
+    reserved = torch.cuda.max_memory_reserved()
+    allocated = torch.cuda.max_memory_allocated()
+    headroom = 1-reserved/torch.cuda.get_device_properties(0).total_memory
+    assert headroom >= .15
+    train = dict(warmup_steps=2, measured_steps=3, step_seconds=statistics.mean(times),
+        samples_per_second=1024/statistics.mean(times), peak_allocated_gib=allocated/2**30,
+        peak_reserved_gib=reserved/2**30, headroom_fraction=headroom, timesteps=342,
+        updates_per_epoch=len(fit)//1024, estimated_epoch_train_seconds=statistics.mean(times)*(len(fit)//1024),
+        finite_losses_and_gradients=True, losses=losses)
+    del optimizer, configured, batch, outputs, loss
+    gc.collect()
+    torch.cuda.empty_cache()
+    model.eval()
+    probes = []
+    predictions = {}
+    for size in (256, 1024):
+        def validation_pass():
+            count = 0
+            weighted = 0.
+            pred = []
+            torch.cuda.synchronize()
+            start = time.perf_counter()
+            with torch.inference_mode():
+                for offset in range(0, len(val_samples), size):
+                    x, y, blocks = (t.cuda() for t in data.collate_fn(val_samples[offset:offset+size]))
+                    reduced, ce, _ = model.process_predictions_and_compute_losses(model(x), y, blocks)
+                    mask = y.flatten().ne(-1)
+                    n = int(mask.sum())
+                    count += n
+                    weighted += float(ce)*n
+                    pred.extend(reduced[mask].argmax(-1).cpu().tolist())
+            torch.cuda.synchronize()
+            assert count == 1635
+            return time.perf_counter()-start, weighted/count, pred
+        validation_pass()
+        measured = validation_pass()
+        predictions[size] = measured[2]
+        probes.append(dict(batch=size, warmup_passes=1, measured_passes=1,
+            validation_records=1635, seconds=measured[0], ordinary_validation_ce=measured[1]))
+    changed = sum(a != b for a, b in zip(predictions[256], predictions[1024]))
+    difference = abs(probes[0]['ordinary_validation_ce']-probes[1]['ordinary_validation_ce'])
+    assert changed == 0 and difference < 1e-5
+    record = dict(static_gains_verified_frozen_zero=(variant == 'STATIC_LS_SE_adLIF'), model=variant, training_objective=cfg.get('training_objective', 'classification'),
+        train=train, validation=probes, changed_predictions=changed, validation_ce_difference=difference,
+        disposable_config=portable_config(OmegaConf.to_container(cfg, resolve=True)))
+    records.append(record)
+    print('[C002_CALIBRATION] '+json.dumps({k: record[k] for k in ('model','train','changed_predictions','validation_ce_difference')}), flush=True)
+    del model
+    gc.collect()
+    torch.cuda.empty_cache()
+result = dict(status='verified', created_at=datetime.now(timezone.utc).isoformat(), models=records,
+    selected_training_batch=1024, selected_validation_batch=1024, lr_scaled=False,
+    calibration_seed=117, full_training_source_indices=[fit[i] for i in chosen],
+    includes_longest_training_recordings=128, training_speaker_ids=manifest['subsets']['train']['speaker_ids'],
+    heldout_speakers_trained_on=False, split_fingerprint=manifest['fingerprint'],
+    validation_probe='All1635held-out validation records, original order; numerical parity only, no idea selection',
+    source_identity=forward_identity('SHD'), disposable_states_discarded=True,
+    main_weights_or_optimizer_reused=False, official_test_opened=False)
+TARGET.write_text(json.dumps(result, indent=2)+'\n')
+print('[CALIBRATION_COMPLETE] Disposable states discarded; no study checkpoints saved.', flush=True)

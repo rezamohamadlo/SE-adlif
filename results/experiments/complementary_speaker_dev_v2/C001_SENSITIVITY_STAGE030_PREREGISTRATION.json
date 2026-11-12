@@ -1,0 +1,50 @@
+{
+  "created_at": "2026-11-12T11:48:28.749835+00:00",
+  "hypothesis": "Determine whether primary combination-over-LS gain persists on the single predefined6/10pair without pair/parameter search. Primary gain was uneven across0/3.",
+  "models": [
+    "SE_adLIF",
+    "LS_SE_adLIF",
+    "DTH_LS_SE_adLIF"
+  ],
+  "matched_controls": "Fresh baseline and smoothing-only; no primary-weight reuse, because those weights saw6/10speakers.",
+  "validation_speakers": [
+    6,
+    10
+  ],
+  "fit_speakers": [
+    0,
+    1,
+    2,
+    3,
+    7,
+    8,
+    9,
+    11
+  ],
+  "record_counts": [
+    6920,
+    1236
+  ],
+  "split_fingerprint": "a3a3e633e3cf80eb04be16dcb17328502c82533b40f1d9aaf32064daa78cc7a2",
+  "shortlist": "c001_dth_ls_v1/SHORTLIST.json",
+  "training_seed": 42,
+  "mode": "fresh_all3",
+  "epoch_ceiling": 30,
+  "full_schedule": 300,
+  "shared_settings": "Identical1024train/validationbatch,LR.01,dropout.15,32-true/highprecision,preprocessing/optimization; mechanisms frozen as in primary.",
+  "primary_metric": "clean held-out-speaker accuracy",
+  "practical_threshold_pp": 0.5,
+  "review_rule": "Assess combination-LS and combination-baseline with ordinary CE/curves/per-speaker evidence. Preserve reversals; no favorable-pair search, no epsilon/threshold tuning or further secondary budget extension. Any retained specifically dynamic-trace claim still needs static-threshold control.",
+  "primary_standalone_DTH_failed": true,
+  "arm_labels_not_rewritten": true,
+  "estimated_compute_minutes": [
+    15,
+    22
+  ],
+  "calibration": "C001_SHD_BATCH1024_CONFIRMATION.json",
+  "data_preflight": "C001_SENSITIVITY_DATA_PREFLIGHT.json",
+  "dry_runs": "passed root and externalTEMP; unshortlisted DTH and seed123 reject",
+  "source_snapshot": "C001_SENSITIVITY_SOURCE_SNAPSHOT.json",
+  "official_test_allowed": false,
+  "canonical_weights_or_final_model": false
+}

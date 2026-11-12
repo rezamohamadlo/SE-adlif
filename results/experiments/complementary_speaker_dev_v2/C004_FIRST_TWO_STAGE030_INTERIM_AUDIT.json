@@ -1,0 +1,28 @@
+{
+  "verified_at": "2026-11-12T13:58:54.542762+00:00",
+  "scope": "CPU metadata/CSV/hash audit only; selected-checkpoint GPU reproduction deferred until queue terminal.",
+  "records": [
+    {
+      "model": "SE_adLIF",
+      "selected_validation_accuracy": 0.831192672252655,
+      "ordinary_validation_ce": 0.7628498077392578,
+      "selected_completed_epoch": 22,
+      "last10_mean": 0.7892966449260712,
+      "checkpoint_hashes_verified": true,
+      "all30_unique_epochs_verified": true
+    },
+    {
+      "model": "RCN_SE_adLIF",
+      "selected_validation_accuracy": 0.8299694061279297,
+      "ordinary_validation_ce": 0.7202306985855103,
+      "selected_completed_epoch": 16,
+      "last10_mean": 0.801406741142273,
+      "checkpoint_hashes_verified": true,
+      "all30_unique_epochs_verified": true
+    }
+  ],
+  "A_minus_baseline_pp": -0.12232661247253418,
+  "first_three_common_initial_tensors_and_RNG_match": true,
+  "all_four_arm_decision": "pendingcombinationandBonly;noearlyrejectionoradvancement",
+  "official_test_evaluated": false
+}

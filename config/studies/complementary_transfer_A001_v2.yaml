@@ -1,0 +1,31 @@
+version: complementary_speaker_dev_v2
+plan: docs/experiments/complementary-mechanisms-study-v2.md
+output_root: results/experiments/complementary_speaker_dev_v2/transfer_A001
+idea: A001
+role: cross_dataset_transfer
+training_seed: 42
+split_seed: 42
+hypothesis: Test whether the auditory channel FIR and learned gain benefit transfers beyond SHD; no official-test selection.
+hypotheses:
+  SE_adLIF: Fresh matched dataset-specific control; same calibrated batch, LR, precision, preprocessing and staged ceiling as A.
+  FIR_SE_adLIF: A001 causal per-channel FIR plus learned gain may transfer to SSC and ECG; neither timing-specific causality nor improvement is assumed.
+models: [SE_adLIF, FIR_SE_adLIF]
+arm_labels:
+  SE_adLIF: Baseline
+  FIR_SE_adLIF: A
+spike_deletion:
+  SE_adLIF: 0
+  FIR_SE_adLIF: 0
+datasets:
+  SSC:
+    batch_size: 1024
+    validation_batch_size: 1024
+    num_workers: 8
+    spawn_safe_transforms: true
+    ceilings: [10, 40]
+    stage: 3
+  ECG:
+    batch_size: 256
+    validation_batch_size: 64
+    ceilings: [50, 100, 400]
+    stage: 4

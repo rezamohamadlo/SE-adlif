@@ -7,6 +7,8 @@ from omegaconf import DictConfig
 
 from models.alif import EFAdLIF, SEAdLIF
 from models.ours.dth_adlif import DTHSEAdLIF
+from models.ours.static_threshold_adlif import StaticThresholdSEAdLIF
+from models.ours.current_norm_adlif import ResidualCurrentNormSEAdLIF
 from models.ours.lt_dth_adlif import LTDTHSEAdLIF
 from models.ours.lg_dth_adlif import LGDTHSEAdLIF
 from models.ours.mt_adlif import MTSEAdLIF
@@ -26,6 +28,9 @@ layer_map = {
     "lif": LIF,
     "se_adlif": SEAdLIF,
     "dth_se_adlif": DTHSEAdLIF,
+    "static_threshold_se_adlif": StaticThresholdSEAdLIF,
+    "residual_current_norm_se_adlif": ResidualCurrentNormSEAdLIF,
+    "current_gain_se_adlif": ResidualCurrentNormSEAdLIF,
     "lt_dth_se_adlif": LTDTHSEAdLIF,
     "lg_dth_se_adlif": LGDTHSEAdLIF,
     "mt_se_adlif": MTSEAdLIF,
@@ -46,6 +51,14 @@ def validate_training_objective(cfg):
     objective = cfg.get('training_objective', 'classification')
     if objective == 'classification':
         return objective
+    if objective == 'classification_dropout_consistency_v1':
+        from models.ours.dropout_consistency import validate_dropout_consistency_config
+        validate_dropout_consistency_config(cfg)
+        return objective
+    if objective == 'classification_label_smoothing_v1':
+        from models.ours.label_smoothing import validate_label_smoothing_config
+        validate_label_smoothing_config(cfg)
+        return objective
     if objective == 'mt_temporal_consistency_v1':
         from models.ours.mt_consistency import validate_consistency_config
         validate_consistency_config(cfg)
@@ -55,6 +68,22 @@ def validate_training_objective(cfg):
 
 def build_training_model(cfg, default_class=None):
     objective = validate_training_objective(cfg)
+    if objective == 'classification_dropout_consistency_v1':
+        from models.ours.dropout_consistency import DropoutConsistentMLPSNN
+        return DropoutConsistentMLPSNN(cfg)
+    if objective == 'classification_label_smoothing_v1':
+        from models.ours.label_smoothing import build_label_smoothed_model
+        return build_label_smoothed_model(cfg)
+    if cfg.get('input_fir'):
+        if objective != 'classification':
+            raise ValueError('Input FIR and objective variants require a separately declared ablation')
+        from models.ours.input_fir import InputFIRMLPSNN
+        return InputFIRMLPSNN(cfg)
+    if cfg.get('spike_delete_probability',0):
+        if objective != 'classification':
+            raise ValueError('Event deletion plus objective variants requires a separately declared study')
+        from models.ours.count_thinning import CountThinningMLPSNN
+        return CountThinningMLPSNN(cfg)
     if objective == 'mt_temporal_consistency_v1':
         from models.ours.mt_consistency import MTConsistencyMLPSNN
         return MTConsistencyMLPSNN(cfg)

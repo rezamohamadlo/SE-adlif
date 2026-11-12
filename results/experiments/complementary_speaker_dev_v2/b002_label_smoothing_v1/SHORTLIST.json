@@ -1,0 +1,21 @@
+{
+  "created_at": "2026-11-12T11:02:33.887337+03:30",
+  "selected_using": "clean_primary_speaker_validation",
+  "models": [
+    "LS_SE_adLIF"
+  ],
+  "source": "results/experiments/complementary_speaker_dev_v2/B002_PRIMARY_STAGE030_FOUR_ARM_COMPARISON.json",
+  "reason": "LS-only improves clean accuracy+4.709476pp with lower ordinary CE and stronger late curves. Gain adds only+0.183487pp conditional on LS, below+0.5threshold; no gain/LS complementarity established.",
+  "primary_ceiling": 30,
+  "secondary_ceiling": 30,
+  "secondary_pair_predefined": [
+    6,
+    10
+  ],
+  "training_seed": 42,
+  "initialization": "fresh_weights_fresh_optimizer_epoch0",
+  "allow_pair_search": false,
+  "allow_pair_tuning": false,
+  "official_test_evaluated": false,
+  "historical_identity": "LS-only remains B002 in all records. Prior A002 is not relabeled, and two-idea goal is incomplete."
+}

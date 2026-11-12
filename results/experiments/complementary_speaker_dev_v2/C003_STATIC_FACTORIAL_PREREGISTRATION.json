@@ -1,0 +1,48 @@
+{
+  "registered_at": "2026-11-12T12:44:01.999078+00:00",
+  "status": "registered_before_new_study_implementation",
+  "idea_id": "A003_B002_STATIC_THRESHOLD_LS",
+  "motivation": "C002static+LS beatLSby1.03976pp anddynamicDTH+LSby0.73394pp onprimary0/3; dynamic-specific benefit notsupported. Need standalone static and matched plainbaseline before claiming complementarity. C001secondarywasbelowthreshold and staysclosed.",
+  "A": "ExistingC002boundedper-neuronstaticthreshold parameterization; both activity gains frozenexactzero,tracecomputationretained.",
+  "B": "Existingtrain-onlyuniformlabel smoothing epsilon0.1,ordinaryhard-labelCEinvalidation.",
+  "arms": [
+    "SE_adLIF",
+    "STATIC_SE_adLIF",
+    "STATIC_LS_SE_adLIF",
+    "LS_SE_adLIF"
+  ],
+  "hypothesis": "Bounded neuron-specific excitability and train-onlyconfidence regularization may provide distinct clean held-out-speaker benefits; no superiority or synergy assumed.",
+  "prior_art": "Learnable/staticthresholds and uniformlabel smoothing are established; this is a matched factorial study,not a noveltyclaim.",
+  "controls": "Freshall4 underone source/manifest, no mixed historicalcohort orcheckpointreuse. ExistingC002remains mechanism evidence, not silently relabeled finalfour-arm.",
+  "split_manifest": "primary_0_3/SPLIT_MANIFEST.json",
+  "validation_speakers": [
+    0,
+    3
+  ],
+  "training_seed": 42,
+  "split_seed": 42,
+  "batch_size": 1024,
+  "validation_batch_size": 1024,
+  "LR": 0.01,
+  "dropout": 0.15,
+  "precision": "32-true/high",
+  "deterministic_algorithms_changed": false,
+  "ceilings": [
+    30,
+    75
+  ],
+  "full_scheduler_budget": 300,
+  "primary_metric": "cleanheld-out-speakeraccuracy",
+  "practical_threshold_pp": 0.5,
+  "decision_rule": "Assess static-baseline,combination-static,combination-LS at0.5pp supportedby ordinaryCE/curves; reportallcontrastsandinteraction. Standalonefailure staysfailure; no forcedsynergy, gap-onlysuccess orselectionbylossalone. Extendallmatchedarms onlywith explicitimproving/inconclusive justification.",
+  "initial_state_evidence": "Newopt-in callback recordsvalue/dtype/shape/per-tensorSHA andtrainability plusCPU/current-GPURNGhashes beforefirstoptimizerstep onfreshruns. ItmustnotconsumeRNG,mutateweightsoroverwriteexistingconflictingevidence; skipsfullresume. This is loggingonly,noprecision/algorithmchange.",
+  "repeated_seed_caveat": "Same-seedLSspread1.34556pp wasobserved; syntheticCUDAreductionnumericsvariedbutcauseoftrainingaccuracyspreadunproven. Repeatsnotindependentseeds, no cherrypicking acrosscohorts.",
+  "estimated_compute_minutes": [
+    20,
+    30
+  ],
+  "next_after_primary": "Reviewall4beforeanytransfer/freeze; ifunpromising retainfailure. Noautomaticsecondarytuningorofficialtests.",
+  "official_test_allowed": false,
+  "output_root": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3",
+  "full_goal_complete": false
+}

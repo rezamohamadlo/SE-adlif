@@ -1,0 +1,29 @@
+{
+  "recorded_at": "2026-11-12T12:07:46.199476+00:00",
+  "decision": "NO_DECLARED_PRACTICAL_SECOND_PAIR_GAIN_STOP_PAIR_TUNING_REVIEW_STATIC_THRESHOLD_CONTROL",
+  "evidence": "C001_SENSITIVITY_STAGE030_COMPARISON.json",
+  "all3arms30completed": true,
+  "combination_minus_LS_pp": 0.40453076362609863,
+  "practical_threshold_pp": 0.5,
+  "threshold_changed": false,
+  "incremental_practical_gate_passed": false,
+  "ordinary_CE_combination_minus_LS": -0.03763997554779053,
+  "late10_accuracy_combination_minus_LS_pp": 0.29126107692718506,
+  "per_speaker_combination_minus_LS_pp": {
+    "6": 0.22371364653244186,
+    "10": 0.5069708491761804
+  },
+  "paired_validation": {
+    "fixes": 26,
+    "loses": 21,
+    "both_wrong": 124
+  },
+  "interpretation": "Positive but below-threshold incremental accuracy, lower ordinary CE and nominal improvements on each secondary speaker; five net additional correct recordings. No robust practical or population-level benefit established. Primary0/3+1.52905pp was uneven across speakers; standaloneDTH failed. Nonzero learned activity gains coexist with shifted static thresholds and do not establish dynamic causality.",
+  "secondary_pair_hyperparameter_tuning_allowed": false,
+  "secondary_budget_extension_allowed": false,
+  "new_pair_search_allowed": false,
+  "SSC_or_ECG_transfer_launched": false,
+  "next_action": "Inspect existing static-threshold/neuron controls and unsuccessful variants; preregister a distinct primary-only static-versus-dynamic threshold control with smoothing if not duplicative. Keep LS as promising SHD component, preserve negative SSC/ECG evidence. No heavy transfer/final freeze justified by this pair alone.",
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

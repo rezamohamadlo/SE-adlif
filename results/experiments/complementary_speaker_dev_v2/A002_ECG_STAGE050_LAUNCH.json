@@ -1,0 +1,10 @@
+﻿{
+    "pid":  21796,
+    "stderr":  "results/experiments/complementary_speaker_dev_v2/a002_ecg_stage050_stderr.log",
+    "ceiling":  50,
+    "stdout":  "results/experiments/complementary_speaker_dev_v2/a002_ecg_stage050_stdout.log",
+    "command":  ".ven/Scripts/python.exe -u runner.py --models SE_adLIF GAIN_SE_adLIF --datasets ECG --seeds 42 --study-file config/studies/complementary_transfer_A002_gain_v1.yaml --stage-ceiling 50",
+    "mode":  "fresh_each_arm_no_calibration_or_historical_weights",
+    "test_evaluated":  false,
+    "full_budget":  400
+}

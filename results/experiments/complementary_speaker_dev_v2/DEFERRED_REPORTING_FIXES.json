@@ -1,0 +1,17 @@
+{
+  "active_source_changed": true,
+  "findings": [
+    {
+      "file": "module/study_control.py",
+      "fix": "Resolve plan from the loaded study specification; preserve historical records.",
+      "issue": "Aggregate STATUS plan field is hard-coded v1 while actual cfg.protocol and study_file are v2. Active numeric/protocol evidence is intact."
+    },
+    {
+      "file": "module/study_control.py",
+      "fix": "Distinguish full-budget validation-only training from short screens and independently frozen final-test evidence. Do not infer test completion.",
+      "issue": "TRAINING_SUMMARY.md wording always calls the stage preliminary/not full-budget, even when ceiling equals full budget. The authoritative RESULT.json preliminary flag already correctly uses completed_epochs < full_budget."
+    }
+  ],
+  "preserved_original_source": "SSC_TRANSFER_SOURCE_SNAPSHOT.zip",
+  "status": "implemented_after_SSC_closed"
+}

@@ -1,0 +1,42 @@
+{
+  "early_baseline_rows_compared": 25,
+  "interpretation": "A repeat of seed42 is not a new independent training seed; fresh controls use their own matched source and settings regardless of replay agreement.",
+  "local_torch_scatter_reduce_documentation": [
+    "This operation may behave nondeterministically when given tensors on a CUDA device. See :doc:`/notes/randomness` for more information."
+  ],
+  "matching_keys": [
+    "paper_baseline",
+    "paper_baseline_version",
+    "paper_baseline_dataset",
+    "dataset",
+    "l1",
+    "l2",
+    "l_out",
+    "two_layers",
+    "lr",
+    "batch_size",
+    "n_epochs",
+    "dropout",
+    "random_seed",
+    "scheduler",
+    "patience",
+    "factor",
+    "gradient_clip_val",
+    "loss_agg",
+    "early_stopping",
+    "stage_ceiling"
+  ],
+  "max_absolute_metric_differences_vs_original": {
+    "train_acc_epoch": 0.011067718267440796,
+    "train_loss_epoch": 0.025905609130859375,
+    "val_acc": 0.04097861051559448,
+    "val_loss": 0.27203500270843506
+  },
+  "mode": "fresh_weights_and_optimizer",
+  "official_test_opened": false,
+  "repeat_variation_caveat": "Same-seed early metrics are not an exact replay despite equal saved training settings. CUDA reduction nondeterminism is documented, but the specific source of this trajectory difference is not isolated. Do not count repeated seed42as independent seeds or treat a small single-seed difference as significance.",
+  "shared_primary_split": true,
+  "shared_training_settings_equal_to_original": true,
+  "source_unchanged_since_launch": true,
+  "status": "verified"
+}

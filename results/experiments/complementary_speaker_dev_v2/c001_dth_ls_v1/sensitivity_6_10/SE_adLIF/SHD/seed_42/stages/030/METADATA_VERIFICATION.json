@@ -1,0 +1,23 @@
+{
+  "observed_at": "2026-11-12T11:55:23.016645+00:00",
+  "status": "baseline30_metadata_verified_candidates_running",
+  "validation_epochs": 30,
+  "selected_validation_accuracy": 0.856796145439148,
+  "selected_completed_epoch": 26,
+  "checks": {
+    "best": {
+      "sha256": "30316f0cd35289e334aac9e15a4672e2cbb97e7cfcf6b6a9df6bb48265279680",
+      "epoch_index": 25,
+      "global_step": 156,
+      "config_matches": true
+    },
+    "last": {
+      "sha256": "d29adea45af1155c044481d8bb25b76402ba3e29f84d8c789c2a3f71f639111e",
+      "epoch_index": 29,
+      "global_step": 180,
+      "config_matches": true
+    }
+  },
+  "GPU_inference_audit_deferred_until_queue_terminal": true,
+  "official_test_evaluated": false
+}

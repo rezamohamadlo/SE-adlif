@@ -1,0 +1,75 @@
+version: complementary_speaker_dev_v2
+candidate_version: A003_B002_static_factorial_v1
+protocol_id: shd_speaker_static_factorial_v1
+plan: docs/experiments/complementary-C003-static-factorial-v1.md
+output_root: results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3
+idea: A003_B002_STATIC_THRESHOLD_LS
+role: development
+pair_id: primary_0_3
+validation_speakers:
+- 0
+- 3
+split_manifest: results/experiments/complementary_speaker_dev_v2/primary_0_3/SPLIT_MANIFEST.json
+split_fingerprint: 7712626f45e9e226299fd2984b2a29ccaf173a4d64895b62a0a0386f2895e860
+training_seed: 42
+split_seed: 42
+hypothesis: Boundedper-neuronstaticexcitability andtrain-onlyconfidence regularization
+  may provide distinctclean held-out-speaker benefits; testallfourarmswithout forcedsynergy.
+models:
+- SE_adLIF
+- STATIC_SE_adLIF
+- STATIC_LS_SE_adLIF
+- LS_SE_adLIF
+arm_labels:
+  SE_adLIF: Baseline
+  STATIC_SE_adLIF: A003 bounded static thresholds
+  STATIC_LS_SE_adLIF: A003+B002 static thresholds and smoothing
+  LS_SE_adLIF: B002 smoothing
+spike_deletion:
+  SE_adLIF: 0
+  STATIC_SE_adLIF: 0
+  STATIC_LS_SE_adLIF: 0
+  LS_SE_adLIF: 0
+input_fir_modes:
+  SE_adLIF: null
+  STATIC_SE_adLIF: null
+  STATIC_LS_SE_adLIF: null
+  LS_SE_adLIF: null
+training_objectives:
+  SE_adLIF: classification
+  STATIC_SE_adLIF: classification
+  STATIC_LS_SE_adLIF: classification_label_smoothing_v1
+  LS_SE_adLIF: classification_label_smoothing_v1
+label_smoothing_epsilon:
+  SE_adLIF: 0
+  STATIC_SE_adLIF: 0
+  STATIC_LS_SE_adLIF: 0.1
+  LS_SE_adLIF: 0.1
+hidden_cells:
+  SE_adLIF: se_adlif
+  STATIC_SE_adLIF: static_threshold_se_adlif
+  STATIC_LS_SE_adLIF: static_threshold_se_adlif
+  LS_SE_adLIF: se_adlif
+hidden_cell_settings:
+  static_threshold_se_adlif:
+    rho_fast: 0.9
+    rho_slow: 0.99
+    target_rate: 0.05
+    theta_min: 0.5
+    theta_max: 1.5
+hypotheses:
+  SE_adLIF: Fresh matched ordinary reference; no prior weights.
+  STATIC_SE_adLIF: Learn boundedper-neuronstaticthresholds with bothactivity gains
+    frozenzero; assess standalone effect.
+  STATIC_LS_SE_adLIF: Add train-onlysmoothing to staticthresholds; must improve over
+    bothcomponents.
+  LS_SE_adLIF: Fresh smoothing-onlycontrol separates standalone regularization fromcomplementarity.
+datasets:
+  SHD:
+    batch_size: 1024
+    validation_batch_size: 1024
+    ceilings:
+    - 30
+    - 75
+    stage: 1
+record_initial_state: true

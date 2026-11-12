@@ -1,0 +1,39 @@
+{
+  "registered_at": "2026-11-12T12:10:24.401332+00:00",
+  "status": "registered_before_new_component_implementation",
+  "idea_id": "C002_static_threshold_control_of_C001",
+  "motivation": "C001combo-LS +1.52905pp primary0/3but+0.40453pp predefined6/10belowpractical0.5; standaloneDTH -2.32416pp. Learned static thresholds shifted while activity gains became nonzero. Need identify whether dynamics are necessary before further transfer investment.",
+  "duplicate_audit": "Existing EF/SE train_thr option is a scalar threshold unless a random-initialized vector is requested; it does not match bounded per-neuron DTHlogits with unchanged RNG/identity init. LT-DTH learns trace decays; FP changes frequency parameterization. No equivalent matched static-only-with-LS control found in experiment configs/registry.",
+  "prior_art": "Learnable/static thresholds and label smoothing are established components. This is a mechanism ablation, not a novelty claim. It retains the existing DTH bounded per-neuron threshold parameterization.",
+  "arms": [
+    "LS_SE_adLIF",
+    "STATIC_LS_SE_adLIF",
+    "DTH_LS_SE_adLIF"
+  ],
+  "hypothesis": "If frozen-zero DTHactivity gains with trainable bounded static thresholds match or exceed DTH+LS, dynamic traces are not required for the observed primary benefit. If dynamic exceeds static by>=0.5pp with supportive ordinary CE/curves, dynamic terms have conditional primary development support, not population/test proof.",
+  "static_implementation": "Subclass existing DTH; freeze its two activity-gain parameters at exact zero in both layers; preserve all states/scans/parameter initialization. Keep bounded per-neuron threshold logits trainable. Reject loaded nonzero activity gains. Deliberately retain trace computation for controlled mechanism comparison, so no inference-speed saving is claimed.",
+  "controls": "Fresh LS and DTH+LS under same new source; no C001weights or other-pair initialization.",
+  "split": "Frozen primary0/3official-training-only manifest",
+  "training_seed": 42,
+  "split_seed": 42,
+  "batch_size": 1024,
+  "validation_batch_size": 1024,
+  "LR": 0.01,
+  "dropout": 0.15,
+  "precision": "32-true/high",
+  "epoch_ceiling": 30,
+  "full_scheduler_budget": 300,
+  "primary_metric": "clean held-out-speaker accuracy",
+  "practical_threshold_pp": 0.5,
+  "decision_rule": "Compare static-LS and dynamic-static at original+0.5pp threshold, supported by ordinary CE/curves and learned thresholds. A smaller gap or lower loss alone does not establish benefit. Retain conditional/inconclusive results without forced synergy. No automatic transfer or final freeze.",
+  "no_secondary_tuning": true,
+  "secondary_pair_revisited_in_this_control": false,
+  "official_test_allowed": false,
+  "estimated_compute_minutes": [
+    15,
+    25
+  ],
+  "output_root": "results/experiments/complementary_speaker_dev_v2/c002_static_threshold_control_v1/primary_0_3",
+  "future_requirement": "Any retained new static candidate still requires its own appropriate ablation/transfer/frozen canonical comparisons. This diagnostic does not replace the finalBaseline/A/B/ABacross3datasetsand3seeds.",
+  "full_goal_complete": false
+}

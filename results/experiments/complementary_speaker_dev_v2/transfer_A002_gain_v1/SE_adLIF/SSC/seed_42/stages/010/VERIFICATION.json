@@ -1,0 +1,26 @@
+{
+  "status": "verified_completed_bounded_screen",
+  "model": "SE_adLIF",
+  "dataset": "SSC",
+  "seed": 42,
+  "completed_epochs": 10,
+  "full_budget": 40,
+  "preliminary": true,
+  "selected_epoch_index": 9,
+  "validation_accuracy": 0.7790802717208862,
+  "validation_loss": 0.7248660922050476,
+  "checkpoint_checks": {
+    "best": {
+      "sha256": "8a29dd0873d7bc580c3e7b60b8da6db21a20c650f102501e9fce56fb891d0599",
+      "epoch_index": 9,
+      "global_step": 730
+    },
+    "last": {
+      "sha256": "8a29dd0873d7bc580c3e7b60b8da6db21a20c650f102501e9fce56fb891d0599",
+      "epoch_index": 9,
+      "global_step": 730
+    }
+  },
+  "official_test_opened": false,
+  "gain_candidate_status": "running_not_yet_compared"
+}

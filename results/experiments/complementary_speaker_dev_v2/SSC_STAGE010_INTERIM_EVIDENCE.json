@@ -1,0 +1,25 @@
+{
+  "baseline_selected_epoch": 10,
+  "baseline_training_accuracy": 0.7901862263679504,
+  "baseline_validation_accuracy": 0.7804828882217407,
+  "baseline_validation_loss": 0.7224344611167908,
+  "control": "Fresh current batch1024baseline, not historical batch256reference.",
+  "matched_dataset_config": true,
+  "matched_shared_settings": {
+    "batch_size": 1024,
+    "dropout": 0.15,
+    "early_stopping": false,
+    "factor": 0.9,
+    "gradient_clip_val": 1.5,
+    "loss_agg": "mean_membrane_potentials",
+    "lr": 0.006,
+    "n_epochs": 40,
+    "patience": 9999,
+    "random_seed": 42,
+    "scheduler": "plateau",
+    "stage_ceiling": 10
+  },
+  "official_test_evaluated": false,
+  "source_unchanged": true,
+  "status": "baseline_verified_candidate_running"
+}

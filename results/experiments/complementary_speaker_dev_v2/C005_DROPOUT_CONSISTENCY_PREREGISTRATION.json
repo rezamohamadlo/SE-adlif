@@ -1,0 +1,46 @@
+{
+  "registered_at": "2026-11-12T14:16:16.730786+00:00",
+  "status": "beforeimplementation",
+  "idea_id": "A005_B002_DROPOUT_CONSISTENCY",
+  "A": "R-Drop-style two independent stochastic forwards of the same unchanged batch; average supervised losses plus alpha times mean symmetric KL on target-aligned valid class blocks.",
+  "B": "Existing uniform train-only label smoothing epsilon0.1; validation uses hard CE.",
+  "alpha": 1.0,
+  "temperature": 1.0,
+  "KL": "0.5*(KL(p1||p2)+KL(p2||p1)); gradients through both distributions; class-sum then valid-block mean; no extra multiplication by batch or class count.",
+  "inference": "Exactly ordinary unmodified single MLPSNN forward; no views, averaging, KL, TTA, extra parameters or states.",
+  "mechanism": "May reduce dependence on individual dropout submodels. Existing fitting-only160row diagnostic finds3/160baseline and1/160LS disagreements, mean SKL~0.024; modest sensitivity only, not evidence that it causes speaker shift or guarantees gain. Weight1fixedbeforediagnostic.",
+  "prior_art": [
+    {
+      "title": "Liang et al., R-Drop, NeurIPS2021",
+      "url": "https://arxiv.org/abs/2106.14448"
+    }
+  ],
+  "duplicate_audit": "No R-Drop/two-independent-pass objective found in models/config/study guides/failed model paths. Existing MT temporal JS compares windows within one pass and uses MT cells; not equivalent. This is established regularization, not proposed novel neuron.",
+  "models": [
+    "SE_adLIF",
+    "RDROP_SE_adLIF",
+    "RDROP_LS_SE_adLIF",
+    "LS_SE_adLIF"
+  ],
+  "conditional_controls": [
+    "TWO_PASS_SE_adLIF",
+    "TWO_PASS_LS_SE_adLIF"
+  ],
+  "conditional_control_rule": "If an R-Drop arm passes, compare to matched alpha0 two-forward CE control before attributing to consistency rather than averaging two dropout supervised losses. Do not automatically spend controls on a negative screen.",
+  "control": "All4 fresh42sameprimary0/3, batch frozen after real two-graph calibration, LR0.01not scaled, dropout0.15, optimizer/clipping/scheduler/full300budget identical; twice forward/backward graph cost is an explicit training-objective deviation. No oldweights/calibrationweights.",
+  "screening_ceilings": [
+    30,
+    75
+  ],
+  "practical_threshold_pp": 0.5,
+  "advancement": "A-baseline,AB-A,AB-B each assessed at+0.5pp with ordinary CE and curves. No gap-only advancement, silent A/B relabeling, forced synergy or loss-only success. Extend only genuinely improving/inconclusive comparison with recorded reason.",
+  "training_metric": "Accuracy from first stochastic forward only, logged once. Loss averages both supervised views plus KL. train_hard_ce is averaged ordinary CE; auxiliary KL and supervised terms logged separately. Not a clean-checkpoint training score.",
+  "cost_estimate_minutes": [
+    30,
+    60
+  ],
+  "calibration": "Discarded117states; long real sequences; finite gradients and >=15%reserved headroom; validate ordinary256vs1024 parity. If1024unstable, freeze a new shared512batch for entire fresh cohort before launch, never silently alter active runs.",
+  "official_test_allowed": false,
+  "secondary": "Predefined6/10onlyaftershortlist,freshownsplit; verifiedSSC/ECGvalidationthen frozenownsplitcanonicalSHD*fourarms/three-seeds/fullbudgets. No test-driven candidate choices.",
+  "full_goal_complete": false
+}

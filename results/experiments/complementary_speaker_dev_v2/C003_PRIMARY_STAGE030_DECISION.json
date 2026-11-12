@@ -1,0 +1,28 @@
+{
+  "recorded_at": "2026-11-12T13:21:45.206634+00:00",
+  "decision": "REJECT_A003_STATIC_BRANCH_UNDER_MATCHED30_SCREEN_NO_EXTENSION_OR_TRANSFER",
+  "evidence": "C003_PRIMARY_STAGE030_COMPARISON.json",
+  "A_minus_Baseline_pp": -2.7522921562194824,
+  "AB_minus_B_pp": -0.7951021194458008,
+  "AB_minus_A_pp": 7.706421613693237,
+  "interaction_pp": 1.9571900367736816,
+  "practical_threshold_pp": 0.5,
+  "standalone_static_gate_passed": false,
+  "incremental_static_on_LS_gate_passed": false,
+  "ordinary_CE_combination_minus_LS": 0.021326422691345215,
+  "late10_combination_minus_LS_pp": -0.25076329708100253,
+  "per_speaker_combination_minus_LS_pp": {
+    "0": -1.0952902519167584,
+    "3": -0.41551246537395725
+  },
+  "initial_state_evidence": "C003_INITIAL_STATE_COMPARISON.json",
+  "actual_common_initial_tensors_and_rng_match": true,
+  "interpretation": "Static alone underperforms baseline; combination underperforms LS in selectedaccuracy,ordinaryCE,late10mean and bothspeakers. Positive1.95719pp interaction reflects a larger smoothing rescue of the weaker static arm; it does not make the combination better than LS or prove synergy. C002positive incremental static result was not sustained in this freshfactorial. Preserveboth cohorts, do not cherry-pick. This rejects the declared30screen,not a theorem about allbudgets/datasets.",
+  "extend_to75": false,
+  "SSC_or_ECG_transfer_launched": false,
+  "new_secondary_tuning_allowed": false,
+  "same_seed_repeats_count_as_independent": false,
+  "next_action": "Shift away from static-threshold/gain tweaks. Review a distinct input-conditioned mechanism aimed at variability across speakers (for example causal per-frame residual current normalization), inspect existing failed variants and primary prior art before preregistration. Retain LS as SHD development component but its below-thresholdSSC/negativeECG transfer remains unresolved. No final architecture or official-test freeze yet.",
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

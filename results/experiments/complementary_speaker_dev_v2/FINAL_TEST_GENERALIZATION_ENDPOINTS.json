@@ -1,0 +1,36 @@
+{
+  "status": "predeclared_endpoints_not_a_test_access_authorization_or_frozen_model_plan",
+  "motivation": "Overall official-test accuracy can obscure performance on speakers absent from fitting. Unseen-speaker generalization is the central research concern.",
+  "official_test_opened": false,
+  "primary_endpoint": "Ordinary-inference official-test accuracy for every frozen arm and dataset, with matching-seed comparisons and mean/sample SD. Preserve established dataset-specific aggregation and masking.",
+  "SHD_predeclared_secondary_endpoints": {
+    "membership_rule": "For each canonical checkpoint, derive fitting speaker IDs from its verified actual training sample indices in the official training file. A test recording is unseen-speaker exactly when its metadata speaker ID is absent from that fitting set. Never infer membership from the test label, prediction or performance.",
+    "matched_cohort_requirement": "Verify identical fitting indices and speaker sets across compared canonical SHD* arms/seeds before comparing the same test subgroups. Keep the split seed fixed at42.",
+    "groups_to_report": [
+      "all official-test recordings",
+      "seen-speaker recordings",
+      "unseen-speaker recordings",
+      "every individual test speaker"
+    ],
+    "metrics": [
+      "correct recording count / recording count",
+      "recording-weighted accuracy",
+      "class coverage and class counts",
+      "per-speaker accuracy and number of speakers",
+      "macro mean of speaker accuracies within each nonempty seen/unseen group"
+    ],
+    "missing_groups_or_metadata": "Report unavailable or empty with counts; never invent speaker identities, silently substitute a different grouping, or assign zero accuracy to an empty group.",
+    "paper_differences": "Apply delta-paper only to a genuinely comparable published numeric metric. Do not subtract the paper's overall SHD* test mean from a seen/unseen subgroup score.",
+    "uncertainty": "Report matching training seeds separately and mean/sample SD. Recordings from one speaker are correlated; a small number of test speakers does not justify treating every recording as an independent speaker or asserting population-level significance.",
+    "inference": "Reuse the same clean ordinary predictions as the overall score, with no TTA, per-speaker adaptation, temperature fitting, additional checkpoint selection or per-group hyperparameters.",
+    "alignment_guard": "Persist original test row IDs and verify a one-to-one complete match between collected predictions, raw labels and speaker metadata. Verify count-weighted subgroup accuracies reconstruct the overall recording accuracy.",
+    "provenance": "Save fitting-split identity, training/test file hashes, checkpoint hash and per-record predictions beside the isolated final evaluation evidence. Do not open the official test file for this development-stage preregistration."
+  },
+  "access_and_interpretation_gate": "Open official test data only after mechanisms/settings and the four-arm final evaluation cohort are frozen and validated. Report all groups for all arms, including regressions. No subgroup or overall test outcome selects the next idea. Prior historical test exposure remains reused evidence; new training seeds do not erase it.",
+  "implementation_status": "Isolated accounting and read-only collector helpers unit-verified (40combined tests). Real evaluator connection, sampler/row provenance checks and actual-checkout integration remain pending.",
+  "active_run_safety": "No training source, dataset, configuration or running process changed to register these endpoints.",
+  "draft_receipt": "results/experiments/complementary_speaker_dev_v2/cost_draft/SPEAKER_GENERALIZATION_DRAFT.json",
+  "collector_draft_receipt": "results/experiments/complementary_speaker_dev_v2/cost_draft/ORDINARY_PREDICTION_CAPTURE_DRAFT.json",
+  "canonical_training_split_manifest": "results/experiments/complementary_speaker_dev_v2/CANONICAL_SHD_SPLIT_MANIFEST.json",
+  "canonical_split_fingerprint": "44a1f13b28fb57eaf703f11a6c9cfdbd1d9543b8d76f9e5aa223a49cb6b4f409"
+}

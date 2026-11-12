@@ -1,0 +1,58 @@
+{
+  "model": "STATIC_LS_SE_adLIF",
+  "selected_validation_accuracy": 0.8660550713539124,
+  "selected_completed_epoch": 22,
+  "online_training_accuracy_in_selected_epoch": 0.9861653447151184,
+  "validation_loss_at_selection": 0.5813568234443665,
+  "last10_validation_mean": 0.8570642292499542,
+  "checkpoint_checks": {
+    "best": {
+      "sha256": "29ca11533d1b6e357eed5db924171341334e6275072acfae9d6288317ab25bf1",
+      "epoch_index": 21,
+      "global_step": 132,
+      "config_matches": true
+    },
+    "last": {
+      "sha256": "194ed4b6c73b91f836b45bb36f159c3b94a49f4a468dce5da3eae3c7d4681c46",
+      "epoch_index": 29,
+      "global_step": 180,
+      "config_matches": true
+    }
+  },
+  "per_speaker": {
+    "0": {
+      "recordings": 913,
+      "correct": 824,
+      "accuracy": 0.9025191675794085
+    },
+    "3": {
+      "recordings": 722,
+      "correct": 592,
+      "accuracy": 0.8199445983379502
+    }
+  },
+  "macroclass_recall": 0.8715378361424596,
+  "threshold_parameters": {
+    "l1": {
+      "homeostatic_gain": 0.0,
+      "transient_gain": 0.0,
+      "static_threshold_min": 0.7807860374450684,
+      "static_threshold_mean": 0.9611445069313049,
+      "static_threshold_max": 1.0239192247390747
+    },
+    "l2": {
+      "homeostatic_gain": 0.0,
+      "transient_gain": 0.0,
+      "static_threshold_min": 0.9209804534912109,
+      "static_threshold_mean": 1.000568151473999,
+      "static_threshold_max": 1.0623466968536377
+    }
+  },
+  "reproduced_validation_accuracy": 0.8660550458715597,
+  "reproduced_ordinary_ce": 0.581356880460675,
+  "source_code": "results/experiments/complementary_speaker_dev_v2/C003_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+  "source_sha256": "e694dde9297230f0ccc2ae8ec45403edaef912ae14a2e3e1699178497238fe43",
+  "official_test_evaluated": false,
+  "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/STATIC_LS_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+  "raw_prediction_sha256": "ea3b9fd0ce991ff3538f2e2d11ec20a183283fc0abe509e1723d21bbdda9ae4d"
+}

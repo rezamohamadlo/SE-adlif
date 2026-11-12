@@ -1,0 +1,39 @@
+{
+  "changed_files": [
+    {
+      "base_sha256": "1b2f9af97635a167119e1ad31b74f9bc2b62cccd1edfb5f0e8952b43e0a6b99d",
+      "draft_sha256": "d0b53c4ad62d7fefa95a88d55ec9346cb015e3db054c0fd3ba4b1223f512c12f",
+      "path": "models/ours/input_fir.py"
+    },
+    {
+      "base_sha256": "f2b6a87331e8f9de801b6e6ef11d22337bd3e9b2883ef6bdc439b36b021cead6",
+      "draft_sha256": "7c51c98d61796c09581b137fe079b6399e7332b29133a7de87314c573adda66d",
+      "path": "module/study_control.py"
+    },
+    {
+      "base_sha256": null,
+      "draft_sha256": "460ae2675fabdb8a18463c1edde71d3eb07394b854fceeaf96b697876b839ac5",
+      "path": "config/experiment/SHD_GAIN_SE_adLIF.yaml"
+    },
+    {
+      "base_sha256": null,
+      "draft_sha256": "20d6a57958770fad481039c3426d2f5e96636a19e04ec7cb50c9671a774f4503",
+      "path": "config/studies/complementary_gain_control_A001_v1.yaml"
+    },
+    {
+      "base_sha256": null,
+      "draft_sha256": "83ade3b981970a965fd8cb01dfe61e91bece2270502d8eaaf49009b128e908b9",
+      "path": "tests/test_input_gain_control.py"
+    }
+  ],
+  "combined_cpu_tests_passed": 60,
+  "depends_on": "cost_draft/FIR_COSTS_READY.patch for new accounting integration test",
+  "generated_checkout_not_for_git": true,
+  "main_cpu_tests_passed": 77,
+  "main_manifest_preflight_verified": true,
+  "no_training_or_official_test_data": true,
+  "patch": "results/experiments/complementary_speaker_dev_v2/gain_control_draft/GAIN_CONTROL_READY.patch",
+  "patch_sha256": "50c4b47f6561cd1ca83a1af41ba12aaced4504acf20e7443ab9442bbe545c1d3",
+  "pending": "Apply only after active source-frozen SSC queue closes; verify base hashes, actual frozen-manifest preflight and relevant tests in main checkout before any gain-control training.",
+  "status": "applied_after_completed_SSC_queue"
+}

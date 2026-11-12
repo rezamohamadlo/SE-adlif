@@ -1,0 +1,28 @@
+{
+  "status": "verified_full_budget_validation_only",
+  "model": "SE_adLIF",
+  "dataset": "SSC",
+  "training_seed": 42,
+  "completed_epochs": 40,
+  "selected_completed_epoch": 37,
+  "train_accuracy_at_selection": 0.8867990374565125,
+  "validation_accuracy": 0.8145476579666138,
+  "validation_loss_at_selection": 0.6425706148147583,
+  "final_train_accuracy": 0.8857020735740662,
+  "final_validation_accuracy": 0.7953110933303833,
+  "tail10_validation_mean": 0.8077046394348144,
+  "checkpoint_checks": {
+    "best": {
+      "sha256": "4be3af373098dde149c3439146a88610e2b0ce0903ed2e9509697efbd007d330",
+      "epoch_index": 36,
+      "global_step": 2701
+    },
+    "last": {
+      "sha256": "bec8c5be766c61e2dce1ea36e052182be8b24c358ae9234ea34f164df5f57c54",
+      "epoch_index": 39,
+      "global_step": 2920
+    }
+  },
+  "stage010_snapshots_preserved": true,
+  "official_test_opened": false
+}

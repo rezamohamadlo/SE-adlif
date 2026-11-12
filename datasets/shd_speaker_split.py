@@ -12,6 +12,7 @@ import numpy as np
 from project_paths import local_path, portable_path
 
 PROTOCOL = 'shd_speaker_holdout_v1'
+DEVELOPMENT_PROTOCOL = 'shd_speaker_development_v2'
 ALGORITHM = 'sha256_seed_speaker_rank_v1'
 SPLIT_SEED = 42
 
@@ -93,8 +94,49 @@ def build_manifest(data_path):
     return manifest
 
 
+def build_development_manifest(data_path, validation_speakers, role):
+    """Predeclared two-speaker split using ONLY official training recordings."""
+    if role not in ('development', 'pair_sensitivity'):
+        raise ValueError('Unknown speaker development role')
+    selected = sorted(validation_speakers)
+    if len(selected) != 2 or len(set(selected)) != 2 or any(type(s) is not int for s in selected):
+        raise ValueError('Exactly two distinct integer speaker IDs must be declared in advance')
+    train = local_path(data_path)/'SHDWrapper/shd_train.h5'
+    if not train.is_file():
+        raise FileNotFoundError('Official SHD training file is required; no fallback or test-file access')
+    speakers, labels = read_metadata(train)
+    available = sorted(int(s) for s in np.unique(speakers))
+    if len(available) != 10 or not set(selected).issubset(available):
+        raise ValueError('Expected ten official-training speakers including the two frozen IDs')
+    heldout = np.isin(speakers, selected)
+    subsets = {}
+    for name, mask in [('train', ~heldout), ('validation', heldout)]:
+        counts = np.bincount(labels[mask].astype(np.int64), minlength=20).tolist()
+        if len(counts)!=20 or any(c==0 for c in counts):
+            raise ValueError(f'{name} lacks full class coverage; do not search for another pair')
+        subsets[name] = dict(indices=np.flatnonzero(mask).tolist(), sample_count=int(mask.sum()),
+                             class_counts=counts, speaker_ids=sorted(int(s) for s in np.unique(speakers[mask])))
+    if (set(subsets['train']['indices']) & set(subsets['validation']['indices'])
+            or len(subsets['train']['speaker_ids'])!=8
+            or set(subsets['train']['speaker_ids']) & set(selected)):
+        raise ValueError('Speaker or recording overlap in frozen split')
+    manifest = dict(protocol=DEVELOPMENT_PROTOCOL, algorithm_version='predeclared_two_speaker_ids_v2',
+                    role=role, split_seed=42, available_speaker_ids=available,
+                    validation_speaker_ids=selected, total_training_recordings=len(labels), subsets=subsets,
+                    validation_fraction=subsets['validation']['sample_count']/len(labels),
+                    official_test_opened=False,
+                    dataset_identity=dict(dataset='SHD', source='official train HDF5 only',
+                        train_sha256=file_sha256(train),
+                        training_metadata_sha256=digest(dict(speakers=speakers.tolist(), labels=labels.tolist())),
+                        speaker_field='extra/speaker', recording_axis='Original HDF5 row index'))
+    manifest['fingerprint']=digest(manifest)
+    return manifest
+
+
 def verify_manifest(manifest, data_path, expected_fingerprint):
-    if manifest.get('fingerprint') != expected_fingerprint or manifest != build_manifest(data_path):
+    rebuilt = (build_development_manifest(data_path,manifest['validation_speaker_ids'],manifest['role'])
+               if manifest.get('protocol')==DEVELOPMENT_PROTOCOL else build_manifest(data_path))
+    if manifest.get('fingerprint') != expected_fingerprint or manifest != rebuilt:
         raise ValueError('Speaker split manifest/dataset/fingerprint changed; refusing reuse')
     return manifest
 

@@ -1,0 +1,32 @@
+{
+  "recorded_at": "2026-11-12T11:12:05.102053+00:00",
+  "status": "bounded_B002_discovery_transfer_stages_closed",
+  "candidate": "B002 training-only uniform label smoothing epsilon0.1",
+  "ordinary_inference": true,
+  "evidence": {
+    "primary_speakers0_3": "B002_PRIMARY_STAGE030_FOUR_ARM_COMPARISON.json",
+    "predefined_sensitivity6_10": "B002_LS_SENSITIVITY_STAGE030_COMPARISON.json",
+    "SSC40": "B002_SSC_STAGE040_COMPARISON.json",
+    "ECG100": "B002_ECG_STAGE100_COMPARISON.json"
+  },
+  "validation_deltas_LS_minus_matched_baseline_pp": {
+    "SHD_primary0_3": 4.7094762325286865,
+    "SHD_sensitivity6_10": 5.177992582321167,
+    "SSC40": 0.4308164119720459,
+    "ECG100": -0.5380451679229736
+  },
+  "interpretation": "Promising held-out-speaker SHD development gain across the two predefined pairs, one training seed. No declared practical SSC gain; ECG regression under100screen. Input gain adds only0.18349pp over LS at primary30, below0.5threshold; two complementary ideas not established. Smaller train-validation gaps are not a success criterion.",
+  "decision": "PRESERVE_SHD_COMPONENT_REVISE_CROSS_DATASET_COMPLEMENTARY_HYPOTHESIS",
+  "next_action": "Evidence review of a distinct mechanism addressing remaining validation errors/dataset transfer, then preregister fresh matched primary0/3screen through runner.py. No favorable-pair search, no further SSC/ECG extension for this branch by default. Do not freeze final architectures yet.",
+  "not_complete": [
+    "Two complementary mechanisms with supported cross-dataset transfer",
+    "Frozen canonical four-arm own-split training",
+    "Full budgets SHD300 SSC40 ECG400 for frozen four-arm comparison",
+    "Matched training seeds42/123/456",
+    "Frozen official ordinary-test evaluation and final costs/uncertainty"
+  ],
+  "official_test_evaluated": false,
+  "full_goal_complete": false,
+  "local_training_processes_at_closure": 0,
+  "existing_evidence_preserved": true
+}

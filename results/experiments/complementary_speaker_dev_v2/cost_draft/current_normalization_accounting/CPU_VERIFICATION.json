@@ -1,0 +1,519 @@
+{
+  "verified_at": "2026-11-12T14:01:07.576834+00:00",
+  "status": "isolatedCPUdraftverifiednotintegrated",
+  "cases": [
+    {
+      "shape": [
+        1,
+        1
+      ],
+      "normalized_shape": [
+        1
+      ],
+      "affine_weight": false,
+      "affine_bias": false,
+      "counts": {
+        "add": 1,
+        "div": 2,
+        "sub": 1,
+        "mul": 2,
+        "rsqrt": 1
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    },
+    {
+      "shape": [
+        1,
+        1
+      ],
+      "normalized_shape": [
+        1
+      ],
+      "affine_weight": false,
+      "affine_bias": true,
+      "counts": {
+        "add": 2,
+        "div": 2,
+        "sub": 1,
+        "mul": 2,
+        "rsqrt": 1
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    },
+    {
+      "shape": [
+        1,
+        1
+      ],
+      "normalized_shape": [
+        1
+      ],
+      "affine_weight": true,
+      "affine_bias": false,
+      "counts": {
+        "add": 1,
+        "div": 2,
+        "sub": 1,
+        "mul": 3,
+        "rsqrt": 1
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    },
+    {
+      "shape": [
+        1,
+        1
+      ],
+      "normalized_shape": [
+        1
+      ],
+      "affine_weight": true,
+      "affine_bias": true,
+      "counts": {
+        "add": 2,
+        "div": 2,
+        "sub": 1,
+        "mul": 3,
+        "rsqrt": 1
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    },
+    {
+      "shape": [
+        2,
+        3
+      ],
+      "normalized_shape": [
+        3
+      ],
+      "affine_weight": false,
+      "affine_bias": false,
+      "counts": {
+        "add": 10,
+        "div": 4,
+        "sub": 6,
+        "mul": 12,
+        "rsqrt": 2
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    },
+    {
+      "shape": [
+        2,
+        3
+      ],
+      "normalized_shape": [
+        3
+      ],
+      "affine_weight": false,
+      "affine_bias": true,
+      "counts": {
+        "add": 16,
+        "div": 4,
+        "sub": 6,
+        "mul": 12,
+        "rsqrt": 2
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    },
+    {
+      "shape": [
+        2,
+        3
+      ],
+      "normalized_shape": [
+        3
+      ],
+      "affine_weight": true,
+      "affine_bias": false,
+      "counts": {
+        "add": 10,
+        "div": 4,
+        "sub": 6,
+        "mul": 18,
+        "rsqrt": 2
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    },
+    {
+      "shape": [
+        2,
+        3
+      ],
+      "normalized_shape": [
+        3
+      ],
+      "affine_weight": true,
+      "affine_bias": true,
+      "counts": {
+        "add": 16,
+        "div": 4,
+        "sub": 6,
+        "mul": 18,
+        "rsqrt": 2
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    },
+    {
+      "shape": [
+        2,
+        4,
+        5
+      ],
+      "normalized_shape": [
+        5
+      ],
+      "affine_weight": false,
+      "affine_bias": false,
+      "counts": {
+        "add": 72,
+        "div": 16,
+        "sub": 40,
+        "mul": 80,
+        "rsqrt": 8
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    },
+    {
+      "shape": [
+        2,
+        4,
+        5
+      ],
+      "normalized_shape": [
+        5
+      ],
+      "affine_weight": false,
+      "affine_bias": true,
+      "counts": {
+        "add": 112,
+        "div": 16,
+        "sub": 40,
+        "mul": 80,
+        "rsqrt": 8
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    },
+    {
+      "shape": [
+        2,
+        4,
+        5
+      ],
+      "normalized_shape": [
+        5
+      ],
+      "affine_weight": true,
+      "affine_bias": false,
+      "counts": {
+        "add": 72,
+        "div": 16,
+        "sub": 40,
+        "mul": 120,
+        "rsqrt": 8
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    },
+    {
+      "shape": [
+        2,
+        4,
+        5
+      ],
+      "normalized_shape": [
+        5
+      ],
+      "affine_weight": true,
+      "affine_bias": true,
+      "counts": {
+        "add": 112,
+        "div": 16,
+        "sub": 40,
+        "mul": 120,
+        "rsqrt": 8
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    },
+    {
+      "shape": [
+        2,
+        3,
+        4
+      ],
+      "normalized_shape": [
+        3,
+        4
+      ],
+      "affine_weight": false,
+      "affine_bias": false,
+      "counts": {
+        "add": 46,
+        "div": 4,
+        "sub": 24,
+        "mul": 48,
+        "rsqrt": 2
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    },
+    {
+      "shape": [
+        2,
+        3,
+        4
+      ],
+      "normalized_shape": [
+        3,
+        4
+      ],
+      "affine_weight": false,
+      "affine_bias": true,
+      "counts": {
+        "add": 70,
+        "div": 4,
+        "sub": 24,
+        "mul": 48,
+        "rsqrt": 2
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    },
+    {
+      "shape": [
+        2,
+        3,
+        4
+      ],
+      "normalized_shape": [
+        3,
+        4
+      ],
+      "affine_weight": true,
+      "affine_bias": false,
+      "counts": {
+        "add": 46,
+        "div": 4,
+        "sub": 24,
+        "mul": 72,
+        "rsqrt": 2
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    },
+    {
+      "shape": [
+        2,
+        3,
+        4
+      ],
+      "normalized_shape": [
+        3,
+        4
+      ],
+      "affine_weight": true,
+      "affine_bias": true,
+      "counts": {
+        "add": 70,
+        "div": 4,
+        "sub": 24,
+        "mul": 72,
+        "rsqrt": 2
+      },
+      "output_unchanged": true,
+      "both_public_and_native_paths": true
+    }
+  ],
+  "case_count": 16,
+  "public_and_native_dispatch_case_count": 32,
+  "unknown_operations_still_rejected": true,
+  "full_size_RCN_cell_profile_affine_batch_counts_verified": true,
+  "profiles": {
+    "l1": {
+      "period": 1,
+      "steps": [
+        {
+          "per_sample": {
+            "abs": 360,
+            "sub": 1800,
+            "reciprocal": 360,
+            "mul": 5400,
+            "add": 3239,
+            "rsqrt": 1,
+            "heaviside": 360,
+            "bias_add": 360,
+            "exp": 360,
+            "tanh": 0,
+            "rsub": 360,
+            "div": 2
+          },
+          "per_batch": {
+            "abs": 0,
+            "sub": 0,
+            "reciprocal": 720,
+            "mul": 2520,
+            "add": 720,
+            "rsqrt": 0,
+            "heaviside": 0,
+            "bias_add": 0,
+            "exp": 720,
+            "tanh": 1,
+            "rsub": 1440,
+            "div": 0
+          }
+        },
+        {
+          "per_sample": {
+            "abs": 360,
+            "sub": 1800,
+            "reciprocal": 360,
+            "mul": 5760,
+            "add": 3239,
+            "rsqrt": 1,
+            "heaviside": 360,
+            "bias_add": 360,
+            "exp": 360,
+            "tanh": 0,
+            "rsub": 360,
+            "div": 2
+          },
+          "per_batch": {
+            "abs": 0,
+            "sub": 0,
+            "reciprocal": 720,
+            "mul": 2160,
+            "add": 720,
+            "rsqrt": 0,
+            "heaviside": 0,
+            "bias_add": 0,
+            "exp": 720,
+            "tanh": 1,
+            "rsub": 1440,
+            "div": 0
+          }
+        }
+      ]
+    },
+    "l2": {
+      "period": 1,
+      "steps": [
+        {
+          "per_sample": {
+            "abs": 360,
+            "sub": 1800,
+            "reciprocal": 360,
+            "mul": 5400,
+            "add": 3239,
+            "rsqrt": 1,
+            "heaviside": 360,
+            "bias_add": 360,
+            "exp": 360,
+            "tanh": 0,
+            "rsub": 360,
+            "div": 2
+          },
+          "per_batch": {
+            "abs": 0,
+            "sub": 0,
+            "reciprocal": 720,
+            "mul": 2520,
+            "add": 720,
+            "rsqrt": 0,
+            "heaviside": 0,
+            "bias_add": 0,
+            "exp": 720,
+            "tanh": 1,
+            "rsub": 1440,
+            "div": 0
+          }
+        },
+        {
+          "per_sample": {
+            "abs": 360,
+            "sub": 1800,
+            "reciprocal": 360,
+            "mul": 5760,
+            "add": 3239,
+            "rsqrt": 1,
+            "heaviside": 360,
+            "bias_add": 360,
+            "exp": 360,
+            "tanh": 0,
+            "rsub": 360,
+            "div": 2
+          },
+          "per_batch": {
+            "abs": 0,
+            "sub": 0,
+            "reciprocal": 720,
+            "mul": 2160,
+            "add": 720,
+            "rsqrt": 0,
+            "heaviside": 0,
+            "bias_add": 0,
+            "exp": 720,
+            "tanh": 1,
+            "rsub": 1440,
+            "div": 0
+          }
+        }
+      ]
+    },
+    "out_layer": {
+      "period": 1,
+      "steps": [
+        {
+          "per_sample": {
+            "bias_add": 20,
+            "exp": 0,
+            "reciprocal": 0,
+            "rsub": 0,
+            "mul": 40,
+            "add": 20
+          },
+          "per_batch": {
+            "bias_add": 0,
+            "exp": 20,
+            "reciprocal": 20,
+            "rsub": 20,
+            "mul": 20,
+            "add": 0
+          }
+        },
+        {
+          "per_sample": {
+            "bias_add": 20,
+            "exp": 0,
+            "reciprocal": 0,
+            "rsub": 0,
+            "mul": 40,
+            "add": 20
+          },
+          "per_batch": {
+            "bias_add": 0,
+            "exp": 20,
+            "reciprocal": 20,
+            "rsub": 20,
+            "mul": 20,
+            "add": 0
+          }
+        }
+      ]
+    }
+  },
+  "training_executed": false,
+  "GPU_used": false,
+  "official_test_opened": false,
+  "root_source_unchanged": true
+}

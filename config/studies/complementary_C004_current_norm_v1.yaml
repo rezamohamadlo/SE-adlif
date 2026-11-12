@@ -1,0 +1,100 @@
+version: complementary_speaker_dev_v2
+candidate_version: A004_B002_residual_current_norm_v1
+protocol_id: shd_speaker_residual_current_norm_v1
+plan: docs/experiments/complementary-C004-current-normalization-v1.md
+output_root: results/experiments/complementary_speaker_dev_v2/c004_current_normalization_v1/primary_0_3
+idea: A004_B002_RESIDUAL_CURRENT_NORMALIZATION
+role: development
+pair_id: primary_0_3
+validation_speakers:
+- 0
+- 3
+split_manifest: results/experiments/complementary_speaker_dev_v2/primary_0_3/SPLIT_MANIFEST.json
+split_fingerprint: 7712626f45e9e226299fd2984b2a29ccaf173a4d64895b62a0a0386f2895e860
+training_seed: 42
+split_seed: 42
+hypothesis: Input-dependentper-framefeedforwardcurrentdispersionconditioning may complementtrain-onlyconfidence
+  regularization; cleanheld-outaccuracy andmatchedgaincontrolsdecide.
+models:
+- SE_adLIF
+- RCN_SE_adLIF
+- RCN_LS_SE_adLIF
+- LS_SE_adLIF
+- CG_SE_adLIF
+- CG_LS_SE_adLIF
+arm_labels:
+  SE_adLIF: Baseline
+  RCN_SE_adLIF: A004 residual current normalization
+  RCN_LS_SE_adLIF: A004+B002 current normalization and smoothing
+  LS_SE_adLIF: B002 smoothing
+  CG_SE_adLIF: Matched currentgain-onlycontrol
+  CG_LS_SE_adLIF: Matched currentgain-only with smoothing
+spike_deletion:
+  SE_adLIF: 0
+  RCN_SE_adLIF: 0
+  RCN_LS_SE_adLIF: 0
+  LS_SE_adLIF: 0
+  CG_SE_adLIF: 0
+  CG_LS_SE_adLIF: 0
+input_fir_modes:
+  SE_adLIF: null
+  RCN_SE_adLIF: null
+  RCN_LS_SE_adLIF: null
+  LS_SE_adLIF: null
+  CG_SE_adLIF: null
+  CG_LS_SE_adLIF: null
+training_objectives:
+  SE_adLIF: classification
+  RCN_SE_adLIF: classification
+  RCN_LS_SE_adLIF: classification_label_smoothing_v1
+  LS_SE_adLIF: classification_label_smoothing_v1
+  CG_SE_adLIF: classification
+  CG_LS_SE_adLIF: classification_label_smoothing_v1
+label_smoothing_epsilon:
+  SE_adLIF: 0
+  RCN_SE_adLIF: 0
+  RCN_LS_SE_adLIF: 0.1
+  LS_SE_adLIF: 0.1
+  CG_SE_adLIF: 0
+  CG_LS_SE_adLIF: 0.1
+hidden_cells:
+  SE_adLIF: se_adlif
+  RCN_SE_adLIF: residual_current_norm_se_adlif
+  RCN_LS_SE_adLIF: residual_current_norm_se_adlif
+  LS_SE_adLIF: se_adlif
+  CG_SE_adLIF: current_gain_se_adlif
+  CG_LS_SE_adLIF: current_gain_se_adlif
+hidden_cell_settings:
+  residual_current_norm_se_adlif:
+    current_norm_mode: layer_norm
+    current_norm_eps: 1.0e-05
+  current_gain_se_adlif:
+    current_norm_mode: gain_only
+    current_norm_eps: 1.0e-05
+hypotheses:
+  SE_adLIF: Fresh ordinary reference, sameoriginalSEdynamics.
+  RCN_SE_adLIF: Boundedzero-initnormalizedresidual onfeedforwardcurrent mayreduceunwantedmagnitudesensitivity
+    withoutfuture/batchpooling.
+  RCN_LS_SE_adLIF: Train-onlysmoothing may complementinput-conditionedcurrentfeatures;
+    mustimproveoverbothcomponents.
+  LS_SE_adLIF: Fresh smoothing-onlycontrol; no normalization.
+  CG_SE_adLIF: Two-scalarparameter-matched feedforwardcurrentgain control,non-normalizing
+    andfoldableintoweights.
+  CG_LS_SE_adLIF: Gain-onlywithsmoothing controls trivialrescaling in anypositivecombinedresult.
+datasets:
+  SHD:
+    batch_size: 1024
+    validation_batch_size: 1024
+    ceilings:
+    - 30
+    - 75
+    stage: 1
+record_initial_state: true
+initial_screen_models:
+- SE_adLIF
+- RCN_SE_adLIF
+- RCN_LS_SE_adLIF
+- LS_SE_adLIF
+conditional_gain_controls:
+  RCN_SE_adLIF: CG_SE_adLIF
+  RCN_LS_SE_adLIF: CG_LS_SE_adLIF

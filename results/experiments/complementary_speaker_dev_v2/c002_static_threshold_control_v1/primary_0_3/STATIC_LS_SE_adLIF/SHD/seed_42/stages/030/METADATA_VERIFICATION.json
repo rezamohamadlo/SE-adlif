@@ -1,0 +1,35 @@
+{
+  "verified_at": "2026-11-12T12:29:06.361377+00:00",
+  "status": "static30_metadata_zero_gains_verified_dynamic_running",
+  "validation_epochs": 30,
+  "selected_validation_accuracy": 0.8776758313179016,
+  "selected_completed_epoch": 25,
+  "checks": {
+    "best": {
+      "sha256": "d89b51e61d268f738deea7963bf3d997174ca0f43819dbebce78b8aa594631cf",
+      "epoch_index": 24,
+      "global_step": 150,
+      "config_matches": true,
+      "all4activity_gains_exact_zero": {
+        "l1.homeostatic_gain": 0.0,
+        "l1.transient_gain": 0.0,
+        "l2.homeostatic_gain": 0.0,
+        "l2.transient_gain": 0.0
+      }
+    },
+    "last": {
+      "sha256": "ff93443c461f162da6031d7fd3db523ea2969769ff19e350bcd89e248f640364",
+      "epoch_index": 29,
+      "global_step": 180,
+      "config_matches": true,
+      "all4activity_gains_exact_zero": {
+        "l1.homeostatic_gain": 0.0,
+        "l1.transient_gain": 0.0,
+        "l2.homeostatic_gain": 0.0,
+        "l2.transient_gain": 0.0
+      }
+    }
+  },
+  "official_test_evaluated": false,
+  "GPU_inference_check_deferred_until_queue_terminal": true
+}

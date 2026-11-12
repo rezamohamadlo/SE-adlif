@@ -1,0 +1,28 @@
+{
+  "status": "verified",
+  "models": [
+    "SE_adLIF",
+    "GAIN_SE_adLIF",
+    "GAIN_LS_SE_adLIF"
+  ],
+  "allowed_differences": [
+    "evaluation_protocol",
+    "exp_name",
+    "input_fir",
+    "label_smoothing_epsilon",
+    "logdir",
+    "model_variant",
+    "paper_baseline_deviations",
+    "run_mode",
+    "study_arm",
+    "study_hypothesis",
+    "training_objective"
+  ],
+  "all_other_fields_equal": true,
+  "resolved_configs": [
+    "SE_adLIF\\SHD\\seed_42\\FULL_RUN_CONFIG.json",
+    "GAIN_SE_adLIF\\SHD\\seed_42\\FULL_RUN_CONFIG.json",
+    "GAIN_LS_SE_adLIF\\SHD\\seed_42\\FULL_RUN_CONFIG.json"
+  ],
+  "intended_objective_deviation": "Only B changes classification objective; hard CE validation remains matched"
+}

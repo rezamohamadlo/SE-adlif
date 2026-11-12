@@ -1,0 +1,21 @@
+{
+  "created_at": "2026-11-12T14:05:13.120694+03:30",
+  "status": "prepared_wait_for_both50epochs_and_closed_queue",
+  "hypothesis": "Inspect whether microaccuracy reflects broad class learning or majority-class collapse at the short ECG stage. No clinical interpretation or patient-independence claim.",
+  "models": [
+    "SE_adLIF",
+    "LS_SE_adLIF"
+  ],
+  "data": "Same frozen30validation rows from official QTDB training MAT;39030valid labeled timesteps",
+  "checks": [
+    "Exact selected checkpoint/last hashes, epoch/step metadata and saved config/source",
+    "Match ordinary GPU high microaccuracy/CE to saved validation-selected metrics",
+    "All6class support/recall and30per-record correct counts; correlated timestep warning",
+    "Preserve original argmax-column labels C0..C5, masks,1301timesteps and end marker"
+  ],
+  "advancement_rule": "No automatic decision from diagnostics; assess original1.0pp threshold with full50curves. Do not treat early majority-class changes as converged generalization.",
+  "source": "results/experiments/complementary_speaker_dev_v2/B002_ECG_STAGE050_DIAGNOSTIC_SOURCE.txt",
+  "source_sha256": "333a830dd9fb3ddc56c8c723dd8e936868f4c51026412e119206302454b01ce7",
+  "estimated_compute": "About10-30seconds selected-checkpoint inference once the training queue closes",
+  "official_test_opened": false
+}

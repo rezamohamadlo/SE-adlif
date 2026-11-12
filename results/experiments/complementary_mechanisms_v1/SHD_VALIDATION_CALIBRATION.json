@@ -1,0 +1,43 @@
+{
+  "official_test_opened": false,
+  "reason": "Fastest tested; all 1631 predictions identical to batch256, max per-sample CE discrepancy 2.1e-5. Keep matching 32-bit/high precision, masks and aggregation.",
+  "records": [
+    {
+      "batch": 256,
+      "changed_predictions": 0,
+      "max_absolute_loss_difference": 0.0,
+      "mean_loss_difference": 0.0,
+      "measured_full_passes": 1,
+      "peak_reserved_gib": 0.1171875,
+      "recordings": 1631,
+      "samples_per_second": 566.5111533856743,
+      "seconds": 2.879025400034152,
+      "warmup_full_passes": 1
+    },
+    {
+      "batch": 512,
+      "changed_predictions": 0,
+      "max_absolute_loss_difference": 2.09808349609375e-05,
+      "mean_loss_difference": 0.0,
+      "measured_full_passes": 1,
+      "peak_reserved_gib": 0.2890625,
+      "recordings": 1631,
+      "samples_per_second": 998.9708334664392,
+      "seconds": 1.6326802999246866,
+      "warmup_full_passes": 1
+    },
+    {
+      "batch": 1024,
+      "changed_predictions": 0,
+      "max_absolute_loss_difference": 1.71661376953125e-05,
+      "mean_loss_difference": 0.0,
+      "measured_full_passes": 1,
+      "peak_reserved_gib": 0.552734375,
+      "recordings": 1631,
+      "samples_per_second": 1899.5108672008796,
+      "seconds": 0.8586421000072733,
+      "warmup_full_passes": 1
+    }
+  ],
+  "selected_batch": 1024
+}

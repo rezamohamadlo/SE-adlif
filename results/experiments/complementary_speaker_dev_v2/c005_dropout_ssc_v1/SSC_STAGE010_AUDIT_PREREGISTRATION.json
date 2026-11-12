@@ -1,0 +1,18 @@
+{
+  "registered_at": "2026-11-12T16:06:52.766564+00:00",
+  "source": "results/experiments/complementary_speaker_dev_v2/c005_dropout_ssc_v1/SSC_STAGE010_AUDIT_SOURCE.txt",
+  "source_sha256": "39e82f20fbd086667eb0bc46d0afaec4012cf6739bd0b869d7a8856e9e5b83e5",
+  "status": "preparednotexecuted",
+  "execution": "Afterboth10epochreceiptscompleteandlauncher/training/workersconfirmedterminal. NoGPUauditduringtraining.",
+  "scope": "280sourcefiles/11frozenprotocolartifacts,freshactualinitialweights/RNG/flags,exact10epoch/config/best-last/optimizer-scheduler/1470updates/losslogs,meanmembraneSSC35classordinary9981validationreproduction/pairederrors/macroclass/storedIDs/curves.",
+  "audit_data_loader": "Workers0auditonly;unchangedorderedtensors/masks,validationbatch1024. Savedworker8trainingconfigsleftunchanged. AvoidWindowsre-executingtop-levelaudit inworkers.",
+  "decision": "Original+0.5ppcleanaccuracywithordinaryCE/curvessupport;reviewpromising/inconclusive beforeownlast40resume; noautomatictrainingextension.",
+  "official_test_opened": false,
+  "full_goal_complete": false,
+  "pre_execution_draft_amendment": {
+    "at": "2026-11-12T16:08:24.554068+00:00",
+    "previous_source_sha256": "a9ac9659d8dcac5f67a042a980ec342796716e9428e175c77f1387334273b7ea",
+    "change": "Corrected3remainingliteralSHDinitial-statepaths in unexecuteddraft andadded explicit SSC512/1024/8worker/40budget/meanloss assertions; statisticalendpoints/thresholdsunmodified.",
+    "audit_executed_before_fix": false
+  }
+}

@@ -27,6 +27,9 @@ def baseline_definition():
 
 
 def validate_config(cfg):
+    if cfg.get('complementary_study'):
+        from module.study_control import validate_config as validate_complementary
+        return validate_complementary(cfg)
     if cfg.get('shd_regularization_study'):
         from shd_speaker_regularization import validate_training_config
         return validate_training_config(cfg)

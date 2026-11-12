@@ -1,0 +1,42 @@
+{
+  "candidate": "A002_INPUT_GAIN",
+  "confidence_caveat": "Primary gain-only CE is worse, Brier better and ECE slightly worse; wrong predictions more confident. Do not conflate these measures or call calibration uniformly worse.",
+  "datasets": {
+    "ECG": {
+      "advancement_rule": "Extend matching arms50->100only when justified; full400for frozen comparisons. Preserve all labels/masks and negative end marker.",
+      "batch": 256,
+      "calibration": "Current-source real-data calibration required before launch; ECG training not yet launched.",
+      "initial_ceiling": 50,
+      "later_ceilings": [
+        100,
+        400
+      ],
+      "lr": 0.01,
+      "practical_threshold_pp": 0.1,
+      "threshold_rationale": "Per-timestep classification has different resolution/ceiling from recording-level speech accuracy;0.1pp is a practical screen, not significance evidence. Report class-sensitive diagnostics where available and avoid treating correlated timesteps as independent records.",
+      "validation": "Established fixed seed42row split;588train/30validation; patient identities unavailable",
+      "validation_batch": 64
+    },
+    "SSC": {
+      "advancement_rule": "Accuracy primary; extend both to40only if promising or genuinely inconclusive/still improving. Keep negative outcomes; no extension beyond40.",
+      "batch": 1024,
+      "estimated_initial_cost": "About15-20minutes per10epoch arm plus startup, estimated from observed prior stage.",
+      "full_budget": 40,
+      "initial_ceiling": 10,
+      "lr": 0.006,
+      "num_workers": 8,
+      "practical_threshold_pp": 0.5,
+      "validation": "Official validation,1864training and256disjoint validation speaker IDs",
+      "validation_batch": 1024
+    }
+  },
+  "hypothesis": "A factorized input gain may improve optimization/implicit regularization and transfer beyond two predefined SHD speaker pairs; no new independent linear representational capacity or temporal-history benefit is claimed.",
+  "initialization": "Fresh random weights and optimizer at epoch0 for both models; all calibration states discarded.",
+  "matched_control": "Fresh current-source SE_adLIF, same dataset-specific baseline architecture/optimization, selected batch, precision, split and staged budget; no historic weights or mismatched source reuse.",
+  "official_test_opened": false,
+  "paired_conditions": "Identical pause/resume boundaries for compared arms; do not claim uninterrupted RNG equivalence.",
+  "primary_metric": "Clean dataset-specific validation accuracy; official tests remain outside selection.",
+  "prior_art": "Per-channel scaling/factorized first projection is established; no novelty claim.",
+  "split_seed": 42,
+  "training_seed": 42
+}

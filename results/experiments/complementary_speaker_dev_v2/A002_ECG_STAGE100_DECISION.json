@@ -1,0 +1,21 @@
+{
+  "decision": "EXTEND_MATCHED_50_TO_100",
+  "recorded_before_extension_launch": true,
+  "hypothesis": "Determine whether the gain-only learning acceleration persists as both matched ECG models receive more optimization;50epochs alone do not establish converged generalization.",
+  "evidence": ["A002_ECG_STAGE050_COMPARISON.json", "transfer_A002_gain_v1/SE_adLIF/ECG/seed_42/VALIDATION_DIAGNOSTICS_STAGE050.json", "transfer_A002_gain_v1/GAIN_SE_adLIF/ECG/seed_42/VALIDATION_DIAGNOSTICS_STAGE050.json"],
+  "observed": "Both selected checkpoints are final epoch50with improving losses and late accuracy growth. Only100optimizer updates completed. Baseline35.56% and gain64.16% validation; both have very poor C0recall. Treat this as optimization-stage evidence, not final test superiority.",
+  "matched_control": "The same SE-adLIF and gain-only runs, own full-state resume, same400epoch schedule, batch256, validation64, LR0.01, dropout0.15, precision, original labels/masks and seed42split.",
+  "mode": "Full resume each own last checkpoint; no calibration, historical or cross-model weights reused",
+  "from_completed_epochs": 50,
+  "to_completed_epochs": 100,
+  "full_schedule_epochs": 400,
+  "primary_metric": "Clean validation accuracy per labeled timestep",
+  "practical_threshold_pp": 0.1,
+  "supporting_evidence": "Validation CE, learning curves, baseline adequacy and class-sensitive diagnostics; small gaps alone are not success",
+  "estimated_additional_seconds": 1100,
+  "advancement_rule": "Review the100epoch matched comparison and optimization adequacy before B or frozen replication. Do not call the50epoch advantage a generalization result. No automatic escalation to400or settings changes; preserve unsuccessful results and use new versioned outputs for any changed batch/protocol.",
+  "snapshots_to_preserve": "Both stages/050best/last checkpoints, receipts, raw metrics and validation predictions",
+  "preflight": "Existing runner dry run passed for both own-checkpoint resumes before launch",
+  "official_test_opened": false,
+  "test_time_augmentation": false
+}

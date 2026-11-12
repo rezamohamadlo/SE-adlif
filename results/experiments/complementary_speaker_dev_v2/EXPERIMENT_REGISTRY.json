@@ -1,0 +1,643 @@
+{
+  "calibration_evidence": [
+    "SHD_TRAINING_CALIBRATION.json",
+    "SHD_VALIDATION_CALIBRATION.json",
+    "SSC_TRAINING_CALIBRATION.json",
+    "SSC_VALIDATION_CALIBRATION.json",
+    "A002_SSC_BATCH1024_CONFIRMATION.json",
+    "ECG_TRAINING_CALIBRATION.json",
+    "ECG_VALIDATION_CALIBRATION.json",
+    "B002_SSC_BATCH1024_CONFIRMATION.json",
+    "B002_ECG_BATCH256_CONFIRMATION.json"
+  ],
+  "canonical_split_manifest": "CANONICAL_SHD_SPLIT_MANIFEST.json",
+  "conditional_proposals": [
+    {
+      "condition": "Review A002 SSC/ECG transfer before investing in complementary confidence regularization; no official-test selection.",
+      "evidence": "B002_CONDITIONAL_HYPOTHESIS.md",
+      "id": "B002",
+      "motivation": "Output-confidence regularization addresses primary SHD wrong-confidence/CE concern without adding inference state. Test clean accuracy, not gap or calibration alone.",
+      "preregistration": "B002_SCREEN_PREREGISTRATION.json",
+      "selection_evidence": "A002_TRANSFER_STAGE_COMPLETION.json",
+      "status": "SHD_promising_SSC_below_threshold_ECG100_negative_closed",
+      "implementation_evidence": "B002_IMPLEMENTATION_VERIFICATION.json",
+      "launch_evidence": "B002_PRIMARY_STAGE030_LAUNCH.json",
+      "outcome_evidence": "B002_PRIMARY_STAGE030_FOUR_ARM_COMPARISON.json",
+      "sensitivity_evidence": "B002_LS_SENSITIVITY_STAGE030_COMPARISON.json",
+      "calibration_evidence": "B002_SSC_BATCH1024_CONFIRMATION.json",
+      "SSC_evidence": "B002_SSC_STAGE040_COMPARISON.json",
+      "ECG_calibration": "B002_ECG_BATCH256_CONFIRMATION.json",
+      "ECG_evidence": "B002_ECG_STAGE100_COMPARISON.json",
+      "completion_evidence": "B002_TRANSFER_STAGE_COMPLETION.json"
+    },
+    {
+      "id": "C001_DTH_B002_LS",
+      "status": "bounded_stages_closed_primary_incremental_gain_secondary_below_threshold",
+      "preregistration": "C001_DTH_LS_PREREGISTRATION.json",
+      "implementation": "C001_IMPLEMENTATION_VERIFICATION.json",
+      "calibration": "C001_SHD_BATCH1024_CONFIRMATION.json",
+      "source_snapshot": "C001_PRIMARY_SOURCE_SNAPSHOT.json",
+      "mechanism": "Existing DTH internal threshold control plus train-only LS; no input gain, no novelty/synergy assumed.",
+      "primary_evidence": "C001_PRIMARY_STAGE030_COMPARISON.json",
+      "primary_decision": "C001_PRIMARY_STAGE030_DECISION.json",
+      "sensitivity_preregistration": "C001_SENSITIVITY_STAGE030_PREREGISTRATION.json",
+      "sensitivity_evidence": "C001_SENSITIVITY_STAGE030_COMPARISON.json",
+      "completion_evidence": "C001_DISCOVERY_STAGE_COMPLETION.json"
+    },
+    {
+      "id": "C002_STATIC_CONTROL",
+      "status": "static_primary_gain_dynamic_not_supported_stage_closed",
+      "preregistration": "C002_STATIC_THRESHOLD_PREREGISTRATION.json",
+      "implementation": "C002_IMPLEMENTATION_VERIFICATION.json",
+      "calibration": "C002_SHD_BATCH1024_CONFIRMATION.json",
+      "source_snapshot": "C002_PRIMARY_SOURCE_SNAPSHOT.json",
+      "mechanism": "DTHboundedper-neuronstaticthresholds with activity gains frozenzero, compared against LS and dynamicDTH+LS; retain scan/state overhead, no speedclaim.",
+      "outcome_evidence": "C002_PRIMARY_STAGE030_COMPARISON.json",
+      "completion_evidence": "C002_MECHANISM_STAGE_COMPLETION.json",
+      "later_factorial_evidence": "C003_PRIMARY_STAGE030_COMPARISON.json",
+      "later_factorial_outcome": "PositiveC002staticincrement didnot hold inC003freshfactorial; preserveboth records."
+    },
+    {
+      "id": "A003_B002_STATIC_FACTORIAL",
+      "status": "rejected_under_declared_matched30screen",
+      "preregistration": "C003_STATIC_FACTORIAL_PREREGISTRATION.json",
+      "implementation": "C003_IMPLEMENTATION_VERIFICATION.json",
+      "source_snapshot": "C003_PRIMARY_SOURCE_SNAPSHOT.json",
+      "calibration": "C003_SHD_BATCH1024_CONFIRMATION.json",
+      "motivation": "C002staticthreshold+LSoutperformedLSanddynamiccontrol; needstandaloneAandfullfactorial beforecomplementarity/transferclaim.",
+      "outcome_evidence": "C003_PRIMARY_STAGE030_COMPARISON.json",
+      "completion_evidence": "C003_FACTORIAL_STAGE_COMPLETION.json"
+    },
+    {
+      "id": "A004_B002_CURRENT_NORM",
+      "status": "matchedprimary30rejected_noextension_ortransfer",
+      "preregistration": "C004_CURRENT_NORMALIZATION_PREREGISTRATION.json",
+      "implementation": "C004_IMPLEMENTATION_VERIFICATION.json",
+      "source_snapshot": "C004_PRIMARY_SOURCE_SNAPSHOT.json",
+      "calibration": "C004_SHD_BATCH1024_CONFIRMATION.json",
+      "prior_art": "LayerNormalization/ReZero/SNNnormalization,establishedcomponents; no noveltyclaim.",
+      "conditional_gain_controls": [
+        "CG_SE_adLIF",
+        "CG_LS_SE_adLIF"
+      ],
+      "mechanism_caveat": "Boundedgaincontrolnotalonecausalproof;inspecteffectivescalesandfreezeadditionalcontrolifrangeinadequate.",
+      "outcome_evidence": "C004_PRIMARY_STAGE030_COMPARISON.json",
+      "decision_evidence": "C004_PRIMARY_STAGE030_DECISION.json"
+    },
+    {
+      "id": "A005_B002_RDROP",
+      "status": "SHDprimary_control_and_sensitivitypassed_AonlySSC10running_combinedrejected",
+      "preregistration": "C005_DROPOUT_CONSISTENCY_PREREGISTRATION.json",
+      "diagnostic": "C005_DROPOUT_FITTING_DIAGNOSTIC.json",
+      "batch1024": "C005_SHD_BATCH1024_CONFIRMATION.json",
+      "batch512_preregistration": "C005_BATCH_SIZE_SELECTION_PREREGISTRATION.json",
+      "prior_art": "LiangetalR-Drop2021;nonoveltyclaim",
+      "conditional_controls": [
+        "TWO_PASS_SE_adLIF",
+        "TWO_PASS_LS_SE_adLIF"
+      ],
+      "implementation": "C005_IMPLEMENTATION_VERIFICATION.json",
+      "source_snapshot": "C005_PRIMARY_SOURCE_SNAPSHOT.json",
+      "batch_selection": "C005_BATCH_SIZE_SELECTION.json",
+      "launch_evidence": "C005_PRIMARY_STAGE030_LAUNCH.json",
+      "outcome_evidence": "C005_PRIMARY_STAGE030_COMPARISON.json",
+      "decision_evidence": "C005_PRIMARY_STAGE030_DECISION.json",
+      "control_evidence": "C005_A_ONLY_CONTROL_STAGE030_COMPARISON.json",
+      "shortlist": "C005_SHORTLIST.json",
+      "sensitivity_launch": "C005_SENSITIVITY_STAGE030_LAUNCH.json",
+      "sensitivity_evidence": "C005_SENSITIVITY_STAGE030_COMPARISON.json",
+      "SSC_launch": "c005_dropout_ssc_v1/SSC_STAGE010_LAUNCH.json"
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "REVISE",
+      "evidence": "User replaced random-split-only selection with speaker-disjoint development. Canonical75epoch checkpoints saw held-out speakers; do not reuse.",
+      "next_action": "Freeze train-only0/3 and6/10indices; fresh matchedBaseline/A/AB primary screen, no official tests."
+    },
+    {
+      "decision": "ADVANCE_A_REJECT_B001_SCREEN",
+      "evidence": "PRIMARY_STAGE030_COMPARISON.json",
+      "next_action": "Fresh baseline/A sensitivity6/10 at30epochs; no primary-weight reuse or favorable-pair search."
+    },
+    {
+      "decision": "ADVANCE_A_SSC_SCREEN",
+      "evidence": "SENSITIVITY_STAGE030_COMPARISON.json",
+      "next_action": "Calibrate SSC real training batches and validation separately, then matched fresh baseline/A10epoch screen; no tests."
+    },
+    {
+      "decision": "EXTEND_SSC_INCONCLUSIVE_10_TO_40",
+      "evidence": "SSC_STAGE010_COMPARISON.json",
+      "next_action": "Full resume both own last checkpoints to40; preserve10epoch snapshots and no tests."
+    },
+    {
+      "decision": "REVISE_A001_SSC_TRANSFER",
+      "evidence": "SSC_STAGE040_COMPARISON.json",
+      "next_action": "Primary gain-only mechanism control after source snapshot; no furtherSSCextension, no tests; ECG pending."
+    },
+    {
+      "decision": "GAIN_ONLY_CONTROL_WEAKENS_TIMING_CLAIM_CHECK_FIXED_PAIR",
+      "evidence": "GAIN_CONTROL_STAGE030_COMPARISON.json",
+      "next_action": "Fresh Baseline/FIR/gain-only30epoch diagnostic on predeclared6/10only. Both accuracy gains pass, but loss worsens; no winner/generalization claim."
+    },
+    {
+      "decision": "ADVANCE_A002_TO_MATCHED_TRANSFER_SCREENS",
+      "evidence": "Both predefined pair accuracy gains; confidence diagnostics mixed",
+      "next_action": "Fresh matched SSC10epoch and ECG50epoch screens; no official tests or B investment yet."
+    },
+    {
+      "decision": "EXTEND_A002_SSC_10_TO_40",
+      "evidence": "A002_SSC_STAGE010_COMPARISON.json",
+      "next_action": "Full resume each own last checkpoint to40; no changed settings or tests. Baseline40complete and verified; candidate resume is active at this snapshot."
+    },
+    {
+      "decision": "NO_PRACTICAL_SSC_GAIN_PROCEED_PREDECLARED_BOUNDED_ECG_SCREEN",
+      "evidence": "A002_SSC_STAGE040_COMPARISON.json",
+      "next_action": "No SSC extension beyond40. Preserve source/results; calibrate then run fresh matched ECG50epoch controls. Defer B investment and final replication."
+    },
+    {
+      "decision": "ADVANCE_TO_PREDECLARED_BOUNDED_ECG50_SCREEN",
+      "evidence": "ECG_A002_CALIBRATION_COMPLETION.json",
+      "next_action": "Fresh Baseline/gain-only, seed42, matched50epochs, no official tests or B/final replication yet"
+    },
+    {
+      "decision": "EXTEND_A002_ECG50_TO_100_INCONCLUSIVE_UNDERLEARNED_CONTROLS",
+      "evidence": "A002_ECG_STAGE100_DECISION.json",
+      "next_action": "Own last full resume for both, unchanged settings/full400scheduler; review100epoch learning and clean validation before B/final replication"
+    },
+    {
+      "decision": "RECOVER_OWN_INTERRUPTED_ECG100_STAGE",
+      "evidence": "A002_ECG_STAGE100_RECOVERY077_DECISION.json",
+      "next_action": "Continue own verified last full state to original100ceiling; preserve logs and document restart-history deviation"
+    },
+    {
+      "decision": "PRIORITIZE_B002_LABEL_SMOOTHING_PRIMARY_SCREEN",
+      "evidence": "A002_TRANSFER_STAGE_COMPLETION.json",
+      "next_action": "Prepare explicit opt-in objective/configs, verify ordinary behavior and train/eval loss separation, then fresh Baseline/A/A+B primary0/3seed42screen; B-only required for final ablation."
+    },
+    {
+      "decision": "PROMISING_B002_RUN_B_ONLY_MECHANISM_CONTROL",
+      "evidence": "B002_PRIMARY_STAGE030_COMPARISON.json",
+      "next_action": "Fresh LS-only seed42sameprimary30epochs; no sensitivity/transfer or test yet"
+    },
+    {
+      "decision": "SHORTLIST_LS_ONLY_REVISE_GAIN_COMPLEMENTARITY_CLAIM",
+      "evidence": "B002_PRIMARY_STAGE030_FOUR_ARM_COMPARISON.json",
+      "next_action": "Fresh Baseline/LS-only on predeclared6/10; no pair tuning or officialtests"
+    },
+    {
+      "decision": "ADVANCE_LS_ONLY_TO_MATCHED_SSC_VALIDATION_SCREEN_AFTER_CURRENT_OBJECTIVE_CALIBRATION",
+      "evidence": "B002_LS_SENSITIVITY_STAGE030_COMPARISON.json",
+      "next_action": "Disposable SSC current-source/LS-objective batch1024 and validation parity confirmation, discard states; then fresh matched Baseline/LS-only SSC10screen with original40schedule."
+    },
+    {
+      "decision": "EXTEND_INCONCLUSIVE_B002_SSC10_TO40",
+      "evidence": "B002_SSC_STAGE010_COMPARISON.json",
+      "next_action": "Full resume own states under unchanged40schedule; no tests"
+    },
+    {
+      "decision": "NO_DECLARED_PRACTICAL_SSC_GAIN_STOP_AT40",
+      "evidence": "B002_SSC_STAGE040_COMPARISON.json",
+      "next_action": "No SSC extension. Verify deferred primary GPU backend replay, then bounded current-objective ECG calibration and fresh matched50epoch validation screen. No heavy new combination or final replication before transfer review."
+    },
+    {
+      "decision": "PRESERVE_SHD_COMPONENT_REVISE_CROSS_DATASET_COMPLEMENTARY_HYPOTHESIS",
+      "evidence": "B002_TRANSFER_STAGE_COMPLETION.json",
+      "next_action": "Evidence review of a distinct mechanism addressing remaining validation errors/dataset transfer, then preregister fresh matched primary0/3screen through runner.py. No favorable-pair search, no further SSC/ECG extension for this branch by default. Do not freeze final architectures yet."
+    },
+    {
+      "decision": "CONDITIONAL_C001_COMBINATION_GAIN_CHECK_PREDEFINED_PAIR",
+      "evidence": "C001_PRIMARY_STAGE030_DECISION.json",
+      "standalone_DTH_failed": true,
+      "next_action": "Verify fresh own-split baseline startup; complete fixed6/10shortlist sensitivity30 without tuning or extension, then inspect combination-LS and combination-baseline with loss/per-speaker evidence. Dynamic-mechanism attribution needs static control if retained."
+    },
+    {
+      "decision": "NO_DECLARED_PRACTICAL_SECOND_PAIR_GAIN_STOP_PAIR_TUNING_REVIEW_STATIC_THRESHOLD_CONTROL",
+      "evidence": "C001_SENSITIVITY_STAGE030_DECISION.json",
+      "next_action": "Inspect existing static-threshold/neuron controls and unsuccessful variants; preregister a distinct primary-only static-versus-dynamic threshold control with smoothing if not duplicative. Keep LS as promising SHD component, preserve negative SSC/ECG evidence. No heavy transfer/final freeze justified by this pair alone."
+    },
+    {
+      "decision": "PREFER_STATIC_HYPOTHESIS_NO_DECLARED_DYNAMIC_ADVANTAGE_COMPLETE_STATIC_FACTORIAL_BEFORE_TRANSFER",
+      "evidence": "C002_PRIMARY_STAGE030_DECISION.json",
+      "next_action": "Prepare a fresh matched primary four-arm comparison Baseline/static-threshold-only/LS/static+LS to assess standalone static effect and factorial interaction before transfer. Add nonintrusive initial-state hash evidence if verified not to alter RNG/model behavior. Keep historical controls separate unless every relevant condition matches; do not silently mix cohorts or bypass source guards. No static candidate has yet demonstrated SSC/ECG transfer."
+    },
+    {
+      "decision": "REJECT_A003_STATIC_BRANCH_UNDER_MATCHED30_SCREEN_NO_EXTENSION_OR_TRANSFER",
+      "evidence": "C003_PRIMARY_STAGE030_DECISION.json",
+      "next_action": "Shift away from static-threshold/gain tweaks. Review a distinct input-conditioned mechanism aimed at variability across speakers (for example causal per-frame residual current normalization), inspect existing failed variants and primary prior art before preregistration. Retain LS as SHD development component but its below-thresholdSSC/negativeECG transfer remains unresolved. No final architecture or official-test freeze yet."
+    },
+    {
+      "recorded_at": "2026-11-12T14:10:32.076876+00:00",
+      "decision": "REJECT_A004_CURRENT_NORMALIZATION_UNDER_MATCHED30_SCREEN_NO_EXTENSION_OR_TRANSFER",
+      "evidence": "C004_PRIMARY_STAGE030_COMPARISON.json",
+      "A_minus_Baseline_pp": -0.12232661247253418,
+      "AB_minus_A_pp": 3.9143741130828857,
+      "AB_minus_B_pp": -1.1009156703948975,
+      "interaction_pp": -0.9785890579223633,
+      "practical_threshold_pp": 0.5,
+      "standalone_A_gate_passed": false,
+      "incremental_A_on_B_gate_passed": false,
+      "ordinary_CE_combination_minus_B": 0.012993454933166504,
+      "late10_combination_minus_B_pp": -2.452599406242373,
+      "per_speaker_combination_minus_B_pp": {
+        "0": 0.10952902519167917,
+        "3": -2.631578947368418
+      },
+      "actual_initial_evidence": "C004_INITIAL_STATE_COMPARISON.json",
+      "curves_visually_inspected": true,
+      "interpretation": "A alone misses the declared accuracy gate despite slightly lower selected CE and better late10mean. A and AB peak at completed16 without a later accuracy gain; AB is below B in selected accuracy, CE and late10mean. B is still improving at30, which does not justify extending failed A/AB. AB gains one correct recording on speaker0 and loses19 on speaker3 versus B. This is a negative30epoch tuned-development result, not a universal statement about normalization or a test finding.",
+      "conditional_gain_controls": "Not launched: positive normalization result required to justify mechanism attribution was absent. No normalization-specific improvement claim; isolated cost draft remains unapplied.",
+      "next_action": "Preserve all evidence; review distinct hypothesis grounded in observed held-speaker errors before any new experiment. No pair tuning, secondary exposure, SSC/ECG transfer, canonical retraining or official test of this rejected branch.",
+      "official_test_evaluated": false,
+      "full_goal_complete": false
+    },
+    {
+      "recorded_at": "2026-11-12T14:55:41.893787+00:00",
+      "decision": "REJECT_COMBINED_INCREMENT_RUN_PREREGISTERED_A_ONLY_TWO_PASS_CONTROL",
+      "evidence": "C005_PRIMARY_STAGE030_COMPARISON.json",
+      "A_minus_Baseline_pp": 1.7125368118286133,
+      "B_minus_Baseline_pp": 6.299692392349243,
+      "AB_minus_A_pp": 2.4464845657348633,
+      "AB_minus_B_pp": -2.1406710147857666,
+      "interaction_pp": -3.85320782661438,
+      "practical_threshold_pp": 0.5,
+      "A_ordinary_CE_minus_Baseline": -0.002138972282409668,
+      "A_late10_minus_Baseline_pp": 0.8501511812210039,
+      "AB_ordinary_CE_minus_B": 0.0067594051361083984,
+      "AB_late10_minus_B_pp": -0.80122411251069,
+      "A_per_speaker_minus_Baseline_pp": {
+        "0": 6.790799561883897,
+        "3": -4.709141274238227
+      },
+      "AB_per_speaker_minus_B_pp": {
+        "0": -1.7524644030668113,
+        "3": -2.631578947368418
+      },
+      "curves_visually_inspected": true,
+      "all4_actual_initial_state_and_RNG_flags_match": true,
+      "interpretation": "StandaloneA passes weighted primary accuracy gate with nearly unchanged selected CE and a modest positive late10mean, but opposite effects on held speakers. Combination is worse than B in accuracy/CE/late10 and both speakers; no complementary-pair/synergy claim. Retain single-seed tuned-pair/repeatability limits.",
+      "next_action": "Fresh predeclared TWO_PASS_SE_adLIF alpha0 control only, same source/split/seed/batch/optimizer/budget. Isolate KL from averaging supervised gradients. No two-passLS control for failed combined increment; no75extension/secondary/transfer/officialtest now.",
+      "official_test_evaluated": false,
+      "full_goal_complete": false
+    },
+    {
+      "recorded_at": "2026-11-12T15:08:37.991740+00:00",
+      "decision": "SHORTLIST_A_ONLY_FOR_FIXED_PAIR_SENSITIVITY_NO_COMBINED_OR_TRANSFER_ADVANCEMENT_YET",
+      "control_evidence": "C005_A_ONLY_CONTROL_STAGE030_COMPARISON.json",
+      "RDrop_minus_control_pp": 2.8134556574923586,
+      "RDrop_minus_control_CE": -0.10649839843814168,
+      "RDrop_minus_control_late10_pp": 1.6024458408355757,
+      "RDrop_minus_control_per_speaker_pp": {
+        "0": 4.70974808324206,
+        "3": 0.41551246537396835
+      },
+      "curves_visually_inspected": true,
+      "interpretation": "KLcontrastpassesdeclaredcontrolgateinthiscohort;two-passCEaloneisbelowbaseline. No uniformspeakerimprovementversusordinarybaseline,fullbudget,replication,testorpaperclaim. Combinationremainsrejected.",
+      "next_action": "FreshmatchedSE/RDrop30onpredefined6/10; noLS/failingcombo/alpha0secondarysweep. Freezeafterconfig/data/sourcepreflight.",
+      "official_test_evaluated": false,
+      "full_goal_complete": false
+    },
+    {
+      "recorded_at": "2026-11-12T15:34:59.062375+00:00",
+      "decision": "ADVANCE_A_ONLY_TO_BOUNDED_SSC_TRANSFER_SCREEN_AFTER_NEW_CALIBRATION",
+      "evidence": "C005_SENSITIVITY_STAGE030_COMPARISON.json",
+      "A_minus_Baseline_pp": 1.6990303993225098,
+      "A_minus_Baseline_CE": -0.008326531999705344,
+      "A_minus_Baseline_late10_pp": 1.1165052652359009,
+      "per_speaker_A_minus_Baseline_pp": {
+        "6": -1.342281879194629,
+        "10": 3.4220532319391705
+      },
+      "curves_visually_inspected": true,
+      "all_fresh_source_initial_state_and_checkpoint_validation_checks_passed": true,
+      "interpretation": "Fixed6/10 accuracy gate passes; small selectedCEimprovement and positive late10mean support. Speaker6regresses while10improves. Together withprimary/control this warrants testing another dataset, not uniformspeakerrobustness or test/paper/multi-seed superiority.",
+      "secondary_tuning_or_extension": false,
+      "next_action": "FreshSE/RDropSSCseed42officialvalidation,10then40onlyifjustified. Fixedalpha1/epsilon0; newreal256/512two-graphcalibration andmatchednewbatch beforetraining. Nofailedcombination/officialtests.",
+      "official_test_evaluated": false,
+      "full_goal_complete": false
+    }
+  ],
+  "execution_authorization": "Original study request explicitly authorizes agent-owned study training; latest correction changes split and stage order, not authorization.",
+  "final_generalization_endpoints": "FINAL_TEST_GENERALIZATION_ENDPOINTS.json",
+  "historical_primary_runtime_evidence": {
+    "completed_epochs_at_estimate": 5,
+    "observed_epoch_seconds": 9.536997399991378,
+    "source": "primary_0_3/SE_adLIF/SHD/seed_42/STATUS.json"
+  },
+  "ideas": [
+    {
+      "arm": "A",
+      "ceiling": 30,
+      "control": "Fresh SE_adLIF on same0/3split, identical preprocessing/optimization/batch/ceiling",
+      "estimated_cost": "Observed first2epochs37-40s duecache warm-up; warm epochs9-10s. Estimate5-10minutes per30epoch arm after warm-up; reevaluate at completed stage.",
+      "hypothesis": "Feature-specific causal FIR may transfer timing structure; its prior learned gain inflation is a confound.",
+      "id": "A001",
+      "outcome_evidence": [
+        "SSC_STAGE040_COMPARISON.json",
+        "GAIN_CONTROL_STAGE030_COMPARISON.json",
+        "GAIN_SENSITIVITY_STAGE030_COMPARISON.json"
+      ],
+      "primary_metric": "clean held-out-speaker accuracy",
+      "prior_art": "Learned delays/temporal filtering; different from failed projected-current DA. No novelty claim.",
+      "status": "speaker_development_positive_SSC40_negative_gain_control_complete_no_timing_specific_benefit_established",
+      "threshold_pp": 0.5
+    },
+    {
+      "arm": "A+B",
+      "ceiling": 30,
+      "control": "A on identical0/3split and all shared conditions",
+      "estimated_cost": "Observed first2epochs37-40s duecache warm-up; warm epochs9-10s. Estimate5-10minutes per30epoch arm after warm-up; reevaluate at completed stage.",
+      "hypothesis": "Training-only10percent per-event deletion reduces rate reliance of A001; clean validation measures unseen-speaker transfer.",
+      "id": "B001",
+      "primary_metric": "clean held-out-speaker accuracy",
+      "prior_art": "EventDrop IJCAI2021; earlier DTH/LG-DTH multi-augmentation trials differ from this isolated SE/FIR factorial. Not a new invention.",
+      "status": "unpromising_30epoch_primary_screen",
+      "threshold_pp": 0.5
+    },
+    {
+      "ECG100_delta_pp": 1.0812163352966309,
+      "ECG100_evidence": "A002_ECG_STAGE100_COMPARISON.json",
+      "ECG100_extra_baseline_interruption_at77": true,
+      "ECG100_interpretation": "Settings/budget matched; extra baseline restart violates predeclared shared-pause condition. Exploratory only; fresh frozen confirmation required.",
+      "ECG100_recovery_record": "A002_ECG_STAGE100_RECOVERY077_DECISION.json",
+      "ECG50_delta_pp": 28.598514199256897,
+      "ECG50_evidence": "A002_ECG_STAGE050_COMPARISON.json",
+      "ECG_adequacy": "Both50epoch controls underlearned; final generalization unresolved; no automatic400epoch escalation",
+      "ECG_preregistration": "A002_ECG_STAGE050_PREREGISTRATION.json",
+      "SSC10_delta_pp": 0.5811035633087158,
+      "SSC10_evidence": "A002_SSC_STAGE010_COMPARISON.json",
+      "SSC40_baseline_verification": "transfer_A002_gain_v1/SE_adLIF/SSC/seed_42/stages/040/VERIFICATION.json",
+      "SSC40_candidate_status_source": "transfer_A002_gain_v1/GAIN_SE_adLIF/SSC/seed_42/STATUS.json",
+      "SSC40_delta_pp": 0.1001894474029541,
+      "SSC40_evidence": "A002_SSC_STAGE040_COMPARISON.json",
+      "SSC40_practical_threshold_met": false,
+      "arm": "A candidate",
+      "calibration_caveat": "Higher primary cross-entropy and more confident wrong predictions, but better Brier score; do not oversimplify calibration evidence.",
+      "hypothesis": "Optimization/implicit-regularization effects may transfer beyond the two SHD speaker pairs; no new representational capacity or guaranteed accuracy gain.",
+      "id": "A002",
+      "mechanism": "Gain-only factorized input conditioning, no added temporal FIR history",
+      "primary_metric": "Clean dataset-specific validation accuracy",
+      "prior_art": "Per-channel scaling/factorized linear parameterization is established; this is an empirical project hypothesis, not a novelty claim.",
+      "shared_conditions": "Fresh matched controls; same baseline optimization/batch/splits and declared budgets.",
+      "source_evidence": [
+        "GAIN_CONTROL_STAGE030_COMPARISON.json",
+        "GAIN_SENSITIVITY_STAGE030_COMPARISON.json",
+        "PRIMARY_VALIDATION_CALIBRATION.json"
+      ],
+      "status": "speaker_pair_gains_SSC_weak_ECG100_preliminary_positive_transfer_stage_closed",
+      "transfer_completion": "A002_TRANSFER_STAGE_COMPLETION.json",
+      "transfer_preregistration": "A002_TRANSFER_PREREGISTRATION.json"
+    }
+  ],
+  "next_stage_preregistration": "B002_SCREEN_PREREGISTRATION.json",
+  "official_test_evaluated_in_study": false,
+  "primary_pair": [
+    0,
+    3
+  ],
+  "runtime_evidence": {
+    "observed_at": "2026-11-12T09:56:04.985885+03:30",
+    "source": "A002_ECG_STAGE100_COMPARISON.json",
+    "status": "ECG100queue_complete_no_training_active_at_native_check"
+  },
+  "secondary_pair": [
+    6,
+    10
+  ],
+  "secondary_rule": "One predefined pair, shortlisted candidates only; fresh training on its own eight speakers.",
+  "source_freeze": "Finish implementation/calibration/tests before launching primary queue; no source edits during its bounded stage.",
+  "training_seed": 42,
+  "version": "complementary_speaker_dev_v2",
+  "next_action": "Monitor boundedSSC10queue; auditbothselectedcheckpoints/officialvalidation/CE/curves before40extensionorECG/newB. No officialtests.",
+  "current_stage": {
+    "idea": "A005_DROPOUT_CONSISTENCY_SSC",
+    "status": "freshbaseline_real_training_batch_progress_verified",
+    "launcher_pid": 20700,
+    "observed_at": "2026-11-12T16:01:28.250570+00:00",
+    "launch_evidence": "c005_dropout_ssc_v1/SSC_STAGE010_LAUNCH.json",
+    "startup_verification": "c005_dropout_ssc_v1/SSC_STAGE010_STARTUP_VERIFICATION.json",
+    "official_tests": false
+  },
+  "primary_CPU_diagnostic": {
+    "evidence": "B002_PRIMARY_DIAGNOSTIC_INTERPRETATION.json",
+    "mode": "CPU-only primary validation, no GPU or official tests",
+    "selection_scores_replaced": false,
+    "backend_replay_pending": false,
+    "does_not_establish_two_ideas": true,
+    "backend_replay_verified": "B002_PRIMARY_GPU_REPLAY_VERIFICATION.json"
+  },
+  "status_observation_history": [
+    {
+      "idea": "B002_LS_ONLY",
+      "status": "ECG50_fresh_matched_screen_running",
+      "launcher_pid": 26128,
+      "launch_evidence": "B002_LS_ECG_STAGE050_LAUNCH.json",
+      "official_tests": false,
+      "observed_at": "2026-11-12T13:55:08.790736+03:30"
+    },
+    {
+      "idea": "B002_LS_ONLY",
+      "status": "ECG50_matched_validation_stage_complete_no_local_training_process",
+      "observed_at": "2026-11-12T10:50:20.520216+00:00",
+      "evidence": "B002_ECG_STAGE050_COMPARISON.json",
+      "official_tests": false,
+      "process_action_this_review": "none"
+    },
+    {
+      "idea": "B002_LS_ONLY",
+      "status": "ECG100_baseline_complete_LS_full_resume_verified_running",
+      "launcher_pid": 25200,
+      "launch_evidence": "B002_LS_ECG_STAGE100_LAUNCH.json",
+      "decision": "B002_ECG_STAGE100_DECISION.json",
+      "official_tests": false,
+      "observed_at": "2026-11-12T10:52:18.573738+00:00",
+      "startup_verification": "B002_ECG_STAGE100_STARTUP_VERIFICATION.json",
+      "baseline_evidence": "transfer_B002_label_smoothing_v1/SE_adLIF/ECG/seed_42/stages/100/METADATA_VERIFICATION.json",
+      "LS_own_state_restore_logged": true
+    },
+    {
+      "idea": "B002_LS_ONLY",
+      "status": "bounded_transfer_stages_complete_no_local_training",
+      "observed_at": "2026-11-12T11:12:05.102053+00:00",
+      "evidence": "B002_TRANSFER_STAGE_COMPLETION.json",
+      "official_tests": false
+    },
+    {
+      "idea": "C001_DTH_B002_LS",
+      "status": "primary30_baseline_DTH_DTH_LS_complete_LS_fresh_running",
+      "launcher_pid": 27672,
+      "observed_at": "2026-11-12T11:38:42.770838+00:00",
+      "launch_evidence": "C001_PRIMARY_STAGE030_LAUNCH.json",
+      "preregistration": "C001_DTH_LS_PREREGISTRATION.json",
+      "official_tests": false,
+      "startup_verification": "C001_PRIMARY_STAGE030_STARTUP_VERIFICATION.json",
+      "baseline_evidence": "c001_dth_ls_v1/primary_0_3/SE_adLIF/SHD/seed_42/stages/030/METADATA_VERIFICATION.json",
+      "completed_arms": [
+        "SE_adLIF",
+        "DTH_SE_adLIF",
+        "DTH_LS_SE_adLIF"
+      ],
+      "completed_arm_validation_accuracy": {
+        "SE_adLIF": 0.8330275416374207,
+        "DTH_SE_adLIF": 0.8097859621047974,
+        "DTH_LS_SE_adLIF": 0.8691131472587585
+      },
+      "decision": "pending_smoothing_only_matched_control_and_full_audit"
+    },
+    {
+      "idea": "C001_DTH_B002_LS",
+      "status": "fixed6_10_baseline_LS_complete_DTH_LS_fresh_running",
+      "launcher_pid": 20052,
+      "observed_at": "2026-11-12T11:59:57.627617+00:00",
+      "launch_evidence": "C001_SENSITIVITY_STAGE030_LAUNCH.json",
+      "primary_evidence": "C001_PRIMARY_STAGE030_COMPARISON.json",
+      "primary_decision": "C001_PRIMARY_STAGE030_DECISION.json",
+      "official_tests": false,
+      "startup_verification": "C001_SENSITIVITY_STAGE030_STARTUP_VERIFICATION.json",
+      "baseline_evidence": "c001_dth_ls_v1/sensitivity_6_10/SE_adLIF/SHD/seed_42/stages/030/METADATA_VERIFICATION.json",
+      "completed_arm_validation_accuracy": {
+        "SE_adLIF": 0.856796145439148,
+        "LS_SE_adLIF": 0.8786407709121704
+      },
+      "decision": "pending_combination30and_full_audit"
+    },
+    {
+      "idea": "C001_DTH_B002_LS",
+      "status": "primary_and_secondary30_complete_no_local_training",
+      "observed_at": "2026-11-12T12:07:46.199476+00:00",
+      "evidence": "C001_DISCOVERY_STAGE_COMPLETION.json",
+      "official_tests": false
+    },
+    {
+      "idea": "C002_STATIC_VERSUS_DYNAMIC_WITH_LS",
+      "status": "primary30_LS_static_complete_dynamic_fresh_running",
+      "launcher_pid": 22004,
+      "observed_at": "2026-11-12T12:29:06.361377+00:00",
+      "launch_evidence": "C002_PRIMARY_STAGE030_LAUNCH.json",
+      "preregistration": "C002_STATIC_THRESHOLD_PREREGISTRATION.json",
+      "official_tests": false,
+      "startup_verification": "C002_PRIMARY_STAGE030_STARTUP_VERIFICATION.json",
+      "completed_arm_validation_accuracy": {
+        "LS_SE_adLIF": 0.8672782778739929,
+        "STATIC_LS_SE_adLIF": 0.8776758313179016
+      },
+      "post_stage_audit": "C002_PRIMARY_STAGE030_AUDIT_PREREGISTRATION.json",
+      "repeatability_observation": "C002_REPEATED_SEED_CONTROL_OBSERVATION.json",
+      "repeatability_diagnostic": "C002_REDUCTION_REPEATABILITY_PREREGISTRATION.json",
+      "static_metadata_evidence": "c002_static_threshold_control_v1/primary_0_3/STATIC_LS_SE_adLIF/SHD/seed_42/stages/030/METADATA_VERIFICATION.json"
+    },
+    {
+      "idea": "C002_STATIC_CONTROL",
+      "status": "bounded_primary_control_complete_no_local_training",
+      "observed_at": "2026-11-12T12:40:53.656280+00:00",
+      "evidence": "C002_MECHANISM_STAGE_COMPLETION.json",
+      "official_tests": false
+    },
+    {
+      "idea": "A003_B002_STATIC_THRESHOLD_LS",
+      "status": "primary30_baseline_static_staticLS_complete_LS_fresh_running",
+      "launcher_pid": 21952,
+      "observed_at": "2026-11-12T13:11:54.477986+00:00",
+      "launch_evidence": "C003_PRIMARY_STAGE030_LAUNCH.json",
+      "preregistration": "C003_STATIC_FACTORIAL_PREREGISTRATION.json",
+      "official_tests": false,
+      "startup_verification": "C003_PRIMARY_STAGE030_STARTUP_VERIFICATION.json",
+      "actual_initial_first_two_verification": "C003_INITIAL_STATE_FIRST_TWO_VERIFICATION.json",
+      "completed_arm_validation_accuracy": {
+        "SE_adLIF": 0.8165137767791748,
+        "STATIC_SE_adLIF": 0.78899085521698,
+        "STATIC_LS_SE_adLIF": 0.8660550713539124
+      },
+      "initial_first_three_verification": "C003_INITIAL_STATE_FIRST_THREE_VERIFICATION.json",
+      "all_actual_initial_start_verification": "C003_INITIAL_START_ALL_FOUR_VERIFICATION.json"
+    },
+    {
+      "idea": "A003_B002_STATIC_THRESHOLD_LS",
+      "status": "matched_four_arm30_complete_static_branch_rejected_no_training",
+      "observed_at": "2026-11-12T13:21:45.206634+00:00",
+      "evidence": "C003_FACTORIAL_STAGE_COMPLETION.json",
+      "official_tests": false
+    },
+    {
+      "idea": "A004_B002_RESIDUAL_CURRENT_NORMALIZATION",
+      "status": "primary0_3_baseline_fresh_initial_state_and_epochs_verified_running_others_queued",
+      "launcher_pid": 26108,
+      "observed_at": "2026-11-12T13:50:38.436736+00:00",
+      "launch_evidence": "C004_PRIMARY_STAGE030_LAUNCH.json",
+      "preregistration": "C004_CURRENT_NORMALIZATION_PREREGISTRATION.json",
+      "official_tests": false,
+      "startup_verification": "C004_PRIMARY_STAGE030_STARTUP_VERIFICATION.json"
+    },
+    {
+      "idea": "A004_B002_RESIDUAL_CURRENT_NORMALIZATION",
+      "status": "primary30_all4_verified_complete_A004_rejected_noactivequeue",
+      "observed_at": "2026-11-12T14:10:32.076876+00:00",
+      "decision_evidence": "C004_PRIMARY_STAGE030_DECISION.json",
+      "completion_evidence": "C004_FACTORIAL_STAGE_COMPLETION.json",
+      "official_tests": false
+    },
+    {
+      "idea": "A005_B002_DROPOUT_CONSISTENCY",
+      "status": "implementation_and58checks_verified_batch1024verified_batch512calibration_active",
+      "observed_at": "2026-11-12T14:22:51.368624+00:00",
+      "calibration_tool_session": 30543,
+      "official_tests": false
+    },
+    {
+      "idea": "A005_B002_DROPOUT_CONSISTENCY",
+      "status": "baseline_andRDROP30_CPUverified_positiveAcontrast_combinationrunning_Bqueued",
+      "launcher_pid": 9328,
+      "observed_at": "2026-11-12T14:41:22.626724+00:00",
+      "launch_evidence": "C005_PRIMARY_STAGE030_LAUNCH.json",
+      "preregistration": "C005_DROPOUT_CONSISTENCY_PREREGISTRATION.json",
+      "official_tests": false,
+      "startup_verification": "C005_PRIMARY_STAGE030_STARTUP_VERIFICATION.json",
+      "interim_evidence": "C005_FIRST_TWO_STAGE030_INTERIM_AUDIT.json",
+      "A_accuracy_contrast_pp": 1.7125368118286133,
+      "KL_specific_attribution": "pendingregisteredalpha0two-passcontrolandfullselectedcheckpointaudit"
+    },
+    {
+      "idea": "A005_B002_DROPOUT_CONSISTENCY",
+      "status": "initial4verified_complete_combinationrejected_Aonlycontrolpreregistered",
+      "observed_at": "2026-11-12T14:55:41.893787+00:00",
+      "evidence": "C005_PRIMARY_STAGE030_COMPARISON.json",
+      "decision": "C005_PRIMARY_STAGE030_DECISION.json",
+      "official_tests": false
+    },
+    {
+      "idea": "A005_B002_DROPOUT_CONSISTENCY",
+      "status": "initial4complete_combinedincrementrejected_conditionalAonlyalpha0controlrunning",
+      "launcher_pid": 25064,
+      "observed_at": "2026-11-12T14:58:10.401587+00:00",
+      "launch_evidence": "C005_A_ONLY_CONTROL_STAGE030_LAUNCH.json",
+      "startup_verification": "C005_A_ONLY_CONTROL_STARTUP_VERIFICATION.json",
+      "official_tests": false
+    },
+    {
+      "idea": "A005_DROPOUT_CONSISTENCY_SENSITIVITY",
+      "status": "primaryandcontrolverifiedcomplete_Aonlyshortlisted_secondarypreflightpending",
+      "observed_at": "2026-11-12T15:08:37.991740+00:00",
+      "decision": "C005_A_ONLY_CONTROL_STAGE030_DECISION.json",
+      "shortlist": "C005_SHORTLIST.json",
+      "official_tests": false
+    },
+    {
+      "idea": "A005_DROPOUT_CONSISTENCY_SENSITIVITY",
+      "status": "sensitivitybaseline30complete_RDROPfresh_actualstart_andlosslogs_verified_running",
+      "launcher_pid": 21992,
+      "observed_at": "2026-11-12T15:21:29.032739+00:00",
+      "launch_evidence": "C005_SENSITIVITY_STAGE030_LAUNCH.json",
+      "shortlist": "C005_SHORTLIST.json",
+      "official_tests": false,
+      "startup_verification": "C005_SENSITIVITY_STARTUP_VERIFICATION.json",
+      "interim_evidence": "C005_SENSITIVITY_FIRST_TWO_START_VERIFICATION.json"
+    },
+    {
+      "idea": "A005_DROPOUT_CONSISTENCY_SSC",
+      "status": "SHDsensitivityverifiedpassed_preparingnewSSCcalibration",
+      "observed_at": "2026-11-12T15:34:59.062375+00:00",
+      "evidence": "C005_SENSITIVITY_STAGE030_DECISION.json",
+      "official_tests": false
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "model": "DTH_SE_adLIF",
+  "selected_validation_accuracy": 0.8097859621047974,
+  "selected_completed_epoch": 28,
+  "online_training_accuracy_in_selected_epoch": 0.9895833134651184,
+  "validation_loss_at_selection": 1.0900354385375977,
+  "last10_validation_mean": 0.7720489382743836,
+  "checkpoint_checks": {
+    "best": {
+      "sha256": "f9084971cb9025e0efc67afc3fe39a12e7b58a7a7e07dc48c4ace97ea78eb21a",
+      "epoch_index": 27,
+      "global_step": 168,
+      "config_matches": true
+    },
+    "last": {
+      "sha256": "de72a343ffc9b0fc73b7446ef8b433c68b2e67ca43dfcceb2d415c120a730753",
+      "epoch_index": 29,
+      "global_step": 180,
+      "config_matches": true
+    }
+  },
+  "per_speaker": {
+    "0": {
+      "recordings": 913,
+      "correct": 779,
+      "accuracy": 0.8532311062431545
+    },
+    "3": {
+      "recordings": 722,
+      "correct": 545,
+      "accuracy": 0.7548476454293629
+    }
+  },
+  "macroclass_recall": 0.8169192977343365,
+  "learned_dth_parameters": {
+    "l1": {
+      "homeostatic_gain": 0.003683295100927353,
+      "transient_gain": 0.343573659658432,
+      "static_threshold_min": 0.7914109230041504,
+      "static_threshold_mean": 0.963434100151062,
+      "static_threshold_max": 1.0376132726669312
+    },
+    "l2": {
+      "homeostatic_gain": 0.03613220155239105,
+      "transient_gain": 0.007783346809446812,
+      "static_threshold_min": 0.9089940190315247,
+      "static_threshold_mean": 1.006125807762146,
+      "static_threshold_max": 1.0734308958053589
+    }
+  },
+  "reproduced_validation_accuracy": 0.8097859327217125,
+  "reproduced_ordinary_ce": 1.0900355540284323,
+  "source_code": "results/experiments/complementary_speaker_dev_v2/C001_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+  "source_sha256": "85e3fa7d78f450790dc3ccb9c6e59bf88bae55e808a6bf9533259dd24c620895",
+  "official_test_evaluated": false,
+  "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3/DTH_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+  "raw_prediction_sha256": "24e119ad4b7f3337789cec847117a932c2b8a6371b823a823b66e791e39f7e0b"
+}

@@ -18,6 +18,26 @@ from tonic.io import make_structured_array
 from tonic.transforms import ToFrame
 import hydra
 
+
+class _FrameToFloatTensor:
+    """Spawn-pickleable equivalent of the existing frame conversion lambda."""
+    def __init__(self, sensor_size, window_size):
+        self.to_frame = ToFrame(sensor_size=sensor_size, time_window=window_size)
+
+    def __call__(self, events):
+        return torch.from_numpy(self.to_frame(events)).float()
+
+
+class _PadMinimumFrames:
+    def __init__(self, minimum):
+        self.minimum = minimum
+
+    def __call__(self, frames):
+        if self.minimum > 0 and frames.shape[0] < self.minimum:
+            return torch.cat((frames, torch.zeros((self.minimum - frames.shape[0], 1, frames.shape[-1]))), dim=0)
+        return frames
+
+
 class SSCLDM(pl.LightningDataModule):
     def __init__(
         self,
@@ -30,6 +50,9 @@ class SSCLDM(pl.LightningDataModule):
         pad_to_min_size: int = 300,
         num_classes: int = 35,
         ignore_first_timesteps: int = 10,
+        validation_only_data: bool = False,
+        validation_batch_size: int = None,
+        spawn_safe_transforms: bool = False,
     ) -> None:
         super().__init__()
         # workaround in order to use the same training loop
@@ -42,6 +65,8 @@ class SSCLDM(pl.LightningDataModule):
         self.time_factor = time_factor
         self.window_size = window_size
         self.batch_size = batch_size
+        self.validation_only_data = validation_only_data
+        self.validation_batch_size = validation_batch_size or batch_size
         self.num_workers = num_workers
         self.collate_fn = PadTensors()
         self.min_len = pad_to_min_size
@@ -84,6 +109,16 @@ class SSCLDM(pl.LightningDataModule):
             Flatten(),
         ]
         self.static_data_transform = tonic.transforms.Compose(transform_list)
+        if spawn_safe_transforms:
+            # Same deterministic operations/order; avoid local functions when
+            # Windows DataLoader workers pickle the dataset. Ordinary configs
+            # retain their existing transform path.
+            self.static_data_transform = tonic.transforms.Compose([
+                tonic.transforms.Downsample(time_factor=self.time_factor, spatial_factor=self.spatial_factor),
+                _FrameToFloatTensor(sensor_size, self.window_size),
+                _PadMinimumFrames(self.min_len),
+                Flatten(),
+            ])
 
     def prepare_data(self):
         pass
@@ -95,12 +130,13 @@ class SSCLDM(pl.LightningDataModule):
             transform=self.static_data_transform,
             ignore_first_timesteps=self.ignore_first_timesteps
         )
-        self.data_test = SSCWrapper(
-            save_to=self.data_path,
-            split="test",
-            transform=self.static_data_transform,
-            ignore_first_timesteps=self.ignore_first_timesteps
-        )
+        if not self.validation_only_data:
+            self.data_test = SSCWrapper(
+                save_to=self.data_path,
+                split="test",
+                transform=self.static_data_transform,
+                ignore_first_timesteps=self.ignore_first_timesteps
+            )
         self.data_val = SSCWrapper(
             save_to=self.data_path,
             split="valid",
@@ -125,7 +161,7 @@ class SSCLDM(pl.LightningDataModule):
             self.data_val,
             shuffle=False,
             pin_memory=True,
-            batch_size=self.batch_size,
+            batch_size=self.validation_batch_size,
             drop_last=False,
             collate_fn=self.collate_fn,
             num_workers=self.num_workers,

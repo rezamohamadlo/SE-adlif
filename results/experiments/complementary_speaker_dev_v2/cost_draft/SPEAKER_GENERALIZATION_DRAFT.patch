@@ -1,0 +1,147 @@
+diff --git a/module/speaker_generalization.py b/module/speaker_generalization.py
+new file mode 100644
+--- /dev/null
++++ b/module/speaker_generalization.py
+@@ -0,0 +1,72 @@
++"""Pure accounting for preregistered ordinary speaker-generalization evidence.
++
++No model fitting, file loading or dataset access. Call only after authorized
++final inference, with verified original row IDs and actual fitting speakers.
++"""
++from numbers import Integral
++
++
++def _integers(values, name):
++    values = list(values)
++    if any(isinstance(x, bool) or not isinstance(x, Integral) for x in values):
++        raise ValueError(f'{name} must contain integer IDs')
++    return [int(x) for x in values]
++
++
++def summarize_speaker_generalization(
++    predictions, observed_labels, row_ids, metadata_labels, metadata_speakers,
++    fitting_speaker_ids, num_classes=20,
++):
++    """Require one prediction for every official test row; return all groups.
++
++    Arrays from the same inference must retain exact row IDs. Metadata arrays
++    are indexed by original HDF5 row number. Correct counts reconstruct the
++    overall score exactly; empty subgroups have null accuracies, not zero.
++    This function cannot establish that a caller's row IDs or fitting indices
++    are genuine: the evaluator must verify sampler and dataset provenance.
++    """
++    if isinstance(num_classes, bool) or not isinstance(num_classes, Integral) or num_classes<2:
++        raise ValueError('num_classes must be an integer >=2')
++    predictions = _integers(predictions, 'predictions')
++    labels = _integers(observed_labels, 'observed labels')
++    rows = _integers(row_ids, 'row IDs')
++    raw_labels = _integers(metadata_labels, 'metadata labels')
++    speakers = _integers(metadata_speakers, 'metadata speakers')
++    fitting = set(_integers(fitting_speaker_ids, 'fitting speakers'))
++    n = len(raw_labels)
++    if not fitting or not n or any(len(x)!=n for x in (predictions, labels, rows, speakers)):
++        raise ValueError('Require nonempty fitting speakers and a complete aligned test cohort')
++    if sorted(rows)!=list(range(n)):
++        raise ValueError('Original test row IDs must be unique and exhaustive')
++    if any(x<0 for x in speakers) or any(x<0 for x in fitting):
++        raise ValueError('Speaker IDs must be nonnegative')
++    if any(not 0<=x<num_classes for x in predictions+labels+raw_labels):
++        raise ValueError('Class IDs lie outside the declared class range')
++    if any(label!=raw_labels[row] for label,row in zip(labels,rows)):
++        raise ValueError('Observed labels do not match original-row metadata')
++    by_speaker = {}
++    for prediction, label, row in zip(predictions, labels, rows):
++        speaker = speakers[row]
++        entry = by_speaker.setdefault(speaker, dict(recordings=0,correct=0,class_counts=[0]*num_classes))
++        entry['recordings']+=1
++        entry['correct']+=int(prediction==label)
++        entry['class_counts'][label]+=1
++    for speaker, entry in by_speaker.items():
++        entry['accuracy']=entry['correct']/entry['recordings']
++        entry['seen_during_fitting']=speaker in fitting
++    groups = {}
++    for name in ('all','seen','unseen'):
++        selected=[e for speaker,e in sorted(by_speaker.items())
++                  if name=='all' or (speaker in fitting)==(name=='seen')]
++        count=sum(e['recordings'] for e in selected)
++        correct=sum(e['correct'] for e in selected)
++        counts=[sum(e['class_counts'][c] for e in selected) for c in range(num_classes)]
++        groups[name]=dict(recordings=count,correct=correct,accuracy=correct/count if count else None,
++                          speakers=len(selected),class_counts=counts,
++                          classes_present=[c for c,nc in enumerate(counts) if nc],
++                          macro_speaker_accuracy=sum(e['accuracy'] for e in selected)/len(selected) if selected else None)
++    assert groups['seen']['recordings']+groups['unseen']['recordings']==groups['all']['recordings']==n
++    assert groups['seen']['correct']+groups['unseen']['correct']==groups['all']['correct']
++    return dict(groups=groups,per_speaker={str(s):by_speaker[s] for s in sorted(by_speaker)},
++                fitting_speaker_ids=sorted(fitting),num_classes=int(num_classes),
++                metric='ordinary_recording_accuracy',speaker_population_independence_established=False)
+diff --git a/tests/test_speaker_generalization.py b/tests/test_speaker_generalization.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_speaker_generalization.py
+@@ -0,0 +1,65 @@
++"""Synthetic accounting tests: never open official data or perform inference."""
++import unittest
++from module.speaker_generalization import summarize_speaker_generalization
++
++
++class SpeakerGeneralizationTests(unittest.TestCase):
++    def setUp(self):
++        self.args=dict(predictions=[0,0,0,2,2,2,1],observed_labels=[0,0,1,2,2,2,2],
++                       row_ids=list(range(7)),metadata_labels=[0,0,1,2,2,2,2],
++                       metadata_speakers=[0,0,1,2,2,2,2],fitting_speaker_ids=[0],num_classes=3)
++
++    def test_weighted_and_macro_speaker_accuracy_are_distinct(self):
++        result=summarize_speaker_generalization(**self.args)
++        groups=result['groups']
++        self.assertEqual(groups['all']['accuracy'],5/7)
++        self.assertEqual(groups['seen']['accuracy'],1)
++        self.assertEqual(groups['unseen']['accuracy'],3/5)
++        self.assertEqual(groups['unseen']['macro_speaker_accuracy'],.375)
++        self.assertEqual(groups['unseen']['class_counts'],[0,1,4])
++        self.assertEqual(groups['unseen']['classes_present'],[1,2])
++        self.assertFalse(result['speaker_population_independence_established'])
++
++    def test_empty_unseen_group_is_null_not_zero(self):
++        self.args['fitting_speaker_ids']=[0,1,2]
++        group=summarize_speaker_generalization(**self.args)['groups']['unseen']
++        self.assertEqual(group['recordings'],0)
++        self.assertIsNone(group['accuracy']);self.assertIsNone(group['macro_speaker_accuracy'])
++
++    def test_empty_seen_group_is_supported(self):
++        self.args['fitting_speaker_ids']=[99]
++        result=summarize_speaker_generalization(**self.args)['groups']
++        self.assertIsNone(result['seen']['accuracy'])
++        self.assertEqual(result['unseen']['accuracy'],5/7)
++
++    def test_explicit_original_row_ids_preserve_accounting_after_permutation(self):
++        expected=summarize_speaker_generalization(**self.args)
++        order=[6,4,2,0,5,3,1]
++        for key in ('predictions','observed_labels','row_ids'):
++            self.args[key]=[self.args[key][i] for i in order]
++        self.assertEqual(summarize_speaker_generalization(**self.args),expected)
++
++    def test_duplicate_and_missing_rows_are_rejected(self):
++        self.args['row_ids'][-1]=0
++        with self.assertRaisesRegex(ValueError,'unique'):summarize_speaker_generalization(**self.args)
++        self.args['predictions'].pop()
++        with self.assertRaisesRegex(ValueError,'complete'):summarize_speaker_generalization(**self.args)
++
++    def test_label_alignment_is_checked_against_original_rows(self):
++        self.args['observed_labels'][-1]=1
++        with self.assertRaisesRegex(ValueError,'metadata'):summarize_speaker_generalization(**self.args)
++
++    def test_invalid_class_or_speaker_ids_are_rejected(self):
++        for key,value in [('predictions',[99]*7),('metadata_speakers',[-1]*7),('fitting_speaker_ids',[])]:
++            with self.subTest(key=key):
++                args=dict(self.args);args[key]=value
++                with self.assertRaises(ValueError):summarize_speaker_generalization(**args)
++
++    def test_boolean_or_fractional_ids_are_not_silently_cast(self):
++        for invalid in (True,.5):
++            args=dict(self.args);args['row_ids']=[invalid]+list(range(1,7))
++            with self.subTest(invalid=invalid),self.assertRaises(ValueError):
++                summarize_speaker_generalization(**args)
++
++
++if __name__=='__main__':unittest.main()

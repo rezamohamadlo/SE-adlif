@@ -1,0 +1,7 @@
+# @package _global_
+defaults:
+  - SSC_GAIN_SE_adLIF
+  - _self_
+exp_name: SSC_GAIN_LS_SE_adLIF
+training_objective: classification_label_smoothing_v1
+label_smoothing_epsilon: 0.1

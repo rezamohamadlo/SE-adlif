@@ -1,0 +1,189 @@
+"""One-off disposable calibration evidence; no main Trainer/queue/checkpoints."""
+import contextlib
+import gc
+import hashlib
+import io
+import json
+import logging
+import math
+from pathlib import Path
+import statistics
+import sys
+import time
+
+import hydra
+from hydra import compose, initialize_config_dir
+from omegaconf import OmegaConf
+import pytorch_lightning as pl
+import torch
+
+from models.pl_module import build_training_model
+from module.study_control import forward_identity
+from project_paths import local_path, portable_config
+
+ROOT = Path.cwd()
+OUT = ROOT / 'results/experiments/complementary_speaker_dev_v2'
+logging.basicConfig(level=logging.INFO, format='%(message)s', handlers=[
+    logging.StreamHandler(sys.stdout),
+    logging.FileHandler(OUT/'ecg_a002_calibration_stdout.log', mode='x', encoding='utf-8'),
+])
+LOG = logging.getLogger('ECG calibration')
+
+
+def save(name, value):
+    path = OUT/name
+    assert not path.exists(), f'Preserve existing calibration: {name}'
+    path.write_text(json.dumps(value, indent=2)+'\n', encoding='utf-8')
+
+
+def main():
+    for name in ('ECG_TRAINING_CALIBRATION.json', 'ECG_VALIDATION_CALIBRATION.json'):
+        assert not (OUT/name).exists(), f'Existing calibration needs inspection: {name}'
+    assert torch.cuda.is_available()
+    torch.set_float32_matmul_precision('high')
+    device = torch.device('cuda:0')
+    with initialize_config_dir(config_dir=str(ROOT/'config'), version_base=None):
+        cfg = compose(config_name='main', overrides=[
+            'experiment=ECG_GAIN_SE_adLIF_2layer', '+comparison=ECG', 'random_seed=117',
+            'batch_size=256', 'dataset.batch_size=256', 'dataset.num_workers=0',
+            '++dataset.validation_only_data=true', '++dataset.validation_batch_size=64',
+            'early_stopping=false', 'run_test=false',
+        ])
+        cfg = OmegaConf.create(OmegaConf.to_container(cfg, resolve=True))
+    assert cfg.lr == .01 and cfg.n_epochs == 400 and cfg.dropout == .15
+    assert cfg.input_fir.mode == 'gain_only' and cfg.loss_agg == 'summed_membrane_potentials'
+    config_record = portable_config(OmegaConf.to_container(cfg, resolve=True))
+    cfg.dataset.data_path = str(local_path(cfg.dataset.data_path))
+    data = hydra.utils.instantiate(cfg.dataset)
+    data.prepare_data()
+    data.setup('fit')
+    audit = json.loads((OUT/'ECG_A002_SPLIT_AUDIT.json').read_text())
+    assert list(data.data_train.indices) == audit['train']['indices']
+    assert list(data.data_val.indices) == audit['validation']['indices']
+    source = local_path(audit['source'])
+    assert hashlib.sha256(source.read_bytes()).hexdigest() == audit['source_sha256']
+    selection = torch.randperm(len(data.data_train), generator=torch.Generator().manual_seed(117)).tolist()[:256]
+    cpu_records = [data.data_train[i] for i in selection]
+    assert all(tuple(x.shape) == (1301,4) and x[-1,0] == -1 for x,y,b in cpu_records)
+    source_identity = forward_identity('ECG')
+    training_records = []
+    model = optimizer = batch = outputs = loss = None
+    LOG.info('[CALIBRATION] A002 ECG real fitting data only; disposable seed117; no test/sequence changes')
+    for size in (64,128,256):
+        del model, optimizer, batch, outputs, loss
+        gc.collect()
+        torch.cuda.empty_cache()
+        pl.seed_everything(117, workers=True)
+        cfg.batch_size = size
+        cfg.dataset.batch_size = size
+        with contextlib.redirect_stdout(io.StringIO()):
+            model = build_training_model(cfg).to(device).train()
+        configured = model.configure_optimizers()
+        optimizer = configured['optimizer'] if isinstance(configured,dict) else configured
+        del configured
+        batch = tuple(t.to(device) for t in data.collate_fn(cpu_records[:size]))
+        assert batch[0].shape[1] == 1301 and batch[1].dtype == torch.int64
+        durations, losses = [], []
+        for step in range(3):
+            optimizer.zero_grad(set_to_none=True)
+            torch.cuda.synchronize()
+            if step == 1:
+                torch.cuda.reset_peak_memory_stats()
+            start = time.perf_counter()
+            outputs = model(batch[0])
+            _, loss, _ = model.process_predictions_and_compute_losses(outputs,batch[1],batch[2])
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(),float(cfg.gradient_clip_val))
+            optimizer.step()
+            model.on_train_batch_end(None,batch,step)
+            torch.cuda.synchronize()
+            elapsed = time.perf_counter()-start
+            losses.append(float(loss.detach().cpu()))
+            if step:
+                durations.append(elapsed)
+        finite_gradients = all(torch.isfinite(p.grad).all().item() for p in model.parameters() if p.grad is not None)
+        finite_losses = all(math.isfinite(x) for x in losses)
+        reserved = torch.cuda.max_memory_reserved()
+        allocated = torch.cuda.max_memory_allocated()
+        total = torch.cuda.get_device_properties(device).total_memory
+        headroom = 1-reserved/total
+        seconds = statistics.mean(durations)
+        record = dict(batch=size,model='GAIN_SE_adLIF',warmup_steps=1,measured_steps=2,
+                      step_seconds=seconds,samples_per_second=size/seconds,
+                      peak_allocated_gib=allocated/2**30,peak_reserved_gib=reserved/2**30,
+                      headroom_fraction=headroom,finite_loss=finite_losses,finite_gradients=finite_gradients,
+                      stable_with_15pct_headroom=finite_losses and finite_gradients and headroom>=.15,
+                      updates_per_epoch=len(data.data_train)//size,
+                      estimated_epoch_train_seconds=seconds*(len(data.data_train)//size),
+                      timesteps=1301,lr=.01,precision='32-true',matmul_precision='high',disposable_state=True)
+        training_records.append(record)
+        LOG.info('[TRAINING_CALIBRATION] '+json.dumps(record))
+    stable = [r for r in training_records if r['stable_with_15pct_headroom']]
+    assert stable, 'No stable real-data batch; do not launch comparison'
+    selected = max(stable,key=lambda r:r['samples_per_second'])['batch']
+    assert selected == 256, 'Measured fastest batch differs from frozen256; prepare separate matched version'
+    del optimizer, batch, outputs, loss
+    gc.collect()
+    torch.cuda.empty_cache()
+    model.eval()
+
+    def validation_pass(size):
+        data.validation_batch_size = size
+        count = 0
+        summed_loss = 0.
+        predictions = []
+        torch.cuda.synchronize()
+        start = time.perf_counter()
+        with torch.inference_mode():
+            for cpu in data.val_dataloader():
+                x,y,b = (t.to(device) for t in cpu)
+                output = model(x)
+                reduced,ce,_ = model.process_predictions_and_compute_losses(output,y,b)
+                mask = y.flatten().ne(-1)
+                valid = int(mask.sum())
+                count += valid
+                summed_loss += float(ce)*valid
+                predictions.extend(reduced[mask].argmax(dim=-1).cpu().tolist())
+        torch.cuda.synchronize()
+        assert count == 39030 and len(predictions) == count
+        return time.perf_counter()-start, summed_loss/count, predictions
+
+    validation_records, predictions_by_batch = [], {}
+    for size in (16,32,64):
+        validation_pass(size)
+        torch.cuda.reset_peak_memory_stats()
+        passes = [validation_pass(size) for _ in range(2)]
+        assert passes[0][2] == passes[1][2], 'Repeated clean validation predictions changed'
+        predictions_by_batch[size] = passes[1][2]
+        validation_records.append(dict(batch=size,warmup_full_passes=1,measured_full_passes=2,
+                                       seconds=statistics.mean(p[0] for p in passes),
+                                       loss=passes[1][1],valid_targets=39030,validation_records=30,
+                                       peak_reserved_gib=torch.cuda.max_memory_reserved()/2**30))
+    reference = predictions_by_batch[64]
+    reference_loss = validation_records[-1]['loss']
+    for record in validation_records:
+        record['changed_predictions'] = sum(a!=b for a,b in zip(predictions_by_batch[record['batch']],reference))
+        record['absolute_loss_difference'] = abs(record['loss']-reference_loss)
+        LOG.info('[VALIDATION_CALIBRATION] '+json.dumps(record))
+    assert predictions_by_batch[32] == reference
+    assert abs(validation_records[1]['loss']-reference_loss)<1e-5
+    common = dict(status='verified',official_test_opened=False,initialized_main_experiment=False,
+                  disposable_seed=117,model_source_identity=source_identity,
+                  data_sha256=audit['source_sha256'],frozen_split_fingerprint=audit['fingerprint'],
+                  calibration_config=config_record)
+    save('ECG_TRAINING_CALIBRATION.json',dict(common,selected_batch=selected,records=training_records,
+         training_original_rows=[data.data_train.indices[i] for i in selection]))
+    save('ECG_VALIDATION_CALIBRATION.json',dict(common,selected_batch=64,records=validation_records,
+         reason='Preserve established64:32and64each use one actual30record batch and agree numerically'))
+    del model
+    gc.collect()
+    torch.cuda.empty_cache()
+    LOG.info('[CALIBRATION_COMPLETE] train_batch256; validation_batch64; all states discarded; main training not started')
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except Exception:
+        LOG.exception('[CALIBRATION_ERROR] No main training may launch without verified records')
+        raise

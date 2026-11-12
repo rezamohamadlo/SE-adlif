@@ -1,0 +1,15 @@
+{
+  "registered_at": "2026-11-12T12:25:36.495681+00:00",
+  "source": "results/experiments/complementary_speaker_dev_v2/C002_REDUCTION_REPEATABILITY_SOURCE.txt",
+  "source_sha256": "d089025ee6ebce403f796a33fd9ad9b848d99869dfa850e875701194d137f4f3",
+  "status": "prepared_do_not_execute_until_main_queue_terminal",
+  "motivation": "Same-seedLSselectedscore differs1.34556pp with matching effective settings; no actual initial-state hash or causal explanation.",
+  "scope": "12synthetic same-input float32 temporalaggregation/CE/gradient repeats onCPU/CUDA under ordinary and diagnostic deterministic modes. No model/dataset/optimizer; no main setting changes.",
+  "source_observation": "C002_REPEATED_SEED_CONTROL_OBSERVATION.json",
+  "causal_training_spread_explanation_claim_allowed": false,
+  "official_test_allowed": false,
+  "estimated_seconds": [
+    10,
+    60
+  ]
+}

@@ -1,0 +1,533 @@
+{
+  "status": "verified_four_arm_primary30_validation_screen",
+  "training_seed": 42,
+  "validation_speakers": [
+    0,
+    3
+  ],
+  "completed_epochs_per_arm": 30,
+  "full_budget": 300,
+  "records": [
+    {
+      "model": "SE_adLIF",
+      "selected_validation_accuracy": 0.8165137767791748,
+      "selected_completed_epoch": 27,
+      "online_training_accuracy_in_selected_epoch": 0.9791666865348816,
+      "validation_loss_at_selection": 0.9093242287635803,
+      "last10_validation_mean": 0.790152907371521,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "485ebf9eb2c2e967a104afe85e395e82d7ad5045b88f203688ec87f299042ebd",
+          "epoch_index": 26,
+          "global_step": 162,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "4491ee8149485f3aba972d3dfcecd126f19aea3d7c9eddbd3f5c6152d34b1ae3",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        }
+      },
+      "per_speaker": {
+        "0": {
+          "recordings": 913,
+          "correct": 788,
+          "accuracy": 0.8630887185104053
+        },
+        "3": {
+          "recordings": 722,
+          "correct": 547,
+          "accuracy": 0.7576177285318559
+        }
+      },
+      "macroclass_recall": 0.8216687972041935,
+      "threshold_parameters": {},
+      "reproduced_validation_accuracy": 0.8165137614678899,
+      "reproduced_ordinary_ce": 0.9093244280654721,
+      "source_code": "results/experiments/complementary_speaker_dev_v2/C003_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+      "source_sha256": "e694dde9297230f0ccc2ae8ec45403edaef912ae14a2e3e1699178497238fe43",
+      "official_test_evaluated": false,
+      "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+      "raw_prediction_sha256": "0cfd68678c9e1b8a3c43013af1fc777214f542ba0c34557ef147932a0b96b4f0"
+    },
+    {
+      "model": "STATIC_SE_adLIF",
+      "selected_validation_accuracy": 0.78899085521698,
+      "selected_completed_epoch": 22,
+      "online_training_accuracy_in_selected_epoch": 0.9861653447151184,
+      "validation_loss_at_selection": 0.9470882415771484,
+      "last10_validation_mean": 0.7761467874050141,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "aa2dd6e65431785fea732072bf4b9c6ab063e1ec28343af8936e7ac01ba3bbcc",
+          "epoch_index": 21,
+          "global_step": 132,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "60e54d686985b5f4a07c0c6973959166975cdb6dd027b8cc7b3d8971f0a2a75b",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        }
+      },
+      "per_speaker": {
+        "0": {
+          "recordings": 913,
+          "correct": 752,
+          "accuracy": 0.823658269441402
+        },
+        "3": {
+          "recordings": 722,
+          "correct": 538,
+          "accuracy": 0.7451523545706371
+        }
+      },
+      "macroclass_recall": 0.7948722612815622,
+      "threshold_parameters": {
+        "l1": {
+          "homeostatic_gain": 0.0,
+          "transient_gain": 0.0,
+          "static_threshold_min": 0.8109750747680664,
+          "static_threshold_mean": 0.9648621082305908,
+          "static_threshold_max": 1.037970781326294
+        },
+        "l2": {
+          "homeostatic_gain": 0.0,
+          "transient_gain": 0.0,
+          "static_threshold_min": 0.9101698994636536,
+          "static_threshold_mean": 1.0069934129714966,
+          "static_threshold_max": 1.0753965377807617
+        }
+      },
+      "reproduced_validation_accuracy": 0.7889908256880734,
+      "reproduced_ordinary_ce": 0.9470883699732089,
+      "source_code": "results/experiments/complementary_speaker_dev_v2/C003_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+      "source_sha256": "e694dde9297230f0ccc2ae8ec45403edaef912ae14a2e3e1699178497238fe43",
+      "official_test_evaluated": false,
+      "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/STATIC_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+      "raw_prediction_sha256": "d295dcbc11e4ff1477812600fc50c6a5c3ace95681ec87232b9f725f0121c599"
+    },
+    {
+      "model": "STATIC_LS_SE_adLIF",
+      "selected_validation_accuracy": 0.8660550713539124,
+      "selected_completed_epoch": 22,
+      "online_training_accuracy_in_selected_epoch": 0.9861653447151184,
+      "validation_loss_at_selection": 0.5813568234443665,
+      "last10_validation_mean": 0.8570642292499542,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "29ca11533d1b6e357eed5db924171341334e6275072acfae9d6288317ab25bf1",
+          "epoch_index": 21,
+          "global_step": 132,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "194ed4b6c73b91f836b45bb36f159c3b94a49f4a468dce5da3eae3c7d4681c46",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        }
+      },
+      "per_speaker": {
+        "0": {
+          "recordings": 913,
+          "correct": 824,
+          "accuracy": 0.9025191675794085
+        },
+        "3": {
+          "recordings": 722,
+          "correct": 592,
+          "accuracy": 0.8199445983379502
+        }
+      },
+      "macroclass_recall": 0.8715378361424596,
+      "threshold_parameters": {
+        "l1": {
+          "homeostatic_gain": 0.0,
+          "transient_gain": 0.0,
+          "static_threshold_min": 0.7807860374450684,
+          "static_threshold_mean": 0.9611445069313049,
+          "static_threshold_max": 1.0239192247390747
+        },
+        "l2": {
+          "homeostatic_gain": 0.0,
+          "transient_gain": 0.0,
+          "static_threshold_min": 0.9209804534912109,
+          "static_threshold_mean": 1.000568151473999,
+          "static_threshold_max": 1.0623466968536377
+        }
+      },
+      "reproduced_validation_accuracy": 0.8660550458715597,
+      "reproduced_ordinary_ce": 0.581356880460675,
+      "source_code": "results/experiments/complementary_speaker_dev_v2/C003_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+      "source_sha256": "e694dde9297230f0ccc2ae8ec45403edaef912ae14a2e3e1699178497238fe43",
+      "official_test_evaluated": false,
+      "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/STATIC_LS_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+      "raw_prediction_sha256": "ea3b9fd0ce991ff3538f2e2d11ec20a183283fc0abe509e1723d21bbdda9ae4d"
+    },
+    {
+      "model": "LS_SE_adLIF",
+      "selected_validation_accuracy": 0.8740060925483704,
+      "selected_completed_epoch": 27,
+      "online_training_accuracy_in_selected_epoch": 0.9884440302848816,
+      "validation_loss_at_selection": 0.5600304007530212,
+      "last10_validation_mean": 0.8595718622207642,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "f35ae108b53abab440f1bbbbfebc337e70723c2d8d08535d57343d805d2d68f7",
+          "epoch_index": 26,
+          "global_step": 162,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "4efdbefe7107e47b6835a3793eed9522f2a75569a6090bb8fa93fa6d7af03bbe",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        }
+      },
+      "per_speaker": {
+        "0": {
+          "recordings": 913,
+          "correct": 834,
+          "accuracy": 0.9134720700985761
+        },
+        "3": {
+          "recordings": 722,
+          "correct": 595,
+          "accuracy": 0.8240997229916898
+        }
+      },
+      "macroclass_recall": 0.879446904515617,
+      "threshold_parameters": {},
+      "reproduced_validation_accuracy": 0.8740061162079511,
+      "reproduced_ordinary_ce": 0.5600303756716783,
+      "source_code": "results/experiments/complementary_speaker_dev_v2/C003_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+      "source_sha256": "e694dde9297230f0ccc2ae8ec45403edaef912ae14a2e3e1699178497238fe43",
+      "official_test_evaluated": false,
+      "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+      "raw_prediction_sha256": "90ba3855b72eb997ad7439944c2749a70556ff0bef72b1edb5bc69f664a2591d"
+    }
+  ],
+  "A_minus_Baseline_pp": -2.7522921562194824,
+  "B_minus_Baseline_pp": 5.749231576919556,
+  "AB_minus_A_pp": 7.706421613693237,
+  "AB_minus_B_pp": -0.7951021194458008,
+  "interaction_pp": 1.9571900367736816,
+  "practical_threshold_pp": 0.5,
+  "shared_config_match": true,
+  "configuration_differences": {
+    "STATIC_SE_adLIF": {
+      "logdir": {
+        "baseline": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/SE_adLIF/SHD/seed_42",
+        "candidate": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/STATIC_SE_adLIF/SHD/seed_42"
+      },
+      "study_hypothesis": {
+        "baseline": "Fresh matched ordinary reference; no prior weights.",
+        "candidate": "Learn boundedper-neuronstaticthresholds with bothactivity gains frozenzero; assess standalone effect."
+      },
+      "l2.theta_max": {
+        "baseline": null,
+        "candidate": 1.5
+      },
+      "l2.target_rate": {
+        "baseline": null,
+        "candidate": 0.05
+      },
+      "l2.cell": {
+        "baseline": "se_adlif",
+        "candidate": "static_threshold_se_adlif"
+      },
+      "l2.theta_min": {
+        "baseline": null,
+        "candidate": 0.5
+      },
+      "l2.rho_slow": {
+        "baseline": null,
+        "candidate": 0.99
+      },
+      "l2.rho_fast": {
+        "baseline": null,
+        "candidate": 0.9
+      },
+      "model_variant": {
+        "baseline": "SE_adLIF",
+        "candidate": "STATIC_SE_adLIF"
+      },
+      "paper_baseline_deviations": {
+        "baseline": [
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*"
+        ],
+        "candidate": [
+          "model_variant=STATIC_SE_adLIF",
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*"
+        ]
+      },
+      "study_arm": {
+        "baseline": "Baseline",
+        "candidate": "A003 bounded static thresholds"
+      },
+      "exp_name": {
+        "baseline": "SHD_SE_adLIF",
+        "candidate": "SHD_STATIC_SE_adLIF"
+      },
+      "l1.theta_max": {
+        "baseline": null,
+        "candidate": 1.5
+      },
+      "l1.target_rate": {
+        "baseline": null,
+        "candidate": 0.05
+      },
+      "l1.cell": {
+        "baseline": "se_adlif",
+        "candidate": "static_threshold_se_adlif"
+      },
+      "l1.theta_min": {
+        "baseline": null,
+        "candidate": 0.5
+      },
+      "l1.rho_slow": {
+        "baseline": null,
+        "candidate": 0.99
+      },
+      "l1.rho_fast": {
+        "baseline": null,
+        "candidate": 0.9
+      },
+      "run_mode": {
+        "baseline": "reference",
+        "candidate": "ours"
+      }
+    },
+    "STATIC_LS_SE_adLIF": {
+      "logdir": {
+        "baseline": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/SE_adLIF/SHD/seed_42",
+        "candidate": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/STATIC_LS_SE_adLIF/SHD/seed_42"
+      },
+      "study_hypothesis": {
+        "baseline": "Fresh matched ordinary reference; no prior weights.",
+        "candidate": "Add train-onlysmoothing to staticthresholds; must improve over bothcomponents."
+      },
+      "l2.theta_max": {
+        "baseline": null,
+        "candidate": 1.5
+      },
+      "l2.target_rate": {
+        "baseline": null,
+        "candidate": 0.05
+      },
+      "l2.cell": {
+        "baseline": "se_adlif",
+        "candidate": "static_threshold_se_adlif"
+      },
+      "l2.theta_min": {
+        "baseline": null,
+        "candidate": 0.5
+      },
+      "l2.rho_slow": {
+        "baseline": null,
+        "candidate": 0.99
+      },
+      "l2.rho_fast": {
+        "baseline": null,
+        "candidate": 0.9
+      },
+      "model_variant": {
+        "baseline": "SE_adLIF",
+        "candidate": "STATIC_LS_SE_adLIF"
+      },
+      "evaluation_protocol": {
+        "baseline": "shd_speaker_static_factorial_v1_primary_0_3",
+        "candidate": "shd_speaker_static_factorial_v1_primary_0_3_classification_label_smoothing_v1"
+      },
+      "paper_baseline_deviations": {
+        "baseline": [
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*"
+        ],
+        "candidate": [
+          "model_variant=STATIC_LS_SE_adLIF",
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*",
+          "training_objective=classification_label_smoothing_v1",
+          "label_smoothing_epsilon=0.1; training only",
+          "validation/inference use ordinary hard-label CE; train_hard_ce logged separately"
+        ]
+      },
+      "study_arm": {
+        "baseline": "Baseline",
+        "candidate": "A003+B002 static thresholds and smoothing"
+      },
+      "training_objective": {
+        "baseline": "classification",
+        "candidate": "classification_label_smoothing_v1"
+      },
+      "label_smoothing_epsilon": {
+        "baseline": 0,
+        "candidate": 0.1
+      },
+      "exp_name": {
+        "baseline": "SHD_SE_adLIF",
+        "candidate": "SHD_STATIC_LS_SE_adLIF"
+      },
+      "l1.theta_max": {
+        "baseline": null,
+        "candidate": 1.5
+      },
+      "l1.target_rate": {
+        "baseline": null,
+        "candidate": 0.05
+      },
+      "l1.cell": {
+        "baseline": "se_adlif",
+        "candidate": "static_threshold_se_adlif"
+      },
+      "l1.theta_min": {
+        "baseline": null,
+        "candidate": 0.5
+      },
+      "l1.rho_slow": {
+        "baseline": null,
+        "candidate": 0.99
+      },
+      "l1.rho_fast": {
+        "baseline": null,
+        "candidate": 0.9
+      },
+      "run_mode": {
+        "baseline": "reference",
+        "candidate": "ours"
+      }
+    },
+    "LS_SE_adLIF": {
+      "logdir": {
+        "baseline": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/SE_adLIF/SHD/seed_42",
+        "candidate": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42"
+      },
+      "study_hypothesis": {
+        "baseline": "Fresh matched ordinary reference; no prior weights.",
+        "candidate": "Fresh smoothing-onlycontrol separates standalone regularization fromcomplementarity."
+      },
+      "model_variant": {
+        "baseline": "SE_adLIF",
+        "candidate": "LS_SE_adLIF"
+      },
+      "evaluation_protocol": {
+        "baseline": "shd_speaker_static_factorial_v1_primary_0_3",
+        "candidate": "shd_speaker_static_factorial_v1_primary_0_3_classification_label_smoothing_v1"
+      },
+      "paper_baseline_deviations": {
+        "baseline": [
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*"
+        ],
+        "candidate": [
+          "model_variant=LS_SE_adLIF",
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*",
+          "training_objective=classification_label_smoothing_v1",
+          "label_smoothing_epsilon=0.1; training only",
+          "validation/inference use ordinary hard-label CE; train_hard_ce logged separately"
+        ]
+      },
+      "study_arm": {
+        "baseline": "Baseline",
+        "candidate": "B002 smoothing"
+      },
+      "training_objective": {
+        "baseline": "classification",
+        "candidate": "classification_label_smoothing_v1"
+      },
+      "label_smoothing_epsilon": {
+        "baseline": 0,
+        "candidate": 0.1
+      },
+      "exp_name": {
+        "baseline": "SHD_SE_adLIF",
+        "candidate": "SHD_LS_SE_adLIF"
+      },
+      "run_mode": {
+        "baseline": "reference",
+        "candidate": "ours"
+      }
+    }
+  },
+  "paired_validation_descriptive": {
+    "STATIC_LS_SE_adLIF versus STATIC_SE_adLIF": {
+      "fixes": 149,
+      "loses": 23,
+      "both_wrong": 196
+    },
+    "STATIC_LS_SE_adLIF versus LS_SE_adLIF": {
+      "fixes": 66,
+      "loses": 79,
+      "both_wrong": 140
+    }
+  },
+  "source261files_unchanged": true,
+  "initial_state_evidence": {
+    "actual_common_initial_tensors_match": true,
+    "actual_cpu_and_cuda_rng_hashes_match": true,
+    "intended_objective_pairs_full_state_hashes_match": true,
+    "execution_flags_match": true,
+    "records": {
+      "SE_adLIF": {
+        "path": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/SE_adLIF/SHD/seed_42/INITIAL_MODEL_STATE.json",
+        "file_sha256": "1d784f18e48d457dd5c2607bb3173a118a9791b1030321a8ff5524e362eecdef",
+        "model_state_sha256": "6830e803aa1acda8558c1b87f7c4302599a13a52187b08b61aae3a1f5738301e",
+        "tensor_count": 31,
+        "cpu_rng_sha256": "9629fe96092d61990f320567f2980fc83aec529bb2bc7e956645f626f84e0486",
+        "cuda_rng_sha256": "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+      },
+      "STATIC_SE_adLIF": {
+        "path": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/STATIC_SE_adLIF/SHD/seed_42/INITIAL_MODEL_STATE.json",
+        "file_sha256": "e146524a86d70ead5b7044b0362fb1fb21b0ea3dcce4381a24754d2c8c57cd41",
+        "model_state_sha256": "31f756a527f2a81ca98ffb5c56358ede3f5dd3a9ee3783b0ea46b0ae62c9846c",
+        "tensor_count": 37,
+        "cpu_rng_sha256": "9629fe96092d61990f320567f2980fc83aec529bb2bc7e956645f626f84e0486",
+        "cuda_rng_sha256": "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+      },
+      "STATIC_LS_SE_adLIF": {
+        "path": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/STATIC_LS_SE_adLIF/SHD/seed_42/INITIAL_MODEL_STATE.json",
+        "file_sha256": "b14c3203fa1c2caefb94868f3f45643750a6abe4af24f63fa3deec7eff3a8ffd",
+        "model_state_sha256": "31f756a527f2a81ca98ffb5c56358ede3f5dd3a9ee3783b0ea46b0ae62c9846c",
+        "tensor_count": 37,
+        "cpu_rng_sha256": "9629fe96092d61990f320567f2980fc83aec529bb2bc7e956645f626f84e0486",
+        "cuda_rng_sha256": "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+      },
+      "LS_SE_adLIF": {
+        "path": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42/INITIAL_MODEL_STATE.json",
+        "file_sha256": "142dab024f5c5a3f9d41a54daddcf1dfa1014eef997cea633fd250880e3030f4",
+        "model_state_sha256": "6830e803aa1acda8558c1b87f7c4302599a13a52187b08b61aae3a1f5738301e",
+        "tensor_count": 31,
+        "cpu_rng_sha256": "9629fe96092d61990f320567f2980fc83aec529bb2bc7e956645f626f84e0486",
+        "cuda_rng_sha256": "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+      }
+    },
+    "caveat": "Matching actual initial weights and RNG state does not establish identical subsequent numerical trajectories."
+  },
+  "static_gains_verified_zero_frozen": true,
+  "selection_automated": false,
+  "decision": "REVIEW_REQUIRED_NO_AUTOMATIC_EXTENSION_OR_SHORTLIST",
+  "caveats": "Tuned development pair,one training seed,30/300epochs; recordings share two speakers. No population/significance/synergy or official-test improvement claim. Fresh staticfactorial; frozenzero activitygains. Initialhashmatches do not prove identical later numerical trajectories or significance.",
+  "training_accuracy_definition": "Logged online selected-epoch aggregate with dropout and changing weights; not clean checkpoint training reevaluation.",
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

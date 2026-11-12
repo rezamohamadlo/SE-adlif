@@ -1,0 +1,28 @@
+﻿{
+    "dataset":  "SHD_primary_static_factorial",
+    "validation_speakers":  [
+                                0,
+                                3
+                            ],
+    "initial_state_hashes":  true,
+    "training_seed":  42,
+    "stage_ceiling":  30,
+    "launched_at":  "2026-11-12T16:22:46.0830701+03:30",
+    "source_snapshot":  "C003_PRIMARY_SOURCE_SNAPSHOT.json",
+    "batch_size":  1024,
+    "pid":  21952,
+    "stderr":  "results/experiments/complementary_speaker_dev_v2/c003_primary_stage030_stderr.log",
+    "preregistration":  "C003_STATIC_FACTORIAL_PREREGISTRATION.json",
+    "models":  [
+                   "SE_adLIF",
+                   "STATIC_SE_adLIF",
+                   "STATIC_LS_SE_adLIF",
+                   "LS_SE_adLIF"
+               ],
+    "stdout":  "results/experiments/complementary_speaker_dev_v2/c003_primary_stage030_stdout.log",
+    "full_schedule":  300,
+    "official_tests":  false,
+    "study_file":  "config/studies/complementary_C003_static_factorial_v1.yaml",
+    "precision_determinism_changed":  false,
+    "mode":  "fresh_all4"
+}

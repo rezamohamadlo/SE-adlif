@@ -1,0 +1,25 @@
+﻿{
+    "pid":  22004,
+    "study_file":  "config/studies/complementary_C002_static_control_v1.yaml",
+    "models":  [
+                   "LS_SE_adLIF",
+                   "STATIC_LS_SE_adLIF",
+                   "DTH_LS_SE_adLIF"
+               ],
+    "source_snapshot":  "C002_PRIMARY_SOURCE_SNAPSHOT.json",
+    "validation_speakers":  [
+                                0,
+                                3
+                            ],
+    "preregistration":  "C002_STATIC_THRESHOLD_PREREGISTRATION.json",
+    "training_seed":  42,
+    "official_tests":  false,
+    "stdout":  "results/experiments/complementary_speaker_dev_v2/c002_primary_stage030_stdout.log",
+    "launched_at":  "2026-11-12T15:46:01.5797543+03:30",
+    "mode":  "fresh_all3",
+    "dataset":  "SHD_primary_mechanism_control",
+    "full_schedule":  300,
+    "batch_size":  1024,
+    "stage_ceiling":  30,
+    "stderr":  "results/experiments/complementary_speaker_dev_v2/c002_primary_stage030_stderr.log"
+}

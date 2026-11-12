@@ -1,0 +1,53 @@
+{
+  "status": "verified_completed_matched_SSC40_validation_comparison",
+  "training_seed": 42,
+  "independent_training_seeds": 1,
+  "completed_epochs_per_arm": 40,
+  "full_budget": 40,
+  "records": [
+    {
+      "model": "SE_adLIF",
+      "selected_validation_accuracy": 0.815248966217041,
+      "selected_completed_epoch": 33,
+      "online_training_accuracy_in_selected_epoch": 0.8745719194412231,
+      "validation_loss_at_selection": 0.6257113814353943,
+      "online_training_hard_ce_at_selection": 0.3975057005882263,
+      "training_objective_loss_at_selection": 0.3975057005882263,
+      "final_online_training_accuracy": 0.8903708457946777,
+      "final_validation_accuracy": 0.8127442002296448,
+      "tail10_mean_accuracy": 0.8031059026718139,
+      "tail10_epoch_sample_sd": 0.014564882749094721,
+      "training_objective": "classification",
+      "epsilon": 0,
+      "receipt": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/SE_adLIF/SSC/seed_42/stages/040/RESULT.json"
+    },
+    {
+      "model": "LS_SE_adLIF",
+      "selected_validation_accuracy": 0.8195571303367615,
+      "selected_completed_epoch": 36,
+      "online_training_accuracy_in_selected_epoch": 0.8488067388534546,
+      "validation_loss_at_selection": 0.6813538074493408,
+      "online_training_hard_ce_at_selection": 0.6201378703117371,
+      "training_objective_loss_at_selection": 1.1567845344543457,
+      "final_online_training_accuracy": 0.8432416319847107,
+      "final_validation_accuracy": 0.8020238280296326,
+      "tail10_mean_accuracy": 0.808215606212616,
+      "tail10_epoch_sample_sd": 0.01207715431738871,
+      "training_objective": "classification_label_smoothing_v1",
+      "epsilon": 0.1,
+      "receipt": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/LS_SE_adLIF/SSC/seed_42/stages/040/RESULT.json"
+    }
+  ],
+  "LS_minus_Baseline_pp": 0.4308164119720459,
+  "practical_threshold_pp": 0.5,
+  "declared_practical_gain_established": false,
+  "ordinary_validation_loss_difference": 0.05564242601394653,
+  "shared_configuration_match_verified": true,
+  "source_archive_unchanged_verified": true,
+  "decision": "NO_DECLARED_PRACTICAL_SSC_GAIN_STOP_AT40",
+  "interpretation": "Nominal validation gain is below preregistered+0.5pp threshold and ordinary validation CE is worse. Preserve single-seed outcome; no success, significance, official-test or uniform cross-dataset improvement claim. Tail-epoch variability is curve fluctuation, not independent-seed uncertainty.",
+  "training_accuracy_definition": "Online epoch aggregate with active dropout and changing weights, not clean fixed-checkpoint training accuracy.",
+  "next_action": "No SSC extension. Verify deferred primary GPU backend replay, then bounded current-objective ECG calibration and fresh matched50epoch validation screen. No heavy new combination or final replication before transfer review.",
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

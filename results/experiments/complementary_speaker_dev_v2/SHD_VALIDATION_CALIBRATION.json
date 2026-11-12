@@ -1,0 +1,27 @@
+{
+  "official_test_opened": false,
+  "records": [
+    {
+      "batch": 256,
+      "changed_predictions": 0,
+      "max_absolute_loss_difference": 0.0,
+      "measured_full_passes": 1,
+      "seconds": 2.435780999949202,
+      "validation_records": 1635,
+      "warmup_full_passes": 1
+    },
+    {
+      "batch": 1024,
+      "changed_predictions": 0,
+      "max_absolute_loss_difference": 0.0,
+      "measured_full_passes": 1,
+      "seconds": 0.69495009991806,
+      "validation_records": 1635,
+      "warmup_full_passes": 1
+    }
+  ],
+  "selected_batch": 1024,
+  "status": "verified",
+  "validation_clean": true,
+  "weights": "Disposable seed117 fresh initialization; never trained on any held-out speaker and never initializes main runs"
+}

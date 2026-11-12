@@ -1,0 +1,9 @@
+{
+  "registered_at": "2026-11-12T14:00:37.419535+00:00",
+  "status": "unappliedisolateddraft",
+  "original_source_sha256": "dd688c712e418137aa58377df2853ee1820597141dc77442153fc2d54ba313f3",
+  "draft_sha256": "82e70725cdcf01f5b0b3183e58ad6a18015fc7f8be8f85877d3e30dae137fa55",
+  "convention": "For M feature vectors of width N, non-affine LN uses M*(5N+1) arithmetic operations plus M reciprocal-square-root logical operations. Optional learned affine multiply/add counted separately. This is a declared mathematical decomposition, not exact fused hardware instruction or energy counting.",
+  "tests": "pendingCPUonly;noGPUwhiletraining",
+  "integration": "Onlyafterqueueclosureandifselectedcandidatejustifiesfinalcostintegration;requiresmeasurementversion/provenanceupdateandrelatedevaluatorchecks. Do notapplyduringactivesourcefreeze."
+}

@@ -1,0 +1,10 @@
+{
+  "verified_at": "2026-11-12T13:56:48.809975+00:00",
+  "scope": "CPU-only one hidden-cell forward in existing scalar-operation counter; no data loading, training, optimizer step, GPU allocation, or official test.",
+  "cell": "residual_current_norm_se_adlif",
+  "current_counter_result": "fails_closed",
+  "actual_exception": "Unaccounted scalar operation: aten.layer_norm.default",
+  "required_followup": "Before final cost evaluation of a selected RCN arm, implement and verify explicit native-layer-normalization arithmetic/logical counts, including feature reductions, centering, epsilon, reciprocal square root and gate residual. Retain measured uninstrumented runtime and include declared counting limitations. Do not report reference operation counts as RCN counts.",
+  "root_code_changed": false,
+  "final_cost_evaluation_ready": false
+}

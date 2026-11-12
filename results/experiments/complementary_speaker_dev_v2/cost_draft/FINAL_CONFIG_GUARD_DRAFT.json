@@ -1,0 +1,20 @@
+{
+  "status": "draft_helper_unit_verified_not_integrated",
+  "patch": "results/experiments/complementary_speaker_dev_v2/cost_draft/FINAL_CONFIG_GUARD_DRAFT.patch",
+  "patch_sha256": "4201fbadd9ec09f1068fa2bcf80d229e50febcf08d05c49c0658206e85803912",
+  "tests_passed": 12,
+  "training_executed_for_tests": false,
+  "source": {
+    "module/final_config_guard.py": "42bf4b0dd38223079be369fea717ac326dfb0f4edcd5f0c70a725799ec88d528",
+    "tests/test_final_config_guard.py": "4c53cd9d469384809a9023a11b6194b0c0d195fc80e5e518e99a4b64a2fee966"
+  },
+  "remaining": [
+    "Review exact frozen-config schema before using it in a real final plan",
+    "Integrate helper into existing test_checkpoint evaluator only after active source-guarded queue closes",
+    "Load portable resolved config from every exact checkpoint and verify each source identity, selected epoch and model/dataset/seed against its receipt",
+    "Update existing full-cohort tests to meaningful model configs; retain negative receipt/hash/budget checks",
+    "Run actual-checkout non-training tests; do not claim final readiness from isolated helper tests"
+  ],
+  "active_source_changed": false,
+  "official_test_opened": false
+}

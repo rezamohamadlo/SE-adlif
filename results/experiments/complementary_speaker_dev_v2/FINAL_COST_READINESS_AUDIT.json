@@ -1,0 +1,34 @@
+{
+  "active_training_unchanged": true,
+  "actual_evaluator_fixed": true,
+  "cpu_tests_passed": 26,
+  "draft": "cost_draft/READY.json",
+  "findings": [
+    {
+      "file": "measure_run_costs.py",
+      "finding": "Constructs shared.MLPSNN rather than build_training_model; strict checkpoint load rejects FIR parameters.",
+      "required_fix": "Use registered saved-config-aware model factory with strict weights and checkpoint identity preservation."
+    },
+    {
+      "file": "measure_reference_costs.py",
+      "finding": "ReferenceCounter event-input x.sum counts weighted FIR inputs as events; not comparable to raw event-count SynOps.",
+      "required_fix": "Explicit FIR first-projection accounting; separate weighted analog projection from original input events and hidden spike connections. Document metric compatibility."
+    },
+    {
+      "file": "measure_shd_costs.py",
+      "finding": "operation_profiles profiles l1,l2,out_layer only; FIR tanh/multiply/add and padding-related arithmetic omitted.",
+      "required_fix": "Include executed FIR component arithmetic and runtime; preserve baseline and legacy records/versioning."
+    }
+  ],
+  "main_tests_passed": 77,
+  "official_test_opened": false,
+  "required_verification": [
+    "No-training tiny-model tests for identity FIR and nonzero coefficients",
+    "Strict registered checkpoint loading and same ordinary-inference predictions",
+    "Finite nonnegative operation counts and known closed-form FIR multiply/add counts",
+    "Ordinary reference measurements unchanged",
+    "Never run official-test measurement during development; freeze final test plan first"
+  ],
+  "status": "implemented_unit_verified_official_measurement_pending",
+  "timing": "Implement after active source-frozen queue closes and before final full-budget four-arm training/evaluation. Do not bypass current provenance guards."
+}

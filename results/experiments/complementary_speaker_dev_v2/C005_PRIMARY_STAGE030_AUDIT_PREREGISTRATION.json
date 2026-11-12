@@ -1,0 +1,12 @@
+{
+  "registered_at": "2026-11-12T14:28:27.561867+00:00",
+  "status": "preparednotexecuted",
+  "source": "results/experiments/complementary_speaker_dev_v2/C005_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+  "source_sha256": "c3e28e11d46a4b062d2cf3e56c9f3b7f1f55e937adfa2af21cb575361094746f",
+  "execution": "Onlyafterall4stage30receiptscompleteandlauncher/trainingchildrenterminal;noGPUauditduringtraining.",
+  "scope": "277sourcefiles, actualinitialstates/RNG/executionflags, fullconfigs allowedonlydeclared objective/routingdifferences,30uniqueepochhistories,best/lastcheckpointshashes/epoch/optimizer/scheduler/180updates; ordinary selectedcheckpointvalidation reproduction/per-speaker/rawpredictions/curves/allfactorialcontrasts.",
+  "RDrop_specific": "Verify all30logged supervised/KL/hardCE values finite; KL nonzero in at least one training epoch; total=supervised+alphaKL; first-viewonlineaccuracy correctly labeled; inference one pass only.",
+  "advancement": "Original+0.5ppcontrastswithordinaryCE/curves; noautomaticextension/control/transfer. Positive KL attribution requires registered alpha0two-passcontrols.",
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

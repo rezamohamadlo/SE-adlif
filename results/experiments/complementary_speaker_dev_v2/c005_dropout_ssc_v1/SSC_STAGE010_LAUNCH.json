@@ -1,0 +1,27 @@
+﻿{
+    "stderr":  "results/experiments/complementary_speaker_dev_v2/c005_dropout_ssc_v1/ssc_stage010_stderr.log",
+    "full_schedule":  40,
+    "calibration":  "results/experiments/complementary_speaker_dev_v2/c005_dropout_ssc_v1/SSC_BATCH_CALIBRATION.json",
+    "stage_ceiling":  10,
+    "training_seed":  42,
+    "estimated_queue_minutes":  [
+                                    75,
+                                    100
+                                ],
+    "validation_batch":  1024,
+    "launched_at":  "2026-11-12T19:26:36.1726237+03:30",
+    "source_snapshot":  "results/experiments/complementary_speaker_dev_v2/c005_dropout_ssc_v1/SSC_SOURCE_SNAPSHOT.json",
+    "pid":  20700,
+    "LR":  0.006,
+    "calibration_or_SHD_weights_reused":  false,
+    "stdout":  "results/experiments/complementary_speaker_dev_v2/c005_dropout_ssc_v1/ssc_stage010_stdout.log",
+    "models":  [
+                   "SE_adLIF",
+                   "RDROP_SE_adLIF"
+               ],
+    "training_batch":  512,
+    "official_tests":  false,
+    "loss_aggregation":  "mean_membrane_potentials",
+    "study_file":  "config/studies/complementary_C005_dropout_ssc_v1.yaml",
+    "mode":  "fresh"
+}

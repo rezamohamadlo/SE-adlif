@@ -1,0 +1,61 @@
+{
+  "created_at": "2026-11-12T11:14:22.801368+00:00",
+  "status": "hypothesis_registered_before_implementation_or_training",
+  "idea_id": "C001_DTH_with_B002_LS",
+  "motivation": "Input gain adds only0.18349pp over LS on primary speaker validation; LS alone misses SSC practical screen and regresses on ECG100. Test internal activity-dependent threshold conditioning as a distinct mechanism, not another input-gain change.",
+  "A": "Existing project DTH: bounded per-neuron static threshold plus causal per-sample fast/slow layer-activity terms; rho.9/.99,target.05,bounds.5/1.5,gainszero initially.",
+  "B": "Existing train-only uniform label smoothing epsilon.1; ordinary hard CE and no smoothing at validation/inference.",
+  "hypothesis": "Activity-dependent internal excitability can provide information beyond train-only confidence regularization for clean held-out-speaker classification. Complementarity and cross-dataset benefit are unproven.",
+  "prior_art": [
+    {
+      "title": "Bellec et al., Long short-term memory and learning-to-learn in networks of spiking neurons,2018",
+      "url": "https://arxiv.org/abs/1803.09574",
+      "distinction": "Adaptive thresholds are established. Current DTH implementation uses bounded logistic neuron thresholds with per-sample layer fast/slow activity. No claim this combination is novel."
+    },
+    {
+      "title": "Szegedy et al., Rethinking the Inception Architecture for Computer Vision,2016",
+      "url": "https://arxiv.org/abs/1512.00567",
+      "distinction": "Uniform label smoothing is established. This study tests its interaction with existing project DTH, not novelty of smoothing."
+    }
+  ],
+  "historical_tests_seen": true,
+  "selection_basis": "Mechanism contrast and current speaker/SSC/ECG validation evidence; no new official-test inspection and no selection using a historical test-score ranking. Final official-test evidence is reused, not pristine confirmation.",
+  "arms": [
+    "SE_adLIF",
+    "DTH_SE_adLIF",
+    "DTH_LS_SE_adLIF",
+    "LS_SE_adLIF"
+  ],
+  "controls": "Fresh all four under new source snapshot; prior random-split, augmentation, smaller-batch or speaker-exposed DTH controls are not reused.",
+  "split_manifest": "primary_0_3/SPLIT_MANIFEST.json",
+  "validation_speakers": [
+    0,
+    3
+  ],
+  "training_seed": 42,
+  "split_seed": 42,
+  "batch_size": 1024,
+  "validation_batch_size": 1024,
+  "LR": 0.01,
+  "dropout": 0.15,
+  "precision": "32-true/high",
+  "ceilings": [
+    30,
+    75
+  ],
+  "full_scheduler_budget": 300,
+  "primary_metric": "clean held-out-speaker validation accuracy",
+  "practical_threshold_pp": 0.5,
+  "advancement_rule": "At30, assess DTH-Baseline and combination-DTH; require combination-LS >=0.5pp too before attributing incremental DTH complementarity. Support with ordinary validation CE and stability/curves. Gap shrinkage alone insufficient. Extend entire matched comparison only for improving/inconclusive evidence. No success/significance assumed.",
+  "mechanism_followup_if_promising": "Separate static-threshold-only control needed before attributing gains specifically to dynamic traces rather than learned static threshold; inspect learned gains/thresholds.",
+  "sensitivity_rule": "Only shortlist on predeclared6/10pair; fresh own-split weights, no pair/hyperparameter search.",
+  "transfer_rule": "Only promising candidates progress to calibrated SSC10/40 and ECG50/100screens; no full dual-protocol training for every idea.",
+  "estimated_compute_minutes": [
+    30,
+    50
+  ],
+  "estimate_basis": "Historical SHD30~8-10minutes/arm at1024; DTH overhead not yet measured, update estimate from disposable realbatch calibration before launch.",
+  "official_test_allowed": false,
+  "output_root": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3",
+  "full_goal_complete": false
+}

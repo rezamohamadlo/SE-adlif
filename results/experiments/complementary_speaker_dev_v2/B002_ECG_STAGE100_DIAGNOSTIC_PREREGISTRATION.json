@@ -1,0 +1,19 @@
+{
+  "created_at": "2026-11-12T10:52:59.433658+00:00",
+  "status": "prepared_do_not_execute_until_both100stages_and_queue_terminal",
+  "purpose": "Identical selected-checkpoint validation accounting to stage050, now100completed epochs; reproduce ordinary accuracy/CE and inspect all6classes/30recordings. No extra inference during training.",
+  "models": [
+    "SE_adLIF",
+    "LS_SE_adLIF"
+  ],
+  "data": "Only established30validation rows from official training QTDB MAT,39030correlated timesteps",
+  "source": "results/experiments/complementary_speaker_dev_v2/B002_ECG_STAGE100_DIAGNOSTIC_SOURCE.txt",
+  "source_sha256": "9512420cffaf11c56917e0908938c81d1d2142e74415848a573067cd1f2b899c",
+  "syntax_check": "ast.parse passed; not executed",
+  "selection_rule_unchanged": "Original1.0pp practical accuracy threshold, supported by ordinary CE/learning curves. No automatic400epoch advancement.",
+  "official_test_allowed": false,
+  "estimated_compute_seconds": [
+    10,
+    30
+  ]
+}

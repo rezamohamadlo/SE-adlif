@@ -1,0 +1,7 @@
+{
+  "registered_at": "2026-11-12T14:21:19.329485+00:00",
+  "purpose": "Compare512with1024throughput using the same real full-length one/two-graph losses, warmup/memory/gradients, discarded117states. Guarded1024studyconfig is resolved/validated before disposable512batch override; no studyweights/outputreuse.",
+  "source_sha256": "985ab83bb13b337b5a96a9109a2a7cda90cbe7599916cd9fb518603a2c684417",
+  "selection": "Require >=15%reservedheadroom for every arm. Compare summed estimated train time per epoch for initial4arms; select512 only if at least5%faster than stable1024, otherwise1024. No LR scaling. Freeze choice and matchingstudy/outputidentitybefore any main training.",
+  "official_test_allowed": false
+}

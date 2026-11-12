@@ -1,0 +1,23 @@
+{
+  "verified_at": "2026-11-12T11:27:04.344197+00:00",
+  "status": "baseline30_metadata_verified_otherarms_running",
+  "unique_validation_epochs": 30,
+  "selected_validation_accuracy": 0.8330275416374207,
+  "selected_completed_epoch": 30,
+  "checkpoint_checks": {
+    "best": {
+      "sha256": "b469098aaa8bed09ee70be86ca0036d335889539375c1d50d321caca730fb320",
+      "epoch_index": 29,
+      "global_step": 180,
+      "saved_config_matches": true
+    },
+    "last": {
+      "sha256": "b469098aaa8bed09ee70be86ca0036d335889539375c1d50d321caca730fb320",
+      "epoch_index": 29,
+      "global_step": 180,
+      "saved_config_matches": true
+    }
+  },
+  "GPU_inference_audit": "deferred_until_all4arms_and_queue_terminal",
+  "official_test_evaluated": false
+}

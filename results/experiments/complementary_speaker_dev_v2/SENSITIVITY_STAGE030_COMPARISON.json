@@ -1,0 +1,48 @@
+{
+  "A_minus_Baseline_pp": 5.987054109573364,
+  "completed_epochs_per_arm": 30,
+  "decision": "ADVANCE A to bounded SSC transfer screen after separate calibration",
+  "limitation": "Single training seed; predefined pair sensitivity, no pair search. Not independent official-test evidence.",
+  "official_test_evaluated": false,
+  "protocol": "speaker-disjoint pair sensitivity",
+  "records": [
+    {
+      "arm": "Baseline",
+      "clean_heldout_accuracy": 0.8341423869132996,
+      "last_training_accuracy": 0.9920247197151184,
+      "last_validation_accuracy": 0.803398072719574,
+      "last_validation_loss": 0.9347188472747803,
+      "launch_training_seconds": 352.28012050001416,
+      "model": "SE_adLIF",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/sensitivity_6_10/SE_adLIF/SHD/seed_42/stages/030/RESULT.json",
+      "selected_checkpoint_epoch_index": 27,
+      "selected_completed_epoch": 28,
+      "tail10_mean_accuracy": 0.8174757301807404,
+      "tail10_sample_sd": 0.013847321571485972,
+      "training_accuracy_at_selection": 0.9923502802848816,
+      "validation_loss_at_selection": 0.6957764029502869
+    },
+    {
+      "arm": "A",
+      "clean_heldout_accuracy": 0.8940129280090332,
+      "last_training_accuracy": 0.99560546875,
+      "last_validation_accuracy": 0.8705501556396484,
+      "last_validation_loss": 0.57126784324646,
+      "launch_training_seconds": 288.79463250003755,
+      "model": "FIR_SE_adLIF",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/sensitivity_6_10/FIR_SE_adLIF/SHD/seed_42/stages/030/RESULT.json",
+      "selected_checkpoint_epoch_index": 25,
+      "selected_completed_epoch": 26,
+      "tail10_mean_accuracy": 0.8633495151996613,
+      "tail10_sample_sd": 0.013974109406946125,
+      "training_accuracy_at_selection": 0.9923502802848816,
+      "validation_loss_at_selection": 0.34761276841163635
+    }
+  ],
+  "status": "verified_stage_complete",
+  "training_seed": 42,
+  "validation_speakers": [
+    6,
+    10
+  ]
+}

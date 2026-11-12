@@ -1,0 +1,8 @@
+# @package _global_
+defaults:
+  - SHD_SE_adLIF
+  - /paper_baseline
+  - _self_
+exp_name: SHD_FIR_SE_adLIF
+input_fir:
+  lags: [1, 2, 4, 8]

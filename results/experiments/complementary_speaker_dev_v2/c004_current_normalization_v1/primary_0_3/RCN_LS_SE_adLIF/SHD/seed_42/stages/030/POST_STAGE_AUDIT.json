@@ -1,0 +1,56 @@
+{
+  "model": "RCN_LS_SE_adLIF",
+  "selected_validation_accuracy": 0.8691131472587585,
+  "selected_completed_epoch": 16,
+  "online_training_accuracy_in_selected_epoch": 0.96826171875,
+  "validation_loss_at_selection": 0.5440066456794739,
+  "last10_validation_mean": 0.8390825629234314,
+  "checkpoint_checks": {
+    "best": {
+      "sha256": "3a950520166d653c8f41fea98decac755695382ca138c75dd558c9ae15f093bc",
+      "epoch_index": 15,
+      "global_step": 96,
+      "config_matches": true
+    },
+    "last": {
+      "sha256": "6522374e535a0404823be87f27c1aec5e550ec7d9a771ad358664dd28da4a597",
+      "epoch_index": 29,
+      "global_step": 180,
+      "config_matches": true
+    }
+  },
+  "per_speaker": {
+    "0": {
+      "recordings": 913,
+      "correct": 828,
+      "accuracy": 0.9069003285870756
+    },
+    "3": {
+      "recordings": 722,
+      "correct": 593,
+      "accuracy": 0.8213296398891967
+    }
+  },
+  "macroclass_recall": 0.8740934886994683,
+  "current_normalization_parameters": {
+    "l1": {
+      "raw_gate": 0.5819270014762878,
+      "residual_coefficient": 0.5240646035863771,
+      "epsilon": 1e-05,
+      "mode": "layer_norm"
+    },
+    "l2": {
+      "raw_gate": 0.4546400308609009,
+      "residual_coefficient": 0.4257056370479279,
+      "epsilon": 1e-05,
+      "mode": "layer_norm"
+    }
+  },
+  "reproduced_validation_accuracy": 0.8691131498470948,
+  "reproduced_ordinary_ce": 0.5440067078359995,
+  "source_code": "results/experiments/complementary_speaker_dev_v2/C004_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+  "source_sha256": "0699dd3b5c7d00badd1f396cea732c818f9cb294c8cbf09caf607deac2d08c90",
+  "official_test_evaluated": false,
+  "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c004_current_normalization_v1/primary_0_3/RCN_LS_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+  "raw_prediction_sha256": "81bc22da5423a9e4c56493e31f7679928d082d7fb68ea2cf4d16c27efd712963"
+}

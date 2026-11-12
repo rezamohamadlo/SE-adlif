@@ -1,0 +1,25 @@
+﻿{
+    "pid":  20052,
+    "study_file":  "config/studies/complementary_C001_dth_ls_sensitivity_v1.yaml",
+    "models":  [
+                   "SE_adLIF",
+                   "LS_SE_adLIF",
+                   "DTH_LS_SE_adLIF"
+               ],
+    "source_snapshot":  "C001_SENSITIVITY_SOURCE_SNAPSHOT.json",
+    "validation_speakers":  [
+                                6,
+                                10
+                            ],
+    "preregistration":  "C001_SENSITIVITY_STAGE030_PREREGISTRATION.json",
+    "training_seed":  42,
+    "official_tests":  false,
+    "stdout":  "results/experiments/complementary_speaker_dev_v2/c001_sensitivity_stage030_stdout.log",
+    "launched_at":  "2026-11-12T15:18:47.0969449+03:30",
+    "mode":  "fresh_all3",
+    "dataset":  "SHD_predefined_pair_sensitivity",
+    "full_schedule":  300,
+    "batch_size":  1024,
+    "stage_ceiling":  30,
+    "stderr":  "results/experiments/complementary_speaker_dev_v2/c001_sensitivity_stage030_stderr.log"
+}

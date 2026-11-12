@@ -1,0 +1,35 @@
+﻿{
+    "stderr":  "results/experiments/complementary_speaker_dev_v2/c005_sensitivity_stage030_stderr.log",
+    "full_schedule":  300,
+    "training_seed":  42,
+    "stage_ceiling":  30,
+    "launched_at":  "2026-11-12T18:42:33.9893727+03:30",
+    "source_snapshot":  "C005_SENSITIVITY_SOURCE_SNAPSHOT.json",
+    "batch_size":  1024,
+    "pid":  21992,
+    "preregistration":  "C005_SENSITIVITY_STAGE030_PREREGISTRATION.json",
+    "models":  [
+                   "SE_adLIF",
+                   "RDROP_SE_adLIF"
+               ],
+    "fit_speakers":  [
+                         0,
+                         1,
+                         2,
+                         3,
+                         7,
+                         8,
+                         9,
+                         11
+                     ],
+    "stdout":  "results/experiments/complementary_speaker_dev_v2/c005_sensitivity_stage030_stdout.log",
+    "study_file":  "config/studies/complementary_C005_dropout_sensitivity_v1.yaml",
+    "shortlist":  "C005_SHORTLIST.json",
+    "primary_weights_reused":  false,
+    "validation_speakers":  [
+                                6,
+                                10
+                            ],
+    "official_tests":  false,
+    "mode":  "fresh"
+}

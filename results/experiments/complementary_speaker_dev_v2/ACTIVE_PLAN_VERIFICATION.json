@@ -1,0 +1,33 @@
+{
+  "verified_at": "2026-11-12T16:18:49.211850+00:00",
+  "plan": "results/experiments/complementary_speaker_dev_v2/ACTIVE_PLAN_DECISION.md",
+  "official_test_opened": false,
+  "source_train_sha256": "2bddb4bd46732f09982b7d1631b7c29c19853c73d3d240e3eb32bba909bdd6c1",
+  "split_checks": [
+    {
+      "manifest": "results/experiments/complementary_speaker_dev_v2/primary_0_3/SPLIT_MANIFEST.json",
+      "manifest_sha256": "e015903f8bf0e7889b3a7d83e25992045b284e8e2ad0e3cd8bee2256eb304485",
+      "fingerprint": "7712626f45e9e226299fd2984b2a29ccaf173a4d64895b62a0a0386f2895e860",
+      "train_rows": 6521,
+      "validation_rows": 1635,
+      "disjoint_and_exhaustive": true,
+      "all_20_classes_each_side": true
+    },
+    {
+      "manifest": "results/experiments/complementary_speaker_dev_v2/sensitivity_6_10/SPLIT_MANIFEST.json",
+      "manifest_sha256": "ac34a76a3d3ebab55c486c7b9d22020fe243eeb364aac75fd141d1a4eea6de91",
+      "fingerprint": "a3a3e633e3cf80eb04be16dcb17328502c82533b40f1d9aaf32064daa78cc7a2",
+      "train_rows": 6920,
+      "validation_rows": 1236,
+      "disjoint_and_exhaustive": true,
+      "all_20_classes_each_side": true
+    }
+  ],
+  "frozen_source_files_verified": 280,
+  "protocol_artifacts_verified": 11,
+  "training_started_stopped_or_resumed": false,
+  "main_guide_unchanged_to_preserve_active_source_guard": true,
+  "active_launcher_pid_at_inspection": 20700,
+  "active_training_pid_at_inspection": 9232,
+  "disposition": "Preserve existing SSC initial10 queue; review both completed arms before any extension."
+}

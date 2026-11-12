@@ -1,0 +1,142 @@
+"""Verified validation-only screen accounting; no official tests or training."""
+import contextlib
+import csv
+import hashlib
+import io
+import json
+import math
+from pathlib import Path
+import statistics
+
+import hydra
+import numpy as np
+from omegaconf import OmegaConf
+import pytorch_lightning as pl
+import torch
+
+from models.pl_module import build_training_model
+from module.study_control import forward_identity
+from project_paths import local_path
+
+ROOT = Path.cwd()
+OUT = ROOT/'results/experiments/complementary_speaker_dev_v2'
+TRANSFER = OUT/'transfer_A002_gain_v1'
+AUDIT = json.loads((OUT/'ECG_A002_SPLIT_AUDIT.json').read_text())
+assert hashlib.sha256(local_path(AUDIT['source']).read_bytes()).hexdigest() == AUDIT['source_sha256']
+torch.set_float32_matmul_precision('high')
+results, curves = {}, {}
+for variant in ('SE_adLIF','GAIN_SE_adLIF'):
+    base = TRANSFER/variant/'ECG/seed_42'
+    receipt = json.loads((base/'stages/050/RESULT.json').read_text())
+    assert receipt['completed_epochs']==50 and receipt['full_budget']==400 and receipt['preliminary'] is True
+    assert json.loads((base/'MODEL_SOURCE_IDENTITY.json').read_text()) == forward_identity('ECG')
+    rows=[]
+    for path in sorted((base/'logs').rglob('metrics.csv')):
+        rows.extend(csv.DictReader(path.open(newline='')))
+    val=[x for x in rows if x.get('val_acc','')]
+    assert len(val)==50 and {int(x['epoch']) for x in val}==set(range(50))
+    assert all(math.isfinite(float(x[k])) for x in val for k in ('val_acc','val_loss'))
+    val.sort(key=lambda x:int(x['epoch']))
+    selected=max(val,key=lambda x:float(x['val_acc']))
+    epoch=int(selected['epoch'])
+    assert epoch==receipt['selected_epoch_index'] and float(selected['val_acc'])==receipt['best_validation_accuracy']
+    train=next(x for x in rows if x.get('train_acc_epoch','') and int(x['epoch'])==epoch)
+    checkpoint_checks={}
+    for kind in ('best','last'):
+        path=local_path(receipt[kind+'_checkpoint'],must_exist=True)
+        digest=hashlib.sha256(path.read_bytes()).hexdigest()
+        assert digest==receipt[kind+'_checkpoint_sha256']
+        checkpoint=torch.load(path,map_location='cpu',weights_only=False)
+        assert checkpoint['epoch']==(epoch if kind=='best' else 49)
+        assert checkpoint['global_step']==2*(checkpoint['epoch']+1)
+        checkpoint_checks[kind]=dict(sha256=digest,epoch_index=checkpoint['epoch'],global_step=checkpoint['global_step'])
+        if kind=='best':
+            selected_checkpoint=checkpoint
+    cfg=OmegaConf.create(OmegaConf.to_container(OmegaConf.create(selected_checkpoint['hyper_parameters']['cfg']),resolve=True))
+    assert cfg.model_variant==variant and cfg.random_seed==42 and cfg.paper_baseline_dataset=='ECG'
+    assert cfg.dataset.validation_only_data and cfg.run_test is False
+    cfg.dataset.data_path=str(local_path(cfg.dataset.data_path))
+    pl.seed_everything(42,workers=True)
+    with contextlib.redirect_stdout(io.StringIO()):
+        model=build_training_model(cfg)
+    model.load_state_dict(selected_checkpoint['state_dict'],strict=True)
+    model.to('cuda:0').eval()
+    data=hydra.utils.instantiate(cfg.dataset)
+    data.setup('fit')
+    assert list(data.data_train.indices)==AUDIT['train']['indices']
+    assert list(data.data_val.indices)==AUDIT['validation']['indices']
+    confusion=torch.zeros((6,6),dtype=torch.int64)
+    prediction_rows=[]
+    target_rows=[]
+    per_record=[]
+    weighted_loss=0.
+    total=0
+    with torch.inference_mode():
+        for cpu in data.val_dataloader():
+            x,y,b=(t.to('cuda:0') for t in cpu)
+            reduced,loss,_=model.process_predictions_and_compute_losses(model(x),y,b)
+            predictions=reduced.argmax(dim=-1).view_as(y).cpu()
+            targets=y.cpu()
+            for pred,target in zip(predictions,targets):
+                mask=target.ne(-1)
+                pred,target=pred[mask],target[mask]
+                assert len(pred)==1301
+                confusion+=torch.bincount(target*6+pred,minlength=36).reshape(6,6)
+                per_record.append(dict(original_row=data.data_val.indices[len(per_record)],correct=int((pred==target).sum()),targets=1301))
+                prediction_rows.append(pred.numpy())
+                target_rows.append(target.numpy())
+            n=int(targets.ne(-1).sum())
+            weighted_loss+=float(loss)*n
+            total+=n
+    assert len(per_record)==30 and total==39030
+    accuracy=float(confusion.diag().sum())/total
+    mean_loss=weighted_loss/total
+    assert abs(accuracy-float(selected['val_acc']))<1e-6
+    assert abs(mean_loss-float(selected['val_loss']))<1e-4
+    support=confusion.sum(dim=1)
+    recalls=confusion.diag().double()/support
+    diagnostic=dict(dataset='ECG',metric='validation only / per labeled timestep',checkpoint=receipt['best_checkpoint'],checkpoint_sha256=receipt['best_checkpoint_sha256'],
+                    accuracy=accuracy,loss=mean_loss,confusion_rows_true_columns_predicted=confusion.tolist(),class_support=support.tolist(),
+                    class_recall=recalls.tolist(),macro_class_recall=float(recalls.mean()),per_record=per_record,
+                    class_names='C0..C5 original argmax columns; no clinical class-name assignment',patient_independence_verified=False,
+                    correlated_timesteps_are_independent_samples=False,official_test_opened=False)
+    (base/'VALIDATION_DIAGNOSTICS_STAGE050.json').write_text(json.dumps(diagnostic,indent=2)+'\n',encoding='utf-8')
+    directory=base/'diagnostic_rows'
+    directory.mkdir(exist_ok=True)
+    np.savez_compressed(directory/'stage050_validation_predictions.npz',original_rows=np.array(data.data_val.indices),predictions=np.stack(prediction_rows),targets=np.stack(target_rows))
+    result=dict(status='verified_completed_bounded_screen_not_full_budget',completed_epochs=50,full_budget=400,preliminary=True,
+                selected_completed_epoch=epoch+1,training_accuracy_at_selection=float(train['train_acc_epoch']),
+                validation_accuracy=float(selected['val_acc']),validation_loss=float(selected['val_loss']),
+                tail10_validation_mean=statistics.mean(float(x['val_acc']) for x in val[-10:]),
+                initial10_validation_mean=statistics.mean(float(x['val_acc']) for x in val[:10]),
+                macro_class_recall=diagnostic['macro_class_recall'],checkpoint_checks=checkpoint_checks,official_test_opened=False)
+    (base/'stages/050/VERIFICATION.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
+    results[variant]=result
+    curves[variant]=val
+    print('[VALIDATION_DIAGNOSTIC] '+json.dumps(dict(model=variant,accuracy=accuracy,loss=mean_loss,class_recall=recalls.tolist())),flush=True)
+    del model,data,selected_checkpoint,checkpoint
+    torch.cuda.empty_cache()
+delta=100*(results['GAIN_SE_adLIF']['validation_accuracy']-results['SE_adLIF']['validation_accuracy'])
+comparison=dict(models=results,delta_gain_minus_baseline_pp=delta,practical_threshold_pp=.1,practical_threshold_met=delta>=.1,
+                decision='EXTEND_MATCHED_50_TO_100_INCONCLUSIVE_UNDERLEARNED_CONTROLS',
+                reason='Both best at final epoch and losses/accuracy improving late;100optimizer updates are insufficient to establish converged generalization. Gain shows learning acceleration, not a final test gain.',
+                next_action='Full resume each own last checkpoint to100; keep400epoch scheduler and all settings. Preserve50epoch snapshots; no B/final replication or official tests yet.',
+                estimated_additional_seconds=1100,completed_independent_training_seeds=1,sample_sd_across_seeds=None,official_test_opened=False)
+(OUT/'A002_ECG_STAGE050_COMPARISON.json').write_text(json.dumps(comparison,indent=2)+'\n',encoding='utf-8')
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+fig,axes=plt.subplots(1,2,figsize=(10,4))
+for name,values in curves.items():
+    xs=[int(x['epoch'])+1 for x in values]
+    axes[0].plot(xs,[100*float(x['val_acc']) for x in values],label=name)
+    axes[1].plot(xs,[float(x['val_loss']) for x in values],label=name)
+for ax,title in zip(axes,['Clean ECG validation accuracy (%)','Clean ECG validation CE']):
+    ax.set(xlabel='Completed epoch',title=title)
+    ax.grid(alpha=.25)
+    ax.legend(fontsize=8)
+fig.suptitle('A002 seed42:50/400epoch preliminary screen; no official test')
+fig.tight_layout()
+for ext in ('png','svg'):
+    fig.savefig(OUT/f'A002_ECG_STAGE050_CURVES.{ext}',dpi=160)
+print('[DECISION] '+comparison['decision']+' delta_pp='+str(delta),flush=True)

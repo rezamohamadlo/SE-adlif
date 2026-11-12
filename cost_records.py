@@ -5,7 +5,7 @@ from pathlib import Path
 
 ARITHMETIC = {'add', 'sub', 'rsub', 'mul', 'div', 'neg', 'reciprocal',
               'sum', 'mean', 'bias_add', 'square'}
-VERSIONS = {'runner_test_costs_v1', 'shd_costs_v1', 'reference_test_costs_v1'}
+VERSIONS = {'runner_test_costs_v1', 'runner_test_costs_v2_fir', 'shd_costs_v1', 'reference_test_costs_v1'}
 
 
 def seed_directory(root, model, dataset, seed):
@@ -44,7 +44,7 @@ def normalized_record(record):
         raise ValueError('Unknown measurement record version')
     if r['version'] == 'shd_costs_v1':
         r.setdefault('dataset', 'SHD')
-    if r['version'] != 'runner_test_costs_v1':
+    if r['version'] not in {'runner_test_costs_v1', 'runner_test_costs_v2_fir'}:
         if not isinstance(r.get('measurements', {}).get('reproduced_test_acc'), (int, float)):
             raise ValueError('Historical measurement lacks its test-accuracy check')
         r.setdefault('status', 'complete')

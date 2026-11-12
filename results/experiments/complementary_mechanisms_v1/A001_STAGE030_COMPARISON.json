@@ -1,0 +1,34 @@
+{
+  "accuracy_difference_pp": 0.4291832447052002,
+  "arms": [
+    {
+      "arm": "SE_adLIF",
+      "best_epoch_index": 28,
+      "best_val_acc": 0.9748620390892029,
+      "last5_mean_val_acc": 0.9703249454498291,
+      "measured_epoch_seconds": 343.29714839952067,
+      "train_acc_at_selected": 0.9939778447151184,
+      "updates": 180,
+      "val_loss_at_selected": 0.13557656109333038
+    },
+    {
+      "arm": "FIR_SE_adLIF",
+      "best_epoch_index": 27,
+      "best_val_acc": 0.9791538715362549,
+      "last5_mean_val_acc": 0.9725321769714356,
+      "measured_epoch_seconds": 291.9076182995923,
+      "train_acc_at_selected": 0.9970703125,
+      "updates": 180,
+      "val_loss_at_selected": 0.10043159127235413
+    }
+  ],
+  "dataset": "SHD*",
+  "decision": "EXTEND",
+  "next_ceiling": 75,
+  "official_test_evaluated": false,
+  "reason": "A001 improves best validation by0.429pp with lower selected loss; both curves still improving/variable, one-seed screen is preliminary.",
+  "seed": 42,
+  "status": "preliminary",
+  "training_batch": 1024,
+  "validation_batch": 1024
+}

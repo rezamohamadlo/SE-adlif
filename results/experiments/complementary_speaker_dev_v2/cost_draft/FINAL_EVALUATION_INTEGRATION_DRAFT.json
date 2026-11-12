@@ -1,0 +1,39 @@
+{
+  "status": "isolated_evaluator_integration_verified_not_applied",
+  "tests_passed": 23,
+  "test_command": "PROJECT_VENV_PYTHON -m unittest tests.test_final_config_guard tests.test_study_evaluation",
+  "test_workdir": "results/experiments/complementary_speaker_dev_v2/cost_draft/checkout/final_evaluation_integration",
+  "base_sha256": {
+    "test_checkpoint.py": "8918b74c37c6885c4c814e9dd61083d23f1a7d1a5e826dccbb19d01f55529ef4",
+    "module/final_config_guard.py": null,
+    "tests/test_final_config_guard.py": null,
+    "tests/test_study_evaluation.py": "27daa12604ae79719605bf0b834323a1805f1aacf946b24db763f56daf6a8e3e"
+  },
+  "draft_sha256": {
+    "test_checkpoint.py": "a6272262a24e8d84e5f0edcafe055cf3aa06c9b0a996f6697f37ef374990cc34",
+    "module/final_config_guard.py": "42bf4b0dd38223079be369fea717ac326dfb0f4edcd5f0c70a725799ec88d528",
+    "tests/test_final_config_guard.py": "749583c913c0d54225aa9ed0b79dfc049f164a811ae92f5e4dfd967dedbe8d76",
+    "tests/test_study_evaluation.py": "9ef41d1e614f43789802993a6c5aac907a5072fb29193257a5d55e871ce77d60"
+  },
+  "patch": "results/experiments/complementary_speaker_dev_v2/cost_draft/FINAL_EVALUATION_INTEGRATION_DRAFT.patch",
+  "patch_sha256": "ac5513b0c58a0f9a51a4870a89d2c8bc5c2f20b967114e96afe45cba96c9c142",
+  "active_source_changed": false,
+  "training_executed_for_tests": false,
+  "official_test_opened": false,
+  "required_before_final_use": [
+    "Review frozen-config schema and integrate after the active source-guarded queue closes",
+    "Run actual-checkout relevant non-training tests after applying",
+    "Freeze portable resolved arm specifications and allowed mechanism paths before final testing",
+    "Preserve source and data provenance for all final runs; isolated metadata tests do not verify completed training or independent test evidence"
+  ],
+  "coverage": [
+    "All36checkpoint configs checked, with exact per-arm frozen settings and matched shared conditions",
+    "All36checkpoint source identities, selected epochs and model/dataset/seed/protocol metadata checked against receipts",
+    "Reject metadata-only distinct arm labels",
+    "Retain existing hash/budget/cohort/isolated-output checks",
+    "Reject speaker-development weights as canonical SHD* evidence"
+  ],
+  "patch_packaging": "Preserve existing per-file line endings; LF for new files. Code text matches tested isolated draft.",
+  "patch_apply_check": "git apply --check passed; patch not applied",
+  "active_source_identity_rechecked": true
+}

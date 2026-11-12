@@ -1,0 +1,42 @@
+{
+  "ordinary_test_opened": false,
+  "reason": "Preserve established batch64; only30validationrecords, so32and64each form the same actual batch.",
+  "records": [
+    {
+      "batch": 64,
+      "changed_predictions": 0,
+      "max_absolute_loss_difference": 0.0,
+      "measured_full_passes": 1,
+      "peak_reserved_gib": 0.02734375,
+      "seconds": 1.690989200025797,
+      "valid_targets": 39030,
+      "validation_records": 30,
+      "warmup_full_passes": 1
+    },
+    {
+      "batch": 16,
+      "changed_predictions": 0,
+      "max_absolute_loss_difference": 0.0,
+      "measured_full_passes": 1,
+      "peak_reserved_gib": 0.02734375,
+      "seconds": 3.313654699944891,
+      "valid_targets": 39030,
+      "validation_records": 30,
+      "warmup_full_passes": 1
+    },
+    {
+      "batch": 32,
+      "changed_predictions": 0,
+      "max_absolute_loss_difference": 0.0,
+      "measured_full_passes": 1,
+      "peak_reserved_gib": 0.02734375,
+      "seconds": 1.6449070000089705,
+      "valid_targets": 39030,
+      "validation_records": 30,
+      "warmup_full_passes": 1
+    }
+  ],
+  "reference_used_only_for_numerical_consistency_not_as_matched_training_control": true,
+  "selected_batch": 64,
+  "status": "verified"
+}

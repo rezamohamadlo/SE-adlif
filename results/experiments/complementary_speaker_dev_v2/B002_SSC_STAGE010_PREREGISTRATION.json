@@ -1,0 +1,43 @@
+{
+  "created_at": "2026-11-12T11:17:08.510119+03:30",
+  "idea": "B002_LS_ONLY_TRANSFER",
+  "hypothesis": "Training-only LS0.1may improve ordinary clean SSC validation generalization beyond matched SE-adLIF, following positive two-pair SHD development. No test improvement assumed.",
+  "prior_art": "Established uniform label smoothing, not architectural novelty",
+  "evidence": [
+    "B002_PRIMARY_STAGE030_FOUR_ARM_COMPARISON.json",
+    "B002_LS_SENSITIVITY_STAGE030_COMPARISON.json",
+    "B002_SSC_BATCH1024_CONFIRMATION.json"
+  ],
+  "models": [
+    "SE_adLIF",
+    "LS_SE_adLIF"
+  ],
+  "matched_control": "Fresh same-source baseline, no historical/calibration weights; all shared settings matched. Only intended training objective differs.",
+  "training_seed": 42,
+  "split": "Official SSC train/valid, hashes reverified, all35classes; stored speaker IDs disjoint per existing audit",
+  "training_batch": 1024,
+  "validation_batch": 1024,
+  "num_workers": 8,
+  "spawn_safe_transforms": true,
+  "lr": 0.006,
+  "lr_scaled": false,
+  "dropout": 0.15,
+  "precision": "32-true/high float32matmul",
+  "loss_aggregation": "mean_membrane_potentials",
+  "epsilon": 0.1,
+  "mode": "fresh random weights and optimizer epoch0",
+  "epoch_ceiling": 10,
+  "optional_next_ceiling": 40,
+  "full_schedule_epochs": 40,
+  "early_stopping": false,
+  "primary_metric": "Clean ordinary official-validation accuracy, LS minus Baseline",
+  "practical_threshold_pp": 0.5,
+  "support": "Ordinary hard-label validation CE and learning curves; lower loss/gap alone not success. Smoothed training loss and hard training CE separately recorded.",
+  "advance_rule": "Review completed matched10epochs. Extend both own last full states to40only if promising or genuinely inconclusive/still learning, with explicit curve evidence. Do not extend a flat failure or exceed40to seek a favorable outcome. Keep originalfull40scheduler.",
+  "estimated_compute": "About31minutes for2x10epochs from prior matched baseline92.37sec/epoch, plus Windows worker startup; calibration training-only ~72sec/epoch excludes loading/validation. Actual ETA measured after launch.",
+  "output_root": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1",
+  "source_snapshot": "B002_PRIMARY_SOURCE_SNAPSHOT.json",
+  "protocol": "label_smoothing_transfer_v1_SSC; objective suffix on LS arm",
+  "official_test_opened": false,
+  "two_complementary_ideas_established": false
+}

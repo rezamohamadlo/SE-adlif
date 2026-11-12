@@ -1,0 +1,214 @@
+"""Completed-stage validation accounting; no training, official tests or selection automation."""
+import contextlib, csv, gc, hashlib, io, json, math, statistics
+from datetime import datetime, timezone
+import h5py
+import numpy as np
+from omegaconf import OmegaConf
+import hydra
+import pytorch_lightning as pl
+import torch
+from models.pl_module import build_training_model
+from module.study_control import canonical, forward_identity
+from datasets.shd_speaker_split import load_manifest
+from project_paths import ROOT, local_path
+
+OUT = ROOT/'results/experiments/complementary_speaker_dev_v2'
+RUNS = OUT/'c001_dth_ls_v1/sensitivity_6_10'
+SOURCE = OUT/'C001_SENSITIVITY_STAGE030_AUDIT_SOURCE.txt'
+TARGET = OUT/'C001_SENSITIVITY_STAGE030_COMPARISON.json'
+MODELS = ('SE_adLIF', 'LS_SE_adLIF', 'DTH_LS_SE_adLIF')
+assert not TARGET.exists(), 'Preserve previous evidence; inspect before repeating'
+receipts = {}
+for name in MODELS:
+    run = RUNS/name/'SHD/seed_42'
+    receipt = json.loads((run/'stages/030/RESULT.json').read_text())
+    assert receipt['completed_epochs'] == 30 and receipt['status'] == 'stage_complete'
+    assert not receipt['test_evaluated']
+    assert json.loads((run/'STATUS.json').read_text())['status'] == 'stage_complete'
+    receipts[name] = receipt
+# Execute only after the launcher and all training children are confirmed terminal externally.
+snapshot = json.loads((OUT/'C001_SENSITIVITY_SOURCE_SNAPSHOT.json').read_text())
+assert all(hashlib.sha256((ROOT/name).read_bytes()).hexdigest() == sha
+           for name, sha in snapshot['files_sha256'].items())
+manifest = load_manifest('results/experiments/complementary_speaker_dev_v2/sensitivity_6_10/SPLIT_MANIFEST.json',
+    'data', 'a3a3e633e3cf80eb04be16dcb17328502c82533b40f1d9aaf32064daa78cc7a2')
+original_rows = np.array(manifest['subsets']['validation']['indices'], dtype=np.int64)
+with h5py.File(ROOT/'data/SHDWrapper/shd_train.h5', 'r') as stream:
+    speakers = np.array(stream['extra/speaker'][:])[original_rows]
+    expected_targets = np.array(stream['labels'][:])[original_rows]
+assert set(speakers.tolist()) == {6, 10}
+torch.set_num_threads(2)
+torch.set_float32_matmul_precision('high')
+assert torch.cuda.is_available()
+records = []
+configs = []
+curves = {}
+predictions = {}
+for name in MODELS:
+    run = RUNS/name/'SHD/seed_42'
+    receipt = receipts[name]
+    full = json.loads((run/'FULL_RUN_CONFIG.json').read_text())
+    configs.append(canonical(full))
+    assert not full.get('init_ckpt_path')
+    assert full['random_seed'] == 42 and full['dataset']['validation_only_data'] and not full['run_test']
+    assert json.loads((run/'MODEL_SOURCE_IDENTITY.json').read_text()) == forward_identity('SHD')
+    rows = []
+    for path in sorted((run/'logs').rglob('metrics.csv')):
+        with path.open(newline='') as stream:
+            rows.extend(csv.DictReader(stream))
+    val = sorted([r for r in rows if r.get('val_acc', '')], key=lambda r: int(float(r['epoch'])))
+    assert len(val) == 30 and [int(float(r['epoch'])) for r in val] == list(range(30))
+    assert all(math.isfinite(float(r[k])) for r in val for k in ('val_acc', 'val_loss'))
+    selected = max(val, key=lambda r: float(r['val_acc']))
+    epoch = int(float(selected['epoch']))
+    assert epoch == receipt['selected_epoch_index']
+    assert float(selected['val_acc']) == receipt['best_validation_accuracy']
+    train = next(r for r in rows if r.get('train_acc_epoch', '') and int(float(r['epoch'])) == epoch)
+    checks = {}
+    for kind in ('best', 'last'):
+        path = local_path(receipt[kind+'_checkpoint'], must_exist=True)
+        sha = hashlib.sha256(path.read_bytes()).hexdigest()
+        assert sha == receipt[kind+'_checkpoint_sha256']
+        state = torch.load(path, map_location='cpu', weights_only=False)
+        saved = OmegaConf.to_container(OmegaConf.create(state['hyper_parameters']['cfg']), resolve=True)
+        assert canonical(saved) == canonical(full)
+        assert state['epoch'] == (epoch if kind == 'best' else 29)
+        assert state['global_step'] == 6*(state['epoch']+1)
+        assert state['optimizer_states'] and state['lr_schedulers']
+        checks[kind] = dict(sha256=sha, epoch_index=state['epoch'], global_step=state['global_step'], config_matches=True)
+        if kind == 'best':
+            chosen = state
+    cfg = OmegaConf.create(full)
+    cfg.dataset.data_path = str(ROOT/'data')
+    pl.seed_everything(42, workers=True)
+    with contextlib.redirect_stdout(io.StringIO()):
+        model = build_training_model(cfg)
+    model.load_state_dict(chosen['state_dict'], strict=True)
+    model.cuda().eval()
+    data = hydra.utils.instantiate(cfg.dataset)
+    data.setup('fit')
+    assert not hasattr(data, 'data_test')
+    assert list(data.data_train.indices) == manifest['subsets']['train']['indices']
+    assert list(data.data_val.indices) == original_rows.tolist()
+    predicted = []
+    target_rows = []
+    probability_rows = []
+    weighted_loss = 0.
+    count = 0
+    with torch.inference_mode():
+        for cpu in data.val_dataloader():
+            x, y, blocks = (t.cuda() for t in cpu)
+            reduced, loss, _ = model.process_predictions_and_compute_losses(model(x), y, blocks)
+            mask = y.flatten().ne(-1)
+            n = int(mask.sum())
+            assert n == len(x)
+            scores = reduced[mask].float()
+            predicted.extend(scores.argmax(-1).cpu().tolist())
+            target_rows.extend(y.flatten()[mask].cpu().tolist())
+            probability_rows.append(scores.softmax(-1).cpu().numpy())
+            weighted_loss += float(loss)*n
+            count += n
+    target_rows = np.array(target_rows)
+    predicted = np.array(predicted)
+    probabilities = np.concatenate(probability_rows)
+    assert count == 1236 and np.array_equal(target_rows, expected_targets)
+    accuracy = float((predicted == target_rows).mean())
+    ce = weighted_loss/count
+    assert abs(accuracy-float(selected['val_acc'])) < 1e-6
+    assert abs(ce-float(selected['val_loss'])) < 1e-4
+    confusion = np.bincount(target_rows.astype(int)*20+predicted, minlength=400).reshape(20,20)
+    per_speaker = {str(s): dict(recordings=int((speakers==s).sum()),
+        correct=int(((predicted==target_rows)&(speakers==s)).sum()),
+        accuracy=float((predicted[speakers==s]==target_rows[speakers==s]).mean())) for s in (6,10)}
+    dth = {}
+    if name.startswith('DTH'):
+        for label, layer in (('l1',model.l1),('l2',model.l2)):
+            threshold = layer.theta_min+(layer.theta_max-layer.theta_min)*layer.threshold_logits.sigmoid()
+            dth[label] = dict(homeostatic_gain=float(layer.homeostatic_gain.detach()),
+                transient_gain=float(layer.transient_gain.detach()),
+                static_threshold_min=float(threshold.min().detach()),
+                static_threshold_mean=float(threshold.mean().detach()),
+                static_threshold_max=float(threshold.max().detach()))
+    record = dict(model=name, selected_validation_accuracy=float(selected['val_acc']),
+        selected_completed_epoch=epoch+1, online_training_accuracy_in_selected_epoch=float(train['train_acc_epoch']),
+        validation_loss_at_selection=float(selected['val_loss']),
+        last10_validation_mean=statistics.mean(float(r['val_acc']) for r in val[-10:]),
+        checkpoint_checks=checks, per_speaker=per_speaker,
+        macroclass_recall=float(np.mean(confusion.diagonal()/confusion.sum(1))),
+        learned_dth_parameters=dth, reproduced_validation_accuracy=accuracy, reproduced_ordinary_ce=ce,
+        source_code=SOURCE.relative_to(ROOT).as_posix(), source_sha256=hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
+        official_test_evaluated=False)
+    raw = run/'diagnostic_rows'
+    raw.mkdir(exist_ok=True)
+    destination = raw/'stage030_validation_predictions.npz'
+    assert not destination.exists()
+    np.savez_compressed(destination, original_rows=original_rows, speaker_ids=speakers,
+        targets=target_rows, predictions=predicted, probabilities=probabilities)
+    record['raw_prediction_archive'] = destination.relative_to(ROOT).as_posix()
+    record['raw_prediction_sha256'] = hashlib.sha256(destination.read_bytes()).hexdigest()
+    (run/'stages/030/POST_STAGE_AUDIT.json').write_text(json.dumps(record,indent=2)+'\n')
+    records.append(record)
+    curves[name] = val
+    predictions[name] = predicted
+    print('[C001_SELECTED_VALIDATION] '+json.dumps(dict(model=name,accuracy=accuracy,ordinary_ce=ce,
+        per_speaker=per_speaker,learned_dth_parameters=dth)), flush=True)
+    del model,data,state,chosen,x,y,blocks,reduced,scores
+    gc.collect()
+    torch.cuda.empty_cache()
+
+def differences(a,b,path=''):
+    if isinstance(a,dict) and isinstance(b,dict):
+        result = {}
+        for key in set(a)|set(b):
+            result.update(differences(a.get(key),b.get(key),path+'.'+key if path else key))
+        return result
+    return {} if a==b else {path:dict(baseline=a,candidate=b)}
+allowed = {'evaluation_protocol','exp_name','label_smoothing_epsilon','logdir','model_variant',
+    'paper_baseline_deviations','run_mode','study_hypothesis','study_arm','training_objective'}
+allowed |= {f'{layer}.{key}' for layer in ('l1','l2') for key in
+    ('cell','rho_fast','rho_slow','target_rate','theta_min','theta_max')}
+config_differences = {}
+for name,cfg in zip(MODELS[1:],configs[1:]):
+    diff = differences(configs[0],cfg)
+    assert set(diff).issubset(allowed), set(diff)-allowed
+    config_differences[name] = diff
+baseline,ls,combined = records
+contrasts = dict(LS_minus_Baseline_pp=100*(ls['selected_validation_accuracy']-baseline['selected_validation_accuracy']),
+    combination_minus_Baseline_pp=100*(combined['selected_validation_accuracy']-baseline['selected_validation_accuracy']),
+    combination_minus_LS_pp=100*(combined['selected_validation_accuracy']-ls['selected_validation_accuracy']))
+per_speaker_delta = {str(s):100*(combined['per_speaker'][str(s)]['accuracy']-ls['per_speaker'][str(s)]['accuracy']) for s in (6,10)}
+left_ok = predictions['DTH_LS_SE_adLIF']==expected_targets
+right_ok = predictions['LS_SE_adLIF']==expected_targets
+paired = dict(fixes=int((left_ok&~right_ok).sum()),loses=int((~left_ok&right_ok).sum()),both_wrong=int((~left_ok&~right_ok).sum()))
+result = dict(status='verified_fixed_pair_sensitivity30_validation_screen',training_seed=42,
+    validation_speakers=[6,10],completed_epochs_per_arm=30,full_budget=300,records=records,
+    **contrasts,per_speaker_combination_minus_LS_pp=per_speaker_delta,practical_threshold_pp=.5,
+    shared_config_match=True,configuration_differences=config_differences,
+    paired_validation_descriptive=paired,source251files_unchanged=True,
+    selection_automated=False,decision='REVIEW_REQUIRED_NO_AUTOMATIC_TUNING_OR_EXTENSION',
+    caveats='Single predefined secondary pair,one training seed,30/300epochs. Shortlist chosen on primary0/3. Not a pair search, independent population proof, synergy or official-test result. No new tuning/extension on this pair.',
+    training_accuracy_definition='Logged online selected-epoch aggregate with dropout and changing weights; not clean checkpoint training reevaluation.',
+    official_test_evaluated=False,full_goal_complete=False)
+TARGET.write_text(json.dumps(result,indent=2)+'\n')
+lines=['# C001 fixed6/10 pair-sensitivity screen','','Fresh baseline and primary-shortlisted LS/DTH+LS; seed42;30/300epochs; no official tests.','',
+    '| Arm | Online train in selected epoch | Clean validation | Ordinary validation CE | Selected completed epoch | Speaker6 | Speaker10 |',
+    '|---|---:|---:|---:|---:|---:|---:|']
+for r in records:
+    lines.append(f"| {r['model']} | {100*r['online_training_accuracy_in_selected_epoch']:.2f}% | {100*r['selected_validation_accuracy']:.2f}% | {r['validation_loss_at_selection']:.4f} | {r['selected_completed_epoch']} | {100*r['per_speaker']['6']['accuracy']:.2f}% | {100*r['per_speaker']['10']['accuracy']:.2f}% |")
+lines+=['',*[f'- {k}: {v:+.6f}pp' for k,v in contrasts.items()],'',result['caveats'],'',result['training_accuracy_definition'],'',
+    'No comparable paper validation metric, so no paper delta. Review original+0.5pp incremental criterion with CE/curves and per-speaker evidence. No automatic next job.']
+(OUT/'C001_SENSITIVITY_STAGE030_COMPARISON.md').write_text('\n'.join(lines)+'\n')
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+fig,axes=plt.subplots(1,2,figsize=(11,4))
+for name,val in curves.items():
+    epochs=[int(float(r['epoch']))+1 for r in val]
+    axes[0].plot(epochs,[100*float(r['val_acc']) for r in val],label=name)
+    axes[1].plot(epochs,[float(r['val_loss']) for r in val],label=name)
+for ax in axes:
+    ax.set_xlabel('Completed epoch');ax.grid(alpha=.2);ax.legend(fontsize=8)
+axes[0].set_ylabel('Clean held-out-speaker accuracy (%)');axes[1].set_ylabel('Ordinary validation CE')
+fig.suptitle('C001 fixed6/10 sensitivity, seed42:30/300epochs');fig.tight_layout()
+for suffix in ('png','svg'):fig.savefig(OUT/f'C001_SENSITIVITY_STAGE030_CURVES.{suffix}',dpi=160)
+print('[C001_SENSITIVITY_AUDIT_COMPLETE] '+json.dumps(contrasts)+'; no automatic next job',flush=True)

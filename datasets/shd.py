@@ -83,6 +83,8 @@ class SHDLDM(pl.LightningDataModule):
         speaker_split_manifest: str = None,
         speaker_split_fingerprint: str = None,
         train_augmentation: dict = None,
+        validation_only_data: bool = False,
+        validation_batch_size: int = None,
     ) -> None:
         super().__init__()
         # workaround in order to use the same training loop
@@ -90,14 +92,20 @@ class SHDLDM(pl.LightningDataModule):
         
         if validate_on == 'speaker_holdout':
             from project_paths import local_path
-            from datasets.shd_speaker_split import load_manifest, PROTOCOL
+            from datasets.shd_speaker_split import load_manifest, PROTOCOL, DEVELOPMENT_PROTOCOL
             data_path = str(local_path(data_path))
             allowed_cache = ('shd_speaker_augmented_v1' if train_augmentation is not None else PROTOCOL)
-            if (cache_namespace != allowed_cache or not speaker_split_manifest
+            if (cache_namespace not in (allowed_cache, DEVELOPMENT_PROTOCOL) or not speaker_split_manifest
                     or not speaker_split_fingerprint or random_seed != 42
                     or additional_test_set_validation):
                 raise ValueError('Speaker holdout requires its frozen manifest/cache and split seed 42; no test validation')
             self.speaker_split = load_manifest(speaker_split_manifest, data_path, speaker_split_fingerprint)
+            if cache_namespace==DEVELOPMENT_PROTOCOL:
+                if (not validation_only_data or train_augmentation is not None
+                        or self.speaker_split['protocol']!=DEVELOPMENT_PROTOCOL):
+                    raise ValueError('Speaker development requires its train-only manifest and clean dataset transforms')
+            elif self.speaker_split['protocol']!=PROTOCOL:
+                raise ValueError('Historical and new speaker protocols cannot share a cache namespace')
         elif speaker_split_manifest is not None or speaker_split_fingerprint is not None:
             raise ValueError('Speaker manifest requires validate_on=speaker_holdout')
         if train_augmentation is not None and validate_on != 'speaker_holdout':
@@ -139,6 +147,7 @@ class SHDLDM(pl.LightningDataModule):
         self.window_size = window_size
         self.split_percent = split_percent
         self.batch_size = batch_size
+        self.validation_batch_size = validation_batch_size or batch_size
         self.num_workers = num_workers
         self.collate_fn = PadTensors()
         self.validate_on = validate_on
@@ -240,12 +249,15 @@ class SHDLDM(pl.LightningDataModule):
             )
 
         self.generator = torch.Generator().manual_seed(self.random_seed)
-        self.data_test = SHDWrapper(
-            save_to=self.data_path,
-            transform=self.static_data_transform_test,
-            train=False,
-            ignore_first_timesteps=self.ignore_first_timesteps,
-        )
+        if validation_only_data and (self.validate_on == 'test' or additional_test_set_validation):
+            raise ValueError('Training-only data access forbids official test validation')
+        if not validation_only_data:
+            self.data_test = SHDWrapper(
+                save_to=self.data_path,
+                transform=self.static_data_transform_test,
+                train=False,
+                ignore_first_timesteps=self.ignore_first_timesteps,
+            )
 
         if self.validate_on == 'speaker_holdout':
             from datasets.shd_speaker_split import check_loader
@@ -316,7 +328,7 @@ class SHDLDM(pl.LightningDataModule):
             DiskCachedDataset(self.data_val, self.cache_path + "/val"),
             shuffle=False,
             pin_memory=True,
-            batch_size=self.batch_size,
+            batch_size=self.validation_batch_size,
             drop_last=False,
             collate_fn=self.collate_fn,
             num_workers=self.num_workers,

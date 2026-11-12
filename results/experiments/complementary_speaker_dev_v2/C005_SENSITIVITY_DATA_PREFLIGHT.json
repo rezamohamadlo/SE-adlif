@@ -1,0 +1,36 @@
+{
+  "verified_at": "2026-11-12T15:10:07.553502+00:00",
+  "status": "verified",
+  "role": "pair_sensitivity",
+  "fit_speakers": [
+    0,
+    1,
+    2,
+    3,
+    7,
+    8,
+    9,
+    11
+  ],
+  "validation_speakers": [
+    6,
+    10
+  ],
+  "fit_validation_recordings": [
+    6920,
+    1236
+  ],
+  "all20classes_each_side": true,
+  "no_sample_or_speaker_overlap": true,
+  "exhaustive_official_train_rows": true,
+  "split_fingerprint": "a3a3e633e3cf80eb04be16dcb17328502c82533b40f1d9aaf32064daa78cc7a2",
+  "actual_loader_indices_match": true,
+  "no_test_dataset_constructed": true,
+  "calibration_reuse_basis": "SameSEarchitectureandfixedRDropobjective,precision,batch1024; newfitting128longestactualprocessedsequencesdonotexceedverified342framefulltrainingcalibration with32.5%reservedheadroom. No new numericalsetting orweightsreuse.",
+  "longest128_actual_padded_frames": 342,
+  "input_features": 140,
+  "train_updates_per_epoch": 6,
+  "shortlist_enforced": true,
+  "primary_or_calibration_weights_reused": false,
+  "official_test_opened": false
+}

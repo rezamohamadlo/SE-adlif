@@ -1,0 +1,33 @@
+{
+  "registered_at": "2026-11-12T15:34:59.062375+00:00",
+  "status": "beforeSSCcalibrationandtraining",
+  "idea": "A005_DROPOUT_CONSISTENCY_SSC",
+  "trigger": "C005_SENSITIVITY_STAGE030_DECISION.json",
+  "hypothesis": "Fixedalpha1dropout-passagreement mayimproveofficialSSCvalidation afterpositivespeakerdevelopment;cleanaccuracyandCEcurvesdecide,nopresumedtransfer.",
+  "model_arms": [
+    "SE_adLIF",
+    "RDROP_SE_adLIF"
+  ],
+  "training_seed": 42,
+  "fresh_weights_and_optimizer": true,
+  "source": "officialSSCtrain75466/valid9981;35classes;verifyhashes/IDs/labels beforecalibration. Officialtestexcluded.",
+  "training_objective": "BaselineoriginalCE;RDropaverage2CE+alpha1symmetricKL,epsilon0. Sameoptimizer/clipping/scheduler,LR0.006not scaled;40epochfullschedule.",
+  "loss_aggregation": "mean_membrane_potentials via comparison=SSC; notSHDsum-softmax orarchivedsummedSSC.",
+  "batch_policy": "Benchmark256and512actualone/two-graphsteps onreal300frame batches;2warmup+3measured;>=15%reserved headroom everyarm. Select fastest stable sharedtrainingbatch beforemaintraining. Skip1024if measured512RDrop footprintprojects above85%total. No LRscaling.",
+  "validation_policy": "Independentfull9981ordinary256/512/1024batches,1warmup+1measuredpass;anchor256predictions/CE,0changedpredictionsandCEdifference<1e-5;selectfasteststable sharedvalidationbatch.",
+  "data_loader_policy": "Reuseunchangedspawn-safe8worker evidencewithsourcehash/provenance,provided existingproducerthroughputcomfortablyexceedsGPUneeds;donotrelabeloldbatch1024benchmarkasnew512measurement.",
+  "main_epoch_ceilings": [
+    10,
+    40
+  ],
+  "practical_threshold_pp": 0.5,
+  "advancement": "CleanofficialvalidationA-baseline>=+0.5pp supportedbyordinaryCE/curves. Screen10;extendbothownlastcheckpointsto40onlyifpromisingor genuinelyinconclusiveandimproving. Rejectflatunpromisingresultswithoutexhaustivesweeps;reportfailure.",
+  "control_reuse": "ExistingSSCcanonical/historicalcontrolsarenotmatchedafterbatch/updateschange;preservethem,trainnewisolatedcontrol. No SHD/calibrationweights or optimizerstate reused.",
+  "cost_initial10_minutes_estimate": [
+    50,
+    110
+  ],
+  "cost_caveat": "Refinefromactualcalibration/epochmeasurements;large720x2SSCmodeland2graphs mayrequire512or256. B/combinednotadvanced;ECGseparateafterreview.",
+  "official_test_allowed": false,
+  "full_goal_complete": false
+}

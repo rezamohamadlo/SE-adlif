@@ -1,0 +1,49 @@
+{
+  "model": "SE_adLIF",
+  "selected_validation_accuracy": 0.8381876945495605,
+  "selected_completed_epoch": 27,
+  "online_training_accuracy_in_selected_epoch": 0.9899088740348816,
+  "validation_loss_at_selection": 0.6546921133995056,
+  "last10_validation_mean": 0.819902914762497,
+  "checkpoint_checks": {
+    "best": {
+      "sha256": "ecfc784b40ea413dce5ccc0e66c96d478fe98658365a07d97464516f36090694",
+      "epoch_index": 26,
+      "global_step": 162,
+      "config_matches": true
+    },
+    "last": {
+      "sha256": "d5416ca450915bd49aca5d8c1ce2a828724d40e0a62b4ecb44128e297a638785",
+      "epoch_index": 29,
+      "global_step": 180,
+      "config_matches": true
+    }
+  },
+  "per_speaker": {
+    "6": {
+      "recordings": 447,
+      "correct": 392,
+      "accuracy": 0.8769574944071589
+    },
+    "10": {
+      "recordings": 789,
+      "correct": 644,
+      "accuracy": 0.8162230671736375
+    }
+  },
+  "macroclass_recall": 0.8342608779400813,
+  "training_objective_settings": {
+    "training_objective": "classification",
+    "label_smoothing_epsilon": 0.0,
+    "dropout_consistency_alpha": 0.0,
+    "inference_forward_passes": 1
+  },
+  "training_epoch_diagnostics": {},
+  "reproduced_validation_accuracy": 0.8381877022653722,
+  "reproduced_ordinary_ce": 0.6546921307600818,
+  "source_code": "results/experiments/complementary_speaker_dev_v2/C005_SENSITIVITY_STAGE030_AUDIT_SOURCE.txt",
+  "source_sha256": "8969daab7a204ae772990b8bc1afc64f26cede3e690c00c9994479b7c6f7cd93",
+  "official_test_evaluated": false,
+  "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/sensitivity_6_10/SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+  "raw_prediction_sha256": "dd8fc14606157ce1ec2c536dae4cf722be830519e1df9db6669c6a3c76c4c08c"
+}

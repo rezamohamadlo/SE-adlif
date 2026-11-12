@@ -1,0 +1,18 @@
+{
+  "recorded_at": "2026-11-12T14:25:10.993021+00:00",
+  "status": "verified_and_frozen_before_main_training",
+  "selected_training_batch": 1024,
+  "selected_validation_batch": 1024,
+  "sum_initial4_estimated_epoch_train_seconds": {
+    "1024": 41.2506401999708,
+    "512": 81.38380880001932
+  },
+  "selection_rule": "512mustbe>=5%fastertochangestable1024;notmet",
+  "shared_LR": 0.01,
+  "LR_scaled": false,
+  "training_updates_per_epoch": 6,
+  "all6memory_and_gradients_and_validation_parity_verified": true,
+  "calibration_states_discarded": true,
+  "main_weights_reused": false,
+  "official_test_opened": false
+}

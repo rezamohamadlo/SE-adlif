@@ -1,0 +1,37 @@
+{
+  "prepared_at": "2026-11-12T12:15:40.793192+03:30",
+  "status": "isolated_draft_tested_not_applied",
+  "patch": "results/experiments/complementary_speaker_dev_v2/cost_draft/SHD_FINAL_PROVENANCE_DRAFT.patch",
+  "patch_sha256": "4c6527696f6f39119ff94a936fd188c9adba830df1c1331a5f7b648d3b065cb6",
+  "files_sha256": {
+    "module/shd_final_provenance.py": "0f83c57edd9a427ffc2112c43686ccf78d1b3b68e44ca0d224aa9ac2d12a8a77",
+    "tests/test_shd_final_provenance.py": "0a0ac43684d925134cb8d9e7e9cffb7fcf7ecdb577c230e7bb11efa2e8b8808b"
+  },
+  "dependencies": [
+    "ORDINARY_PREDICTION_CAPTURE_DRAFT.patch",
+    "SPEAKER_GENERALIZATION_DRAFT.patch"
+  ],
+  "test_command": "python -m unittest tests.test_shd_final_provenance tests.test_ordinary_prediction_capture tests.test_speaker_generalization tests.test_final_config_guard tests.test_study_evaluation",
+  "test_location": "isolated final_evaluation_integration checkout",
+  "tests_passed": 50,
+  "tests_seconds": 2.782,
+  "new_tests": 10,
+  "data_used": "Synthetic metadata and temporary synthetic HDF5 only; no actual project test data",
+  "coverage": [
+    "Frozen canonical manifest bytes/source identity and regenerated split42indices",
+    "Actual fitting membership, not all training-file speakers",
+    "Protocol/exposure/count/class coverage failure cases",
+    "Exact original SHDWrapper file/transform/collation and exhaustive non-drop sequential sampler",
+    "Reject cache/subset/random sampler/reordered/incomplete/mismatched loaders",
+    "Same captured ordinary synthetic predictions reconstruct all/seen/unseen totals"
+  ],
+  "not_covered": [
+    "Not integrated with real final test_checkpoint/Lightning evaluation",
+    "No actual official-test data or final cohort evaluated",
+    "Current label-smoothed model plus collector integration still requires root-level tests after source can safely change",
+    "Evaluator must supply original uncached loader and verify trusted frozen file/config/source metadata before these guards"
+  ],
+  "root_training_source_changed": false,
+  "official_test_opened": false,
+  "full_goal_complete": false
+}

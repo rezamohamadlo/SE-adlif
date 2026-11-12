@@ -1,0 +1,26 @@
+--- a/measure_shd_costs.py
++++ b/measure_shd_costs.py
+@@ -145,6 +145,23 @@
+             self.counts[name] += n
+             if name in {'add', 'sub'} and kwargs.get('alpha', 1) != 1:
+                 self.counts['mul'] += n
++        elif name in {'layer_norm', 'native_layer_norm'}:
++            # Explicit logical decomposition, not the fused kernel's exact FLOPs:
++            # feature mean, centered population variance, epsilon, rsqrt, normalize.
++            width = math.prod(args[1])
++            if width <= 0:
++                raise ValueError('Layer-normalization width must be positive')
++            rows = args[0].numel() // width
++            elements = rows * width
++            self.counts['add'] += rows * (2 * (width - 1) + 1)
++            self.counts['div'] += 2 * rows
++            self.counts['sub'] += elements
++            self.counts['mul'] += 2 * elements
++            self.counts['rsqrt'] += rows
++            if (len(args) > 2 and args[2] is not None) or kwargs.get('weight') is not None:
++                self.counts['mul'] += elements
++            if (len(args) > 3 and args[3] is not None) or kwargs.get('bias') is not None:
++                self.counts['add'] += elements
+         elif name in {'sum', 'mean'}:
+             self.counts[name] += args[0].numel() - n + (n if name == 'mean' else 0)
+         elif name in {'clamp', 'clamp_min', 'clamp_max'}:

@@ -1,0 +1,26 @@
+{
+  "checked_shared_settings": {
+    "batch_size": 1024,
+    "dropout": 0.15,
+    "early_stopping": false,
+    "factor": 0.9,
+    "gradient_clip_val": 1.5,
+    "lr": 0.01,
+    "matmul_precision": null,
+    "n_epochs": 300,
+    "optimizer": null,
+    "patience": 9999,
+    "precision": null,
+    "random_seed": 42,
+    "scheduler": "plateau",
+    "stage_ceiling": 30
+  },
+  "identical_dataset_config": true,
+  "models": [
+    "SE_adLIF",
+    "FIR_SE_adLIF",
+    "FIR_THIN_SE_adLIF"
+  ],
+  "official_test_evaluated": false,
+  "status": "verified"
+}

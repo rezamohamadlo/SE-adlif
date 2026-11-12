@@ -1,0 +1,54 @@
+{
+  "models": {
+    "SE_adLIF": {
+      "selected_completed_epoch": 10,
+      "train_accuracy_at_selection": 0.7992695569992065,
+      "validation_accuracy": 0.7790802717208862,
+      "validation_loss": 0.7248660922050476,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "8a29dd0873d7bc580c3e7b60b8da6db21a20c650f102501e9fce56fb891d0599",
+          "epoch_index": 9,
+          "global_step": 730
+        },
+        "last": {
+          "sha256": "8a29dd0873d7bc580c3e7b60b8da6db21a20c650f102501e9fce56fb891d0599",
+          "epoch_index": 9,
+          "global_step": 730
+        }
+      },
+      "completed_epochs": 10,
+      "full_budget": 40,
+      "preliminary": true
+    },
+    "GAIN_SE_adLIF": {
+      "selected_completed_epoch": 9,
+      "train_accuracy_at_selection": 0.7998849749565125,
+      "validation_accuracy": 0.7848913073539734,
+      "validation_loss": 0.7025777101516724,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "98d03daaa59148c43c64e90655c0d9fb09af0989d2bf400b8ea2f92b65f0c36e",
+          "epoch_index": 8,
+          "global_step": 657
+        },
+        "last": {
+          "sha256": "4bb8cfcd8881a181702d3173cb3d765420e4e6850d2abe392a1efc901a5e238e",
+          "epoch_index": 9,
+          "global_step": 730
+        }
+      },
+      "completed_epochs": 10,
+      "full_budget": 40,
+      "preliminary": true
+    }
+  },
+  "dataset": "SSC",
+  "training_seed": 42,
+  "official_test_opened": false,
+  "delta_gain_minus_baseline_pp": 0.5811035633087158,
+  "decision": "EXTEND",
+  "reason": "Preregistered practical threshold +0.5pp passed; selected validation CE lower; single-seed preliminary development evidence only",
+  "next_action": "Full resume both arms from their own last checkpoints to40; preserve10epoch snapshots and full40epoch scheduler",
+  "estimated_additional_seconds": 5580
+}

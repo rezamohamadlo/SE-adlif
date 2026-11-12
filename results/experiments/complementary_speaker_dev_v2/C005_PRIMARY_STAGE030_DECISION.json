@@ -1,0 +1,29 @@
+{
+  "recorded_at": "2026-11-12T14:55:41.893787+00:00",
+  "decision": "REJECT_COMBINED_INCREMENT_RUN_PREREGISTERED_A_ONLY_TWO_PASS_CONTROL",
+  "evidence": "C005_PRIMARY_STAGE030_COMPARISON.json",
+  "A_minus_Baseline_pp": 1.7125368118286133,
+  "B_minus_Baseline_pp": 6.299692392349243,
+  "AB_minus_A_pp": 2.4464845657348633,
+  "AB_minus_B_pp": -2.1406710147857666,
+  "interaction_pp": -3.85320782661438,
+  "practical_threshold_pp": 0.5,
+  "A_ordinary_CE_minus_Baseline": -0.002138972282409668,
+  "A_late10_minus_Baseline_pp": 0.8501511812210039,
+  "AB_ordinary_CE_minus_B": 0.0067594051361083984,
+  "AB_late10_minus_B_pp": -0.80122411251069,
+  "A_per_speaker_minus_Baseline_pp": {
+    "0": 6.790799561883897,
+    "3": -4.709141274238227
+  },
+  "AB_per_speaker_minus_B_pp": {
+    "0": -1.7524644030668113,
+    "3": -2.631578947368418
+  },
+  "curves_visually_inspected": true,
+  "all4_actual_initial_state_and_RNG_flags_match": true,
+  "interpretation": "StandaloneA passes weighted primary accuracy gate with nearly unchanged selected CE and a modest positive late10mean, but opposite effects on held speakers. Combination is worse than B in accuracy/CE/late10 and both speakers; no complementary-pair/synergy claim. Retain single-seed tuned-pair/repeatability limits.",
+  "next_action": "Fresh predeclared TWO_PASS_SE_adLIF alpha0 control only, same source/split/seed/batch/optimizer/budget. Isolate KL from averaging supervised gradients. No two-passLS control for failed combined increment; no75extension/secondary/transfer/officialtest now.",
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

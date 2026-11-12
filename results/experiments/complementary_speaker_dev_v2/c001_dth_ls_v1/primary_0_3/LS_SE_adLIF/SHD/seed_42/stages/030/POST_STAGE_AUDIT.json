@@ -1,0 +1,43 @@
+{
+  "model": "LS_SE_adLIF",
+  "selected_validation_accuracy": 0.853822648525238,
+  "selected_completed_epoch": 27,
+  "online_training_accuracy_in_selected_epoch": 0.9944661259651184,
+  "validation_loss_at_selection": 0.6307353377342224,
+  "last10_validation_mean": 0.8432415843009948,
+  "checkpoint_checks": {
+    "best": {
+      "sha256": "b0a783aeddbe9c323dd699d2b0d0abab4cdbe3ceac438d4a3eaac536a20ab7f2",
+      "epoch_index": 26,
+      "global_step": 162,
+      "config_matches": true
+    },
+    "last": {
+      "sha256": "0aa866457ca94f73926b98b5e604390e01d73c1cf0c4e0a4edea03094612b7ee",
+      "epoch_index": 29,
+      "global_step": 180,
+      "config_matches": true
+    }
+  },
+  "per_speaker": {
+    "0": {
+      "recordings": 913,
+      "correct": 838,
+      "accuracy": 0.9178532311062432
+    },
+    "3": {
+      "recordings": 722,
+      "correct": 558,
+      "accuracy": 0.7728531855955678
+    }
+  },
+  "macroclass_recall": 0.8617426316269452,
+  "learned_dth_parameters": {},
+  "reproduced_validation_accuracy": 0.8538226299694189,
+  "reproduced_ordinary_ce": 0.6307354955862786,
+  "source_code": "results/experiments/complementary_speaker_dev_v2/C001_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+  "source_sha256": "85e3fa7d78f450790dc3ccb9c6e59bf88bae55e808a6bf9533259dd24c620895",
+  "official_test_evaluated": false,
+  "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+  "raw_prediction_sha256": "0763301c47b788e8ccd5ea5548ca08c8e909283813bf92b2bac43079f8166a88"
+}

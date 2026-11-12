@@ -1,0 +1,25 @@
+{
+  "verified_at": "2026-11-12T14:04:03.826369+00:00",
+  "actual_all_four_common_initial_tensors_match": true,
+  "actual_initial_CPU_CUDA_RNG_and_execution_flags_match": true,
+  "objective_pairs_full_state_hashes_match": true,
+  "records": {
+    "SE_adLIF": {
+      "model_state_sha256": "6830e803aa1acda8558c1b87f7c4302599a13a52187b08b61aae3a1f5738301e",
+      "initial_file_sha256": "e435226c6513e9dbe6124c953efba6f2e3ce1550f791ae395ffc85fb445b315e"
+    },
+    "RCN_SE_adLIF": {
+      "model_state_sha256": "8659c0c4388d534a887cc8e8542fdb648990fea5a761caf843d5e9ddf7640fe7",
+      "initial_file_sha256": "67b35c14527174404110f6088a1fbb9a8a7a915186670bef4b008ac9f99124ea"
+    },
+    "RCN_LS_SE_adLIF": {
+      "model_state_sha256": "8659c0c4388d534a887cc8e8542fdb648990fea5a761caf843d5e9ddf7640fe7",
+      "initial_file_sha256": "b6ef1d8052883b33f98f582f9691699d53c773d5635dbabf9b38a9ca574a3493"
+    },
+    "LS_SE_adLIF": {
+      "model_state_sha256": "6830e803aa1acda8558c1b87f7c4302599a13a52187b08b61aae3a1f5738301e",
+      "initial_file_sha256": "0d27ea58cb55ee8215ee9b03aac48dde773a499cccccfb418c38b651b0143245"
+    }
+  },
+  "caveat": "Identical starts do not prove identical later numerical trajectories or statistical significance."
+}

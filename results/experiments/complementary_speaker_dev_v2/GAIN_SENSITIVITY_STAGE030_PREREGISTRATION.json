@@ -1,0 +1,21 @@
+{
+  "advancement_rule": "Assess signed gain versus matched baseline and FIR-versus-gain-only at identical30epoch budget, supported/qualified by loss and late curves. Preserve negative sensitivity; no setting changes or further pair search. Only primary-shortlisted models may run.",
+  "ceiling": 30,
+  "ecg_status": "Pending, not replaced by this diagnostic.",
+  "estimated_cost": "About15minutes for3warm30epoch arms plus startup, estimated.",
+  "hypothesis": "Assess whether primary accuracy gains of FIR/gain-only survive one predefined second training-speaker holdout. Higher primary gain-only loss may expose calibration weakness; no timing-specific benefit is assumed.",
+  "idea": "A001_GAIN_PAIR_SENSITIVITY",
+  "initialization": "Fresh for all3arms; primary weights trained on6/10and are ineligible.",
+  "matched_control": "All3fresh from epoch0, same6/10holdout, batch1024, AdamLR0.01, dropout0.15, full300epoch schedule, seed42,30epoch ceiling.",
+  "official_test_opened": false,
+  "practical_threshold_pp": 0.5,
+  "primary_evidence": "GAIN_CONTROL_STAGE030_COMPARISON.json",
+  "primary_metric": "Clean held-out-speaker accuracy",
+  "prior_art": "A mechanism control/parameterization study; no novelty claim for learned input gain.",
+  "shortlist": "GAIN_CONTROL_SHORTLIST.json",
+  "stage": 2,
+  "validation_speakers": [
+    6,
+    10
+  ]
+}

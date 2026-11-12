@@ -1,0 +1,70 @@
+{
+  "AB_minus_A_pp": -1.7125368118286133,
+  "A_minus_Baseline_pp": 1.3455688953399658,
+  "decision": "ADVANCE A to predefined pair sensitivity; REJECT B001 combination under30epoch screen; no automatic75extension",
+  "limitation": "One reused development pair and one training seed; neither independent final-test evidence nor proof of synergy.",
+  "official_test_evaluated": false,
+  "protocol": "speaker-disjoint development",
+  "records": [
+    {
+      "arm": "Baseline",
+      "clean_heldout_accuracy": 0.8159021139144897,
+      "completed_epochs": 30,
+      "last_training_accuracy": 0.998046875,
+      "last_validation_accuracy": 0.7724770903587341,
+      "last_validation_loss": 1.1335947513580322,
+      "launch_training_seconds": 353.4440244999714,
+      "model": "SE_adLIF",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/primary_0_3/SE_adLIF/SHD/seed_42/stages/030/RESULT.json",
+      "selected_checkpoint_epoch_index": 22,
+      "selected_completed_epoch": 23,
+      "tail10_mean_accuracy": 0.7903363883495331,
+      "tail10_sample_sd": 0.0156964060750548,
+      "training_accuracy_at_selection": 0.9860026240348816,
+      "training_loss_at_selection": 0.04481033980846405,
+      "validation_loss_at_selection": 0.9617340564727783
+    },
+    {
+      "arm": "A",
+      "clean_heldout_accuracy": 0.8293578028678894,
+      "completed_epochs": 30,
+      "last_training_accuracy": 0.9983723759651184,
+      "last_validation_accuracy": 0.8232415914535522,
+      "last_validation_loss": 0.8483833074569702,
+      "launch_training_seconds": 291.62758089997806,
+      "model": "FIR_SE_adLIF",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/primary_0_3/FIR_SE_adLIF/SHD/seed_42/stages/030/RESULT.json",
+      "selected_checkpoint_epoch_index": 25,
+      "selected_completed_epoch": 26,
+      "tail10_mean_accuracy": 0.8171253859996795,
+      "tail10_sample_sd": 0.012313697871892465,
+      "training_accuracy_at_selection": 0.9962565302848816,
+      "training_loss_at_selection": 0.01595398411154747,
+      "validation_loss_at_selection": 0.7857329845428467
+    },
+    {
+      "arm": "A+B",
+      "clean_heldout_accuracy": 0.8122324347496033,
+      "completed_epochs": 30,
+      "last_training_accuracy": 0.9933268427848816,
+      "last_validation_accuracy": 0.7926605343818665,
+      "last_validation_loss": 1.1012834310531616,
+      "launch_training_seconds": 296.52208400005475,
+      "model": "FIR_THIN_SE_adLIF",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/primary_0_3/FIR_THIN_SE_adLIF/SHD/seed_42/stages/030/RESULT.json",
+      "selected_checkpoint_epoch_index": 21,
+      "selected_completed_epoch": 22,
+      "tail10_mean_accuracy": 0.783180433511734,
+      "tail10_sample_sd": 0.02234300468539729,
+      "training_accuracy_at_selection": 0.9783528447151184,
+      "training_loss_at_selection": 0.064641572535038,
+      "validation_loss_at_selection": 1.112528681755066
+    }
+  ],
+  "status": "verified_stage_complete",
+  "training_seed": 42,
+  "validation_speakers": [
+    0,
+    3
+  ]
+}

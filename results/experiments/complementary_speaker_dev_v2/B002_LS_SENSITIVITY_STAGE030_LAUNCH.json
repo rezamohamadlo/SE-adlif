@@ -1,0 +1,21 @@
+﻿{
+    "launched_at":  "2026-11-12T11:02:55.9655626+03:30",
+    "pid":  13704,
+    "models":  [
+                   "SE_adLIF",
+                   "LS_SE_adLIF"
+               ],
+    "mode":  "fresh",
+    "training_seed":  42,
+    "validation_speakers":  [
+                                6,
+                                10
+                            ],
+    "epoch_ceiling":  30,
+    "full_schedule":  300,
+    "official_test":  false,
+    "study_file":  "config/studies/complementary_B002_sensitivity_v1.yaml",
+    "stdout":  "results/experiments/complementary_speaker_dev_v2/b002_ls_sensitivity_stage030_stdout.log",
+    "stderr":  "results/experiments/complementary_speaker_dev_v2/b002_ls_sensitivity_stage030_stderr.log",
+    "decision":  "B002_LS_ONLY_SENSITIVITY_STAGE030_PREREGISTRATION.json"
+}

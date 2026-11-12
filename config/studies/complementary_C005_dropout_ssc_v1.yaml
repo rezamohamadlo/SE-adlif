@@ -1,0 +1,53 @@
+version: complementary_speaker_dev_v2
+candidate_version: A005_dropout_SSC_transfer_v1
+protocol_id: dropout_consistency_ssc_mean_loss_v1
+plan: docs/experiments/complementary-C005-dropout-consistency-v1.md
+output_root: results/experiments/complementary_speaker_dev_v2/c005_dropout_ssc_v1/runs
+idea: A005_DROPOUT_CONSISTENCY_SSC
+role: cross_dataset_transfer
+training_seed: 42
+split_seed: 42
+hypothesis: Fixedalpha1dropout-passagreement mayimproveofficialSSCvalidation afterpositivespeakerdevelopment;cleanaccuracyandCEcurvesdecide,nopresumedtransfer.
+models:
+- SE_adLIF
+- RDROP_SE_adLIF
+arm_labels:
+  SE_adLIF: Baseline
+  RDROP_SE_adLIF: A005 dropout consistency
+spike_deletion:
+  SE_adLIF: 0
+  RDROP_SE_adLIF: 0
+input_fir_modes:
+  SE_adLIF: null
+  RDROP_SE_adLIF: null
+training_objectives:
+  SE_adLIF: classification
+  RDROP_SE_adLIF: classification_dropout_consistency_v1
+label_smoothing_epsilon:
+  SE_adLIF: 0
+  RDROP_SE_adLIF: 0
+hidden_cells:
+  SE_adLIF: se_adlif
+  RDROP_SE_adLIF: se_adlif
+hidden_cell_settings: {}
+hypotheses:
+  SE_adLIF: Fresh matchedSSCmean-membraneCE baseline; originalcanonicalreferencepreserved.
+  RDROP_SE_adLIF: Fixedalpha1/epsilon0RDrop;two-passsupervision+KL,ordinarysingle-passSSCmean-membraneCE
+    validation.
+datasets:
+  SSC:
+    batch_size: 512
+    validation_batch_size: 1024
+    num_workers: 8
+    spawn_safe_transforms: true
+    ceilings:
+    - 10
+    - 40
+    stage: 3
+record_initial_state: true
+initial_screen_models:
+- SE_adLIF
+- RDROP_SE_adLIF
+dropout_consistency_alpha:
+  SE_adLIF: 0
+  RDROP_SE_adLIF: 1

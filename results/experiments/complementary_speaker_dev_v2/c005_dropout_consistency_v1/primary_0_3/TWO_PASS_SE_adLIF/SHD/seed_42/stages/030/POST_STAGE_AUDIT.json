@@ -1,0 +1,65 @@
+{
+  "model": "TWO_PASS_SE_adLIF",
+  "selected_validation_accuracy": 0.8103975653648376,
+  "reproduced_validation_accuracy": 0.8103975535168195,
+  "reproduced_ordinary_ce": 1.0507774921003104,
+  "selected_completed_epoch": 29,
+  "validation_loss_at_selection": 1.0507773160934448,
+  "last10_validation_mean": 0.7874006152153015,
+  "per_speaker": {
+    "0": {
+      "recordings": 913,
+      "correct": 776,
+      "accuracy": 0.8499452354874042
+    },
+    "3": {
+      "recordings": 722,
+      "correct": 549,
+      "accuracy": 0.760387811634349
+    }
+  },
+  "checkpoint_checks": {
+    "best": {
+      "sha256": "46f3ba34b60e52f3689873ca8ed77adc9bcdb80af4e0d3b229f55cc603099ec8",
+      "epoch_index": 28,
+      "global_step": 174,
+      "config_matches": true
+    },
+    "last": {
+      "sha256": "31aea116834d4ae3d03d5f3985cbfb41cc7a821a5ac6b35913bfed266918131a",
+      "epoch_index": 29,
+      "global_step": 180,
+      "config_matches": true
+    }
+  },
+  "ordinary_forward_invocations": 2,
+  "trainable_parameters": 450760,
+  "objective_alpha": 0.0,
+  "label_smoothing_epsilon": 0.0,
+  "online_training_accuracy_in_selected_epoch": 0.9970703125,
+  "training_diagnostics": {
+    "train_loss_epoch": {
+      "selected_epoch": 0.014464500360190868,
+      "last_epoch": 0.01215407159179449,
+      "maximum": 3.00398325920105
+    },
+    "train_supervised_loss": {
+      "selected_epoch": 0.014464500360190868,
+      "last_epoch": 0.01215407159179449,
+      "maximum": 3.00398325920105
+    },
+    "train_hard_ce": {
+      "selected_epoch": 0.014464500360190868,
+      "last_epoch": 0.01215407159179449,
+      "maximum": 3.00398325920105
+    },
+    "train_dropout_symmetric_kl": {
+      "selected_epoch": 0.011079532094299793,
+      "last_epoch": 0.010090037249028683,
+      "maximum": 0.03637342527508736
+    }
+  },
+  "official_test_evaluated": false,
+  "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/TWO_PASS_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+  "raw_prediction_sha256": "4a96226e67050493e75c9dca0981ebc8a66573317cbd54eee4615da9220a7d46"
+}

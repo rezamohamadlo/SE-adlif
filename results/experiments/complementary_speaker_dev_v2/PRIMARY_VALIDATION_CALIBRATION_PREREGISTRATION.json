@@ -1,0 +1,22 @@
+{
+  "checkpoints": "Each gain_control_A001_v1 stage030validation-accuracy-selected snapshot; retain receipt SHA256 and forward source identity.",
+  "data": "Primary0/3validation only from official training file, original frozen row order; no secondary calibration tuning and no official test.",
+  "inference": "Registered saved-config model factory; eval/inference_mode; no TTA, fitting, temperature scaling or weight changes; same saved validation batch and temporal mask/aggregation.",
+  "interpretation": "Cross-entropy alone does not prove miscalibration; measure confidence directly. Calibration diagnostics are development evidence, not an accuracy improvement or new model.",
+  "metrics": [
+    "Ordinary accuracy as a recomputation diagnostic, never replacing original authoritative score",
+    "Ordinary unsmoothed cross-entropy",
+    "15equal-width-bin top-label ECE",
+    "Brier score summed across classes",
+    "Mean max-confidence for correct and incorrect predictions",
+    "Per-speaker descriptive accuracy"
+  ],
+  "models": [
+    "SE_adLIF",
+    "FIR_SE_adLIF",
+    "GAIN_SE_adLIF"
+  ],
+  "purpose": "Describe why gain-only accuracy improves while selected validation cross-entropy worsens; do not tune on secondary pair or official tests.",
+  "resource_rule": "Wait for current GPU queue to close; do not run parallel inference on the active training GPU.",
+  "status": "pending_after_active_GPU_queue"
+}

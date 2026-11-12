@@ -1,0 +1,18 @@
+{
+  "allow_pair_search": false,
+  "initialization": "fresh_weights_fresh_optimizer_epoch0",
+  "models": [
+    "FIR_SE_adLIF"
+  ],
+  "official_test_evaluated": false,
+  "primary_ceiling": 30,
+  "reason": "A+1.34557pp with lower selected loss and better late-curve stability; B001 fails declared incremental improvement and worsens loss.",
+  "secondary_ceiling": 30,
+  "secondary_pair_predefined": [
+    6,
+    10
+  ],
+  "selected_using": "clean_primary_speaker_validation",
+  "source": "results/experiments/complementary_speaker_dev_v2/PRIMARY_STAGE030_COMPARISON.json",
+  "training_seed": 42
+}

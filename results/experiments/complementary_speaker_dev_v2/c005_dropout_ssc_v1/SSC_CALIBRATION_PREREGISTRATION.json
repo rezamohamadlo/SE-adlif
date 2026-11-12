@@ -1,0 +1,16 @@
+{
+  "registered_at": "2026-11-12T15:43:32.626734+00:00",
+  "source": "results/experiments/complementary_speaker_dev_v2/c005_dropout_ssc_v1/SSC_CALIBRATION_SOURCE.txt",
+  "source_sha256": "5a3661c7e6a934b9f1ecfc62c61b68872ddfd35c595738c05e6378f82eea5920",
+  "status": "registered_before_execution",
+  "role": "Discarded117states;noTrainer/maincheckpoint/officialtest;real train/valid only.",
+  "training_grid": [
+    256,
+    512
+  ],
+  "conditional1024": "Onlyifmeasured512RDropreservedfootprintprojects<=85%totalGPU;otherwisedocument skip.",
+  "selection": "Fasteststablecommontrainingbatchsumestimatedepochseconds,>=15%headroom. Separate fastestcommonfullvalidationbatch256/512/1024 with0predictionchangesandrepeatchanges,CEdiff<1e-5.",
+  "training_repetitions": "2warmup+3synchronizedactualoptimizersteps permodel/batch;one/two-graphlossasusedmain",
+  "main_training_launched": false,
+  "official_test_opened": false
+}

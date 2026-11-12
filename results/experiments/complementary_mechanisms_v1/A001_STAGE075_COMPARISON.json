@@ -1,0 +1,40 @@
+{
+  "accuracy_difference_pp": 0.0613093376159668,
+  "arms": [
+    {
+      "arm": "SE_adLIF",
+      "best_val_accuracy": 0.9797670245170593,
+      "elapsed_epoch_seconds": 762.9662501997082,
+      "last15_mean_validation_accuracy": 0.9645616213480631,
+      "last15_sd_validation_accuracy": 0.012199192259424355,
+      "last_validation_accuracy": 0.9767014384269714,
+      "selected_epoch_index": 69,
+      "selected_validation_loss": 0.10315552353858948,
+      "train_accuracy_at_selected": 0.9973958134651184,
+      "updates": 450
+    },
+    {
+      "arm": "FIR_SE_adLIF",
+      "best_val_accuracy": 0.980380117893219,
+      "elapsed_epoch_seconds": 719.0659534001024,
+      "last15_mean_validation_accuracy": 0.9744941790898641,
+      "last15_sd_validation_accuracy": 0.009511985012046803,
+      "last_validation_accuracy": 0.9423666596412659,
+      "selected_epoch_index": 63,
+      "selected_validation_loss": 0.13210509717464447,
+      "train_accuracy_at_selected": 1.0,
+      "updates": 450
+    }
+  ],
+  "completed_epochs": 75,
+  "dataset": "SHD*",
+  "full_budget": 300,
+  "generalization_improvement_established": false,
+  "interpretation": "Initial30epochgain shrank; best accuracy difference0.061pp, selectedlossworse forA, but last15meanaccuracy and stability favorA. Inconclusive; no test generalization claim.",
+  "next_ceiling": 150,
+  "next_stage_decision": "EXTEND",
+  "ordinary_test_accuracy": "pending",
+  "reason": "Mixed accuracy/loss/stability evidence remains inconclusive. Extend once under the original declared protocol, independently of any test outcome.",
+  "seed": 42,
+  "status": "preliminary_validation_only"
+}

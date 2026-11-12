@@ -1,0 +1,287 @@
+{
+  "cpu_rng_sha256": "65ffa5d0c74bc502f680eb2e303ddb7eb356f5d69044916b93570d715fc60bbc",
+  "cublas_workspace_config": null,
+  "cuda_allow_tf32": true,
+  "cuda_rng_sha256": "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263",
+  "dataset": "SSC",
+  "deterministic_algorithms": false,
+  "float32_matmul_precision": "high",
+  "initialization_mode": "fresh",
+  "model_device": "cuda:0",
+  "model_state_sha256": "a38c160a83af5c7be00a313f02f39b9687b6fee1c11c2ca027a97a9395952296",
+  "model_variant": "RDROP_SE_adLIF",
+  "optimizer_updates": 0,
+  "precision": "32-true",
+  "protocol": "dropout_consistency_ssc_mean_loss_v1_SSC_classification_dropout_consistency_v1",
+  "recorded_at": "2026-11-12T16:32:38.924365+00:00",
+  "split_fingerprint": null,
+  "tensor_count": 31,
+  "tensors": {
+    "l1.a": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "a6f365eb6ccbdd16c2da42e39297628b965443de262309e56db5b987d98ef6c2",
+      "shape": [
+        720
+      ]
+    },
+    "l1.b": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "053db047c3e60866d64ee929864142a09326b30f2a61e1f43e46366f5a23e61f",
+      "shape": [
+        720
+      ]
+    },
+    "l1.bias": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "39a68c2004ed4a20edb148b72e5aabd663f15cce54b30d2ea1c106e839761ed5",
+      "shape": [
+        720
+      ]
+    },
+    "l1.recurrent": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "19f5831ffaa60143e3856092cf1587b72aceda7f66ce50afe4e57306158b46ca",
+      "shape": [
+        720,
+        720
+      ]
+    },
+    "l1.tau_u_trainer.tau_max": {
+      "dtype": "torch.int64",
+      "parameter": false,
+      "requires_grad": false,
+      "sha256": "bf5b0e89f1caed18c8d6ff15d17ecc5c6e0c89510b4bc6d7b4b51d4ed30999cb",
+      "shape": []
+    },
+    "l1.tau_u_trainer.tau_min": {
+      "dtype": "torch.int64",
+      "parameter": false,
+      "requires_grad": false,
+      "sha256": "f13ee6ed54ea2aae9fc49a9faeb5da6e8ddef0e12ed5d30d35a624ae813e0485",
+      "shape": []
+    },
+    "l1.tau_u_trainer.weight": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "fcfa923fccd78b44fe526917b9b4d9f0cb29346d42c6e3b16fd32b4ccb6fc85f",
+      "shape": [
+        720
+      ]
+    },
+    "l1.tau_w_trainer.tau_max": {
+      "dtype": "torch.int64",
+      "parameter": false,
+      "requires_grad": false,
+      "sha256": "5fbbc50a5e0bc4e1bb5ea4bbacda5ae6709eff8e286fb002fee73a4913820fe9",
+      "shape": []
+    },
+    "l1.tau_w_trainer.tau_min": {
+      "dtype": "torch.int64",
+      "parameter": false,
+      "requires_grad": false,
+      "sha256": "3fe8adee83a670dd3131f667e963775b2256f3f59d5a996984eb47f8375efd7c",
+      "shape": []
+    },
+    "l1.tau_w_trainer.weight": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "d869c636c6f58429fac1859e7691675273ac1f76350cc5684e6dce80b1d71c51",
+      "shape": [
+        720
+      ]
+    },
+    "l1.thr": {
+      "dtype": "torch.float32",
+      "parameter": false,
+      "requires_grad": false,
+      "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+      "shape": [
+        1
+      ]
+    },
+    "l1.u0": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": false,
+      "sha256": "39a68c2004ed4a20edb148b72e5aabd663f15cce54b30d2ea1c106e839761ed5",
+      "shape": [
+        720
+      ]
+    },
+    "l1.weight": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "204d2f13578558c7ccf1a937ebc5b80667cc35c9d01f241652e9a5a545b66152",
+      "shape": [
+        720,
+        140
+      ]
+    },
+    "l2.a": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "976109e2bcae393eacf0af17f3d5c759ffd29b5028db49ebf712b7da7796cf4d",
+      "shape": [
+        720
+      ]
+    },
+    "l2.b": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "15053433bbebb456d55d34bf4032c05d42f4575ced6e71539e1e8bfed5a2281f",
+      "shape": [
+        720
+      ]
+    },
+    "l2.bias": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "39a68c2004ed4a20edb148b72e5aabd663f15cce54b30d2ea1c106e839761ed5",
+      "shape": [
+        720
+      ]
+    },
+    "l2.recurrent": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "ecc4ad2096d6ac7acce4aaacc212496d1553fe4b1a393774ae0760bdb3b1a07c",
+      "shape": [
+        720,
+        720
+      ]
+    },
+    "l2.tau_u_trainer.tau_max": {
+      "dtype": "torch.int64",
+      "parameter": false,
+      "requires_grad": false,
+      "sha256": "bf5b0e89f1caed18c8d6ff15d17ecc5c6e0c89510b4bc6d7b4b51d4ed30999cb",
+      "shape": []
+    },
+    "l2.tau_u_trainer.tau_min": {
+      "dtype": "torch.int64",
+      "parameter": false,
+      "requires_grad": false,
+      "sha256": "f13ee6ed54ea2aae9fc49a9faeb5da6e8ddef0e12ed5d30d35a624ae813e0485",
+      "shape": []
+    },
+    "l2.tau_u_trainer.weight": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "1fc91a8b9a562a0f85ef8f0e489efce587be6d4864b19309c74cce6327266cb3",
+      "shape": [
+        720
+      ]
+    },
+    "l2.tau_w_trainer.tau_max": {
+      "dtype": "torch.int64",
+      "parameter": false,
+      "requires_grad": false,
+      "sha256": "5fbbc50a5e0bc4e1bb5ea4bbacda5ae6709eff8e286fb002fee73a4913820fe9",
+      "shape": []
+    },
+    "l2.tau_w_trainer.tau_min": {
+      "dtype": "torch.int64",
+      "parameter": false,
+      "requires_grad": false,
+      "sha256": "3fe8adee83a670dd3131f667e963775b2256f3f59d5a996984eb47f8375efd7c",
+      "shape": []
+    },
+    "l2.tau_w_trainer.weight": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "563efcdc61cfee26a8afaff6e2721d7a2ac996f8670ffb3d9fbc4cc63645634a",
+      "shape": [
+        720
+      ]
+    },
+    "l2.thr": {
+      "dtype": "torch.float32",
+      "parameter": false,
+      "requires_grad": false,
+      "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+      "shape": [
+        1
+      ]
+    },
+    "l2.u0": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": false,
+      "sha256": "39a68c2004ed4a20edb148b72e5aabd663f15cce54b30d2ea1c106e839761ed5",
+      "shape": [
+        720
+      ]
+    },
+    "l2.weight": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "6deac34c3262f4b6c59a22d75e47d391085250690638c806315e1272def55bce",
+      "shape": [
+        720,
+        720
+      ]
+    },
+    "out_layer.bias": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "24045c10c12a89f4c11e3b88ea34558fcdf926a8c1008cd08cc33bc71407c774",
+      "shape": [
+        35
+      ]
+    },
+    "out_layer.tau_u_trainer.tau_max": {
+      "dtype": "torch.int64",
+      "parameter": false,
+      "requires_grad": false,
+      "sha256": "a4bd89d0c3e16ec03c5436d0b9b8eb1a934beeac808447459e5ee2f9a23e97d7",
+      "shape": []
+    },
+    "out_layer.tau_u_trainer.tau_min": {
+      "dtype": "torch.int64",
+      "parameter": false,
+      "requires_grad": false,
+      "sha256": "a4bd89d0c3e16ec03c5436d0b9b8eb1a934beeac808447459e5ee2f9a23e97d7",
+      "shape": []
+    },
+    "out_layer.tau_u_trainer.weight": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": false,
+      "sha256": "d8224e7b8fe4054215511ea179b13b5f8ad1b7c6a8b625f5c32c988d38ab2e8a",
+      "shape": [
+        35
+      ]
+    },
+    "out_layer.weight": {
+      "dtype": "torch.float32",
+      "parameter": true,
+      "requires_grad": true,
+      "sha256": "8a77d241d3fc58a9ae95fdf99554286f8a2b81e15663cea0245bfd6c0614b8bf",
+      "shape": [
+        35,
+        720
+      ]
+    }
+  },
+  "training_seed": 42,
+  "version": "fresh_initial_state_v1"
+}

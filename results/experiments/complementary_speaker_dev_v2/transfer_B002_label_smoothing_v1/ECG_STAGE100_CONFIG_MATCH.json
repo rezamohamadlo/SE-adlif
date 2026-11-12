@@ -1,0 +1,54 @@
+{
+  "shared_conditions_match": true,
+  "explicit_objective_and_identity_differences": {
+    "label_smoothing_epsilon": {
+      "baseline": 0,
+      "LS": 0.1
+    },
+    "paper_baseline_deviations": {
+      "baseline": [
+        "validation-only staged discovery; official tests disabled",
+        "batch_size=256; LR unchanged",
+        "full_schedule_epochs=400; explicit staged stops"
+      ],
+      "LS": [
+        "model_variant=LS_SE_adLIF",
+        "validation-only staged discovery; official tests disabled",
+        "batch_size=256; LR unchanged",
+        "full_schedule_epochs=400; explicit staged stops",
+        "training_objective=classification_label_smoothing_v1",
+        "label_smoothing_epsilon=0.1; training only",
+        "validation/inference use ordinary hard-label CE; train_hard_ce logged separately"
+      ]
+    },
+    "training_objective": {
+      "baseline": "classification",
+      "LS": "classification_label_smoothing_v1"
+    },
+    "run_mode": {
+      "baseline": "reference",
+      "LS": "ours"
+    },
+    "exp_name": {
+      "baseline": "ECG_SE_adLIF_2layer",
+      "LS": "ECG_LS_SE_adLIF_2layer"
+    },
+    "model_variant": {
+      "baseline": "SE_adLIF",
+      "LS": "LS_SE_adLIF"
+    },
+    "study_hypothesis": {
+      "baseline": "Fresh matched plain SE-adLIF control; no old weights.",
+      "LS": "B-only control for the required factorial ablation; no input gain."
+    },
+    "evaluation_protocol": {
+      "baseline": "label_smoothing_transfer_v1_ECG",
+      "LS": "label_smoothing_transfer_v1_ECG_classification_label_smoothing_v1"
+    },
+    "logdir": {
+      "baseline": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/SE_adLIF/ECG/seed_42",
+      "LS": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/LS_SE_adLIF/ECG/seed_42"
+    }
+  },
+  "all_other_canonical_config_fields_identical": true
+}

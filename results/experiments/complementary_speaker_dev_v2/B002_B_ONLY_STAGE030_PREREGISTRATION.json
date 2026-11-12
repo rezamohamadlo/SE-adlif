@@ -1,0 +1,29 @@
+{
+  "created_at": "2026-11-12T10:54:48.221003+03:30",
+  "status": "preregistered_before_B_only_training",
+  "idea": "B002_LABEL_SMOOTHING_ONLY_MECHANISM_CONTROL",
+  "evidence": "B002_PRIMARY_STAGE030_COMPARISON.json",
+  "hypothesis": "Test whether gain+LS improves beyond LS alone; distinguish a combination contribution from generic smoothing benefit. Do not assume synergy.",
+  "model": "LS_SE_adLIF",
+  "matched_controls": [
+    "SE_adLIF",
+    "GAIN_SE_adLIF",
+    "GAIN_LS_SE_adLIF"
+  ],
+  "control_reuse": "Exact same source and study, frozen split, seed, batch, preprocessing, optimization, fullschedule, screening ceiling and selection rule. Controls already verified; no weights reused for initialization.",
+  "training_seed": 42,
+  "split_manifest": "results/experiments/complementary_speaker_dev_v2/primary_0_3/SPLIT_MANIFEST.json",
+  "mode": "fresh random weights/optimizer",
+  "training_batch": 1024,
+  "validation_batch": 1024,
+  "epsilon": 0.1,
+  "full_schedule_epochs": 300,
+  "epoch_ceiling": 30,
+  "primary_metric": "Clean held-out-speaker validation accuracy, AB minus B",
+  "practical_threshold_pp": 0.5,
+  "support": "Ordinary hard-label validation CE and curves, compare both best checkpoint and late-epoch behavior. Loss/gap alone insufficient.",
+  "decision_rule": "If AB also exceeds B meaningfully and A comparison remains supportive, consider fixed-pair sensitivity. If B explains the gain or AB regresses, revise the complementarity claim; preserve all evidence. Extend matched arms only for explicit technical/learning evidence, not to obtain a favorable result.",
+  "estimated_compute": "About5minutes plus startup from measured9.5second epochs",
+  "prior_art": "Same established uniform label smoothing as B002; no novelty claim",
+  "official_test_opened": false
+}

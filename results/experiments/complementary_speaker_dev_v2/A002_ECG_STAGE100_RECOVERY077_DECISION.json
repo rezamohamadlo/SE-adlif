@@ -1,0 +1,22 @@
+{
+  "decision": "RESUME_INTERRUPTED_BOUNDED_STAGE_FROM_VERIFIED_OWN_LAST",
+  "observed": "Original launcher and all Python training children are absent in repeated native process checks. Baseline log/STATUS end at77completed epochs without a100epoch completion receipt; no Python exception appears in the retained stderr.",
+  "termination_cause": "Not established; do not infer an intentional user stop or a particular crash cause",
+  "baseline_checkpoint": "results/experiments/complementary_speaker_dev_v2/transfer_A002_gain_v1/SE_adLIF/ECG/seed_42/ckpt/last.ckpt",
+  "baseline_checkpoint_sha256": "cef2fd3b50201b81f55fe5f020e76cff6d9480da7c653f78ebdf6c7c39656880",
+  "checkpoint_epoch_index": 76,
+  "completed_epochs": 77,
+  "global_optimizer_steps": 154,
+  "optimizer_and_scheduler_present": true,
+  "distinct_validation_CSV_epochs": 77,
+  "mode": "Full resume, preserving model/optimizer/scheduler/epoch state; no weights-only restart, checkpoint substitution or hyperparameter changes",
+  "recovery_ceiling": 100,
+  "full_schedule_epochs": 400,
+  "candidate_checkpoint": "Own gain-only last checkpoint at50completed epochs; queued after baseline",
+  "preflight": "Both own-checkpoint resumes pass the existing runner dry run with source/config guards retained",
+  "deviation_from_predeclared_paired_pause_condition": true,
+  "interpretation_limit": "Planned50epoch boundary is shared, but baseline has an additional unplanned interruption at77. Report this operational deviation; do not claim identical restart histories, uninterrupted RNG equivalence or final architectural/generalization superiority from this exploratory screen. Require fresh frozen confirmation before final claims.",
+  "evidence_to_preserve": ["a002_ecg_stage100_stdout.log", "a002_ecg_stage100_stderr.log", "All stage050snapshots and existing raw CSV/JSONL histories"],
+  "new_logs": ["a002_ecg_stage100_recovery077_stdout.log", "a002_ecg_stage100_recovery077_stderr.log"],
+  "official_test_opened": false
+}

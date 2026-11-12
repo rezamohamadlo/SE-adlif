@@ -1,3 +1,249 @@
+# Current research-plan decision: results/experiments/complementary_speaker_dev_v2/ACTIVE_PLAN_DECISION.md
+# Speaker-disjoint development -> shortlist sensitivity -> SSC/ECG validation -> frozen fresh canonical comparisons -> official tests.
+# Preserve the active bounded SSC queue; no automatic extension or test evaluation.
+
+# ACTIVE C005 SSC initial10: fresh Baseline/RDropAonly, seed42.
+# Mean-membrane loss; train512/val1024; LR0.006unchanged; full40schedule,hard10ceiling.
+# Frozen280sourcefiles; source/data/calibrationverified; no SHD/calibrationweightsreuse orofficialtests.
+# PID20700maybeactive; inspectprocesses before recoverycommands.
+# Watch results/experiments/complementary_speaker_dev_v2/c005_dropout_ssc_v1/ssc_stage010_stdout.log
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF RDROP_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_C005_dropout_ssc_v1.yaml --stage-ceiling 10 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF RDROP_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_C005_dropout_ssc_v1.yaml --stage-ceiling 10
+
+# Earliercommands/status below are historical recovery references.
+# ACTIVE C005 fixed6/10 sensitivity: fresh Baseline/RDropAonly, seed42,30epochs.
+# Source278frozen; no primaryweightsreuse; no secondarytuning/extension; officialtests disabled.
+# PID21992maybeactive; inspectprocesses before recoverycommands.
+# Watch results/experiments/complementary_speaker_dev_v2/c005_sensitivity_stage030_stdout.log
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF RDROP_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C005_dropout_sensitivity_v1.yaml --stage-ceiling 30 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF RDROP_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C005_dropout_sensitivity_v1.yaml --stage-ceiling 30
+
+# Earliercommands/status below are historical recovery references.
+# ACTIVE C005 conditional A-only alpha0 two-pass control, fresh42,30epochs.
+# Initial4complete: Baseline82.14,RDrop83.85,RDrop+LS86.30,LS88.44; combinedincrementrejected.
+# ControlPID25064mayberunning; inspectprocesses before anyrecoverycommand.
+# Watch results/experiments/complementary_speaker_dev_v2/c005_a_only_control_stage030_stdout.log
+.\.ven\Scripts\python.exe runner.py --models TWO_PASS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C005_dropout_consistency_v1.yaml --stage-ceiling 30
+
+# Earliercommands/status are historical recovery references.
+# ACTIVE C005 primary0/3: fresh Baseline/R-Drop/R-Drop+LS/LS, seed42, initial30epochs.
+# Fixed alpha1 symmetricKL; two training forwards; ordinary single inference.
+# Shared batch1024/LR0.01/dropout0.15/full300schedule; officialtests disabled.
+# Agent queue PID9328 may be active: inspect processes before any recovery command.
+# Watch results/experiments/complementary_speaker_dev_v2/c005_primary_stage030_stdout.log
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF RDROP_SE_adLIF RDROP_LS_SE_adLIF LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C005_dropout_consistency_v1.yaml --stage-ceiling 30 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF RDROP_SE_adLIF RDROP_LS_SE_adLIF LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C005_dropout_consistency_v1.yaml --stage-ceiling 30
+
+# Earlier commands/status below are historical recovery references.
+# CURRENT: C004 primary30 COMPLETE; A004 rejected (-0.122327pp vs baseline; AB-B -1.100916pp).
+# No active study training at verified closure; no extension/transfer/test of this branch.
+# Commands below are historical recovery references, not the next experiment.
+
+# ACTIVE C004 primary0/3: fresh Baseline/RCN/RCN+LS/LS, seed42,30epoch initialscreen.
+# RCN=boundedzero-initper-framecurrentnormalization residual; no batch/timepooling or inputwarp.
+# Same1024batch/LR0.01/dropout0.15/full300schedule; initialtensor/RNGhashes; officialtestsoff.
+# CG/CG+LScontrols registered/calibratedbutnotlaunched; requiredifinterpretingpositiveRCNresults.
+# Agent-ownedqueuemaybeactive:inspectprocessesbeforeusingrecoverycommands;donotduplicate.
+# Watch results/experiments/complementary_speaker_dev_v2/c004_primary_stage030_stdout.log
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF RCN_SE_adLIF RCN_LS_SE_adLIF LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C004_current_norm_v1.yaml --stage-ceiling 30 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF RCN_SE_adLIF RCN_LS_SE_adLIF LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C004_current_norm_v1.yaml --stage-ceiling 30
+
+# Earliercompletedstagecommands/statusarehistorical/recoveryreferences.
+# CURRENT: C003 four-arm primary30 COMPLETE; static branch rejected under declaredscreen.
+# Baseline81.65%,static-only78.90%,static+LS86.61%,LS87.40%; actualinitialtensors/RNGmatched.
+# No75extension,secondarytuning ortransfer. Next: reviewdistinctinput-conditionedmechanism.
+# Officialtests remainoutside development. Earliercommandsarehistorical/recoveryreferences.
+
+# ACTIVE C003 primary0/3: fresh Baseline/static-only/static+LS/LS, seed42,30epoch screen.
+# Same1024batch/LR0.01/dropout0.15/full300schedule; no precision/determinism change or officialtests.
+# Opt-in INITIAL_MODEL_STATE.json records tensor/RNGhashes beforeupdates; no state/RNGmutation.
+# Agent-owned queue may be active: inspect processes before running recoverycommands; do notduplicate.
+# Watch results/experiments/complementary_speaker_dev_v2/c003_primary_stage030_stdout.log
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF STATIC_SE_adLIF STATIC_LS_SE_adLIF LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C003_static_factorial_v1.yaml --stage-ceiling 30 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF STATIC_SE_adLIF STATIC_LS_SE_adLIF LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C003_static_factorial_v1.yaml --stage-ceiling 30
+
+# Earlier completedstage commands/status are historical/recovery references.
+# CURRENT: C002 primary30 mechanism control COMPLETE; no local training at verified closure.
+# LS86.73%, static+LS87.77%, dynamic+LS87.03%; no dynamic advantage under this screen.
+# Next: fresh static four-arm primary comparison before transfer. No secondary tuning/test evaluation.
+# Prior launch/recovery commands below are historical.
+
+# ACTIVE C002 primary0/3 mechanism control: fresh LS/static-threshold+LS/dynamicDTH+LS.
+# Seed42, batch1024, LR0.01, dropout0.15,30epoch ceiling in300schedule; official tests disabled.
+# Static cell freezes both zeroactivitygains; bounded static thresholds still learn.
+# No6/10tuning or automatic transfer. Agent-owned queue may be active: do not duplicate.
+# Watch results/experiments/complementary_speaker_dev_v2/c002_primary_stage030_stdout.log
+.\.ven\Scripts\python.exe runner.py --models LS_SE_adLIF STATIC_LS_SE_adLIF DTH_LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C002_static_control_v1.yaml --stage-ceiling 30 --dry-run
+.\.ven\Scripts\python.exe runner.py --models LS_SE_adLIF STATIC_LS_SE_adLIF DTH_LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C002_static_control_v1.yaml --stage-ceiling 30
+
+# Prior commands/status are historical/recovery context.
+# CURRENT: C001 primary and fixed6/10sensitivity30 COMPLETE; no local training at verified closure.
+# Secondary: baseline85.68%, LS87.86%, combination88.27%; increment+0.40pp misses+0.5pp gate.
+# Do not tune/extend the secondary pair. Next: primary-only static/dynamic mechanism review.
+# Official tests excluded; prior commands below are historical/recovery context.
+
+# ACTIVE C001 fixed6/10sensitivity: fresh Baseline/LS/DTH+LS, seed42,30epochs.
+# Primary30: Baseline83.30%, DTH80.98%, DTH+LS86.91%, LS85.38%; validation only.
+# Combination-LS+1.53pp, uneven across speakers; DTH-alone failed. No synergy/test claim.
+# Only shortlisted frozen candidates; no primary-weight reuse, pair search or tuning.
+# Agent-owned queue may be active: inspect processes before using recovery commands.
+# Watch results/experiments/complementary_speaker_dev_v2/c001_sensitivity_stage030_stdout.log
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF DTH_LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C001_dth_ls_sensitivity_v1.yaml --stage-ceiling 30 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF DTH_LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C001_dth_ls_sensitivity_v1.yaml --stage-ceiling 30
+
+# Prior stage commands below are historical/recovery references.
+# ACTIVE C001 primary0/3: fresh Baseline/DTH/DTH+LS/LS, seed42,30epoch screen.
+# Existing agent-owned queue may be active: inspect processes before launch; do not duplicate.
+# Same split/batch1024/LR0.01/dropout0.15; full300schedule. Official tests disabled.
+# Two complementary mechanisms remain unproven; preregistered+0.5pp gates and B-only control.
+# Watch results/experiments/complementary_speaker_dev_v2/c001_primary_stage030_stdout.log
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF DTH_SE_adLIF DTH_LS_SE_adLIF LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C001_dth_ls_primary_v1.yaml --stage-ceiling 30 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF DTH_SE_adLIF DTH_LS_SE_adLIF LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_C001_dth_ls_primary_v1.yaml --stage-ceiling 30
+
+# Earlier completed-stage commands/status are historical/recovery context.
+# CURRENT: B002 ECG100 both arms COMPLETE; no local training process at verified closure.
+# Result: baseline77.48%, LS76.94% validation (-0.54pp); no official tests.
+# No automatic400epoch extension. Review a distinct hypothesis before the next fresh screen.
+# Earlier launch/recovery commands below are historical; do not run the whole file.
+
+# ACTIVE ECG100 STAGE: full resume both own last states, from completed50; seed42.
+# Baseline/LS-only; unchanged400epoch schedule, train256/validation64; tests disabled.
+# Inspect live processes before use. Do not duplicate the existing bounded queue.
+# Watch: results/experiments/complementary_speaker_dev_v2/b002_ls_ecg_stage100_stdout.log
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets ECG --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 100 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets ECG --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 100
+
+# Historical status/commands below describe earlier observations.
+# PLAN REVIEW 2026-11-12: no local Python training process observed; ECG50 both arms complete.
+# Active stage order: docs/experiments/complementary-mechanisms-study-v2.md#revised-stage-order
+# Screen ideas on frozen train-only SHD speakers0/3; shortlist-only sensitivity6/10.
+# Official tests excluded. Canonical SHD* requires later fresh four-arm training.
+# Commands below retain historical bounded-stage/recovery context; do not run the whole file.
+
+# CURRENT BOUNDED STUDY: fresh ECG Baseline/LS-only, seed42,50epoch screen.
+# SSC40complete: Baseline81.52%, LS81.96% (+0.43pp), below+0.5threshold; no furtherSSCtraining.
+# ECG current-source calibration passed: train256/validation64, full1301timesteps, LR0.01 unchanged.
+# Fixed588/30record split42; no patient-independence claim. Full400schedule retained.
+# Fresh weights/optimizer; no calibration/historical weights. Tests/TTA disabled.
+# Agent-owned queue may be active: inspect processes before launch; never duplicate.
+# Watch results/experiments/complementary_speaker_dev_v2/b002_ls_ecg_stage050_stdout.log
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets ECG --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 50 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets ECG --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 50
+
+# Completed SSC/speaker commands below are historical/recovery references.
+# CURRENT BOUNDED STUDY: SSC Baseline/LS-only full resume10->40, seed42.
+# SSC10: Baseline78.43%, LS78.81% (+0.38pp), inconclusive; LS ordinary CE worse.
+# Both best at10 and still learning; original40budget/scheduler retained unchanged.
+# Own last.ckpt resumes optimizer/scheduler/epoch, not weights-only or fresh training.
+# Prior10snapshots preserved. No official tests/TTA or source/config edits during queue.
+# Agent-owned queue may be active: inspect processes before launch; never duplicate.
+# Watch results/experiments/complementary_speaker_dev_v2/b002_ls_ssc_stage040_stdout.log
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 40 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 40
+
+# Completed SSC10/speaker commands below are historical/recovery references.
+# CURRENT BOUNDED STUDY: fresh matched SSC Baseline/LS-only, seed42,10epoch screen.
+# SHD primary LS-only+4.71pp; fixed6/10sensitivity+5.18pp (validation only).
+# Gain adds only0.18pp over LS in primary; two complementary ideas not established.
+# Current-objective real-data calibration passed; train/val1024, workers8, LR0.006 unchanged.
+# Full40epoch scheduler preserved; tests disabled; no calibration/old weights reused.
+# Agent-owned queue may be active. Inspect processes before launch; never duplicate.
+# Watch results/experiments/complementary_speaker_dev_v2/b002_ls_ssc_stage010_stdout.log
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 10 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_B002_transfer_v1.yaml --stage-ceiling 10
+
+# Completed sensitivity/primary commands below are historical/recovery references.
+# CURRENT BOUNDED STUDY: fixed6/10pair sensitivity, fresh Baseline/LS-only, seed42.
+# Primary four-arm30screen: Baseline81.83%, gain82.32%, LS86.54%, gain+LS86.73%.
+# Gain adds only0.18pp over LS; no complementarity established. Only LS shortlisted.
+# Agent-owned queue may be active: inspect processes before launch; never duplicate.
+# No pair/epsilon tuning, primary-weight reuse, official tests or TTA.
+# Watch results/experiments/complementary_speaker_dev_v2/b002_ls_sensitivity_stage030_stdout.log
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_B002_sensitivity_v1.yaml --stage-ceiling 30 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_B002_sensitivity_v1.yaml --stage-ceiling 30
+
+# Completed B-only/three-arm commands below are historical/recovery references.
+# CURRENT BOUNDED STUDY: fresh B-only label-smoothing control, primary0/3, seed42.
+# Three-arm30screen complete: Baseline81.83%, gain82.32%, gain+LS86.73% (validation only).
+# Do not duplicate the agent-owned B-only queue. Source/configs remain frozen.
+# Watch results/experiments/complementary_speaker_dev_v2/b002_b_only_stage030_stdout.log
+.\.ven\Scripts\python.exe runner.py --models LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_B002_primary_v1.yaml --stage-ceiling 30 --dry-run
+.\.ven\Scripts\python.exe runner.py --models LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_B002_primary_v1.yaml --stage-ceiling 30
+
+# Completed three-arm commands below are historical/recovery references.
+# ACTIVE NEXT BOUNDED STUDY: B002 primary speaker development, fresh Baseline/A/A+B.
+# Hold out0/3, train other8; seed42; matched batch1024/dropout0.15/LR0.01.
+# A=input gain; B=train-only label smoothing epsilon0.1; ordinary validation CE.
+# 30epoch ceiling within300epoch schedule. No official tests/TTA or old weights.
+# Agent-owned queue may be active: inspect processes before running; never duplicate.
+# Watch results/experiments/complementary_speaker_dev_v2/b002_primary_stage030_stdout.log
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF GAIN_SE_adLIF GAIN_LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_B002_primary_v1.yaml --stage-ceiling 30 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF GAIN_SE_adLIF GAIN_LS_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_B002_primary_v1.yaml --stage-ceiling 30
+
+# Commands below are historical/recovery references, not new launch requests.
+# Completed A002 ECG100screen: Baseline77.61%, gain78.69% (+1.08pp), validation only.
+# Screen50: Baseline35.56%, gain64.16%; both still underlearned, no final gain claim.
+# Baseline interrupted at77; full-state recovery logs: a002_ecg_stage100_recovery077_stdout.log.
+# Extra baseline restart is recorded as an operational deviation; screen remains exploratory.
+# Train256 / validation64 / LR0.01 / dropout0.15; full400epoch schedule retained.
+# Calibration passed on real full1301step data; states discarded. No official tests/TTA.
+# Queue is terminal; commands below are recovery/reference, not a new training request.
+# Next: B002label-smoothing primary-speaker screen after implementation and non-training checks.
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF GAIN_SE_adLIF --datasets ECG --seeds 42 --study-file config/studies/complementary_transfer_A002_gain_v1.yaml --stage-ceiling 100 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF GAIN_SE_adLIF --datasets ECG --seeds 42 --study-file config/studies/complementary_transfer_A002_gain_v1.yaml --stage-ceiling 100
+
+# A002 SSC transfer completed40epochs: Baseline81.45%, gain-only81.55% (+0.10pp).
+# Validation only; below practical+0.5pp threshold. No official test data or TTA.
+# Commands below are completed-stage recovery/reference; do not retrain completed jobs.
+# Next: preregistered ECG calibration, then fresh matched50epoch screen after it passes.
+# Calibration batch1024/workers8; LR0.006unchanged; full40epoch scheduler retained.
+# The SSC queue is terminal. No duplicate launcher is needed.
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF GAIN_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_transfer_A002_gain_v1.yaml --stage-ceiling 40 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF GAIN_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_transfer_A002_gain_v1.yaml --stage-ceiling 40
+
+# Completed pair-sensitivity commands below are historical/source-specific.
+# Active next check: only primary-shortlisted FIR and gain-only, plus fresh baseline.
+# Predefined6/10speaker pair; all weights fresh; same30epoch budget; no tuning/test.
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF GAIN_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_gain_sensitivity_A001_v1.yaml --stage-ceiling 30 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF GAIN_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_gain_sensitivity_A001_v1.yaml --stage-ceiling 30
+
+# Completed primary gain-control commands below are historical/source-specific.
+# Next bounded stage: gain-only mechanism control after completed SSC40.
+# SSC40: no A improvement; investigate on frozen primary0/3, no pair search/test.
+# All3arms start fresh under the updated isolated-control protocol, seed42,30epochs.
+# Do not launch a duplicate while the agent-owned queue is active.
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF GAIN_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_gain_control_A001_v1.yaml --stage-ceiling 30 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF GAIN_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_gain_control_A001_v1.yaml --stage-ceiling 30
+
+# Completed SSC commands below are historical. Source was snapshotted before revision.
+# Do not bypass changed-source guards or reuse old paths for new settings.
+# Active SSC extension: preliminary10epoch gain+0.23pp was inconclusive.
+# Both arms fully resume their own last.ckpt to40; optimizer/scheduler restored.
+# Do not launch a duplicate while the queue is active. No official tests.
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_transfer_A001_v2.yaml --stage-ceiling 40 --dry-run
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_transfer_A001_v2.yaml --stage-ceiling 40
+
+# Completed10epoch screen commands below; preserve as historical/recovery references.
+# Active stage: A001 transfer after completed primary + fixed-pair SHD development.
+# Both SHD pairs favored A; event-deletion B001 was unpromising. No official tests.
+# SSC training and validation batches1024 separately calibrated; LR unchanged.
+# Study authorization permits agent execution; do not launch a second copy of an active queue.
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_transfer_A001_v2.yaml --stage-ceiling 10 --dry-run
+# Fresh matched10epoch screen, retaining full40epoch scheduler metadata:
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_transfer_A001_v2.yaml --stage-ceiling 10
+
+# Completed SHD development commands below are historical/recovery references.
+# Their original source snapshot is preserved; do not bypass changed-source guards.
+# Active plan: docs/experiments/complementary-mechanisms-study-v2.md
+# Speaker-disjoint DEVELOPMENT, seed 42: fresh Baseline / A / A+B; no official tests.
+# Local environment is .ven; replace with .venv on PCs using .venv.
+# Non-training preflight:
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF FIR_THIN_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_speaker_dev_v2.yaml --stage-ceiling 30 --dry-run
+# User launches the bounded primary screen only after preflight:
+.\.ven\Scripts\python.exe runner.py --models SE_adLIF FIR_SE_adLIF FIR_THIN_SE_adLIF --datasets SHD --seeds 42 --study-file config/studies/complementary_speaker_dev_v2.yaml --stage-ceiling 30
+# Do not launch sensitivity or canonical final comparisons before their stage gates.
+
+# Historical analysis pilot commands below; not the current discovery training stage.
 # Bounded SHD validation-only AMT/MT analysis pilot: run ONE command per PC.
 # No training, official-test evaluation, TTA, or automatic next round.
 # Pull the same commit on all PCs. Transfer ignored data/checkpoints/metrics separately.

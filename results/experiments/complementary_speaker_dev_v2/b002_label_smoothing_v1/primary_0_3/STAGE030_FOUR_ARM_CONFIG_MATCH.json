@@ -1,0 +1,25 @@
+{
+  "models": [
+    "SE_adLIF",
+    "GAIN_SE_adLIF",
+    "LS_SE_adLIF",
+    "GAIN_LS_SE_adLIF"
+  ],
+  "status": "verified",
+  "allowed_differences": [
+    "evaluation_protocol",
+    "exp_name",
+    "input_fir",
+    "label_smoothing_epsilon",
+    "logdir",
+    "model_variant",
+    "paper_baseline_deviations",
+    "run_mode",
+    "study_arm",
+    "study_hypothesis",
+    "training_objective"
+  ],
+  "all_other_config_fields_equal": true,
+  "all_model_source_identities_equal": true,
+  "training_objective_difference_intended": true
+}

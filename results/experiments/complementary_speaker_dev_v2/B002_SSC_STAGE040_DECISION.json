@@ -1,0 +1,28 @@
+{
+  "decided_at": "2026-11-12T11:59:27.186211+03:30",
+  "decision": "EXTEND_INCONCLUSIVE_MATCHED10_TO40",
+  "evidence": "B002_SSC_STAGE010_COMPARISON.json",
+  "reason": "Both best at10, accuracy gained1.44/1.12pp from8to10 and ordinary CE fell. LS+0.380725pp below+0.5threshold and CE worse, so no positive transfer claim. Original optional40stage is justified by ongoing learning, not success assumed.",
+  "mode": "full resume each own last.ckpt; optimizer/scheduler/epoch restored",
+  "resume": [
+    {
+      "model": "SE_adLIF",
+      "resume_checkpoint": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/SE_adLIF/SSC/seed_42/ckpt/last.ckpt",
+      "sha256": "3e471b022500dd8d3adfdb0f558f8a250cf0fcf96202a9729c6dcc5491f4851a"
+    },
+    {
+      "model": "LS_SE_adLIF",
+      "resume_checkpoint": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/LS_SE_adLIF/SSC/seed_42/ckpt/last.ckpt",
+      "sha256": "72accdb47cf9fcd87f318b8a3019ea2ca9a71930638c95f397258a5ddd57276f"
+    }
+  ],
+  "previous_ceiling": 10,
+  "new_ceiling": 40,
+  "full_schedule_epochs": 40,
+  "source_and_settings_changes": false,
+  "planned_pause_both_arms_at10": true,
+  "exact_uninterrupted_RNG_equivalence_claimed": false,
+  "estimated_remaining_compute": "About94minutes plus Windows startup for2x30epochs from93.5sec/epoch; actual ETA measured after resume",
+  "stopping_rule": "Exact40ceiling, no extensions beyondfull40to obtain favorable score. No test-based selection.",
+  "official_test_opened": false
+}

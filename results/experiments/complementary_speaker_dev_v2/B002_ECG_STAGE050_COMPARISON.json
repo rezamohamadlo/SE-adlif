@@ -1,0 +1,70 @@
+{
+  "status": "verified_completed_matched_ECG50_screen_not_full_budget",
+  "training_seed": 42,
+  "independent_training_seeds": 1,
+  "completed_epochs_per_arm": 50,
+  "full_budget": 400,
+  "records": [
+    {
+      "model": "SE_adLIF",
+      "selected_validation_accuracy": 0.35564950108528137,
+      "selected_completed_epoch": 50,
+      "online_training_accuracy_in_selected_epoch": 0.361963152885437,
+      "validation_loss_at_selection": 1.4227224588394165,
+      "online_training_hard_ce_at_selection": 1.3963847160339355,
+      "training_objective_loss_at_selection": 1.3963847160339355,
+      "macro_class_recall": 0.2554613834950135,
+      "class_recall": [
+        0.035533653222668916,
+        0.006846846846846847,
+        0.4688715953307393,
+        0.0,
+        0.08106935161878309,
+        0.9404468539510432
+      ],
+      "last10_validation_mean": 0.32534717321395873,
+      "epoch41_to50_accuracy_gain_pp": 4.378682374954224,
+      "epoch41_to50_loss_change": -0.14950871467590332,
+      "final_online_training_accuracy": 0.361963152885437,
+      "receipt": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/SE_adLIF/ECG/seed_42/stages/050/RESULT.json",
+      "last_checkpoint": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/SE_adLIF/ECG/seed_42/stages/050/last.ckpt",
+      "last_checkpoint_sha256": "e8fa8c63282147efd1361bd01fdafe2054d1f50537b8d722cc9f660af1c3d183"
+    },
+    {
+      "model": "LS_SE_adLIF",
+      "selected_validation_accuracy": 0.35375353693962097,
+      "selected_completed_epoch": 50,
+      "online_training_accuracy_in_selected_epoch": 0.3613956868648529,
+      "validation_loss_at_selection": 1.4349689483642578,
+      "online_training_hard_ce_at_selection": 1.4108028411865234,
+      "training_objective_loss_at_selection": 1.4779746532440186,
+      "macro_class_recall": 0.24875637028774236,
+      "class_recall": [
+        0.045130333290105046,
+        0.004324324324324324,
+        0.42140077821011673,
+        0.0,
+        0.11327141741168302,
+        0.9084113684902251
+      ],
+      "last10_validation_mean": 0.3249782234430313,
+      "epoch41_to50_accuracy_gain_pp": 4.189085960388184,
+      "epoch41_to50_loss_change": -0.14097285270690918,
+      "final_online_training_accuracy": 0.3613956868648529,
+      "receipt": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/LS_SE_adLIF/ECG/seed_42/stages/050/RESULT.json",
+      "last_checkpoint": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/LS_SE_adLIF/ECG/seed_42/stages/050/last.ckpt",
+      "last_checkpoint_sha256": "245a3c94f471e858360241de1439a1a953336e89691803bfd271d64645e4ab12"
+    }
+  ],
+  "LS_minus_Baseline_pp": -0.18959641456604004,
+  "practical_threshold_pp": 1.0,
+  "threshold_value_unchanged_since_preregistration": true,
+  "shared_settings_verified": true,
+  "decision": "EXTEND_INCONCLUSIVE_UNDERLEARNED_MATCHED50_TO100",
+  "interpretation": "LS is nominally worse at50, not a gain. Both best at final50, online train~36% and macroclass recall~25% indicate poorly learned controls, while late accuracy and ordinary CE improve. Extend within predeclared100stage to assess learning, not to claim early generalization. No new B/400run or final replication.",
+  "training_accuracy_definition": "Logged online epoch accuracy with dropout active and changing weights, not clean fixed-checkpoint reevaluation.",
+  "patient_independence_established": false,
+  "timesteps_are_independent_samples": false,
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

@@ -1,0 +1,9 @@
+{
+  "registered_at": "2026-11-12T11:17:49.820341+00:00",
+  "source": "results/experiments/complementary_speaker_dev_v2/C001_SHD_CONFIRMATION_SOURCE.txt",
+  "source_sha256": "7350e4687255ae7875b5ae19da8aaf69defb2b9ff687375fc13e6d1539dc2233",
+  "scope": "All4fresh disposable models, seed117, primary-training-only batch1024including128longest,2warmup+3measuredrealoptimizersteps; discard states. Full frozen validation batch256/1024numerical parity; no idea selection.",
+  "acceptance": "finite losses/gradients,>=15percentreserved-memoryheadroom,0changedvalidationpredictions,CEdifference<1e-5. Do not launch main if calibration fails.",
+  "main_training_allowed_after": "Correctness tests, calibration, portable runner preflight and source freeze.",
+  "official_test_allowed": false
+}

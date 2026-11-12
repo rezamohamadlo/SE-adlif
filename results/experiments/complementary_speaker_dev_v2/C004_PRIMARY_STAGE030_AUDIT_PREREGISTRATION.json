@@ -1,0 +1,10 @@
+{
+  "registered_at": "2026-11-12T13:55:59.790369+00:00",
+  "audit_source": "results/experiments/complementary_speaker_dev_v2/C004_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+  "audit_source_sha256": "0699dd3b5c7d00badd1f396cea732c818f9cb294c8cbf09caf607deac2d08c90",
+  "execution": "Deferred until all four stage receipts verified complete and launcher/training children terminal; no GPU diagnostic alongside training.",
+  "scope": "All four selected clean primary0/3 validation checkpoints; full configs/source/initial tensor and RNG evidence; 30 unique epoch rows; checkpoint epoch/optimizer/scheduler/hash accounting; original row labels; ordinary CE and predictions; per-speaker and paired descriptive errors; curves; all factorial contrasts.",
+  "current_normalization_diagnostic": "Record finite learned gates/epsilon/mode. Gate values do not characterize effective normalization scales. Any positive mechanism-specific interpretation requires registered gain controls plus scale diagnostics.",
+  "selection": "No automatic selection/extension/transfer; apply original 0.5pp preregistered contrasts with ordinary CE and curves. One seed, tuned two-speaker pair,30/300 epochs; no significance or synergy assertion.",
+  "official_test_evaluated": false
+}

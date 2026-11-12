@@ -1,0 +1,80 @@
+{
+  "all_timestep_targets_onehot": false,
+  "channels": 4,
+  "class_timestep_counts": [
+    166315,
+    49485,
+    46503,
+    35776,
+    242792,
+    263147
+  ],
+  "encoded_values": [
+    -1,
+    0,
+    1
+  ],
+  "fields": {
+    "max_i": {
+      "dtype": "uint16",
+      "shape": [
+        618,
+        1
+      ]
+    },
+    "t": {
+      "dtype": "uint16",
+      "shape": [
+        618,
+        1301
+      ]
+    },
+    "x": {
+      "dtype": "int16",
+      "shape": [
+        618,
+        1301,
+        4
+      ]
+    },
+    "y": {
+      "dtype": "uint8",
+      "shape": [
+        618,
+        1301,
+        6
+      ]
+    }
+  },
+  "identical_input_records_across_train_validation": 0,
+  "input_values": {
+    "-1": 618,
+    "0": 2966682,
+    "1": 248772
+  },
+  "metadata_max_i_minmax": [
+    1301,
+    1301
+  ],
+  "negative_channels": [
+    0
+  ],
+  "negative_timestep_minmax": [
+    1300,
+    1300
+  ],
+  "official_test_opened": false,
+  "path": "data/QTDB/QTDB_train.mat",
+  "patient_limitation": "No original patient/record identifier fields. Established row split is verified, not patient independence.",
+  "patient_separation_verified": false,
+  "record_ids_present": false,
+  "record_rows": 618,
+  "sha256": "72d1a10c96f1540880447e07256835d66da419c0b34f3dff495731a7928c5bc7",
+  "source": "https://raw.githubusercontent.com/byin-cwi/Efficient-spiking-networks/main/data/QTDB_train.mat",
+  "split_row_indices_disjoint": true,
+  "split_seed": 42,
+  "task_policy": "Preserve existing full-length per-timestep labels and masks, including their padding semantics; max_i is not used to truncate or inflate accuracy.",
+  "timesteps_per_row": 1301,
+  "training_rows": 588,
+  "validation_rows": 30
+}

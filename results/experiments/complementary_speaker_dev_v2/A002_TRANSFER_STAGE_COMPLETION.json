@@ -1,0 +1,23 @@
+{
+  "status": "discovery_transfer_stage_closed_no_final_test_claim",
+  "completed_at": "2026-11-12T09:56:04.980885+03:30",
+  "candidate": "A002_INPUT_GAIN",
+  "source_snapshot": "results/experiments/complementary_speaker_dev_v2/A002_SSC_SOURCE_SNAPSHOT.json",
+  "source_archive_reused_after_all236file_hashes_verified_unchanged": true,
+  "SHD_primary_evidence": "GAIN_CONTROL_STAGE030_COMPARISON.json",
+  "SHD_predefined_pair_sensitivity_evidence": "GAIN_SENSITIVITY_STAGE030_COMPARISON.json",
+  "SSC_evidence": "A002_SSC_STAGE040_COMPARISON.json",
+  "SSC_delta_pp": 0.1001894474029541,
+  "SSC_practical_gain_established": false,
+  "ECG_evidence": "A002_ECG_STAGE100_COMPARISON.json",
+  "ECG_delta_pp": 1.0812163352966309,
+  "ECG_epochs_completed": 100,
+  "ECG_full_budget": 400,
+  "ECG_extra_baseline_pause77": true,
+  "ECG_interpretation": "Preliminary nominal accuracy/loss advantage, not identical restart histories or final generalization evidence",
+  "independent_training_seeds": 1,
+  "ordinary_official_test_evaluated": false,
+  "final_four_arm_ablation_complete": false,
+  "two_complementary_ideas_established": false,
+  "next_action": "Preregister and implement B002 training-only label smoothing on fresh matched primary-speaker Baseline/A/A+B controls; no automatic400epoch training or test access."
+}

@@ -1,0 +1,28 @@
+{
+  "verified_at": "2026-11-12T16:33:17.309659+00:00",
+  "baseline_completed_epochs": 10,
+  "baseline_selected_completed_epoch": 10,
+  "baseline_selected_validation_accuracy": 0.7971144914627075,
+  "baseline_checkpoint_hashes_verified": true,
+  "candidate": "RDROP_SE_adLIF",
+  "candidate_start": "fresh",
+  "actual_initial_full_tensors_RNG_and_execution_settings_match": true,
+  "common_initial_model_state_sha256": "a38c160a83af5c7be00a313f02f39b9687b6fee1c11c2ca027a97a9395952296",
+  "verified_fields": [
+    "model_state_sha256",
+    "tensor_count",
+    "cpu_rng_sha256",
+    "cuda_rng_sha256",
+    "precision",
+    "float32_matmul_precision",
+    "deterministic_algorithms",
+    "cuda_allow_tf32",
+    "cublas_workspace_config"
+  ],
+  "source280files_and11protocol_artifacts_unchanged": true,
+  "launcher_pid": 20700,
+  "candidate_training_pid_at_inspection": 20572,
+  "candidate_wrapper_pid": 25964,
+  "official_tests_evaluated": false,
+  "decision": "Await candidate10completion before audit and continuation decision; noautomatic40extension."
+}

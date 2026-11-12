@@ -1,0 +1,22 @@
+{
+  "status": "isolated_pure_accounting_verified_not_integrated",
+  "patch": "results/experiments/complementary_speaker_dev_v2/cost_draft/SPEAKER_GENERALIZATION_DRAFT.patch",
+  "patch_sha256": "321d4641823c9246cd600b602c3e9a85f9bdd75facc4e71152b7447ef97f06f6",
+  "normalized_source_sha256": {
+    "module/speaker_generalization.py": "bddc33a7cd1d5b30a6d48ad2be5fa92703fb0b08f568f8315447e602b21fc31a",
+    "tests/test_speaker_generalization.py": "de3a3d0d7a121b232e7a15f1e53ad8051531266b62c1ca192614c27c5520b489"
+  },
+  "accounting_tests_passed": 8,
+  "combined_guard_and_accounting_tests_passed": 31,
+  "training_executed_for_tests": false,
+  "official_test_opened": false,
+  "active_source_changed": false,
+  "remaining": [
+    "Connect a read-only collector to the exact ordinary inference outputs without an extra forward or changed aggregation",
+    "Verify sequential sampler/row identity and one valid classification target per SHD recording",
+    "Check collected labels against original-row metadata only after authorized frozen test access",
+    "Derive actual fitting speaker IDs from verified fitting indices, never from presumed speaker lists",
+    "Compare aggregate counts with recorded Lightning test accuracy and persist per-record provenance",
+    "Apply and test actual-checkout integration only after source-guarded training queue closes"
+  ]
+}

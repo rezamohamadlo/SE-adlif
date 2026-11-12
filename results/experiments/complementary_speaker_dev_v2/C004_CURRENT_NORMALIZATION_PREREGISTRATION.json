@@ -1,0 +1,74 @@
+{
+  "registered_at": "2026-11-12T13:29:22.796442+00:00",
+  "status": "registered_before_new_model_implementation",
+  "idea_id": "A004_B002_RESIDUAL_CURRENT_NORMALIZATION",
+  "motivation": "A003static-only andstatic+LS failedmatched30screen; dynamicDTHincrementwasweak/notreproduced. A002learnedinputgain didnotestablishmulti-datasettransfer. Testinput-conditionedfeaturedispersion ratherthananotherfixedgain/threshold. Speaker-dependentcurrentvariability is a hypothesis,notanestablishedmeasuredcause.",
+  "A": "Per-sampleper-framefeedforwardcurrent c=linear(x,W,b); d=c-b; c_new=c+tanh(g)*LayerNorm(d,eps1e-5,non-affine,lastfeatureaxis),gscalarzero-initializedineachhiddenlayer. RecurrentcurrentandSEupdateunchanged.",
+  "B": "Existingtrain-onlyuniformlabelsmoothingepsilon0.1;ordinaryhard-labelCEinvalidation.",
+  "padding_and_causality": "No poolingacrossbatch/time/future;no warping/truncation/maskchanges. Forzero input,d=0andnonaffineLN=0,sofeedforwardcurrentremainsbiasasinthebaseline;quiet/paddingnotusedtoinferduration.",
+  "gain_only_control": "Same2scalarparameters/init, c_new=c+tanh(g)*(c-b) withno normalization. Registerplain/smoothedcontrols before seeingresults. Ifnormadvances,compareagainstmatchedcurrentgaincontrol beforeattributingbenefittosample-dependentnormalization; earlierper-channelinputgainisnotparameter-matched.",
+  "prior_art": [
+    {
+      "title": "Ba et al., Layer Normalization,2016",
+      "url": "https://arxiv.org/abs/1607.06450",
+      "distinction": "Per-case/per-timestepnormalizationisestablished. Hereanon-affinenormalizedfeedforward-currentbranchisaddedresidually;notreplacementofallcurrent."
+    },
+    {
+      "title": "Bachlechner et al., ReZero,2020/2021",
+      "url": "https://arxiv.org/abs/2003.04887",
+      "distinction": "Zero-initializedresidualgatesareestablished. No dynamicalisometryguaranteeclaimedforthisSNN."
+    },
+    {
+      "title": "Zheng et al., Going Deeper With Directly-Trained Larger Spiking Neural Networks,2020/2021",
+      "url": "https://arxiv.org/abs/2011.05280",
+      "distinction": "SNNnormalizationispriorart;thisstudyusescausalper-framefeatures,no batch/timepopulationstatistics."
+    }
+  ],
+  "duplicate_audit": "No LayerNorm/RMSNorm/currentnormalizationinmodels/config/module/functional. SA/VS-MTchangeadaptationstrengths;AMTactivitygatesmixmemory;LG-DTHuseslocal/globalactivitytraces,notfeedforwardcurrentnormalization.",
+  "initial_arms": [
+    "SE_adLIF",
+    "RCN_SE_adLIF",
+    "RCN_LS_SE_adLIF",
+    "LS_SE_adLIF"
+  ],
+  "conditional_registered_controls": [
+    "CG_SE_adLIF",
+    "CG_LS_SE_adLIF"
+  ],
+  "hypothesis": "A bounded normalized residual may reduceundesiredsensitivitytocurrent-magnitudedifferenceswhile retainingrawmagnitude, andmay complementconfidence regularization. It may instead amplify noise or loseusefullevelinformation;desiredgainnotassumed.",
+  "controls": "Freshmatchedall4,same source/split/settings;no oldcheckpoint/calibrationweights. Initialtensor/RNGhashesrecorded.",
+  "validation_speakers": [
+    0,
+    3
+  ],
+  "training_seed": 42,
+  "split_seed": 42,
+  "batch_size": 1024,
+  "validation_batch_size": 1024,
+  "LR": 0.01,
+  "dropout": 0.15,
+  "precision": "32-true/high",
+  "execution_settings_changed": false,
+  "ceilings": [
+    30,
+    75
+  ],
+  "full_scheduler_budget": 300,
+  "primary_metric": "cleanheld-out-speakeraccuracy",
+  "practical_threshold_pp": 0.5,
+  "decision_rule": "AssessA-baseline,AB-AandAB-LSat0.5pp supportedbyordinaryCE/curves;reportallcontrasts/interaction. No gap-onlysuccess,forcedsynergyorloss-onlyselection. Gain-onlycontrols required before anynormalization-specificinterpretationofpositivegain. Extendmatchedcomparisononlyifgenuinelyimproving/inconclusive.",
+  "screen_cost_minutes_estimate": [
+    20,
+    40
+  ],
+  "screen_cost_caveat": "Per-timestepnormalizationoverheadnotyetbenchmarked;verifyrealbatchthroughput/memorybeforemainlaunch.",
+  "secondary_and_transfer": "Onlyprimaryshortlistedfrozenideas mayenterpredefined6/10diagnosticfresh orSSC/ECGverifiedvalidation;no pairtuning. No fulltrainingunderbothprotocolsforeveryidea.",
+  "official_test_allowed": false,
+  "output_root": "results/experiments/complementary_speaker_dev_v2/c004_current_normalization_v1/primary_0_3",
+  "full_goal_complete": false,
+  "pretraining_control_range_clarification": {
+    "recorded_at": "2026-11-12T13:46:23.070909+00:00",
+    "definition_changed": false,
+    "reason": "Boundedgain-onlycoefficient0..2doesnotcoverallnormalizationeffective scales; inspect learnedscaleanduseaseparatelyfrozencountercontrolifneededbeforemechanism-specificattribution. Necessarycontrolnotcausalproof. No metric/threshold/formulachange."
+  }
+}

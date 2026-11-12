@@ -1,0 +1,301 @@
+diff --git a/module/shd_final_provenance.py b/module/shd_final_provenance.py
+new file mode 100644
+--- /dev/null
++++ b/module/shd_final_provenance.py
+@@ -0,0 +1,143 @@
++"""Draft final SHD* provenance guards; never fit models or choose candidates.
++
++Use only after the final evaluation gate. Membership uses official-training
++metadata supplied by the caller. Loader inspection may call dataset.__len__;
++it therefore belongs after authorization to access the final cohort.
++"""
++import hashlib
++import json
++import math
++from numbers import Integral
++from pathlib import Path
++import re
++from collections import Counter
++
++import torch
++from torch.utils.data import DataLoader, BatchSampler, SequentialSampler
++
++
++def _integers(values, name):
++    values = list(values)
++    if any(isinstance(x, bool) or not isinstance(x, Integral) for x in values):
++        raise ValueError(f'{name} must contain integer IDs')
++    return [int(x) for x in values]
++
++
++def verify_canonical_fitting_membership(
++    manifest_bytes, expected_manifest_sha256, source_sha256,
++    train_labels, train_speakers, fitting_indices, validation_indices, cfg,
++):
++    """Bind actual fitting indices to frozen bytes and training-file identity.
++
++    The caller hashes the actual HDF5 source and reads its metadata. This
++    helper cannot independently prove where supplied arrays came from.
++    Regenerating the split here verifies the fixed algorithm, not a new split.
++    """
++    if (not isinstance(manifest_bytes, bytes)
++            or not isinstance(expected_manifest_sha256, str)
++            or re.fullmatch('[0-9a-f]{64}', expected_manifest_sha256) is None
++            or hashlib.sha256(manifest_bytes).hexdigest() != expected_manifest_sha256):
++        raise ValueError('Canonical manifest bytes differ from the frozen digest')
++    manifest = json.loads(manifest_bytes)
++    dataset = cfg.get('dataset', {})
++    if (manifest.get('version') != 'canonical_shd_split_v1'
++            or manifest.get('dataset_label') != 'SHD*'
++            or manifest.get('validate_on') != .2 or manifest.get('split_seed') != 42
++            or manifest.get('official_test_opened') is not False
++            or dataset.get('validate_on') != .2 or dataset.get('random_seed') != 42
++            or dataset.get('additional_test_set_validation', False)
++            or dataset.get('speaker_split_manifest')
++            or dataset.get('speaker_split_fingerprint')
++            or cfg.get('init_ckpt_path')):
++        raise ValueError('Require fresh canonical SHD* fitting protocol, not speaker exposure or test selection')
++    if (not isinstance(source_sha256, str)
++            or re.fullmatch('[0-9a-f]{64}', source_sha256) is None
++            or manifest.get('source_sha256') != source_sha256):
++        raise ValueError('Training-file identity differs from the frozen split')
++    labels = _integers(train_labels, 'training labels')
++    speakers = _integers(train_speakers, 'training speakers')
++    fitting = _integers(fitting_indices, 'fitting indices')
++    validation = _integers(validation_indices, 'validation indices')
++    if (not labels or len(labels) != len(speakers)
++            or any(not 0 <= x < 20 for x in labels) or any(x < 0 for x in speakers)):
++        raise ValueError('Invalid aligned training-file labels/speakers')
++    valid_count = math.floor(len(labels) * .2)
++    order = torch.randperm(len(labels), generator=torch.Generator().manual_seed(42)).tolist()
++    expected_fit, expected_val = order[:-valid_count], order[-valid_count:]
++    if (not valid_count or fitting != expected_fit or validation != expected_val
++            or manifest.get('train', {}).get('indices') != expected_fit
++            or manifest.get('validation', {}).get('indices') != expected_val):
++        raise ValueError('Actual fitting/validation indices differ from the frozen canonical algorithm')
++    if any({labels[i] for i in indices} != set(range(20)) for indices in (fitting, validation)):
++        raise ValueError('Canonical fitting and validation must retain all20classes')
++    for name, indices in (('train', fitting), ('validation', validation)):
++        subset = manifest[name]
++        counts = Counter(labels[i] for i in indices)
++        speaker_counts = Counter(speakers[i] for i in indices)
++        if (subset.get('record_count') != len(indices)
++                or subset.get('class_counts') != [counts[i] for i in range(20)]
++                or subset.get('speaker_ids') != sorted(speaker_counts)
++                or subset.get('per_speaker_record_counts') != {str(k): v for k, v in speaker_counts.items()}):
++            raise ValueError('Frozen split counts or speaker membership disagree with original training rows')
++    return dict(
++        fitting_records=len(fitting), validation_records=len(validation),
++        fitting_speaker_ids=sorted({speakers[i] for i in fitting}),
++        training_file_speaker_ids=sorted(set(speakers)),
++        manifest_sha256=expected_manifest_sha256, training_source_sha256=source_sha256,
++        declared_split_fingerprint=manifest.get('fingerprint'),
++        split_seed=42, dataset_label='SHD*',
++    )
++
++
++def verify_original_row_loader(
++    loader, raw_dataset, expected_file, expected_records, expected_batch_size,
++    expected_transform,
++):
++    """Require complete unwrapped original-row SHD evaluation.
++
++    Existing disk caches are deliberately not accepted by this draft path.
++    The future evaluator must supply an uncached loader retaining the frozen
++    preprocessing/collation/batch settings, after checking file SHA/metadata.
++    No dataset item or model forward is requested by this guard.
++    """
++    from datasets.shd import SHDWrapper
++    from datasets.utils.pad_tensors import PadTensors
++
++    for value in (expected_records, expected_batch_size):
++        if isinstance(value, bool) or not isinstance(value, Integral) or value < 1:
++            raise ValueError('Expected positive recording count and batch size')
++    if (type(loader) is not DataLoader or type(raw_dataset) is not SHDWrapper
++            or loader.dataset is not raw_dataset):
++        raise ValueError('Require the original SHD dataset, without cache/subset/reordering wrappers')
++    if raw_dataset.data_filename != 'shd_test.h5' or Path(expected_file).name != 'shd_test.h5':
++        raise ValueError('Final loader must refer to the official-test filename')
++    try:
++        actual_file = Path(raw_dataset.location_on_system, raw_dataset.data_filename).resolve(strict=True)
++        frozen_file = Path(expected_file).resolve(strict=True)
++    except OSError as exc:
++        raise ValueError('Missing original HDF5 source') from exc
++    if actual_file != frozen_file:
++        raise ValueError('Loader refers to a different original HDF5 source')
++    if (raw_dataset.target_transform is not None or expected_transform is None
++            or raw_dataset.transform is not expected_transform):
++        raise ValueError('Loader input/label transforms differ from the verified clean pipeline')
++    if (type(loader.sampler) is not SequentialSampler
++            or loader.sampler.data_source is not raw_dataset
++            or type(loader.batch_sampler) is not BatchSampler
++            or loader.batch_sampler.sampler is not loader.sampler
++            or loader.drop_last or loader.batch_sampler.drop_last
++            or loader.batch_size != expected_batch_size
++            or loader.batch_sampler.batch_size != expected_batch_size):
++        raise ValueError('Require sequential exhaustive sampling at the frozen batch size')
++    collate = loader.collate_fn
++    if (type(collate) is not PadTensors or not collate.batch_first
++            or not collate.require_padding or collate.batch_dim != 0 or collate.temp_dim != 1
++            or collate.call_fn is not PadTensors._call_with_padding):
++        raise ValueError('Classification collation differs from the established target/mask contract')
++    if len(raw_dataset) != expected_records or len(loader.sampler) != expected_records:
++        raise ValueError('Loader does not cover the complete original recording cohort')
++    if len(loader) != math.ceil(expected_records / expected_batch_size):
++        raise ValueError('Unexpected evaluation batch count')
++    return dict(recordings=int(expected_records), batch_size=int(expected_batch_size),
++                batches=len(loader), original_row_order='0..N-1', cached=False,
++                sampler='SequentialSampler', drop_last=False)
+diff --git a/tests/test_shd_final_provenance.py b/tests/test_shd_final_provenance.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_shd_final_provenance.py
+@@ -0,0 +1,148 @@
++"""Synthetic metadata/HDF5 only; no official data, Trainer or model training."""
++import copy
++import hashlib
++import json
++from pathlib import Path
++import tempfile
++import unittest
++from collections import Counter
++
++import h5py
++import numpy as np
++import torch
++from torch.utils.data import DataLoader, Subset
++from datasets.shd import SHDWrapper
++from datasets.utils.pad_tensors import PadTensors
++from datasets.utils.diskcache import DiskCachedDataset
++from module.shd_final_provenance import (
++    verify_canonical_fitting_membership, verify_original_row_loader,
++)
++from module.ordinary_prediction_capture import capture_ordinary_classification
++from module.speaker_generalization import summarize_speaker_generalization
++from tests.test_ordinary_prediction_capture import LoggingFixture
++
++
++class FittingMembershipTests(unittest.TestCase):
++    def setUp(self):
++        self.labels=[i%20 for i in range(2000)]
++        self.speakers=[i//200 for i in range(2000)]
++        order=torch.randperm(2000,generator=torch.Generator().manual_seed(42)).tolist()
++        self.fitting,self.validation=order[:1600],order[1600:]
++        self.cfg=dict(dataset=dict(validate_on=.2,random_seed=42),init_ckpt_path=None)
++
++    def manifest(self):
++        result=dict(version='canonical_shd_split_v1',dataset_label='SHD*',validate_on=.2,
++                    split_seed=42,official_test_opened=False,source_sha256='a'*64)
++        for name,indices in [('train',self.fitting),('validation',self.validation)]:
++            classes=Counter(self.labels[i] for i in indices)
++            speakers=Counter(self.speakers[i] for i in indices)
++            result[name]=dict(indices=list(indices),record_count=len(indices),
++                              class_counts=[classes[i] for i in range(20)],
++                              speaker_ids=sorted(speakers),
++                              per_speaker_record_counts={str(k):v for k,v in speakers.items()})
++        return result
++
++    def check(self,manifest=None,**overrides):
++        raw=json.dumps(manifest or self.manifest()).encode()
++        values=dict(manifest_bytes=raw,expected_manifest_sha256=hashlib.sha256(raw).hexdigest(),
++                    source_sha256='a'*64,train_labels=self.labels,train_speakers=self.speakers,
++                    fitting_indices=self.fitting,validation_indices=self.validation,cfg=self.cfg)
++        values.update(overrides)
++        return verify_canonical_fitting_membership(**values)
++
++    def test_exact_split_and_membership_without_global_rng_consumption(self):
++        state=torch.get_rng_state().clone()
++        r=self.check()
++        self.assertEqual(r['fitting_records'],1600)
++        self.assertEqual(r['validation_records'],400)
++        self.assertEqual(r['fitting_speaker_ids'],list(range(10)))
++        self.assertTrue(torch.equal(state,torch.get_rng_state()))
++
++    def test_membership_uses_fitting_rows_not_every_training_file_speaker(self):
++        for i in self.validation:self.speakers[i]=99
++        r=self.check()
++        self.assertIn(99,r['training_file_speaker_ids'])
++        self.assertNotIn(99,r['fitting_speaker_ids'])
++
++    def test_frozen_bytes_and_training_source_identity_are_required(self):
++        for overrides in [dict(expected_manifest_sha256='b'*64),dict(source_sha256='b'*64)]:
++            with self.subTest(overrides=overrides),self.assertRaises(ValueError):self.check(**overrides)
++
++    def test_wrong_fitting_exposure_or_order_is_rejected(self):
++        for indices in [self.fitting[:-1],list(reversed(self.fitting)),self.validation]:
++            with self.subTest(indices=len(indices)),self.assertRaises(ValueError):
++                self.check(fitting_indices=indices)
++
++    def test_speaker_holdout_test_selection_and_weights_initialization_are_rejected(self):
++        for cfg in [dict(dataset=dict(validate_on='speaker_holdout',random_seed=42)),
++                    dict(dataset=dict(validate_on=.2,random_seed=7)),
++                    dict(dataset=dict(validate_on=.2,random_seed=42,additional_test_set_validation=True)),
++                    dict(dataset=dict(validate_on=.2,random_seed=42),init_ckpt_path='old.ckpt')]:
++            with self.subTest(cfg=cfg),self.assertRaises(ValueError):self.check(cfg=cfg)
++
++    def test_missing_classes_bad_counts_and_noninteger_metadata_are_rejected(self):
++        with self.assertRaises(ValueError):self.check(train_labels=[0]*2000)
++        m=self.manifest();m['train']['class_counts'][0]+=1
++        with self.assertRaises(ValueError):self.check(manifest=m)
++        with self.assertRaises(ValueError):self.check(train_speakers=[True]*2000)
++
++
++class OriginalRowLoaderTests(unittest.TestCase):
++    def setUp(self):
++        self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
++        self.path=Path(self.temp.name)/'shd_test.h5'  # Synthetic temporary file only.
++        with h5py.File(self.path,'w') as f:
++            f['labels']=np.array([0,1,2],dtype=np.int64)
++            f['spikes/times']=np.array([[.01,.02]]*3,dtype=np.float16)
++            f['spikes/units']=np.arange(6).reshape(3,2)
++        self.raw=object.__new__(SHDWrapper)  # Never call Tonic download/initialization.
++        self.raw.location_on_system=str(self.path.parent);self.raw.data_filename=self.path.name
++        self.raw.ignore_first_timesteps=0;self.raw.target_transform=None
++        self.transform=lambda events:torch.tensor(events['x'].astype(np.float32)).unsqueeze(1)
++        self.raw.transform=self.transform
++
++    def loader(self,**kwargs):
++        values=dict(dataset=self.raw,batch_size=2,shuffle=False,drop_last=False,
++                    num_workers=0,collate_fn=PadTensors());values.update(kwargs)
++        return DataLoader(**values)
++
++    def check(self,loader=None,**kwargs):
++        values=dict(loader=loader or self.loader(),raw_dataset=self.raw,
++                    expected_file=self.path,expected_records=3,expected_batch_size=2,
++                    expected_transform=self.transform);values.update(kwargs)
++        return verify_original_row_loader(**values)
++
++    def test_complete_uncached_sequential_loader(self):
++        r=self.check();self.assertEqual(r['batches'],2);self.assertFalse(r['cached'])
++
++    def test_cache_subset_shuffle_drop_last_and_wrong_batch_are_rejected(self):
++        cache=DiskCachedDataset(self.raw,Path(self.temp.name)/'cache')
++        for loader in [self.loader(dataset=cache),self.loader(dataset=Subset(self.raw,[2,1,0])),
++                       self.loader(shuffle=True),self.loader(drop_last=True),self.loader(batch_size=1)]:
++            with self.subTest(loader=loader),self.assertRaises(ValueError):self.check(loader)
++
++    def test_source_count_label_transform_and_collation_are_checked(self):
++        with self.assertRaises(ValueError):self.check(expected_records=4)
++        with self.assertRaises(ValueError):self.check(expected_file=self.path.parent/'other.h5')
++        with self.assertRaises(ValueError):self.check(self.loader(collate_fn=PadTensors(batch_first=False)))
++        self.raw.target_transform=lambda y:y
++        with self.assertRaises(ValueError):self.check()
++
++    def test_same_ordinary_predictions_reconstruct_every_speaker_group(self):
++        loader=self.loader();self.check(loader);model=LoggingFixture()
++        with capture_ordinary_classification(model,3) as rows:
++            for x,y,b in loader:
++                scores=torch.zeros((y.numel(),3));valid=y.flatten().ne(-1)
++                positions=valid.nonzero().flatten();scores[positions,y.flatten()[valid]]=1
++                model.update_and_log_metrics(scores,y,'loss','metrics','test_')
++            captured=rows.finalize()
++        summary=summarize_speaker_generalization(
++            captured['predictions'],captured['observed_labels'],captured['row_ids'],
++            [0,1,2],[7,8,8],[7],num_classes=3)
++        self.assertEqual(summary['groups']['all']['correct'],3)
++        self.assertEqual(summary['groups']['seen']['recordings'],1)
++        self.assertEqual(summary['groups']['unseen']['recordings'],2)
++        self.assertEqual(model.forward_calls,0)
++
++
++if __name__=='__main__':unittest.main()

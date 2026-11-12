@@ -130,7 +130,7 @@ class ScalarOperations(TorchDispatchMode):
               'index_select', 'cat', 'stack', 'clone', 'copy_', 'lift_fresh',
               'lift_fresh_copy', '_to_copy', 'to', 'empty', 'empty_like',
               'empty_strided', 'zeros', 'zeros_like', 'ones_like', 'full_like',
-              'fill_', 'new_zeros', 'new_empty', 'constant_pad_nd'}
+              'fill_', 'new_zeros', 'new_empty', 'constant_pad_nd', 'pad'}
 
     def __init__(self):
         super().__init__()

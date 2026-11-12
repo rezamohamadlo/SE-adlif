@@ -1,0 +1,27 @@
+﻿{
+    "preregistration":  "C001_DTH_LS_PREREGISTRATION.json",
+    "pid":  27672,
+    "full_schedule":  300,
+    "stderr":  "results/experiments/complementary_speaker_dev_v2/c001_primary_stage030_stderr.log",
+    "dataset":  "SHD_speaker_development",
+    "batch_size":  1024,
+    "training_seed":  42,
+    "validation_batch_size":  1024,
+    "mode":  "fresh_all4",
+    "launched_at":  "2026-11-12T14:50:14.1314666+03:30",
+    "source_snapshot":  "C001_PRIMARY_SOURCE_SNAPSHOT.json",
+    "stdout":  "results/experiments/complementary_speaker_dev_v2/c001_primary_stage030_stdout.log",
+    "stage_ceiling":  30,
+    "study_file":  "config/studies/complementary_C001_dth_ls_primary_v1.yaml",
+    "models":  [
+                   "SE_adLIF",
+                   "DTH_SE_adLIF",
+                   "DTH_LS_SE_adLIF",
+                   "LS_SE_adLIF"
+               ],
+    "validation_speakers":  [
+                                0,
+                                3
+                            ],
+    "official_tests":  false
+}

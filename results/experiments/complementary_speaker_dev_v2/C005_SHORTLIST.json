@@ -1,0 +1,22 @@
+{
+  "frozen_at": "2026-11-12T15:08:37.991740+00:00",
+  "selected_using": "clean_primary_speaker_validation",
+  "models": [
+    "RDROP_SE_adLIF"
+  ],
+  "primary_evidence": [
+    "C005_PRIMARY_STAGE030_COMPARISON.json",
+    "C005_A_ONLY_CONTROL_STAGE030_COMPARISON.json"
+  ],
+  "A_minus_Baseline_pp": 1.7125368118286133,
+  "RDrop_minus_alpha0control_pp": 2.8134556574923586,
+  "configuration": "A005fixedalpha1,epsilon0,SEdynamics;nohyperparameterchange",
+  "sensitivity_pair": [
+    6,
+    10
+  ],
+  "sensitivity_split_fingerprint": "a3a3e633e3cf80eb04be16dcb17328502c82533b40f1d9aaf32064daa78cc7a2",
+  "rule": "Freshownsplit baseline/Aonly,seed42,30epochs. No tuning/pairexploration/primaryweightsreuse/secondaryextension; ordinarycleanaccuracyprimary with+0.5pp,CE/curvessupport;reporteitheroutcome.",
+  "caveats": "Oneprimarytrainingseed,tuned0/3;Aharms speaker3vsbaseline. Predefined6/10haspriorstudysensitivityexposure;notuntouchedconfirmation.",
+  "official_test_allowed": false
+}

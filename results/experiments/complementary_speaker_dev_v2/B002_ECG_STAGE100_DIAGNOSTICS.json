@@ -1,0 +1,61 @@
+{
+  "status": "completed_validation_only_class_diagnostics",
+  "models": {
+    "SE_adLIF": {
+      "status": "verified_completed_bounded_screen_not_full_budget",
+      "completed_epochs": 100,
+      "full_budget": 400,
+      "preliminary": true,
+      "selected_completed_epoch": 99,
+      "online_training_accuracy_in_selected_epoch": 0.7981991171836853,
+      "validation_accuracy": 0.7747629880905151,
+      "validation_loss": 0.6399042010307312,
+      "tail10_validation_mean": 0.7680886507034301,
+      "initial10_validation_mean": 0.30047911405563354,
+      "macro_class_recall": 0.7358134706810624,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "f854648dab7e30d2d4001c7ed897cc1b0ac555e0eb5d017a3a21dd536ddc068b",
+          "epoch_index": 98,
+          "global_step": 198
+        },
+        "last": {
+          "sha256": "6b306aa35e514307a70ac68a2fd6e98cc801642960381c60e084438eb570c737",
+          "epoch_index": 99,
+          "global_step": 200
+        }
+      },
+      "official_test_opened": false
+    },
+    "LS_SE_adLIF": {
+      "status": "verified_completed_bounded_screen_not_full_budget",
+      "completed_epochs": 100,
+      "full_budget": 400,
+      "preliminary": true,
+      "selected_completed_epoch": 100,
+      "online_training_accuracy_in_selected_epoch": 0.7938124537467957,
+      "validation_accuracy": 0.7693825364112854,
+      "validation_loss": 0.6827183961868286,
+      "tail10_validation_mean": 0.7661978006362915,
+      "initial10_validation_mean": 0.30047911405563354,
+      "macro_class_recall": 0.7259528374979597,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "8a2f26f03cf4c0e5eed16a47ba0d408c676d42cff49c9c715918ba81ae525de1",
+          "epoch_index": 99,
+          "global_step": 200
+        },
+        "last": {
+          "sha256": "8a2f26f03cf4c0e5eed16a47ba0d408c676d42cff49c9c715918ba81ae525de1",
+          "epoch_index": 99,
+          "global_step": 200
+        }
+      },
+      "official_test_opened": false
+    }
+  },
+  "source_code": "B002_ECG_STAGE100_DIAGNOSTIC_SOURCE.txt",
+  "source_sha256": "9512420cffaf11c56917e0908938c81d1d2142e74415848a573067cd1f2b899c",
+  "official_test_opened": false,
+  "decision": "No automatic advancement decision; review matched accuracy/loss/curves and declared1.0pp rule separately"
+}

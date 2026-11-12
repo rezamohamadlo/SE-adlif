@@ -1,0 +1,77 @@
+{
+  "recorded_at": "2026-11-12T12:35:23.142925+00:00",
+  "scope": "Synthetic same-input ordinary temporal aggregation/CE/input-gradient repeats only",
+  "input_shape": [
+    1024,
+    342,
+    20
+  ],
+  "seed": 117,
+  "records": [
+    {
+      "device": "cpu",
+      "deterministic_algorithms": false,
+      "repeats": 12,
+      "status": "completed",
+      "max_absolute_reduced_score_change": 0.0,
+      "max_absolute_input_gradient_change": 0.0,
+      "max_differing_score_entries": 0,
+      "max_differing_gradient_entries": 0,
+      "max_prediction_changes": 0,
+      "loss_min": 3.5256712436676025,
+      "loss_max": 3.5256712436676025,
+      "completed_repeats": 12
+    },
+    {
+      "device": "cpu",
+      "deterministic_algorithms": true,
+      "repeats": 12,
+      "status": "completed",
+      "max_absolute_reduced_score_change": 0.0,
+      "max_absolute_input_gradient_change": 0.0,
+      "max_differing_score_entries": 0,
+      "max_differing_gradient_entries": 0,
+      "max_prediction_changes": 0,
+      "loss_min": 3.5256712436676025,
+      "loss_max": 3.5256712436676025,
+      "completed_repeats": 12
+    },
+    {
+      "device": "cuda:0",
+      "deterministic_algorithms": false,
+      "repeats": 12,
+      "status": "completed",
+      "max_absolute_reduced_score_change": 2.6702880859375e-05,
+      "max_absolute_input_gradient_change": 1.3969838619232178e-09,
+      "max_differing_score_entries": 17382,
+      "max_differing_gradient_entries": 6660448,
+      "max_prediction_changes": 0,
+      "loss_min": 3.5256707668304443,
+      "loss_max": 3.5256712436676025,
+      "completed_repeats": 12
+    },
+    {
+      "device": "cuda:0",
+      "deterministic_algorithms": true,
+      "repeats": 12,
+      "status": "completed",
+      "max_absolute_reduced_score_change": 0.0,
+      "max_absolute_input_gradient_change": 0.0,
+      "max_differing_score_entries": 0,
+      "max_differing_gradient_entries": 0,
+      "max_prediction_changes": 0,
+      "loss_min": 3.5256710052490234,
+      "loss_max": 3.5256710052490234,
+      "completed_repeats": 12
+    }
+  ],
+  "source": "results/experiments/complementary_speaker_dev_v2/C002_REDUCTION_REPEATABILITY_SOURCE.txt",
+  "source_sha256": "d089025ee6ebce403f796a33fd9ad9b848d99869dfa850e875701194d137f4f3",
+  "torch_version": "2.6.0+cu124",
+  "cuda_version": "12.4",
+  "training_or_optimizer_steps": false,
+  "model_weights_loaded": false,
+  "actual_dataset_or_official_test_opened": false,
+  "main_precision_or_determinism_changed": false,
+  "caution": "Any observed numerical differences identify a possible contributor, not proof of the cause of actual repeated training-score spread. Absence here does not prove full training determinism. Deterministic mode is diagnostic only; never select it using validation/test accuracy or silently change running protocols."
+}

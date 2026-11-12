@@ -1,0 +1,23 @@
+{
+  "best_checkpoint": "results/experiments/complementary_speaker_dev_v2/c004_current_normalization_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42/stages/030/best.ckpt",
+  "best_checkpoint_sha256": "a7d58177fde7325f94881687096e9ad531d118883f0e9cedc72297687a3cefb7",
+  "best_validation_accuracy": 0.8801223039627075,
+  "completed_epochs": 30,
+  "dataset": "SHD",
+  "dataset_label": "SHD speaker-disjoint development",
+  "full_budget": 300,
+  "label_smoothing_epsilon": 0.1,
+  "last_checkpoint": "results/experiments/complementary_speaker_dev_v2/c004_current_normalization_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42/stages/030/last.ckpt",
+  "last_checkpoint_sha256": "a7d58177fde7325f94881687096e9ad531d118883f0e9cedc72297687a3cefb7",
+  "metric": "validation_accuracy",
+  "model": "LS_SE_adLIF",
+  "preliminary": true,
+  "protocol": "shd_speaker_residual_current_norm_v1_primary_0_3_classification_label_smoothing_v1",
+  "seed": 42,
+  "selected_epoch_index": 29,
+  "split_fingerprint": "7712626f45e9e226299fd2984b2a29ccaf173a4d64895b62a0a0386f2895e860",
+  "status": "stage_complete",
+  "test_evaluated": false,
+  "training_objective": "classification_label_smoothing_v1",
+  "validation_loss_definition": "ordinary hard-label cross-entropy"
+}
