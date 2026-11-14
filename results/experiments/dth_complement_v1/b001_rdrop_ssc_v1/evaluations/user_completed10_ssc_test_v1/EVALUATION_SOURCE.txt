@@ -1,0 +1,159 @@
+"""One-time user-authorized exploratory evaluation; no training or selection.
+
+Uses the saved registered model, original dataset transforms, temporal masks,
+test_step, hard-label loss and metric. Logging sinks only are silenced without
+a Trainer. No training/optimizer/queue entrypoint, TTA or new candidate.
+"""
+import contextlib, gc, hashlib, importlib.util, io, json, math, time
+from datetime import datetime, timezone
+from pathlib import Path
+import h5py
+import hydra
+import numpy as np
+import torch
+from omegaconf import OmegaConf
+from models.pl_module import build_training_model
+from module.study_control import canonical, forward_identity
+from project_paths import ROOT, local_path, portable_config
+
+OUT=ROOT/'results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/evaluations/user_completed10_ssc_test_v1'
+PLAN=OUT/'FROZEN_CHECKPOINTS.json'
+def sha(path):
+    with Path(path).open('rb') as f: return hashlib.file_digest(f,'sha256').hexdigest()
+plan=json.loads(PLAN.read_text(encoding='utf-8'))
+assert plan['status']=='frozen' and plan['purpose']=='exploratory_user_requested_stop_diagnostic'
+assert plan['test_selects_ideas'] is False and plan['resume_training_after_tests'] is False
+assert sha(OUT/'EVALUATION_SOURCE.txt')==plan['evaluation_source_sha256']
+assert not (OUT/'ALL_RESULTS.json').exists(), 'Do not overwrite a one-time evaluation'
+# Verify the entire frozen cohort before touching any official-test contents.
+for e in plan['checkpoints']:
+    assert sha(local_path(e['checkpoint'],must_exist=True))==e['checkpoint_sha256']
+    assert sha(local_path(e['stage_receipt'],must_exist=True))==e['stage_receipt_sha256']
+    assert forward_identity(e['dataset'])==e['model_source_identity']
+    for p,h in e['metrics_files_sha256'].items(): assert sha(ROOT/p)==h
+
+capture_path=ROOT/plan['capture_source']
+assert sha(capture_path)==plan['capture_source_sha256']
+spec=importlib.util.spec_from_file_location('frozen_ordinary_capture',capture_path)
+capture=importlib.util.module_from_spec(spec); spec.loader.exec_module(capture)
+torch.set_num_threads(2)
+torch.set_float32_matmul_precision('high')
+results=[]
+for e in plan['checkpoints']:
+    target=OUT/e['dataset']/e['model']
+    target.mkdir(parents=True,exist_ok=True)
+    assert not (target/'TEST_RESULTS.json').exists(), 'Preserve existing evaluation evidence'
+    base=dict(e,evaluation_plan_sha256=sha(PLAN),ordinary_inference=True,
+        test_time_augmentation=False,purpose=plan['purpose'],test_selects_ideas=False)
+    test_path=ROOT/e['test_data']
+    if not test_path.is_file():
+        record=dict(base,status='not_evaluated_missing_official_test_file',metrics=None,
+                    reason='Exact official test file absent; no download, substitution or inferred accuracy.')
+        (target/'TEST_RESULTS.json').write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8')
+        results.append(record)
+        print('[TEST_UNAVAILABLE] '+e['dataset']+'/'+e['model']+' '+e['test_data'],flush=True)
+        continue
+    state=torch.load(local_path(e['checkpoint'],must_exist=True),map_location='cpu',weights_only=False)
+    saved=OmegaConf.to_container(OmegaConf.create(state['hyper_parameters']['cfg']),resolve=True)
+    assert canonical(saved)==canonical(json.loads(local_path(e['full_config']).read_text()))
+    assert state['epoch']==e['selected_epoch_index'] and state['global_step']==e['selected_global_step']
+    cfg=OmegaConf.create(portable_config(saved))
+    assert cfg.model_variant==e['model'] and cfg.paper_baseline_dataset==e['dataset']
+    # Access-path relocation and audit-worker count do not change tensors/masks.
+    cfg.dataset.data_path=str(local_path(cfg.dataset.data_path))
+    cfg.dataset.num_workers=0
+    assert float(cfg.get('spike_delete_probability',0))==0
+    assert not cfg.dataset.get('train_augmentation')
+    torch.manual_seed(int(cfg.random_seed))
+    with contextlib.redirect_stdout(io.StringIO()):
+        model=build_training_model(cfg)
+        data=hydra.utils.instantiate(cfg.dataset)
+    if e['dataset']=='SHD':
+        from datasets.shd import SHDWrapper
+        assert cfg.dataset.validate_on=='speaker_holdout' and cfg.dataset.validation_only_data
+        assert data.speaker_split['fingerprint']==e['split_fingerprint']
+        assert data.speaker_split['subsets']['train']['speaker_ids']==e['fitting_speakers']
+        assert data.speaker_split['validation_speaker_ids']==e['validation_speakers']
+        data.data_test=SHDWrapper(save_to=data.data_path,train=False,
+            transform=data.static_data_transform_test,
+            ignore_first_timesteps=data.ignore_first_timesteps)
+    else:
+        from datasets.ssc import SSCWrapper
+        assert e['dataset']=='SSC' and cfg.dataset.validation_only_data
+        data.data_test=SSCWrapper(save_to=data.data_path,split='test',
+            transform=data.static_data_transform,ignore_first_timesteps=data.ignore_first_timesteps)
+    # Read the official metadata only AFTER the complete checkpoint freeze.
+    with h5py.File(test_path,'r') as f:
+        labels=np.asarray(f['labels']).reshape(-1)
+        raw_speakers=np.asarray(f['extra/speaker']).reshape(-1)
+    assert len(data.data_test)==len(labels)
+    test_sha=sha(test_path)
+    loader=torch.utils.data.DataLoader(data.data_test,batch_size=int(cfg.dataset.batch_size),
+        shuffle=False,drop_last=False,num_workers=0,pin_memory=True,collate_fn=data.collate_fn,
+        generator=torch.Generator().manual_seed(42))
+    assert isinstance(loader.sampler,torch.utils.data.SequentialSampler) and not loader.drop_last
+    model.load_state_dict(state['state_dict'],strict=True)
+    device=torch.device(str(cfg.device)); model.to(device).eval()
+    model.log=lambda *a,**k: None
+    model.log_dict=lambda *a,**k: None
+    initial={k:v.detach().cpu().clone() for k,v in model.state_dict().items()}
+    rng=torch.get_rng_state().clone(); gpu_rng=torch.cuda.get_rng_state(device).clone()
+    calls=[]; hook=model.register_forward_hook(lambda *args:calls.append(1))
+    n=0; total=0.; started=time.perf_counter()
+    print('[TEST_START] '+e['dataset']+'/'+e['model']+' checkpoint='+e['checkpoint_sha256'],flush=True)
+    with torch.inference_mode(),capture.capture_ordinary_classification(model,len(labels)) as rows:
+        for i,batch in enumerate(loader):
+            inputs,targets,blocks=(v.to(device) for v in batch)
+            count=int(targets.ne(model.ignore_target_idx).sum())
+            assert count==len(inputs)
+            loss=model.test_step((inputs,targets,blocks),i)
+            assert torch.isfinite(loss)
+            total+=float(loss)*count; n+=count
+        predictions=rows.finalize()
+    torch.cuda.synchronize(device); seconds=time.perf_counter()-started
+    hook.remove()
+    assert len(calls)==len(loader) and n==len(labels)
+    assert np.array_equal(predictions['observed_labels'],labels)
+    predicted=np.asarray(predictions['predictions'],dtype=np.int64)
+    correct=predicted==labels; accuracy=float(correct.mean()); ce=total/n
+    assert math.isclose(float(model.test_metric.compute()['test_acc']),accuracy,abs_tol=1e-6)
+    assert torch.equal(rng,torch.get_rng_state())
+    assert torch.equal(gpu_rng,torch.cuda.get_rng_state(device))
+    for k,v in model.state_dict().items(): assert torch.equal(v.detach().cpu(),initial[k]),k
+    speakers=(raw_speakers.astype(np.int64) if e['dataset']=='SHD' else
+        np.asarray([v.decode('utf-8') if isinstance(v,bytes) else str(v) for v in raw_speakers]))
+    per_speaker={str(s):dict(samples=int((speakers==s).sum()),
+        correct=int(correct[speakers==s].sum()),accuracy=float(correct[speakers==s].mean()))
+        for s in np.unique(speakers)}
+    record=dict(base,status='evaluated',test_data_sha256=test_sha,
+        metrics=dict(test_acc=accuracy,test_loss=ce,test_samples=n,test_correct=int(correct.sum())),
+        per_speaker=per_speaker,inference_forward_calls=len(calls),batches=len(loader),
+        evaluation_elapsed_seconds=seconds,weights_and_rng_unchanged=True,
+        evaluation_execution_deviations=['repository-root data path resolution','num_workers=0; deterministic ordered loading',
+            'uncached original deterministic test transforms','logging sinks suppressed; original test_step/loss/metric unchanged',
+            'explicit user-authorized test dataset; saved validation-only training config retained'],
+        recorded_saved_config=saved)
+    if e['dataset']=='SHD':
+        fitting=set(e['fitting_speakers']); validation=set(e['validation_speakers'])
+        only=set(int(s) for s in np.unique(speakers))-fitting-validation
+        record['test_only_speakers']=sorted(only)
+        for key,ids in [('seen_during_fitting',fitting),('validation_selection_speakers',validation),('test_only_speakers',only)]:
+            mask=np.isin(speakers,list(ids)); size=int(mask.sum())
+            record.setdefault('speaker_groups',{})[key]=dict(speakers=sorted(ids),samples=size,
+                correct=int(correct[mask].sum()),accuracy=float(correct[mask].mean()) if size else None)
+        for speaker,values in per_speaker.items():
+            s=int(speaker)
+            values['role']='fitting' if s in fitting else ('validation_selection' if s in validation else 'test_only')
+    archive=target/'PREDICTIONS.npz'
+    assert not archive.exists()
+    np.savez_compressed(archive,row_ids=np.arange(n,dtype=np.int64),labels=labels,predictions=predicted,speaker_ids=speakers)
+    record['prediction_archive']=archive.relative_to(ROOT).as_posix();record['prediction_archive_sha256']=sha(archive)
+    (target/'TEST_RESULTS.json').write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8')
+    results.append(record)
+    print('[TEST_COMPLETE] '+json.dumps(dict(dataset=e['dataset'],model=e['model'],accuracy=accuracy,loss=ce,samples=n)),flush=True)
+    del model,data,state,initial,inputs,targets,blocks
+    gc.collect();torch.cuda.empty_cache()
+(OUT/'ALL_RESULTS.json').write_text(json.dumps(dict(purpose=plan['purpose'],
+    frozen_plan_sha256=sha(PLAN),test_selects_ideas=False,resume_training_after_tests=False,
+    results=results,finished_at=datetime.now(timezone.utc).isoformat()),indent=2)+'\n',encoding='utf-8')
+print('[ONE_TIME_EVALUATION_COMPLETE] No training or selection follows.',flush=True)

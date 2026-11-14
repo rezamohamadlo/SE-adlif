@@ -96,6 +96,10 @@ def read_provenance(directory, root=None):
             or any(not isinstance(e, dict) or not e.get('git_commit') or not e.get('tracked_diff_sha256') for e in records)):
         raise ValueError(f'Invalid source/environment provenance: {directory}')
     keys = ('git_commit', 'tracked_diff_sha256', 'source_files_sha256')
+    transition = directory / 'RESUME_SOURCE_TRANSITION.json'
+    if transition.is_file():
+        _verify_resume_source_transition(directory, records, root or ROOT)
+        return records
     source_hashes = {e['source_files_sha256'] for e in records if e.get('source_files_sha256')}
     if len({tuple(e[k] for k in keys[:2]) for e in records}) != 1 or len(source_hashes) > 1:
         raise ValueError(f'Mixed source revisions in provenance: {directory}')
@@ -104,6 +108,41 @@ def read_provenance(directory, root=None):
         if any(e[k] != current[k] for e in records for k in keys if k in e):
             raise ValueError(f'Source revision changed; refusing to resume this study: {directory}')
     return records
+
+
+def _verify_resume_source_transition(directory, records, root):
+    """Explicit, auditable Git/provenance migration; never an unchecked resume."""
+    def digest(path):
+        with Path(path).open('rb') as stream:
+            return hashlib.file_digest(stream, 'sha256').hexdigest()
+    receipt = json.loads((directory / 'RESUME_SOURCE_TRANSITION.json').read_text(encoding='utf-8'))
+    if receipt.get('version') != 'identical_training_source_resume_v1':
+        raise ValueError('Unknown resume-source transition')
+    original_path = local_path(receipt['original_provenance'], must_exist=True)
+    snapshot_path = local_path(receipt['source_snapshot'], must_exist=True)
+    if (digest(original_path) != receipt['original_provenance_sha256']
+            or digest(snapshot_path) != receipt['source_snapshot_sha256']):
+        raise ValueError('Original resume provenance was changed')
+    original = json.loads(original_path.read_text(encoding='utf-8'))
+    snapshot = json.loads(snapshot_path.read_text(encoding='utf-8'))
+    # The sole permitted code amendment is this provenance guard itself.
+    changes = receipt['guard_only_amendments']
+    if set(changes) != {'extended_seed_study.py'}:
+        raise ValueError('Resume transition cannot amend training/model/config code')
+    for name, expected in snapshot['files_sha256'].items():
+        if digest(Path(root) / name) != changes.get(name, expected):
+            raise ValueError(f'Frozen training source changed: {name}')
+    current = source_identity(root)
+    expected = receipt['resumed_source_identity']
+    # Tracked result/provenance files evolve during the run. Their diff hash
+    # is retained in each launch record, but cannot identify computation code.
+    if any(current[k] != expected[k] for k in ('git_commit', 'source_files_sha256')):
+        raise ValueError('Resume source differs from the explicitly audited transition')
+    if records[:len(original)] != original:
+        raise ValueError('Historical launch records must remain unchanged')
+    for record in records[len(original):]:
+        if any(record[k] != expected[k] for k in ('git_commit', 'source_files_sha256')):
+            raise ValueError('Mixed unaudited resume source revisions')
 
 
 def write_provenance(directory, root):

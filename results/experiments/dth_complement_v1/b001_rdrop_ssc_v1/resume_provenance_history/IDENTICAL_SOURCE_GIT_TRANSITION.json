@@ -1,0 +1,27 @@
+{
+  "at": "2026-11-14T06:30:18.847317+00:00",
+  "scope": "Only existing SSC DTH+RDrop seven-to-ten epoch completion explicitly requested by user",
+  "reason": "Git commit and repository diff changed while actual training/model/config source bytes remained identical.",
+  "original_provenance": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/resume_provenance_history/CANDIDATE_LAUNCH_ENVIRONMENTS_BEFORE_IDENTICAL_SOURCE_GIT_TRANSITION.json",
+  "original_sha256": "f3dc8ea5e1dd169e93061f523e48c054baf2bb9a17ec6c53b77ac4cc040ede0d",
+  "original_identities": [
+    {
+      "git_commit": "1d73eb58b8ad8b0ec569d1aabdaed0400ba2cfef",
+      "source_files_sha256": "b8206ffcfe63562f7cfff937d88a616838c99bcca87b2d5b93dcc67a84ec63c1",
+      "tracked_diff_sha256": "509bf48b91d7be99554f7a04f78e95b310721dda936ddb9bed4af6640c40a630"
+    }
+  ],
+  "active_guard_identity": {
+    "git_commit": "f3032e3dd5c2ad56c674e7cd3b3bc3e58d195032",
+    "source_files_sha256": "b8206ffcfe63562f7cfff937d88a616838c99bcca87b2d5b93dcc67a84ec63c1",
+    "tracked_diff_sha256": "f7fcfefe5b4032bc65d878711d4ffd851664975f6e04dee2dd2eab95fa2fbf5e"
+  },
+  "all_288_frozen_files_byte_identical": true,
+  "training_source_hash_identical": true,
+  "checkpoint_or_config_changes": false,
+  "source_snapshot": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/MAIN_SOURCE_SNAPSHOT.json",
+  "policy": "Preserve original launch identities in immutable archive and each active record; refresh only git bookkeeping for identical-source resume. Existing source, configuration, data and checkpoint guards remain enabled.",
+  "status": "attempt_rejected_no_training_started",
+  "active_provenance_restored_verbatim": true,
+  "reason_rejected": "Whole-repository diff fingerprint includes tracked provenance itself; bookkeeping normalization cannot satisfy the legacy guard."
+}

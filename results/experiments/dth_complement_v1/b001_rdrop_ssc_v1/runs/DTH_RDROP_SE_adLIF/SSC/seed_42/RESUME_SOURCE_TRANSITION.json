@@ -1,0 +1,18 @@
+{
+  "version": "identical_training_source_resume_v1",
+  "created_at": "2026-11-14T06:32:46.782609+00:00",
+  "original_provenance": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/resume_provenance_history/CANDIDATE_LAUNCH_ENVIRONMENTS_BEFORE_IDENTICAL_SOURCE_GIT_TRANSITION.json",
+  "original_provenance_sha256": "f3dc8ea5e1dd169e93061f523e48c054baf2bb9a17ec6c53b77ac4cc040ede0d",
+  "source_snapshot": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/MAIN_SOURCE_SNAPSHOT.json",
+  "source_snapshot_sha256": "b607e04bd581c55d7fda3ea4ecbb6ebdf40a5533fa7daad4f6f687f03218860e",
+  "guard_only_amendments": {
+    "extended_seed_study.py": "527b905e64cea3ceb3abe7da75ce9c6b064828d1ed22a130949aac2aa890d67b"
+  },
+  "resumed_source_identity": {
+    "git_commit": "f3032e3dd5c2ad56c674e7cd3b3bc3e58d195032",
+    "source_files_sha256": "53adaf082599d46dccb3d06e74b942db39babfba46966f52e42db4e572e728b3",
+    "tracked_diff_sha256": "04fc5561d414cc32bde65a790293af32a105aabad3f4d5e1d21900237d423090"
+  },
+  "reason": "User requests exactly own-last SSC epochs8-10. Original code unchanged in all288snapshotfiles except opt-in provenance guard amendment. Git changed due evidence commit; preserve old launch records verbatim and validate actual code/config bytes. No optimizer/model/data/loss/training changes.",
+  "test_exposure": "Existing7epoch test explicitly exposed; this10epoch completion remains exploratory."
+}
