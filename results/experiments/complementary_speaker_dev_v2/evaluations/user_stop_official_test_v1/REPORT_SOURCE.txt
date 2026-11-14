@@ -1,0 +1,65 @@
+"""Render the fixed exploratory cohort without selecting a subsequent experiment."""
+from pathlib import Path
+import hashlib,json,os
+from project_paths import ROOT
+OUT=ROOT/'results/experiments/complementary_speaker_dev_v2/evaluations/user_stop_official_test_v1'
+data=json.loads((OUT/'ALL_RESULTS.json').read_text(encoding='utf-8'))
+plan=json.loads((OUT/'FROZEN_CHECKPOINTS.json').read_text(encoding='utf-8'))
+assert hashlib.sha256((OUT/'FROZEN_CHECKPOINTS.json').read_bytes()).hexdigest()==data['frozen_plan_sha256']
+assert len(data['results'])==6 and all(r['status']=='evaluated' for r in data['results'])
+rows=data['results']; shd=[r for r in rows if r['dataset']=='SHD']; ssc=[r for r in rows if r['dataset']=='SSC']
+def pct(x): return f'{100*x:.2f}%'
+def rel(p): return Path(os.path.relpath(ROOT/p,OUT)).as_posix()
+def link(r): return f"[`{r['checkpoint_sha256'][:12]}`]({rel(r['checkpoint'])})"
+names={'SE_adLIF':'Baseline','RDROP_SE_adLIF':'R-Drop','LS_SE_adLIF':'Label smoothing','RDROP_LS_SE_adLIF':'R-Drop + LS'}
+lines=['# ارزیابی تشخیصی یک‌بارهٔ C005 پس از توقف پژوهش','',
+    'تاریخ: ۲۰۲۶-۱۱-۱۲. استنتاج معمولی تک‌گذر، بدون TTA و بدون آموزش بیشتر. انتخاب همهٔ checkpointها فقط با بیشترین دقت اعتبارسنجی ثبت‌شده در همان cohort و پیش از بازکردن نتایج آزمون انجام شد. هیچ کنترل از cohort دیگری جایگزین نشد.',
+    '', 'آموزش و صف در مرز طبیعی checkpoint دورهٔ ۱۰ SSC پایان یافتند؛ هیچ پردازش نامرتبطی متوقف نشد. وزن‌های best/last، optimizer، scheduler، لاگ‌ها و پیکربندی‌ها حفظ شدند. حلقهٔ پژوهش متوقف است و Goal پس از گزارش paused می‌ماند.',
+    '', '## SHD: پروتکل جداسازی گوینده، نه canonical SHD*', '',
+    'هر چهار بازو از cohort اصلی C005، بذر آموزش ۴۲، تقسیم ثابت ۰/۳ و سقف یکسان ۳۰ دوره هستند. این‌ها اجرای کامل ۳۰۰دوره‌ای یا بازتولید هم‌پروتکل مقاله نیستند. آزمون قبلاً در تاریخچهٔ پروژه دیده شده است؛ این نتایج تشخیصی و اکتشافی‌اند، نه تأیید مستقل یا مبنای جست‌وجوی بعدی.', '',
+    '| بازو | آموزش در دورهٔ منتخب | آموزش در آخرین دوره | بهترین اعتبارسنجی | آزمون رسمی | loss آزمون | دوره‌های کامل | دورهٔ checkpoint | شناسهٔ checkpoint |',
+    '|---|---:|---:|---:|---:|---:|---:|---:|---|']
+for r in shd:
+    lines.append(f"| {names[r['model']]} | {pct(r['training_accuracy_at_selected_epoch'])} | {pct(r['training_accuracy_final_epoch'])} | {pct(r['best_validation_accuracy'])} | {pct(r['metrics']['test_acc'])} | {r['metrics']['test_loss']:.6f} | {r['completed_epochs']} / {r['full_budget']} | {r['selected_completed_epoch']} | {link(r)} |")
+lines+=['','دورهٔ checkpoint در جدول از ۱ شمرده می‌شود؛ مقدار صفرمبنا و global step در فایل فهرست ثابت آمده است. دقت آموزش، میانگین آنلاین همان دوره با وزن‌های در حال تغییر و dropout فعال است؛ برای R-Drop فقط نمای تصادفی اول ثبت شده است. این مقدار دقت clean روی مجموعهٔ آموزش با checkpoint منتخب نیست. loss آزمون در همهٔ بازوها cross-entropy با برچسب سخت است؛ KL و label smoothing در آزمون فعال نیستند.', '',
+    '## گویندگان و داده‌های واقعاً استفاده‌شده','',
+    '- گویندگان موجود در دادهٔ fitting: **۱، ۲، ۶، ۷، ۸، ۹، ۱۰، ۱۱**؛ ردیف‌های واقعی از manifest ثابت و loader اصلی تطبیق داده شدند.',
+    '- گویندگان اعتبارسنجی مورد استفاده برای انتخاب checkpoint: **۰ و ۳**. این دو در fitting حضور ندارند، اما در انتخاب مدل استفاده شده‌اند.',
+    '- گویندگان کاملاً جدید آزمون، خارج از fitting و اعتبارسنجی: **۴ و ۵**.',
+    '- اندازهٔ fitting برابر ۶۵۲۱، اعتبارسنجی ۱۶۳۵ و آزمون رسمی **۲۲۶۴** نمونه است.', '',
+    '| گروه در آزمون رسمی | تعداد نمونه | Baseline | R-Drop | LS | R-Drop + LS |',
+    '|---|---:|---:|---:|---:|---:|']
+groups=[('seen_during_fitting','گویندگان دیده‌شده در fitting'),('validation_selection_speakers','گویندگان استفاده‌شده برای انتخاب اعتبارسنجی'),('test_only_speakers','گویندگان کاملاً جدید ۴ و ۵')]
+for key,label in groups:
+    counts=[r['speaker_groups'][key]['samples'] for r in shd]; assert len(set(counts))==1
+    lines.append('| '+label+' | '+str(counts[0])+' | '+' | '.join(pct(r['speaker_groups'][key]['accuracy']) for r in shd)+' |')
+lines+=['','## دقت هر گوینده در آزمون SHD','',
+    '| شناسهٔ گوینده | نقش | نمونه | Baseline | R-Drop | LS | R-Drop + LS |',
+    '|---:|---|---:|---:|---:|---:|---:|']
+roles={'fitting':'fitting','validation_selection':'انتخاب اعتبارسنجی','test_only':'کاملاً جدید آزمون'}
+for speaker in sorted(shd[0]['per_speaker'],key=int):
+    values=[r['per_speaker'][speaker] for r in shd]
+    assert len({v['samples'] for v in values})==1
+    lines.append('| '+speaker+' | '+roles[values[0]['role']]+' | '+str(values[0]['samples'])+' | '+' | '.join(pct(v['accuracy']) for v in values)+' |')
+lines+=['','## SSC: همین دو checkpoint موجود','',
+    'هر دو بازو همان مرحلهٔ ۱۰دوره‌ای را کامل کرده‌اند و از نظر بودجهٔ همین screen همسان‌اند؛ اجرای کامل ۴۰دوره‌ای نیستند. هیچ آموزشی برای برابرکردن بودجه انجام نشد. فایل آزمون در ابتدا محلی نبود؛ پس از ثابت‌شدن فهرست checkpointها از منبع رسمی دریافت و MD5 آرشیو مطابق نسخهٔ نصب‌شدهٔ Tonic تأیید شد. انتخاب checkpointها تغییر نکرد و آزمون SHD دوباره اجرا نشد.', '',
+    '| بازو | آموزش در دورهٔ منتخب | آموزش در آخرین دوره | بهترین اعتبارسنجی | آزمون رسمی | loss آزمون | دوره‌های کامل | دورهٔ checkpoint | شناسهٔ checkpoint |',
+    '|---|---:|---:|---:|---:|---:|---:|---:|---|']
+for r in ssc:
+    lines.append(f"| {names[r['model']]} | {pct(r['training_accuracy_at_selected_epoch'])} | {pct(r['training_accuracy_final_epoch'])} | {pct(r['best_validation_accuracy'])} | {pct(r['metrics']['test_acc'])} | {r['metrics']['test_loss']:.6f} | {r['completed_epochs']} / {r['full_budget']} | {r['selected_completed_epoch']} | {link(r)} |")
+baseline=shd[0]; contrasts={names[r['model']]:100*(r['metrics']['test_acc']-baseline['metrics']['test_acc']) for r in shd[1:]}
+ssc_delta=100*(ssc[1]['metrics']['test_acc']-ssc[0]['metrics']['test_acc'])
+lines+=['','## تفسیر محدود به همین ارزیابی','',
+    f"در SHD اختلاف دقت آزمون نسبت به Baseline: R-Drop برابر {contrasts['R-Drop']:+.4f}، LS برابر {contrasts['Label smoothing']:+.4f} و ترکیب برابر {contrasts['R-Drop + LS']:+.4f} واحد درصد است. این اختلاف‌ها از نسبت‌های گردنشده محاسبه شدند.",
+    f'در SSC اختلاف R-Drop نسبت به Baseline برابر {ssc_delta:+.4f} واحد درصد است؛ هر دو فقط ۱۰ از ۴۰ دوره را کامل کرده‌اند.',
+    'این نتایج یک بذر دارند و هم‌افزایی، بهبود عمومی روی جمعیت گویندگان یا برتری بر مقاله را اثبات نمی‌کنند. اعتبارسنجی بهتر الزاماً آزمون بهتر نداده است. هیچ score آزمونی برای انتخاب ایده، تغییر تنظیمات، ادامهٔ آموزش یا راه‌اندازی جست‌وجو استفاده نمی‌شود.', '',
+    '## شواهد و شناسه‌ها','',
+    '- [فهرست ثابت checkpointها](FROZEN_CHECKPOINTS.json)، شامل مسیر، SHA-256 کامل، معیار انتخاب، تنظیمات و تاریخچهٔ آموزش.',
+    '- [نتایج کامل](ALL_RESULTS.json) و آرشیو پیش‌بینی تک‌تک نمونه‌ها در پوشهٔ هر بازو.',
+    '- [تأیید توقف امن آموزش](TRAINING_STOP_VERIFICATION.json).',
+    '- [دریافت و checksum دادهٔ آزمون SSC](SSC_TEST_DATA_ACQUISITION.json).','']
+for r in rows:
+    lines.append(f"- {r['dataset']} / {names[r['model']]}: `{r['checkpoint_sha256']}`؛ [نتیجهٔ بازو]({r['dataset']}/{r['model']}/TEST_RESULTS.json).")
+lines+=['','وضعیت پایانی: **هیچ آموزش یا صف پژوهشی فعال نیست. پژوهش پس از این گزارش متوقف و Goal paused است.**','']
+(OUT/'REPORT_FA.md').write_text('\n'.join(lines),encoding='utf-8')
+print('\n'.join(f"{r['dataset']} {names[r['model']]} train_selected={pct(r['training_accuracy_at_selected_epoch'])} val={pct(r['best_validation_accuracy'])} test={pct(r['metrics']['test_acc'])} loss={r['metrics']['test_loss']:.6f} epochs={r['completed_epochs']} selected={r['selected_completed_epoch']}" for r in rows))

@@ -1,0 +1,65 @@
+{
+  "verified_at": "2026-11-12T17:52:42.895355+00:00",
+  "frozen_checkpoint_list_unchanged": true,
+  "checkpoints": [
+    {
+      "dataset": "SHD",
+      "model": "SE_adLIF",
+      "checkpoint_identity_verified": true,
+      "raw_prediction_and_per_speaker_counts_verified": true,
+      "completed_epochs": 30,
+      "selected_completed_epoch": 30
+    },
+    {
+      "dataset": "SHD",
+      "model": "RDROP_SE_adLIF",
+      "checkpoint_identity_verified": true,
+      "raw_prediction_and_per_speaker_counts_verified": true,
+      "completed_epochs": 30,
+      "selected_completed_epoch": 23
+    },
+    {
+      "dataset": "SHD",
+      "model": "LS_SE_adLIF",
+      "checkpoint_identity_verified": true,
+      "raw_prediction_and_per_speaker_counts_verified": true,
+      "completed_epochs": 30,
+      "selected_completed_epoch": 28
+    },
+    {
+      "dataset": "SHD",
+      "model": "RDROP_LS_SE_adLIF",
+      "checkpoint_identity_verified": true,
+      "raw_prediction_and_per_speaker_counts_verified": true,
+      "completed_epochs": 30,
+      "selected_completed_epoch": 22
+    },
+    {
+      "dataset": "SSC",
+      "model": "SE_adLIF",
+      "checkpoint_identity_verified": true,
+      "raw_prediction_and_per_speaker_counts_verified": true,
+      "completed_epochs": 10,
+      "selected_completed_epoch": 10
+    },
+    {
+      "dataset": "SSC",
+      "model": "RDROP_SE_adLIF",
+      "checkpoint_identity_verified": true,
+      "raw_prediction_and_per_speaker_counts_verified": true,
+      "completed_epochs": 10,
+      "selected_completed_epoch": 10
+    }
+  ],
+  "all_six_official_tests_completed_once": true,
+  "SHD_results_preserved_without_repeat_during_SSC_acquisition": true,
+  "saved_model_and_data_source280files_and11protocol_artifacts_unchanged": true,
+  "raw_metadata_prediction_accuracy_and_speaker_counts_verified": true,
+  "all_checkpoints_optimizer_scheduler_preserved": true,
+  "final_training_active": false,
+  "final_python_process_count": 0,
+  "report_links_verified": true,
+  "goal_pause_requested": true,
+  "report": "results/experiments/complementary_speaker_dev_v2/evaluations/user_stop_official_test_v1/REPORT_FA.md",
+  "final_aggregate_sha256": "015e863bb5fffcc0873886bd8f22289a2a7ef652f2dd936767fb9bf62a04fcea"
+}

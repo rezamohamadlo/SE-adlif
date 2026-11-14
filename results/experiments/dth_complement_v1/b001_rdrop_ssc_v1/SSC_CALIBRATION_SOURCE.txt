@@ -1,0 +1,150 @@
+"""Disposable SSC throughput/numerical calibration, never main initialization."""
+import contextlib, gc, hashlib, io, json, math, statistics, time
+from pathlib import Path
+from datetime import datetime, timezone
+import hydra
+from hydra import compose, initialize_config_dir
+from omegaconf import OmegaConf
+import pytorch_lightning as pl
+import torch
+from models.pl_module import build_training_model
+from module.study_control import forward_identity
+from project_paths import ROOT, portable_config
+
+PARENT=ROOT/'results/experiments/complementary_speaker_dev_v2'
+OUT=ROOT/'results/experiments/dth_complement_v1/b001_rdrop_ssc_v1'
+TARGET=OUT/'SSC_BATCH_CALIBRATION.json'
+assert not TARGET.exists()
+assert json.loads((OUT/'SSC_DATA_AUDIT.json').read_text())['status']=='verified'
+assert torch.cuda.is_available()
+torch.set_num_threads(2);torch.set_float32_matmul_precision('high')
+total=torch.cuda.get_device_properties(0).total_memory
+indices=json.loads((PARENT/'SSC_TRAINING_CALIBRATION.json').read_text())['source_indices']
+assert len(indices)==1024 and len(set(indices))==1024
+records=[];skipped=[];data=None
+
+def configuration(model,batch):
+    with initialize_config_dir(config_dir=str(ROOT/'config'),version_base=None):
+        cfg=compose(config_name='main',overrides=[f'experiment=SSC_{model}','+comparison=SSC',
+            'random_seed=117',f'batch_size={batch}',f'dataset.batch_size={batch}',
+            'dataset.num_workers=0','++dataset.spawn_safe_transforms=true',
+            '++dataset.validation_only_data=true','++dataset.validation_batch_size=1024',
+            'run_test=false','early_stopping=false','++calibration_only=true'])
+    cfg=OmegaConf.create(OmegaConf.to_container(cfg,resolve=True))
+    assert cfg.lr==.006 and cfg.n_epochs==40 and cfg.dropout==.15
+    assert cfg.loss_agg=='mean_membrane_potentials' and cfg.dataset.num_classes==35
+    assert cfg.l1.n_neurons==cfg.l2.n_neurons==720
+    return cfg
+
+def train_probe(model,cfg,cpu_samples):
+    configured=model.configure_optimizers()
+    optimizer=configured['optimizer'] if isinstance(configured,dict) else configured
+    batch=tuple(t.cuda() for t in data.collate_fn(cpu_samples))
+    assert batch[0].shape[:2]==(len(cpu_samples),300)
+    times=[];losses=[]
+    for step in range(5):
+        optimizer.zero_grad(set_to_none=True);torch.cuda.synchronize()
+        if step==2:torch.cuda.reset_peak_memory_stats()
+        start=time.perf_counter()
+        if cfg.get('training_objective')=='classification_dropout_consistency_v1':
+            output,loss,diagnostics=model.training_terms(batch)
+        else:
+            output=model(batch[0]);_,loss,_=model.process_predictions_and_compute_losses(output,batch[1],batch[2])
+        loss.backward();torch.nn.utils.clip_grad_norm_(model.parameters(),float(cfg.gradient_clip_val))
+        optimizer.step();model.on_train_batch_end(None,batch,step)
+        torch.cuda.synchronize();elapsed=time.perf_counter()-start
+        losses.append(float(loss.detach()));assert math.isfinite(losses[-1])
+        assert all(torch.isfinite(p.grad).all().item() for p in model.parameters() if p.grad is not None)
+        assert all(torch.isfinite(p).all().item() for p in model.parameters())
+        if step>=2:times.append(elapsed)
+    reserved=torch.cuda.max_memory_reserved();allocated=torch.cuda.max_memory_allocated()
+    return dict(warmup_steps=2,measured_steps=3,step_seconds=statistics.mean(times),
+        step_time_samples=times,samples_per_second=len(cpu_samples)/statistics.mean(times),
+        peak_allocated_gib=allocated/2**30,peak_reserved_gib=reserved/2**30,
+        headroom_fraction=1-reserved/total,timesteps=300,updates_per_epoch=75466//len(cpu_samples),
+        estimated_epoch_train_seconds=statistics.mean(times)*(75466//len(cpu_samples)),
+        finite_losses_and_gradients=True,losses=losses,
+        training_forward_passes=2 if cfg.get('training_objective')=='classification_dropout_consistency_v1' else 1)
+
+def validation_pass(model,size):
+    count=0;weighted=0.;predictions=[];torch.cuda.synchronize();start=time.perf_counter()
+    with torch.inference_mode():
+        for offset in range(0,len(cpu_val),size):
+            x,y,blocks=(t.cuda() for t in data.collate_fn(cpu_val[offset:offset+size]))
+            reduced,loss,_=model.process_predictions_and_compute_losses(model(x),y,blocks)
+            mask=y.flatten().ne(-1);n=int(mask.sum());assert n==len(x)
+            count+=n;weighted+=float(loss)*n;predictions.extend(reduced[mask].argmax(-1).cpu().tolist())
+    torch.cuda.synchronize();elapsed=time.perf_counter()-start;assert count==9981
+    return elapsed,weighted/count,predictions
+
+print('[SSC_CALIBRATION_START] DTH and DTH+RDrop real-batch calibration/smoke only;discarded117states,256/512grid;no main checkpoints or testdata.',flush=True)
+grid=[256,512]
+for size in grid:
+    for variant in ('DTH_SE_adLIF','DTH_RDROP_SE_adLIF'):
+        pl.seed_everything(117,workers=True);cfg=configuration(variant,size)
+        if data is None:
+            cfg.dataset.data_path=str(ROOT/'data')
+            data=hydra.utils.instantiate(cfg.dataset);data.prepare_data();data.setup('fit')
+            assert not hasattr(data,'data_test') and len(data.data_train)==75466 and len(data.data_val)==9981
+            cpu_train=[data.data_train[i] for i in indices]
+            cpu_val=[]
+            for i in range(9981):
+                cpu_val.append(data.data_val[i])
+                if (i+1)%2000==0:print(f'[SSC_DATA_LOADING] {i+1}/9981 validation tensors, unchanged rows',flush=True)
+            print('[SSC_DATA_READY]1024 real fitting samples including128longest;9981officialvalidationrows;no testdataset.',flush=True)
+        model=None
+        try:
+            with contextlib.redirect_stdout(io.StringIO()):model=build_training_model(cfg).cuda().train()
+            train=train_probe(model,cfg,cpu_train[:size]);model.zero_grad(set_to_none=True)
+            gc.collect();torch.cuda.empty_cache()
+            record=dict(model=variant,batch=size,train=train,status='verified' if train['headroom_fraction']>=.15 else 'insufficient_headroom',
+                training_objective=cfg.get('training_objective','classification'),
+                disposable_config=portable_config(OmegaConf.to_container(cfg,resolve=True)))
+            if record['status']=='verified':
+                model.eval();probes=[];anchor=None
+                for validation_size in (256,512,1024):
+                    warm=validation_pass(model,validation_size)
+                    torch.cuda.reset_peak_memory_stats();measured=validation_pass(model,validation_size)
+                    if anchor is None:anchor=measured
+                    changed=sum(a!=b for a,b in zip(anchor[2],measured[2]))
+                    repeated=sum(a!=b for a,b in zip(warm[2],measured[2]))
+                    ce_difference=abs(anchor[1]-measured[1]);headroom=1-torch.cuda.max_memory_reserved()/total
+                    probes.append(dict(batch=validation_size,warmup_passes=1,measured_passes=1,validation_records=9981,
+                        seconds=measured[0],ordinary_validation_ce=measured[1],changed_predictions_vs256=changed,
+                        repeat_changed_predictions=repeated,CE_difference_vs256=ce_difference,headroom_fraction=headroom,
+                        consistent=changed==0 and repeated==0 and ce_difference<1e-5 and headroom>=.15))
+                record['validation']=probes
+            records.append(record)
+            print('[SSC_CALIBRATION] '+json.dumps(dict(model=variant,batch=size,train=train,
+                validation_consistency=[dict(batch=p['batch'],consistent=p['consistent'],changed=p['changed_predictions_vs256']) for p in record.get('validation',[])])),flush=True)
+        except torch.cuda.OutOfMemoryError as exc:
+            records.append(dict(model=variant,batch=size,status='OOM',exception=str(exc)))
+            print(f'[SSC_CALIBRATION_OOM] {variant} batch{size};preservefailure anduseverifiedsmallerbatch.',flush=True)
+        finally:
+            del model;gc.collect();torch.cuda.empty_cache()
+        (OUT/'CALIBRATION_PROGRESS.json').write_text(json.dumps(dict(records=records,main_training_started=False,official_test_opened=False),indent=2)+'\n')
+    if size==512:
+        probe=next(r for r in records if r['batch']==512 and r['model']=='DTH_RDROP_SE_adLIF')
+        if probe['status']=='verified' and 2*probe['train']['peak_reserved_gib']<=.85*total/2**30:
+            grid.append(1024)
+        else:
+            skipped.append(dict(batch=1024,reason='Measured512two-graphfootprintprojectedapproximatelylinearly exceeds85%GPUor512notstable;largerbatchnothelpful.',projection_gib=2*probe['train']['peak_reserved_gib'] if 'train' in probe else None))
+eligible={size:sum(r['train']['estimated_epoch_train_seconds'] for r in records if r['batch']==size)
+    for size in grid if len([r for r in records if r['batch']==size and r['status']=='verified'])==2}
+assert eligible,'No stable shared training batch; do not launch main training'
+selected_train=min(eligible,key=eligible.get)
+successful=[r for r in records if r['status']=='verified']
+eligible_val={size:sum(next(p['seconds'] for p in r['validation'] if p['batch']==size) for r in successful)
+    for size in (256,512,1024) if all(next(p['consistent'] for p in r['validation'] if p['batch']==size) for r in successful)}
+assert eligible_val,'No numerically consistent common validation batch'
+selected_val=min(eligible_val,key=eligible_val.get)
+result=dict(status='verified',created_at=datetime.now(timezone.utc).isoformat(),records=records,
+    selected_training_batch=selected_train,selected_validation_batch=selected_val,
+    summed_two_arm_estimated_epoch_train_seconds=eligible,summed_validation_seconds=eligible_val,skipped=skipped,
+    LR=.006,LR_scaled=False,full_schedule_epochs=40,calibration_seed=117,
+    training_source_indices=indices,source_data_audit='SSC_DATA_AUDIT.json',
+    source_identity=forward_identity('SSC'),disposable_states_discarded=True,
+    main_weights_or_optimizer_reused=False,official_test_opened=False,
+    note='Measured optimizer steps and ordinary validation numerical/speed checks only;no model-selection accuracy evidence or main checkpoint export.')
+TARGET.write_text(json.dumps(result,indent=2)+'\n')
+print('[SSC_CALIBRATION_COMPLETE] '+json.dumps(dict(selected_training_batch=selected_train,selected_validation_batch=selected_val,states_discarded=True)),flush=True)

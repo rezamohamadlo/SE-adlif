@@ -1,0 +1,50 @@
+{
+  "official_test_opened": false,
+  "records": [
+    {
+      "batch": 1024,
+      "first4096_tensors_and_masks_exact": true,
+      "measured_records": 16384,
+      "num_workers": 0,
+      "samples_per_second": 274.14589636022083,
+      "seconds": 59.763798099942505,
+      "warmup_batches": 4,
+      "warmup_seconds": 15.449306800030172
+    },
+    {
+      "batch": 1024,
+      "first4096_tensors_and_masks_exact": true,
+      "measured_records": 16384,
+      "num_workers": 4,
+      "samples_per_second": 1146.7142894644708,
+      "seconds": 14.2877787000034,
+      "warmup_batches": 4,
+      "warmup_seconds": 19.187472200021148
+    },
+    {
+      "batch": 1024,
+      "first4096_tensors_and_masks_exact": true,
+      "measured_records": 16384,
+      "num_workers": 8,
+      "samples_per_second": 2388.9036939539305,
+      "seconds": 6.858376100077294,
+      "warmup_batches": 4,
+      "warmup_seconds": 35.584956900100224
+    }
+  ],
+  "selected_num_workers": 8,
+  "source": "Fixed20,480 real training recordings; original tensors/masks and order retained; no GPU or model updates",
+  "spawn_safe_transforms": true,
+  "status": "verified",
+  "training_and_validation_same_workers": true,
+  "reused_from": "results/experiments/complementary_speaker_dev_v2/SSC_WORKER_CALIBRATION.json",
+  "reused_source_sha256": "3e270503fd29f35b080aa0b9045807cf20d9de78872004e3ccd67d3a0c98139b",
+  "target_training_batch": 256,
+  "original_benchmark_batch": 1024,
+  "preprocessing_sources_unchanged": [
+    "datasets/ssc.py",
+    "datasets/utils/pad_tensors.py"
+  ],
+  "maximum_measured_DTH_consumer_samples_per_second": 373.63052008791635,
+  "reuse_caveat": "Originalworkerbenchmarkat1024retained;notnew256timings. Samepreprocessingtensors/masksandspawn-safeimplementation;producer2388.9samples/s comfortablyexceedsDTHconsumption."
+}

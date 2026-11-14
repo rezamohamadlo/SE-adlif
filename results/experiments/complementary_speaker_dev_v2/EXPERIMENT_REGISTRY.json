@@ -390,7 +390,7 @@
     }
   ],
   "next_stage_preregistration": "B002_SCREEN_PREREGISTRATION.json",
-  "official_test_evaluated_in_study": false,
+  "official_test_evaluated_in_study": true,
   "primary_pair": [
     0,
     3
@@ -408,15 +408,13 @@
   "source_freeze": "Finish implementation/calibration/tests before launching primary queue; no source edits during its bounded stage.",
   "training_seed": 42,
   "version": "complementary_speaker_dev_v2",
-  "next_action": "Monitor boundedSSC10queue; auditbothselectedcheckpoints/officialvalidation/CE/curves before40extensionorECG/newB. No officialtests.",
+  "next_action": "PAUSED by explicit user request. Stop after Persian report; no further research,training,search or test-driven candidate selection.",
   "current_stage": {
-    "idea": "A005_DROPOUT_CONSISTENCY_SSC",
-    "status": "freshbaseline_real_training_batch_progress_verified",
-    "launcher_pid": 20700,
-    "observed_at": "2026-11-12T16:01:28.250570+00:00",
-    "launch_evidence": "c005_dropout_ssc_v1/SSC_STAGE010_LAUNCH.json",
-    "startup_verification": "c005_dropout_ssc_v1/SSC_STAGE010_STARTUP_VERIFICATION.json",
-    "official_tests": false
+    "status": "user_stopped_after_one_time_exploratory_tests",
+    "training_active": false,
+    "queue_active": false,
+    "goal_pause_requested": true,
+    "evidence": "evaluations/user_stop_official_test_v1/FINAL_VERIFICATION.json"
   },
   "primary_CPU_diagnostic": {
     "evidence": "B002_PRIMARY_DIAGNOSTIC_INTERPRETATION.json",
@@ -638,6 +636,17 @@
       "observed_at": "2026-11-12T15:34:59.062375+00:00",
       "evidence": "C005_SENSITIVITY_STAGE030_DECISION.json",
       "official_tests": false
+    },
+    {
+      "idea": "A005_DROPOUT_CONSISTENCY_SSC",
+      "status": "freshbaseline_real_training_batch_progress_verified",
+      "launcher_pid": 20700,
+      "observed_at": "2026-11-12T16:01:28.250570+00:00",
+      "launch_evidence": "c005_dropout_ssc_v1/SSC_STAGE010_LAUNCH.json",
+      "startup_verification": "c005_dropout_ssc_v1/SSC_STAGE010_STARTUP_VERIFICATION.json",
+      "official_tests": false,
+      "superseded_by": "User-requested stop and one-time exploratory testing"
     }
-  ]
+  ],
+  "official_test_scope": "User-authorized exploratory stop diagnostics,not development selection or canonical paper evidence."
 }

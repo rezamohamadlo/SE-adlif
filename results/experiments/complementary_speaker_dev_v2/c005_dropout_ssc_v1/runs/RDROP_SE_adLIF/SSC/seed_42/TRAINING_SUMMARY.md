@@ -1,75 +1,17 @@
-# SSC_RDROP_SE_adLIF Training Summary — Seed 42
+# RDROP_SE_adLIF: staged validation study
 
-This file is updated automatically whenever training saves a new best checkpoint.
+Protocol: dropout_consistency_ssc_mean_loss_v1_SSC_classification_dropout_consistency_v1; dataset label: SSC.
 
-## Run status
+Completed 10 epochs (indices 0 through 9); full budget 40. This is a preliminary screen, not full-budget completion.
 
-- **Status:** Training in progress
-- **Progress:** 6 epochs completed (`0` through `5`) out of 40
-- **Dataset:** SSC
-- **Model:** SSC_RDROP_SE_adLIF
-- **Seed:** 42
-- **Device:** cuda:0
+Best validation accuracy: 80.242461%; selected epoch index 9. No official test evaluation.
 
-## Best result
+Training loss averages two supervised dropout passes plus weighted symmetric KL; accuracy uses the first pass only. Hard CE, supervised loss and KL are logged separately. Validation/inference use one ordinary forward and hard-label CE.
 
-| Metric | Value | Epoch |
-|---|---:|---:|
-| Best validation accuracy | **78.72%** | 5 |
-| Validation loss | **0.6806** | 5 |
-| Training accuracy | **77.40%** | 5 |
-| Training loss | **0.764222** | 5 |
-| Gradient norm | **0.1754** | 5 |
-| Learning rate | **0.006** | 5 |
+Authoritative receipt: `stages/010/RESULT.json`; per-epoch evidence: `EPOCH_PROGRESS.jsonl` and `logs/mlp_snn/version_0/metrics.csv`.
 
-## Model size and computation
-
-| Measurement | Value |
-|---|---:|
-| Total parameters | **1,689,910** |
-| Trainable parameters | **1,688,435** |
-| Average padded validation timesteps/sample | **300.00** |
-| Estimated dense forward GFLOPs/sample | **1.0087** |
-
-The GFLOPs estimate counts dense feed-forward and recurrent matrix multiply-adds, with one multiply-add equal to two FLOPs. It uses the actual average padded validation sequence length. Elementwise neuron-state updates, loss computation, backward propagation, and data loading are excluded. It is therefore a reproducible forward-compute estimate rather than measured GPU throughput.
-
-## Best checkpoint
-
-```text
-ckpt/epoch=5-step=882.ckpt
-```
-
-## Main hyperparameters
-
-| Hyperparameter | Value |
-|---|---:|
-| Epoch limit | 40 |
-| Batch size | 512 |
-| Initial learning rate | 0.006 |
-| LR scheduler | plateau |
-| LR scheduler factor | 0.9 |
-| LR scheduler patience | 9999 |
-| Early stopping | false |
-| Early-stopping patience | 50 |
-| Early-stopping minimum delta | 0.001 |
-| Dropout | 0.15 |
-| Hidden layers | 2 |
-| Neurons per hidden layer | 720 |
-| Gradient clipping | 1.5 |
-
-## Files
-
-- Metrics: `logs/mlp_snn/version_0/metrics.csv`
-- Hyperparameters: `logs/mlp_snn/version_0/hparams.yaml`
-- Runtime log: `out.log`
-- Checkpoints: `ckpt/`
-
-## Resume command
+Rerun/verify the same bounded stage (an interrupted run resumes its own last checkpoint):
 
 ```powershell
-.\.venv\Scripts\python.exe runner.py --models RDROP_SE_adLIF --datasets SSC --seeds 42 --validation-only --logdir "results/experiments/complementary_speaker_dev_v2/c005_dropout_ssc_v1/runs"
+.\.ven\Scripts\python.exe runner.py --models RDROP_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_C005_dropout_ssc_v1.yaml --stage-ceiling 10
 ```
-
-## Evaluation note
-
-This run uses `validate_on: validation`. If this is the test split, checkpoint selection is not an unbiased final test evaluation.

@@ -1,4 +1,4 @@
-"""Opt-in R-Drop training; ordinary single-pass SE-adLIF inference is retained."""
+"""Opt-in R-Drop training; ordinary single-pass inference is retained."""
 import math
 
 import torch
@@ -16,9 +16,11 @@ def validate_dropout_consistency_config(cfg):
             raise ValueError(f'Dropout consistency {name} must be finite numeric')
     if alpha < 0 or not 0 <= epsilon < 1:
         raise ValueError('Require alpha >= 0 and 0 <= smoothing epsilon < 1')
-    if (cfg.get('auto_regression', False) or not cfg.two_layers
-            or any(cfg[layer].cell != 'se_adlif' for layer in ('l1', 'l2'))):
-        raise ValueError('This declared objective requires two-layer SE classification')
+    backbone = cfg.get('dropout_consistency_backbone', 'se_adlif')
+    if (backbone not in ('se_adlif', 'dth_se_adlif')
+            or cfg.get('auto_regression', False) or not cfg.two_layers
+            or any(cfg[layer].cell != backbone for layer in ('l1', 'l2'))):
+        raise ValueError('Require a declared matching two-layer SE or explicit DTH classification backbone')
     if not 0 < cfg.dropout < 1 or cfg.get('input_fir') or cfg.get('spike_delete_probability', 0):
         raise ValueError('Require ordinary dropout and no undeclared input transforms')
     return float(alpha), float(epsilon)

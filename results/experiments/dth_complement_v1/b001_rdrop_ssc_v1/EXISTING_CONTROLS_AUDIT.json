@@ -1,0 +1,302 @@
+{
+  "verified_at": "2026-11-12T18:39:29.717686+00:00",
+  "records": [
+    {
+      "dataset": "SSC",
+      "n": 3,
+      "records": [
+        {
+          "seed": 42,
+          "test_accuracy": 0.8046315312385559,
+          "test_loss": 0.6962849497795105,
+          "completed_validation_epochs": 40,
+          "best_validation_accuracy": 0.8183548450469971,
+          "metrics": [
+            {
+              "path": "results/valid/DTH_SE_adLIF/SSC/seed_42/logs/mlp_snn/version_0/metrics.csv",
+              "sha256": "a84038ce1c9f03bc2e473770ca8c8e05c536295547f043d6fda6acce60237497"
+            }
+          ],
+          "config": {
+            "paper_baseline_version": "paper_classification_v1",
+            "paper_baseline_dataset": "SSC",
+            "evaluation_protocol": "ssc_mean_loss_v1",
+            "batch_size": 256,
+            "lr": 0.006,
+            "n_epochs": 40,
+            "loss_agg": "mean_membrane_potentials",
+            "early_stopping": false,
+            "scheduler": "plateau",
+            "patience": 9999,
+            "factor": 0.9,
+            "dropout": 0.15
+          },
+          "dataset_config": {
+            "_target_": "datasets.ssc.SSCLDM",
+            "batch_size": 256,
+            "data_path": "data",
+            "ignore_first_timesteps": 10,
+            "num_classes": 35,
+            "num_workers": 0,
+            "pad_to_min_size": 300,
+            "spatial_factor": 0.2,
+            "time_factor": 0.001,
+            "window_size": 4
+          },
+          "checkpoints_present": [
+            "results/valid/DTH_SE_adLIF/SSC/seed_42/ckpt/epoch=19-step=5880.ckpt",
+            "results/valid/DTH_SE_adLIF/SSC/seed_42/ckpt/last.ckpt"
+          ],
+          "RESULT_verified": true
+        },
+        {
+          "seed": 123,
+          "test_accuracy": 0.7984005212783813,
+          "test_loss": 0.7667438387870789,
+          "completed_validation_epochs": 40,
+          "best_validation_accuracy": 0.8171526193618774,
+          "metrics": [
+            {
+              "path": "results/valid/DTH_SE_adLIF/SSC/seed_123/logs/mlp_snn/version_0/metrics.csv",
+              "sha256": "032062bbad07772d6800f0aeb6563743efb93ef6b0b3413845e4aa51c9e5686d"
+            }
+          ],
+          "config": {
+            "paper_baseline_version": "paper_classification_v1",
+            "paper_baseline_dataset": "SSC",
+            "evaluation_protocol": "ssc_mean_loss_v1",
+            "batch_size": 256,
+            "lr": 0.006,
+            "n_epochs": 40,
+            "loss_agg": "mean_membrane_potentials",
+            "early_stopping": false,
+            "scheduler": "plateau",
+            "patience": 9999,
+            "factor": 0.9,
+            "dropout": 0.15
+          },
+          "dataset_config": {
+            "_target_": "datasets.ssc.SSCLDM",
+            "batch_size": 256,
+            "data_path": "data",
+            "ignore_first_timesteps": 10,
+            "num_classes": 35,
+            "num_workers": 0,
+            "pad_to_min_size": 300,
+            "spatial_factor": 0.2,
+            "time_factor": 0.001,
+            "window_size": 4
+          },
+          "checkpoints_present": [
+            "results/valid/DTH_SE_adLIF/SSC/seed_123/ckpt/epoch=39-step=11760.ckpt",
+            "results/valid/DTH_SE_adLIF/SSC/seed_123/ckpt/last.ckpt"
+          ],
+          "RESULT_verified": true
+        },
+        {
+          "seed": 456,
+          "test_accuracy": 0.7956039905548096,
+          "test_loss": 0.6906729936599731,
+          "completed_validation_epochs": 40,
+          "best_validation_accuracy": 0.8118425011634827,
+          "metrics": [
+            {
+              "path": "results/valid/DTH_SE_adLIF/SSC/seed_456/logs/mlp_snn/version_0/metrics.csv",
+              "sha256": "5017e03d0d93ac50bffd085c28ad6c584fa3c279987b12aea9521004d241a98f"
+            }
+          ],
+          "config": {
+            "paper_baseline_version": "paper_classification_v1",
+            "paper_baseline_dataset": "SSC",
+            "evaluation_protocol": "ssc_mean_loss_v1",
+            "batch_size": 256,
+            "lr": 0.006,
+            "n_epochs": 40,
+            "loss_agg": "mean_membrane_potentials",
+            "early_stopping": false,
+            "scheduler": "plateau",
+            "patience": 9999,
+            "factor": 0.9,
+            "dropout": 0.15
+          },
+          "dataset_config": {
+            "_target_": "datasets.ssc.SSCLDM",
+            "batch_size": 256,
+            "data_path": "data",
+            "ignore_first_timesteps": 10,
+            "num_classes": 35,
+            "num_workers": 0,
+            "pad_to_min_size": 300,
+            "spatial_factor": 0.2,
+            "time_factor": 0.001,
+            "window_size": 4
+          },
+          "checkpoints_present": [
+            "results/valid/DTH_SE_adLIF/SSC/seed_456/ckpt/epoch=11-step=3528.ckpt",
+            "results/valid/DTH_SE_adLIF/SSC/seed_456/ckpt/last.ckpt"
+          ],
+          "RESULT_verified": true
+        }
+      ],
+      "mean_percent": 79.95453476905823,
+      "sample_sd_pp": 0.46213735333479006,
+      "paper_mean_percent": 80.44,
+      "delta_paper_pp": -0.4854652309417702
+    },
+    {
+      "dataset": "ECG",
+      "n": 3,
+      "records": [
+        {
+          "seed": 42,
+          "test_accuracy": 0.8781188726425171,
+          "test_loss": 0.32940083742141724,
+          "completed_validation_epochs": 400,
+          "best_validation_accuracy": 0.8586984276771545,
+          "metrics": [
+            {
+              "path": "results/valid/DTH_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv",
+              "sha256": "3186ae183810ef7b3ef0b3993d8fe0fb7136bccc521605e66e65de650678e252"
+            }
+          ],
+          "config": {
+            "paper_baseline_version": "paper_classification_v1",
+            "paper_baseline_dataset": "ECG",
+            "evaluation_protocol": "paper_classification_v1",
+            "batch_size": 64,
+            "lr": 0.01,
+            "n_epochs": 400,
+            "loss_agg": "summed_membrane_potentials",
+            "early_stopping": false,
+            "scheduler": "plateau",
+            "patience": 9999,
+            "factor": 0.9,
+            "dropout": 0.15
+          },
+          "dataset_config": {
+            "_target_": "datasets.ecg.ECGLDM",
+            "batch_size": 64,
+            "data_path": "data",
+            "num_classes": 6,
+            "num_workers": 0,
+            "random_seed": 42,
+            "valid_fraction": 0.05
+          },
+          "checkpoints_present": [
+            "results/valid/DTH_SE_adLIF/ECG/seed_42/ckpt/epoch=385-step=3474.ckpt",
+            "results/valid/DTH_SE_adLIF/ECG/seed_42/ckpt/last.ckpt"
+          ]
+        },
+        {
+          "seed": 123,
+          "test_accuracy": 0.8780970573425293,
+          "test_loss": 0.33549007773399353,
+          "completed_validation_epochs": 400,
+          "best_validation_accuracy": 0.8629003167152405,
+          "metrics": [
+            {
+              "path": "results/valid/DTH_SE_adLIF/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv",
+              "sha256": "26dccc911cdfefc9e8ff731bf754ab94dd6b3525053a9f77501b602ff7acf71f"
+            }
+          ],
+          "config": {
+            "paper_baseline_version": "paper_classification_v1",
+            "paper_baseline_dataset": "ECG",
+            "evaluation_protocol": "paper_classification_v1",
+            "batch_size": 64,
+            "lr": 0.01,
+            "n_epochs": 400,
+            "loss_agg": "summed_membrane_potentials",
+            "early_stopping": false,
+            "scheduler": "plateau",
+            "patience": 9999,
+            "factor": 0.9,
+            "dropout": 0.15
+          },
+          "dataset_config": {
+            "_target_": "datasets.ecg.ECGLDM",
+            "batch_size": 64,
+            "data_path": "data",
+            "num_classes": 6,
+            "num_workers": 0,
+            "random_seed": 42,
+            "valid_fraction": 0.05
+          },
+          "checkpoints_present": [
+            "results/valid/DTH_SE_adLIF/ECG/seed_123/ckpt/epoch=213-step=1926.ckpt",
+            "results/valid/DTH_SE_adLIF/ECG/seed_123/ckpt/last.ckpt"
+          ]
+        },
+        {
+          "seed": 456,
+          "test_accuracy": 0.8726783990859985,
+          "test_loss": 0.33400285243988037,
+          "completed_validation_epochs": 400,
+          "best_validation_accuracy": 0.859236478805542,
+          "metrics": [
+            {
+              "path": "results/valid/DTH_SE_adLIF/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv",
+              "sha256": "4dbf8a1502af3486b1c8c3e927463536fa246e9f75f30fae452bfde9aefe08d9"
+            }
+          ],
+          "config": {
+            "paper_baseline_version": "paper_classification_v1",
+            "paper_baseline_dataset": "ECG",
+            "evaluation_protocol": "paper_classification_v1",
+            "batch_size": 64,
+            "lr": 0.01,
+            "n_epochs": 400,
+            "loss_agg": "summed_membrane_potentials",
+            "early_stopping": false,
+            "scheduler": "plateau",
+            "patience": 9999,
+            "factor": 0.9,
+            "dropout": 0.15
+          },
+          "dataset_config": {
+            "_target_": "datasets.ecg.ECGLDM",
+            "batch_size": 64,
+            "data_path": "data",
+            "num_classes": 6,
+            "num_workers": 0,
+            "random_seed": 42,
+            "valid_fraction": 0.05
+          },
+          "checkpoints_present": [
+            "results/valid/DTH_SE_adLIF/ECG/seed_456/ckpt/epoch=341-step=3078.ckpt",
+            "results/valid/DTH_SE_adLIF/ECG/seed_456/ckpt/last.ckpt"
+          ]
+        }
+      ],
+      "mean_percent": 87.62981096903482,
+      "sample_sd_pp": 0.313478031467279,
+      "paper_mean_percent": 88.18,
+      "delta_paper_pp": -0.5501890309651856
+    }
+  ],
+  "published_values_verified_in_local_PDF": [
+    {
+      "page": 10,
+      "value": "80.44",
+      "compact_context": "1.76LIFBittar&Garner2022[16]141k66.67LIFBittar&Garner2022[16]1.1M68.14LIFThiswork1.7M75.23SE-adLIFThiswork1.6M80.44\u00b10.26ECGLIFThiswork1.8k77.8\u00b11.85SE-adLIFThiswork1.8k86.88\u00b10.40synapticweights\u03b8,aswellasallneuronparameter"
+    },
+    {
+      "page": 11,
+      "value": "80.44",
+      "compact_context": ".4cAdLIF[24]\u27170.35M177.5DCLS-Delays[39]\u27172.5M580.69\u00b10.21EF-adLIF(2layers)\u27131.6M579.80\u00b10.18SE-adLIF(2layers)\u27131.6M580.44\u00b10.26ECGLIF(1layer)\u27131.8k577.8\u00b11.85ALIF[25]\u27131.8k185.9BHRF[17]\u27131.8k587.0\u00b10.4EF-adLIF(1layer)\u27131.8k2087.10\u00b10."
+    },
+    {
+      "page": 11,
+      "value": "88.18",
+      "compact_context": "r)\u27131.8k2087.10\u00b10.46SE-adLIF(1layer)\u27131.8k2086.88\u00b10.40EF-adLIF(2layers)\u27134.6k2087.83\u00b10.51SE-adLIF(2layers)\u27134.6k2088.18\u00b10.36complementtotheenhancedsomaticdynamicsofthemodelsstudiedinourwork(seealso\u201dDiscussion\u201d).Networkscompo"
+    }
+  ],
+  "existing_SSC_seed42_control_reusable_for_initial10": false,
+  "reasons": [
+    "CanonicalSSCcontrolhasbatch256/worker0;newbatchisnotyetcalibrated.",
+    "Onlybestepochindex19andlastcheckpointsretained;nocheckpointselectedfromfirst10epochs.",
+    "Freshsame-budgetcontrolrequiredregardlessofsimilarfull40testscore."
+  ],
+  "TTA_included": false,
+  "old_results_overwritten": false
+}

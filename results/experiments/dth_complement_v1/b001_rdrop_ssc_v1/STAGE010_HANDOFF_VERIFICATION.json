@@ -1,0 +1,32 @@
+{
+  "verified_at": "2026-11-12T20:09:29.513454+00:00",
+  "launcher_pid": 23192,
+  "candidate_training_pid": 28308,
+  "candidate_wrapper_pid": 6576,
+  "control_completed_epochs": 10,
+  "control_selected_completed_epoch": 9,
+  "control_best_validation_accuracy": 0.810339629650116,
+  "control_online_train_at_selection": 0.841571033000946,
+  "control_online_train_final": 0.8456101417541504,
+  "control_best_checkpoint_sha256": "e8e952bb30bc618a31453ea0ce027aa6e42275518a4bc7e047b92e446110b889",
+  "control_last_checkpoint_sha256": "f3d1b2f269d48f0fde6b9917cdac9128eb5d7b6a1670f8e9bd88f44c6813f2f3",
+  "control_checkpoint_hashes_and10validation_rows_verified": true,
+  "candidate_start": "freshseed42",
+  "common_initial_full_model_state_sha256": "884ba20139002c242fcd43972b3c5cb484d55bf4dc1ff69b932bc2415bc2a9a2",
+  "initial_tensor_count": 37,
+  "actual_initial_tensors_RNG_flags_match": true,
+  "verified_fields": [
+    "model_state_sha256",
+    "tensor_count",
+    "cpu_rng_sha256",
+    "cuda_rng_sha256",
+    "precision",
+    "float32_matmul_precision",
+    "deterministic_algorithms",
+    "cuda_allow_tf32",
+    "cublas_workspace_config"
+  ],
+  "source288files_and9protocol_artifacts_unchanged": true,
+  "official_tests_disabled": true,
+  "decision": "Wait for candidate10completion and post-stage validation audit before any extension or frozen exploratory tests."
+}

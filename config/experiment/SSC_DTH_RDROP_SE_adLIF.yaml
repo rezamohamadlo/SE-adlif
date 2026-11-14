@@ -1,0 +1,10 @@
+# @package _global_
+defaults:
+  - SSC_DTH_SE_adLIF
+  - /paper_baseline
+  - _self_
+exp_name: SSC_DTH_RDROP_SE_adLIF
+training_objective: classification_dropout_consistency_v1
+dropout_consistency_backbone: dth_se_adlif
+dropout_consistency_alpha: 1
+label_smoothing_epsilon: 0

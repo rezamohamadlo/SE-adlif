@@ -21,7 +21,7 @@ def load_study(path):
     if not actual.is_relative_to(ROOT / 'config/studies'):
         raise ValueError('Study definition must be under config/studies')
     study = OmegaConf.to_container(OmegaConf.load(actual), resolve=True)
-    if study['version'] not in ('complementary_mechanisms_v1','complementary_speaker_dev_v2'):
+    if study['version'] not in ('complementary_mechanisms_v1','complementary_speaker_dev_v2','dth_complement_v1'):
         raise ValueError('Unknown staged comparison version')
     output = local_path(study['output_root'])
     if not output.is_relative_to(ROOT / 'results/experiments'):
@@ -120,7 +120,7 @@ def validate_config(cfg):
             for key, expected in spec.get('hidden_cell_settings', {}).get(expected_cell, {}).items():
                 if cfg[layer].get(key) != expected:
                     raise ValueError(f'Hidden neuron setting {layer}.{key} differs from the declared arm')
-    if spec['version']=='complementary_speaker_dev_v2':
+    if spec['version'] in ('complementary_speaker_dev_v2','dth_complement_v1'):
         expected_probability=spec['spike_deletion'].get(cfg['model_variant'],0)
         if cfg.get('spike_delete_probability',0)!=expected_probability:
             raise ValueError('Training event deletion differs from the declared factorial arm')

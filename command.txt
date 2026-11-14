@@ -1,3 +1,34 @@
+# USER STOP: all study training/queues stopped; Goal paused. Do not run historical commands below.
+# Verified one-time C005 SHD/SSC diagnostics; no repeated inference or new training.
+# Report: results/experiments/complementary_speaker_dev_v2/evaluations/user_stop_official_test_v1/REVALIDATED_REPORT_FA.md
+# New B001 DTH SSC pair stopped at control10/candidate7; incomplete/unmatched and not tested.
+
+# ACTIVE B001 SSC42: DTH control10complete (bestval81.03%,selectedepoch9); DTH+RDrop now running fresh.
+# LauncherPID23192 / actualcandidatePID28308. Source288/protocol9 files frozen; no extension or tests yet.
+# Watch results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/stage010_stdout.log
+# Earlier commands/status below are historical; check processes before recovery and do not duplicate.
+
+# ACTIVE DTH+B B001 SSC42 queue PID23192: fresh DTH control now running; DTH+RDrop queued.
+# train256/val1024,LR0.006unchanged; hard10ceiling/full40schedule; ordinary clean validation,testsdisabled.
+# Original user authorization applies; earlier agent-imposed resource hold is superseded; no Goal reset.
+# Do not duplicate this queue. Check actual processes before any recovery command.
+# Watch results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/stage010_stdout.log
+.\.ven\Scripts\python.exe runner.py --models DTH_SE_adLIF DTH_RDROP_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/dth_complement_B001_ssc_v1.yaml --stage-ceiling 10
+
+# Earlier commands/status below are historical references.
+# NEW DTH+B study PREPARED ONLY: no main training active.
+# Plan: docs/experiments/dth-complement-study-v1.md
+# Real calibration selected train256/val1024,LR0.006;20checks passed;twoarm10 estimated3.4h training-only.
+# Resource reply pending after native Goal counter exceeded requested50kallocation; do not auto-launch.
+# Preflight (no training):
+.\.ven\Scripts\python.exe runner.py --models DTH_SE_adLIF DTH_RDROP_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/dth_complement_B001_ssc_v1.yaml --stage-ceiling 10 --dry-run
+# Main command below is a reference only; hold until resource reply:
+# .\.ven\Scripts\python.exe runner.py --models DTH_SE_adLIF DTH_RDROP_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/dth_complement_B001_ssc_v1.yaml --stage-ceiling 10
+
+# RESEARCH LOOP STOPPED BY USER: no new ideas, training stages, continuations or searches.
+# One-time exploratory evaluation: results/experiments/complementary_speaker_dev_v2/evaluations/user_stop_official_test_v1/
+# Commands below are historical references; do not launch automatically. Goal will remain paused after reporting.
+
 # Current research-plan decision: results/experiments/complementary_speaker_dev_v2/ACTIVE_PLAN_DECISION.md
 # Speaker-disjoint development -> shortlist sensitivity -> SSC/ECG validation -> frozen fresh canonical comparisons -> official tests.
 # Preserve the active bounded SSC queue; no automatic extension or test evaluation.

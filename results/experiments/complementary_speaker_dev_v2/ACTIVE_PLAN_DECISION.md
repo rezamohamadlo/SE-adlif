@@ -1,3 +1,5 @@
+> User stop (2026-11-12): the research loop is stopped. Only the explicitly authorized one-time exploratory tests and report may finish; no automatic ideas, training, continuation or tuning follow. See [evaluation evidence](evaluations/user_stop_official_test_v1/). The historical stage order below is inactive until the user resumes.
+
 # Active research-plan decision: generalization first
 
 Effective 2026-11-12. This decision confirms and clarifies the subsequent-stage
