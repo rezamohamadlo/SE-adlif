@@ -1,0 +1,27 @@
+{
+  "ECG_training_only_read": true,
+  "official_test_not_constructed": true,
+  "input_shape": [
+    618,
+    1301,
+    4
+  ],
+  "signed_input_values": [
+    -1.0,
+    0.0,
+    1.0
+  ],
+  "fitting_count": 588,
+  "validation_count": 30,
+  "validation_class_coverage": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "target_dtype": "torch.int64",
+  "original_dummy_target_and_block_masks_verified": true,
+  "training_executed": false
+}

@@ -1,0 +1,23 @@
+{
+  "best_checkpoint": "results/experiments/dth_complement_v1/b001_rdrop_shd_v1/runs/DTH_SE_adLIF/SHD/seed_42/stages/030/best.ckpt",
+  "best_checkpoint_sha256": "4e8dd85ac4ce5c4043547cde29710bf48d4d824bf3edd22c94d4a1b556a8015f",
+  "best_validation_accuracy": 0.980380117893219,
+  "completed_epochs": 30,
+  "dataset": "SHD",
+  "dataset_label": "SHD*",
+  "full_budget": 300,
+  "label_smoothing_epsilon": 0.0,
+  "last_checkpoint": "results/experiments/dth_complement_v1/b001_rdrop_shd_v1/runs/DTH_SE_adLIF/SHD/seed_42/stages/030/last.ckpt",
+  "last_checkpoint_sha256": "39c2367305f3b332d64322adfca514f97f43ff4c367a703d404b9fe1a788fbc1",
+  "metric": "validation_accuracy",
+  "model": "DTH_SE_adLIF",
+  "preliminary": true,
+  "protocol": "paper_classification_v1_dth_complement_v1",
+  "seed": 42,
+  "selected_epoch_index": 26,
+  "split_fingerprint": null,
+  "status": "stage_complete",
+  "test_evaluated": false,
+  "training_objective": "classification",
+  "validation_loss_definition": "ordinary hard-label cross-entropy"
+}

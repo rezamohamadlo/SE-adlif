@@ -2,7 +2,7 @@
   "study": "dth_complement_v1",
   "plan": "docs/experiments/dth-complement-study-v1.md",
   "idea": "B001_DTH_DROPOUT_CONSISTENCY",
-  "status": "completed_user_authorized_ten_epoch_test_report_stop",
+  "status": "first30_selection_window_tests_complete_candidate_stopped31",
   "test_exposure": "BselectedafterC005ordinarySHD/SSCtests;adaptiveworkexploratory",
   "frozen_mechanism": {
     "backbone": "dth_se_adlif",
@@ -35,7 +35,7 @@
   "completed_main_runs": 1,
   "main_test_results_pending": false,
   "handoff_verification": "STAGE010_HANDOFF_VERIFICATION.json",
-  "candidate_completed_epochs": 10,
+  "candidate_completed_epochs": 31,
   "first_epoch_evidence": "CANDIDATE_FIRST_EPOCH_VERIFICATION.json",
   "ecg_test_data_prerequisite": {
     "evidence": "ECG_TEST_DATA_ACQUISITION.json",
@@ -46,12 +46,20 @@
   },
   "training_active": false,
   "queue_active": false,
-  "control_completed_epochs": 10,
+  "control_completed_epochs": 30,
   "automatic_extension_allowed": false,
   "automatic_tests_allowed": false,
   "stop_evidence": "USER_REQUESTED_STOP_VERIFICATION.json",
   "current_pair_budget_status": "incomplete_unmatched_10_vs_7_not_tested_not_mixed_with_C005",
   "one_time_exploratory_test": "evaluations/user_requested_ssc_test_v1/ALL_RESULTS.json",
-  "next_action": "At10freezevalidationselectedcandidate,testonce,reuseexactDTH10test,reportandstop.",
-  "current_comparison": "evaluations/user_completed10_ssc_test_v1/COMPARISON.json"
+  "next_action": "Existing20naturalexit -> officialrunner ownlast resume40 -> frozen validation-selected test -> Persian report -> stop",
+  "current_comparison": "evaluations/user_completed10_ssc_test_v1/COMPARISON.json",
+  "target_completed_epochs": 40,
+  "stage020_evidence": "resume_provenance_history/user_requested_stage020/STAGE020_PREREGISTRATION.json",
+  "latest_user_requested_live_test": "evaluations/user_epoch019_ssc_test_v1/ALL_RESULTS.json",
+  "latest_test_checkpoint_epoch": 19,
+  "latest_test_accuracy": 0.805318418212148,
+  "stage040_sequence_pid": 16372,
+  "scheduled_user_requested_test_after40": false,
+  "first30_table": "results/experiments/dth_complement_v1/table30_then_ecg_v1/TABLE_RESULTS.json"
 }

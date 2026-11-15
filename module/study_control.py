@@ -65,12 +65,18 @@ def study_overrides(study, ceiling, model, dataset, seed):
         overrides.append('++dataset.spawn_safe_transforms=true')
     if 'record_initial_state' in study:
         overrides.append(f'++study_record_initial_state={str(study["record_initial_state"]).lower()}')
+    if study.get('continuation_manifest'):
+        overrides.append(f'++study_continuation_manifest={json.dumps(study["continuation_manifest"])}')
+    if 'training_budget_epochs' in settings:
+        overrides += [f'n_epochs={settings["training_budget_epochs"]}',
+                      f'++study_original_schedule_epochs={settings["original_schedule_epochs"]}',
+                      f'++study_budget_extension_policy={settings["budget_extension_policy"]}']
     if 'training_objectives' in study:
         overrides += [f'++training_objective={study["training_objectives"][model]}',
                       f'++label_smoothing_epsilon={study["label_smoothing_epsilon"][model]}']
     if 'dropout_consistency_alpha' in study:
         overrides.append(f'++dropout_consistency_alpha={study["dropout_consistency_alpha"][model]}')
-    if study.get('protocol_id') and dataset != 'SHD':
+    if study.get('protocol_id') and (dataset != 'SHD' or study.get('canonical_protocol_override') is True):
         overrides.append(f'++evaluation_protocol={study["protocol_id"]}_{dataset}')
     if study['version']=='complementary_speaker_dev_v2' and dataset=='SHD':
         from datasets.shd_speaker_split import load_manifest, DEVELOPMENT_PROTOCOL
@@ -90,6 +96,27 @@ def study_overrides(study, ceiling, model, dataset, seed):
                       f'++evaluation_protocol={study.get("protocol_id",study["version"])}_{study["pair_id"]}',
                       f'++study_arm={json.dumps(study["arm_labels"][model])}']
     return overrides
+
+
+def expected_training_budget(cfg, spec, baseline):
+    """An explicit SSC-only extra budget; ordinary protocols stay strict."""
+    dataset=cfg['paper_baseline_dataset']
+    original=baseline['datasets'][dataset]['n_epochs']
+    settings=spec['datasets'][dataset]
+    if 'training_budget_epochs' not in settings:
+        if cfg.get('study_budget_extension_policy'):
+            raise ValueError('Undeclared training-budget extension')
+        return original
+    budget=settings['training_budget_epochs']
+    if (dataset!='SSC' or type(budget) is not int or budget<=original
+            or settings.get('original_schedule_epochs')!=original
+            or settings.get('budget_extension_policy')!='constant_plateau_budget_extension_v1'
+            or cfg.get('study_original_schedule_epochs')!=original
+            or cfg.get('study_budget_extension_policy')!='constant_plateau_budget_extension_v1'
+            or cfg.get('scheduler')!='plateau' or cfg.get('patience',0)<=budget
+            or not spec.get('continuation_manifest')):
+        raise ValueError('Unsafe or unrecorded training-budget extension')
+    return budget
 
 
 def validate_config(cfg):
@@ -136,9 +163,10 @@ def validate_config(cfg):
             or cfg['random_seed'] != spec['training_seed'] or cfg['early_stopping']
             or cfg.get('init_ckpt_path') or not cfg['dataset'].get('validation_only_data')):
         raise ValueError('Unsafe staged validation-only configuration')
-    for key in ('n_epochs', 'lr'):
-        if cfg[key] != baseline['datasets'][dataset][key]:
-            raise ValueError(f'Staging must retain the full-budget {key}')
+    if cfg['n_epochs']!=expected_training_budget(cfg,spec,baseline):
+        raise ValueError('Staging changed its declared training budget')
+    if cfg['lr']!=baseline['datasets'][dataset]['lr']:
+        raise ValueError('Staging must retain the baseline learning rate')
     for key in ('dropout', 'gradient_clip_val'):
         if cfg[key] != baseline['common'][key]:
             raise ValueError(f'Changed shared {key}')

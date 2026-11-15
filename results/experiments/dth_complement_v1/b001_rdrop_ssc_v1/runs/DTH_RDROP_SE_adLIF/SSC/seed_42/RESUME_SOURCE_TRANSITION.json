@@ -1,18 +1,18 @@
 {
   "version": "identical_training_source_resume_v1",
-  "created_at": "2026-11-14T06:32:46.782609+00:00",
-  "original_provenance": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/resume_provenance_history/CANDIDATE_LAUNCH_ENVIRONMENTS_BEFORE_IDENTICAL_SOURCE_GIT_TRANSITION.json",
-  "original_provenance_sha256": "f3dc8ea5e1dd169e93061f523e48c054baf2bb9a17ec6c53b77ac4cc040ede0d",
-  "source_snapshot": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/MAIN_SOURCE_SNAPSHOT.json",
-  "source_snapshot_sha256": "b607e04bd581c55d7fda3ea4ecbb6ebdf40a5533fa7daad4f6f687f03218860e",
+  "created_at": "2026-11-14T08:07:26.303404+00:00",
+  "original_provenance": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/resume_provenance_history/user_requested_stage020/BEFORE020_LAUNCH_ENVIRONMENTS.json",
+  "original_provenance_sha256": "7eab5e72357cc73f83b5f8383bdb7141de66ec08e6c67ec4902aee697eefc5d1",
+  "source_snapshot": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/resume_provenance_history/user_requested_stage020/STAGE020_SOURCE_SNAPSHOT.json",
+  "source_snapshot_sha256": "72b286c96e39eb51bcd9155eb64480a3f3663ab8391fb4b81af911fa92ba7a15",
   "guard_only_amendments": {
     "extended_seed_study.py": "527b905e64cea3ceb3abe7da75ce9c6b064828d1ed22a130949aac2aa890d67b"
   },
   "resumed_source_identity": {
-    "git_commit": "f3032e3dd5c2ad56c674e7cd3b3bc3e58d195032",
-    "source_files_sha256": "53adaf082599d46dccb3d06e74b942db39babfba46966f52e42db4e572e728b3",
-    "tracked_diff_sha256": "04fc5561d414cc32bde65a790293af32a105aabad3f4d5e1d21900237d423090"
+    "git_commit": "f1ab5aa7c0eeddf0ee80ec241d1aa732b8db839d",
+    "source_files_sha256": "e4e5777e7598f1f6619b27b918f2d9adaec42129076365980ff6207a1f94ba63",
+    "tracked_diff_sha256": "e820cd2b59fcec94fd6ca3f62acdb86167952e474a1da81b35a10237bbbfd5e8"
   },
-  "reason": "User requests exactly own-last SSC epochs8-10. Original code unchanged in all288snapshotfiles except opt-in provenance guard amendment. Git changed due evidence commit; preserve old launch records verbatim and validate actual code/config bytes. No optimizer/model/data/loss/training changes.",
-  "test_exposure": "Existing7epoch test explicitly exposed; this10epoch completion remains exploratory."
+  "reason": "Explicit user request to full-resume DTH+RDrop from own epoch10 last to exactly20; only added allowed stopping boundary20, original40epoch optimization schedule retained. Immutable prior provenance and snapshots preserved.",
+  "previous_transition": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/resume_provenance_history/user_requested_stage020/BEFORE020_RESUME_SOURCE_TRANSITION.json"
 }

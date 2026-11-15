@@ -1,3 +1,66 @@
+# ACTIVE: user-requested DTH+RDrop TOTAL epochs SHD100 / ECG70 / SSC70, seed42.
+# One GPU sequence4904: SHD current full-resume30to100, then ECG30to70, then SSC31to70.
+# Official runner only; weights/optimizer/scheduler/loops preserved and verified.
+# SSC70 is explicit budget deviation vs paper40; DTH controls remain30 (unmatched).
+# Sequence status: results/experiments/dth_complement_v1/extended_100_70_70_v1/SEQUENCE_STATUS.json
+# Current SHD log: results/experiments/dth_complement_v1/extended_100_70_70_v1/training_SHD_stdout.log
+# Updated table after each frozen ordinary test: results/experiments/dth_complement_v1/extended_100_70_70_v1/UPDATED_TEST_TABLE_FA.md
+# Old matched30 table and all original checkpoints preserved. Do not duplicate or change frozen source during sequence.
+
+# COMPLETE: requested four30epoch-window test cells plus subsequent ECG DTH+RDrop30 test.
+# Final report: results/experiments/dth_complement_v1/table30_then_ecg_v1/FINAL_REPORT_FA.md
+# No more stages scheduled. Historical commands below.
+
+# FOUR TEST CELLS COMPLETE (first30 validation window), seed42, noTTA.
+# SHD*: DTH92.712014%, DTH+RDrop93.242049%; SSC: DTH80.154058%, DTH+RDrop80.531842%.
+# Filled table: results/experiments/dth_complement_v1/table30_then_ecg_v1/TEST_TABLE_30_FA.md
+# ACTIVE NEXT: fresh ECG DTH+RDrop30, original400epoch schedule, maininitialupdates0.
+# Master status: results/experiments/dth_complement_v1/table30_then_ecg_v1/MASTER_STATUS.json
+# ECG log: results/experiments/dth_complement_v1/table30_then_ecg_v1/ecg30_training_stdout.log
+# Final report after ECG test: results/experiments/dth_complement_v1/table30_then_ecg_v1/FINAL_REPORT_FA.md
+# No duplicate launch, further budgets or new ideas scheduled. Historical commands below.
+
+# COMPLETE: bounded fresh SHD DTH/RDrop30 plus ordinary tests; SSC stopped.
+# Report: results/experiments/dth_complement_v1/b001_rdrop_shd_v1/CROSS_DATASET_TEST_REPORT_FA.md
+# No further training or experiments scheduled. Historical commands below.
+
+# ACTIVE USER TASK: complete four official-test cells using first30 validation window, THEN ECG DTH+RDrop30 test.
+# Master sequence26444 waits for existing SHD sequence22392; no duplicate GPU training.
+# Master status: results/experiments/dth_complement_v1/table30_then_ecg_v1/MASTER_STATUS.json
+# Filled table after SSC control30 test: results/experiments/dth_complement_v1/table30_then_ecg_v1/TEST_TABLE_30_FA.md
+# Final report after subsequent ECG test: results/experiments/dth_complement_v1/table30_then_ecg_v1/FINAL_REPORT_FA.md
+# Scope: finish SHD30/tests -> SSC control own-last10to30/test + reuse exact RDrop first30 selection -> table -> fresh ECG RDrop30/test -> stop.
+# No further ideas, searches, budget extensions or unrelated processes authorized.
+
+# Current SHD DTH-only control diagnostic: epoch16 test92.667845%, validation97.731453%; candidate result pending.
+# Report: results/experiments/dth_complement_v1/b001_rdrop_shd_v1/evaluations/user_live_DTH_epoch016_test_v1/REPORT.md
+# Existing matched30 training/test queue continues unchanged; do not duplicate.
+
+# SSC STOPPED at31 epochs; exact validation-selected epoch19 test80.531842%, all states preserved.
+# ACTIVE fresh canonical SHD* matched study: DTH30 then DTH+RDrop30, seed42; no SSC weights reuse.
+# Sequence22392 / official runner29200 / current DTH control training19956.
+# Status: results/experiments/dth_complement_v1/b001_rdrop_shd_v1/SEQUENCE_STATUS.json
+# Log: results/experiments/dth_complement_v1/b001_rdrop_shd_v1/stage030_stdout.log
+# Report (pending SHD tests, automatically updated after completion): results/experiments/dth_complement_v1/b001_rdrop_shd_v1/CROSS_DATASET_TEST_REPORT_FA.md
+# Stop after both30epoch receipts, frozen ordinary tests and report; no other stages or ideas scheduled.
+
+# ACTIVE20 + QUEUED40: user explicitly requested candidate SSC DTH+RDrop40 then ordinary test/report.
+# Existing training12612 continues to20; waiting sequence16372 then launches official runner40.
+# Sequence status: results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/STAGE040_SEQUENCE_STATUS.json
+# Training40 log (created after20 exits): results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/stage040_stdout.log
+# Final report (created after40 and test): results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/evaluations/user_completed40_ssc_test_v1/REPORT_FA.md
+# Do not duplicate queue. No other training/ideas or stages beyond40 authorized.
+
+# Latest explicit user-requested test: frozen validation-best epoch15 SSC80.330684%; training17of20 still active.
+# Test report: results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/evaluations/user_live_best_epoch015_ssc_test_v1/REPORT_FA.md
+
+# ACTIVE: user-authorized DTH+RDrop SSC seed42 full resume10to20 ONLY.
+# Launcher2664 / actual training12612. Restored all checkpoint states; stop ceiling20.
+# Watch results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/stage020_stdout.log
+# Estimated ten remaining epochs ~2h20m based on measured14min/epoch; no automatic test or40extension.
+# Do not launch duplicate. Recovery reference only, after inspecting actual processes:
+# .\.ven\Scripts\python.exe runner.py --models DTH_RDROP_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/dth_complement_B001_ssc_v1.yaml --stage-ceiling 20
+
 # COMPLETE: user-requested SSC DTH+RDrop resumed7to10; no training/queue active.
 # Test: DTH79.457364%, DTH+RDrop79.786086%; candidate-control +0.328721pp. Both10epochs.
 # Report: results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/evaluations/user_completed10_ssc_test_v1/REPORT_FA.md

@@ -1,0 +1,82 @@
+{
+  "mode": "full_state_continuation_with_explicit_metadata_routing_migration",
+  "source_run": "results/experiments/dth_complement_v1/b001_rdrop_shd_v1/runs/DTH_RDROP_SE_adLIF/SHD/seed_42",
+  "new_run": "results/experiments/dth_complement_v1/extended_100_70_70_v1/runs/DTH_RDROP_SE_adLIF/SHD/seed_42",
+  "starting_completed_epochs": 30,
+  "target_completed_epochs": 100,
+  "paper_baseline_schedule_epochs": 300,
+  "saved_training_budget": 300,
+  "model_data_loss_optimizer_schedule_unchanged": true,
+  "SSC_budget_extension_declared": false,
+  "checkpoints": [
+    {
+      "kind": "best",
+      "source_checkpoint": "results/experiments/dth_complement_v1/b001_rdrop_shd_v1/runs/DTH_RDROP_SE_adLIF/SHD/seed_42/ckpt/epoch=14-step=375.ckpt",
+      "source_checkpoint_sha256": "a8c9b88899419fdf894186a87ccc29889d3be1e9ac49eb614af8f65a12193483",
+      "derived_checkpoint": "results/experiments/dth_complement_v1/extended_100_70_70_v1/runs/DTH_RDROP_SE_adLIF/SHD/seed_42/ckpt/epoch=14-step=375.ckpt",
+      "derived_checkpoint_sha256": "3cb9dc5d09e6f764659af380ce0dcb0fe73438e61dc0f960438178c5648a3e59",
+      "preserved_state_hashes": {
+        "state_dict": "6c8f3f579a9b0617e329de5f50f0da16acf530c0c91aae358161c07f21657008",
+        "optimizer_states": "f489464a26819de5dbd7c596a8909c400191f40824a8a752e5200d0a82357b69",
+        "lr_schedulers": "bfd56ffc77e98b8ff04ae379cf4c93f92fca1f8d6b6ca9d06339eaf20ab90a64",
+        "loops": "da1b1fc8a25c75c095c242f32abec3ed2a3584b4b915836bed614a49e601a866"
+      },
+      "preserved_epoch": 14,
+      "preserved_global_step": 375
+    },
+    {
+      "kind": "last",
+      "source_checkpoint": "results/experiments/dth_complement_v1/b001_rdrop_shd_v1/runs/DTH_RDROP_SE_adLIF/SHD/seed_42/ckpt/last.ckpt",
+      "source_checkpoint_sha256": "7c3e29e25b055d110c47de319db2afff461acbbf638d58e1b04c31f301513631",
+      "derived_checkpoint": "results/experiments/dth_complement_v1/extended_100_70_70_v1/runs/DTH_RDROP_SE_adLIF/SHD/seed_42/ckpt/last.ckpt",
+      "derived_checkpoint_sha256": "fd94b462bacb442ad2b8848082cacf7d7e652574b483073a26cae539b915e14e",
+      "preserved_state_hashes": {
+        "state_dict": "6b7d0470ccb98c8c471297aac7df2ad65ef2e44355afe50e156e8356189e8fe7",
+        "optimizer_states": "31913c1d693c4c47739447f2b4aee6882956cba8e89dbf7de7bb4ba890bc839b",
+        "lr_schedulers": "7e745016423400ed227f676783fba14663a0d27739f3ba770ecc04a6595ec0d0",
+        "loops": "d150a780081cdb8c4a5a094e637b77cc5b43a60dafb3bf8ccb565f966a744398"
+      },
+      "preserved_epoch": 29,
+      "preserved_global_step": 750
+    }
+  ],
+  "configuration_changes": {
+    "study_idea": {
+      "original": "B001_DTH_DROPOUT_CONSISTENCY_SHD_TRANSFER",
+      "continued": "USER_DTH_RDROP_LONGER_BUDGETS"
+    },
+    "stage_ceiling": {
+      "original": 30,
+      "continued": 100
+    },
+    "logdir": {
+      "original": "results/experiments/dth_complement_v1/b001_rdrop_shd_v1/runs/DTH_RDROP_SE_adLIF/SHD/seed_42",
+      "continued": "results/experiments/dth_complement_v1/extended_100_70_70_v1/runs/DTH_RDROP_SE_adLIF/SHD/seed_42"
+    },
+    "study_continuation_manifest": {
+      "original": null,
+      "continued": "results/experiments/dth_complement_v1/extended_100_70_70_v1/CONTINUATION_PLAN.json"
+    },
+    "study_file": {
+      "original": "config/studies/dth_complement_B001_shd_v1.yaml",
+      "continued": "config/studies/dth_complement_extended_100_70_70_v1.yaml"
+    },
+    "study_hypothesis": {
+      "original": "Check the fixed SSC DTH plus R-Drop mechanism on its own canonical SHD split; no SSC weights or speaker-holdout weights are reused.",
+      "continued": "User-requested full-state continuation of the fixed DTH plus R-Drop recipe; SHD100/ECG70 retain their original300/400schedule, SSC70 explicitly extends its original40epoch constant-plateau budget. No new hyperparameters or score-based decisions."
+    },
+    "launcher_logdir": {
+      "original": "results/experiments/dth_complement_v1/b001_rdrop_shd_v1/runs",
+      "continued": "results/experiments/dth_complement_v1/extended_100_70_70_v1/runs"
+    },
+    "evaluation_protocol": {
+      "original": "paper_classification_v1_dth_complement_v1_classification_dropout_consistency_v1",
+      "continued": "dth_rdrop_extended_100_70_70_v1_SHD_classification_dropout_consistency_v1"
+    }
+  },
+  "old_initial_state": "results/experiments/dth_complement_v1/b001_rdrop_shd_v1/runs/DTH_RDROP_SE_adLIF/SHD/seed_42/INITIAL_MODEL_STATE.json",
+  "original_metrics_sha256": "f83455e6a6b4e9f33ac2326128f90d171affec4f3a79cd24e3c6a36b7ca58b6f",
+  "source_checkpoint_unchanged": true,
+  "restart_random_sequence_not_guaranteed_equivalent_to_uninterrupted": true,
+  "prior_tests_exposed": true
+}

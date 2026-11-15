@@ -1,0 +1,26 @@
+{
+  "status": "SHD_full_state_continuation_active_ECG_and_SSC_queued",
+  "training_seed": 42,
+  "targets": {
+    "SHD": 100,
+    "ECG": 70,
+    "SSC": 70
+  },
+  "starts": {
+    "SHD": 30,
+    "ECG": 30,
+    "SSC": 31
+  },
+  "sequence_pid": 4904,
+  "SHD_actual_training_pid": 29700,
+  "training_active": true,
+  "queue_active": true,
+  "tests_after_each_validation_selected_target": true,
+  "tta": false,
+  "prior_test_exposure": true,
+  "controls_budget_unmatched": true,
+  "baseline_SSC_budget_extension_explicit": true,
+  "source_and_state_proof": "CONTINUATION_PLAN.json",
+  "report": "UPDATED_TEST_TABLE_FA.md",
+  "no_other_training_scheduled": true
+}

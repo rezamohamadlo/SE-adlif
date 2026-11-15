@@ -1,0 +1,33 @@
+{
+  "status": "matched30_both_official_tests_complete",
+  "seed": 42,
+  "protocol": "canonical SHD* random20 split42",
+  "models": [
+    "DTH_SE_adLIF",
+    "DTH_RDROP_SE_adLIF"
+  ],
+  "ceiling": 30,
+  "full_schedule_epochs": 300,
+  "training_active": false,
+  "queue_active": false,
+  "sequence_pid": 22392,
+  "runner_pid": 29200,
+  "current_training_pid": 19956,
+  "SSC_stopped": true,
+  "source_snapshot": "STUDY_SOURCE_SNAPSHOT.json",
+  "split_audit": "SPLIT_AND_SSC_STOP_AUDIT.json",
+  "report": "CROSS_DATASET_TEST_REPORT_FA.md",
+  "official_test_after_validation_freeze": true,
+  "tta": false,
+  "prior_test_exposure": true,
+  "automatic_extension": false,
+  "latest_control_diagnostic_test": "evaluations/user_live_DTH_epoch016_test_v1/ALL_RESULTS.json",
+  "latest_control_test_accuracy": 0.926678445229682,
+  "latest_control_test_checkpoint_epoch": 16,
+  "control_test_does_not_represent_RDrop": true,
+  "matched30_results_complete": true,
+  "control_completed_epochs": 30,
+  "candidate_completed_epochs": 30,
+  "actual_initial_states_and_rng_match": true,
+  "first30_table": "results/experiments/dth_complement_v1/table30_then_ecg_v1/TABLE_RESULTS.json"
+}

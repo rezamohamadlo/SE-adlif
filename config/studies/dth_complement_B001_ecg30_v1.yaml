@@ -1,0 +1,42 @@
+version: dth_complement_v1
+candidate_version: B001_dth_dropout_consistency_ecg30_v1
+protocol_id: dth_complement_rdrop_ecg30_v1
+plan: docs/experiments/dth-complement-study-v1.md
+output_root: results/experiments/dth_complement_v1/b001_rdrop_ecg_v1/runs
+idea: B001_DTH_DROPOUT_CONSISTENCY_ECG_TRANSFER
+role: user_requested_exploratory_ECG30_after_completed_two_dataset_test_table
+training_seed: 42
+split_seed: 42
+hypothesis: Fixed alpha1 dropout consistency on the ECG-specific DTH architecture;
+  initial30epoch screen, not full400 confirmation
+models:
+- DTH_RDROP_SE_adLIF
+arm_labels:
+  DTH_RDROP_SE_adLIF: DTH plus R-Drop
+training_objectives:
+  DTH_RDROP_SE_adLIF: classification_dropout_consistency_v1
+label_smoothing_epsilon:
+  DTH_RDROP_SE_adLIF: 0
+dropout_consistency_alpha:
+  DTH_RDROP_SE_adLIF: 1
+spike_deletion:
+  DTH_RDROP_SE_adLIF: 0
+input_fir_modes:
+  DTH_RDROP_SE_adLIF: null
+hidden_cells:
+  DTH_RDROP_SE_adLIF: dth_se_adlif
+hidden_cell_settings:
+  dth_se_adlif:
+    rho_fast: 0.9
+    rho_slow: 0.99
+    target_rate: 0.05
+    theta_min: 0.5
+    theta_max: 1.5
+record_initial_state: true
+datasets:
+  ECG:
+    batch_size: 64
+    validation_batch_size: 64
+    ceilings:
+    - 30
+    stage: 3

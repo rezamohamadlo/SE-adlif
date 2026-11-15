@@ -1,0 +1,52 @@
+version: dth_complement_v1
+candidate_version: B001_dth_dropout_consistency_ssc_v1
+protocol_id: dth_complement_rdrop_ssc_v1
+plan: docs/experiments/dth-complement-study-v1.md
+output_root: results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/runs
+idea: B001_DTH_DROPOUT_CONSISTENCY
+role: exploratory_official_validation_development
+training_seed: 42
+split_seed: 42
+hypothesis: Output agreement under independent dropout may complement DTH adaptive thresholds; transfer is a hypothesis and prior test exposure makes subsequent search exploratory.
+models: [DTH_SE_adLIF, DTH_RDROP_SE_adLIF]
+arm_labels:
+  DTH_SE_adLIF: DTH control
+  DTH_RDROP_SE_adLIF: DTH plus B001 R-Drop
+training_objectives:
+  DTH_SE_adLIF: classification
+  DTH_RDROP_SE_adLIF: classification_dropout_consistency_v1
+label_smoothing_epsilon:
+  DTH_SE_adLIF: 0
+  DTH_RDROP_SE_adLIF: 0
+dropout_consistency_alpha:
+  DTH_SE_adLIF: 0
+  DTH_RDROP_SE_adLIF: 1
+spike_deletion:
+  DTH_SE_adLIF: 0
+  DTH_RDROP_SE_adLIF: 0
+input_fir_modes:
+  DTH_SE_adLIF: null
+  DTH_RDROP_SE_adLIF: null
+hidden_cells:
+  DTH_SE_adLIF: dth_se_adlif
+  DTH_RDROP_SE_adLIF: dth_se_adlif
+hidden_cell_settings:
+  dth_se_adlif:
+    rho_fast: 0.9
+    rho_slow: 0.99
+    target_rate: 0.05
+    theta_min: 0.5
+    theta_max: 1.5
+hypotheses:
+  DTH_SE_adLIF: Fresh matched DTH control; canonical full40 batch256 checkpoint does not supply a matched first10epoch checkpoint.
+  DTH_RDROP_SE_adLIF: Fixed alpha1 R-Drop on the identical DTH backbone; epsilon0, original masks and ordinary single-pass validation.
+record_initial_state: true
+datasets:
+  SSC:
+    # Frozen by the registered DTH-pair real-batch calibration.
+    batch_size: 256
+    validation_batch_size: 1024
+    num_workers: 8
+    spawn_safe_transforms: true
+    ceilings: [10, 40]
+    stage: 1

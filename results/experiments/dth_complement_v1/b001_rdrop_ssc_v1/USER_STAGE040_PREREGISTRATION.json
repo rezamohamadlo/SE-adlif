@@ -1,0 +1,22 @@
+{
+  "authorized_at": "2026-11-14T10:05:40.652298+00:00",
+  "authorization": "User explicitly requests continue DTH+RDrop to40 then report test",
+  "scope": "Existing SSC candidate seed42 only",
+  "wait_for_current_stage20_natural_exit": true,
+  "resume_from": "Own last.ckpt after completed20; full optimizer/scheduler state",
+  "stop_at_completed_epoch": 40,
+  "full_schedule_epochs": 40,
+  "control_training_authorized": false,
+  "control_comparison": "Historical DTH10 budget unmatched; do not claim matched improvement",
+  "freeze_checkpoint_using": "First maximum clean official validation accuracy across completed40epochs",
+  "official_test_after40": true,
+  "ordinary_single_pass": true,
+  "tta": false,
+  "prior_test_exposure": true,
+  "exploratory": true,
+  "no_automatic_retries": true,
+  "no_new_ideas_or_other_datasets": true,
+  "stop_after_test_and_report": true,
+  "sequence": "USER_STAGE040_SEQUENCE.ps1",
+  "report": "evaluations/user_completed40_ssc_test_v1/REPORT_FA.md"
+}
