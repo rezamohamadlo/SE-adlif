@@ -1,4 +1,21 @@
-# ACTIVE: user-requested DTH+RDrop TOTAL epochs SHD100 / ECG70 / SSC70, seed42.
+# CURRENT: Direction-aware DTH + R-Drop + train-only augmentation; full-state41 -> total100.
+# time scale0.9..1.1, input channel shift +/-2, independent spike deletion5%.
+# Status: results/experiments/dth_complement_v1/direction_aug_shd100_v1/SEQUENCE_STATUS.json
+# Table: results/experiments/dth_complement_v1/direction_aug_shd100_v1/COMPARISON_FA.md
+Get-Content results/experiments/dth_complement_v1/direction_aug_shd100_v1/training_stdout.log -Tail 25 -Wait
+# Old unaugmented study stopped at saved41; its automatic final test cancelled.
+# Do not duplicate training or edit frozen source during continuation.
+
+# STOPPED HISTORICAL STUDY: Direction-aware DTH + SAME R-Drop, fresh to41.
+# Existing A100 reused after config/shared-initial-state/split audit.
+# Training exclusively runner.py; automatic validation-selected ordinary test, no TTA.
+# Status: results/experiments/dth_complement_v1/direction_shd100_v1/SEQUENCE_STATUS.json
+# Table: results/experiments/dth_complement_v1/direction_shd100_v1/COMPARISON_FA.md
+# Monitor:
+Get-Content results/experiments/dth_complement_v1/direction_shd100_v1/training_stdout.log -Tail 25 -Wait
+# Do not start a duplicate job or edit frozen sources during training.
+
+# COMPLETE (historical): DTH+RDrop TOTAL epochs SHD100 / ECG70 / SSC70, seed42.
 # One GPU sequence4904: SHD current full-resume30to100, then ECG30to70, then SSC31to70.
 # Official runner only; weights/optimizer/scheduler/loops preserved and verified.
 # SSC70 is explicit budget deviation vs paper40; DTH controls remain30 (unmatched).

@@ -200,6 +200,14 @@ def validate_config(cfg):
     if dataset == 'ECG' and (cfg['dataset']['valid_fraction']!=.05 or cfg['dataset']['random_seed']!=42):
         raise ValueError('ECG established row split changed')
     expected_target={'SHD':'datasets.shd.SHDLDM','SSC':'datasets.ssc.SSCLDM','ECG':'datasets.ecg.ECGLDM'}[dataset]
+    if s.get('training_frame_augmentation') is not None:
+        if (dataset!='SHD' or spec.get('augmentation_policy')!='canonical_shd_train_only_v1'
+                or cfg['dataset'].get('training_frame_augmentation')!=s['training_frame_augmentation']
+                or not spec.get('continuation_manifest')):
+            raise ValueError('Undeclared or mismatched training-only augmentation')
+        expected_target='datasets.shd_augmented.AugmentedSHDLDM'
+    elif cfg['dataset'].get('training_frame_augmentation'):
+        raise ValueError('Undeclared frame augmentation')
     if cfg['dataset']['_target_']!=expected_target:
         raise ValueError('Dataset implementation differs from the study task')
 
@@ -221,7 +229,7 @@ def forward_identity(dataset='SHD'):
     names += ['models/ours/static_threshold_adlif.py']
     names += ['models/ours/current_norm_adlif.py']
     names += ['models/ours/dropout_consistency.py']
-    if dataset=='SHD': names += ['datasets/shd_speaker_split.py']
+    if dataset=='SHD': names += ['datasets/shd_speaker_split.py', 'datasets/shd_augmented.py', 'datasets/shd_augmentation.py']
     return {name: hashlib.sha256((ROOT/name).read_bytes().replace(b'\r\n', b'\n')).hexdigest()
             for name in names}
 
