@@ -1,0 +1,27 @@
+version: adaptation_temporal_permutation_v1
+inherits: config/paper_baseline.yaml
+scientific_source_revision: f0bf2e16e56d956408b06b3e862e4701469f7451
+source_manifest: results/experiments/adaptation_stage7_suite_v1/MANIFEST.json
+source_manifest_sha256: 9502a7e2003d7d9ed5bc7fc27b378fb33bb799f404b87198ba7b11f069964c32
+window_widths: [5, 10, 20]
+permutation_replicates: 3
+permutation_seed: 20261119
+pilot_selection_seed: 20261116
+pilot_samples: 40
+pilot_sample_ids: [1361, 3896, 6851, 2299, 1947, 5437, 3602, 6449, 1023, 6884, 1313, 6456, 2972, 759, 4158, 8070, 1717, 873, 4001, 7281, 2381, 7123, 2932, 3272, 5822, 3181, 4182, 1814, 7128, 3947, 6621, 7601, 5, 7533, 6170, 7916, 3693, 4203, 2267, 4581]
+validation_sizes: {SHD: 1631, SSC: 9981, ECG: 30}
+training_seeds: [42, 123, 456]
+pairs:
+  - {id: amt_mt, parent: MT_SE_adLIF, variant: AMT_SE_adLIF}
+  - {id: mt_tc, parent: MT_SE_adLIF, variant: MT_TC_SE_adLIF}
+  - {id: sa_mt, parent: MT_SE_adLIF, variant: SA_MT_SE_adLIF}
+  - {id: lt_dth, parent: DTH_SE_adLIF, variant: LT_DTH_SE_adLIF}
+precision: high
+accuracy_tolerance: 0.000001
+loss_tolerance: 0.001
+training: false
+official_test_access: false
+ecg_policy: blocked_pending_independent_temporal_label_region_contract
+output_roots:
+  pilot: results/experiments/adaptation_temporal_permutation_pilot_v1
+  full: results/experiments/adaptation_temporal_permutation_full_v1
