@@ -1,0 +1,211 @@
+{
+  "identity": {
+    "manifest_sha256": "056e74951db9e36c176831d7a84150c80b2349de78f4c0ef6aa5e2aeb083cc37",
+    "sample_id": 2299,
+    "iteration": 1,
+    "current_sha256": "b4c418980ea12e5d09a3c52bfea6b93db3790f826ac6190e9adb2389c6b5e87a",
+    "current_score_sha256": "4cd20e0adfd7dc89bb6ec3a8df7e2f0ebc7183cfadcbeb7f19d8b41c6c91d3b1"
+  },
+  "value": {
+    "score": {
+      "loss": 0.4408402442932129,
+      "predictions": [
+        15
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "accepted": true,
+    "moves": 62,
+    "allocation": [
+      {
+        "channel": 2,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 4,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 14,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 15,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 16,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 17,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 18,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 19,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 20,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 22,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 23,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 24,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 25,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 26,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 27,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 29,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 31,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 32,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 34,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 36,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 38,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 39,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 41,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 43,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 44,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 45,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 46,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 47,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 49,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 53,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 54,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 58,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 59,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 62,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 114,
+        "sign": 1,
+        "moves": 1
+      }
+    ],
+    "status": "accepted",
+    "previous_loss": 0.006657917983829975,
+    "acceptance_bound": 2.0066579179838303e-05,
+    "autograd_forward_check": {
+      "prediction_matches": true,
+      "loss_difference": 0.0,
+      "loss_bound": 2.0066579179838303e-05,
+      "passed": true
+    }
+  },
+  "value_sha256": "14ce91b6218777444df476937c151085cb47d8a31ce7350c7698b2da290b9eaf",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SHD/SA_MT_SE_adLIF/seed_456/optimization_candidates/sample_2299_step_1.npz",
+  "artifact_sha256": "75bd1e7e2e7afde2b6a4f0c82ad6d5e9dce3eaf2caac1b539e52e0842aba856e"
+}

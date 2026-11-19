@@ -1,0 +1,291 @@
+{
+  "status": "passed",
+  "reviewed_utc": "2026-11-12T06:10:02.780586+00:00",
+  "manifest_sha256": "05f7f0943caf2c12ab7eedde768581e03f8917506cd52bc016e0eed2e8019580",
+  "completion_sha256": "0556fec13a9e7354dab7267ad4fcd0ca80c0c0751102c7c495488d4bf8b6568d",
+  "verified_output_count": 57,
+  "samples": 1631,
+  "seeds": [
+    42,
+    123,
+    456
+  ],
+  "unique_paired_records": 29358,
+  "prediction_chunks": 36,
+  "shared_feature_chunks": 6,
+  "anchors": 6,
+  "per_seed_condition_replicate": [
+    {
+      "seed": 42,
+      "condition": "clean",
+      "replicate": 0,
+      "n": 1631,
+      "parent_accuracy": 0.9926425505824648,
+      "variant_accuracy": 0.9889638258736971,
+      "parent_mean_loss": 0.09387052955569636,
+      "variant_mean_loss": 0.07237306004732813,
+      "mean_loss_benefit": 0.021497469508368235
+    },
+    {
+      "seed": 42,
+      "condition": "time_scale_0.9",
+      "replicate": 0,
+      "n": 1631,
+      "parent_accuracy": 0.9803801348865726,
+      "variant_accuracy": 0.9779276517473943,
+      "parent_mean_loss": 0.13071386226396794,
+      "variant_mean_loss": 0.10571909165260229,
+      "mean_loss_benefit": 0.024994770611365645
+    },
+    {
+      "seed": 42,
+      "condition": "time_scale_1.1",
+      "replicate": 0,
+      "n": 1631,
+      "parent_accuracy": 0.9828326180257511,
+      "variant_accuracy": 0.9834457388105456,
+      "parent_mean_loss": 0.11115677682904132,
+      "variant_mean_loss": 0.0873266561299945,
+      "mean_loss_benefit": 0.02383012069904682
+    },
+    {
+      "seed": 42,
+      "condition": "delete_0.1",
+      "replicate": 0,
+      "n": 1631,
+      "parent_accuracy": 0.9871244635193133,
+      "variant_accuracy": 0.9846719803801349,
+      "parent_mean_loss": 0.09682488331805765,
+      "variant_mean_loss": 0.0780168918860274,
+      "mean_loss_benefit": 0.01880799143203026
+    },
+    {
+      "seed": 42,
+      "condition": "delete_0.1",
+      "replicate": 1,
+      "n": 1631,
+      "parent_accuracy": 0.9871244635193133,
+      "variant_accuracy": 0.9834457388105456,
+      "parent_mean_loss": 0.10449507473411611,
+      "variant_mean_loss": 0.07264431006906451,
+      "mean_loss_benefit": 0.0318507646650516
+    },
+    {
+      "seed": 42,
+      "condition": "delete_0.1",
+      "replicate": 2,
+      "n": 1631,
+      "parent_accuracy": 0.9883507050889025,
+      "variant_accuracy": 0.9828326180257511,
+      "parent_mean_loss": 0.10566673721045265,
+      "variant_mean_loss": 0.07581529846757902,
+      "mean_loss_benefit": 0.029851438742873628
+    },
+    {
+      "seed": 123,
+      "condition": "clean",
+      "replicate": 0,
+      "n": 1631,
+      "parent_accuracy": 0.9920294297976702,
+      "variant_accuracy": 0.9908031882280809,
+      "parent_mean_loss": 0.05700241025676035,
+      "variant_mean_loss": 0.052011213143686306,
+      "mean_loss_benefit": 0.004991197113074046
+    },
+    {
+      "seed": 123,
+      "condition": "time_scale_0.9",
+      "replicate": 0,
+      "n": 1631,
+      "parent_accuracy": 0.9840588595953402,
+      "variant_accuracy": 0.9809932556713673,
+      "parent_mean_loss": 0.07112582102090484,
+      "variant_mean_loss": 0.08533601283179348,
+      "mean_loss_benefit": -0.01421019181088864
+    },
+    {
+      "seed": 123,
+      "condition": "time_scale_1.1",
+      "replicate": 0,
+      "n": 1631,
+      "parent_accuracy": 0.9858982219497241,
+      "variant_accuracy": 0.9730226854690374,
+      "parent_mean_loss": 0.08084214290499916,
+      "variant_mean_loss": 0.10221339555004243,
+      "mean_loss_benefit": -0.021371252645043262
+    },
+    {
+      "seed": 123,
+      "condition": "delete_0.1",
+      "replicate": 0,
+      "n": 1631,
+      "parent_accuracy": 0.9889638258736971,
+      "variant_accuracy": 0.9822194972409565,
+      "parent_mean_loss": 0.06481085647620782,
+      "variant_mean_loss": 0.08754366200320114,
+      "mean_loss_benefit": -0.022732805526993315
+    },
+    {
+      "seed": 123,
+      "condition": "delete_0.1",
+      "replicate": 1,
+      "n": 1631,
+      "parent_accuracy": 0.9883507050889025,
+      "variant_accuracy": 0.979767014101778,
+      "parent_mean_loss": 0.06294160969728506,
+      "variant_mean_loss": 0.08434604777047641,
+      "mean_loss_benefit": -0.021404438073191367
+    },
+    {
+      "seed": 123,
+      "condition": "delete_0.1",
+      "replicate": 2,
+      "n": 1631,
+      "parent_accuracy": 0.9889638258736971,
+      "variant_accuracy": 0.9809932556713673,
+      "parent_mean_loss": 0.06426603851259305,
+      "variant_mean_loss": 0.07252154775504695,
+      "mean_loss_benefit": -0.00825550924245389
+    },
+    {
+      "seed": 456,
+      "condition": "clean",
+      "replicate": 0,
+      "n": 1631,
+      "parent_accuracy": 0.9932556713672593,
+      "variant_accuracy": 0.9908031882280809,
+      "parent_mean_loss": 0.04866864914149864,
+      "variant_mean_loss": 0.09718821990702452,
+      "mean_loss_benefit": -0.04851957076552588
+    },
+    {
+      "seed": 456,
+      "condition": "time_scale_0.9",
+      "replicate": 0,
+      "n": 1631,
+      "parent_accuracy": 0.9822194972409565,
+      "variant_accuracy": 0.9803801348865726,
+      "parent_mean_loss": 0.07541773420389758,
+      "variant_mean_loss": 0.13441718391230195,
+      "mean_loss_benefit": -0.05899944970840436
+    },
+    {
+      "seed": 456,
+      "condition": "time_scale_1.1",
+      "replicate": 0,
+      "n": 1631,
+      "parent_accuracy": 0.9840588595953402,
+      "variant_accuracy": 0.9846719803801349,
+      "parent_mean_loss": 0.08311070195368832,
+      "variant_mean_loss": 0.10125794665890381,
+      "mean_loss_benefit": -0.018147244705215494
+    },
+    {
+      "seed": 456,
+      "condition": "delete_0.1",
+      "replicate": 0,
+      "n": 1631,
+      "parent_accuracy": 0.9871244635193133,
+      "variant_accuracy": 0.9895769466584917,
+      "parent_mean_loss": 0.06588893922629467,
+      "variant_mean_loss": 0.09199920826089897,
+      "mean_loss_benefit": -0.026110269034604297
+    },
+    {
+      "seed": 456,
+      "condition": "delete_0.1",
+      "replicate": 1,
+      "n": 1631,
+      "parent_accuracy": 0.9871244635193133,
+      "variant_accuracy": 0.9883507050889025,
+      "parent_mean_loss": 0.06805298004554414,
+      "variant_mean_loss": 0.09406349621682251,
+      "mean_loss_benefit": -0.026010516171278378
+    },
+    {
+      "seed": 456,
+      "condition": "delete_0.1",
+      "replicate": 2,
+      "n": 1631,
+      "parent_accuracy": 0.987737584304108,
+      "variant_accuracy": 0.9865113427345187,
+      "parent_mean_loss": 0.06843546917038612,
+      "variant_mean_loss": 0.09723947852722005,
+      "mean_loss_benefit": -0.028804009356833936
+    }
+  ],
+  "clean_metrics": {
+    "parent_mean_loss": {
+      "mean": 0.06651386298465178,
+      "sample_sd": 0.024055213530356424
+    },
+    "variant_mean_loss": {
+      "mean": 0.07385749769934633,
+      "sample_sd": 0.02262505583154932
+    },
+    "mean_loss_benefit": {
+      "mean": -0.007343634714694539,
+      "sample_sd": 0.03660201550930669
+    },
+    "parent_accuracy": {
+      "mean": 0.9926425505824646,
+      "sample_sd": 0.0006131207847945852
+    },
+    "variant_accuracy": {
+      "mean": 0.9901900674432863,
+      "sample_sd": 0.0010619563504407252
+    },
+    "accuracy_difference_pp": {
+      "mean": -0.24524831391784518,
+      "sample_sd": 0.12262415695891704
+    }
+  },
+  "effects": [
+    {
+      "condition": "time_scale_0.9",
+      "n_training_seeds": 3,
+      "benefit_change": {
+        "mean": -0.00872798892128124,
+        "sample_sd": 0.011450304416077053
+      },
+      "accuracy_gap_pp": {
+        "mean": -0.24524831391783777,
+        "sample_sd": 0.06131207847945297
+      }
+    },
+    {
+      "condition": "time_scale_1.1",
+      "n_training_seeds": 3,
+      "benefit_change": {
+        "mean": 0.0021141758309572273,
+        "sample_sd": 0.0283680188840165
+      },
+      "accuracy_gap_pp": {
+        "mean": -0.38830983036991507,
+        "sample_sd": 0.7787679903232273
+      }
+    },
+    {
+      "condition": "delete_0.1",
+      "n_training_seeds": 3,
+      "benefit_change": {
+        "mean": 0.0014761510963167907,
+        "sample_sd": 0.022252969256168202
+      },
+      "accuracy_gap_pp": {
+        "mean": -0.36106001771237795,
+        "sample_sd": 0.42983286475502147
+      }
+    }
+  ],
+  "elapsed_seconds": 351.7340000000004,
+  "training": false,
+  "new_inference": false,
+  "official_test_opened": false,
+  "limitations": [
+    "Validation-development evidence, not independent official-test confirmation.",
+    "Descriptive effects and sample SD across only three training seeds; controlled Stage 5 inference remains pending.",
+    "Full-review checks event totals and duration in saved feature records; it does not rerun model inference or independently reconstruct raw transformed inputs.",
+    "Clean records appear in multiple analysis reports but are shared predictions, not independent observations."
+  ]
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "model": "MT_SE_adLIF",
+    "status": "passed",
+    "samples": 1631,
+    "prediction_mismatches": 0,
+    "accuracy_difference": 0.0,
+    "loss_difference": 4.689178471227937e-09,
+    "maximum_absolute_row_loss_drift": 1.33514404296875e-05,
+    "reference_mode": "highest_matmul",
+    "role": "strict diagnostic reference; not source_high training-validation anchor"
+  },
+  {
+    "model": "AMT_SE_adLIF",
+    "status": "passed",
+    "samples": 1631,
+    "prediction_mismatches": 0,
+    "accuracy_difference": 0.0,
+    "loss_difference": 7.009472878413431e-09,
+    "maximum_absolute_row_loss_drift": 1.1444091796875e-05,
+    "reference_mode": "highest_matmul",
+    "role": "strict diagnostic reference; not source_high training-validation anchor"
+  }
+]

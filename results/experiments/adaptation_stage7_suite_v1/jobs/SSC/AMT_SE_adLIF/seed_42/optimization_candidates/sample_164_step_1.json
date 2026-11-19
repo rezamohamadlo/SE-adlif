@@ -1,0 +1,246 @@
+{
+  "identity": {
+    "manifest_sha256": "243574be89daf03b6de19657d871634f9850060e46f7cc307503262d88ea9663",
+    "sample_id": 164,
+    "iteration": 1,
+    "current_sha256": "e69bd13e3a8c0dd115f174e100f469b930928db1e489113c9f4366e082b8a11b",
+    "current_score_sha256": "712f049dd764ecd470407673f8b76fe8343d71c8677acfb8b2c1438d697c9e9e"
+  },
+  "value": {
+    "score": {
+      "loss": 1.1655892133712769,
+      "predictions": [
+        16
+      ],
+      "valid_steps": 1,
+      "correct_steps": 0,
+      "accuracy": 0.0
+    },
+    "accepted": false,
+    "moves": 147,
+    "allocation": [
+      {
+        "channel": 5,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 16,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 24,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 29,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 30,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 34,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 35,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 36,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 38,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 39,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 40,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 42,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 43,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 45,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 48,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 49,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 50,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 51,
+        "sign": 1,
+        "moves": 7
+      },
+      {
+        "channel": 52,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 53,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 54,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 55,
+        "sign": 1,
+        "moves": 12
+      },
+      {
+        "channel": 56,
+        "sign": 1,
+        "moves": 10
+      },
+      {
+        "channel": 57,
+        "sign": 1,
+        "moves": 8
+      },
+      {
+        "channel": 58,
+        "sign": 1,
+        "moves": 13
+      },
+      {
+        "channel": 59,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 60,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 61,
+        "sign": 1,
+        "moves": 7
+      },
+      {
+        "channel": 62,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 63,
+        "sign": 1,
+        "moves": 13
+      },
+      {
+        "channel": 64,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 66,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 68,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 78,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 80,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 81,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 83,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 87,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 88,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 89,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 90,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 91,
+        "sign": 1,
+        "moves": 1
+      }
+    ],
+    "status": "rejected_no_measured_ce_increase",
+    "previous_loss": 1.441219687461853,
+    "acceptance_bound": 3.441219687461853e-05,
+    "autograd_forward_check": {
+      "prediction_matches": true,
+      "loss_difference": -1.1920928955078125e-07,
+      "loss_bound": 3.441219568252564e-05,
+      "passed": true
+    }
+  },
+  "value_sha256": "e05812b8a654a97709946014eef5a0ad402c1fbd9cf927f8f539334de090bfa7",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/AMT_SE_adLIF/seed_42/optimization_candidates/sample_164_step_1.npz",
+  "artifact_sha256": "62d95e7b3ffed93aea0b7ddc18221f49b4aa3de61fba3c4ceddf107f9625117c"
+}

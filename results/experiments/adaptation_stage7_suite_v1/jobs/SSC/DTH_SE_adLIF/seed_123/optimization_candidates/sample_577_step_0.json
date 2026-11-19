@@ -1,0 +1,91 @@
+{
+  "identity": {
+    "manifest_sha256": "8af91e2d1e6d9566e96199f77b0fcc2b6e4b5bbf9e5e056ef8c8c5a6f4a0bb8e",
+    "sample_id": 577,
+    "iteration": 0,
+    "current_sha256": "e1e381b64a990b69a6b97cd0a544ce16e151d75914281af89db6b0d871434125",
+    "current_score_sha256": "37eccc60119dce7cf49848fa65335afcbbfcf31efc8d5982cc864c3fa421c539"
+  },
+  "value": {
+    "score": {
+      "loss": 0.04958850145339966,
+      "predictions": [
+        1
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "accepted": true,
+    "moves": 104,
+    "allocation": [
+      {
+        "channel": 33,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 60,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 63,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 64,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 66,
+        "sign": 1,
+        "moves": 10
+      },
+      {
+        "channel": 67,
+        "sign": 1,
+        "moves": 21
+      },
+      {
+        "channel": 68,
+        "sign": 1,
+        "moves": 20
+      },
+      {
+        "channel": 69,
+        "sign": 1,
+        "moves": 20
+      },
+      {
+        "channel": 70,
+        "sign": 1,
+        "moves": 20
+      },
+      {
+        "channel": 71,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 72,
+        "sign": 1,
+        "moves": 4
+      }
+    ],
+    "status": "accepted",
+    "previous_loss": 2.0265558760002023e-06,
+    "acceptance_bound": 2.000002026555876e-05,
+    "autograd_forward_check": {
+      "prediction_matches": true,
+      "loss_difference": 0.0,
+      "loss_bound": 2.000002026555876e-05,
+      "passed": true
+    }
+  },
+  "value_sha256": "62dd04f8562d8494ee41e2cbfb580177ccf52c772fecdcaf13bb14c8652e8401",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/DTH_SE_adLIF/seed_123/optimization_candidates/sample_577_step_0.npz",
+  "artifact_sha256": "6384544e1b1faa8c0207ac202344bb8931ac829e00e29b19eb7d99da6948b813"
+}

@@ -1,0 +1,100 @@
+{
+  "status": "complete",
+  "scope": "ssc_full_validation",
+  "complete_training_seed_cohort": true,
+  "manifest_sha256": "1558f87099ba8a3d0fe9713a0bce5c16a0802b295075335ec75a798876db4d14",
+  "completed_utc": "2026-11-12T11:17:50.497206+00:00",
+  "elapsed_seconds": 2175.6710000000003,
+  "phase_timings": [
+    {
+      "condition": "clean",
+      "replicate": 0,
+      "elapsed_seconds": 337.0149999999994
+    },
+    {
+      "condition": "time_scale_0.9",
+      "replicate": 0,
+      "elapsed_seconds": 371.46900000000096
+    },
+    {
+      "condition": "time_scale_1.1",
+      "replicate": 0,
+      "elapsed_seconds": 376.75
+    },
+    {
+      "condition": "delete_0.1",
+      "replicate": 0,
+      "elapsed_seconds": 361.4840000000004
+    },
+    {
+      "condition": "delete_0.1",
+      "replicate": 1,
+      "elapsed_seconds": 359.25
+    },
+    {
+      "condition": "delete_0.1",
+      "replicate": 2,
+      "elapsed_seconds": 360.15699999999924
+    }
+  ],
+  "paired_records": 179658,
+  "outputs": {
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/MANIFEST.json": "f02d92cecdcaf573caf791b02467233b39b3c8bb3ae3513cef07ac1de7b36934",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/input_features_clean_rep_0.json": "347d078dd409f17e6a2d0b1ef6d6eeb5400feb635391636614381140ea071bb4",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_42_clean_rep_0.json": "ad2a434b5e974663bcb8d4c3c6bf8be2ea448fcaa4466c2c9716342f9ead5f4a",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_123_clean_rep_0.json": "d3c5da405108c2ad3d0c114cbbaf266b1674eeb5f9c3e91858c934b47e65d636",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_456_clean_rep_0.json": "753ce4cd7f2c44a0cb5cb8d9d78946fa5b1e196c2fae9e2d88f4416b73fc5728",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_42_clean_rep_0.json": "1ef24a16953e02ab1216aebc526b6318133dc4df813d16cbb8f9811a1bf5831b",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_123_clean_rep_0.json": "1a8f9f8f6985e176be711d1e4e2ab6c87559fd50290b05ebb8ab86bd0ab4739d",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_456_clean_rep_0.json": "fea872ee0d235ab8f24791b59132b0b389841cf6c7f51107c673e1df547f157f",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/VALIDATION_ANCHORS.json": "8c2044b800789e2fb71f738b75f4d09f87605ebb5bbe8055ae9fa64662b8cfb0",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/input_features_time_scale_0.9_rep_0.json": "8ab1f63490d1bb49011d75914e2156d61ec3eea3636db2c8dddf5da289c9024f",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_42_time_scale_0.9_rep_0.json": "347a48a55ef13561b397a38eae9f38cfe039a430f80ffd1cc17b3a89dac8af73",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_123_time_scale_0.9_rep_0.json": "07c2a64bf2dc3618bc80a538a7e56faede389a7e44672c492cc725e82541ab83",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_456_time_scale_0.9_rep_0.json": "acf9b9a202825256c5d32783a2b9e3f98183e0a461f0b279389a660cb615a1af",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_42_time_scale_0.9_rep_0.json": "5c883d4f18a51ccff16fadbe2a1de77dd5c4f6292dd3944bb8db081796872d20",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_123_time_scale_0.9_rep_0.json": "5e22aafde32920b3f0a4d53966c36494c5b3fcbc77a572d8424dd138a54ecfaf",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_456_time_scale_0.9_rep_0.json": "645db2821422d4fdb9894f77ab4436f952a614f65efcbe4fc20efe3c285b93ad",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/input_features_time_scale_1.1_rep_0.json": "590dfde313d535bab302d066182bc8109a0c89d1e133fb4435dc0be635b8e7d8",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_42_time_scale_1.1_rep_0.json": "cd732fd6651f6132061b9219c479ff3f4403b658f21d04988915ebb60b600fc8",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_123_time_scale_1.1_rep_0.json": "7d609baa717e86bb8940a29c6bf3a022a01512a71f4bc474fa36bc7696f4e8ff",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_456_time_scale_1.1_rep_0.json": "2af645bbe0c5e93e227437f457d89c34bba595eef8a53617ef6c5e6f05a09c46",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_42_time_scale_1.1_rep_0.json": "798905bdf12c2daea5af381a910d248762921be0c07dff54c8f59b02a1a783b9",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_123_time_scale_1.1_rep_0.json": "04ad19e3e7117f2d684eb19017d8489ab8a31204e663b154916282e2d66a3dca",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_456_time_scale_1.1_rep_0.json": "aa6f3fe8c37f65aa798b440ec92bb17abc1811398f8c32353e04f83625daea21",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/input_features_delete_0.1_rep_0.json": "3f0e4aa3a4d267c5f9cb9329fa63d7e7123cc42934a96e22a5426ed239d9ad8b",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_42_delete_0.1_rep_0.json": "e0fbd2345c738ce87e2e884b5db11fa208e2d1d5d52abe850b6e247630e88b76",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_123_delete_0.1_rep_0.json": "737e83b3c0f653d47e4d5a9055c4de5a3c69f0d733e2ce57267e2cbadcd0d236",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_456_delete_0.1_rep_0.json": "2868ef80aff008057583a82c91ab97ef477de483b427d1ceac4509deedfce915",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_42_delete_0.1_rep_0.json": "48eccb02664f49e6f5c197fd2fd44c3995fafaace7356e0b213a141eb1ee1828",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_123_delete_0.1_rep_0.json": "307380eeb5df75555e40503c8d5bbf0f010ea08f23bbff7d329d561903d81958",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_456_delete_0.1_rep_0.json": "4fd00209b00ec51636b6441158c1848072584f83c1044760ec663c6d5437605d",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/input_features_delete_0.1_rep_1.json": "62a44403c7a67b872714a0c4d7260213d9ab24d439aa8b947d9291d6fcb2f6c3",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_42_delete_0.1_rep_1.json": "eb2edc737419cf3571ba3920045d128a9f5d74a54c860315ad1f808e49cd0b66",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_123_delete_0.1_rep_1.json": "36658c3ed763e5801c2a4f0ff617a0bc76330905ea853f590c899760ac84c6f1",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_456_delete_0.1_rep_1.json": "e82cc9d046553eefd6959f9c8fff55b4d16f579e462ea85ecb09475c4f2c346d",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_42_delete_0.1_rep_1.json": "e0dd326e13100a86a134c545890274adf67eb130fae0a141f7195d993e23bce2",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_123_delete_0.1_rep_1.json": "f4fc7015d39f21a965a9435d952a69ec24e70396ddf02f629ae4b82c7b4a2212",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_456_delete_0.1_rep_1.json": "62d1c936ac4ba8c35bc0d574eaf1b3cfd16b78484b2f3e895372525a2ec8d3f0",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/input_features_delete_0.1_rep_2.json": "ce9ced4eee74fa0cd157375902785afa08c37d0f701b28ba208bca2e7afc1480",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_42_delete_0.1_rep_2.json": "17d5e1e77b7b02d5ad5ea759cf7fa3fae9b2cc40a9e3f03922169f7c397c41b9",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_123_delete_0.1_rep_2.json": "ed1611ecfd81f103baadeae31f91c8c3844313776e508fb9cbacd7f0a3f50542",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/MT_SE_adLIF_seed_456_delete_0.1_rep_2.json": "ff477347013584de54c0bb3533aa8b9214217ea6ddcb98b83edabd5934cad5a7",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_42_delete_0.1_rep_2.json": "003f4ad39857bac17ba10ff7dca257bbb0b9af4e94a3c934ed0c18b3a0a0577d",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_123_delete_0.1_rep_2.json": "da81735ac3df8c02668c61b51a372e58ae375c631580927f14e19aaacc627034",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/AMT_SE_adLIF_seed_456_delete_0.1_rep_2.json": "c8cdcdfe256b908c7d4559182261e95ad2c1828d9af0d2c602fef21cb1c2625c",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/diagnostic_rows/paired_samples.csv": "42dac35ad58c5644262bcc7f07b66ce17ffd2e81e375085fce85fafcabb6d18f",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/analyses/clean/SUMMARY.json": "f1f4481226f87bda54a631f2a2997ab20aa4a4d8745894530d21d7361e6c31e5",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/analyses/clean/SUMMARY.md": "6c83c257f4d47b096639229192c1674e21acb5e1b9a0220a47de326f2b792699",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/analyses/clean/benefit.png": "5285f0edb2b6b3225b8aa9275e7523c2e773d364225eda2912acf1ed37d9d577",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/analyses/clean/benefit.svg": "d6f87da95ee9c4402eb9106b539f8207f324cb55465d66f16b83ab428bdc9bcd",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/analyses/time_scaling/SUMMARY.json": "ede984c1cfd86bcd72d782df52a0d3e4d7bbabbf7ad5bd81b681d2f37619ee64",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/analyses/time_scaling/SUMMARY.md": "5a07df98cf540dbc0e0dc98b5f08e3504fc5eda98fa277d4cf286862513e3fca",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/analyses/time_scaling/benefit.png": "d25d65e6329faa628f191d2af4262cc390e8c0b373ca28a09b476e496c713da5",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/analyses/time_scaling/benefit.svg": "d299a45e689c992b1ace837eb0db49a7cc834fe7546bb9399ef8c6a63659120b",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/analyses/spike_deletion/SUMMARY.json": "950d1b959df1c66235690321b6443349650ca368417beb8f025b4b26c1b8cd02",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/analyses/spike_deletion/SUMMARY.md": "091e1336d65d55d255df4c24930c43216f9b4e8296050e81d556051c0851265b",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/analyses/spike_deletion/benefit.png": "a9e03cec03945c5889e3ed209b6be8df15ccd91f2eb38f966cb35676d57605ba",
+    "results/experiments/adaptation_ssc_amt_full_validation_v1/analyses/spike_deletion/benefit.svg": "d3f03ef1eba42ea6ec3fcf2b147cceb3a77f7efdceac0ecfd8292df7272cf8c3"
+  }
+}

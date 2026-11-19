@@ -1,0 +1,112 @@
+{
+  "reviewed_utc": "2026-11-16T09:22:39.534715+00:00",
+  "status": "verified_with_numerical_batching_followup",
+  "verification_mode": "read_only_saved_artifacts_no_tests_or_scientific_execution",
+  "manifest_sha256": "0d7feabf97012ace9a6edb34467f467ba8224eda08e6b5112e6fde39ce0ff0f0",
+  "registered_outputs_verified": 544,
+  "source_hashes_verified": 50,
+  "user_contract_tests_passed": 18,
+  "full_validation_anchors": [
+    {
+      "status": "passed",
+      "model": "MT_SE_adLIF",
+      "seed": 42,
+      "samples": 1631,
+      "accuracy": 0.9926425505824648,
+      "loss": 0.09387052086773019,
+      "accuracy_difference": 2.8724249423461856e-08,
+      "loss_difference": 3.0078316740067557e-08
+    },
+    {
+      "status": "passed",
+      "model": "AMT_SE_adLIF",
+      "seed": 42,
+      "samples": 1631,
+      "accuracy": 0.9889638258736971,
+      "loss": 0.07237304567434534,
+      "accuracy_difference": -1.651827064019784e-08,
+      "loss_difference": -1.6697862301184863e-08
+    }
+  ],
+  "gradient_records_verified": 80,
+  "finite_nonzero_physical_gradients": 80,
+  "shared_deletion_inputs_verified": 160,
+  "matched_budget_per_record": true,
+  "paired_condition_records_verified": 200,
+  "evaluation_records_verified": 400,
+  "frozen_state_checks": [
+    {
+      "model": "MT_SE_adLIF",
+      "seed": 42,
+      "status": "unchanged",
+      "model_state_sha256": "4c3660e8235568b61f4099f74825d8de3bf44e563331153b2740ccfa6b6b68f3",
+      "all_parameter_gradients_none": true
+    },
+    {
+      "model": "AMT_SE_adLIF",
+      "seed": 42,
+      "status": "unchanged",
+      "model_state_sha256": "fa542446861c9dc5c2185311b6b73762e9509d4c4a41bf113475f8cd2488a2ee",
+      "all_parameter_gradients_none": true
+    }
+  ],
+  "maximum_same_batch_autograd_forward_loss_difference": 0.0,
+  "group_summaries": [
+    {
+      "model": "MT_SE_adLIF",
+      "records": 40,
+      "nonzero_physical_gradients": 40,
+      "mean_physical_abs_gradient_sum": 18.67921401307567,
+      "mean_padding_abs_gradient_sum": 0.7988160555048572,
+      "mean_burn_in_abs_gradient_sum": 1.540914168036752,
+      "source_batch_prediction_mismatches": 1,
+      "max_absolute_source_batch_loss_drift": 0.3386995792388916,
+      "max_autograd_forward_loss_drift": 0.0
+    },
+    {
+      "model": "AMT_SE_adLIF",
+      "records": 40,
+      "nonzero_physical_gradients": 40,
+      "mean_physical_abs_gradient_sum": 0.05225228183547205,
+      "mean_padding_abs_gradient_sum": 0.005179257976747037,
+      "mean_burn_in_abs_gradient_sum": 0.005041747244353149,
+      "source_batch_prediction_mismatches": 0,
+      "max_absolute_source_batch_loss_drift": 0.00044492125744000077,
+      "max_autograd_forward_loss_drift": 0.0
+    }
+  ],
+  "mt_batching_warning": {
+    "sample_id": 3896,
+    "target": 1,
+    "original_batch_reference": {
+      "loss": 0.5342843532562256,
+      "prediction": 1,
+      "correct": 1,
+      "true_probability": 0.5860885977745056
+    },
+    "single_record_reference": {
+      "loss": 0.8729839324951172,
+      "prediction": 9,
+      "correct": 0,
+      "true_probability": 0.4177033007144928
+    },
+    "source_batch_loss_difference": 0.3386995792388916,
+    "physical_abs_gradient_sum": 746.7067828361469,
+    "retained_without_exclusion": true,
+    "cause": "not_established"
+  },
+  "attempt_elapsed_seconds": 244.98500000000058,
+  "timing_scope": "execute attempt, excluding initial preflight; not pure inference latency",
+  "stage6_scoped_complete": true,
+  "stage7_complete": false,
+  "input_optimization": false,
+  "next_step": "Prepare a separate user-launched batching/precision sensitivity check before broader gradient expansion or mechanistic interpretation. Preserve the executed pilot and record 3896.",
+  "limitations": [
+    "One seed and 40 validation records; full-validation anchors do not make gradient coverage full-validation.",
+    "SLAYER surrogate input gradients are not hard-spike finite-difference derivatives or causal evidence.",
+    "MT-guided deletions use shared inputs and exact matched budgets; model/loss coupling limits cross-model interpretations.",
+    "Record 3896 dominates raw MT gradient magnitude; normalized time profiles weight each record equally.",
+    "Batch-mode cause is not proven; original-batch anchors passed and same-mode autograd forward equivalence passed."
+  ],
+  "verification_documents_outside_immutable_output_ledger": true
+}

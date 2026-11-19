@@ -1,0 +1,183 @@
+{
+  "identity": {
+    "manifest_sha256": "87d9013d3a3b8927184e2de2626f2ecd5ef6fe9d3235fbec8ddfc0d79b62492e",
+    "sample_id": 3896,
+    "original_sha256": "cb1e17fca49d0a45210faff153745af08bac71c5e1af426016dee06a145f171e"
+  },
+  "value": {
+    "sample_id": 3896,
+    "status": "improved",
+    "budget": 86,
+    "moves": 86,
+    "allocation": [
+      {
+        "channel": 3,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 4,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 7,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 10,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 13,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 15,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 18,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 20,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 21,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 23,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 24,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 25,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 26,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 27,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 28,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 29,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 34,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 35,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 41,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 79,
+        "sign": 1,
+        "moves": 7
+      },
+      {
+        "channel": 80,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 81,
+        "sign": 1,
+        "moves": 12
+      },
+      {
+        "channel": 82,
+        "sign": 1,
+        "moves": 21
+      },
+      {
+        "channel": 83,
+        "sign": 1,
+        "moves": 12
+      },
+      {
+        "channel": 136,
+        "sign": 1,
+        "moves": 1
+      }
+    ],
+    "trace": [
+      {
+        "iteration": 0,
+        "status": "accepted",
+        "loss": 5.9930419921875,
+        "previous_loss": 9.536697689327411e-06,
+        "acceptance_bound": 2.0000095366976894e-05,
+        "moves": 86,
+        "candidate_sha256": "03b4d30e2d6e1e2e2bb6704d645d815e0dfa53600e455e790516698832e26703",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SHD/AMT_SE_adLIF/seed_42/optimization_candidates/sample_3896_step_0.npz"
+      },
+      {
+        "iteration": 1,
+        "status": "rejected_no_measured_ce_increase",
+        "loss": 5.488587379455566,
+        "previous_loss": 5.9930419921875,
+        "acceptance_bound": 7.993041992187501e-05,
+        "moves": 86,
+        "candidate_sha256": "3a368e19802a653fcf303fb5fdfbe7cdff716e40cb557f0071b91369c58f8ca4",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SHD/AMT_SE_adLIF/seed_42/optimization_candidates/sample_3896_step_1.npz"
+      }
+    ],
+    "clean": {
+      "loss": 9.536697689327411e-06,
+      "predictions": [
+        1
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "optimized": {
+      "loss": 5.9930419921875,
+      "predictions": [
+        9
+      ],
+      "valid_steps": 1,
+      "correct_steps": 0,
+      "accuracy": 0.0
+    }
+  },
+  "value_sha256": "aaa92a122027626ddde7c3a0a1e50f956e9a142ee71974170a49f171dca1f864",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SHD/AMT_SE_adLIF/seed_42/optimized/sample_3896.npz",
+  "artifact_sha256": "c6aa2448c02bce196c04643a21496a7b8d04e594ef50a2120562216a0398ad92"
+}

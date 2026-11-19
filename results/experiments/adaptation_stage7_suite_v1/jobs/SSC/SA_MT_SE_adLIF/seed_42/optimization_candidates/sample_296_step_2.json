@@ -1,0 +1,206 @@
+{
+  "identity": {
+    "manifest_sha256": "d11c111467522bc29d179f17d7102c275d32943c0a4db460b93a59d6b087878c",
+    "sample_id": 296,
+    "iteration": 2,
+    "current_sha256": "1372267d3b93299be8465bb2809e6c27b38491d9c2f54049619ef1c739707f52",
+    "current_score_sha256": "a31b4d58bb44bf4a55132487820af13960dd14db4c6725b8e0af6a4dcebe6c8a"
+  },
+  "value": {
+    "score": {
+      "loss": 2.286799430847168,
+      "predictions": [
+        4
+      ],
+      "valid_steps": 1,
+      "correct_steps": 0,
+      "accuracy": 0.0
+    },
+    "accepted": false,
+    "moves": 130,
+    "allocation": [
+      {
+        "channel": 26,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 27,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 28,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 29,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 30,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 31,
+        "sign": 1,
+        "moves": 8
+      },
+      {
+        "channel": 32,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 33,
+        "sign": 1,
+        "moves": 18
+      },
+      {
+        "channel": 34,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 35,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 36,
+        "sign": 1,
+        "moves": 12
+      },
+      {
+        "channel": 37,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 38,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 39,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 42,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 43,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 44,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 45,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 46,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 47,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 48,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 49,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 50,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 51,
+        "sign": 1,
+        "moves": 7
+      },
+      {
+        "channel": 52,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 53,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 54,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 55,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 56,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 57,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 58,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 60,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 62,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 64,
+        "sign": 1,
+        "moves": 1
+      }
+    ],
+    "status": "rejected_no_measured_ce_increase",
+    "previous_loss": 5.180752277374268,
+    "acceptance_bound": 7.180752277374268e-05,
+    "autograd_forward_check": {
+      "prediction_matches": true,
+      "loss_difference": 9.5367431640625e-07,
+      "loss_bound": 7.180750846862793e-05,
+      "passed": true
+    }
+  },
+  "value_sha256": "efc498a56fd9b2d4bae4fef80d0b2778ee6378cb976252c3d68ee608d734b3f3",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/SA_MT_SE_adLIF/seed_42/optimization_candidates/sample_296_step_2.npz",
+  "artifact_sha256": "197687611e2b1582b8510bf130690df479b14b05c27a0e567d967ca850ed8006"
+}

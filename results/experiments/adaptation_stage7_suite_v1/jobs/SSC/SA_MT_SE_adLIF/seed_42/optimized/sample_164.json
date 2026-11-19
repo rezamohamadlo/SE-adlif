@@ -1,0 +1,288 @@
+{
+  "identity": {
+    "manifest_sha256": "d11c111467522bc29d179f17d7102c275d32943c0a4db460b93a59d6b087878c",
+    "sample_id": 164,
+    "original_sha256": "0f9a3c9fa336d4256e7022919c1624b9820975f9a6a03e10b760f1fd7b63f7a9"
+  },
+  "value": {
+    "sample_id": 164,
+    "status": "improved",
+    "budget": 147,
+    "moves": 147,
+    "allocation": [
+      {
+        "channel": 8,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 14,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 18,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 28,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 30,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 31,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 33,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 36,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 38,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 42,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 43,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 44,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 45,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 46,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 47,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 48,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 49,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 50,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 51,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 52,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 53,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 54,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 55,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 56,
+        "sign": 1,
+        "moves": 7
+      },
+      {
+        "channel": 57,
+        "sign": 1,
+        "moves": 7
+      },
+      {
+        "channel": 58,
+        "sign": 1,
+        "moves": 9
+      },
+      {
+        "channel": 59,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 60,
+        "sign": 1,
+        "moves": 12
+      },
+      {
+        "channel": 61,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 62,
+        "sign": 1,
+        "moves": 12
+      },
+      {
+        "channel": 63,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 64,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 65,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 66,
+        "sign": 1,
+        "moves": 7
+      },
+      {
+        "channel": 67,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 68,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 69,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 72,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 74,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 76,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 77,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 78,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 79,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 88,
+        "sign": 1,
+        "moves": 1
+      }
+    ],
+    "trace": [
+      {
+        "iteration": 0,
+        "status": "accepted",
+        "loss": 0.14133818447589874,
+        "previous_loss": 0.02989007532596588,
+        "acceptance_bound": 2.029890075325966e-05,
+        "moves": 147,
+        "candidate_sha256": "8c736a3320f4be4a19ee5230b3eadea1133b40d00886d44af43b7c34f622310d",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/SA_MT_SE_adLIF/seed_42/optimization_candidates/sample_164_step_0.npz"
+      },
+      {
+        "iteration": 1,
+        "status": "accepted",
+        "loss": 1.9495359659194946,
+        "previous_loss": 0.14133818447589874,
+        "acceptance_bound": 2.1413381844758988e-05,
+        "moves": 147,
+        "candidate_sha256": "4465e0026cc5aab23f2017f6885d26c80bf40764d0149e620cb017252b04ac81",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/SA_MT_SE_adLIF/seed_42/optimization_candidates/sample_164_step_1.npz"
+      },
+      {
+        "iteration": 2,
+        "status": "rejected_no_measured_ce_increase",
+        "loss": 0.16286352276802063,
+        "previous_loss": 1.9495359659194946,
+        "acceptance_bound": 3.949535965919495e-05,
+        "moves": 147,
+        "candidate_sha256": "c75422122446dc1cfd5ccac9ae672cc31d33d8ad68a4f266351b34cf9c9df517",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/SA_MT_SE_adLIF/seed_42/optimization_candidates/sample_164_step_2.npz"
+      }
+    ],
+    "clean": {
+      "loss": 0.02989007532596588,
+      "predictions": [
+        0
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "optimized": {
+      "loss": 1.9495359659194946,
+      "predictions": [
+        32
+      ],
+      "valid_steps": 1,
+      "correct_steps": 0,
+      "accuracy": 0.0
+    }
+  },
+  "value_sha256": "135e4a6d900e5372b50ceb99245ce38f9761411cbc4714baabd411d3462bf6e3",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/SA_MT_SE_adLIF/seed_42/optimized/sample_164.npz",
+  "artifact_sha256": "821a82ce757a8aeca6ae57205749538f40dcd0ac0624d2348861db99bb7a2cf4"
+}

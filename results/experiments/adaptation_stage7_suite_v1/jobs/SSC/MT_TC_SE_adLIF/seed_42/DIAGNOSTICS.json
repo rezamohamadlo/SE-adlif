@@ -1,0 +1,653 @@
+[
+  {
+    "sample_id": 164,
+    "status": "improved",
+    "budget": 147,
+    "moves": 147,
+    "allocation": [
+      {
+        "channel": 3,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 24,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 27,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 28,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 29,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 30,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 31,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 32,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 33,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 35,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 36,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 37,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 38,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 39,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 40,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 44,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 47,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 49,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 50,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 52,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 53,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 54,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 55,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 56,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 57,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 58,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 61,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 62,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 63,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 64,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 65,
+        "sign": 1,
+        "moves": 7
+      },
+      {
+        "channel": 66,
+        "sign": 1,
+        "moves": 10
+      },
+      {
+        "channel": 67,
+        "sign": 1,
+        "moves": 8
+      },
+      {
+        "channel": 68,
+        "sign": 1,
+        "moves": 7
+      },
+      {
+        "channel": 69,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 70,
+        "sign": 1,
+        "moves": 14
+      },
+      {
+        "channel": 71,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 73,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 74,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 75,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 76,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 77,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 79,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 81,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 94,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 100,
+        "sign": 1,
+        "moves": 18
+      },
+      {
+        "channel": 102,
+        "sign": 1,
+        "moves": 3
+      }
+    ],
+    "trace": [
+      {
+        "iteration": 0,
+        "status": "accepted",
+        "loss": 3.1892523765563965,
+        "previous_loss": 0.07748281955718994,
+        "acceptance_bound": 2.07748281955719e-05,
+        "moves": 147,
+        "candidate_sha256": "f4a4c81dcbb64af88bbbb224a39c2198a7557653738df09107bc316e4b27b507",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/MT_TC_SE_adLIF/seed_42/optimization_candidates/sample_164_step_0.npz"
+      },
+      {
+        "iteration": 1,
+        "status": "rejected_no_measured_ce_increase",
+        "loss": 2.3962597846984863,
+        "previous_loss": 3.1892523765563965,
+        "acceptance_bound": 5.189252376556397e-05,
+        "moves": 147,
+        "candidate_sha256": "95444c7a91fe379164ecb745d560a2314764a0febee7f9081440cc0681891938",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/MT_TC_SE_adLIF/seed_42/optimization_candidates/sample_164_step_1.npz"
+      }
+    ],
+    "clean": {
+      "loss": 0.07748281955718994,
+      "predictions": [
+        0
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "optimized": {
+      "loss": 3.1892523765563965,
+      "predictions": [
+        26
+      ],
+      "valid_steps": 1,
+      "correct_steps": 0,
+      "accuracy": 0.0
+    }
+  },
+  {
+    "sample_id": 296,
+    "status": "no_accepted_improvement",
+    "budget": 130,
+    "moves": 0,
+    "allocation": [],
+    "trace": [
+      {
+        "iteration": 0,
+        "status": "rejected_no_measured_ce_increase",
+        "loss": 0.23769418895244598,
+        "previous_loss": 0.4005216956138611,
+        "acceptance_bound": 2.4005216956138613e-05,
+        "moves": 130,
+        "candidate_sha256": "5c4cdfeb59f906f7a1c72096434f3d426114efa0cfbde70c7f7c83d7995dd58c",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/MT_TC_SE_adLIF/seed_42/optimization_candidates/sample_296_step_0.npz"
+      }
+    ],
+    "clean": {
+      "loss": 0.4005216956138611,
+      "predictions": [
+        0
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "optimized": {
+      "loss": 0.4005216956138611,
+      "predictions": [
+        0
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    }
+  },
+  {
+    "sample_id": 513,
+    "status": "improved",
+    "budget": 100,
+    "moves": 100,
+    "allocation": [
+      {
+        "channel": 31,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 33,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 38,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 66,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 67,
+        "sign": 1,
+        "moves": 10
+      },
+      {
+        "channel": 68,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 69,
+        "sign": 1,
+        "moves": 25
+      },
+      {
+        "channel": 70,
+        "sign": 1,
+        "moves": 10
+      },
+      {
+        "channel": 72,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 73,
+        "sign": 1,
+        "moves": 10
+      },
+      {
+        "channel": 74,
+        "sign": 1,
+        "moves": 15
+      },
+      {
+        "channel": 75,
+        "sign": 1,
+        "moves": 12
+      },
+      {
+        "channel": 76,
+        "sign": 1,
+        "moves": 8
+      }
+    ],
+    "trace": [
+      {
+        "iteration": 0,
+        "status": "accepted",
+        "loss": 4.058774471282959,
+        "previous_loss": 0.281444787979126,
+        "acceptance_bound": 2.281444787979126e-05,
+        "moves": 100,
+        "candidate_sha256": "67429ade25fc0b5c9416024249cc4d5787c937f32a346a0f86d4a9840d44542e",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/MT_TC_SE_adLIF/seed_42/optimization_candidates/sample_513_step_0.npz"
+      },
+      {
+        "iteration": 1,
+        "status": "accepted",
+        "loss": 4.210958957672119,
+        "previous_loss": 4.058774471282959,
+        "acceptance_bound": 6.058774471282959e-05,
+        "moves": 100,
+        "candidate_sha256": "c99c52ec81f5e7399fa99cb3a5c382e6e316555a356bf46737d84b3812c0674e",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/MT_TC_SE_adLIF/seed_42/optimization_candidates/sample_513_step_1.npz"
+      },
+      {
+        "iteration": 2,
+        "status": "rejected_no_measured_ce_increase",
+        "loss": 1.3879730701446533,
+        "previous_loss": 4.210958957672119,
+        "acceptance_bound": 6.21095895767212e-05,
+        "moves": 100,
+        "candidate_sha256": "eaf68da3eaccc73398e67cad9416c9e8cc566b5d9c9f30305faa829150054215",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/MT_TC_SE_adLIF/seed_42/optimization_candidates/sample_513_step_2.npz"
+      }
+    ],
+    "clean": {
+      "loss": 0.281444787979126,
+      "predictions": [
+        1
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "optimized": {
+      "loss": 4.210958957672119,
+      "predictions": [
+        25
+      ],
+      "valid_steps": 1,
+      "correct_steps": 0,
+      "accuracy": 0.0
+    }
+  },
+  {
+    "sample_id": 577,
+    "status": "improved",
+    "budget": 104,
+    "moves": 104,
+    "allocation": [
+      {
+        "channel": 4,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 15,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 18,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 23,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 27,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 28,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 29,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 31,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 32,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 33,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 35,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 36,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 37,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 38,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 41,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 42,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 44,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 47,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 48,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 49,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 51,
+        "sign": 1,
+        "moves": 8
+      },
+      {
+        "channel": 53,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 54,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 55,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 56,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 58,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 64,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 75,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 76,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 95,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 98,
+        "sign": 1,
+        "moves": 21
+      },
+      {
+        "channel": 99,
+        "sign": 1,
+        "moves": 6
+      }
+    ],
+    "trace": [
+      {
+        "iteration": 0,
+        "status": "accepted",
+        "loss": 0.14993946254253387,
+        "previous_loss": 0.0031409950461238623,
+        "acceptance_bound": 2.003140995046124e-05,
+        "moves": 104,
+        "candidate_sha256": "19d098df78ddc5fa4180a84cc732e18a3cb33afacbf3fc88c59416819acd0b59",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/MT_TC_SE_adLIF/seed_42/optimization_candidates/sample_577_step_0.npz"
+      },
+      {
+        "iteration": 1,
+        "status": "rejected_no_measured_ce_increase",
+        "loss": 0.04337267950177193,
+        "previous_loss": 0.14993946254253387,
+        "acceptance_bound": 2.149939462542534e-05,
+        "moves": 104,
+        "candidate_sha256": "9c652b76184244c7703010e4c853591cfdf15296ce7e8f55ad4a0d5ad49ccf80",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/MT_TC_SE_adLIF/seed_42/optimization_candidates/sample_577_step_1.npz"
+      }
+    ],
+    "clean": {
+      "loss": 0.0031409950461238623,
+      "predictions": [
+        1
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "optimized": {
+      "loss": 0.14993946254253387,
+      "predictions": [
+        1
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    }
+  }
+]

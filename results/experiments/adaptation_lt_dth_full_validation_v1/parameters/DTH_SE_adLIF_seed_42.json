@@ -1,0 +1,39 @@
+{
+  "model": "DTH_SE_adLIF",
+  "seed": 42,
+  "checkpoint": "results/valid/DTH_SE_adLIF/SHD/seed_42/ckpt/epoch=178-step=4475.ckpt",
+  "checkpoint_sha256": "d7822e95690a85c94a5d9a04225f7eda592a78c2186c580ef7925a2558ab785e",
+  "layers": [
+    {
+      "layer": "l1",
+      "learned": false,
+      "bin_ms": 4.0,
+      "fast": {
+        "rho": 0.9,
+        "e_folding_frames": 9.491221581029905,
+        "e_folding_ms": 37.96488632411962
+      },
+      "slow": {
+        "rho": 0.99,
+        "e_folding_frames": 99.49916247342207,
+        "e_folding_ms": 397.9966498936883
+      }
+    },
+    {
+      "layer": "l2",
+      "learned": false,
+      "bin_ms": 4.0,
+      "fast": {
+        "rho": 0.9,
+        "e_folding_frames": 9.491221581029905,
+        "e_folding_ms": 37.96488632411962
+      },
+      "slow": {
+        "rho": 0.99,
+        "e_folding_frames": 99.49916247342207,
+        "e_folding_ms": 397.9966498936883
+      }
+    }
+  ],
+  "interpretation": "Layer-level descriptors shared across samples; not independent per-sample observations. Trace decays operate per input frame; milliseconds use the saved input bin width, not neuron dt."
+}

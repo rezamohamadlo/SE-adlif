@@ -1,0 +1,199 @@
+{
+  "identity": {
+    "manifest_sha256": "46bb3324f789628298ffc49908d80b405ba7ad44f8be30611f095202815bce7a",
+    "sample_id": 2299,
+    "backend": {
+      "matmul_precision": "highest",
+      "matmul_allow_tf32": false,
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": false
+    },
+    "clean_sha256": {
+      "MT_SE_adLIF": "ffc6b84b506e4fabf0892b7aad0ae5aabb0b3bb315d837707dd2a96954509328",
+      "AMT_SE_adLIF": "86fed824f265ac2423c264d112cbf897df17d2fce0a1715fdbf367ebd84fb8d1"
+    },
+    "inputs": [
+      {
+        "condition": "mt_abs_gradient_deletion",
+        "replicate": 0,
+        "seed": null,
+        "budget": 62,
+        "input_sha256": "6215cad77e925e269a400141b7baa41bdcaf53a633ee30106e53ff5d3d9a38e0",
+        "delta_sha256": "8099716046da69fa7ef962ca425e75509168ee22255c6596f375f7040feefdba",
+        "removed_burn_in_events": 15,
+        "physical_steps": 137
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 0,
+        "seed": 6521776287780688252,
+        "budget": 62,
+        "input_sha256": "01893d0714d411ffd3bea0f3f681e62f63e152a13c1bcae32159793ff1c95f1c",
+        "delta_sha256": "c121600d5db7373541fd3d8e840790de82852a4141a207419853dc7d751857f2",
+        "removed_burn_in_events": 2,
+        "physical_steps": 137
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 1,
+        "seed": 17504295878206735293,
+        "budget": 62,
+        "input_sha256": "a200aab56d2d602b65780f3b94c879d1d36a23af2364cad438e1ceb300734744",
+        "delta_sha256": "b3f207b6e6cc2c4f84c23770fb1ac97dba85fdc5bb86386a0dd46688fc72462e",
+        "removed_burn_in_events": 0,
+        "physical_steps": 137
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 2,
+        "seed": 87794832957365565,
+        "budget": 62,
+        "input_sha256": "518de8ac6b21759e977c2186115558e421627e898b8ecdb6a1e2bf13cc01a2e3",
+        "delta_sha256": "885d20025b55a26f40312329be52f6663027d88cdbcaba9f4dcb743c63357a67",
+        "removed_burn_in_events": 1,
+        "physical_steps": 137
+      }
+    ]
+  },
+  "value": {
+    "sample_id": 2299,
+    "target": 15,
+    "speaker": 8,
+    "guidance_eligible": true,
+    "conditions": [
+      {
+        "condition": "clean",
+        "replicate": 0,
+        "budget": 0,
+        "input_sha256": "351644f796011572d3777b03176ee5b77a1ec653f1cc5ff1ac796db73c866e7a",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 15,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 0.0
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": 7.152555099310121e-07,
+            "prediction": 15,
+            "correct": 1,
+            "true_probability": 0.9999992847442627,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 0.0
+          }
+        ]
+      },
+      {
+        "condition": "mt_abs_gradient_deletion",
+        "replicate": 0,
+        "budget": 62,
+        "input_sha256": "6215cad77e925e269a400141b7baa41bdcaf53a633ee30106e53ff5d3d9a38e0",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": 3.576278118089249e-07,
+            "prediction": 15,
+            "correct": 1,
+            "true_probability": 0.9999996423721313,
+            "actual_loss_change": 3.576278118089249e-07,
+            "surrogate_linear_prediction": 5.203282929522324e-09
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": 1.0728830375228426e-06,
+            "prediction": 15,
+            "correct": 1,
+            "true_probability": 0.999998927116394,
+            "actual_loss_change": 3.576275275918306e-07,
+            "surrogate_linear_prediction": -1.9568723952367861e-07
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 0,
+        "budget": 62,
+        "input_sha256": "01893d0714d411ffd3bea0f3f681e62f63e152a13c1bcae32159793ff1c95f1c",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 15,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 5.322419828002536e-10
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": 2.145764938177308e-06,
+            "prediction": 15,
+            "correct": 1,
+            "true_probability": 0.9999978542327881,
+            "actual_loss_change": 1.430509428246296e-06,
+            "surrogate_linear_prediction": 1.0908482273030984e-07
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 1,
+        "budget": 62,
+        "input_sha256": "a200aab56d2d602b65780f3b94c879d1d36a23af2364cad438e1ceb300734744",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 15,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 7.595814840825887e-11
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": 7.152555099310121e-07,
+            "prediction": 15,
+            "correct": 1,
+            "true_probability": 0.9999992847442627,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 8.748669455549418e-09
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 2,
+        "budget": 62,
+        "input_sha256": "518de8ac6b21759e977c2186115558e421627e898b8ecdb6a1e2bf13cc01a2e3",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 15,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 3.6244848832314713e-10
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": 4.768370445162873e-07,
+            "prediction": 15,
+            "correct": 1,
+            "true_probability": 0.9999995231628418,
+            "actual_loss_change": -2.3841846541472478e-07,
+            "surrogate_linear_prediction": 2.422083711373091e-07
+          }
+        ]
+      }
+    ]
+  },
+  "value_sha256": "608ace3ca802976f5db1fbf8248a35a0f5587bd7a5706414bd007fea4316e37d"
+}

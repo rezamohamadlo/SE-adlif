@@ -1,0 +1,1255 @@
+{
+  "groups": [
+    {
+      "seed": 42,
+      "model": "MT_SE_adLIF",
+      "window_frames": 5,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.03815074624034799
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.043987681062648214
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.3489417678320639
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.35986526685353587
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.17635011992747163
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.3555008683267493
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3598613701859026
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "model": "MT_TC_SE_adLIF",
+      "window_frames": 5,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.03379790191310222
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.04188390607255783
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.3522589330722929
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.36407150805142413
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.1699943881801767
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.1934102652581613
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3640134081393953
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "model": "MT_SE_adLIF",
+      "window_frames": 10,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.0826384668498432
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.08659648498902422
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.3423883351249936
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.35575498445156367
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.2792649806318695
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.3336188656265033
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3558763498409601
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "model": "MT_TC_SE_adLIF",
+      "window_frames": 10,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.07506488024042719
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.08304128473031488
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.34577744615621986
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3596176459296654
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.27014464934589794
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.1782913323420066
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.35956243640189284
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "model": "MT_SE_adLIF",
+      "window_frames": 20,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.14863216253902828
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.16630570687562124
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.32798991240472564
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3473990950771834
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.4139771915846457
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.2463677051197184
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3495605358695229
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "model": "MT_TC_SE_adLIF",
+      "window_frames": 20,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.1385165924059958
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.16173244303248618
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.33150355950649735
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.35088778708406
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.4087148518693454
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.1086006388818985
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3521550035977448
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "model": "MT_SE_adLIF",
+      "window_frames": 5,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.045542202375745904
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.04800461424467324
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.3412911162024827
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.35144343165390596
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.18748958567582868
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.749918735956286
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.35129995357625
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "model": "MT_TC_SE_adLIF",
+      "window_frames": 5,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.03914500889145852
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.04395699224781851
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.35025632609679896
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3621587868760991
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.16846460574108454
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.349656390886571
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3621879062304178
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "model": "MT_SE_adLIF",
+      "window_frames": 10,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.09418404458689511
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.09251079936829522
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.33529491234751674
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.34749466514156924
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.29604322528323174
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.7099817479397514
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3477978780712165
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "model": "MT_TC_SE_adLIF",
+      "window_frames": 10,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.08416960945594375
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.08583357837242794
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.34382365512951607
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3580542595988476
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.26538345092064264
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.3232067198759414
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.35839876269143384
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "model": "MT_SE_adLIF",
+      "window_frames": 20,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.1606650428972574
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.17399230122828388
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.32191307202826575
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.34126841359333093
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.4389039969593021
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.578299999118158
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.34387654364360104
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "model": "MT_TC_SE_adLIF",
+      "window_frames": 20,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.14887168111938287
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.16462361717191148
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.3296551173131648
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.34929345193096323
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.393570879909924
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.2235058600474056
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3525330920957611
+        }
+      }
+    },
+    {
+      "seed": 456,
+      "model": "MT_SE_adLIF",
+      "window_frames": 5,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.036560380474900366
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.042261027669945085
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.35567368281208384
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.36643510546295627
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.17423116053585888
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.3315164430398165
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3663417580352448
+        }
+      }
+    },
+    {
+      "seed": 456,
+      "model": "MT_TC_SE_adLIF",
+      "window_frames": 5,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.04086426421597879
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.04464385335348007
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.34856438329501266
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3584454908411301
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.19482937138718445
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.469936962409088
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3583031680919577
+        }
+      }
+    },
+    {
+      "seed": 456,
+      "model": "MT_SE_adLIF",
+      "window_frames": 10,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.07942843937014675
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.08358150442458231
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.34904959309748423
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.36152459050761004
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.2716556618894629
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.312412354225172
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.36171892637298964
+        }
+      }
+    },
+    {
+      "seed": 456,
+      "model": "MT_TC_SE_adLIF",
+      "window_frames": 10,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.08681089717878417
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.08758841507846447
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.3420299782649827
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.35362644700361207
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.30032851173106667
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.4420303943440986
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3535503330914285
+        }
+      }
+    },
+    {
+      "seed": 456,
+      "model": "MT_SE_adLIF",
+      "window_frames": 20,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.14353926456108584
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.16390247562695476
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.33443444046997844
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.35285609035233323
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.4009714886856455
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.2348138165579035
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.35494429314687803
+        }
+      }
+    },
+    {
+      "seed": 456,
+      "model": "MT_TC_SE_adLIF",
+      "window_frames": 20,
+      "metrics": {
+        "adjacent_js_nats": {
+          "n_finite_records": 9981,
+          "mean": 0.15169648244844033
+        },
+        "true_class_concentration": {
+          "n_finite_records": 9981,
+          "mean": 0.16843366257469436
+        },
+        "true_class_mean_probability": {
+          "n_finite_records": 9981,
+          "mean": 0.32761446131114513
+        },
+        "window_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3450775087384645
+        },
+        "top_class_switch_fraction": {
+          "n_finite_records": 9981,
+          "mean": 0.4347715818785852
+        },
+        "window_mean_supervised_ce": {
+          "n_finite_records": 9981,
+          "mean": 3.3395156025485746
+        },
+        "window_supervised_accuracy": {
+          "n_finite_records": 9981,
+          "mean": 0.3470260124828805
+        }
+      }
+    }
+  ],
+  "paired_per_seed_differences": [
+    {
+      "seed": 42,
+      "window_frames": 5,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.004352844327245772
+    },
+    {
+      "seed": 42,
+      "window_frames": 5,
+      "metric": "true_class_concentration",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.0021037749900903943
+    },
+    {
+      "seed": 42,
+      "window_frames": 5,
+      "metric": "true_class_mean_probability",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.0033171652402289795
+    },
+    {
+      "seed": 42,
+      "window_frames": 5,
+      "metric": "window_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.00420624119788824
+    },
+    {
+      "seed": 42,
+      "window_frames": 5,
+      "metric": "top_class_switch_fraction",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.006355731747294912
+    },
+    {
+      "seed": 42,
+      "window_frames": 5,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.1620906030685883
+    },
+    {
+      "seed": 42,
+      "window_frames": 5,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.0041520379534927395
+    },
+    {
+      "seed": 42,
+      "window_frames": 10,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.00757358660941601
+    },
+    {
+      "seed": 42,
+      "window_frames": 10,
+      "metric": "true_class_concentration",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.0035552002587093327
+    },
+    {
+      "seed": 42,
+      "window_frames": 10,
+      "metric": "true_class_mean_probability",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.003389111031226285
+    },
+    {
+      "seed": 42,
+      "window_frames": 10,
+      "metric": "window_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.0038626614781016723
+    },
+    {
+      "seed": 42,
+      "window_frames": 10,
+      "metric": "top_class_switch_fraction",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.009120331285971544
+    },
+    {
+      "seed": 42,
+      "window_frames": 10,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.15532753328449764
+    },
+    {
+      "seed": 42,
+      "window_frames": 10,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.0036860865609326695
+    },
+    {
+      "seed": 42,
+      "window_frames": 20,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.010115570133032496
+    },
+    {
+      "seed": 42,
+      "window_frames": 20,
+      "metric": "true_class_concentration",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.00457326384313507
+    },
+    {
+      "seed": 42,
+      "window_frames": 20,
+      "metric": "true_class_mean_probability",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.0035136471017717494
+    },
+    {
+      "seed": 42,
+      "window_frames": 20,
+      "metric": "window_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.003488692006876557
+    },
+    {
+      "seed": 42,
+      "window_frames": 20,
+      "metric": "top_class_switch_fraction",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.00526233971530034
+    },
+    {
+      "seed": 42,
+      "window_frames": 20,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.13776706623782042
+    },
+    {
+      "seed": 42,
+      "window_frames": 20,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.0025944677282218613
+    },
+    {
+      "seed": 123,
+      "window_frames": 5,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.006397193484287382
+    },
+    {
+      "seed": 123,
+      "window_frames": 5,
+      "metric": "true_class_concentration",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.004047621996854729
+    },
+    {
+      "seed": 123,
+      "window_frames": 5,
+      "metric": "true_class_mean_probability",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.008965209894316234
+    },
+    {
+      "seed": 123,
+      "window_frames": 5,
+      "metric": "window_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.010715355222193149
+    },
+    {
+      "seed": 123,
+      "window_frames": 5,
+      "metric": "top_class_switch_fraction",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.019024979934744116
+    },
+    {
+      "seed": 123,
+      "window_frames": 5,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.40026234506971586
+    },
+    {
+      "seed": 123,
+      "window_frames": 5,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.010887952654167778
+    },
+    {
+      "seed": 123,
+      "window_frames": 10,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.010014435130951349
+    },
+    {
+      "seed": 123,
+      "window_frames": 10,
+      "metric": "true_class_concentration",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.006677220995867278
+    },
+    {
+      "seed": 123,
+      "window_frames": 10,
+      "metric": "true_class_mean_probability",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.008528742781999292
+    },
+    {
+      "seed": 123,
+      "window_frames": 10,
+      "metric": "window_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.010559594457278425
+    },
+    {
+      "seed": 123,
+      "window_frames": 10,
+      "metric": "top_class_switch_fraction",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.030659774362589123
+    },
+    {
+      "seed": 123,
+      "window_frames": 10,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.3867750280638101
+    },
+    {
+      "seed": 123,
+      "window_frames": 10,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.010600884620217342
+    },
+    {
+      "seed": 123,
+      "window_frames": 20,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.01179336177787453
+    },
+    {
+      "seed": 123,
+      "window_frames": 20,
+      "metric": "true_class_concentration",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.009368684056372376
+    },
+    {
+      "seed": 123,
+      "window_frames": 20,
+      "metric": "true_class_mean_probability",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.0077420452848990205
+    },
+    {
+      "seed": 123,
+      "window_frames": 20,
+      "metric": "window_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.008025038337632266
+    },
+    {
+      "seed": 123,
+      "window_frames": 20,
+      "metric": "top_class_switch_fraction",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.045333117049377945
+    },
+    {
+      "seed": 123,
+      "window_frames": 20,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.3547941390707525
+    },
+    {
+      "seed": 123,
+      "window_frames": 20,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.008656548452160113
+    },
+    {
+      "seed": 456,
+      "window_frames": 5,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.00430388374107841
+    },
+    {
+      "seed": 456,
+      "window_frames": 5,
+      "metric": "true_class_concentration",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.002382825683534982
+    },
+    {
+      "seed": 456,
+      "window_frames": 5,
+      "metric": "true_class_mean_probability",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.007109299517071155
+    },
+    {
+      "seed": 456,
+      "window_frames": 5,
+      "metric": "window_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.00798961462182621
+    },
+    {
+      "seed": 456,
+      "window_frames": 5,
+      "metric": "top_class_switch_fraction",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.020598210851325575
+    },
+    {
+      "seed": 456,
+      "window_frames": 5,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.13842051936927144
+    },
+    {
+      "seed": 456,
+      "window_frames": 5,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.0080385899432871
+    },
+    {
+      "seed": 456,
+      "window_frames": 10,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.007382457808637423
+    },
+    {
+      "seed": 456,
+      "window_frames": 10,
+      "metric": "true_class_concentration",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.004006910653882158
+    },
+    {
+      "seed": 456,
+      "window_frames": 10,
+      "metric": "true_class_mean_probability",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.007019614832501447
+    },
+    {
+      "seed": 456,
+      "window_frames": 10,
+      "metric": "window_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.007898143503997953
+    },
+    {
+      "seed": 456,
+      "window_frames": 10,
+      "metric": "top_class_switch_fraction",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.028672849841603756
+    },
+    {
+      "seed": 456,
+      "window_frames": 10,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.12961804011892655
+    },
+    {
+      "seed": 456,
+      "window_frames": 10,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.008168593281561118
+    },
+    {
+      "seed": 456,
+      "window_frames": 20,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.008157217887354507
+    },
+    {
+      "seed": 456,
+      "window_frames": 20,
+      "metric": "true_class_concentration",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.004531186947739563
+    },
+    {
+      "seed": 456,
+      "window_frames": 20,
+      "metric": "true_class_mean_probability",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.006819979158833254
+    },
+    {
+      "seed": 456,
+      "window_frames": 20,
+      "metric": "window_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.007778581613868658
+    },
+    {
+      "seed": 456,
+      "window_frames": 20,
+      "metric": "top_class_switch_fraction",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.033800093192939605
+    },
+    {
+      "seed": 456,
+      "window_frames": 20,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.10470178599067143
+    },
+    {
+      "seed": 456,
+      "window_frames": 20,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.007918280663997523
+    }
+  ],
+  "across_seed_differences": [
+    {
+      "window_frames": 5,
+      "metric": "adjacent_js_nats",
+      "n_training_seeds": 3,
+      "mean": -0.0021487180234849145,
+      "sample_sd": 0.005680835591531274
+    },
+    {
+      "window_frames": 5,
+      "metric": "true_class_concentration",
+      "n_training_seeds": 3,
+      "mean": -0.0012561904344700473,
+      "sample_sd": 0.0032979484572612655
+    },
+    {
+      "window_frames": 5,
+      "metric": "true_class_mean_probability",
+      "n_training_seeds": 3,
+      "mean": 0.0017243585391580193,
+      "sample_sd": 0.008154767813643002
+    },
+    {
+      "window_frames": 5,
+      "metric": "window_accuracy",
+      "n_training_seeds": 3,
+      "mean": 0.002310660599418393,
+      "sample_sd": 0.00949546700117429
+    },
+    {
+      "window_frames": 5,
+      "metric": "top_class_switch_fraction",
+      "n_training_seeds": 3,
+      "mean": -0.0015941669435711517,
+      "sample_sd": 0.020236197433123774
+    },
+    {
+      "window_frames": 5,
+      "metric": "window_mean_supervised_ce",
+      "n_training_seeds": 3,
+      "mean": -0.14131080958967757,
+      "sample_sd": 0.26994195111693503
+    },
+    {
+      "window_frames": 5,
+      "metric": "window_supervised_accuracy",
+      "n_training_seeds": 3,
+      "mean": 0.002333800221457806,
+      "sample_sd": 0.009593382876283276
+    },
+    {
+      "window_frames": 10,
+      "metric": "adjacent_js_nats",
+      "n_training_seeds": 3,
+      "mean": -0.003401854643909979,
+      "sample_sd": 0.009418889620432816
+    },
+    {
+      "window_frames": 10,
+      "metric": "true_class_concentration",
+      "n_training_seeds": 3,
+      "mean": -0.002075170200231484,
+      "sample_sd": 0.00549368128014293
+    },
+    {
+      "window_frames": 10,
+      "metric": "true_class_mean_probability",
+      "n_training_seeds": 3,
+      "mean": 0.0016327463269080432,
+      "sample_sd": 0.007921582471831745
+    },
+    {
+      "window_frames": 10,
+      "metric": "window_accuracy",
+      "n_training_seeds": 3,
+      "mean": 0.0021747041437940487,
+      "sample_sd": 0.0093439243700716
+    },
+    {
+      "window_frames": 10,
+      "metric": "top_class_switch_fraction",
+      "n_training_seeds": 3,
+      "mean": -0.00370241860231897,
+      "sample_sd": 0.03003506962077425
+    },
+    {
+      "window_frames": 10,
+      "metric": "window_mean_supervised_ce",
+      "n_training_seeds": 3,
+      "mean": -0.13749484040979373,
+      "sample_sd": 0.2586579863800222
+    },
+    {
+      "window_frames": 10,
+      "metric": "window_supervised_accuracy",
+      "n_training_seeds": 3,
+      "mean": 0.0020394592998629647,
+      "sample_sd": 0.009492463388341876
+    },
+    {
+      "window_frames": 20,
+      "metric": "adjacent_js_nats",
+      "n_training_seeds": 3,
+      "mean": -0.004583904674517505,
+      "sample_sd": 0.011065979364853274
+    },
+    {
+      "window_frames": 20,
+      "metric": "true_class_concentration",
+      "n_training_seeds": 3,
+      "mean": -0.003136920317255961,
+      "sample_sd": 0.007060376443645841
+    },
+    {
+      "window_frames": 20,
+      "metric": "true_class_mean_probability",
+      "n_training_seeds": 3,
+      "mean": 0.0014785710759458385,
+      "sample_sd": 0.007491280918383224
+    },
+    {
+      "window_frames": 20,
+      "metric": "window_accuracy",
+      "n_training_seeds": 3,
+      "mean": 0.0012450495768800548,
+      "sample_sd": 0.008137201571064217
+    },
+    {
+      "window_frames": 20,
+      "metric": "top_class_switch_fraction",
+      "n_training_seeds": 3,
+      "mean": -0.005598454523912892,
+      "sample_sd": 0.039567675831253146
+    },
+    {
+      "window_frames": 20,
+      "metric": "window_mean_supervised_ce",
+      "n_training_seeds": 3,
+      "mean": -0.12928647310596716,
+      "sample_sd": 0.22986532281297772
+    },
+    {
+      "window_frames": 20,
+      "metric": "window_supervised_accuracy",
+      "n_training_seeds": 3,
+      "mean": 0.0011109118387948168,
+      "sample_sd": 0.008386414228694346
+    }
+  ],
+  "weighting": "equal record weight within each model/seed/window width; then three training-seed values",
+  "limitations": [
+    "Descriptive validation only; windows, speakers and records are not extra independent training seeds.",
+    "Lower adjacent JS or fewer class switches may describe consistently wrong or low-confidence outputs.",
+    "Inspect true-class probability, window accuracy and window CE together; smoother is not automatically better.",
+    "Window CE uses mean raw membrane potentials; probability metrics use mean frame-softmax probabilities.",
+    "Diagnostic windows exclude burn-in/minimum/batch padding, whereas ordinary anchor loss retains its original mask.",
+    "Window widths and training JS overlap/stride are different contracts; JS is never added to this prediction loss.",
+    "No p-values, bootstrap, automatic confidence/benefit regression, TTA or independent-test/causal claim."
+  ],
+  "version": "adaptation_ssc_windows_v1",
+  "dataset": "SSC official clean validation",
+  "validation_records": 9981,
+  "prediction_records": 59886,
+  "descriptor_records": 179658,
+  "paired_records": 89829,
+  "chunks": 234,
+  "window_frames": [
+    5,
+    10,
+    20
+  ],
+  "physical_bin_ms": 4.0,
+  "burn_in_frames": 10,
+  "anchors_passed": 6,
+  "training": false,
+  "official_test_opened": false,
+  "stage6_complete": false,
+  "remaining": "Review this evidence and remaining study/code scope before closing stage 6; stage 7 is separate"
+}

@@ -1,0 +1,230 @@
+{
+  "unit": "model/layer, not sample",
+  "groups": [
+    {
+      "model": "DTH_SE_adLIF",
+      "layer": "l1",
+      "trace": "fast",
+      "n_models": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "rho": 0.9,
+          "e_folding_frames": 9.491221581029905,
+          "e_folding_ms": 37.96488632411962
+        },
+        {
+          "seed": 123,
+          "rho": 0.9,
+          "e_folding_frames": 9.491221581029905,
+          "e_folding_ms": 37.96488632411962
+        },
+        {
+          "seed": 456,
+          "rho": 0.9,
+          "e_folding_frames": 9.491221581029905,
+          "e_folding_ms": 37.96488632411962
+        }
+      ],
+      "mean_ms": 37.96488632411962,
+      "sample_sd_ms": 0.0
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "layer": "l1",
+      "trace": "slow",
+      "n_models": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "rho": 0.99,
+          "e_folding_frames": 99.49916247342207,
+          "e_folding_ms": 397.9966498936883
+        },
+        {
+          "seed": 123,
+          "rho": 0.99,
+          "e_folding_frames": 99.49916247342207,
+          "e_folding_ms": 397.9966498936883
+        },
+        {
+          "seed": 456,
+          "rho": 0.99,
+          "e_folding_frames": 99.49916247342207,
+          "e_folding_ms": 397.9966498936883
+        }
+      ],
+      "mean_ms": 397.9966498936883,
+      "sample_sd_ms": 0.0
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "layer": "l2",
+      "trace": "fast",
+      "n_models": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "rho": 0.9,
+          "e_folding_frames": 9.491221581029905,
+          "e_folding_ms": 37.96488632411962
+        },
+        {
+          "seed": 123,
+          "rho": 0.9,
+          "e_folding_frames": 9.491221581029905,
+          "e_folding_ms": 37.96488632411962
+        },
+        {
+          "seed": 456,
+          "rho": 0.9,
+          "e_folding_frames": 9.491221581029905,
+          "e_folding_ms": 37.96488632411962
+        }
+      ],
+      "mean_ms": 37.96488632411962,
+      "sample_sd_ms": 0.0
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "layer": "l2",
+      "trace": "slow",
+      "n_models": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "rho": 0.99,
+          "e_folding_frames": 99.49916247342207,
+          "e_folding_ms": 397.9966498936883
+        },
+        {
+          "seed": 123,
+          "rho": 0.99,
+          "e_folding_frames": 99.49916247342207,
+          "e_folding_ms": 397.9966498936883
+        },
+        {
+          "seed": 456,
+          "rho": 0.99,
+          "e_folding_frames": 99.49916247342207,
+          "e_folding_ms": 397.9966498936883
+        }
+      ],
+      "mean_ms": 397.9966498936883,
+      "sample_sd_ms": 0.0
+    },
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "layer": "l1",
+      "trace": "fast",
+      "n_models": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "rho": 0.9277132749557495,
+          "e_folding_frames": 13.32754653214922,
+          "e_folding_ms": 53.31018612859688
+        },
+        {
+          "seed": 123,
+          "rho": 0.9252145290374756,
+          "e_folding_frames": 12.865104414438406,
+          "e_folding_ms": 51.460417657753624
+        },
+        {
+          "seed": 456,
+          "rho": 0.9277999997138977,
+          "e_folding_frames": 13.344171118099684,
+          "e_folding_ms": 53.376684472398736
+        }
+      ],
+      "mean_ms": 52.71576275291641,
+      "sample_sd_ms": 1.0876690619825746
+    },
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "layer": "l1",
+      "trace": "slow",
+      "n_models": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "rho": 0.9870100617408752,
+          "e_folding_frames": 76.48157038341482,
+          "e_folding_ms": 305.9262815336593
+        },
+        {
+          "seed": 123,
+          "rho": 0.9864190816879272,
+          "e_folding_frames": 73.13158378786736,
+          "e_folding_ms": 292.5263351514694
+        },
+        {
+          "seed": 456,
+          "rho": 0.9869425892829895,
+          "e_folding_frames": 76.08376688459913,
+          "e_folding_ms": 304.3350675383965
+        }
+      ],
+      "mean_ms": 300.9292280745084,
+      "sample_sd_ms": 7.320481377732203
+    },
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "layer": "l2",
+      "trace": "fast",
+      "n_models": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "rho": 0.9692264795303345,
+          "e_folding_frames": 31.99286493048104,
+          "e_folding_ms": 127.97145972192416
+        },
+        {
+          "seed": 123,
+          "rho": 0.9743898510932922,
+          "e_folding_frames": 38.54485817531426,
+          "e_folding_ms": 154.17943270125704
+        },
+        {
+          "seed": 456,
+          "rho": 0.9754986763000488,
+          "e_folding_frames": 40.312054216899035,
+          "e_folding_ms": 161.24821686759614
+        }
+      ],
+      "mean_ms": 147.79970309692578,
+      "sample_sd_ms": 17.531724213587587
+    },
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "layer": "l2",
+      "trace": "slow",
+      "n_models": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "rho": 0.9904763102531433,
+          "e_folding_frames": 104.50052311455619,
+          "e_folding_ms": 418.00209245822475
+        },
+        {
+          "seed": 123,
+          "rho": 0.9916359186172485,
+          "e_folding_frames": 119.05815586996583,
+          "e_folding_ms": 476.2326234798633
+        },
+        {
+          "seed": 456,
+          "rho": 0.9936610460281372,
+          "e_folding_frames": 157.25420444047353,
+          "e_folding_ms": 629.0168177618941
+        }
+      ],
+      "mean_ms": 507.7505112333274,
+      "sample_sd_ms": 108.98089974888137
+    }
+  ],
+  "limitation": "Three seeds and two layers do not identify a population-level parameter/performance relationship. No parameter-data correlation, p-value or per-sample parameter regression is fitted."
+}

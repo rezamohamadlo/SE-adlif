@@ -1,0 +1,490 @@
+{
+  "status": "passed",
+  "reviewed_utc": "2026-11-12T07:15:25.685332+00:00",
+  "manifest_sha256": "7404ecefa4925022fd26fdb694cef73d5bf6d2edbe4834af6c96257af7b21c81",
+  "verified_output_count": 63,
+  "samples": 1631,
+  "training_seeds": [
+    42,
+    123,
+    456
+  ],
+  "prediction_chunks": 36,
+  "feature_chunks": 6,
+  "parameter_records": 6,
+  "clean_anchors": 6,
+  "unique_paired_records": 29358,
+  "clean_metrics": {
+    "parent_mean_loss": {
+      "mean": 0.06553771218232844,
+      "sample_sd": 0.015524411801876843
+    },
+    "variant_mean_loss": {
+      "mean": 0.05724178825858416,
+      "sample_sd": 0.001599596887811522
+    },
+    "mean_loss_benefit": {
+      "mean": 0.00829592392374428,
+      "sample_sd": 0.01570406967865027
+    },
+    "parent_accuracy": {
+      "mean": 0.9908031882280809,
+      "sample_sd": 0.0006131207847946407
+    },
+    "variant_accuracy": {
+      "mean": 0.9914163090128755,
+      "sample_sd": 0.0031858690513223036
+    },
+    "accuracy_difference_pp": {
+      "mean": 0.06131207847946222,
+      "sample_sd": 0.37294681362957055
+    }
+  },
+  "per_seed_condition_replicate": [
+    {
+      "seed": 42,
+      "condition": "clean",
+      "replicate": 0,
+      "n": 1631,
+      "parent_mean_loss": 0.0526556148503023,
+      "variant_mean_loss": 0.0586053594957608,
+      "mean_loss_benefit": -0.005949744645458512,
+      "parent_accuracy": 0.9914163090128756,
+      "variant_accuracy": 0.9895769466584917
+    },
+    {
+      "seed": 42,
+      "condition": "time_scale_0.9",
+      "replicate": 0,
+      "n": 1631,
+      "parent_mean_loss": 0.08620722443142004,
+      "variant_mean_loss": 0.08224281520029215,
+      "mean_loss_benefit": 0.00396440923112789,
+      "parent_accuracy": 0.9816063764561619,
+      "variant_accuracy": 0.9816063764561619
+    },
+    {
+      "seed": 42,
+      "condition": "time_scale_1.1",
+      "replicate": 0,
+      "n": 1631,
+      "parent_mean_loss": 0.10123318568262764,
+      "variant_mean_loss": 0.09340157816177604,
+      "mean_loss_benefit": 0.007831607520851606,
+      "parent_accuracy": 0.9760882893930104,
+      "variant_accuracy": 0.9816063764561619
+    },
+    {
+      "seed": 42,
+      "condition": "delete_0.1",
+      "replicate": 0,
+      "n": 1631,
+      "parent_mean_loss": 0.06723782007991344,
+      "variant_mean_loss": 0.0674312473547915,
+      "mean_loss_benefit": -0.0001934272748780537,
+      "parent_accuracy": 0.9846719803801349,
+      "variant_accuracy": 0.9883507050889025
+    },
+    {
+      "seed": 42,
+      "condition": "delete_0.1",
+      "replicate": 1,
+      "n": 1631,
+      "parent_mean_loss": 0.06005273036599288,
+      "variant_mean_loss": 0.06493642729425221,
+      "mean_loss_benefit": -0.004883696928259334,
+      "parent_accuracy": 0.9889638258736971,
+      "variant_accuracy": 0.9852851011649295
+    },
+    {
+      "seed": 42,
+      "condition": "delete_0.1",
+      "replicate": 2,
+      "n": 1631,
+      "parent_mean_loss": 0.06032756856082263,
+      "variant_mean_loss": 0.06448212393158959,
+      "mean_loss_benefit": -0.004154555370766952,
+      "parent_accuracy": 0.9858982219497241,
+      "variant_accuracy": 0.9858982219497241
+    },
+    {
+      "seed": 123,
+      "condition": "clean",
+      "replicate": 0,
+      "n": 1631,
+      "parent_mean_loss": 0.06118311181549469,
+      "variant_mean_loss": 0.05548101454258478,
+      "mean_loss_benefit": 0.005702097272909915,
+      "parent_accuracy": 0.9908031882280809,
+      "variant_accuracy": 0.9895769466584917
+    },
+    {
+      "seed": 123,
+      "condition": "time_scale_0.9",
+      "replicate": 0,
+      "n": 1631,
+      "parent_mean_loss": 0.09730671011492262,
+      "variant_mean_loss": 0.11488933144565903,
+      "mean_loss_benefit": -0.01758262133073642,
+      "parent_accuracy": 0.9809932556713673,
+      "variant_accuracy": 0.9816063764561619
+    },
+    {
+      "seed": 123,
+      "condition": "time_scale_1.1",
+      "replicate": 0,
+      "n": 1631,
+      "parent_mean_loss": 0.08907164661989464,
+      "variant_mean_loss": 0.1048392357538067,
+      "mean_loss_benefit": -0.015767589133912057,
+      "parent_accuracy": 0.9822194972409565,
+      "variant_accuracy": 0.9791538933169834
+    },
+    {
+      "seed": 123,
+      "condition": "delete_0.1",
+      "replicate": 0,
+      "n": 1631,
+      "parent_mean_loss": 0.06914429745957658,
+      "variant_mean_loss": 0.07027613299740722,
+      "mean_loss_benefit": -0.0011318355378306404,
+      "parent_accuracy": 0.9846719803801349,
+      "variant_accuracy": 0.9822194972409565
+    },
+    {
+      "seed": 123,
+      "condition": "delete_0.1",
+      "replicate": 1,
+      "n": 1631,
+      "parent_mean_loss": 0.06848062826271291,
+      "variant_mean_loss": 0.07762465196493756,
+      "mean_loss_benefit": -0.009144023702224658,
+      "parent_accuracy": 0.9871244635193133,
+      "variant_accuracy": 0.9803801348865726
+    },
+    {
+      "seed": 123,
+      "condition": "delete_0.1",
+      "replicate": 2,
+      "n": 1631,
+      "parent_mean_loss": 0.06503117785387881,
+      "variant_mean_loss": 0.069081598020423,
+      "mean_loss_benefit": -0.004050420166544203,
+      "parent_accuracy": 0.9846719803801349,
+      "variant_accuracy": 0.9858982219497241
+    },
+    {
+      "seed": 456,
+      "condition": "clean",
+      "replicate": 0,
+      "n": 1631,
+      "parent_mean_loss": 0.08277440988118834,
+      "variant_mean_loss": 0.05763899073740689,
+      "mean_loss_benefit": 0.025135419143781448,
+      "parent_accuracy": 0.9901900674432863,
+      "variant_accuracy": 0.9950950337216432
+    },
+    {
+      "seed": 456,
+      "condition": "time_scale_0.9",
+      "replicate": 0,
+      "n": 1631,
+      "parent_mean_loss": 0.11099157957516999,
+      "variant_mean_loss": 0.1065802674186335,
+      "mean_loss_benefit": 0.004411312156536498,
+      "parent_accuracy": 0.9779276517473943,
+      "variant_accuracy": 0.979767014101778
+    },
+    {
+      "seed": 456,
+      "condition": "time_scale_1.1",
+      "replicate": 0,
+      "n": 1631,
+      "parent_mean_loss": 0.09852566794784112,
+      "variant_mean_loss": 0.07205302931239922,
+      "mean_loss_benefit": 0.026472638635441897,
+      "parent_accuracy": 0.9791538933169834,
+      "variant_accuracy": 0.9852851011649295
+    },
+    {
+      "seed": 456,
+      "condition": "delete_0.1",
+      "replicate": 0,
+      "n": 1631,
+      "parent_mean_loss": 0.0867575779372169,
+      "variant_mean_loss": 0.06659721716275344,
+      "mean_loss_benefit": 0.020160360774463468,
+      "parent_accuracy": 0.9865113427345187,
+      "variant_accuracy": 0.9908031882280809
+    },
+    {
+      "seed": 456,
+      "condition": "delete_0.1",
+      "replicate": 1,
+      "n": 1631,
+      "parent_mean_loss": 0.0834143718663285,
+      "variant_mean_loss": 0.07571378828256756,
+      "mean_loss_benefit": 0.007700583583760937,
+      "parent_accuracy": 0.9840588595953402,
+      "variant_accuracy": 0.987737584304108
+    },
+    {
+      "seed": 456,
+      "condition": "delete_0.1",
+      "replicate": 2,
+      "n": 1631,
+      "parent_mean_loss": 0.08546654135421186,
+      "variant_mean_loss": 0.06710372233325629,
+      "mean_loss_benefit": 0.01836281902095558,
+      "parent_accuracy": 0.9834457388105456,
+      "variant_accuracy": 0.9895769466584917
+    }
+  ],
+  "parameter_records_verified": [
+    {
+      "model": "DTH_SE_adLIF",
+      "seed": 42,
+      "checkpoint": "results/valid/DTH_SE_adLIF/SHD/seed_42/ckpt/epoch=178-step=4475.ckpt",
+      "checkpoint_sha256": "d7822e95690a85c94a5d9a04225f7eda592a78c2186c580ef7925a2558ab785e",
+      "layers": [
+        {
+          "layer": "l1",
+          "learned": false,
+          "bin_ms": 4.0,
+          "fast": {
+            "rho": 0.9,
+            "e_folding_frames": 9.491221581029905,
+            "e_folding_ms": 37.96488632411962
+          },
+          "slow": {
+            "rho": 0.99,
+            "e_folding_frames": 99.49916247342207,
+            "e_folding_ms": 397.9966498936883
+          }
+        },
+        {
+          "layer": "l2",
+          "learned": false,
+          "bin_ms": 4.0,
+          "fast": {
+            "rho": 0.9,
+            "e_folding_frames": 9.491221581029905,
+            "e_folding_ms": 37.96488632411962
+          },
+          "slow": {
+            "rho": 0.99,
+            "e_folding_frames": 99.49916247342207,
+            "e_folding_ms": 397.9966498936883
+          }
+        }
+      ],
+      "interpretation": "Layer-level descriptors shared across samples; not independent per-sample observations. Trace decays operate per input frame; milliseconds use the saved input bin width, not neuron dt."
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "seed": 123,
+      "checkpoint": "results/valid/DTH_SE_adLIF/SHD/seed_123/ckpt/epoch=247-step=6200.ckpt",
+      "checkpoint_sha256": "a1a90c9fd43518110d11f3e4771982c853b8f3f09f50ed6ce0fece7c01fe9cfe",
+      "layers": [
+        {
+          "layer": "l1",
+          "learned": false,
+          "bin_ms": 4.0,
+          "fast": {
+            "rho": 0.9,
+            "e_folding_frames": 9.491221581029905,
+            "e_folding_ms": 37.96488632411962
+          },
+          "slow": {
+            "rho": 0.99,
+            "e_folding_frames": 99.49916247342207,
+            "e_folding_ms": 397.9966498936883
+          }
+        },
+        {
+          "layer": "l2",
+          "learned": false,
+          "bin_ms": 4.0,
+          "fast": {
+            "rho": 0.9,
+            "e_folding_frames": 9.491221581029905,
+            "e_folding_ms": 37.96488632411962
+          },
+          "slow": {
+            "rho": 0.99,
+            "e_folding_frames": 99.49916247342207,
+            "e_folding_ms": 397.9966498936883
+          }
+        }
+      ],
+      "interpretation": "Layer-level descriptors shared across samples; not independent per-sample observations. Trace decays operate per input frame; milliseconds use the saved input bin width, not neuron dt."
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "seed": 456,
+      "checkpoint": "results/valid/DTH_SE_adLIF/SHD/seed_456/ckpt/epoch=98-step=2475.ckpt",
+      "checkpoint_sha256": "76f079028f7fa3041f671212871c72b3b5eb25cadf2ced03907dd74af83135af",
+      "layers": [
+        {
+          "layer": "l1",
+          "learned": false,
+          "bin_ms": 4.0,
+          "fast": {
+            "rho": 0.9,
+            "e_folding_frames": 9.491221581029905,
+            "e_folding_ms": 37.96488632411962
+          },
+          "slow": {
+            "rho": 0.99,
+            "e_folding_frames": 99.49916247342207,
+            "e_folding_ms": 397.9966498936883
+          }
+        },
+        {
+          "layer": "l2",
+          "learned": false,
+          "bin_ms": 4.0,
+          "fast": {
+            "rho": 0.9,
+            "e_folding_frames": 9.491221581029905,
+            "e_folding_ms": 37.96488632411962
+          },
+          "slow": {
+            "rho": 0.99,
+            "e_folding_frames": 99.49916247342207,
+            "e_folding_ms": 397.9966498936883
+          }
+        }
+      ],
+      "interpretation": "Layer-level descriptors shared across samples; not independent per-sample observations. Trace decays operate per input frame; milliseconds use the saved input bin width, not neuron dt."
+    },
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "seed": 42,
+      "checkpoint": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/ckpt/epoch=223-step=5600.ckpt",
+      "checkpoint_sha256": "455bb8ea256b2517bf0218e9e539ee32cafda43966e0027fc276538bf960ef04",
+      "layers": [
+        {
+          "layer": "l1",
+          "learned": true,
+          "bin_ms": 4.0,
+          "fast": {
+            "rho": 0.9277132749557495,
+            "e_folding_frames": 13.32754653214922,
+            "e_folding_ms": 53.31018612859688
+          },
+          "slow": {
+            "rho": 0.9870100617408752,
+            "e_folding_frames": 76.48157038341482,
+            "e_folding_ms": 305.9262815336593
+          }
+        },
+        {
+          "layer": "l2",
+          "learned": true,
+          "bin_ms": 4.0,
+          "fast": {
+            "rho": 0.9692264795303345,
+            "e_folding_frames": 31.99286493048104,
+            "e_folding_ms": 127.97145972192416
+          },
+          "slow": {
+            "rho": 0.9904763102531433,
+            "e_folding_frames": 104.50052311455619,
+            "e_folding_ms": 418.00209245822475
+          }
+        }
+      ],
+      "interpretation": "Layer-level descriptors shared across samples; not independent per-sample observations. Trace decays operate per input frame; milliseconds use the saved input bin width, not neuron dt."
+    },
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "seed": 123,
+      "checkpoint": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/ckpt/epoch=253-step=6350.ckpt",
+      "checkpoint_sha256": "06a6e61e6d2654a9ecda4eef5e2594f1960c7e9c0307c1f267b94b08c9aefa6e",
+      "layers": [
+        {
+          "layer": "l1",
+          "learned": true,
+          "bin_ms": 4.0,
+          "fast": {
+            "rho": 0.9252145290374756,
+            "e_folding_frames": 12.865104414438406,
+            "e_folding_ms": 51.460417657753624
+          },
+          "slow": {
+            "rho": 0.9864190816879272,
+            "e_folding_frames": 73.13158378786736,
+            "e_folding_ms": 292.5263351514694
+          }
+        },
+        {
+          "layer": "l2",
+          "learned": true,
+          "bin_ms": 4.0,
+          "fast": {
+            "rho": 0.9743898510932922,
+            "e_folding_frames": 38.54485817531426,
+            "e_folding_ms": 154.17943270125704
+          },
+          "slow": {
+            "rho": 0.9916359186172485,
+            "e_folding_frames": 119.05815586996583,
+            "e_folding_ms": 476.2326234798633
+          }
+        }
+      ],
+      "interpretation": "Layer-level descriptors shared across samples; not independent per-sample observations. Trace decays operate per input frame; milliseconds use the saved input bin width, not neuron dt."
+    },
+    {
+      "model": "LT_DTH_SE_adLIF",
+      "seed": 456,
+      "checkpoint": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/ckpt/epoch=192-step=4825.ckpt",
+      "checkpoint_sha256": "15d2ecea89a3e382878be6515435d9b6e5eb4ee1107ccdfec6eb7f6a5b7bda19",
+      "layers": [
+        {
+          "layer": "l1",
+          "learned": true,
+          "bin_ms": 4.0,
+          "fast": {
+            "rho": 0.9277999997138977,
+            "e_folding_frames": 13.344171118099684,
+            "e_folding_ms": 53.376684472398736
+          },
+          "slow": {
+            "rho": 0.9869425892829895,
+            "e_folding_frames": 76.08376688459913,
+            "e_folding_ms": 304.3350675383965
+          }
+        },
+        {
+          "layer": "l2",
+          "learned": true,
+          "bin_ms": 4.0,
+          "fast": {
+            "rho": 0.9754986763000488,
+            "e_folding_frames": 40.312054216899035,
+            "e_folding_ms": 161.24821686759614
+          },
+          "slow": {
+            "rho": 0.9936610460281372,
+            "e_folding_frames": 157.25420444047353,
+            "e_folding_ms": 629.0168177618941
+          }
+        }
+      ],
+      "interpretation": "Layer-level descriptors shared across samples; not independent per-sample observations. Trace decays operate per input frame; milliseconds use the saved input bin width, not neuron dt."
+    }
+  ],
+  "elapsed_seconds": 345.29600000000005,
+  "training": false,
+  "new_inference": false,
+  "official_test_opened": false,
+  "limitations": [
+    "Descriptive validation-development evidence, not independent final-test confirmation.",
+    "Only three training seeds; clean mean accuracy improvement is not consistent across seeds.",
+    "Learned trace descriptors belong to model/layer units; no per-sample independent parameter observations.",
+    "No new model inference or raw input reconstruction was run by this post-run review.",
+    "LT-DTH-specific adjusted statistical analysis remains pending."
+  ]
+}

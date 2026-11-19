@@ -1,5 +1,11 @@
 # Paper and proposed-model comparison
 
+The [completed supervisor-study synthesis](../results/experiments/adaptation_stage8_synthesis_v1/SUMMARY.md)
+connects the four mechanism pairs across SHD*/SSC/ECG with saved feature,
+intervention, gradient and cost evidence. Its [completion review](../results/experiments/adaptation_stage8_synthesis_v1/POST_RUN_REVIEW.md)
+records the bounded exploratory scope; it supplies no new independent-test or
+controlled hardware-speed claim.
+
 ## SHD* speaker holdout + augmentation versus shuffled reference
 
 This descriptive comparison adds the imported `shd_speaker_augmented_v1`

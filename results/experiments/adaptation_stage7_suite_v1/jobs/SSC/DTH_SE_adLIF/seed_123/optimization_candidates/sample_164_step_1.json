@@ -1,0 +1,246 @@
+{
+  "identity": {
+    "manifest_sha256": "8af91e2d1e6d9566e96199f77b0fcc2b6e4b5bbf9e5e056ef8c8c5a6f4a0bb8e",
+    "sample_id": 164,
+    "iteration": 1,
+    "current_sha256": "6a63921fe74b72e75a596b05c80ff57cac0d9cb296f0d1802a6ed4acce05dccd",
+    "current_score_sha256": "4dfa723078539b38903c5ce6080364f496c8a6feef65058667f4ef3920702252"
+  },
+  "value": {
+    "score": {
+      "loss": 5.882201194763184,
+      "predictions": [
+        24
+      ],
+      "valid_steps": 1,
+      "correct_steps": 0,
+      "accuracy": 0.0
+    },
+    "accepted": false,
+    "moves": 147,
+    "allocation": [
+      {
+        "channel": 29,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 31,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 32,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 33,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 44,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 45,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 47,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 49,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 51,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 53,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 54,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 55,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 56,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 57,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 58,
+        "sign": 1,
+        "moves": 9
+      },
+      {
+        "channel": 59,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 60,
+        "sign": 1,
+        "moves": 10
+      },
+      {
+        "channel": 61,
+        "sign": 1,
+        "moves": 9
+      },
+      {
+        "channel": 62,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 63,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 64,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 66,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 67,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 68,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 69,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 70,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 71,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 72,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 73,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 74,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 75,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 76,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 77,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 78,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 79,
+        "sign": 1,
+        "moves": 10
+      },
+      {
+        "channel": 80,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 81,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 84,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 85,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 86,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 87,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 88,
+        "sign": 1,
+        "moves": 1
+      }
+    ],
+    "status": "rejected_no_measured_ce_increase",
+    "previous_loss": 6.369063377380371,
+    "acceptance_bound": 8.369063377380371e-05,
+    "autograd_forward_check": {
+      "prediction_matches": true,
+      "loss_difference": 9.5367431640625e-07,
+      "loss_bound": 8.36905860900879e-05,
+      "passed": true
+    }
+  },
+  "value_sha256": "6107ef0d257dd0f06c5395fef06888f29c0e0950a3867b15e053c84a4907dd8b",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/DTH_SE_adLIF/seed_123/optimization_candidates/sample_164_step_1.npz",
+  "artifact_sha256": "de74ce64c55f88982be2923b9106dd822fa41a3e27051ccb04609401c20de667"
+}

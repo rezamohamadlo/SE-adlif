@@ -1,0 +1,101 @@
+{
+  "identity": {
+    "manifest_sha256": "6f05545ab8f39e11dd1555433eb77cbddc62d5b3b7c8c75bd8e3480de256aaaa",
+    "sample_id": 3896,
+    "iteration": 0,
+    "current_sha256": "cb1e17fca49d0a45210faff153745af08bac71c5e1af426016dee06a145f171e",
+    "current_score_sha256": "b70f206cec9ebe308da75675d8c42639b523f8ed152923fa4e6fbdad4ee66070"
+  },
+  "value": {
+    "score": {
+      "loss": 10.682861328125,
+      "predictions": [
+        9
+      ],
+      "valid_steps": 1,
+      "correct_steps": 0,
+      "accuracy": 0.0
+    },
+    "accepted": true,
+    "moves": 86,
+    "allocation": [
+      {
+        "channel": 4,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 15,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 25,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 27,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 34,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 35,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 37,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 49,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 79,
+        "sign": 1,
+        "moves": 17
+      },
+      {
+        "channel": 80,
+        "sign": 1,
+        "moves": 9
+      },
+      {
+        "channel": 81,
+        "sign": 1,
+        "moves": 12
+      },
+      {
+        "channel": 82,
+        "sign": 1,
+        "moves": 29
+      },
+      {
+        "channel": 83,
+        "sign": 1,
+        "moves": 8
+      }
+    ],
+    "status": "accepted",
+    "previous_loss": 7.152555099310121e-07,
+    "acceptance_bound": 2.00000071525551e-05,
+    "autograd_forward_check": {
+      "prediction_matches": true,
+      "loss_difference": 0.0,
+      "loss_bound": 2.00000071525551e-05,
+      "passed": true
+    }
+  },
+  "value_sha256": "c29580d75240cdeac18aae873a81bb2b242b3858b7dcbeff1495051d26968dae",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SHD/DTH_SE_adLIF/seed_123/optimization_candidates/sample_3896_step_0.npz",
+  "artifact_sha256": "afbd30647a2aa0a1f95a1f8f0916c7589989d5de7f37a915cc007c908cc317dc"
+}

@@ -1,0 +1,66 @@
+{
+  "review_date": "2026-11-14",
+  "scope": "Windows_metadata_write_failure",
+  "failed_phase": "lt_dth_evaluation",
+  "error_type": "PermissionError",
+  "reported_winerror": 5,
+  "failed_session_seconds": 53.485000000015134,
+  "completed_jobs": [
+    "contract_tests",
+    "snapshot_source",
+    "amt_mt_statistics"
+  ],
+  "tests_passed_in_user_run": 25,
+  "destination_read_only": false,
+  "destination_write_access": true,
+  "cause_certainty": "Atomic replacement was denied; transient sharing/scan locking is plausible but no owning process was identified.",
+  "cached_LT_prediction_files_unchanged": 36,
+  "LT_paired_csv_unchanged": true,
+  "preservation": {
+    "MANIFEST.json": {
+      "source_sha256": "a35b5b6c707c5f4ad8c6bacc3ed1822092478b581f6f8087eade89df05b82d7a",
+      "archive": "results/experiments/adaptation_ssc_suite_v2/io_failure_review/original_records/MANIFEST.json",
+      "archive_sha256": "a35b5b6c707c5f4ad8c6bacc3ed1822092478b581f6f8087eade89df05b82d7a"
+    },
+    "PROGRESS.json": {
+      "source_sha256": "5a8b38fffed14a3671c21c0c9f95a81a2b541e2fda46a9f6974ee10357eed213",
+      "archive": "results/experiments/adaptation_ssc_suite_v2/io_failure_review/original_records/PROGRESS.json",
+      "archive_sha256": "5a8b38fffed14a3671c21c0c9f95a81a2b541e2fda46a9f6974ee10357eed213"
+    },
+    "CONTRACT_TESTS.json": {
+      "source_sha256": "817ea9856497c246ac8e52ab074f98dc9d448459a0e2a90e197eb2c6ecf368ac",
+      "archive": "results/experiments/adaptation_ssc_suite_v2/io_failure_review/original_records/CONTRACT_TESTS.json",
+      "archive_sha256": "817ea9856497c246ac8e52ab074f98dc9d448459a0e2a90e197eb2c6ecf368ac"
+    },
+    "contract_tests.log": {
+      "source_sha256": "e25fd88a568a9faec22e35755a71ad0c359fea2539d4f57c5851d729d0841554",
+      "archive": "results/experiments/adaptation_ssc_suite_v2/io_failure_review/original_records/contract_tests.log",
+      "archive_sha256": "e25fd88a568a9faec22e35755a71ad0c359fea2539d4f57c5851d729d0841554"
+    },
+    "pairs/lt_dth/evaluation/PROGRESS.json": {
+      "source_sha256": "dc264a1f13f51eb6e65fcf683c93e8c9d37bcfcc3f1b59ba7df213487dbb5361",
+      "archive": "results/experiments/adaptation_ssc_suite_v2/io_failure_review/original_records/pairs/lt_dth/evaluation/PROGRESS.json",
+      "archive_sha256": "dc264a1f13f51eb6e65fcf683c93e8c9d37bcfcc3f1b59ba7df213487dbb5361"
+    },
+    "pairs/lt_dth/evaluation/PROGRESS.json.tmp": {
+      "source_sha256": "2902311424a1b5cf582fec616b8fdeb28e398b261a321bc942b9f2d5c0703b9a",
+      "archive": "results/experiments/adaptation_ssc_suite_v2/io_failure_review/original_records/pairs/lt_dth/evaluation/PROGRESS.json.tmp",
+      "archive_sha256": "2902311424a1b5cf582fec616b8fdeb28e398b261a321bc942b9f2d5c0703b9a"
+    }
+  },
+  "compatibility_launcher": "scripts/resume_ssc_suite.py",
+  "compatibility_helper": "scripts/ssc_resume_io.py",
+  "scientific_frozen_source_modified": false,
+  "manifest_guard_relaxed": false,
+  "correction_preflight": {
+    "result_volume_atomic_probe": "passed",
+    "byte_serialization": "same as pilot.write_json",
+    "frozen_source_hashes_unchanged": 68,
+    "checkpoint_count": 18,
+    "complete_cases": 9979,
+    "speaker_groups": 256,
+    "agent_tests_run": false,
+    "agent_scientific_execution": false
+  },
+  "user_resume_command": ".\\.venv\\Scripts\\python.exe -m scripts.resume_ssc_suite --device cuda:0 --output-root results/experiments/adaptation_ssc_suite_v2"
+}

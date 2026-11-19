@@ -1,0 +1,29 @@
+{
+  "reviewed_utc": "2026-11-16T07:24:34.964427+00:00",
+  "decision": "stage6_complete_within_registered_exploratory_scope",
+  "stage6_scoped_complete": true,
+  "overall_supervisor_study_complete": false,
+  "stage7": "ready_for_preparation_not_implemented_or_executed",
+  "evaluation_analysis_packages": {
+    "SHD": 4,
+    "SSC": 4,
+    "ECG": 4,
+    "total": 12
+  },
+  "evidence_check_path": "results/experiments/adaptation_mechanism_study_v1/STAGE6_EVIDENCE_CHECK.json",
+  "evidence_check_sha256": "29601f1d520cd271a7cf693e687a5c0de75754a7986c57833bf1ca8ccec49726",
+  "audit_path": "docs/audits/supervisor-stage6-closeout-2026-11-16.md",
+  "audit_sha256": "a899774d4772afa62575038f61bbe90b659bd9b7f3436ba5b844caed252dd0e9",
+  "scientific_execution": false,
+  "tests_run": false,
+  "frozen_completion_records_rewritten": false,
+  "upstream_analytical_figure_parity": "unverified; local availability/adaptation audit only",
+  "limitations": [
+    "validation-selected exploratory evidence, not independent-test confirmation",
+    "ECG has no verified independent patient identities or population intervals",
+    "ECG feature units differ from physical SHD/SSC units",
+    "resampling changes counts and class proportions jointly",
+    "seed-dependent output-window findings",
+    "additional optional transformations/CV-ISI and final visual synthesis not claimed complete"
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "identity": {
+    "manifest_sha256": "0d7feabf97012ace9a6edb34467f467ba8224eda08e6b5112e6fde39ce0ff0f0",
+    "sample_id": 6884,
+    "inputs": [
+      {
+        "condition": "mt_abs_gradient_deletion",
+        "replicate": 0,
+        "budget": 81,
+        "seed": 17233436880192766459,
+        "input_sha256": "db111aeb1facc9812570b2ee8ea569096a3c77886b41dc340978d9a23e4cf30b",
+        "delta_sha256": "478d43520258705569a1f69b305e13da1f6c4a239da1238f0973f2782d99e67b",
+        "removed_burn_in_events": 0,
+        "domain": "nonnegative integer counts, original length"
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 0,
+        "budget": 81,
+        "seed": 9126756952603686349,
+        "input_sha256": "17f1c2566f2c612a35c8026afafb5ae737e56f528a477169c6538e4dcf06be31",
+        "delta_sha256": "83dc24ed3825c6f1e8126d74beea98144a4dc33759bebe3fca183d72cbc850d0",
+        "removed_burn_in_events": 3,
+        "domain": "nonnegative integer counts, original length"
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 1,
+        "budget": 81,
+        "seed": 6630879092848574051,
+        "input_sha256": "c5903adebfaae511420cf9245d2e4e061b6ad5860c819e72df351259d86027f1",
+        "delta_sha256": "81b424692521409e08db9c613452984cf6b29937e3f3885a62aacb7786a4881b",
+        "removed_burn_in_events": 0,
+        "domain": "nonnegative integer counts, original length"
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 2,
+        "budget": 81,
+        "seed": 6130846649911355590,
+        "input_sha256": "e8e02dfd25abcb1cd1f3bfe4b584d4cc365d3938242fda2d56a08312759c659a",
+        "delta_sha256": "c462243a271e85404aa44ede39b6fc61a7fbbc8012903b0595991f4adb815220",
+        "removed_burn_in_events": 1,
+        "domain": "nonnegative integer counts, original length"
+      }
+    ]
+  },
+  "value": {
+    "sample_id": 6884,
+    "target": 9,
+    "speaker": 0,
+    "guided_status": "defined",
+    "conditions": [
+      {
+        "condition": "clean",
+        "replicate": 0,
+        "budget": 0,
+        "input_sha256": "3b5e31b02b94231ccff23fa41a5c715910f26950462318f4ea0a1642d527df1d",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 9,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 0.0
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 9,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 0.0
+          }
+        ]
+      },
+      {
+        "condition": "mt_abs_gradient_deletion",
+        "replicate": 0,
+        "budget": 81,
+        "input_sha256": "db111aeb1facc9812570b2ee8ea569096a3c77886b41dc340978d9a23e4cf30b",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 9,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 5.956456932776442e-12
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": 5.602820692729438e-06,
+            "prediction": 9,
+            "correct": 1,
+            "true_probability": 0.9999943971633911,
+            "actual_loss_change": 5.602820692729438e-06,
+            "surrogate_linear_prediction": 5.446343918392993e-09
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 0,
+        "budget": 81,
+        "input_sha256": "17f1c2566f2c612a35c8026afafb5ae737e56f528a477169c6538e4dcf06be31",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 9,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 8.434239553300557e-14
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 9,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 2.8633651851482644e-10
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 1,
+        "budget": 81,
+        "input_sha256": "c5903adebfaae511420cf9245d2e4e061b6ad5860c819e72df351259d86027f1",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 9,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 1.367112149897539e-13
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 9,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 1.4358071247786222e-10
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 2,
+        "budget": 81,
+        "input_sha256": "e8e02dfd25abcb1cd1f3bfe4b584d4cc365d3938242fda2d56a08312759c659a",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 9,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -1.7981559480406803e-13
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 9,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -6.618596433720023e-10
+          }
+        ]
+      }
+    ]
+  },
+  "value_sha256": "810afe142b104c8b0ebb484fa3feb165db16ea71fa1e7177b956affd6284b67e"
+}

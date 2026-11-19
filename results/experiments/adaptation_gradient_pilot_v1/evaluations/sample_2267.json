@@ -1,0 +1,187 @@
+{
+  "identity": {
+    "manifest_sha256": "0d7feabf97012ace9a6edb34467f467ba8224eda08e6b5112e6fde39ce0ff0f0",
+    "sample_id": 2267,
+    "inputs": [
+      {
+        "condition": "mt_abs_gradient_deletion",
+        "replicate": 0,
+        "budget": 63,
+        "seed": 11719108520853882125,
+        "input_sha256": "b65c8b882c22c9b7d9b459b60eb8b07384eeb750592b7487b6f18a2436f94624",
+        "delta_sha256": "ab3d34fb31b254aad06d5c667fdda8dca6fb1fd390cbe7b63edc59db90bca6f9",
+        "removed_burn_in_events": 0,
+        "domain": "nonnegative integer counts, original length"
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 0,
+        "budget": 63,
+        "seed": 10195476388167947907,
+        "input_sha256": "d16ef3274b7546f0386f3746c69ea77c441795de24df527f0f34927890b77d88",
+        "delta_sha256": "70b9fe07fee27dc77efb638fe4481249ba9de7f3acb2e13165ac2338054046db",
+        "removed_burn_in_events": 0,
+        "domain": "nonnegative integer counts, original length"
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 1,
+        "budget": 63,
+        "seed": 13774631760747038555,
+        "input_sha256": "e7b26eb40618fabdd02e08311936557d522c9889c0a62a1ec8289d85a7d20913",
+        "delta_sha256": "143e9d2f8c04d540a24f366d6d48f08e5fa3e171ad0f3ab8426f5dc340b7ae6e",
+        "removed_burn_in_events": 0,
+        "domain": "nonnegative integer counts, original length"
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 2,
+        "budget": 63,
+        "seed": 9143919199587433972,
+        "input_sha256": "70f55f26a3af18bbba3cda3da032a6c5999d6814db7ec50527ab159c6738121a",
+        "delta_sha256": "34c39da03c06b50eae4958f9136b7df06420e98806b2519fdd48f3fb0d8d48ab",
+        "removed_burn_in_events": 0,
+        "domain": "nonnegative integer counts, original length"
+      }
+    ]
+  },
+  "value": {
+    "sample_id": 2267,
+    "target": 18,
+    "speaker": 11,
+    "guided_status": "defined",
+    "conditions": [
+      {
+        "condition": "clean",
+        "replicate": 0,
+        "budget": 0,
+        "input_sha256": "a8c05678eaed1533798b816c6a3aa38e09ed336f998e2f01d822dadc3e904856",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 18,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 0.0
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 18,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 0.0
+          }
+        ]
+      },
+      {
+        "condition": "mt_abs_gradient_deletion",
+        "replicate": 0,
+        "budget": 63,
+        "input_sha256": "b65c8b882c22c9b7d9b459b60eb8b07384eeb750592b7487b6f18a2436f94624",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 18,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 2.6612699589245017e-20
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 18,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -1.181332222527972e-11
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 0,
+        "budget": 63,
+        "input_sha256": "d16ef3274b7546f0386f3746c69ea77c441795de24df527f0f34927890b77d88",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 18,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 1.7027085457233972e-22
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 18,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -9.285793628908078e-13
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 1,
+        "budget": 63,
+        "input_sha256": "e7b26eb40618fabdd02e08311936557d522c9889c0a62a1ec8289d85a7d20913",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 18,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 1.8021255317425022e-21
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 18,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -2.2898882522622076e-12
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 2,
+        "budget": 63,
+        "input_sha256": "70f55f26a3af18bbba3cda3da032a6c5999d6814db7ec50527ab159c6738121a",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 18,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 2.675399883366438e-21
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 18,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 1.6396618051750089e-12
+          }
+        ]
+      }
+    ]
+  },
+  "value_sha256": "400fc7a9c5f0d2598f138b843a70dc42af3acbdaeb6ac059a368256023353693"
+}

@@ -1,0 +1,211 @@
+{
+  "identity": {
+    "manifest_sha256": "7201dbe1704b0d853db7be8dd3ada3b1d276b9f10bcb4ae3215bc1e2dd4c0d36",
+    "sample_id": 577,
+    "iteration": 2,
+    "current_sha256": "66e54fcecda61cabf27c4d6d716c5636774128ec27c42d2acf54901b31ddec08",
+    "current_score_sha256": "3245bbf0c6397d19accbaa9afa98232efe489b8a7eb423460693e4f14b4a5e1e"
+  },
+  "value": {
+    "score": {
+      "loss": 0.006139111239463091,
+      "predictions": [
+        1
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "accepted": false,
+    "moves": 104,
+    "allocation": [
+      {
+        "channel": 4,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 5,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 7,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 13,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 15,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 17,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 18,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 24,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 27,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 28,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 29,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 30,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 31,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 32,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 33,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 34,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 35,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 36,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 37,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 38,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 39,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 40,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 41,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 42,
+        "sign": 1,
+        "moves": 9
+      },
+      {
+        "channel": 43,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 44,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 45,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 46,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 47,
+        "sign": 1,
+        "moves": 10
+      },
+      {
+        "channel": 48,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 49,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 50,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 51,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 53,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 54,
+        "sign": 1,
+        "moves": 2
+      }
+    ],
+    "status": "rejected_no_measured_ce_increase",
+    "previous_loss": 0.030627382919192314,
+    "acceptance_bound": 2.0306273829191925e-05,
+    "autograd_forward_check": {
+      "prediction_matches": true,
+      "loss_difference": 0.0,
+      "loss_bound": 2.0306273829191925e-05,
+      "passed": true
+    }
+  },
+  "value_sha256": "9f79c8616e34d88e2e98eb8151f55fca26e859bc7aa3ae43b213f959016f03e5",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/DTH_SE_adLIF/seed_456/optimization_candidates/sample_577_step_2.npz",
+  "artifact_sha256": "9f2786f92787f8a85b7cb3ba2fe993562d56eb8e73498067d52651d5185399e3"
+}

@@ -1,0 +1,206 @@
+{
+  "identity": {
+    "manifest_sha256": "056e74951db9e36c176831d7a84150c80b2349de78f4c0ef6aa5e2aeb083cc37",
+    "sample_id": 2299,
+    "iteration": 2,
+    "current_sha256": "109a463c032ad2ac04dcd6b12599ab41a3c072962f6f42fcbc2269dae990244b",
+    "current_score_sha256": "889e607ae50bd663d767a1d0a583766a55632fe986c8d702ee565cfe787bc02f"
+  },
+  "value": {
+    "score": {
+      "loss": 0.015045378357172012,
+      "predictions": [
+        15
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "accepted": false,
+    "moves": 62,
+    "allocation": [
+      {
+        "channel": 0,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 2,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 4,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 12,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 16,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 17,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 19,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 20,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 23,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 25,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 26,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 27,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 29,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 31,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 32,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 34,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 35,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 36,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 39,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 41,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 43,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 44,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 45,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 46,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 47,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 54,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 55,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 59,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 62,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 101,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 114,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 125,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 136,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 137,
+        "sign": 1,
+        "moves": 6
+      }
+    ],
+    "status": "rejected_no_measured_ce_increase",
+    "previous_loss": 0.4408402442932129,
+    "acceptance_bound": 2.440840244293213e-05,
+    "autograd_forward_check": {
+      "prediction_matches": true,
+      "loss_difference": -1.4007091522216797e-06,
+      "loss_bound": 2.4408408701419832e-05,
+      "passed": true
+    }
+  },
+  "value_sha256": "0eb7731c6d32e9685453c5ca77d10086969cb3da8ebeb1ef447ca1a0317b4caa",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SHD/SA_MT_SE_adLIF/seed_456/optimization_candidates/sample_2299_step_2.npz",
+  "artifact_sha256": "0dd45b9916e6e216ca1553e28c4bd50800971bad3fa28c43fcbbc5a8ed84fffb"
+}

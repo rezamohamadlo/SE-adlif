@@ -1,0 +1,371 @@
+{
+  "reviewed_utc": "2026-11-16T07:16:35.889654+00:00",
+  "status": "verified",
+  "scope": "read_only_saved_evidence_integrity_reductions_and_cross_file_consistency",
+  "registered_output_hashes": 256,
+  "current_source_hashes": 79,
+  "user_tests_passed": 12,
+  "clean_anchors": 6,
+  "ordinary_prediction_mismatches": 0,
+  "batch_chunks": 234,
+  "prediction_records": 59886,
+  "descriptor_records": 179658,
+  "paired_records": 89829,
+  "undefined_reasons": {},
+  "window_frames": [
+    5,
+    10,
+    20
+  ],
+  "physical_bin_ms": 4.0,
+  "recorded_attempt_elapsed_seconds": 380.95300000000043,
+  "timing_scope": "execute() attempt only; excludes initial preflight; not pure inference latency",
+  "across_seed_differences": [
+    {
+      "window_frames": 5,
+      "metric": "adjacent_js_nats",
+      "n_training_seeds": 3,
+      "mean": -0.0021487180234849145,
+      "sample_sd": 0.005680835591531274
+    },
+    {
+      "window_frames": 5,
+      "metric": "true_class_concentration",
+      "n_training_seeds": 3,
+      "mean": -0.0012561904344700473,
+      "sample_sd": 0.0032979484572612655
+    },
+    {
+      "window_frames": 5,
+      "metric": "true_class_mean_probability",
+      "n_training_seeds": 3,
+      "mean": 0.0017243585391580193,
+      "sample_sd": 0.008154767813643002
+    },
+    {
+      "window_frames": 5,
+      "metric": "window_accuracy",
+      "n_training_seeds": 3,
+      "mean": 0.002310660599418393,
+      "sample_sd": 0.00949546700117429
+    },
+    {
+      "window_frames": 5,
+      "metric": "top_class_switch_fraction",
+      "n_training_seeds": 3,
+      "mean": -0.0015941669435711517,
+      "sample_sd": 0.020236197433123774
+    },
+    {
+      "window_frames": 5,
+      "metric": "window_mean_supervised_ce",
+      "n_training_seeds": 3,
+      "mean": -0.14131080958967757,
+      "sample_sd": 0.26994195111693503
+    },
+    {
+      "window_frames": 5,
+      "metric": "window_supervised_accuracy",
+      "n_training_seeds": 3,
+      "mean": 0.002333800221457806,
+      "sample_sd": 0.009593382876283276
+    },
+    {
+      "window_frames": 10,
+      "metric": "adjacent_js_nats",
+      "n_training_seeds": 3,
+      "mean": -0.003401854643909979,
+      "sample_sd": 0.009418889620432816
+    },
+    {
+      "window_frames": 10,
+      "metric": "true_class_concentration",
+      "n_training_seeds": 3,
+      "mean": -0.002075170200231484,
+      "sample_sd": 0.00549368128014293
+    },
+    {
+      "window_frames": 10,
+      "metric": "true_class_mean_probability",
+      "n_training_seeds": 3,
+      "mean": 0.0016327463269080432,
+      "sample_sd": 0.007921582471831745
+    },
+    {
+      "window_frames": 10,
+      "metric": "window_accuracy",
+      "n_training_seeds": 3,
+      "mean": 0.0021747041437940487,
+      "sample_sd": 0.0093439243700716
+    },
+    {
+      "window_frames": 10,
+      "metric": "top_class_switch_fraction",
+      "n_training_seeds": 3,
+      "mean": -0.00370241860231897,
+      "sample_sd": 0.03003506962077425
+    },
+    {
+      "window_frames": 10,
+      "metric": "window_mean_supervised_ce",
+      "n_training_seeds": 3,
+      "mean": -0.13749484040979373,
+      "sample_sd": 0.2586579863800222
+    },
+    {
+      "window_frames": 10,
+      "metric": "window_supervised_accuracy",
+      "n_training_seeds": 3,
+      "mean": 0.0020394592998629647,
+      "sample_sd": 0.009492463388341876
+    },
+    {
+      "window_frames": 20,
+      "metric": "adjacent_js_nats",
+      "n_training_seeds": 3,
+      "mean": -0.004583904674517505,
+      "sample_sd": 0.011065979364853274
+    },
+    {
+      "window_frames": 20,
+      "metric": "true_class_concentration",
+      "n_training_seeds": 3,
+      "mean": -0.003136920317255961,
+      "sample_sd": 0.007060376443645841
+    },
+    {
+      "window_frames": 20,
+      "metric": "true_class_mean_probability",
+      "n_training_seeds": 3,
+      "mean": 0.0014785710759458385,
+      "sample_sd": 0.007491280918383224
+    },
+    {
+      "window_frames": 20,
+      "metric": "window_accuracy",
+      "n_training_seeds": 3,
+      "mean": 0.0012450495768800548,
+      "sample_sd": 0.008137201571064217
+    },
+    {
+      "window_frames": 20,
+      "metric": "top_class_switch_fraction",
+      "n_training_seeds": 3,
+      "mean": -0.005598454523912892,
+      "sample_sd": 0.039567675831253146
+    },
+    {
+      "window_frames": 20,
+      "metric": "window_mean_supervised_ce",
+      "n_training_seeds": 3,
+      "mean": -0.12928647310596716,
+      "sample_sd": 0.22986532281297772
+    },
+    {
+      "window_frames": 20,
+      "metric": "window_supervised_accuracy",
+      "n_training_seeds": 3,
+      "mean": 0.0011109118387948168,
+      "sample_sd": 0.008386414228694346
+    }
+  ],
+  "selected_per_seed_differences": [
+    {
+      "seed": 42,
+      "window_frames": 5,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.004352844327245772
+    },
+    {
+      "seed": 42,
+      "window_frames": 5,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.1620906030685883
+    },
+    {
+      "seed": 42,
+      "window_frames": 5,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.0041520379534927395
+    },
+    {
+      "seed": 42,
+      "window_frames": 10,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.00757358660941601
+    },
+    {
+      "seed": 42,
+      "window_frames": 10,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.15532753328449764
+    },
+    {
+      "seed": 42,
+      "window_frames": 10,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.0036860865609326695
+    },
+    {
+      "seed": 42,
+      "window_frames": 20,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.010115570133032496
+    },
+    {
+      "seed": 42,
+      "window_frames": 20,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.13776706623782042
+    },
+    {
+      "seed": 42,
+      "window_frames": 20,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.0025944677282218613
+    },
+    {
+      "seed": 123,
+      "window_frames": 5,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.006397193484287382
+    },
+    {
+      "seed": 123,
+      "window_frames": 5,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.40026234506971586
+    },
+    {
+      "seed": 123,
+      "window_frames": 5,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.010887952654167778
+    },
+    {
+      "seed": 123,
+      "window_frames": 10,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.010014435130951349
+    },
+    {
+      "seed": 123,
+      "window_frames": 10,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.3867750280638101
+    },
+    {
+      "seed": 123,
+      "window_frames": 10,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.010600884620217342
+    },
+    {
+      "seed": 123,
+      "window_frames": 20,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.01179336177787453
+    },
+    {
+      "seed": 123,
+      "window_frames": 20,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.3547941390707525
+    },
+    {
+      "seed": 123,
+      "window_frames": 20,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.008656548452160113
+    },
+    {
+      "seed": 456,
+      "window_frames": 5,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.00430388374107841
+    },
+    {
+      "seed": 456,
+      "window_frames": 5,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.13842051936927144
+    },
+    {
+      "seed": 456,
+      "window_frames": 5,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.0080385899432871
+    },
+    {
+      "seed": 456,
+      "window_frames": 10,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.007382457808637423
+    },
+    {
+      "seed": 456,
+      "window_frames": 10,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.12961804011892655
+    },
+    {
+      "seed": 456,
+      "window_frames": 10,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.008168593281561118
+    },
+    {
+      "seed": 456,
+      "window_frames": 20,
+      "metric": "adjacent_js_nats",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.008157217887354507
+    },
+    {
+      "seed": 456,
+      "window_frames": 20,
+      "metric": "window_mean_supervised_ce",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": 0.10470178599067143
+    },
+    {
+      "seed": 456,
+      "window_frames": 20,
+      "metric": "window_supervised_accuracy",
+      "n_finite_pairs": 9981,
+      "mean_variant_minus_parent": -0.007918280663997523
+    }
+  ],
+  "interpretation": "For every width, MT-TC is smoother/lower window CE at seeds 42 and 123, with the reverse at seed 456. Descriptive, not causal or an independent-test result.",
+  "agent_tests_run": false,
+  "agent_scientific_execution": false,
+  "stage6_complete": false,
+  "remaining": "Prepare stage 7; upstream figure parity and final synthesis remain explicitly unclaimed",
+  "completion_sha256": "864a265c5822bdf9ac216c94d82a195f6146049e576d45d45b44d90d7b55d3b3",
+  "subsequent_scope_audit": "docs/audits/supervisor-stage6-closeout-2026-11-16.md",
+  "subsequent_stage6_scoped_completion_record": "results/experiments/adaptation_mechanism_study_v1/STAGE6_CLOSEOUT_AUDIT.json"
+}

@@ -1,0 +1,62 @@
+# Frozen direct SSC output windows, distinct from input-feature statistics.
+version: adaptation_ssc_windows_v1
+inherits: config/paper_baseline.yaml
+dataset_section: SSC
+output_root: results/experiments/adaptation_ssc_windows_v1
+source:
+  root: results/experiments/adaptation_ssc_suite_v2
+  files:
+    MANIFEST.json: a35b5b6c707c5f4ad8c6bacc3ed1822092478b581f6f8087eade89df05b82d7a
+    COMPLETE.json: 7c6886d820f1e60872954b55aef434286c2b2fd691e3f86a406e062f52bb379b
+    pairs/mt_tc/evaluation/MANIFEST.json: 889ef5970c515868e53cced0cb60e1e3349cbcc8535d21f54552a69f3db4d5c7
+    pairs/mt_tc/evaluation/COMPLETE.json: 598fb8661e233d7a525ff5c42e8b7a04cdc4ce339ea09dbb4b8ebf236a7d9c7d
+    pairs/mt_tc/evaluation/VALIDATION_ANCHORS.json: e942c0b92a044b7d33b3d88cce6279b31ba63793655308eb13ee4dc20e93f897
+    shared/amt_mt_full_validation/diagnostic_rows/input_features_clean_rep_0.json: 347d078dd409f17e6a2d0b1ef6d6eeb5400feb635391636614381140ea071bb4
+    shared/amt_mt_full_validation/diagnostic_rows/MT_SE_adLIF_seed_42_clean_rep_0.json: ad2a434b5e974663bcb8d4c3c6bf8be2ea448fcaa4466c2c9716342f9ead5f4a
+    shared/amt_mt_full_validation/diagnostic_rows/MT_SE_adLIF_seed_123_clean_rep_0.json: d3c5da405108c2ad3d0c114cbbaf266b1674eeb5f9c3e91858c934b47e65d636
+    shared/amt_mt_full_validation/diagnostic_rows/MT_SE_adLIF_seed_456_clean_rep_0.json: 753ce4cd7f2c44a0cb5cb8d9d78946fa5b1e196c2fae9e2d88f4416b73fc5728
+    pairs/mt_tc/evaluation/diagnostic_rows/MT_TC_SE_adLIF_seed_42_clean_rep_0.json: 00a1a7ea1c6dd2a03d33eb7b655d235ef177efb40bed9f3808aae32a903d33a5
+    pairs/mt_tc/evaluation/diagnostic_rows/MT_TC_SE_adLIF_seed_123_clean_rep_0.json: 4278f1338c4a3b84e88a039a205859f3f798fe5dae18d32645543bc3504cd436
+    pairs/mt_tc/evaluation/diagnostic_rows/MT_TC_SE_adLIF_seed_456_clean_rep_0.json: a11f16d178b8bd70f9a9f866cb506dcf0d75ac98071b275e8f4b997f078b3b73
+references:
+- model: MT_SE_adLIF
+  seed: 42
+  file: shared/amt_mt_full_validation/diagnostic_rows/MT_SE_adLIF_seed_42_clean_rep_0.json
+- model: MT_SE_adLIF
+  seed: 123
+  file: shared/amt_mt_full_validation/diagnostic_rows/MT_SE_adLIF_seed_123_clean_rep_0.json
+- model: MT_SE_adLIF
+  seed: 456
+  file: shared/amt_mt_full_validation/diagnostic_rows/MT_SE_adLIF_seed_456_clean_rep_0.json
+- model: MT_TC_SE_adLIF
+  seed: 42
+  file: pairs/mt_tc/evaluation/diagnostic_rows/MT_TC_SE_adLIF_seed_42_clean_rep_0.json
+- model: MT_TC_SE_adLIF
+  seed: 123
+  file: pairs/mt_tc/evaluation/diagnostic_rows/MT_TC_SE_adLIF_seed_123_clean_rep_0.json
+- model: MT_TC_SE_adLIF
+  seed: 456
+  file: pairs/mt_tc/evaluation/diagnostic_rows/MT_TC_SE_adLIF_seed_456_clean_rep_0.json
+clean_features_file: shared/amt_mt_full_validation/diagnostic_rows/input_features_clean_rep_0.json
+models:
+- MT_SE_adLIF
+- MT_TC_SE_adLIF
+window_frames:
+- 5
+- 10
+- 20
+stride: equal_to_window_width
+physical_bin_ms: 4.0
+minimum_windows: 2
+burn_in_frames: 10
+mask: descriptor excludes burn-in and all minimum/batch padding; ordinary loss retains
+  original saved blocks
+probability_definition: softmax each frame in float32; window mean and descriptors
+  in float64
+window_loss_definition: CE on mean raw membrane potentials in each complete physical
+  window; float64 log-sum-exp
+auxiliary_JS_in_prediction_loss: false
+no_benefit_regression: true
+registration_status: exploratory_after_completed_validation_studies_not_preregistered
+training: false
+official_test_access: false

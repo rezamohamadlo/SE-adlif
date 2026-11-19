@@ -1,0 +1,113 @@
+{
+  "identity": {
+    "manifest_sha256": "8af91e2d1e6d9566e96199f77b0fcc2b6e4b5bbf9e5e056ef8c8c5a6f4a0bb8e",
+    "sample_id": 577,
+    "original_sha256": "e1e381b64a990b69a6b97cd0a544ce16e151d75914281af89db6b0d871434125"
+  },
+  "value": {
+    "sample_id": 577,
+    "status": "improved",
+    "budget": 104,
+    "moves": 104,
+    "allocation": [
+      {
+        "channel": 33,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 60,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 63,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 64,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 66,
+        "sign": 1,
+        "moves": 10
+      },
+      {
+        "channel": 67,
+        "sign": 1,
+        "moves": 21
+      },
+      {
+        "channel": 68,
+        "sign": 1,
+        "moves": 20
+      },
+      {
+        "channel": 69,
+        "sign": 1,
+        "moves": 20
+      },
+      {
+        "channel": 70,
+        "sign": 1,
+        "moves": 20
+      },
+      {
+        "channel": 71,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 72,
+        "sign": 1,
+        "moves": 4
+      }
+    ],
+    "trace": [
+      {
+        "iteration": 0,
+        "status": "accepted",
+        "loss": 0.04958850145339966,
+        "previous_loss": 2.0265558760002023e-06,
+        "acceptance_bound": 2.000002026555876e-05,
+        "moves": 104,
+        "candidate_sha256": "b8575fb3a806787b0ef4ef577a8ee158a3a2e06489cbd69d329d25c34e50d107",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/DTH_SE_adLIF/seed_123/optimization_candidates/sample_577_step_0.npz"
+      },
+      {
+        "iteration": 1,
+        "status": "rejected_no_measured_ce_increase",
+        "loss": 0.0057326434180140495,
+        "previous_loss": 0.04958850145339966,
+        "acceptance_bound": 2.0495885014533998e-05,
+        "moves": 104,
+        "candidate_sha256": "07c51b351493d53a8561afa7925b70b850b92cabdbf873f0174d584195a64cad",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/DTH_SE_adLIF/seed_123/optimization_candidates/sample_577_step_1.npz"
+      }
+    ],
+    "clean": {
+      "loss": 2.0265558760002023e-06,
+      "predictions": [
+        1
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "optimized": {
+      "loss": 0.04958850145339966,
+      "predictions": [
+        1
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    }
+  },
+  "value_sha256": "075d0d8e32a84c08824a0e4430d31f5991abd8755c34229138d8da7cd57bb9a9",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/DTH_SE_adLIF/seed_123/optimized/sample_577.npz",
+  "artifact_sha256": "b3f4158922a77ed3828e375ebbc310361af241e9525e7c4371d332e6e89e8130"
+}

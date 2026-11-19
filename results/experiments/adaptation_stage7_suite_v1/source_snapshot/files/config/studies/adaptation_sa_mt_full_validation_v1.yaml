@@ -1,0 +1,51 @@
+# Frozen SA-MT/MT diagnostics; reuse authenticated MT predictions, not a tuned trial.
+inherits: config/studies/adaptation_mechanism_full_validation_v1.yaml
+paper_baseline: config/paper_baseline.yaml
+version: adaptation_sa_mt_full_validation_v1
+parent: MT_SE_adLIF
+variant: SA_MT_SE_adLIF
+output_root: results/experiments/adaptation_sa_mt_full_validation_v1
+hypothesis: Separate fast/slow spike adaptation may depend on transient versus sustained
+  input activity; outcomes can contradict the hypothesis.
+training: false
+test_set_access: false
+reuse_source: results/experiments/adaptation_mechanism_full_validation_v1
+reuse_manifest_sha256: 05f7f0943caf2c12ab7eedde768581e03f8917506cd52bc016e0eed2e8019580
+reuse_completion_sha256: 0556fec13a9e7354dab7267ad4fcd0ca80c0c0751102c7c495488d4bf8b6568d
+runs:
+- model: MT_SE_adLIF
+  seed: 42
+  cost_record: results/valid/MT_SE_adLIF/SHD/seed_42/COST_RESULTS.json
+  checkpoint: results/valid/MT_SE_adLIF/SHD/seed_42/ckpt/epoch=199-step=5000.ckpt
+  checkpoint_sha256: 617b926c02963a37782025d7df329bf8f87e28b8f4f2c037a57947438e11f76a
+  selected_epoch: 199
+- model: MT_SE_adLIF
+  seed: 123
+  cost_record: results/valid/MT_SE_adLIF/SHD/seed_123/COST_RESULTS.json
+  checkpoint: results/valid/MT_SE_adLIF/SHD/seed_123/ckpt/epoch=137-step=3450.ckpt
+  checkpoint_sha256: 667fafa34ad26556d74bb7ce5327dd38d300b4a6d27c364423ef41a17b69fa40
+  selected_epoch: 137
+- model: MT_SE_adLIF
+  seed: 456
+  cost_record: results/valid/MT_SE_adLIF/SHD/seed_456/COST_RESULTS.json
+  checkpoint: results/valid/MT_SE_adLIF/SHD/seed_456/ckpt/epoch=107-step=2700.ckpt
+  checkpoint_sha256: 365827d0402ae2724a94eabb0c86b20ed3355e09345ecfbb0d973c34e91b7344
+  selected_epoch: 107
+- model: SA_MT_SE_adLIF
+  seed: 42
+  cost_record: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/SHD/seed_42/COST_RESULTS.json
+  checkpoint: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/SHD/seed_42/ckpt/epoch=188-step=4725.ckpt
+  checkpoint_sha256: 10bc789ed2e0af4363e1193605e82ea5e91629cf6ce477559d25b4aa917df2b2
+  selected_epoch: 188
+- model: SA_MT_SE_adLIF
+  seed: 123
+  cost_record: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/SHD/seed_123/COST_RESULTS.json
+  checkpoint: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/SHD/seed_123/ckpt/epoch=188-step=4725.ckpt
+  checkpoint_sha256: cc7b631cb3993b059a4e04c9a5a57bddc9a3462afef9e111b109ae9d6a6b5059
+  selected_epoch: 188
+- model: SA_MT_SE_adLIF
+  seed: 456
+  cost_record: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/SHD/seed_456/COST_RESULTS.json
+  checkpoint: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/SHD/seed_456/ckpt/epoch=99-step=2500.ckpt
+  checkpoint_sha256: eacc5531b3b4d9c02565feb8f0262849d967c9610bc1d57b8564223878286824
+  selected_epoch: 99

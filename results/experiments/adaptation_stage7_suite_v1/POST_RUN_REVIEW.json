@@ -1,0 +1,110 @@
+{
+  "review_date": "2026-11-17",
+  "reviewed_utc": "2026-11-17T03:42:07.481286+00:00",
+  "status": "independently_verified_scoped_complete",
+  "stage7_scoped_complete": true,
+  "scope": "all four pairs, all three saved training seeds, all three datasets; limited diagnostic cohorts, not exhaustive gradient validation or independent test",
+  "main_registered_outputs": 15439,
+  "main_complete_sha256": "9c2cdd1bb664cdd88825979b37bc383b3e76fa822733b70d57265dae4a9128a8",
+  "scientific_source_files_verified": 112,
+  "checkpoint_and_metrics_history_hash_pairs_verified": 54,
+  "common_contract_tests_passed": 14,
+  "checks": {
+    "checkpoint_jobs": 54,
+    "expected_checkpoint_jobs": 54,
+    "primary_gradient_records": 2520,
+    "expected_primary_gradient_records": 2520,
+    "repeat_checks": 432,
+    "expected_repeat_checks": 432,
+    "repeat_failures": 0,
+    "autograd_failures": 0,
+    "optimization_autograd_failures": 0,
+    "optimized_attempts": 216,
+    "expected_optimized_attempts": 216,
+    "skipped_unstable_inputs": 0,
+    "accepted_diagnostic_inputs": 171,
+    "transfer_bundles": 9,
+    "transfer_rows": 5184,
+    "expected_transfer_rows": 5184,
+    "paired_diagnostic_rows": 288,
+    "expected_paired_diagnostic_rows": 288
+  },
+  "independent_gradient_arrays_verified": 2952,
+  "independent_transfer_verification": {
+    "status": "independently_verified",
+    "verifier_source_sha256": "a9aba36a001d06f92dd8c744d440c71d2b379fbc45e6d4c95eb1782238528c26",
+    "transfer_bundles": 9,
+    "target_evaluations": 5184,
+    "unique_shared_diagnostic_inputs": 864,
+    "paired_rows": 288,
+    "seed_aggregate_groups": 24,
+    "model_execution": false,
+    "training": false
+  },
+  "source_archive_files": 112,
+  "cohort_archive_records": 140,
+  "native_inputs_targets_masks_preserved": true,
+  "model_states_unchanged": true,
+  "training": false,
+  "official_test_access": false,
+  "source_high_baseline_replaced": false,
+  "diagnostic_cohorts": {
+    "SHD*": 40,
+    "SSC": 70,
+    "ECG": 30
+  },
+  "dataset_acceptance": {
+    "SHD": {
+      "checkpoints": 18,
+      "gradient_records_per_checkpoint": 40,
+      "accepted": 47,
+      "attempts": 72
+    },
+    "SSC": {
+      "checkpoints": 18,
+      "gradient_records_per_checkpoint": 70,
+      "accepted": 69,
+      "attempts": 72
+    },
+    "ECG": {
+      "checkpoints": 18,
+      "gradient_records_per_checkpoint": 30,
+      "accepted": 55,
+      "attempts": 72
+    }
+  },
+  "timing": {
+    "started_utc": "2026-11-16T12:30:39.691441+00:00",
+    "execution_phase_seconds": 13136.672000000002,
+    "seconds_through_artifact_seal": 13285.491535,
+    "seconds_through_internal_verification": 13341.448195,
+    "planning_description": "Approximately 3 h 45 min including startup on one RTX 4090; initial preflight and later independent/presentation review not part of the execution-phase timer.",
+    "checkpoint_job_seconds": {
+      "SHD": 1189.3609999999899,
+      "SSC": 2961.736000000008,
+      "ECG": 4102.638999999996
+    }
+  },
+  "parent_optimized_positive_mean_contrasts": 11,
+  "variant_optimized_negative_mean_contrasts": 12,
+  "interpretation": "Effects depend strongly on the model used to optimize the diagnostic input; both predeclared origins must be considered. These limited model-selected counterfactuals do not establish natural robustness or architectural superiority.",
+  "presentation_complete_sha256": "0a98fc1b8516d4ae70e7f0e9dca1d6b1c623b6ecba6a317233d21e555a50427a",
+  "origin_controls_complete_sha256": "bc42a24f726824b8038af0efa6e8546e409b3837701707a87a4ddfbf80e710d7",
+  "visual_reviewed": [
+    "presentation_v1/figures/SHD_paired_gradient_profiles.png",
+    "presentation_v1/figures/ECG_sample_456_seed_42_diagnostics.png",
+    "origin_controls_v1/both_optimization_origins.png"
+  ],
+  "limitations": [
+    "diagnostic cohorts only: SHD* 40, SSC 70, ECG 30; only 8 repeat records and 4 optimized records per dataset",
+    "SLAYER sensitivities are surrogate derivatives; optimized labels held fixed do not guarantee unchanged semantic class",
+    "parent/variant-optimized selection is model/loss coupled; no causal or architectural superiority claim",
+    "ECG per-step targets, original all-zero vectors mapping to class 0 and model-step time units preserved",
+    "no independent official test, no exact Nature figure reproduction, no new model-weight training",
+    "source_high baseline remains separate; shared parents/records/random replicates are not independent seeds",
+    "Six-step greedy projection is not a global optimizer; ineffective attempts do not exclude other feasible diagnostic inputs.",
+    "ECG sensitivity is for record-mean supervised CE over its original valid temporal labels, not a per-class causal attribution."
+  ],
+  "next_step": "Stage 8: synthesize the verified mechanism findings and report cost/activity with existing source-high performance evidence; do not launch new training or independent-test claims.",
+  "review_documents_outside_immutable_scientific_output_ledger": true
+}

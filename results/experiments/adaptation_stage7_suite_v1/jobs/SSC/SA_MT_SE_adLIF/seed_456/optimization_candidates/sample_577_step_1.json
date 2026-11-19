@@ -1,0 +1,211 @@
+{
+  "identity": {
+    "manifest_sha256": "e6ae6e5a0a6da064a95ad765da477209729fdbc321b956fa8250331f50092ca4",
+    "sample_id": 577,
+    "iteration": 1,
+    "current_sha256": "21a70c953ff3f568b48f3bf839d2f9e665a15a2f645de2478f506f478afef425",
+    "current_score_sha256": "bbde8079920b554075a04e1a41177f5a698ccefda68448f6e6dc1c34b1aca175"
+  },
+  "value": {
+    "score": {
+      "loss": 0.022344261407852173,
+      "predictions": [
+        1
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "accepted": true,
+    "moves": 104,
+    "allocation": [
+      {
+        "channel": 15,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 26,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 28,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 29,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 30,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 31,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 32,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 33,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 34,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 35,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 37,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 38,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 39,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 40,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 42,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 44,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 45,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 48,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 50,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 51,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 53,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 55,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 56,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 57,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 58,
+        "sign": 1,
+        "moves": 8
+      },
+      {
+        "channel": 59,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 60,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 61,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 62,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 71,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 73,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 74,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 75,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 76,
+        "sign": 1,
+        "moves": 15
+      },
+      {
+        "channel": 78,
+        "sign": 1,
+        "moves": 2
+      }
+    ],
+    "status": "accepted",
+    "previous_loss": 0.014630062505602837,
+    "acceptance_bound": 2.014630062505603e-05,
+    "autograd_forward_check": {
+      "prediction_matches": true,
+      "loss_difference": 0.0,
+      "loss_bound": 2.014630062505603e-05,
+      "passed": true
+    }
+  },
+  "value_sha256": "17f3050359e62e765dc7ae26489c879b71d949f3e8cda8606f6001223da8cc92",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/SA_MT_SE_adLIF/seed_456/optimization_candidates/sample_577_step_1.npz",
+  "artifact_sha256": "74d2f098e0deb788da7409059e8feec67cc96cfb5fc5e3520cd3c4e900d1320e"
+}

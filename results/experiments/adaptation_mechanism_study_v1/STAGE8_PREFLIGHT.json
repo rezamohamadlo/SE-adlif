@@ -1,0 +1,31 @@
+{
+  "review_date": "2026-11-17",
+  "recorded_utc": "2026-11-17T04:14:13.517764+00:00",
+  "status": "preflight_passed_execution_pending",
+  "command": ".\\.venv\\Scripts\\python.exe -m scripts.adaptation_stage8.run --check-only",
+  "exit_code": 0,
+  "checkpoint_cost_history_identities": 54,
+  "comparison_dataset_packages": 12,
+  "authenticated_completion_ledgers": 25,
+  "stage7_registered_outputs_authenticated": 15439,
+  "historical_ssc_snapshot_index_verified": true,
+  "changed_cwd_and_simulated_relocated_checkout_passed": true,
+  "source_files_sha256": {
+    "scripts/adaptation_stage8/evidence.py": "2676eee0ae47de35dc9a0d5a61996ec5afaf6333f91c85976af7d477e330018c",
+    "scripts/adaptation_stage8/reporting.py": "dc541ff0e247a84acf38139fe2ce5b5756f81477d401a63044942aa960280d79",
+    "scripts/adaptation_stage8/run.py": "1b9e74322a2f6aaa9d9efcda39152aec65edf35ccd5b598d1da8bbf8e64ae143",
+    "scripts/adaptation_stage8/__init__.py": "dbf84327218d7e6d7409b06895d941579744640c7a78669db04324ada9dad99f",
+    "tests/test_adaptation_stage8.py": "5a36f0c597b34fd806a3c6454357ddba5a1e5e5bfee80cfc466456ac97ffd925",
+    "config/studies/adaptation_stage8_synthesis_v1.json": "6f9355b7e5c2eb327cb66f2c4ee8fe5436c1eaa30736ee58e7d0e4cd41314e1a"
+  },
+  "tests_run": false,
+  "report_tests_pending": 10,
+  "report_generation_run": false,
+  "scientific_execution": false,
+  "training": false,
+  "model_execution": false,
+  "new_fitting_or_resampling": false,
+  "official_test_access": false,
+  "report_output_root": "results/experiments/adaptation_stage8_synthesis_v1",
+  "next_command": ".\\.venv\\Scripts\\python.exe -u -m scripts.adaptation_stage8.run --output-root results/experiments/adaptation_stage8_synthesis_v1"
+}

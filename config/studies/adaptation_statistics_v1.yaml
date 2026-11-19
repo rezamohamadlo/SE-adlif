@@ -1,0 +1,35 @@
+version: adaptation_statistics_v1
+source: results/experiments/adaptation_mechanism_full_validation_v1
+source_manifest_sha256: 05f7f0943caf2c12ab7eedde768581e03f8917506cd52bc016e0eed2e8019580
+source_completion_sha256: 0556fec13a9e7354dab7267ad4fcd0ca80c0c0751102c7c495488d4bf8b6568d
+output_root: results/experiments/adaptation_mechanism_full_validation_v1/statistics_v1
+registration_status: exploratory_specification_after_descriptive_validation_results
+expected_samples: 1631
+training_seeds: [42, 123, 456]
+features: [fast_slow_contrast, autocorr_tau_ms]
+controls: [class_fixed_effects, speaker_fixed_effects, log1p_duration_ms, log1p_mean_rate_hz]
+outcome: supervised_loss_parent_minus_variant
+fast_slow_hypothesis: positive_adjusted_association
+autocorrelation_hypothesis: exploratory_two_sided_association
+missing_features: complete_case_with_explicit_exclusion_reasons
+scaling: population_sd_on_complete_clean_validation_inputs_fixed_for_resampling
+bootstrap:
+  unit: speaker
+  draws: 2000
+  seed: 20261112
+  minimum_speakers: 8
+  minimum_valid_fraction: 0.95
+  rank_relative_tolerance: 1.0e-10
+uncertainty:
+  method: speaker_pairs_percentile_bootstrap
+  alpha: 0.05
+  primary_family_size: 2
+  secondary_family_size: 3
+  scope: conditional_on_the_three_observed_training_seeds
+  interpretation: approximate_exploratory_intervals_with_only_ten_speakers
+secondary_conditions: [time_scale_0.9, time_scale_1.1, delete_0.1]
+secondary_outcome: transformed_benefit_minus_clean_benefit
+deletion_replicates: [0, 1, 2]
+training: false
+new_inference: false
+official_test_access: false

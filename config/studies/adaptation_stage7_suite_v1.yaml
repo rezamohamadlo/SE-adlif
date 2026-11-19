@@ -1,0 +1,84 @@
+version: adaptation_stage7_suite_v1
+inherits: config/paper_baseline.yaml
+output_root: results/experiments/adaptation_stage7_suite_v1
+datasets:
+- SHD
+- SSC
+- ECG
+models:
+- MT_SE_adLIF
+- AMT_SE_adLIF
+- DTH_SE_adLIF
+- LT_DTH_SE_adLIF
+- SA_MT_SE_adLIF
+- MT_TC_SE_adLIF
+seeds:
+- 42
+- 123
+- 456
+pairs:
+- id: amt_mt
+  parent: MT_SE_adLIF
+  variant: AMT_SE_adLIF
+- id: lt_dth
+  parent: DTH_SE_adLIF
+  variant: LT_DTH_SE_adLIF
+- id: sa_mt
+  parent: MT_SE_adLIF
+  variant: SA_MT_SE_adLIF
+- id: mt_tc
+  parent: MT_SE_adLIF
+  variant: MT_TC_SE_adLIF
+sources:
+  SHD:
+  - root: results/experiments/adaptation_mechanism_full_validation_v1
+    manifest_sha256: 12fbe2152dbbabcf59cfa8835ba3610c0f0dce2f8acca18e6ffb7ab1997b7297
+    complete_sha256: 0556fec13a9e7354dab7267ad4fcd0ca80c0c0751102c7c495488d4bf8b6568d
+  - root: results/experiments/adaptation_lt_dth_full_validation_v1
+    manifest_sha256: 2c59566db99d4e3e50473b7ce23ff40a61cb5c51025780936f1f9ad2ed0eb765
+    complete_sha256: 4c6a9794425891b105e425be5a2633bdd905dbec186392b7678534085bb1e1c9
+  - root: results/experiments/adaptation_sa_mt_full_validation_v1
+    manifest_sha256: ef14cc59296a146f905be93cf700bf7ee8c53fc63803351ae5c7f186b6ce11eb
+    complete_sha256: 2ee07d9ccb244a57cecb0eb11ac6346798ee8c4fe100af227cb527dd47691c28
+  - root: results/experiments/adaptation_mt_tc_full_validation_v1
+    manifest_sha256: f4eb3b800999d9ebc29aaa3d255379a85c9db0b15d1336f9571f094ab6b85a6c
+    complete_sha256: fd5baa6a3ebe5223c781bc0dc3af05822f1c19faffefd59cd4e92228cba6cb61
+  SSC:
+  - root: results/experiments/adaptation_ssc_suite_v2
+    manifest_sha256: a35b5b6c707c5f4ad8c6bacc3ed1822092478b581f6f8087eade89df05b82d7a
+    complete_sha256: 7c6886d820f1e60872954b55aef434286c2b2fd691e3f86a406e062f52bb379b
+  ECG:
+  - root: results/experiments/adaptation_ecg_pairs_v2
+    manifest_sha256: 8e2ac6923b5959e71ff0e387f3baf198b701a5b08ffb9bf56019f6a561b6258a
+    complete_sha256: da7b7b31061c801f52c9d301572d47d6b686464cf5be3f603d9a88456eebc0f1
+cohort_seed: 20261116
+samples:
+  SHD: 40
+  SSC: 70
+  ECG: 30
+repeat_records: 8
+diagnostic_records: 4
+optimization_steps: 6
+event_fraction: 0.01
+random_replicates: 3
+score_atol: 2.0e-05
+score_rtol: 1.0e-05
+gradient_relative_l2_limit: 0.01
+gradient_cosine_minimum: 0.999
+profile_bins: 20
+precision: highest
+training: false
+official_test_access: false
+input_optimization: true
+optimization_mode: projected surrogate-gradient ascent of supervised CE by within-channel
+  event relocation; accept only measured CE increase
+domain_policy: counts nonnegative integers or ECG signed ternary; fixed length, targets
+  and blocks; per-channel signed event totals preserved; at most 1% relocated events;
+  count-cell maxima bounded by original per-channel maximum; destinations are originally
+  zero cells
+repeated_common_engine_evaluation: Intentional new common three-dataset engine verification;
+  existing SHD MT/AMT seed42 evidence remains separate, not independent training replications
+registration_status: exploratory scope fixed before suite execution; prior pilots
+  observed
+scope: all four pairs, all three saved training seeds, all three datasets; limited
+  diagnostic cohorts, not exhaustive gradient validation or independent test

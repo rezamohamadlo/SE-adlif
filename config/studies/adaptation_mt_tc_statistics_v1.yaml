@@ -1,0 +1,20 @@
+inherits: config/studies/adaptation_statistics_v1.yaml
+version: adaptation_mt_tc_statistics_v1
+source: results/experiments/adaptation_mt_tc_full_validation_v1
+source_manifest_sha256: 121b75d063542716c22bd7eb2867b49d1e66f7a922af1759e4e09c2f27106691
+source_completion_sha256: fd5baa6a3ebe5223c781bc0dc3af05822f1c19faffefd59cd4e92228cba6cb61
+output_root: results/experiments/adaptation_mt_tc_full_validation_v1/statistics_v1
+parent: MT_SE_adLIF
+variant: MT_TC_SE_adLIF
+registration_status: exploratory_specification_after_descriptive_validation_results
+fast_slow_hypothesis: exploratory_two_sided_input_feature_association
+autocorrelation_hypothesis: exploratory_two_sided_input_feature_association
+mechanism_hypothesis: Temporal-consistency training may favor stable adjacent-window
+  class evidence; input contrast and ACF alone do not measure this. Window diagnostics
+  are separate.
+reuse_interpretation: reused_MT_predictions_are_the_same_observations_not_independent_replications
+parameter_analysis: none_no_direct_window_evidence_or_mediation_claim
+training: false
+new_inference: false
+official_test_access: false
+comparison_loss: supervised_cross_entropy_auxiliary_JS_excluded

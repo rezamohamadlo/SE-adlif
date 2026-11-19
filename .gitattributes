@@ -2,9 +2,23 @@
 
 # These new analysis files participate in immutable source/output SHA-256 records.
 scripts/adaptation_analysis/*.py -text
+scripts/adaptation_statistics/*.py -text
+scripts/adaptation_lt_statistics/*.py -text
+scripts/adaptation_pairs/*.py -text
+scripts/adaptation_sa_mt/*.py -text
+scripts/adaptation_sa_statistics/*.py -text
+scripts/adaptation_mt_tc/*.py -text
+scripts/adaptation_tc_statistics/*.py -text
+scripts/adaptation_tc_windows/*.py -text
 config/studies/adaptation_mechanism_pilot_v1.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 results/experiments/adaptation_pilot_command_verification_v*/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 results/experiments/adaptation_mechanism_analysis_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_mechanism_analysis_local_recheck_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_mechanism_full_validation_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_lt_dth_full_validation_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_sa_mt_full_validation_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_mt_tc_full_validation_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_mechanism_study_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 
 results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/*/SHD/seed_*/.hydra/config.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/*/SHD/seed_*/.hydra/hydra.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
@@ -13,3 +27,92 @@ results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/*
 results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/*/SHD/seed_*/logs/mlp_snn/version_0/hparams.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/*/SHD/seed_*/logs/mlp_snn/version_0/metrics.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 results/experiments/shd_speaker_combined_v1/artifacts/shd_speaker_augmented_v1/*/SHD/seed_*/out.log -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+scripts/adaptation_ssc/*.py -text
+results/experiments/adaptation_ssc_amt_pilot_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+scripts/adaptation_ssc_full/*.py -text
+results/experiments/adaptation_ssc_amt_full_validation_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_ssc_amt_full_validation_v1_seed_cohorts/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+scripts/adaptation_ssc_suite/*.py -text
+config/studies/adaptation_ssc_suite_v1.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_ssc_suite_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_ssc_suite_v2/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/resume_ssc_suite.py -text
+scripts/ssc_resume_io.py -text
+tests/test_ssc_resume_io.py -text
+scripts/adaptation_ecg/*.py -text
+tests/test_adaptation_ecg.py -text
+config/studies/adaptation_ecg_alignment_pilot_v1.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_ecg_alignment_pilot_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/adaptation_ecg_suite/*.py -text
+tests/test_adaptation_ecg_suite.py -text
+config/studies/adaptation_ecg_pairs_v2.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_ecg_pairs_v2/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/adaptation_ecg_extension/*.py -text
+tests/test_adaptation_ecg_extension.py -text
+config/studies/adaptation_ecg_extension_v1.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_ecg_extension_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/adaptation_ssc_windows/*.py -text
+tests/test_adaptation_ssc_windows.py -text
+config/studies/adaptation_ssc_windows_v1.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_ssc_windows_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/adaptation_gradient_pilot/*.py -text
+tests/test_adaptation_gradient_pilot.py -text
+config/studies/adaptation_gradient_pilot_v1.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_gradient_pilot_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/audits/supervisor-stage6-closeout-2026-11-16.md -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/adaptation_batch_precision/*.py -text
+tests/test_adaptation_batch_precision.py -text
+config/studies/adaptation_batch_precision_v1.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_batch_precision_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/adaptation_gradient_strict/*.py -text
+tests/test_adaptation_gradient_strict.py -text
+config/studies/adaptation_gradient_strict_v1.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_gradient_strict_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/adaptation_gradient_deletion/*.py -text
+tests/test_adaptation_gradient_deletion.py -text
+config/studies/adaptation_gradient_deletion_v1.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_gradient_deletion_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/adaptation_stage7/*.py -text
+tests/test_adaptation_stage7.py -text
+config/studies/adaptation_stage7_suite_v1.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+results/experiments/adaptation_stage7_suite_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/adaptation_stage8/*.py -text
+tests/test_adaptation_stage8.py -text
+config/studies/adaptation_stage8_synthesis_v1.json -text
+results/experiments/adaptation_stage8_synthesis_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Preserve study source and export identities across Windows checkouts.
+config/studies/adaptation_*.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+tests/test_adaptation_batch_precision.py -text
+tests/test_adaptation_ecg.py -text
+tests/test_adaptation_ecg_extension.py -text
+tests/test_adaptation_ecg_suite.py -text
+tests/test_adaptation_full_validation.py -text
+tests/test_adaptation_gradient_deletion.py -text
+tests/test_adaptation_gradient_pilot.py -text
+tests/test_adaptation_gradient_strict.py -text
+tests/test_adaptation_lt_dth.py -text
+tests/test_adaptation_lt_statistics.py -text
+tests/test_adaptation_mt_tc.py -text
+tests/test_adaptation_sa_mt.py -text
+tests/test_adaptation_sa_statistics.py -text
+tests/test_adaptation_ssc.py -text
+tests/test_adaptation_ssc_full.py -text
+tests/test_adaptation_ssc_suite.py -text
+tests/test_adaptation_ssc_windows.py -text
+tests/test_adaptation_stage7.py -text
+tests/test_adaptation_stage8.py -text
+tests/test_adaptation_statistics.py -text
+tests/test_adaptation_tc_windows.py -text
+scripts/export_research_report_docx.py -text
+scripts/export_supervisor_report_pdf.py -text
+scripts/plot_stage7_origin_controls.py -text
+scripts/present_stage7.py -text
+scripts/review_stage7_suite.py -text
+scripts/review_stage7_transfers.py -text
+scripts/review_stage8_synthesis.py -text
+supervisor-guideline-report-fa.md -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+research-report-fa.md -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol

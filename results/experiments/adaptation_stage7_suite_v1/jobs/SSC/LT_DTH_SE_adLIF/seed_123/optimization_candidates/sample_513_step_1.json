@@ -1,0 +1,206 @@
+{
+  "identity": {
+    "manifest_sha256": "d67d05b689db46e65839c472a0beeeef4017406299e759d08d1364c48b1a1e8d",
+    "sample_id": 513,
+    "iteration": 1,
+    "current_sha256": "f71ff6096fd92a8bd40aad7846e2c22fa9957e58d3436fadfbe7bc751230432d",
+    "current_score_sha256": "6eeca7ea547d6bab2ad6132b21aed0dc3cfc2ee36854e2f60cc5ba6e919aaee4"
+  },
+  "value": {
+    "score": {
+      "loss": 6.259737968444824,
+      "predictions": [
+        25
+      ],
+      "valid_steps": 1,
+      "correct_steps": 0,
+      "accuracy": 0.0
+    },
+    "accepted": false,
+    "moves": 100,
+    "allocation": [
+      {
+        "channel": 8,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 22,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 27,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 32,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 34,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 35,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 36,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 37,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 38,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 39,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 40,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 41,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 42,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 47,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 48,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 49,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 50,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 51,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 52,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 53,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 54,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 55,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 56,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 57,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 58,
+        "sign": 1,
+        "moves": 8
+      },
+      {
+        "channel": 59,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 60,
+        "sign": 1,
+        "moves": 12
+      },
+      {
+        "channel": 62,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 63,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 64,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 65,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 67,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 69,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 78,
+        "sign": 1,
+        "moves": 1
+      }
+    ],
+    "status": "rejected_no_measured_ce_increase",
+    "previous_loss": 8.874964714050293,
+    "acceptance_bound": 0.00010874964714050294,
+    "autograd_forward_check": {
+      "prediction_matches": true,
+      "loss_difference": 9.5367431640625e-07,
+      "loss_bound": 0.00010874963760375977,
+      "passed": true
+    }
+  },
+  "value_sha256": "87725cf3094cbc3d6db81ce1d4b1d1091307f592d3ddd23f312d0a6866c14b10",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/LT_DTH_SE_adLIF/seed_123/optimization_candidates/sample_513_step_1.npz",
+  "artifact_sha256": "8477f93a9d2280f1bbfb87554e82d19565a75bc38a930fed48cc4bc14a07a261"
+}

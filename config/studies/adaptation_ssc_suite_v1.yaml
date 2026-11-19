@@ -1,0 +1,189 @@
+# One-PC, user-launched SSC mechanism suite; completed evidence is immutable.
+version: adaptation_ssc_suite_v1
+inherits: config/paper_baseline.yaml
+dataset_section: SSC
+output_root: results/experiments/adaptation_ssc_suite_v1
+dataset_file: data/SSCWrapper/ssc_valid.h5
+dataset_sha256: 6365c36ff8c680c4b0caf27ca52faa59e14359db5810b528f40dd80e2bcb9210
+expected_validation_samples: 9981
+expected_speaker_groups: 256
+feature_definition_source: config/studies/adaptation_mechanism_pilot_v1.yaml
+selection_seed: 20261112
+seeds:
+- 42
+- 123
+- 456
+loss_agg: mean_membrane_potentials
+evaluation_protocol: ssc_mean_loss_v1
+accuracy_tolerance: 1.0e-06
+loss_tolerance: 0.001
+source_evaluation:
+  root: results/experiments/adaptation_ssc_amt_full_validation_v1
+  manifest_sha256: 1558f87099ba8a3d0fe9713a0bce5c16a0802b295075335ec75a798876db4d14
+  completion_sha256: bf151db5f54d1033a2e690f0ab5c43c89e7ef5523cfe3589f30e331b7fc80470
+pairs:
+- id: amt_mt
+  parent: MT_SE_adLIF
+  variant: AMT_SE_adLIF
+  hypothesis: positive_adjusted_fast_slow_association
+- id: lt_dth
+  parent: DTH_SE_adLIF
+  variant: LT_DTH_SE_adLIF
+  hypothesis: exploratory_two_sided_input_timescale_associations
+- id: sa_mt
+  parent: MT_SE_adLIF
+  variant: SA_MT_SE_adLIF
+  hypothesis: positive_adjusted_fast_slow_association
+- id: mt_tc
+  parent: MT_SE_adLIF
+  variant: MT_TC_SE_adLIF
+  hypothesis: exploratory_input_features_only_no_direct_window_stability_claim
+variant_training_objective: mt_temporal_consistency_v1
+variant_temporal_consistency:
+  weight: 0.1
+  window: 5
+statistics:
+  version: ssc_speaker_statistics_v1
+  registration_status: exploratory_defined_after_AMT_descriptive_results_not_preregistered
+  features:
+  - fast_slow_contrast
+  - autocorr_tau_ms
+  controls:
+  - class_fixed_effects
+  - speaker_fixed_effects
+  - log1p_duration_ms
+  - log1p_mean_rate_hz
+  missing_features: complete_cases_for_joint_regression_explicit_exclusions_no_imputation_censored_ACF_not_set_to_horizon
+  secondary_conditions:
+  - time_scale_0.9
+  - time_scale_1.1
+  - delete_0.1
+  deletion_replicates:
+  - 0
+  - 1
+  - 2
+  scaling: population_sd_on_complete_clean_inputs_fixed_for_resampling
+  bootstrap:
+    unit: speaker
+    draws: 2000
+    seed: 20261112
+    minimum_speakers: 200
+    minimum_valid_fraction: 0.95
+    rank_relative_tolerance: 1.0e-10
+  uncertainty:
+    method: speaker_pairs_percentile_bootstrap
+    alpha: 0.05
+    primary_family_size: 8
+    secondary_family_size: 12
+    scope: conditional_on_three_observed_training_seeds_no_joint_primary_secondary_family_guarantee
+training: false
+new_test_access: false
+runs:
+- model: MT_SE_adLIF
+  seed: 42
+  cost_record: results/valid/MT_SE_adLIF/SSC/seed_42/COST_RESULTS.json
+  checkpoint: results/valid/MT_SE_adLIF/SSC/seed_42/ckpt/epoch=23-step=7056.ckpt
+  checkpoint_sha256: 11baa18a6d147e56b4f3c98bac824af94dca7891f4db8b696a52058dbdfe1ded
+  selected_epoch: 23
+- model: MT_SE_adLIF
+  seed: 123
+  cost_record: results/valid/MT_SE_adLIF/SSC/seed_123/COST_RESULTS.json
+  checkpoint: results/valid/MT_SE_adLIF/SSC/seed_123/ckpt/epoch=36-step=10878.ckpt
+  checkpoint_sha256: d4652f57efbbb0e6890d8f8af995e23826767b95af787c93788c4b3e173a85d8
+  selected_epoch: 36
+- model: MT_SE_adLIF
+  seed: 456
+  cost_record: results/valid/MT_SE_adLIF/SSC/seed_456/COST_RESULTS.json
+  checkpoint: results/valid/MT_SE_adLIF/SSC/seed_456/ckpt/epoch=17-step=5292.ckpt
+  checkpoint_sha256: 8839a9be04ff077a87056b43e28a7fed97b1eb9c28fe99597fd64b949ee08b05
+  selected_epoch: 17
+- model: DTH_SE_adLIF
+  seed: 42
+  cost_record: results/valid/DTH_SE_adLIF/SSC/seed_42/COST_RESULTS.json
+  checkpoint: results/valid/DTH_SE_adLIF/SSC/seed_42/ckpt/epoch=19-step=5880.ckpt
+  checkpoint_sha256: cd7d09605185757f8c82d41dd99a0f7942cb77c52601bf07ec81659791e140b1
+  selected_epoch: 19
+- model: DTH_SE_adLIF
+  seed: 123
+  cost_record: results/valid/DTH_SE_adLIF/SSC/seed_123/COST_RESULTS.json
+  checkpoint: results/valid/DTH_SE_adLIF/SSC/seed_123/ckpt/epoch=39-step=11760.ckpt
+  checkpoint_sha256: bd4ea98cee51d66bff611a5b31a19bcf5b76bccc4066894430c79fb8c9f84384
+  selected_epoch: 39
+- model: DTH_SE_adLIF
+  seed: 456
+  cost_record: results/valid/DTH_SE_adLIF/SSC/seed_456/COST_RESULTS.json
+  checkpoint: results/valid/DTH_SE_adLIF/SSC/seed_456/ckpt/epoch=11-step=3528.ckpt
+  checkpoint_sha256: bd7dc7f293a61275bdf772755e28797465f83f267fd0597b11dfbf85c7b790df
+  selected_epoch: 11
+- model: AMT_SE_adLIF
+  seed: 42
+  cost_record: results/not_improved/AMT_SE_adLIF/SSC/seed_42/COST_RESULTS.json
+  checkpoint: results/not_improved/AMT_SE_adLIF/SSC/seed_42/ckpt/epoch=35-step=10584.ckpt
+  checkpoint_sha256: 1032f84b6dc136931363752a3441d9d56ea057c322a6cbe59f256eb577675d18
+  selected_epoch: 35
+- model: AMT_SE_adLIF
+  seed: 123
+  cost_record: results/not_improved/AMT_SE_adLIF/SSC/seed_123/COST_RESULTS.json
+  checkpoint: results/not_improved/AMT_SE_adLIF/SSC/seed_123/ckpt/epoch=27-step=8232.ckpt
+  checkpoint_sha256: 8b75ec256929244d0b1ed05ffd68031699a0fb839e71dd3b260c22fdbf73be40
+  selected_epoch: 27
+- model: AMT_SE_adLIF
+  seed: 456
+  cost_record: results/not_improved/AMT_SE_adLIF/SSC/seed_456/COST_RESULTS.json
+  checkpoint: results/not_improved/AMT_SE_adLIF/SSC/seed_456/ckpt/epoch=13-step=4116.ckpt
+  checkpoint_sha256: 2115814092a1b93abcf7301d69a6d8e5afd359dd3879e1caebde65a0fb83108a
+  selected_epoch: 13
+- model: LT_DTH_SE_adLIF
+  seed: 42
+  cost_record: results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/COST_RESULTS.json
+  checkpoint: results/not_improved/LT_DTH_SE_adLIF/SSC/seed_42/ckpt/epoch=16-step=4998.ckpt
+  checkpoint_sha256: 97d1c43cbc08b3bc13332fd4cf54b82ecd17997e0d5a10f3f5d2d6f562298839
+  selected_epoch: 16
+- model: LT_DTH_SE_adLIF
+  seed: 123
+  cost_record: results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/COST_RESULTS.json
+  checkpoint: results/not_improved/LT_DTH_SE_adLIF/SSC/seed_123/ckpt/epoch=20-step=6174.ckpt
+  checkpoint_sha256: 03764c25684114ce64480c022b3617b52f423e363e9fede2e88f5452912e8617
+  selected_epoch: 20
+- model: LT_DTH_SE_adLIF
+  seed: 456
+  cost_record: results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/COST_RESULTS.json
+  checkpoint: results/not_improved/LT_DTH_SE_adLIF/SSC/seed_456/ckpt/epoch=24-step=7350.ckpt
+  checkpoint_sha256: 0a927072b3a0b5e3d9fb72d99799276eee01bc09adf1626cb68fd5c4f6e2d78f
+  selected_epoch: 24
+- model: SA_MT_SE_adLIF
+  seed: 42
+  cost_record: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/SSC/seed_42/COST_RESULTS.json
+  checkpoint: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/SSC/seed_42/ckpt/epoch=13-step=4116.ckpt
+  checkpoint_sha256: 3a2b44bc9cae65280ca38f88de9bd328021c7edde8da20a56d70fd54ea65bf20
+  selected_epoch: 13
+- model: SA_MT_SE_adLIF
+  seed: 123
+  cost_record: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/SSC/seed_123/COST_RESULTS.json
+  checkpoint: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/SSC/seed_123/ckpt/epoch=26-step=7938.ckpt
+  checkpoint_sha256: 085871a5c15ff4bcd072c540709be659cbcdfc9c65f277fdff22720a8cd4a1c7
+  selected_epoch: 26
+- model: SA_MT_SE_adLIF
+  seed: 456
+  cost_record: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/SSC/seed_456/COST_RESULTS.json
+  checkpoint: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/SSC/seed_456/ckpt/epoch=27-step=8232.ckpt
+  checkpoint_sha256: 5363a7eb798069abb25698d4f440b0b627a2672c56c618b14ed61691acad0622
+  selected_epoch: 27
+- model: MT_TC_SE_adLIF
+  seed: 42
+  cost_record: results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/COST_RESULTS.json
+  checkpoint: results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_42/ckpt/epoch=16-step=4998.ckpt
+  checkpoint_sha256: 4ba69a9caf0d5b25e58c37383464d0ad282eeef1500156dcb821437bfe70511d
+  selected_epoch: 16
+- model: MT_TC_SE_adLIF
+  seed: 123
+  cost_record: results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/COST_RESULTS.json
+  checkpoint: results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_123/ckpt/epoch=26-step=7938.ckpt
+  checkpoint_sha256: 079cddf16996198026cbae0fad7d7a58452072b3a69c843d43e370c3dcdf88e5
+  selected_epoch: 26
+- model: MT_TC_SE_adLIF
+  seed: 456
+  cost_record: results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/COST_RESULTS.json
+  checkpoint: results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/SSC/seed_456/ckpt/epoch=28-step=8526.ckpt
+  checkpoint_sha256: d429a1b79e72b45dbcda2b9125cc921f50a315ade4d98e054c56fa8396764e6b
+  selected_epoch: 28

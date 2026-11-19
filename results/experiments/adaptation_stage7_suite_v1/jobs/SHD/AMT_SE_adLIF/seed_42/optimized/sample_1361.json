@@ -1,0 +1,47 @@
+{
+  "identity": {
+    "manifest_sha256": "87d9013d3a3b8927184e2de2626f2ecd5ef6fe9d3235fbec8ddfc0d79b62492e",
+    "sample_id": 1361,
+    "original_sha256": "f63828b0a036a7ec259ba3668ad826afa3ed27ef3b747b11366f7f261d87c4ac"
+  },
+  "value": {
+    "sample_id": 1361,
+    "status": "no_accepted_improvement",
+    "budget": 123,
+    "moves": 0,
+    "allocation": [],
+    "trace": [
+      {
+        "iteration": 0,
+        "status": "rejected_no_measured_ce_increase",
+        "loss": 0.0,
+        "previous_loss": 0.0,
+        "acceptance_bound": 2e-05,
+        "moves": 123,
+        "candidate_sha256": "95eeb4d29319c6a2a36edf05dc15f4323942aafd36c40a4cbf4c0d30d6b86ba5",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SHD/AMT_SE_adLIF/seed_42/optimization_candidates/sample_1361_step_0.npz"
+      }
+    ],
+    "clean": {
+      "loss": 0.0,
+      "predictions": [
+        13
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "optimized": {
+      "loss": 0.0,
+      "predictions": [
+        13
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    }
+  },
+  "value_sha256": "85cef4ad5bc7462707304dff358cbf3bb04ea324d0331c7aaf0eee7a2c730dc6",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SHD/AMT_SE_adLIF/seed_42/optimized/sample_1361.npz",
+  "artifact_sha256": "ef280b90577e62e5c5616ce9488dc81c519fbec9533f26f0cc11aa2e58ee2478"
+}

@@ -1,0 +1,25 @@
+{
+  "identity": {
+    "manifest_sha256": "0d7feabf97012ace9a6edb34467f467ba8224eda08e6b5112e6fde39ce0ff0f0",
+    "sample_id": 7123,
+    "source_input_sha256": "dde0f75ea65abd2b7909ec7a3b7aff063c81eea1a73d22f72073afbe531ea6e4",
+    "condition": "mt_abs_gradient_deletion",
+    "replicate": 0,
+    "budget": 116,
+    "seed": 12781174831796034659,
+    "parent_gradient_sha256": "53215260dde02689ae2a3e0b6f4fde6633a19f128d2c0ff7afa5bca5794141d3"
+  },
+  "value": {
+    "condition": "mt_abs_gradient_deletion",
+    "replicate": 0,
+    "budget": 116,
+    "seed": 12781174831796034659,
+    "input_sha256": "ac096e855d9fc67e0f41eadd1c6e24648dcecac5225d608f77b7e622d0731eb9",
+    "delta_sha256": "547b02d6f5a16fbf428a6dbfd5c2d60be0de49dec0a8bbe037ed7766fbe7f6b5",
+    "removed_burn_in_events": 7,
+    "domain": "nonnegative integer counts, original length"
+  },
+  "value_sha256": "ce55957c2c31073dec85876ece6c19c00fb376c3aa908b5cba8a22070b51d8fa",
+  "artifact": "results/experiments/adaptation_gradient_pilot_v1/shared_inputs/sample_7123/mt_abs_gradient_deletion/rep_0.npz",
+  "artifact_sha256": "0082c16d098a0c6ccb534eccf50c88b6a2ebdfca290aa0183c6680f0f3e4711d"
+}

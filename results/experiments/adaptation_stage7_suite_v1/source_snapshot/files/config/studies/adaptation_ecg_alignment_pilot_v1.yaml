@@ -1,0 +1,155 @@
+# Validation-only ECG pilot; baseline settings are inherited, not copied.
+version: adaptation_ecg_alignment_pilot_v1
+inherits: config/paper_baseline.yaml
+dataset_section: ECG
+dataset_file: data/QTDB/QTDB_train.mat
+dataset_sha256: 72d1a10c96f1540880447e07256835d66da419c0b34f3dff495731a7928c5bc7
+expected_input_shape:
+- 618
+- 1301
+- 4
+expected_validation_samples: 30
+seeds:
+- 42
+- 123
+- 456
+parent: MT_SE_adLIF
+variant: AMT_SE_adLIF
+pairs:
+- id: amt_mt
+  parent: MT_SE_adLIF
+  variant: AMT_SE_adLIF
+- id: lt_dth
+  parent: DTH_SE_adLIF
+  variant: LT_DTH_SE_adLIF
+- id: sa_mt
+  parent: MT_SE_adLIF
+  variant: SA_MT_SE_adLIF
+- id: mt_tc
+  parent: MT_SE_adLIF
+  variant: MT_TC_SE_adLIF
+conditions:
+- - clean
+  - 0
+- - delete_0.1
+  - 0
+- - delete_0.1
+  - 1
+- - delete_0.1
+  - 2
+deletion_probability: 0.1
+selection_seed: 20261114
+accuracy_tolerance: 1.0e-06
+loss_tolerance: 0.001
+training: false
+official_test_access: false
+output_root: results/experiments/adaptation_ecg_alignment_pilot_v1
+runs:
+- model: MT_SE_adLIF
+  seed: 42
+  cost_record: results/valid/MT_SE_adLIF/ECG/seed_42/COST_RESULTS.json
+  checkpoint: results/valid/MT_SE_adLIF/ECG/seed_42/ckpt/epoch=398-step=3591.ckpt
+  checkpoint_sha256: bd867984c88b516cfebd76bc403bcc327ec3bfac08707411d29470274f3b8eff
+  selected_epoch: 398
+- model: MT_SE_adLIF
+  seed: 123
+  cost_record: results/valid/MT_SE_adLIF/ECG/seed_123/COST_RESULTS.json
+  checkpoint: results/valid/MT_SE_adLIF/ECG/seed_123/ckpt/epoch=396-step=3573.ckpt
+  checkpoint_sha256: fb8085fae16d02232f6022ae8e0ba07e015c5be2bc44f345067f45f7079a8b48
+  selected_epoch: 396
+- model: MT_SE_adLIF
+  seed: 456
+  cost_record: results/valid/MT_SE_adLIF/ECG/seed_456/COST_RESULTS.json
+  checkpoint: results/valid/MT_SE_adLIF/ECG/seed_456/ckpt/epoch=393-step=3546.ckpt
+  checkpoint_sha256: 201e9307a8e921f1f82dc6bb62f1291b408217fb550f9bcdef1b923f49b22b2d
+  selected_epoch: 393
+- model: AMT_SE_adLIF
+  seed: 42
+  cost_record: results/not_improved/AMT_SE_adLIF/ECG/seed_42/COST_RESULTS.json
+  checkpoint: results/not_improved/AMT_SE_adLIF/ECG/seed_42/ckpt/epoch=372-step=3357.ckpt
+  checkpoint_sha256: 5cef29dfeac771cf79d7d63e91cf593779ed3a91cf26aac9d2ac099a7b7ff1e6
+  selected_epoch: 372
+- model: AMT_SE_adLIF
+  seed: 123
+  cost_record: results/not_improved/AMT_SE_adLIF/ECG/seed_123/COST_RESULTS.json
+  checkpoint: results/not_improved/AMT_SE_adLIF/ECG/seed_123/ckpt/epoch=394-step=3555.ckpt
+  checkpoint_sha256: 6e8ca1f873e227eae5ac5e6d7c20abbde8cdab4d08b30acfdf1c26a9b32a8e91
+  selected_epoch: 394
+- model: AMT_SE_adLIF
+  seed: 456
+  cost_record: results/not_improved/AMT_SE_adLIF/ECG/seed_456/COST_RESULTS.json
+  checkpoint: results/not_improved/AMT_SE_adLIF/ECG/seed_456/ckpt/epoch=386-step=3483.ckpt
+  checkpoint_sha256: 4968d97815a37e28e6cb371af6d623ac8519f5200030e5416f425fc8d2482715
+  selected_epoch: 386
+- model: DTH_SE_adLIF
+  seed: 42
+  cost_record: results/valid/DTH_SE_adLIF/ECG/seed_42/COST_RESULTS.json
+  checkpoint: results/valid/DTH_SE_adLIF/ECG/seed_42/ckpt/epoch=385-step=3474.ckpt
+  checkpoint_sha256: d0cf20e233f18f8b803c9f837275923df111ed79a7e9ca31904ecfb812417c1d
+  selected_epoch: 385
+- model: DTH_SE_adLIF
+  seed: 123
+  cost_record: results/valid/DTH_SE_adLIF/ECG/seed_123/COST_RESULTS.json
+  checkpoint: results/valid/DTH_SE_adLIF/ECG/seed_123/ckpt/epoch=213-step=1926.ckpt
+  checkpoint_sha256: 896abfdb39d8b0791db5acc2c5afdb45a56c9c317a29467da992286d9a6e65ec
+  selected_epoch: 213
+- model: DTH_SE_adLIF
+  seed: 456
+  cost_record: results/valid/DTH_SE_adLIF/ECG/seed_456/COST_RESULTS.json
+  checkpoint: results/valid/DTH_SE_adLIF/ECG/seed_456/ckpt/epoch=341-step=3078.ckpt
+  checkpoint_sha256: 5e9b6309f9337229dc6cb49ac7a2bfa89b57cf93ea80e7ff69fc17845c1e0ec0
+  selected_epoch: 341
+- model: LT_DTH_SE_adLIF
+  seed: 42
+  cost_record: results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/COST_RESULTS.json
+  checkpoint: results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/ckpt/epoch=249-step=2250.ckpt
+  checkpoint_sha256: 47bea41b0d1b30efede00afe2f05382204c9d91e227b4c708c37318e9e117c33
+  selected_epoch: 249
+- model: LT_DTH_SE_adLIF
+  seed: 123
+  cost_record: results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/COST_RESULTS.json
+  checkpoint: results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/ckpt/epoch=324-step=2925.ckpt
+  checkpoint_sha256: ed89b4bac1fdacf7d19fa3cb2aa8a9af75fa53e7a9840c0b3610b59eb492caac
+  selected_epoch: 324
+- model: LT_DTH_SE_adLIF
+  seed: 456
+  cost_record: results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/COST_RESULTS.json
+  checkpoint: results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/ckpt/epoch=321-step=2898.ckpt
+  checkpoint_sha256: 3bf9662f497047ee555ed42f64843a40b26911c925cb8a8ae596c969a4f92036
+  selected_epoch: 321
+- model: SA_MT_SE_adLIF
+  seed: 42
+  cost_record: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/ECG/seed_42/COST_RESULTS.json
+  checkpoint: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/ECG/seed_42/ckpt/epoch=366-step=3303.ckpt
+  checkpoint_sha256: 11426b50028c68b62e28f93810476cbd906684642227eb065ec9666ff8efb5c9
+  selected_epoch: 366
+- model: SA_MT_SE_adLIF
+  seed: 123
+  cost_record: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/ECG/seed_123/COST_RESULTS.json
+  checkpoint: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/ECG/seed_123/ckpt/epoch=368-step=3321.ckpt
+  checkpoint_sha256: 30b0c4c0705852dee79d05354f4b020f48b90b50c2612b911bb8e1ee8dab0050
+  selected_epoch: 368
+- model: SA_MT_SE_adLIF
+  seed: 456
+  cost_record: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/ECG/seed_456/COST_RESULTS.json
+  checkpoint: results/experiments/sa_mt_v1/SA_MT_SE_adLIF/ECG/seed_456/ckpt/epoch=310-step=2799.ckpt
+  checkpoint_sha256: 35d8710ef59a2443f5eeeb5429d09f2f3910ccf286a5f1fe2a16a9e0a0039270
+  selected_epoch: 310
+- model: MT_TC_SE_adLIF
+  seed: 42
+  cost_record: results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/COST_RESULTS.json
+  checkpoint: results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/ckpt/epoch=288-step=2601.ckpt
+  checkpoint_sha256: 47b748ec912d74a21033dbbce53e3c3f647150bd1dbf277c4ab735b87dc59235
+  selected_epoch: 288
+- model: MT_TC_SE_adLIF
+  seed: 123
+  cost_record: results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/COST_RESULTS.json
+  checkpoint: results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/ckpt/epoch=392-step=3537.ckpt
+  checkpoint_sha256: 224eed47c932d9010af995a0a88e07e43f1d539a5273f207774ab3e7cdebd629
+  selected_epoch: 392
+- model: MT_TC_SE_adLIF
+  seed: 456
+  cost_record: results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/COST_RESULTS.json
+  checkpoint: results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/ckpt/epoch=379-step=3420.ckpt
+  checkpoint_sha256: 5055fc93f0b4250ccce8fbcc59c0c4dbbaade01dcf199215090250756068c8a4
+  selected_epoch: 379

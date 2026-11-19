@@ -1,0 +1,188 @@
+{
+  "identity": {
+    "manifest_sha256": "580b6a2773304fa19e3a9d33922d65a27c5b458de426599bacd81ff9185544ae",
+    "sample_id": 3896,
+    "original_sha256": "cb1e17fca49d0a45210faff153745af08bac71c5e1af426016dee06a145f171e"
+  },
+  "value": {
+    "sample_id": 3896,
+    "status": "improved",
+    "budget": 86,
+    "moves": 86,
+    "allocation": [
+      {
+        "channel": 2,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 6,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 10,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 15,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 20,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 25,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 26,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 27,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 35,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 39,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 40,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 43,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 44,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 49,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 55,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 56,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 69,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 73,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 77,
+        "sign": 1,
+        "moves": 7
+      },
+      {
+        "channel": 79,
+        "sign": 1,
+        "moves": 12
+      },
+      {
+        "channel": 80,
+        "sign": 1,
+        "moves": 19
+      },
+      {
+        "channel": 81,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 82,
+        "sign": 1,
+        "moves": 15
+      },
+      {
+        "channel": 100,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 138,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 139,
+        "sign": 1,
+        "moves": 4
+      }
+    ],
+    "trace": [
+      {
+        "iteration": 0,
+        "status": "accepted",
+        "loss": 5.813634872436523,
+        "previous_loss": 1.2636104656849056e-05,
+        "acceptance_bound": 2.000012636104657e-05,
+        "moves": 86,
+        "candidate_sha256": "e93eabc0dbc1714233e23fac10224cf4af1ac9b3db8a3bba652db60a050f8ed6",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SHD/AMT_SE_adLIF/seed_456/optimization_candidates/sample_3896_step_0.npz"
+      },
+      {
+        "iteration": 1,
+        "status": "rejected_no_measured_ce_increase",
+        "loss": 0.0011862630490213633,
+        "previous_loss": 5.813634872436523,
+        "acceptance_bound": 7.813634872436525e-05,
+        "moves": 86,
+        "candidate_sha256": "144e342a809edf30b3ec12e2ee078138f911d13bf21d157f94f6f8a10d66da2b",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SHD/AMT_SE_adLIF/seed_456/optimization_candidates/sample_3896_step_1.npz"
+      }
+    ],
+    "clean": {
+      "loss": 1.2636104656849056e-05,
+      "predictions": [
+        1
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "optimized": {
+      "loss": 5.813634872436523,
+      "predictions": [
+        9
+      ],
+      "valid_steps": 1,
+      "correct_steps": 0,
+      "accuracy": 0.0
+    }
+  },
+  "value_sha256": "94fe252ac2578ab7a9361d9ac60edd921cb38f8db97672472682c52082453e31",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SHD/AMT_SE_adLIF/seed_456/optimized/sample_3896.npz",
+  "artifact_sha256": "bb8effa38fa6675fdf3290421e117e4b5a22b181a90706acf19059eaef5a68e9"
+}

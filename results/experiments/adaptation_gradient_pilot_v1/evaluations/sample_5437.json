@@ -1,0 +1,187 @@
+{
+  "identity": {
+    "manifest_sha256": "0d7feabf97012ace9a6edb34467f467ba8224eda08e6b5112e6fde39ce0ff0f0",
+    "sample_id": 5437,
+    "inputs": [
+      {
+        "condition": "mt_abs_gradient_deletion",
+        "replicate": 0,
+        "budget": 92,
+        "seed": 13630470020475434628,
+        "input_sha256": "2cf8842b6946e8e523ee17d1ab726a56eeb9e59ccedc11ca7f4a97163207ec91",
+        "delta_sha256": "d6623acfd4f508cacbadf5536b15eb9e04e61392535bf63a86a8ac32757069e0",
+        "removed_burn_in_events": 0,
+        "domain": "nonnegative integer counts, original length"
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 0,
+        "budget": 92,
+        "seed": 17039632871691927298,
+        "input_sha256": "47bb2e9cf0ec6b820e2c9d2fa5bf305b8c421d65c029358e8db5e78c89a89d65",
+        "delta_sha256": "2abcd896e8c6e8a56fab43b3f813774d5ddbf24b848a5311d7b9db99530a6007",
+        "removed_burn_in_events": 0,
+        "domain": "nonnegative integer counts, original length"
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 1,
+        "budget": 92,
+        "seed": 12778116757833438325,
+        "input_sha256": "c8946f5cf724bb5446d6379b6aec9af048fb8b87eb68a544e33c8d82c6913393",
+        "delta_sha256": "a8e667a9ed3509c7284709cd0dfb1481de034545e3afcde5c6408948edab8c54",
+        "removed_burn_in_events": 1,
+        "domain": "nonnegative integer counts, original length"
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 2,
+        "budget": 92,
+        "seed": 13681377680610565133,
+        "input_sha256": "4aaaf62697471cfee7619a1769e97384ea41203d56afaebeadaf2c6d89d78f90",
+        "delta_sha256": "80eab6c1bfcc1c383893ae223130ae4894d4f81447028206e2e5f5e9a1ffd81b",
+        "removed_burn_in_events": 0,
+        "domain": "nonnegative integer counts, original length"
+      }
+    ]
+  },
+  "value": {
+    "sample_id": 5437,
+    "target": 4,
+    "speaker": 9,
+    "guided_status": "defined",
+    "conditions": [
+      {
+        "condition": "clean",
+        "replicate": 0,
+        "budget": 0,
+        "input_sha256": "0fe767606ba5ab705e293823910b9acdfcac8c352a598797e7c7e860942a5828",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 4,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 0.0
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 4,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 0.0
+          }
+        ]
+      },
+      {
+        "condition": "mt_abs_gradient_deletion",
+        "replicate": 0,
+        "budget": 92,
+        "input_sha256": "2cf8842b6946e8e523ee17d1ab726a56eeb9e59ccedc11ca7f4a97163207ec91",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 4,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -1.1900244312646087e-11
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 4,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -1.860482326873766e-11
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 0,
+        "budget": 92,
+        "input_sha256": "47bb2e9cf0ec6b820e2c9d2fa5bf305b8c421d65c029358e8db5e78c89a89d65",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 4,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 5.111209531821986e-13
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 4,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -2.5473986526962367e-12
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 1,
+        "budget": 92,
+        "input_sha256": "c8946f5cf724bb5446d6379b6aec9af048fb8b87eb68a544e33c8d82c6913393",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 4,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 6.776965310949885e-13
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 4,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -2.0930423836977834e-12
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 2,
+        "budget": 92,
+        "input_sha256": "4aaaf62697471cfee7619a1769e97384ea41203d56afaebeadaf2c6d89d78f90",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 4,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -8.879540406723976e-14
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 4,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -1.5011384850614697e-12
+          }
+        ]
+      }
+    ]
+  },
+  "value_sha256": "cd6e9eec59c0962dac2d4a20aab6a75f5234617e7cb7c8d8ef4092bbca92b748"
+}

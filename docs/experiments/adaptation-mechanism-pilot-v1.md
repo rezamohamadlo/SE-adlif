@@ -1,7 +1,16 @@
 # Adaptation mechanism pilot v1
 
+Current workflow (12 November 2026): the completed local pilot has been
+organized into `clean/`, `time_scaling/`, and `spike_deletion/` under
+`results/experiments/adaptation_mechanism_analysis_local_recheck_v1/`.
+Its `ARTIFACT_INDEX.json` maps preserved historical paths to the current
+package. Do not rerun the legacy commands below into relocated directories.
+See the [full-validation guide](adaptation-mechanism-full-validation-v1.md)
+for current commands, sharing and verification. This document retains the
+original pilot procedure; `command.txt` now prepares full validation.
+
 This implements the first bounded SHD* validation analysis in the
-[supervisor roadmap](supervisor-guideline-roadmap-fa.md) and
+[supervisor roadmap](../../supervisor-guideline-roadmap-fa.md) and
 [three-PC daily plan](supervisor-three-pc-daily-plan-fa.md). It compares existing,
 validation-selected AMT and MT checkpoints with frozen weights. It does not train,
 access the official test set, use TTA, or start later roadmap stages automatically.
@@ -75,12 +84,30 @@ After the checks pass, run exactly one assigned command on each machine:
 .\.ven\Scripts\python.exe scripts/adaptation_analysis/pilot.py --pc pc3
 ```
 
-These same commands are in [command.txt](../../command.txt). Historical
+The current [command.txt](../../command.txt) now contains full-validation commands. Historical
 speaker-regularization commands remain in Git history and their experiment
 guides; they are not part of this pilot. Check active processes and output paths
 before launching; do not run duplicate workers for one PC's output directory.
 
 ## Bounded scope
+
+### Local regeneration of PC2/PC3 (12 November 2026)
+
+The user chose one physical PC to regenerate both short evaluation arms.
+`--pc pc2` and `--pc pc3` select the timing and spike-density analyses;
+they can run sequentially on the same machine using its `.venv` environment.
+At the time of the local regeneration, `command.txt` supplied these two commands with
+`--output-root results/experiments/adaptation_mechanism_analysis_local_recheck_v1`.
+Both synthetic checks and prerequisite preflights passed locally; inference
+has not been launched by the agent. Finish PC2 successfully before starting PC3.
+
+This is an intentional repeat of the same frozen-checkpoint, 256-sample pilot
+to produce coherent local detailed artifacts. It is not the full-validation
+perturbation study and adds no independent training seeds. The imported outputs
+and original local PC1 evidence remain separate. Each new arm will retain its
+own manifest, detailed rows and completion hashes; verify those records before
+comparing with imported summaries. The three-machine commands above document
+the original arrangement; use the current local commands for this regeneration.
 
 The defaults are **256 fixed validation samples**, the existing training seeds
 **42, 123 and 456**, and one GPU worker per PC. Sample selection and the original

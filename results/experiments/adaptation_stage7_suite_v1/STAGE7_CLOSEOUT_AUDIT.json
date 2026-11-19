@@ -1,0 +1,39 @@
+{
+  "status": "verified_scoped_complete",
+  "stage7_scoped_complete": true,
+  "checks": {
+    "checkpoint_jobs": 54,
+    "expected_checkpoint_jobs": 54,
+    "primary_gradient_records": 2520,
+    "expected_primary_gradient_records": 2520,
+    "repeat_checks": 432,
+    "expected_repeat_checks": 432,
+    "repeat_failures": 0,
+    "autograd_failures": 0,
+    "optimization_autograd_failures": 0,
+    "optimized_attempts": 216,
+    "expected_optimized_attempts": 216,
+    "skipped_unstable_inputs": 0,
+    "accepted_diagnostic_inputs": 171,
+    "transfer_bundles": 9,
+    "transfer_rows": 5184,
+    "expected_transfer_rows": 5184,
+    "paired_diagnostic_rows": 288,
+    "expected_paired_diagnostic_rows": 288
+  },
+  "interpretation": "Completion of registered exploratory three-dataset scope, not exhaustive validation gradients or independent confirmation",
+  "objectives": [
+    "common frozen-weight supervised input gradients for all four parent/variant pairs",
+    "native-domain, fixed-length, per-channel event-budgeted diagnostic input optimization",
+    "identical input transfer and matched random temporal-relocation controls",
+    "comparable figures, seed-matched CE effects and explicit negative outcomes"
+  ],
+  "limitations": [
+    "diagnostic cohorts only: SHD* 40, SSC 70, ECG 30; only 8 repeat records and 4 optimized records per dataset",
+    "SLAYER sensitivities are surrogate derivatives; optimized labels held fixed do not guarantee unchanged semantic class",
+    "parent/variant-optimized selection is model/loss coupled; no causal or architectural superiority claim",
+    "ECG per-step targets, original all-zero vectors mapping to class 0 and model-step time units preserved",
+    "no independent official test, no exact Nature figure reproduction, no new model-weight training",
+    "source_high baseline remains separate; shared parents/records/random replicates are not independent seeds"
+  ]
+}

@@ -1,0 +1,65 @@
+# Frozen full SSC official-validation AMT/MT diagnostics; no training.
+version: adaptation_ssc_amt_full_validation_v1
+inherits: config/paper_baseline.yaml
+dataset_section: SSC
+feature_definition_source: config/studies/adaptation_mechanism_pilot_v1.yaml
+dataset_file: data/SSCWrapper/ssc_valid.h5
+dataset_sha256: 6365c36ff8c680c4b0caf27ca52faa59e14359db5810b528f40dd80e2bcb9210
+expected_validation_samples: 9981
+selection_seed: 20261112
+seeds:
+- 42
+- 123
+- 456
+parent: MT_SE_adLIF
+variant: AMT_SE_adLIF
+loss_agg: mean_membrane_potentials
+evaluation_protocol: ssc_mean_loss_v1
+output_root: results/experiments/adaptation_ssc_amt_full_validation_v1
+analyses:
+- clean
+- time_scaling
+- spike_deletion
+accuracy_tolerance: 1.0e-06
+loss_tolerance: 0.001
+training: false
+test_set_access: false
+runs:
+- model: MT_SE_adLIF
+  seed: 42
+  cost_record: results/valid/MT_SE_adLIF/SSC/seed_42/COST_RESULTS.json
+  checkpoint: results/valid/MT_SE_adLIF/SSC/seed_42/ckpt/epoch=23-step=7056.ckpt
+  checkpoint_sha256: 11baa18a6d147e56b4f3c98bac824af94dca7891f4db8b696a52058dbdfe1ded
+  selected_epoch: 23
+- model: MT_SE_adLIF
+  seed: 123
+  cost_record: results/valid/MT_SE_adLIF/SSC/seed_123/COST_RESULTS.json
+  checkpoint: results/valid/MT_SE_adLIF/SSC/seed_123/ckpt/epoch=36-step=10878.ckpt
+  checkpoint_sha256: d4652f57efbbb0e6890d8f8af995e23826767b95af787c93788c4b3e173a85d8
+  selected_epoch: 36
+- model: MT_SE_adLIF
+  seed: 456
+  cost_record: results/valid/MT_SE_adLIF/SSC/seed_456/COST_RESULTS.json
+  checkpoint: results/valid/MT_SE_adLIF/SSC/seed_456/ckpt/epoch=17-step=5292.ckpt
+  checkpoint_sha256: 8839a9be04ff077a87056b43e28a7fed97b1eb9c28fe99597fd64b949ee08b05
+  selected_epoch: 17
+- model: AMT_SE_adLIF
+  seed: 42
+  cost_record: results/not_improved/AMT_SE_adLIF/SSC/seed_42/COST_RESULTS.json
+  checkpoint: results/not_improved/AMT_SE_adLIF/SSC/seed_42/ckpt/epoch=35-step=10584.ckpt
+  checkpoint_sha256: 1032f84b6dc136931363752a3441d9d56ea057c322a6cbe59f256eb577675d18
+  selected_epoch: 35
+- model: AMT_SE_adLIF
+  seed: 123
+  cost_record: results/not_improved/AMT_SE_adLIF/SSC/seed_123/COST_RESULTS.json
+  checkpoint: results/not_improved/AMT_SE_adLIF/SSC/seed_123/ckpt/epoch=27-step=8232.ckpt
+  checkpoint_sha256: 8b75ec256929244d0b1ed05ffd68031699a0fb839e71dd3b260c22fdbf73be40
+  selected_epoch: 27
+- model: AMT_SE_adLIF
+  seed: 456
+  cost_record: results/not_improved/AMT_SE_adLIF/SSC/seed_456/COST_RESULTS.json
+  checkpoint: results/not_improved/AMT_SE_adLIF/SSC/seed_456/ckpt/epoch=13-step=4116.ckpt
+  checkpoint_sha256: 2115814092a1b93abcf7301d69a6d8e5afd359dd3879e1caebde65a0fb83108a
+  selected_epoch: 13
+sample_selection: all_official_validation_in_original_file_order
+diagnostic_scope: full_official_validation

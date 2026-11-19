@@ -1,0 +1,37 @@
+{
+  "status": "verified",
+  "registered_outputs": 557,
+  "tests_passed": 19,
+  "clean_reference_checks": 80,
+  "source_primary_arrays_reused": 80,
+  "shared_deletion_inputs": 160,
+  "model_evaluations": 400,
+  "paired_rows": 200,
+  "training": false,
+  "new_backward": false,
+  "agent_execution_explicitly_authorized": true,
+  "stage7_complete": false,
+  "elapsed_seconds": 163.85900000000038,
+  "summary_groups": [
+    {
+      "model": "MT_SE_adLIF",
+      "clean_records": 40,
+      "clean_accuracy": 0.975,
+      "clean_mean_loss": 0.021833689476362394,
+      "common_guidance_eligible_records": 40,
+      "mean_abs_guided_loss_change": 0.3919810246983115,
+      "mean_abs_random_loss_change": 0.020989087293290014,
+      "mean_guided_minus_random_abs_loss_change": 0.3709919374050215
+    },
+    {
+      "model": "AMT_SE_adLIF",
+      "clean_records": 40,
+      "clean_accuracy": 1.0,
+      "clean_mean_loss": 5.4977259258137676e-05,
+      "common_guidance_eligible_records": 40,
+      "mean_abs_guided_loss_change": 0.21914549495705202,
+      "mean_abs_random_loss_change": 0.0002035005133012172,
+      "mean_guided_minus_random_abs_loss_change": 0.2189419944437509
+    }
+  ]
+}

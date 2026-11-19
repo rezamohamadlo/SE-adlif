@@ -1,0 +1,67 @@
+{
+  "reviewed_utc": "2026-11-14T13:21:25.945756+00:00",
+  "scope": "read_only_saved_evidence_integrity_and_coverage",
+  "status": "verified",
+  "registered_output_hashes": 96,
+  "current_source_hashes": 56,
+  "clean_anchors_passed": 18,
+  "user_contract_tests_passed": 19,
+  "unique_prediction_chunks": 72,
+  "validation_records": 30,
+  "paired_rows": 1440,
+  "pairs": [
+    {
+      "id": "amt_mt",
+      "parent": "MT_SE_adLIF",
+      "variant": "AMT_SE_adLIF",
+      "paired_rows": 360,
+      "status": "clean_and_deletion_evaluation_verified",
+      "features": "pending",
+      "time_scaling": "pending",
+      "inferential_statistics": "pending"
+    },
+    {
+      "id": "lt_dth",
+      "parent": "DTH_SE_adLIF",
+      "variant": "LT_DTH_SE_adLIF",
+      "paired_rows": 360,
+      "status": "clean_and_deletion_evaluation_verified",
+      "features": "pending",
+      "time_scaling": "pending",
+      "inferential_statistics": "pending"
+    },
+    {
+      "id": "sa_mt",
+      "parent": "MT_SE_adLIF",
+      "variant": "SA_MT_SE_adLIF",
+      "paired_rows": 360,
+      "status": "clean_and_deletion_evaluation_verified",
+      "features": "pending",
+      "time_scaling": "pending",
+      "inferential_statistics": "pending"
+    },
+    {
+      "id": "mt_tc",
+      "parent": "MT_SE_adLIF",
+      "variant": "MT_TC_SE_adLIF",
+      "paired_rows": 360,
+      "status": "clean_and_deletion_evaluation_verified",
+      "features": "pending",
+      "time_scaling": "pending",
+      "inferential_statistics": "pending"
+    }
+  ],
+  "recorded_attempt_elapsed_seconds": 415.64100000000144,
+  "timing_scope": "execute() only; excludes initial preflight; not pure inference latency",
+  "full_mechanism_study_complete": false,
+  "agent_tests_run": false,
+  "agent_scientific_execution": false,
+  "pending": [
+    "ECG input features",
+    "label-aligned time scaling",
+    "statistical inference with defensible dependence units",
+    "direct SSC window diagnostics",
+    "stage 7 gradients"
+  ],
+  "completion_sha256": "da7b7b31061c801f52c9d301572d47d6b686464cf5be3f603d9a88456eebc0f1"
+}

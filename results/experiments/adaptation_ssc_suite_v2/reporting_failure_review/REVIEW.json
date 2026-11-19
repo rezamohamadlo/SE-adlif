@@ -1,0 +1,94 @@
+{
+  "review_date": "2026-11-14",
+  "phase": "lt_dth_evaluation_reporting",
+  "scope": "read_only_failure_and_resume_review",
+  "cause": "Direct script launch adds the suite directory to module search paths, allowing its statistics.py to shadow the standard-library statistics module.",
+  "correction": "Launch as a package module with -m scripts.adaptation_ssc_suite.run; preserve all frozen source bytes and manifest identities.",
+  "frozen_source_hashes_unchanged": 68,
+  "tests_passed_in_user_run": 25,
+  "completed_jobs": [
+    "contract_tests",
+    "snapshot_source",
+    "amt_mt_statistics"
+  ],
+  "verified_completed_AMT_evaluation_output_hashes": 62,
+  "verified_completed_AMT_statistics_output_hashes": 8,
+  "verified_LT_prediction_cache_values": 36,
+  "records_per_prediction_chunk": 9981,
+  "verified_LT_parameter_records": 6,
+  "paired_csv_records": 179658,
+  "LT_evaluation_complete": false,
+  "scientific_queue_complete": false,
+  "correction_preflight": "package import resolves statistics to the standard library; full module-mode preflight passed",
+  "preserved_failure_records": {
+    "MANIFEST.json": {
+      "original_sha256": "a35b5b6c707c5f4ad8c6bacc3ed1822092478b581f6f8087eade89df05b82d7a",
+      "archive": "results/experiments/adaptation_ssc_suite_v2/reporting_failure_review/original_records/MANIFEST.json",
+      "archive_sha256": "a35b5b6c707c5f4ad8c6bacc3ed1822092478b581f6f8087eade89df05b82d7a"
+    },
+    "PROGRESS.json": {
+      "original_sha256": "0d19ba3a137c47dfe44590a0f9e25e7ea3853892557aea273ff6853933f255fa",
+      "archive": "results/experiments/adaptation_ssc_suite_v2/reporting_failure_review/original_records/PROGRESS.json",
+      "archive_sha256": "0d19ba3a137c47dfe44590a0f9e25e7ea3853892557aea273ff6853933f255fa"
+    },
+    "CONTRACT_TESTS.json": {
+      "original_sha256": "ecb9d0495cb46a25ba74a9e717e5044bc4f27a942cfd1d74e3e963ae682f5af4",
+      "archive": "results/experiments/adaptation_ssc_suite_v2/reporting_failure_review/original_records/CONTRACT_TESTS.json",
+      "archive_sha256": "ecb9d0495cb46a25ba74a9e717e5044bc4f27a942cfd1d74e3e963ae682f5af4"
+    },
+    "contract_tests.log": {
+      "original_sha256": "cc65f75df2bec4776eff058f930963d9652992e22a4575be68229de525f1549f",
+      "archive": "results/experiments/adaptation_ssc_suite_v2/reporting_failure_review/original_records/contract_tests.log",
+      "archive_sha256": "cc65f75df2bec4776eff058f930963d9652992e22a4575be68229de525f1549f"
+    },
+    "pairs/lt_dth/evaluation/MANIFEST.json": {
+      "original_sha256": "52d7e7f05c2fbbccad2bb15843e13426a93e3a6c9b2d9d9843a69826054bc521",
+      "archive": "results/experiments/adaptation_ssc_suite_v2/reporting_failure_review/original_records/pairs/lt_dth/evaluation/MANIFEST.json",
+      "archive_sha256": "52d7e7f05c2fbbccad2bb15843e13426a93e3a6c9b2d9d9843a69826054bc521"
+    }
+  },
+  "preserved_LT_prediction_file_sha256": {
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_123_clean_rep_0.json": "ed939188a12845c3d8e4ff05cd387c475c21a272acbde14bc2ae50911cd1c2a2",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_123_delete_0.1_rep_0.json": "5de2126c4ae17e2d0ae5fe1ce002bd552a907bc4ea855732a0fb3edbd35aaa49",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_123_delete_0.1_rep_1.json": "987a6d1e03a178acb8fb8843df93314ada8f318741f1ec544def040d0bc60247",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_123_delete_0.1_rep_2.json": "2f9b851f3a7626ac7c51c5355a86e415507f7b54487031979a10bed3fe67dbb7",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_123_time_scale_0.9_rep_0.json": "f7f3c831d9ef4b7af848e38d2ce5aa0297ab21b63686320f78ad4918c8ac7194",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_123_time_scale_1.1_rep_0.json": "393e556de98ca96e63e93d4bac9fd5877edfcbeeafe2879e4c7bd9c11a37b7a1",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_42_clean_rep_0.json": "3e553da1c97bc8622d4767e7a8c7f1194cea34ef801a089380ec3c9c038806d5",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_42_delete_0.1_rep_0.json": "b372f40f6e65873b8b63239d2de17cab36aa7675f8e810f09a90283d1b36710a",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_42_delete_0.1_rep_1.json": "56ffcae3af0d8f128861a56c27432c53fea0ad91a5160ecd7c5f632761e063fa",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_42_delete_0.1_rep_2.json": "5c123b7af7a1a511c3175947a6d53134a77b7dc9e6bf7319934bce0702158e75",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_42_time_scale_0.9_rep_0.json": "083c75178b6a3ae4eef57b4b42609798bce04edb93030fbd13865ac8a44c4de8",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_42_time_scale_1.1_rep_0.json": "c3c38bcafaf7d2a1e19a4344ba4621286b52015f213ff6c16e5883c162f88e15",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_456_clean_rep_0.json": "1127ce120924e111385242da5c8eea592a164d9056975cdafdeff6682f2db903",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_456_delete_0.1_rep_0.json": "e38eac3cd53a2fa7114edb65846a7de1e47cd89248be517c0d46c1ccc8f4934b",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_456_delete_0.1_rep_1.json": "61241855da91759df7afda963d76223df2e972e89df374c2180380414c3f6608",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_456_delete_0.1_rep_2.json": "158543f0065dbe1b85b772366e74e63c4b791114cd5f5afc5031bd5be5423b6d",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_456_time_scale_0.9_rep_0.json": "9dcc3a952e9c0da24b922bc8b1286395e98957114e55731877960e63ff98d3c6",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/DTH_SE_adLIF_seed_456_time_scale_1.1_rep_0.json": "5df542b36a1f9ea09582f4f304bb78cbcd3074504ca68172a5a79994b36e9088",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_123_clean_rep_0.json": "24d98e5a3d2447e18d133ac0f9a4c82505c34191736aa354a65fa49aa6347f8b",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_123_delete_0.1_rep_0.json": "77c89246e0f7e178536a3d4dc1ba7393dbf7e751104b4a819f372b0a3fe530fe",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_123_delete_0.1_rep_1.json": "44cf65334670e579ddf1cc25bc2248a522a5e3f2bd5018d32ce6f4aae95d0d80",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_123_delete_0.1_rep_2.json": "3af70267e358648bf643bc06c755e7317f11f907368ade6870fe4811c9dd09b2",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_123_time_scale_0.9_rep_0.json": "3171de8bb81cdb36d4cf4b8632bcfacdca854151b29bfd41ab21968ea5576777",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_123_time_scale_1.1_rep_0.json": "7903699292634c02705f9e13875fe4c66ef2aa52e141bfc3ce87211286ca602b",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_42_clean_rep_0.json": "7ff2ab05d3f1c4f17057419b3ebf2947d33c671d48a3e752017bbafb27982344",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_42_delete_0.1_rep_0.json": "673d26dec50a9a2a0f72a86be20a84d4dccbe4e0396be0f0329a0f3efc5e0038",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_42_delete_0.1_rep_1.json": "907c8dd4871d1015c02c8bd0d42be6eea77edc09fb98aa6758861892e7ca9af3",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_42_delete_0.1_rep_2.json": "0b7a6d6af04c7a37c91092bb926dc757f8728857906f42f14a2737e366d49e41",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_42_time_scale_0.9_rep_0.json": "042166320f837ad52ebb677a8b4d50c9a67ab0626964dd41bfaefd667b3a635e",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_42_time_scale_1.1_rep_0.json": "3383c47d60039a2ad487a574ee6edec9bf1ad116ad18fd1c41522a11024575e7",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_456_clean_rep_0.json": "61ba069f61be92f04926b3d4c382d7425bd237cc430be29f8a56399769588612",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_456_delete_0.1_rep_0.json": "b2e60176619cf6a0544189bc6c0e9d712980cddd1f46e08c0e8dc5c2a2fddd69",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_456_delete_0.1_rep_1.json": "ec8fdddd6912f71fe4ff33beb8c675c524c72aaae508cbb1c9f13ed128cfb61a",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_456_delete_0.1_rep_2.json": "0f874a0c68031c3808cbdcaa7037753923befea5cd355934ece9315277b701c8",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_456_time_scale_0.9_rep_0.json": "304484590acd6c66876192cbc554fb5822250a66b3f94b2f1e1c2e3c10a9e290",
+    "results/experiments/adaptation_ssc_suite_v2/pairs/lt_dth/evaluation/diagnostic_rows/LT_DTH_SE_adLIF_seed_456_time_scale_1.1_rep_0.json": "f5062f6ce4ad36b7b4c6988a45296a0ca3ee571f0895e33bea3ff73f7b02f191"
+  },
+  "preserved_LT_paired_csv_sha256": "b13db3a073fb3c77b2a8f502bccfa47d14368a65ff09de5472f74e53b4867f08",
+  "resume_command": ".\\.venv\\Scripts\\python.exe -m scripts.adaptation_ssc_suite.run --device cuda:0 --output-root results/experiments/adaptation_ssc_suite_v2",
+  "agent_tests_run": false,
+  "agent_model_inference": false,
+  "agent_statistical_fit": false,
+  "agent_reports_generated": false
+}

@@ -1,0 +1,52 @@
+{
+  "review_date": "2026-11-14",
+  "failed_phase": "contract_tests",
+  "tests_run": 25,
+  "test_errors": 2,
+  "failed_test_methods": [
+    "test_changed_snapshot_is_rejected_and_preserved",
+    "test_snapshot_is_byte_exact_and_survives_missing_original"
+  ],
+  "cause": "Windows short temporary-directory paths were stored before resolution, while validation resolved the same paths to their long spelling.",
+  "scientific_jobs_started": false,
+  "source_bundle_copied": false,
+  "completion_present": false,
+  "frozen_failure_evidence": {
+    "results/experiments/adaptation_ssc_suite_v1/MANIFEST.json": "639f7b21d2e7cfc861783e0e9b508d817b5d7f7ef4c6dcf8373e657e0fdf9cb2",
+    "results/experiments/adaptation_ssc_suite_v1/PROGRESS.json": "df31be056d2a0054e628f9b0f6545f4e03c672a68943e86f16a5173b23ca782c",
+    "results/experiments/adaptation_ssc_suite_v1/CONTRACT_TESTS.json": "5d5e74cd9ad9fabad44e471bf46bba72f1b58e46d3b29bdc350b524dae88dc86",
+    "results/experiments/adaptation_ssc_suite_v1/contract_tests.log": "c3f3e3587d4ff38269444e1e5afde250bc50a2f75d077dcb8887698c63201c98"
+  },
+  "archived_source": {
+    "scripts/adaptation_ssc_suite/common.py": {
+      "archive": "results/experiments/adaptation_ssc_suite_v1/prelaunch_failure_review/source_snapshot/scripts/adaptation_ssc_suite/common.py",
+      "sha256": "9ae1c02d9376aee092b4a0ee96cd9a97f4a6ee6f5ac615b885de3f86d7ee8c75",
+      "normalized_sha256": "9ae1c02d9376aee092b4a0ee96cd9a97f4a6ee6f5ac615b885de3f86d7ee8c75"
+    },
+    "scripts/adaptation_ssc_suite/run.py": {
+      "archive": "results/experiments/adaptation_ssc_suite_v1/prelaunch_failure_review/source_snapshot/scripts/adaptation_ssc_suite/run.py",
+      "sha256": "cb209aab9083fe640098f75fc5641b1b130ce47877e1a892a39b972f3c32d478",
+      "normalized_sha256": "cb209aab9083fe640098f75fc5641b1b130ce47877e1a892a39b972f3c32d478"
+    },
+    "tests/test_adaptation_ssc_suite.py": {
+      "archive": "results/experiments/adaptation_ssc_suite_v1/prelaunch_failure_review/source_snapshot/tests/test_adaptation_ssc_suite.py",
+      "sha256": "a272f1609dd928b1f6de67715cab70f855d7c961f0eff8871346e57e04c897cf",
+      "normalized_sha256": "a272f1609dd928b1f6de67715cab70f855d7c961f0eff8871346e57e04c897cf"
+    }
+  },
+  "planned_retry_root": "results/experiments/adaptation_ssc_suite_v2",
+  "agent_tests_run": false,
+  "agent_experiments_run": false,
+  "correction_preflight": {
+    "status": "passed",
+    "review_date": "2026-11-14",
+    "different_working_directory": true,
+    "windows_temp_alias_path_check": true,
+    "checkpoint_count": 18,
+    "validation_records": 9981,
+    "complete_cases": 9979,
+    "speaker_groups": 256,
+    "agent_tests_run": false,
+    "new_scientific_execution": false
+  }
+}

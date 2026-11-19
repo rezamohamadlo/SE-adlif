@@ -1,0 +1,43 @@
+{
+  "status": "complete",
+  "execution_root": "results/experiments/adaptation_ssc_suite_v2",
+  "started_utc": "2026-11-14T08:14:18.661820+00:00",
+  "compatibility_source_sha256": {
+    "scripts/resume_ssc_suite.py": "126517ae78ab46d5a6ada9a2e87d5b97a2e6a54edf63cf70deb37cd4ab979642",
+    "scripts/ssc_resume_io.py": "2958f0e7943d43b2d550998695d30466c7a5a1125df1c1bc9dcd20c600dad071",
+    "tests/test_ssc_resume_io.py": "ce0bf054dddba301d57408d5c43f68752d27e0d4101f1a9272f96d43865a3a6e"
+  },
+  "unchanged_frozen_source_count": 68,
+  "policy": {
+    "scope": "JSON destinations inside this suite only",
+    "replacement_attempts": 12,
+    "retry_winerrors": [
+      5,
+      32,
+      33
+    ],
+    "unique_same_directory_temporary_files": true,
+    "serialization": "Original pilot.write_json JSON options, UTF-8 and native newline behavior",
+    "fallback_delete_or_inplace_overwrite": false,
+    "training_or_numerical_change": false
+  },
+  "filesystem_preflight": {
+    "status": "passed",
+    "probe_writes": 2,
+    "retries": 0,
+    "scientific_files_touched": false,
+    "exact_serialization": true
+  },
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "scripts.resume_ssc_suite",
+    "--device",
+    "cuda:0",
+    "--output-root",
+    "results/experiments/adaptation_ssc_suite_v2"
+  ],
+  "elapsed_seconds": 3484.844000000012,
+  "json_writes": 200,
+  "retry_events": []
+}

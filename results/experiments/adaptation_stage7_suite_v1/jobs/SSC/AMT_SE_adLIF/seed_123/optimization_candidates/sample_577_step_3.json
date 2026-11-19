@@ -1,0 +1,211 @@
+{
+  "identity": {
+    "manifest_sha256": "bb840aac10e0f19c0800aab87e9518cf115dbeb56473aa26e302356937f33d16",
+    "sample_id": 577,
+    "iteration": 3,
+    "current_sha256": "804fe34621f241d12c4d34ab7ca7014901a72b662ae3e1ff20d6dbf62db47c05",
+    "current_score_sha256": "2518d31cdf8ee26632ce45eee053f4bc11b398910a31d6f7e9846d7f1d333726"
+  },
+  "value": {
+    "score": {
+      "loss": 0.17261169850826263,
+      "predictions": [
+        1
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "accepted": false,
+    "moves": 104,
+    "allocation": [
+      {
+        "channel": 0,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 3,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 14,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 29,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 32,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 33,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 35,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 38,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 39,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 41,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 42,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 44,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 45,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 46,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 47,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 48,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 49,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 50,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 51,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 53,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 54,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 55,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 56,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 58,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 59,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 60,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 66,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 67,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 69,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 78,
+        "sign": 1,
+        "moves": 5
+      },
+      {
+        "channel": 79,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 98,
+        "sign": 1,
+        "moves": 16
+      },
+      {
+        "channel": 99,
+        "sign": 1,
+        "moves": 12
+      },
+      {
+        "channel": 100,
+        "sign": 1,
+        "moves": 6
+      },
+      {
+        "channel": 101,
+        "sign": 1,
+        "moves": 3
+      }
+    ],
+    "status": "rejected_no_measured_ce_increase",
+    "previous_loss": 4.512507438659668,
+    "acceptance_bound": 6.512507438659668e-05,
+    "autograd_forward_check": {
+      "prediction_matches": true,
+      "loss_difference": 0.0,
+      "loss_bound": 6.512507438659668e-05,
+      "passed": true
+    }
+  },
+  "value_sha256": "62f38db8ff3b58a6ab9b7c79e091baa6f45e94ea201c34067eaa4a6e6c06c9fd",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/AMT_SE_adLIF/seed_123/optimization_candidates/sample_577_step_3.npz",
+  "artifact_sha256": "58cf4ef24a45b9bfc4b215b868050cc7163b81411e26463a577b1982efd94fa5"
+}

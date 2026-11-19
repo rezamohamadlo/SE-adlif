@@ -1,0 +1,106 @@
+{
+  "identity": {
+    "manifest_sha256": "bb840aac10e0f19c0800aab87e9518cf115dbeb56473aa26e302356937f33d16",
+    "sample_id": 296,
+    "iteration": 1,
+    "current_sha256": "cc42a056f77b32ec1d81bba62c82276775cb9a75acd9b4d843fcb79e5ccf3baf",
+    "current_score_sha256": "bd4d86e267d17f06e7c52df98bdcc1df8cb96a05cb0896207e4c3d36877aa4bf"
+  },
+  "value": {
+    "score": {
+      "loss": 1.2310476303100586,
+      "predictions": [
+        11
+      ],
+      "valid_steps": 1,
+      "correct_steps": 0,
+      "accuracy": 0.0
+    },
+    "accepted": false,
+    "moves": 130,
+    "allocation": [
+      {
+        "channel": 24,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 27,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 28,
+        "sign": 1,
+        "moves": 14
+      },
+      {
+        "channel": 29,
+        "sign": 1,
+        "moves": 11
+      },
+      {
+        "channel": 30,
+        "sign": 1,
+        "moves": 14
+      },
+      {
+        "channel": 31,
+        "sign": 1,
+        "moves": 20
+      },
+      {
+        "channel": 32,
+        "sign": 1,
+        "moves": 12
+      },
+      {
+        "channel": 33,
+        "sign": 1,
+        "moves": 15
+      },
+      {
+        "channel": 34,
+        "sign": 1,
+        "moves": 12
+      },
+      {
+        "channel": 35,
+        "sign": 1,
+        "moves": 9
+      },
+      {
+        "channel": 36,
+        "sign": 1,
+        "moves": 12
+      },
+      {
+        "channel": 37,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 38,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 40,
+        "sign": 1,
+        "moves": 1
+      }
+    ],
+    "status": "rejected_no_measured_ce_increase",
+    "previous_loss": 3.8486855030059814,
+    "acceptance_bound": 5.8486855030059825e-05,
+    "autograd_forward_check": {
+      "prediction_matches": true,
+      "loss_difference": 4.76837158203125e-07,
+      "loss_bound": 5.8486855030059825e-05,
+      "passed": true
+    }
+  },
+  "value_sha256": "42bcc221538844197281502101107e03a1b85e8165b25df152409a8c65805d56",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/AMT_SE_adLIF/seed_123/optimization_candidates/sample_296_step_1.npz",
+  "artifact_sha256": "a897c254a9bfbd88e3d620b34503e5582978f713e2212154d447600850c5e6c4"
+}

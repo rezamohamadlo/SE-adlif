@@ -1,0 +1,527 @@
+{
+  "report_version": "adaptation_ssc_full_validation_v1",
+  "scope": "ssc_full_validation",
+  "ordinary_inference": true,
+  "test_time_augmentation": false,
+  "final_test_evidence": false,
+  "architecture_selection": false,
+  "grouping": [
+    "seed",
+    "condition",
+    "replicate"
+  ],
+  "benefit_definition": "parent_loss - variant_loss; positive favors variant",
+  "accuracy_difference_definition": "100 * (variant_accuracy - parent_accuracy), percentage points",
+  "accuracy_units": "fraction",
+  "n_unique_validation_samples": 9981,
+  "n_paired_records": 89829,
+  "groups": [
+    {
+      "seed": 123,
+      "condition": "clean",
+      "replicate": 0,
+      "n_validation_samples": 9981,
+      "parent_mean_loss": 0.6404169371755027,
+      "variant_mean_loss": 0.6247097294329272,
+      "mean_loss_benefit": 0.015707207742575502,
+      "parent_accuracy": 0.8199579200480914,
+      "variant_accuracy": 0.8194569682396553,
+      "accuracy_difference_pp": -0.05009518084361231,
+      "benefit_change_from_clean": 0.0
+    },
+    {
+      "seed": 123,
+      "condition": "time_scale_0.9",
+      "replicate": 0,
+      "n_validation_samples": 9981,
+      "parent_mean_loss": 0.7047000805856011,
+      "variant_mean_loss": 0.6829170600332358,
+      "mean_loss_benefit": 0.02178302055236525,
+      "parent_accuracy": 0.8044284139865745,
+      "variant_accuracy": 0.8057308886885082,
+      "accuracy_difference_pp": 0.13024747019336758,
+      "benefit_change_from_clean": 0.006075812809789749
+    },
+    {
+      "seed": 123,
+      "condition": "time_scale_1.1",
+      "replicate": 0,
+      "n_validation_samples": 9981,
+      "parent_mean_loss": 0.6792917715473146,
+      "variant_mean_loss": 0.6639573654889213,
+      "mean_loss_benefit": 0.015334406058393313,
+      "parent_accuracy": 0.8033263200080152,
+      "variant_accuracy": 0.8060314597735698,
+      "accuracy_difference_pp": 0.2705139765554643,
+      "benefit_change_from_clean": -0.00037280168418218906
+    },
+    {
+      "seed": 42,
+      "condition": "clean",
+      "replicate": 0,
+      "n_validation_samples": 9981,
+      "parent_mean_loss": 0.6120638934624943,
+      "variant_mean_loss": 0.6466663985240095,
+      "mean_loss_benefit": -0.03460250506151519,
+      "parent_accuracy": 0.8199579200480914,
+      "variant_accuracy": 0.8224626790902715,
+      "accuracy_difference_pp": 0.25047590421800603,
+      "benefit_change_from_clean": 0.0
+    },
+    {
+      "seed": 42,
+      "condition": "time_scale_0.9",
+      "replicate": 0,
+      "n_validation_samples": 9981,
+      "parent_mean_loss": 0.6781486887942627,
+      "variant_mean_loss": 0.7158430872571604,
+      "mean_loss_benefit": -0.03769439846289768,
+      "parent_accuracy": 0.803226129646328,
+      "variant_accuracy": 0.806632601943693,
+      "accuracy_difference_pp": 0.3406472297365015,
+      "benefit_change_from_clean": -0.003091893401382495
+    },
+    {
+      "seed": 42,
+      "condition": "time_scale_1.1",
+      "replicate": 0,
+      "n_validation_samples": 9981,
+      "parent_mean_loss": 0.6655612683204386,
+      "variant_mean_loss": 0.6881067710868961,
+      "mean_loss_benefit": -0.022545502766457504,
+      "parent_accuracy": 0.8002204187957118,
+      "variant_accuracy": 0.802224226029456,
+      "accuracy_difference_pp": 0.20038072337441593,
+      "benefit_change_from_clean": 0.012057002295057684
+    },
+    {
+      "seed": 456,
+      "condition": "clean",
+      "replicate": 0,
+      "n_validation_samples": 9981,
+      "parent_mean_loss": 0.6124231022324964,
+      "variant_mean_loss": 0.6047844541662755,
+      "mean_loss_benefit": 0.007638648066220943,
+      "parent_accuracy": 0.82466686704739,
+      "variant_accuracy": 0.8194569682396553,
+      "accuracy_difference_pp": -0.5209898807734703,
+      "benefit_change_from_clean": 0.0
+    },
+    {
+      "seed": 456,
+      "condition": "time_scale_0.9",
+      "replicate": 0,
+      "n_validation_samples": 9981,
+      "parent_mean_loss": 0.696731717693671,
+      "variant_mean_loss": 0.6699859374658143,
+      "mean_loss_benefit": 0.026745780227856786,
+      "parent_accuracy": 0.8009217513275223,
+      "variant_accuracy": 0.8003206091573991,
+      "accuracy_difference_pp": -0.06011421701231923,
+      "benefit_change_from_clean": 0.019107132161635842
+    },
+    {
+      "seed": 456,
+      "condition": "time_scale_1.1",
+      "replicate": 0,
+      "n_validation_samples": 9981,
+      "parent_mean_loss": 0.6453325182785636,
+      "variant_mean_loss": 0.6669980704891755,
+      "mean_loss_benefit": -0.021665552210611838,
+      "parent_accuracy": 0.8079350766456267,
+      "variant_accuracy": 0.7992185151788398,
+      "accuracy_difference_pp": -0.8716561466786898,
+      "benefit_change_from_clean": -0.02930420027683278
+    }
+  ],
+  "across_seed_aggregates": [
+    {
+      "condition": "clean",
+      "replicate": 0,
+      "training_seeds": [
+        123,
+        42,
+        456
+      ],
+      "expected_training_seeds": [
+        123,
+        42,
+        456
+      ],
+      "missing_training_seeds": [],
+      "complete_training_seed_cohort": true,
+      "n_training_seeds": 3,
+      "metrics": {
+        "parent_mean_loss": {
+          "mean": 0.6216346442901645,
+          "sample_sd": 0.016266934322670706
+        },
+        "variant_mean_loss": {
+          "mean": 0.6253868607077374,
+          "sample_sd": 0.02094918126964817
+        },
+        "mean_loss_benefit": {
+          "mean": -0.0037522164175729142,
+          "sample_sd": 0.0270200045498449
+        },
+        "parent_accuracy": {
+          "mean": 0.8215275690478577,
+          "sample_sd": 0.0027187118176447153
+        },
+        "variant_accuracy": {
+          "mean": 0.8204588718565273,
+          "sample_sd": 0.0017353479687094325
+        },
+        "accuracy_difference_pp": {
+          "mean": -0.10686971913302552,
+          "sample_sd": 0.3888539256605374
+        }
+      }
+    },
+    {
+      "condition": "time_scale_0.9",
+      "replicate": 0,
+      "training_seeds": [
+        123,
+        42,
+        456
+      ],
+      "expected_training_seeds": [
+        123,
+        42,
+        456
+      ],
+      "missing_training_seeds": [],
+      "complete_training_seed_cohort": true,
+      "n_training_seeds": 3,
+      "metrics": {
+        "parent_mean_loss": {
+          "mean": 0.6931934956911783,
+          "sample_sd": 0.013624733491649681
+        },
+        "variant_mean_loss": {
+          "mean": 0.6895820282520702,
+          "sample_sd": 0.02364393997972933
+        },
+        "mean_loss_benefit": {
+          "mean": 0.003611467439108118,
+          "sample_sd": 0.035857888453379894
+        },
+        "parent_accuracy": {
+          "mean": 0.8028587649868082,
+          "sample_sd": 0.001781961937274697
+        },
+        "variant_accuracy": {
+          "mean": 0.8042280332632,
+          "sample_sd": 0.0034138312869252947
+        },
+        "accuracy_difference_pp": {
+          "mean": 0.1369268276391833,
+          "sample_sd": 0.2004641979555669
+        }
+      }
+    },
+    {
+      "condition": "time_scale_1.1",
+      "replicate": 0,
+      "training_seeds": [
+        123,
+        42,
+        456
+      ],
+      "expected_training_seeds": [
+        123,
+        42,
+        456
+      ],
+      "missing_training_seeds": [],
+      "complete_training_seed_cohort": true,
+      "n_training_seeds": 3,
+      "metrics": {
+        "parent_mean_loss": {
+          "mean": 0.6633951860487722,
+          "sample_sd": 0.017082934611726202
+        },
+        "variant_mean_loss": {
+          "mean": 0.6730207356883309,
+          "sample_sd": 0.013153053628709705
+        },
+        "mean_loss_benefit": {
+          "mean": -0.009625549639558676,
+          "sample_sd": 0.021620432918375565
+        },
+        "parent_accuracy": {
+          "mean": 0.8038272718164512,
+          "sample_sd": 0.003881649259154517
+        },
+        "variant_accuracy": {
+          "mean": 0.8024914003272885,
+          "sample_sd": 0.0034143213222809043
+        },
+        "accuracy_difference_pp": {
+          "mean": -0.13358714891626988,
+          "sample_sd": 0.6401476801441653
+        }
+      }
+    }
+  ],
+  "aggregate_scope": "equal-weight per-training-seed means within each condition/replicate; sample SD (ddof=1), undefined for one seed; SD is not a confidence interval; missing members of the reported seed cohort are explicit",
+  "feature_associations": [
+    {
+      "seed": 123,
+      "condition": "clean",
+      "feature": "mean_rate_hz",
+      "n_finite_pairs": 9981,
+      "pearson_r": -0.010045015569846223,
+      "undefined_reason": null
+    },
+    {
+      "seed": 123,
+      "condition": "clean",
+      "feature": "fast_slow_contrast",
+      "n_finite_pairs": 9981,
+      "pearson_r": 0.011972353924282416,
+      "undefined_reason": null
+    },
+    {
+      "seed": 123,
+      "condition": "clean",
+      "feature": "autocorr_tau_ms",
+      "n_finite_pairs": 9979,
+      "pearson_r": -0.014750039817602093,
+      "undefined_reason": null
+    },
+    {
+      "seed": 123,
+      "condition": "clean",
+      "feature": "active_channel_fraction",
+      "n_finite_pairs": 9981,
+      "pearson_r": -0.001402455672577339,
+      "undefined_reason": null
+    },
+    {
+      "seed": 123,
+      "condition": "clean",
+      "feature": "duration_ms",
+      "n_finite_pairs": 9981,
+      "pearson_r": -0.01799187449216522,
+      "undefined_reason": null
+    },
+    {
+      "seed": 42,
+      "condition": "clean",
+      "feature": "mean_rate_hz",
+      "n_finite_pairs": 9981,
+      "pearson_r": -0.0014615948315499362,
+      "undefined_reason": null
+    },
+    {
+      "seed": 42,
+      "condition": "clean",
+      "feature": "fast_slow_contrast",
+      "n_finite_pairs": 9981,
+      "pearson_r": -0.002739777927570734,
+      "undefined_reason": null
+    },
+    {
+      "seed": 42,
+      "condition": "clean",
+      "feature": "autocorr_tau_ms",
+      "n_finite_pairs": 9979,
+      "pearson_r": -0.023826631428952496,
+      "undefined_reason": null
+    },
+    {
+      "seed": 42,
+      "condition": "clean",
+      "feature": "active_channel_fraction",
+      "n_finite_pairs": 9981,
+      "pearson_r": -0.012097087315770728,
+      "undefined_reason": null
+    },
+    {
+      "seed": 42,
+      "condition": "clean",
+      "feature": "duration_ms",
+      "n_finite_pairs": 9981,
+      "pearson_r": -0.02345465251017329,
+      "undefined_reason": null
+    },
+    {
+      "seed": 456,
+      "condition": "clean",
+      "feature": "mean_rate_hz",
+      "n_finite_pairs": 9981,
+      "pearson_r": -0.03150738745461215,
+      "undefined_reason": null
+    },
+    {
+      "seed": 456,
+      "condition": "clean",
+      "feature": "fast_slow_contrast",
+      "n_finite_pairs": 9981,
+      "pearson_r": 0.022735080049113576,
+      "undefined_reason": null
+    },
+    {
+      "seed": 456,
+      "condition": "clean",
+      "feature": "autocorr_tau_ms",
+      "n_finite_pairs": 9979,
+      "pearson_r": -0.013882635617066656,
+      "undefined_reason": null
+    },
+    {
+      "seed": 456,
+      "condition": "clean",
+      "feature": "active_channel_fraction",
+      "n_finite_pairs": 9981,
+      "pearson_r": -0.010514161315869366,
+      "undefined_reason": null
+    },
+    {
+      "seed": 456,
+      "condition": "clean",
+      "feature": "duration_ms",
+      "n_finite_pairs": 9981,
+      "pearson_r": -0.02557906139234128,
+      "undefined_reason": null
+    }
+  ],
+  "association_scope": "descriptive Pearson correlation on finite clean-input pairs, separately per seed; no p-values",
+  "metadata": {
+    "analyses": [
+      "clean",
+      "time_scaling",
+      "spike_deletion"
+    ],
+    "seeds": [
+      42,
+      123,
+      456
+    ],
+    "executed_seeds": [
+      42,
+      123,
+      456
+    ],
+    "samples": 9981,
+    "full_clean_anchor_samples": 9981,
+    "parent": "MT_SE_adLIF",
+    "variant": "AMT_SE_adLIF",
+    "scope": "ssc_full_validation",
+    "selection": "all official validation records, original file order and class frequencies",
+    "split": "official_validation",
+    "training": false,
+    "official_test_opened": false,
+    "paper_baseline_version": "paper_classification_v1",
+    "paper_baseline_dataset": "SSC",
+    "loss_agg": "mean_membrane_potentials",
+    "evaluation_protocol": "ssc_mean_loss_v1",
+    "analysis": "time_scaling"
+  },
+  "analysis": "time_scaling",
+  "within_seed_replicate_means": [
+    {
+      "condition": "clean",
+      "seed": 42,
+      "n_replicates": 1,
+      "benefit_change": 0.0,
+      "accuracy_gap_pp": 0.25047590421800603
+    },
+    {
+      "condition": "clean",
+      "seed": 123,
+      "n_replicates": 1,
+      "benefit_change": 0.0,
+      "accuracy_gap_pp": -0.05009518084361231
+    },
+    {
+      "condition": "clean",
+      "seed": 456,
+      "n_replicates": 1,
+      "benefit_change": 0.0,
+      "accuracy_gap_pp": -0.5209898807734703
+    },
+    {
+      "condition": "time_scale_0.9",
+      "seed": 42,
+      "n_replicates": 1,
+      "benefit_change": -0.003091893401382495,
+      "accuracy_gap_pp": 0.3406472297365015
+    },
+    {
+      "condition": "time_scale_0.9",
+      "seed": 123,
+      "n_replicates": 1,
+      "benefit_change": 0.006075812809789749,
+      "accuracy_gap_pp": 0.13024747019336758
+    },
+    {
+      "condition": "time_scale_0.9",
+      "seed": 456,
+      "n_replicates": 1,
+      "benefit_change": 0.019107132161635842,
+      "accuracy_gap_pp": -0.06011421701231923
+    },
+    {
+      "condition": "time_scale_1.1",
+      "seed": 42,
+      "n_replicates": 1,
+      "benefit_change": 0.012057002295057684,
+      "accuracy_gap_pp": 0.20038072337441593
+    },
+    {
+      "condition": "time_scale_1.1",
+      "seed": 123,
+      "n_replicates": 1,
+      "benefit_change": -0.00037280168418218906,
+      "accuracy_gap_pp": 0.2705139765554643
+    },
+    {
+      "condition": "time_scale_1.1",
+      "seed": 456,
+      "n_replicates": 1,
+      "benefit_change": -0.02930420027683278,
+      "accuracy_gap_pp": -0.8716561466786898
+    }
+  ],
+  "replicate_averaged_across_seed_effects": [
+    {
+      "condition": "clean",
+      "n_training_seeds": 3,
+      "benefit_change": {
+        "mean": 0.0,
+        "sample_sd": 0.0
+      },
+      "accuracy_gap_pp": {
+        "mean": -0.10686971913302552,
+        "sample_sd": 0.3888539256605374
+      }
+    },
+    {
+      "condition": "time_scale_0.9",
+      "n_training_seeds": 3,
+      "benefit_change": {
+        "mean": 0.007363683856681032,
+        "sample_sd": 0.01115540868197804
+      },
+      "accuracy_gap_pp": {
+        "mean": 0.1369268276391833,
+        "sample_sd": 0.2004641979555669
+      }
+    },
+    {
+      "condition": "time_scale_1.1",
+      "n_training_seeds": 3,
+      "benefit_change": {
+        "mean": -0.005873333221985762,
+        "sample_sd": 0.02122213832173889
+      },
+      "accuracy_gap_pp": {
+        "mean": -0.13358714891626988,
+        "sample_sd": 0.6401476801441653
+      }
+    }
+  ]
+}

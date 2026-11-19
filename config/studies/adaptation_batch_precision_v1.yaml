@@ -1,0 +1,22 @@
+# Diagnostic follow-up, never a replacement for frozen validation/pilot evidence.
+version: adaptation_batch_precision_v1
+inherits: config/paper_baseline.yaml
+dataset_section: SHD
+report_label: SHD*
+output_root: results/experiments/adaptation_batch_precision_v1
+pilot_root: results/experiments/adaptation_gradient_pilot_v1
+pilot_manifest_sha256: 9f9841a074c80128e5100a303459e884396f1c539c17cb7c3acd9623f5a09e91
+pilot_complete_sha256: 4d1ef14c0abe18a0d9d835bbe7a39d55fd82409a4d86c91ab5988d7a2dabff69
+models: [MT_SE_adLIF, AMT_SE_adLIF]
+seeds: [42]
+samples: 40
+focus_sample_id: 3896
+precision_modes: [source_high, highest_matmul, highest_matmul_cudnn_disabled]
+layouts: [original_batch, singleton_natural, singleton_original_padding]
+focus_layouts: [original_repeat, singleton_repeat, replicated_original_padding, reversed_original]
+reproduction_loss_tolerance: 1.0e-6
+training: false
+official_test_access: false
+backward: false
+input_optimization: false
+stage7_complete: false

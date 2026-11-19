@@ -1,0 +1,187 @@
+{
+  "identity": {
+    "manifest_sha256": "0d7feabf97012ace9a6edb34467f467ba8224eda08e6b5112e6fde39ce0ff0f0",
+    "sample_id": 8070,
+    "inputs": [
+      {
+        "condition": "mt_abs_gradient_deletion",
+        "replicate": 0,
+        "budget": 70,
+        "seed": 13528134063430126843,
+        "input_sha256": "2bef23a9057be40a24e851da62a1e5b04ceca779c9f4f478b4f5c1d175834440",
+        "delta_sha256": "f0585a8f114c047ed0c528d7969c44364c9cb6d92f20724bc2077227ff4695fe",
+        "removed_burn_in_events": 0,
+        "domain": "nonnegative integer counts, original length"
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 0,
+        "budget": 70,
+        "seed": 13717028005541368549,
+        "input_sha256": "823e2aa5be900aaecef5c5240e67aa8773f8e28c4f8bd47bc396b85ca729776b",
+        "delta_sha256": "b2d30ff07e2cc96e3628c027ee4ce61ca6bf8286a21f6978a6226f2c777a57a1",
+        "removed_burn_in_events": 0,
+        "domain": "nonnegative integer counts, original length"
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 1,
+        "budget": 70,
+        "seed": 413029061788635278,
+        "input_sha256": "6cec697d361722a50143f15d4a85517a1bb1dd7be57a5e441f25b3042c52f4cd",
+        "delta_sha256": "cfe7163ad716dc463248be08881b06fb4b5e159af16251e3785e390cbc7631e1",
+        "removed_burn_in_events": 1,
+        "domain": "nonnegative integer counts, original length"
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 2,
+        "budget": 70,
+        "seed": 8406644222122104944,
+        "input_sha256": "6aee98169dd475eb732f9420e1c08c2ce0a92c1e9f523e9ebc7e72ee1789608d",
+        "delta_sha256": "3b15ca9c87bb823c078f69559b40c26108c269186c46e15b39c0600e89e7ff6b",
+        "removed_burn_in_events": 0,
+        "domain": "nonnegative integer counts, original length"
+      }
+    ]
+  },
+  "value": {
+    "sample_id": 8070,
+    "target": 2,
+    "speaker": 1,
+    "guided_status": "defined",
+    "conditions": [
+      {
+        "condition": "clean",
+        "replicate": 0,
+        "budget": 0,
+        "input_sha256": "d968f3b9a53a6ba0200c45d73b311aeb9f8f470301806fd3df7463ddad0b5ab5",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 2,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 0.0
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 2,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 0.0
+          }
+        ]
+      },
+      {
+        "condition": "mt_abs_gradient_deletion",
+        "replicate": 0,
+        "budget": 70,
+        "input_sha256": "2bef23a9057be40a24e851da62a1e5b04ceca779c9f4f478b4f5c1d175834440",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 2,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 9.64333648504278e-15
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": 1.1920928244535389e-07,
+            "prediction": 2,
+            "correct": 1,
+            "true_probability": 0.9999998807907104,
+            "actual_loss_change": 1.1920928244535389e-07,
+            "surrogate_linear_prediction": 9.308705932811745e-12
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 0,
+        "budget": 70,
+        "input_sha256": "823e2aa5be900aaecef5c5240e67aa8773f8e28c4f8bd47bc396b85ca729776b",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 2,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -4.5333728232779656e-15
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 2,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -2.561804506254358e-12
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 1,
+        "budget": 70,
+        "input_sha256": "6cec697d361722a50143f15d4a85517a1bb1dd7be57a5e441f25b3042c52f4cd",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 2,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 4.322483807704396e-15
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 2,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -7.325160968654721e-13
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 2,
+        "budget": 70,
+        "input_sha256": "6aee98169dd475eb732f9420e1c08c2ce0a92c1e9f523e9ebc7e72ee1789608d",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 2,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -1.3158136042681892e-16
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 2,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 2.288045499051171e-12
+          }
+        ]
+      }
+    ]
+  },
+  "value_sha256": "7ededd3b24b4704350edd8b5f15c48fc17dee0add5ea00378559304062006268"
+}

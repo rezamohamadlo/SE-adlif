@@ -1,0 +1,80 @@
+# @package _global_
+# One source of paper-derived comparison settings. Values are metadata until
+# an experiment explicitly references them; existing controlled_v2 is unchanged.
+paper_baseline:
+  version: paper_classification_v1
+  source:
+    doi: 10.1038/s41467-025-60878-z
+    document: reference_paper.pdf
+    locations: "Table 7 (page 35); training/preprocessing methods (pages 28-29)"
+  common:
+    lr_optimizer: Adam
+    adam_betas: [0.9, 0.999]
+    adam_eps: 1.0e-8
+    dropout: 0.15
+    gradient_clip_val: 1.5
+    alpha: 5.0
+    dt: 1.0
+    tracking_metric: val_acc
+    tracking_mode: max
+  # Local reproduction choices, not verified original paper settings.
+  reproduction_policy:
+    training_seeds: [42, 123, 456]
+    split_seed: 42
+    num_workers: 0
+    early_stopping: false
+    scheduler: plateau
+    patience: 9999
+    factor: 0.9
+    cache_namespace: controlled_v2
+  datasets:
+    SHD:
+      report_label: SHD*
+      lr: 0.01
+      batch_size: 256
+      n_epochs: 300
+      validate_on: 0.2
+      spatial_factor: 0.2
+      time_factor: 0.001
+      window_size: 4
+      pad_to_min_size: 250
+      ignore_first_timesteps: 10
+      reference_architecture:
+        layers: 2
+        neurons_per_layer: 360
+        q: 120
+        c: 0.4
+        tau_u_range: [5, 25]
+        tau_w_range: [60, 300]
+        output_tau: 15
+    SSC:
+      lr: 0.006
+      batch_size: 256
+      n_epochs: 40
+      validation: official
+      spatial_factor: 0.2
+      time_factor: 0.001
+      window_size: 4
+      pad_to_min_size: 300
+      ignore_first_timesteps: 10
+      reference_architecture:
+        layers: 2
+        neurons_per_layer: 720
+        q: 120
+        c: 0.4
+        tau_u_range: [5, 25]
+        tau_w_range: [60, 300]
+        output_tau: 15
+    ECG:
+      lr: 0.01
+      batch_size: 64
+      n_epochs: 400
+      valid_fraction: 0.05
+      reference_architecture:
+        layers: 2
+        neurons_per_layer: 36
+        q: 120
+        c: 0.2
+        tau_u_range: [5, 25]
+        tau_w_range: [60, 300]
+        output_tau: 3

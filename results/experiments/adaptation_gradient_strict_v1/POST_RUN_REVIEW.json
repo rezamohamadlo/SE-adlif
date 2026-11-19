@@ -1,0 +1,177 @@
+{
+  "reviewed_utc": "2026-11-16T11:40:22.706371+00:00",
+  "status": "verified_stability_passed_for_registered_pilot",
+  "verification_mode": "read_only_saved_artifacts_no_tests_forward_backward_or_new_experiment_analysis",
+  "manifest_sha256": "18ac389aef07e88e4769522a2f7bb391fabe099062f1d68619e6891626a9f16d",
+  "registered_outputs_verified": 456,
+  "source_hashes_verified": 64,
+  "checkpoint_file_hashes_verified": 2,
+  "user_contract_tests_passed": 17,
+  "full_validation_anchors": [
+    {
+      "model": "MT_SE_adLIF",
+      "status": "passed",
+      "samples": 1631,
+      "prediction_mismatches": 0,
+      "accuracy_difference": 0.0,
+      "loss_difference": 4.689178471227937e-09,
+      "maximum_absolute_row_loss_drift": 1.33514404296875e-05,
+      "reference_mode": "highest_matmul",
+      "role": "strict diagnostic reference; not source_high training-validation anchor"
+    },
+    {
+      "model": "AMT_SE_adLIF",
+      "status": "passed",
+      "samples": 1631,
+      "prediction_mismatches": 0,
+      "accuracy_difference": 0.0,
+      "loss_difference": 7.009472878413431e-09,
+      "maximum_absolute_row_loss_drift": 1.1444091796875e-05,
+      "reference_mode": "highest_matmul",
+      "role": "strict diagnostic reference; not source_high training-validation anchor"
+    }
+  ],
+  "gradient_arrays_verified": 164,
+  "finite_nonzero_physical_gradients": 164,
+  "required_repeat_padding_checks_passed": 86,
+  "descriptive_cross_precision_comparisons": 80,
+  "comparison_json_csv_rows_verified": 166,
+  "same_mode_autograd_score_checks_passed": 164,
+  "strict_reference_score_checks_passed": 164,
+  "maximum_autograd_forward_absolute_ce_drift": 2.3245811462402344e-06,
+  "maximum_strict_reference_absolute_ce_drift": 2.2649765014648438e-06,
+  "stability_group_metrics": [
+    {
+      "kind": "natural_repeat",
+      "model": "MT_SE_adLIF",
+      "records": 40,
+      "failed": 0,
+      "maximum_symmetric_relative_l2": 7.578444039822423e-06,
+      "minimum_cosine": 0.9999999999937607,
+      "maximum_absolute_score_loss_drift": 1.1920928955078125e-06
+    },
+    {
+      "kind": "natural_repeat",
+      "model": "AMT_SE_adLIF",
+      "records": 40,
+      "failed": 0,
+      "maximum_symmetric_relative_l2": 1.1274560624368434e-05,
+      "minimum_cosine": 0.9999999999957843,
+      "maximum_absolute_score_loss_drift": 0.0
+    },
+    {
+      "kind": "padding_repeat",
+      "model": "MT_SE_adLIF",
+      "records": 1,
+      "failed": 0,
+      "maximum_symmetric_relative_l2": 1.0114838343266297e-06,
+      "minimum_cosine": 0.9999999999999868,
+      "maximum_absolute_score_loss_drift": 1.0728836059570312e-06
+    },
+    {
+      "kind": "padding_repeat",
+      "model": "AMT_SE_adLIF",
+      "records": 1,
+      "failed": 0,
+      "maximum_symmetric_relative_l2": 8.680462276765576e-07,
+      "minimum_cosine": 0.9999999999999291,
+      "maximum_absolute_score_loss_drift": 0.0
+    },
+    {
+      "kind": "padding_layout",
+      "model": "MT_SE_adLIF",
+      "records": 2,
+      "failed": 0,
+      "maximum_symmetric_relative_l2": 1.4337174608171119e-06,
+      "minimum_cosine": 0.9999999999999872,
+      "maximum_absolute_score_loss_drift": 1.1920928955078125e-06
+    },
+    {
+      "kind": "padding_layout",
+      "model": "AMT_SE_adLIF",
+      "records": 2,
+      "failed": 0,
+      "maximum_symmetric_relative_l2": 2.5086761670347693e-06,
+      "minimum_cosine": 0.9999999999993133,
+      "maximum_absolute_score_loss_drift": 0.0
+    },
+    {
+      "kind": "cross_precision_legacy",
+      "model": "MT_SE_adLIF",
+      "records": 40,
+      "failed": 0,
+      "maximum_symmetric_relative_l2": 7.71502969645581e-06,
+      "minimum_cosine": 0.9999999999991739,
+      "maximum_absolute_score_loss_drift": 2.2649765014648438e-06
+    },
+    {
+      "kind": "cross_precision_legacy",
+      "model": "AMT_SE_adLIF",
+      "records": 40,
+      "failed": 0,
+      "maximum_symmetric_relative_l2": 1.4896801725656974e-05,
+      "minimum_cosine": 0.9999999999969644,
+      "maximum_absolute_score_loss_drift": 0.0
+    }
+  ],
+  "focus_natural_repeat0": [
+    {
+      "model": "MT_SE_adLIF",
+      "sample_id": 3896,
+      "physical_abs_gradient_sum": 746.7078628792733,
+      "physical_gradient_l2": 7.075481165694409,
+      "event_cell_abs_gradient_sum": 126.32309302361682,
+      "clean": {
+        "loss": 0.8729861974716187,
+        "prediction": 9,
+        "correct": 0,
+        "true_probability": 0.41770240664482117
+      }
+    },
+    {
+      "model": "AMT_SE_adLIF",
+      "sample_id": 3896,
+      "physical_abs_gradient_sum": 0.012774891473084748,
+      "physical_gradient_l2": 0.00013225886094170525,
+      "event_cell_abs_gradient_sum": 0.002029646258623785,
+      "clean": {
+        "loss": 9.536697689327411e-06,
+        "prediction": 1,
+        "correct": 1,
+        "true_probability": 0.9999904632568359
+      }
+    }
+  ],
+  "frozen_state_checks": [
+    {
+      "model": "MT_SE_adLIF",
+      "status": "unchanged",
+      "model_state_sha256": "4c3660e8235568b61f4099f74825d8de3bf44e563331153b2740ccfa6b6b68f3",
+      "all_parameter_gradients_none": true
+    },
+    {
+      "model": "AMT_SE_adLIF",
+      "status": "unchanged",
+      "model_state_sha256": "fa542446861c9dc5c2185311b6b73762e9509d4c4a41bf113475f8cd2488a2ee",
+      "all_parameter_gradients_none": true
+    }
+  ],
+  "stability_criteria_passed": true,
+  "original_source_high_evidence_replaced": false,
+  "training": false,
+  "event_deletion": false,
+  "input_optimization": false,
+  "stage6_scoped_complete": true,
+  "stage7_complete": false,
+  "attempt_elapsed_seconds": 216.31299999999828,
+  "timing_scope": "execute attempt excluding initial preflight; not pure inference latency",
+  "next_step": "Prepare a separate user-launched highest_matmul matched event-deletion pilot using predetermined natural repeat 0, 1% MT-guided exact event budget and three shared random controls. Keep repeat 1/padded variants as stability evidence, not independent seeds.",
+  "limitations": [
+    "Forty validation records, one model pair and one training seed; full validation applies to anchors, not gradient coverage.",
+    "Thresholds assess numerical tooling reproducibility, not causal truth or architectural superiority.",
+    "Recording 3896 remains incorrectly classified by MT and dominates raw gradient magnitude; retain it and distinguish normalized profiles.",
+    "Cross-precision comparisons use singleton layouts only and do not override the full-batch source-high prediction differences.",
+    "Gradients are SLAYER surrogate CE sensitivities; no official test, optimized inputs or new deletion evaluations occurred."
+  ],
+  "verification_documents_outside_immutable_output_ledger": true
+}

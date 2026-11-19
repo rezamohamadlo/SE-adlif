@@ -1,0 +1,15 @@
+# Four-pair validation-only ECG queue, with the training matrix precision restored.
+version: adaptation_ecg_pairs_v2
+inherits: config/paper_baseline.yaml
+dataset_section: ECG
+checkpoint_registry: config/studies/adaptation_ecg_alignment_pilot_v1.yaml
+output_root: results/experiments/adaptation_ecg_pairs_v2
+training: false
+official_test_access: false
+failed_pilot:
+  root: results/experiments/adaptation_ecg_alignment_pilot_v1
+  files:
+    CONTRACT_TESTS.txt: 9e1708adb5d694cecf548d1eab65a56467620e67be8e9e3b6199202e7f590d95
+    MANIFEST.json: ec075d49622139b6b63b056492c74b0a1352e0743b11b7d9fdf016a0e71fd035
+    PROGRESS.json: c2718455b0df47003a6f3ab0bc14a7dd3445f1808af2af77449e6ce0808c1438
+    raw/MT_SE_adLIF_seed_42_clean_rep_0.json: 4d8e306061e2b6f98f369522d628cca2919f062966b024d247c9ad97c80cdb80

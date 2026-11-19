@@ -1,0 +1,398 @@
+[
+  {
+    "model": "MT_SE_adLIF",
+    "seed": 42,
+    "selected_epoch": 398,
+    "saved_validation": {
+      "path": "results/valid/MT_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "80cb6814408fb8e1323566e86ebd7c7e3b683d85d627e7c2f4c5c557ae38685c",
+      "accuracy": 0.8624647855758667,
+      "loss": 0.372476190328598
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.3724761186228266,
+      "step_weighted_accuracy": 0.8624647706892135,
+      "record_mean_loss": 0.37247611862282665,
+      "record_mean_accuracy": 0.8624647706892133
+    },
+    "accuracy_delta": -1.4886653243451065e-08,
+    "loss_delta": -7.170577143167378e-08,
+    "status": "passed"
+  },
+  {
+    "model": "MT_SE_adLIF",
+    "seed": 123,
+    "selected_epoch": 396,
+    "saved_validation": {
+      "path": "results/valid/MT_SE_adLIF/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "1a791a7c011ddf2d2763dd29e4b451b33d2aca7bc298188d824c80f7bd22ffa7",
+      "accuracy": 0.8630796670913696,
+      "loss": 0.36984583735466003
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.3698457368063767,
+      "step_weighted_accuracy": 0.86307968229567,
+      "record_mean_loss": 0.36984573680637667,
+      "record_mean_accuracy": 0.8630796822956698
+    },
+    "accuracy_delta": 1.5204300374271895e-08,
+    "loss_delta": -1.0054828331051979e-07,
+    "status": "passed"
+  },
+  {
+    "model": "MT_SE_adLIF",
+    "seed": 456,
+    "selected_epoch": 393,
+    "saved_validation": {
+      "path": "results/valid/MT_SE_adLIF/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "0a8778c6d810c114bb29530e4ce48439e4f072658c910291fe453b9cba4475e5",
+      "accuracy": 0.8616704940795898,
+      "loss": 0.37701892852783203
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.37701887776363124,
+      "step_weighted_accuracy": 0.861670509864207,
+      "record_mean_loss": 0.3770188777636312,
+      "record_mean_accuracy": 0.8616705098642071
+    },
+    "accuracy_delta": 1.5784617168890236e-08,
+    "loss_delta": -5.0764200787423164e-08,
+    "status": "passed"
+  },
+  {
+    "model": "AMT_SE_adLIF",
+    "seed": 42,
+    "selected_epoch": 372,
+    "saved_validation": {
+      "path": "results/not_improved/AMT_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "ee2df7014c558c0ac5fcc72109b7b40f36efdfdedaeb540e64f49067f72d46cb",
+      "accuracy": 0.8637714385986328,
+      "loss": 0.3740536868572235
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.37405380394687726,
+      "step_weighted_accuracy": 0.8637714578529336,
+      "record_mean_loss": 0.37405380394687726,
+      "record_mean_accuracy": 0.8637714578529337
+    },
+    "accuracy_delta": 1.92543008203927e-08,
+    "loss_delta": 1.1708965375056835e-07,
+    "status": "passed"
+  },
+  {
+    "model": "AMT_SE_adLIF",
+    "seed": 123,
+    "selected_epoch": 394,
+    "saved_validation": {
+      "path": "results/not_improved/AMT_SE_adLIF/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "59aef4c8057a4ad9b94310110df8d724f66ad78e83a21511e61a8c524b1ee9d2",
+      "accuracy": 0.8659749031066895,
+      "loss": 0.36515891551971436
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.3651588557210873,
+      "step_weighted_accuracy": 0.8659748911094031,
+      "record_mean_loss": 0.36515885572108725,
+      "record_mean_accuracy": 0.8659748911094027
+    },
+    "accuracy_delta": -1.1997286386566941e-08,
+    "loss_delta": -5.979862705007832e-08,
+    "status": "passed"
+  },
+  {
+    "model": "AMT_SE_adLIF",
+    "seed": 456,
+    "selected_epoch": 386,
+    "saved_validation": {
+      "path": "results/not_improved/AMT_SE_adLIF/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "004894092e04bbcef3f6a9987528ff5f73afac2a2fef3aad67f5bff2ce2afa22",
+      "accuracy": 0.8672303557395935,
+      "loss": 0.3614616096019745
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.361461599609404,
+      "step_weighted_accuracy": 0.8672303356392519,
+      "record_mean_loss": 0.36146159960940394,
+      "record_mean_accuracy": 0.8672303356392518
+    },
+    "accuracy_delta": -2.0100341613371597e-08,
+    "loss_delta": -9.992570493277952e-09,
+    "status": "passed"
+  },
+  {
+    "model": "DTH_SE_adLIF",
+    "seed": 42,
+    "selected_epoch": 385,
+    "saved_validation": {
+      "path": "results/valid/DTH_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "3186ae183810ef7b3ef0b3993d8fe0fb7136bccc521605e66e65de650678e252",
+      "accuracy": 0.8586984276771545,
+      "loss": 0.38362032175064087
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.3836199276049113,
+      "step_weighted_accuracy": 0.858698437099667,
+      "record_mean_loss": 0.38361992760491126,
+      "record_mean_accuracy": 0.858698437099667
+    },
+    "accuracy_delta": 9.422512436962904e-09,
+    "loss_delta": -3.9414572955420724e-07,
+    "status": "passed"
+  },
+  {
+    "model": "DTH_SE_adLIF",
+    "seed": 123,
+    "selected_epoch": 213,
+    "saved_validation": {
+      "path": "results/valid/DTH_SE_adLIF/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "26dccc911cdfefc9e8ff731bf754ab94dd6b3525053a9f77501b602ff7acf71f",
+      "accuracy": 0.8629003167152405,
+      "loss": 0.3781505227088928
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.37815060172621906,
+      "step_weighted_accuracy": 0.8629003330771202,
+      "record_mean_loss": 0.378150601726219,
+      "record_mean_accuracy": 0.86290033307712
+    },
+    "accuracy_delta": 1.6361879739967833e-08,
+    "loss_delta": 7.901732623771807e-08,
+    "status": "passed"
+  },
+  {
+    "model": "DTH_SE_adLIF",
+    "seed": 456,
+    "selected_epoch": 341,
+    "saved_validation": {
+      "path": "results/valid/DTH_SE_adLIF/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "4dbf8a1502af3486b1c8c3e927463536fa246e9f75f30fae452bfde9aefe08d9",
+      "accuracy": 0.859236478805542,
+      "loss": 0.3816719651222229
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.3816718483968808,
+      "step_weighted_accuracy": 0.8592364847553164,
+      "record_mean_loss": 0.38167184839688073,
+      "record_mean_accuracy": 0.8592364847553163
+    },
+    "accuracy_delta": 5.949774450897394e-09,
+    "loss_delta": -1.1672534211415453e-07,
+    "status": "passed"
+  },
+  {
+    "model": "LT_DTH_SE_adLIF",
+    "seed": 42,
+    "selected_epoch": 249,
+    "saved_validation": {
+      "path": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "9df8f32760724258bdbb109f333b59eb8473c73451d283d28393373c961ea1b8",
+      "accuracy": 0.8651294112205505,
+      "loss": 0.35878127813339233
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.3587812452313539,
+      "step_weighted_accuracy": 0.8651293876505253,
+      "record_mean_loss": 0.3587812452313539,
+      "record_mean_accuracy": 0.8651293876505252
+    },
+    "accuracy_delta": -2.357002526487406e-08,
+    "loss_delta": -3.290203842709616e-08,
+    "status": "passed"
+  },
+  {
+    "model": "LT_DTH_SE_adLIF",
+    "seed": 123,
+    "selected_epoch": 324,
+    "saved_validation": {
+      "path": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "4a37673ce745fcb37bc3253b162b6aa14099f0cde9f0633ac65df4e6f536b1d4",
+      "accuracy": 0.8674865365028381,
+      "loss": 0.3580600917339325
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.35806005863543094,
+      "step_weighted_accuracy": 0.8674865488086088,
+      "record_mean_loss": 0.3580600586354309,
+      "record_mean_accuracy": 0.8674865488086089
+    },
+    "accuracy_delta": 1.2305770624720935e-08,
+    "loss_delta": -3.309850155064353e-08,
+    "status": "passed"
+  },
+  {
+    "model": "LT_DTH_SE_adLIF",
+    "seed": 456,
+    "selected_epoch": 321,
+    "saved_validation": {
+      "path": "results/not_improved/LT_DTH_SE_adLIF/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "5bea979bacd9bc27ed636aca31bc594cb7d2b04ff231e8192c7187bc9d824868",
+      "accuracy": 0.8613630533218384,
+      "loss": 0.3862798810005188
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.38627988975815,
+      "step_weighted_accuracy": 0.8613630540609787,
+      "record_mean_loss": 0.38627988975814986,
+      "record_mean_accuracy": 0.8613630540609788
+    },
+    "accuracy_delta": 7.391403045176048e-10,
+    "loss_delta": 8.757631175804192e-09,
+    "status": "passed"
+  },
+  {
+    "model": "SA_MT_SE_adLIF",
+    "seed": 42,
+    "selected_epoch": 366,
+    "saved_validation": {
+      "path": "results/experiments/sa_mt_v1/SA_MT_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "debc76652113387ba466d27614afa36f7b6a981639c026eb5598fcb4c809a4b4",
+      "accuracy": 0.8603125810623169,
+      "loss": 0.37419718503952026
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.3741971088266363,
+      "step_weighted_accuracy": 0.8603125800666154,
+      "record_mean_loss": 0.37419710882663626,
+      "record_mean_accuracy": 0.8603125800666153
+    },
+    "accuracy_delta": -9.957015212336273e-10,
+    "loss_delta": -7.621288394821235e-08,
+    "status": "passed"
+  },
+  {
+    "model": "SA_MT_SE_adLIF",
+    "seed": 123,
+    "selected_epoch": 368,
+    "saved_validation": {
+      "path": "results/experiments/sa_mt_v1/SA_MT_SE_adLIF/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "32ede5479288a828cd3a57325127e1bc59a9d7c82558f8b3a070270be71826b9",
+      "accuracy": 0.8690494298934937,
+      "loss": 0.3514096438884735
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.35140949916926123,
+      "step_weighted_accuracy": 0.8690494491416859,
+      "record_mean_loss": 0.3514094991692613,
+      "record_mean_accuracy": 0.8690494491416861
+    },
+    "accuracy_delta": 1.924819226228891e-08,
+    "loss_delta": -1.4471921228054185e-07,
+    "status": "passed"
+  },
+  {
+    "model": "SA_MT_SE_adLIF",
+    "seed": 456,
+    "selected_epoch": 310,
+    "saved_validation": {
+      "path": "results/experiments/sa_mt_v1/SA_MT_SE_adLIF/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "cedf1dfd322d616b910926dffc538fe5fc1bdf4dc1db837afe09160884104bf9",
+      "accuracy": 0.8632846474647522,
+      "loss": 0.3867645263671875
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.3867645328350653,
+      "step_weighted_accuracy": 0.8632846528311555,
+      "record_mean_loss": 0.3867645328350653,
+      "record_mean_accuracy": 0.8632846528311556
+    },
+    "accuracy_delta": 5.366403321716007e-09,
+    "loss_delta": 6.467877788907117e-09,
+    "status": "passed"
+  },
+  {
+    "model": "MT_TC_SE_adLIF",
+    "seed": 42,
+    "selected_epoch": 288,
+    "saved_validation": {
+      "path": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "2f35d7fa6d0146d95b12ad1b4bd57d573679490cde4688f60a55d9cadd9cbd41",
+      "accuracy": 0.8607737421989441,
+      "loss": 0.3909491300582886
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.3909491180231724,
+      "step_weighted_accuracy": 0.8607737637714579,
+      "record_mean_loss": 0.39094911802317234,
+      "record_mean_accuracy": 0.8607737637714579
+    },
+    "accuracy_delta": 2.157251377532532e-08,
+    "loss_delta": -1.203511618141917e-08,
+    "status": "passed"
+  },
+  {
+    "model": "MT_TC_SE_adLIF",
+    "seed": 123,
+    "selected_epoch": 392,
+    "saved_validation": {
+      "path": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "2e5b492ea0842b4277aafd5fbaff4760c03a30102a6574b77972a49bc5d9b8d0",
+      "accuracy": 0.8647194504737854,
+      "loss": 0.36661118268966675
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.3666112797293532,
+      "step_weighted_accuracy": 0.8647194465795542,
+      "record_mean_loss": 0.3666112797293532,
+      "record_mean_accuracy": 0.8647194465795541
+    },
+    "accuracy_delta": -3.894231159762285e-09,
+    "loss_delta": 9.703968645302652e-08,
+    "status": "passed"
+  },
+  {
+    "model": "MT_TC_SE_adLIF",
+    "seed": 456,
+    "selected_epoch": 379,
+    "saved_validation": {
+      "path": "results/experiments/mt_consistency_runner_v1/MT_TC_SE_adLIF/ECG/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "a564cdeec1a73b5ac93c7ecb2a8e1e397fc78b9e675a3038e1b145e28613826f",
+      "accuracy": 0.8575198650360107,
+      "loss": 0.38952794671058655
+    },
+    "measured": {
+      "records": 30,
+      "valid_steps": 39030,
+      "step_weighted_loss": 0.38952788996395804,
+      "step_weighted_accuracy": 0.8575198565206251,
+      "record_mean_loss": 0.38952788996395804,
+      "record_mean_accuracy": 0.8575198565206252
+    },
+    "accuracy_delta": -8.515385618856897e-09,
+    "loss_delta": -5.674662850729817e-08,
+    "status": "passed"
+  }
+]

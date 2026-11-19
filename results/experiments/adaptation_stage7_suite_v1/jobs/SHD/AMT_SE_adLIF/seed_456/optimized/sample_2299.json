@@ -1,0 +1,158 @@
+{
+  "identity": {
+    "manifest_sha256": "580b6a2773304fa19e3a9d33922d65a27c5b458de426599bacd81ff9185544ae",
+    "sample_id": 2299,
+    "original_sha256": "7c10f498abdade2aeb9987f30ce2447156a3ed6ecc6db2db248f3ab776c4778e"
+  },
+  "value": {
+    "sample_id": 2299,
+    "status": "improved",
+    "budget": 62,
+    "moves": 62,
+    "allocation": [
+      {
+        "channel": 1,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 16,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 23,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 30,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 31,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 34,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 37,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 38,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 45,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 51,
+        "sign": 1,
+        "moves": 2
+      },
+      {
+        "channel": 53,
+        "sign": 1,
+        "moves": 3
+      },
+      {
+        "channel": 54,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 56,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 57,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 82,
+        "sign": 1,
+        "moves": 7
+      },
+      {
+        "channel": 121,
+        "sign": 1,
+        "moves": 20
+      },
+      {
+        "channel": 132,
+        "sign": 1,
+        "moves": 7
+      },
+      {
+        "channel": 133,
+        "sign": 1,
+        "moves": 4
+      },
+      {
+        "channel": 134,
+        "sign": 1,
+        "moves": 1
+      },
+      {
+        "channel": 135,
+        "sign": 1,
+        "moves": 5
+      }
+    ],
+    "trace": [
+      {
+        "iteration": 0,
+        "status": "accepted",
+        "loss": 0.002422614488750696,
+        "previous_loss": 3.576278118089249e-07,
+        "acceptance_bound": 2.000000357627812e-05,
+        "moves": 62,
+        "candidate_sha256": "3706831166071e14899695cae0cdc231d17cadec1cc51cc878d20bbca8c35e02",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SHD/AMT_SE_adLIF/seed_456/optimization_candidates/sample_2299_step_0.npz"
+      },
+      {
+        "iteration": 1,
+        "status": "rejected_no_measured_ce_increase",
+        "loss": 0.0005783553933724761,
+        "previous_loss": 0.002422614488750696,
+        "acceptance_bound": 2.0024226144887508e-05,
+        "moves": 62,
+        "candidate_sha256": "fec0bc785fdb434952c0618207ed62e0e331007c20bdff3d44142d55d363c011",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SHD/AMT_SE_adLIF/seed_456/optimization_candidates/sample_2299_step_1.npz"
+      }
+    ],
+    "clean": {
+      "loss": 3.576278118089249e-07,
+      "predictions": [
+        15
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "optimized": {
+      "loss": 0.002422614488750696,
+      "predictions": [
+        15
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    }
+  },
+  "value_sha256": "874fa69353e809c60946572bcabc71dfeff06dfab33b2315629a4acdaf5cadce",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SHD/AMT_SE_adLIF/seed_456/optimized/sample_2299.npz",
+  "artifact_sha256": "3650bac4ffe70150a85b18c484f75f0825a540884ed573889b1ae792c36c8689"
+}

@@ -1,0 +1,25 @@
+{
+  "identity": {
+    "manifest_sha256": "0d7feabf97012ace9a6edb34467f467ba8224eda08e6b5112e6fde39ce0ff0f0",
+    "sample_id": 759,
+    "source_input_sha256": "c6894360705c88ec0f15a9256a3d44f100a6c9156fb52a835fad4d411166775a",
+    "condition": "exact_random_deletion",
+    "replicate": 1,
+    "budget": 91,
+    "seed": 1653960436351574530,
+    "parent_gradient_sha256": "7beaceebbf37c833b8f44bd53989a89021391484c4b0b5b735fb1c62a7ddbfac"
+  },
+  "value": {
+    "condition": "exact_random_deletion",
+    "replicate": 1,
+    "budget": 91,
+    "seed": 1653960436351574530,
+    "input_sha256": "29331031f213f5a2b0f18ede78e8335f3d51aabb969429aeccc7228bdbb8e2b6",
+    "delta_sha256": "b1ad4eb29e0497326f2e4c062773d38349014f32771eba441e9dae6ffadbedfe",
+    "removed_burn_in_events": 1,
+    "domain": "nonnegative integer counts, original length"
+  },
+  "value_sha256": "909b1ef44525dbdc3db246443e09d276a5f9d85c269e2eb54d3b640da95e7558",
+  "artifact": "results/experiments/adaptation_gradient_pilot_v1/shared_inputs/sample_759/exact_random_deletion/rep_1.npz",
+  "artifact_sha256": "cddf368610e270c170ca97f80426d4c504d8c740dcb5bebcd794cbeec71c3a97"
+}

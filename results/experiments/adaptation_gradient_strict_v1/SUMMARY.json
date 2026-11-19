@@ -1,0 +1,39 @@
+{
+  "status": "executed_stability_passed_pending_review",
+  "samples": 40,
+  "seeds": [
+    42
+  ],
+  "gradient_records": 164,
+  "natural_repeat_pairs": 80,
+  "padding_repeat_pairs": 2,
+  "padding_comparisons": 4,
+  "cross_precision_comparisons": 80,
+  "required_stability_checks": 86,
+  "failed_stability_checks": [],
+  "autograd_forward_failures": [],
+  "strict_reference_failures": [],
+  "stability_criteria_passed": true,
+  "nonzero_physical_gradients": 164,
+  "zero_physical_gradients": 0,
+  "criteria": {
+    "score_atol": 2e-05,
+    "score_rtol": 1e-05,
+    "gradient_relative_l2_limit": 0.01,
+    "gradient_cosine_minimum": 0.999
+  },
+  "criteria_role": "proposed engineering criteria; not significance, proof of correct hard-spike gradients or causality",
+  "backend": {
+    "matmul_precision": "highest",
+    "matmul_allow_tf32": false,
+    "cudnn_allow_tf32": true,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "deterministic_algorithms": false
+  },
+  "training": false,
+  "event_deletion": false,
+  "input_optimization": false,
+  "stage7_complete": false,
+  "next_step": "Read-only review of repeat, forward and padding stability before preparing any perturbations or expanding coverage."
+}

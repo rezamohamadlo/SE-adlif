@@ -1,0 +1,33 @@
+# Separate diagnostic evaluation protocol; original source_high evidence is immutable.
+version: adaptation_gradient_strict_v1
+inherits: config/paper_baseline.yaml
+dataset_section: SHD
+report_label: SHD*
+output_root: results/experiments/adaptation_gradient_strict_v1
+reference_root: results/experiments/adaptation_batch_precision_v1
+reference_manifest_sha256: 1dc501cbac205bba64f5d7998c39a35b18dcdd691489c7b9364792d571b00064
+reference_complete_sha256: 2247d6ded23debc0ea7c1ecfb0d803c5e418c1207bd9d8bc82b4949a0f8b173c
+precision_mode: highest_matmul
+models: [MT_SE_adLIF, AMT_SE_adLIF]
+seeds: [42]
+samples: 40
+repeats: 2
+focus_sample_id: 3896
+layouts: [singleton_natural, singleton_original_padding_focus]
+diagnostic_batch_size: 1
+burn_in_frames: 10
+profile_bins: 20
+anchor_accuracy_tolerance: 1.0e-6
+anchor_loss_tolerance: 0.001
+# New diagnostic score criteria, not changes to the source_high anchor tolerances.
+# 2e-5 covers the prior focus repeat/order drift (~1.01e-5); not significance bounds.
+score_atol: 2.0e-5
+score_rtol: 1.0e-5
+# Proposed tooling thresholds, explicitly evaluated; not scientific ground truth.
+gradient_relative_l2_limit: 0.01
+gradient_cosine_minimum: 0.999
+training: false
+official_test_access: false
+input_optimization: false
+event_deletion: false
+stage7_complete: false

@@ -1,0 +1,187 @@
+{
+  "identity": {
+    "manifest_sha256": "0d7feabf97012ace9a6edb34467f467ba8224eda08e6b5112e6fde39ce0ff0f0",
+    "sample_id": 759,
+    "inputs": [
+      {
+        "condition": "mt_abs_gradient_deletion",
+        "replicate": 0,
+        "budget": 91,
+        "seed": 13555946234211216696,
+        "input_sha256": "8888d7c5b860936751e98b63fda2e96a8ae182492146aa5fc32c9ffaf4da32f1",
+        "delta_sha256": "248999a75ca75c39de572ff60acc33f8cb05194f1ca3d2a77d31e430ac4b46e3",
+        "removed_burn_in_events": 14,
+        "domain": "nonnegative integer counts, original length"
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 0,
+        "budget": 91,
+        "seed": 7074535788678697504,
+        "input_sha256": "c15bdae49b12acb1bc4099cea8aa361b2aa0f9f50a4ef51ef8ef4e1b4b5e2816",
+        "delta_sha256": "e2d0109366d27270f01fdd7a96e2eedcd30c51de7ab7fd7f9172d90dc4af5a32",
+        "removed_burn_in_events": 0,
+        "domain": "nonnegative integer counts, original length"
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 1,
+        "budget": 91,
+        "seed": 1653960436351574530,
+        "input_sha256": "29331031f213f5a2b0f18ede78e8335f3d51aabb969429aeccc7228bdbb8e2b6",
+        "delta_sha256": "b1ad4eb29e0497326f2e4c062773d38349014f32771eba441e9dae6ffadbedfe",
+        "removed_burn_in_events": 1,
+        "domain": "nonnegative integer counts, original length"
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 2,
+        "budget": 91,
+        "seed": 17357350571113015307,
+        "input_sha256": "c8accb4e650610974d584cbaecc2af318a2f95fabddd1dbe1a147f06cfea9258",
+        "delta_sha256": "7dfa2225a1213dd0e4093b366e423639e5aec6369a0b218c7a28b43846d3dc67",
+        "removed_burn_in_events": 0,
+        "domain": "nonnegative integer counts, original length"
+      }
+    ]
+  },
+  "value": {
+    "sample_id": 759,
+    "target": 14,
+    "speaker": 1,
+    "guided_status": "defined",
+    "conditions": [
+      {
+        "condition": "clean",
+        "replicate": 0,
+        "budget": 0,
+        "input_sha256": "c6894360705c88ec0f15a9256a3d44f100a6c9156fb52a835fad4d411166775a",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 14,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 0.0
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 14,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 0.0
+          }
+        ]
+      },
+      {
+        "condition": "mt_abs_gradient_deletion",
+        "replicate": 0,
+        "budget": 91,
+        "input_sha256": "8888d7c5b860936751e98b63fda2e96a8ae182492146aa5fc32c9ffaf4da32f1",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 14,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -4.9841375512768006e-26
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 14,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -4.335371345134084e-14
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 0,
+        "budget": 91,
+        "input_sha256": "c15bdae49b12acb1bc4099cea8aa361b2aa0f9f50a4ef51ef8ef4e1b4b5e2816",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 14,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 1.2001310975684033e-27
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 14,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 8.247382257232541e-16
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 1,
+        "budget": 91,
+        "input_sha256": "29331031f213f5a2b0f18ede78e8335f3d51aabb969429aeccc7228bdbb8e2b6",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 14,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -7.759984816531843e-28
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 14,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": -7.068111716502046e-16
+          }
+        ]
+      },
+      {
+        "condition": "exact_random_deletion",
+        "replicate": 2,
+        "budget": 91,
+        "input_sha256": "c8accb4e650610974d584cbaecc2af318a2f95fabddd1dbe1a147f06cfea9258",
+        "evaluations": [
+          {
+            "model": "MT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 14,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 2.014343520818571e-27
+          },
+          {
+            "model": "AMT_SE_adLIF",
+            "loss": -0.0,
+            "prediction": 14,
+            "correct": 1,
+            "true_probability": 1.0,
+            "actual_loss_change": 0.0,
+            "surrogate_linear_prediction": 8.04332004266371e-16
+          }
+        ]
+      }
+    ]
+  },
+  "value_sha256": "f5fedff00c1b5050f2b0f2a97f029dda6c79682b4b1bfa14c7ef8647a56dc22a"
+}

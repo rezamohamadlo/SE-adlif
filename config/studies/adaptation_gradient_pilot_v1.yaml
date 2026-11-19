@@ -1,0 +1,49 @@
+# Stage-7 pilot only; no weight training, no input optimization, no official test.
+version: adaptation_gradient_pilot_v1
+inherits: config/paper_baseline.yaml
+dataset_section: SHD
+report_label: SHD*
+output_root: results/experiments/adaptation_gradient_pilot_v1
+source:
+  root: results/experiments/adaptation_mechanism_full_validation_v1
+  files:
+    MANIFEST.json: 12fbe2152dbbabcf59cfa8835ba3610c0f0dce2f8acca18e6ffb7ab1997b7297
+    COMPLETE.json: 0556fec13a9e7354dab7267ad4fcd0ca80c0c0751102c7c495488d4bf8b6568d
+    VALIDATION_ANCHORS.json: f96b8543cccad7ff3ce9686962c6e8860f6dfaa9c16de9411810be7704817864
+    diagnostic_rows/input_features_clean_rep_0.json: 9c1e614d9822b3f11aafdc5cb296e96af2d0ea21617fcf176aed582bba260bf1
+    diagnostic_rows/MT_SE_adLIF_seed_42_clean_rep_0.json: da7bb501d9f0717aa669650059da7e4c54e4ecddaaa2021412edb8a15efb9ba9
+    diagnostic_rows/AMT_SE_adLIF_seed_42_clean_rep_0.json: b133013af76201ce26b6c980a4c35f4186caf02b1ab3c1784c91b6b1dcf52d7a
+stage6_audit:
+  record: results/experiments/adaptation_mechanism_study_v1/STAGE6_CLOSEOUT_AUDIT.json
+  sha256: 23a45ccfd6401a606718eaceda723e5bf6014f2b372cdc43c1be5c52ec43054b
+references:
+- model: MT_SE_adLIF
+  file: diagnostic_rows/MT_SE_adLIF_seed_42_clean_rep_0.json
+- model: AMT_SE_adLIF
+  file: diagnostic_rows/AMT_SE_adLIF_seed_42_clean_rep_0.json
+clean_features_file: diagnostic_rows/input_features_clean_rep_0.json
+models:
+- MT_SE_adLIF
+- AMT_SE_adLIF
+seeds:
+- 42
+samples: 40
+cohort_selection_seed: 20261116
+diagnostic_batch_size: 1
+burn_in_frames: 10
+profile_bins: 20
+deletion_fraction: 0.01
+random_replicates: 3
+autograd_forward_loss_tolerance: 1.0e-06
+gradient_objective: saved supervised record CE, sum_softmax_over_time
+gradient_mask: all physical input frames including burn-in; synthetic padding summarized
+  separately
+guidance: parent MT absolute surrogate gradient on existing-event cells; descending
+  score, ascending flat-index ties
+zero_guidance: skip guided condition for both models; retain random/clean cases
+random_policy: exact uniform-without-replacement event deletion, three fixed draws;
+  shared inputs across both models
+registration_status: exploratory_tooling_pilot_after_stage6_not_preregistered
+training: false
+official_test_access: false
+input_optimization: false

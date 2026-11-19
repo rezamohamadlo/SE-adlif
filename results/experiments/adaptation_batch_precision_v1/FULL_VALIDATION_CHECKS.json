@@ -1,0 +1,116 @@
+[
+  {
+    "model": "MT_SE_adLIF",
+    "mode": "source_high",
+    "samples": 1631,
+    "accuracy": 0.9926425505824648,
+    "loss": 0.09387051560984039,
+    "source_prediction_mismatches": 0,
+    "accuracy_difference": 2.8724249423461856e-08,
+    "loss_difference": 2.4820426935967532e-08,
+    "backend": {
+      "matmul_precision": "high",
+      "matmul_allow_tf32": true,
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": false
+    },
+    "role": "required_original_contract"
+  },
+  {
+    "model": "AMT_SE_adLIF",
+    "mode": "source_high",
+    "samples": 1631,
+    "accuracy": 0.9889638258736971,
+    "loss": 0.07237305945839946,
+    "source_prediction_mismatches": 0,
+    "accuracy_difference": -1.651827064019784e-08,
+    "loss_difference": -2.9138081808488536e-09,
+    "backend": {
+      "matmul_precision": "high",
+      "matmul_allow_tf32": true,
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": false
+    },
+    "role": "required_original_contract"
+  },
+  {
+    "model": "MT_SE_adLIF",
+    "mode": "highest_matmul",
+    "samples": 1631,
+    "accuracy": 0.9908031882280809,
+    "loss": 0.09711384561937102,
+    "source_prediction_mismatches": 3,
+    "accuracy_difference": -0.0018393336301344432,
+    "loss_difference": 0.003243354829957565,
+    "backend": {
+      "matmul_precision": "highest",
+      "matmul_allow_tf32": false,
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": false
+    },
+    "role": "diagnostic_only_not_a_replacement_anchor"
+  },
+  {
+    "model": "AMT_SE_adLIF",
+    "mode": "highest_matmul",
+    "samples": 1631,
+    "accuracy": 0.9883507050889025,
+    "loss": 0.06983051928208613,
+    "source_prediction_mismatches": 5,
+    "accuracy_difference": -0.0006131373030652254,
+    "loss_difference": -0.0025425430901215157,
+    "backend": {
+      "matmul_precision": "highest",
+      "matmul_allow_tf32": false,
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": false
+    },
+    "role": "diagnostic_only_not_a_replacement_anchor"
+  },
+  {
+    "model": "MT_SE_adLIF",
+    "mode": "highest_matmul_cudnn_disabled",
+    "samples": 1631,
+    "accuracy": 0.9908031882280809,
+    "loss": 0.09711386522282614,
+    "source_prediction_mismatches": 3,
+    "accuracy_difference": -0.0018393336301344432,
+    "loss_difference": 0.003243374433412688,
+    "backend": {
+      "matmul_precision": "highest",
+      "matmul_allow_tf32": false,
+      "cudnn_allow_tf32": false,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": false
+    },
+    "role": "diagnostic_only_not_a_replacement_anchor"
+  },
+  {
+    "model": "AMT_SE_adLIF",
+    "mode": "highest_matmul_cudnn_disabled",
+    "samples": 1631,
+    "accuracy": 0.9883507050889025,
+    "loss": 0.06983052203921458,
+    "source_prediction_mismatches": 5,
+    "accuracy_difference": -0.0006131373030652254,
+    "loss_difference": -0.0025425403329930596,
+    "backend": {
+      "matmul_precision": "highest",
+      "matmul_allow_tf32": false,
+      "cudnn_allow_tf32": false,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": false
+    },
+    "role": "diagnostic_only_not_a_replacement_anchor"
+  }
+]

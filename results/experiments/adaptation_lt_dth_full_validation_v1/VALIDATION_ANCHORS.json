@@ -1,0 +1,98 @@
+[
+  {
+    "model": "DTH_SE_adLIF",
+    "seed": 42,
+    "n": 1631,
+    "accuracy": 0.9914163090128756,
+    "loss": 0.05265561485030229,
+    "expected": {
+      "path": "results/valid/DTH_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "e5a43730d06e5ce9fe7407a18c49cea825a3308751ef915fd5a2237febdbe52d",
+      "epoch": 178,
+      "accuracy": 0.991416335105896,
+      "loss": 0.052655648440122604
+    },
+    "accuracy_difference": -2.6093020411011025e-08,
+    "loss_difference": -3.3589820314094965e-08
+  },
+  {
+    "model": "DTH_SE_adLIF",
+    "seed": 123,
+    "n": 1631,
+    "accuracy": 0.9908031882280809,
+    "loss": 0.06118311181549469,
+    "expected": {
+      "path": "results/valid/DTH_SE_adLIF/SHD/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "41c166171ae8227facdea1801d87a8e59906fe7e7573d22a99a0668ee8015f6e",
+      "epoch": 247,
+      "accuracy": 0.9908031821250916,
+      "loss": 0.06118311733007431
+    },
+    "accuracy_difference": 6.1029893361208565e-09,
+    "loss_difference": -5.514579619336768e-09
+  },
+  {
+    "model": "DTH_SE_adLIF",
+    "seed": 456,
+    "n": 1631,
+    "accuracy": 0.9901900674432863,
+    "loss": 0.08277440988118834,
+    "expected": {
+      "path": "results/valid/DTH_SE_adLIF/SHD/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "1df3c8d4f7b382534762488099750562d4a690360bb9852e006a71e431f0148f",
+      "epoch": 98,
+      "accuracy": 0.9901900887489319,
+      "loss": 0.08277440071105957
+    },
+    "accuracy_difference": -2.1305645581115584e-08,
+    "loss_difference": 9.170128767443941e-09
+  },
+  {
+    "model": "LT_DTH_SE_adLIF",
+    "seed": 42,
+    "n": 1631,
+    "accuracy": 0.9895769466584917,
+    "loss": 0.0586053594957608,
+    "expected": {
+      "path": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "a6d3194524de8b9ddd6877e152893b2f89df01756bbd4bbd945907351339a588",
+      "epoch": 223,
+      "accuracy": 0.9895769357681274,
+      "loss": 0.05860539898276329
+    },
+    "accuracy_difference": 1.08903642770386e-08,
+    "loss_difference": -3.9487002487237355e-08
+  },
+  {
+    "model": "LT_DTH_SE_adLIF",
+    "seed": 123,
+    "n": 1631,
+    "accuracy": 0.9895769466584917,
+    "loss": 0.055481014542584785,
+    "expected": {
+      "path": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "674d5c4c44884101329cb8bfebc822d5dc5663063b24c719f57064f650cbcfd5",
+      "epoch": 253,
+      "accuracy": 0.9895769357681274,
+      "loss": 0.05548102781176567
+    },
+    "accuracy_difference": 1.08903642770386e-08,
+    "loss_difference": -1.3269180886010812e-08
+  },
+  {
+    "model": "LT_DTH_SE_adLIF",
+    "seed": 456,
+    "n": 1631,
+    "accuracy": 0.9950950337216432,
+    "loss": 0.057638990737406894,
+    "expected": {
+      "path": "results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/logs/mlp_snn/version_0/metrics.csv",
+      "sha256": "77cd9c33ce13403c114440bb366186902b17d841edc2722c3b0d6e26436e3beb",
+      "epoch": 192,
+      "accuracy": 0.9950950145721436,
+      "loss": 0.057638999074697495
+    },
+    "accuracy_difference": 1.914949965264867e-08,
+    "loss_difference": -8.337290600957115e-09
+  }
+]

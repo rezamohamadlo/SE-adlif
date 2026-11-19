@@ -1,0 +1,63 @@
+{
+  "identity": {
+    "manifest_sha256": "8c2fe370e1069cade2836723ce9f38f154059a2aa951cf92297718035513f11c",
+    "checkpoint_sha256": "1201b53120bb35afc1385460f10390c3ab6336f5710a6620aa674d0f757ea460",
+    "mode": "source_high",
+    "backend": {
+      "matmul_precision": "high",
+      "matmul_allow_tf32": true,
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": false
+    },
+    "layout": "singleton_natural",
+    "sample_ids": [
+      3693
+    ],
+    "slots": [
+      0
+    ],
+    "batch": {
+      "shape": [
+        1,
+        250,
+        140
+      ],
+      "input_sha256": "16579dd57050a33f45971dbc2048e77a2f78897765521bc5c96a3694f1351f40",
+      "targets_sha256": "cb4cf1edc729dd28728dc2ec83062c48da37110978527504453ad0d9b8c56be5",
+      "blocks_sha256": "bcac8aebeb0c19032e91a57dcdc32b3e83636906864721ce64e714427dfcd5ef"
+    }
+  },
+  "value": [
+    {
+      "loss": -0.0,
+      "prediction": 7,
+      "correct": 1,
+      "true_probability": 1.0,
+      "logits": [
+        10.894269943237305,
+        8.051877975463867,
+        5.858250617980957,
+        5.689445972442627,
+        7.685750961303711,
+        7.526491641998291,
+        9.862668991088867,
+        64.34909057617188,
+        5.584571361541748,
+        10.535712242126465,
+        4.640986442565918,
+        6.384525299072266,
+        24.44817543029785,
+        10.058788299560547,
+        7.314333438873291,
+        6.705966949462891,
+        18.701297760009766,
+        13.109861373901367,
+        6.480011463165283,
+        6.11792516708374
+      ]
+    }
+  ],
+  "value_sha256": "8ce435560db337108e429c4684c9a32d696b12149696786995c78826cee25935"
+}

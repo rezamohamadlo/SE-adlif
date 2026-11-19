@@ -1,0 +1,394 @@
+{
+  "version": "adaptation_mt_tc_statistics_v1",
+  "scope": "exploratory_validation_fixed_seed_cohort",
+  "n_samples": 1631,
+  "n_complete_cases": 1631,
+  "excluded": [],
+  "n_speakers": 10,
+  "n_training_seeds": 3,
+  "bootstrap_valid": 2000,
+  "bootstrap_rejected": 0,
+  "primary": [
+    {
+      "feature": "fast_slow_contrast",
+      "mean": 0.012434042499320674,
+      "sample_sd": 0.008795872503671672,
+      "interval": [
+        -0.05693220655556184,
+        0.07855845145934581
+      ],
+      "direction": "inconclusive",
+      "per_seed": [
+        {
+          "seed": 42,
+          "coefficient": 0.022038105322259253,
+          "interval": [
+            -0.06368474582033057,
+            0.13707792338497454
+          ]
+        },
+        {
+          "seed": 123,
+          "coefficient": 0.010493628824488156,
+          "interval": [
+            -0.06904257246551088,
+            0.08655747799980257
+          ]
+        },
+        {
+          "seed": 456,
+          "coefficient": 0.004770393351214612,
+          "interval": [
+            -0.0521030105635717,
+            0.05704740613507099
+          ]
+        }
+      ],
+      "seed_direction_consistent": true,
+      "leave_one_speaker_out_mean_range": [
+        -0.005793025182366331,
+        0.03703185213969972
+      ],
+      "leave_one_speaker_out_all_estimable": true
+    },
+    {
+      "feature": "autocorr_tau_ms",
+      "mean": 0.03041884121969631,
+      "sample_sd": 0.06799284897307978,
+      "interval": [
+        -0.008860831722305727,
+        0.11189983576912818
+      ],
+      "direction": "inconclusive",
+      "per_seed": [
+        {
+          "seed": 42,
+          "coefficient": 0.055702633775185785,
+          "interval": [
+            -0.019682519305202203,
+            0.21638852262805627
+          ]
+        },
+        {
+          "seed": 123,
+          "coefficient": 0.08214755071030105,
+          "interval": [
+            -0.02041084568266453,
+            0.24196457338382316
+          ]
+        },
+        {
+          "seed": 456,
+          "coefficient": -0.046593660826397904,
+          "interval": [
+            -0.12267845054581723,
+            0.005182443352068487
+          ]
+        }
+      ],
+      "seed_direction_consistent": false,
+      "leave_one_speaker_out_mean_range": [
+        0.011562399170517587,
+        0.040610869997864514
+      ],
+      "leave_one_speaker_out_all_estimable": true
+    }
+  ],
+  "secondary": [
+    {
+      "condition": "time_scale_0.9",
+      "mean": -0.023025393634526044,
+      "sample_sd": 0.02323284411887781,
+      "interval": [
+        -0.04618247779282085,
+        -0.00210584319522503
+      ],
+      "direction": "negative_within_fixed_cohort",
+      "per_seed": [
+        {
+          "seed": 42,
+          "benefit_change": -0.013566432888125198
+        },
+        {
+          "seed": 123,
+          "benefit_change": -0.04949564428043325
+        },
+        {
+          "seed": 456,
+          "benefit_change": -0.0060141037350196795
+        }
+      ]
+    },
+    {
+      "condition": "time_scale_1.1",
+      "mean": 0.009061894842134632,
+      "sample_sd": 0.009453666837542595,
+      "interval": [
+        -0.007546348156135394,
+        0.02855084653062967
+      ],
+      "direction": "inconclusive",
+      "per_seed": [
+        {
+          "seed": 42,
+          "benefit_change": 0.01460190440304242
+        },
+        {
+          "seed": 123,
+          "benefit_change": -0.001853847303594451
+        },
+        {
+          "seed": 456,
+          "benefit_change": 0.014437627426955925
+        }
+      ]
+    },
+    {
+      "condition": "delete_0.1",
+      "mean": 0.008222635641278177,
+      "sample_sd": 0.008535157712333704,
+      "interval": [
+        -0.003510741594611645,
+        0.02101347302610924
+      ],
+      "direction": "inconclusive",
+      "per_seed": [
+        {
+          "seed": 42,
+          "benefit_change": 0.009475782089978192
+        },
+        {
+          "seed": 123,
+          "benefit_change": -0.0008698182317694258
+        },
+        {
+          "seed": 456,
+          "benefit_change": 0.016061943065625764
+        }
+      ]
+    }
+  ],
+  "design_condition_number": 27.68164210966994,
+  "within_speaker_r_squared_per_seed": [
+    0.012407997257034564,
+    0.021181453720497512,
+    0.011405505829841789
+  ],
+  "highest_leverage_samples": [
+    {
+      "sample_id": 4047,
+      "leverage": 0.0426232507720554
+    },
+    {
+      "sample_id": 5822,
+      "leverage": 0.042345005086387465
+    },
+    {
+      "sample_id": 6582,
+      "leverage": 0.035534583968721466
+    },
+    {
+      "sample_id": 830,
+      "leverage": 0.0353132421617145
+    },
+    {
+      "sample_id": 4958,
+      "leverage": 0.034186577406776046
+    },
+    {
+      "sample_id": 3572,
+      "leverage": 0.03299294224714873
+    },
+    {
+      "sample_id": 5990,
+      "leverage": 0.03271634726169714
+    },
+    {
+      "sample_id": 5028,
+      "leverage": 0.03244384949931395
+    },
+    {
+      "sample_id": 6495,
+      "leverage": 0.032382143378002444
+    },
+    {
+      "sample_id": 5857,
+      "leverage": 0.032177931770792235
+    }
+  ],
+  "leave_one_speaker_out": [
+    {
+      "omitted_speaker": 0,
+      "feature_coefficients": [
+        [
+          0.030466442771684882,
+          0.0039399954409569315,
+          0.005629842536550204
+        ],
+        [
+          0.057830973531881144,
+          0.08384922490673165,
+          -0.049931121692724435
+        ]
+      ]
+    },
+    {
+      "omitted_speaker": 1,
+      "feature_coefficients": [
+        [
+          0.04534617764156369,
+          0.03748524679072054,
+          0.028264131986814944
+        ],
+        [
+          0.0829942258771882,
+          0.07685503573527541,
+          -0.05377539191055448
+        ]
+      ]
+    },
+    {
+      "omitted_speaker": 2,
+      "feature_coefficients": [
+        [
+          0.03498405517565327,
+          0.0071611686253778405,
+          0.003860925725654048
+        ],
+        [
+          0.060514499344898665,
+          0.08814210446880585,
+          -0.05031540205331341
+        ]
+      ]
+    },
+    {
+      "omitted_speaker": 3,
+      "feature_coefficients": [
+        [
+          0.019204896224531195,
+          0.01915077099511496,
+          0.004026347521273237
+        ],
+        [
+          0.07232646152274348,
+          0.11227962300660072,
+          -0.06283534705822916
+        ]
+      ]
+    },
+    {
+      "omitted_speaker": 6,
+      "feature_coefficients": [
+        [
+          0.021915183908011924,
+          0.015464646519065248,
+          0.000287575702179226
+        ],
+        [
+          0.06112638373359861,
+          0.062249756124185346,
+          -0.03218344581757227
+        ]
+      ]
+    },
+    {
+      "omitted_speaker": 7,
+      "feature_coefficients": [
+        [
+          0.01130644649639663,
+          -0.008909711417435542,
+          -0.008159326622289083
+        ],
+        [
+          0.018154880669541892,
+          0.07054983539879851,
+          -0.054017518556787644
+        ]
+      ]
+    },
+    {
+      "omitted_speaker": 8,
+      "feature_coefficients": [
+        [
+          0.02912690637181959,
+          0.015158656877204267,
+          0.004908180023195051
+        ],
+        [
+          0.058112409467083036,
+          0.11169940784261553,
+          -0.047979207316105034
+        ]
+      ]
+    },
+    {
+      "omitted_speaker": 9,
+      "feature_coefficients": [
+        [
+          0.021085001916337963,
+          0.00866416336124776,
+          0.009142758339754833
+        ],
+        [
+          0.044207340975868446,
+          0.09477061858687023,
+          -0.032279310214243045
+        ]
+      ]
+    },
+    {
+      "omitted_speaker": 10,
+      "feature_coefficients": [
+        [
+          0.021248775305503717,
+          0.0062722811951434225,
+          0.004349792024228348
+        ],
+        [
+          0.057316768377251845,
+          0.08429678291282644,
+          -0.048435447107926716
+        ]
+      ]
+    },
+    {
+      "omitted_speaker": 11,
+      "feature_coefficients": [
+        [
+          -0.012202354613746401,
+          -0.0005316816410481046,
+          -0.004645039292304488
+        ],
+        [
+          0.052277327504582465,
+          0.04718756953749424,
+          -0.038804781684624506
+        ]
+      ]
+    }
+  ],
+  "limitations": [
+    "Only ten speaker clusters: percentile intervals may have poor coverage; no formal significance or causal confirmation.",
+    "Intervals condition on three observed trained model pairs and do not generalize over training seeds.",
+    "Three-seed sample SD is not a confidence interval; samples/replicates are not independent training runs.",
+    "Primary two-feature and secondary three-intervention Bonferroni families are separate; no combined familywise guarantee.",
+    "Seed-specific intervals are diagnostic, not a simultaneous six-coefficient testing family.",
+    "Exploratory specification written after descriptive validation results were observed; not preregistration.",
+    "Speaker/class/linear duration/activity adjustment does not remove all sample-difficulty confounding.",
+    "No official-test access, new neural-model inference or training.",
+    "Input contrast and ACF do not directly measure temporal stability of model class evidence; direct window diagnostics are separate.",
+    "Reused MT predictions are the original parent observations, not new independent replications."
+  ],
+  "comparison_loss": "supervised_cross_entropy_auxiliary_JS_excluded",
+  "comparison": {
+    "parent": "MT_SE_adLIF",
+    "variant": "MT_TC_SE_adLIF"
+  },
+  "hypotheses": {
+    "fast_slow": "exploratory_two_sided_input_feature_association",
+    "autocorrelation": "exploratory_two_sided_input_feature_association",
+    "mechanism": "Temporal-consistency training may favor stable adjacent-window class evidence; input contrast and ACF alone do not measure this. Window diagnostics are separate."
+  },
+  "reuse_interpretation": "reused_MT_predictions_are_the_same_observations_not_independent_replications"
+}

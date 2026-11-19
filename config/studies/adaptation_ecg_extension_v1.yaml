@@ -1,0 +1,42 @@
+# ECG-only extension; reuse frozen saved-validation evidence, never official test.
+version: adaptation_ecg_extension_v1
+inherits: config/paper_baseline.yaml
+dataset_section: ECG
+output_root: results/experiments/adaptation_ecg_extension_v1
+source:
+  root: results/experiments/adaptation_ecg_pairs_v2
+  manifest_sha256: 8e2ac6923b5959e71ff0e387f3baf198b701a5b08ffb9bf56019f6a561b6258a
+  completion_sha256: da7b7b31061c801f52c9d301572d47d6b686464cf5be3f603d9a88456eebc0f1
+training: false
+official_test_access: false
+conditions:
+- - clean
+  - 0
+- - delete_0.1
+  - 0
+- - delete_0.1
+  - 1
+- - delete_0.1
+  - 2
+- - time_scale_0.9
+  - 0
+- - time_scale_1.1
+  - 0
+time_scaling:
+  time_scale_0.9: 0.9
+  time_scale_1.1: 1.1
+features:
+  short_steps: 20
+  long_steps: 200
+analysis:
+  inference: false
+  rank_relative_tolerance: 1.0e-10
+  minimum_residual_df: 5
+  uncertainty: descriptive mean/sample SD across three training seeds; no patient
+    intervals
+  controls:
+  - log1p_events_per_step
+  - log1p_stored_steps
+  - class_fractions_1_to_5
+  constant_controls: drop with explicit reason; never drop a primary feature
+  failed_design: report not_estimable; no ridge, imputation or feature selection

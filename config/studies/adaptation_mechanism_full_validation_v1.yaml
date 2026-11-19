@@ -1,0 +1,14 @@
+# Frozen-checkpoint diagnostics, not a new training protocol.
+# Reuse the pilot's paper-baseline identity, authenticated checkpoints, data,
+# split, feature definitions and perturbation levels without copying settings.
+inherits: config/studies/adaptation_mechanism_pilot_v1.yaml
+version: adaptation_mechanism_full_validation_v1
+scope: full_validation
+expected_validation_samples: 1631
+output_root: results/experiments/adaptation_mechanism_full_validation_v1
+analyses:
+  - clean
+  - time_scaling
+  - spike_deletion
+training: false
+test_set_access: false

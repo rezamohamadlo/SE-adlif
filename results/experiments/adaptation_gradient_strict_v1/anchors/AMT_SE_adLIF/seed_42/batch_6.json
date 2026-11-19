@@ -1,0 +1,780 @@
+{
+  "identity": {
+    "manifest_sha256": "18ac389aef07e88e4769522a2f7bb391fabe099062f1d68619e6891626a9f16d",
+    "model": "AMT_SE_adLIF",
+    "checkpoint_sha256": "1201b53120bb35afc1385460f10390c3ab6336f5710a6620aa674d0f757ea460",
+    "backend": {
+      "matmul_precision": "highest",
+      "matmul_allow_tf32": false,
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": false
+    },
+    "sample_ids": [
+      1583,
+      5679,
+      1324,
+      6548,
+      2690,
+      2612,
+      3092,
+      2396,
+      5028,
+      6598,
+      3396,
+      3008,
+      3416,
+      6134,
+      3622,
+      2729,
+      3572,
+      2599,
+      5819,
+      6092,
+      3178,
+      2805,
+      2629,
+      1745,
+      4105,
+      7623,
+      7296,
+      6344,
+      5317,
+      1414,
+      5297,
+      5739,
+      2506,
+      1006,
+      1077,
+      1620,
+      6203,
+      3616,
+      2986,
+      1114,
+      5354,
+      2582,
+      4204,
+      302,
+      6270,
+      5768,
+      1369,
+      1559,
+      1349,
+      3182,
+      2443,
+      6791,
+      7664,
+      4203,
+      2267,
+      6145,
+      2673,
+      1518,
+      1844,
+      7011,
+      5622,
+      7353,
+      5458,
+      4581,
+      1516,
+      6605,
+      6253,
+      6614,
+      1713,
+      1376,
+      985,
+      1560,
+      488,
+      2311,
+      5640,
+      5044,
+      5525,
+      8144,
+      7252,
+      5286,
+      5160,
+      6973,
+      5656,
+      6771,
+      6677,
+      2013,
+      5445,
+      5309,
+      3088,
+      6672,
+      5172,
+      2460,
+      7996,
+      4614,
+      1373
+    ]
+  },
+  "value": [
+    {
+      "sample_id": 1583,
+      "loss": -0.0,
+      "prediction": 5,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 5679,
+      "loss": -0.0,
+      "prediction": 18,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 1324,
+      "loss": 6.198863957251888e-06,
+      "prediction": 2,
+      "correct": 1,
+      "true_probability": 0.9999938011169434
+    },
+    {
+      "sample_id": 6548,
+      "loss": 0.035121574997901917,
+      "prediction": 13,
+      "correct": 1,
+      "true_probability": 0.9654880166053772
+    },
+    {
+      "sample_id": 2690,
+      "loss": -0.0,
+      "prediction": 13,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 2612,
+      "loss": 4.768370445162873e-07,
+      "prediction": 10,
+      "correct": 1,
+      "true_probability": 0.9999995231628418
+    },
+    {
+      "sample_id": 3092,
+      "loss": 3.576278118089249e-07,
+      "prediction": 9,
+      "correct": 1,
+      "true_probability": 0.9999996423721313
+    },
+    {
+      "sample_id": 2396,
+      "loss": 0.0009142747730948031,
+      "prediction": 16,
+      "correct": 1,
+      "true_probability": 0.9990861415863037
+    },
+    {
+      "sample_id": 5028,
+      "loss": -0.0,
+      "prediction": 13,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 6598,
+      "loss": -0.0,
+      "prediction": 12,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 3396,
+      "loss": -0.0,
+      "prediction": 12,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 3008,
+      "loss": -0.0,
+      "prediction": 18,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 3416,
+      "loss": -0.0,
+      "prediction": 12,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 6134,
+      "loss": -0.0,
+      "prediction": 18,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 3622,
+      "loss": -0.0,
+      "prediction": 11,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 2729,
+      "loss": -0.0,
+      "prediction": 16,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 3572,
+      "loss": -0.0,
+      "prediction": 18,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 2599,
+      "loss": -0.0,
+      "prediction": 15,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 5819,
+      "loss": -0.0,
+      "prediction": 1,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 6092,
+      "loss": 7.152555099310121e-07,
+      "prediction": 19,
+      "correct": 1,
+      "true_probability": 0.9999992847442627
+    },
+    {
+      "sample_id": 3178,
+      "loss": 4.732496745418757e-05,
+      "prediction": 19,
+      "correct": 1,
+      "true_probability": 0.9999526739120483
+    },
+    {
+      "sample_id": 2805,
+      "loss": -0.0,
+      "prediction": 11,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 2629,
+      "loss": 2.50339189733495e-06,
+      "prediction": 13,
+      "correct": 1,
+      "true_probability": 0.9999974966049194
+    },
+    {
+      "sample_id": 1745,
+      "loss": -0.0,
+      "prediction": 15,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 4105,
+      "loss": -0.0,
+      "prediction": 9,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 7623,
+      "loss": -0.0,
+      "prediction": 6,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 7296,
+      "loss": -0.0,
+      "prediction": 12,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 6344,
+      "loss": -0.0,
+      "prediction": 17,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 5317,
+      "loss": -0.0,
+      "prediction": 7,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 1414,
+      "loss": -0.0,
+      "prediction": 13,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 5297,
+      "loss": -0.0,
+      "prediction": 7,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 5739,
+      "loss": -0.0,
+      "prediction": 1,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 2506,
+      "loss": 0.0007819455349817872,
+      "prediction": 15,
+      "correct": 1,
+      "true_probability": 0.9992183446884155
+    },
+    {
+      "sample_id": 1006,
+      "loss": 3.576278118089249e-07,
+      "prediction": 16,
+      "correct": 1,
+      "true_probability": 0.9999996423721313
+    },
+    {
+      "sample_id": 1077,
+      "loss": -0.0,
+      "prediction": 16,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 1620,
+      "loss": -0.0,
+      "prediction": 1,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 6203,
+      "loss": 0.2796670198440552,
+      "prediction": 9,
+      "correct": 1,
+      "true_probability": 0.7560354471206665
+    },
+    {
+      "sample_id": 3616,
+      "loss": -0.0,
+      "prediction": 15,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 2986,
+      "loss": 1.3589766240329482e-05,
+      "prediction": 19,
+      "correct": 1,
+      "true_probability": 0.9999864101409912
+    },
+    {
+      "sample_id": 1114,
+      "loss": 2.1457441107486375e-05,
+      "prediction": 3,
+      "correct": 1,
+      "true_probability": 0.9999785423278809
+    },
+    {
+      "sample_id": 5354,
+      "loss": -0.0,
+      "prediction": 18,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 2582,
+      "loss": -0.0,
+      "prediction": 5,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 4204,
+      "loss": -0.0,
+      "prediction": 18,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 302,
+      "loss": -0.0,
+      "prediction": 2,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 6270,
+      "loss": 7.390948667307384e-06,
+      "prediction": 4,
+      "correct": 1,
+      "true_probability": 0.9999926090240479
+    },
+    {
+      "sample_id": 5768,
+      "loss": -0.0,
+      "prediction": 15,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 1369,
+      "loss": -0.0,
+      "prediction": 5,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 1559,
+      "loss": -0.0,
+      "prediction": 7,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 1349,
+      "loss": -0.0,
+      "prediction": 8,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 3182,
+      "loss": 4.565611743601039e-05,
+      "prediction": 1,
+      "correct": 1,
+      "true_probability": 0.999954342842102
+    },
+    {
+      "sample_id": 2443,
+      "loss": -0.0,
+      "prediction": 12,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 6791,
+      "loss": -0.0,
+      "prediction": 1,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 7664,
+      "loss": 0.0001858300092862919,
+      "prediction": 1,
+      "correct": 1,
+      "true_probability": 0.9998142123222351
+    },
+    {
+      "sample_id": 4203,
+      "loss": -0.0,
+      "prediction": 6,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 2267,
+      "loss": -0.0,
+      "prediction": 18,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 6145,
+      "loss": -0.0,
+      "prediction": 17,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 2673,
+      "loss": -0.0,
+      "prediction": 7,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 1518,
+      "loss": -0.0,
+      "prediction": 1,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 1844,
+      "loss": -0.0,
+      "prediction": 9,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 7011,
+      "loss": 3.576278118089249e-07,
+      "prediction": 13,
+      "correct": 1,
+      "true_probability": 0.9999996423721313
+    },
+    {
+      "sample_id": 5622,
+      "loss": -0.0,
+      "prediction": 12,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 7353,
+      "loss": -0.0,
+      "prediction": 11,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 5458,
+      "loss": -0.0,
+      "prediction": 7,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 4581,
+      "loss": 1.1920928244535389e-07,
+      "prediction": 16,
+      "correct": 1,
+      "true_probability": 0.9999998807907104
+    },
+    {
+      "sample_id": 1516,
+      "loss": 2.1815061700181104e-05,
+      "prediction": 15,
+      "correct": 1,
+      "true_probability": 0.9999781847000122
+    },
+    {
+      "sample_id": 6605,
+      "loss": 0.001369729870930314,
+      "prediction": 6,
+      "correct": 1,
+      "true_probability": 0.9986311793327332
+    },
+    {
+      "sample_id": 6253,
+      "loss": -0.0,
+      "prediction": 7,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 6614,
+      "loss": -0.0,
+      "prediction": 1,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 1713,
+      "loss": -0.0,
+      "prediction": 3,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 1376,
+      "loss": 2.3841855067985307e-07,
+      "prediction": 14,
+      "correct": 1,
+      "true_probability": 0.9999997615814209
+    },
+    {
+      "sample_id": 985,
+      "loss": -0.0,
+      "prediction": 0,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 1560,
+      "loss": -0.0,
+      "prediction": 14,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 488,
+      "loss": -0.0,
+      "prediction": 3,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 2311,
+      "loss": -0.0,
+      "prediction": 13,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 5640,
+      "loss": 0.14033199846744537,
+      "prediction": 19,
+      "correct": 1,
+      "true_probability": 0.8690696358680725
+    },
+    {
+      "sample_id": 5044,
+      "loss": -0.0,
+      "prediction": 9,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 5525,
+      "loss": 2.3841855067985307e-07,
+      "prediction": 11,
+      "correct": 1,
+      "true_probability": 0.9999997615814209
+    },
+    {
+      "sample_id": 8144,
+      "loss": -0.0,
+      "prediction": 4,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 7252,
+      "loss": -0.0,
+      "prediction": 0,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 5286,
+      "loss": -0.0,
+      "prediction": 7,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 5160,
+      "loss": -0.0,
+      "prediction": 8,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 6973,
+      "loss": 2.3841855067985307e-07,
+      "prediction": 10,
+      "correct": 1,
+      "true_probability": 0.9999997615814209
+    },
+    {
+      "sample_id": 5656,
+      "loss": 0.34796807169914246,
+      "prediction": 12,
+      "correct": 1,
+      "true_probability": 0.7061213850975037
+    },
+    {
+      "sample_id": 6771,
+      "loss": -0.0,
+      "prediction": 19,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 6677,
+      "loss": -0.0,
+      "prediction": 1,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 2013,
+      "loss": -0.0,
+      "prediction": 1,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 5445,
+      "loss": -0.0,
+      "prediction": 6,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 5309,
+      "loss": -0.0,
+      "prediction": 8,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 3088,
+      "loss": -0.0,
+      "prediction": 6,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 6672,
+      "loss": 0.0008117241668514907,
+      "prediction": 14,
+      "correct": 1,
+      "true_probability": 0.9991886019706726
+    },
+    {
+      "sample_id": 5172,
+      "loss": 0.0005529781919904053,
+      "prediction": 1,
+      "correct": 1,
+      "true_probability": 0.9994471669197083
+    },
+    {
+      "sample_id": 2460,
+      "loss": -0.0,
+      "prediction": 1,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 7996,
+      "loss": -0.0,
+      "prediction": 1,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 4614,
+      "loss": -0.0,
+      "prediction": 15,
+      "correct": 1,
+      "true_probability": 1.0
+    },
+    {
+      "sample_id": 1373,
+      "loss": -0.0,
+      "prediction": 14,
+      "correct": 1,
+      "true_probability": 1.0
+    }
+  ],
+  "value_sha256": "575791d1fbdcb1895b8ea475279697876725f722f4c6e1ff21d9aa24d930e9ad"
+}

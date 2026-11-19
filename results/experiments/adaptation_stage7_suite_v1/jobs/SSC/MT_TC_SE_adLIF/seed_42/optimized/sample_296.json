@@ -1,0 +1,47 @@
+{
+  "identity": {
+    "manifest_sha256": "10cde45a6ea642a4407db518e3c2b1a32a9573f7985e90f972e7076d5dac4c14",
+    "sample_id": 296,
+    "original_sha256": "08bab6ef49ccc5aa3f5683ad919e8da5e332da920bb172c8ab28ebd33651711d"
+  },
+  "value": {
+    "sample_id": 296,
+    "status": "no_accepted_improvement",
+    "budget": 130,
+    "moves": 0,
+    "allocation": [],
+    "trace": [
+      {
+        "iteration": 0,
+        "status": "rejected_no_measured_ce_increase",
+        "loss": 0.23769418895244598,
+        "previous_loss": 0.4005216956138611,
+        "acceptance_bound": 2.4005216956138613e-05,
+        "moves": 130,
+        "candidate_sha256": "5c4cdfeb59f906f7a1c72096434f3d426114efa0cfbde70c7f7c83d7995dd58c",
+        "candidate_path": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/MT_TC_SE_adLIF/seed_42/optimization_candidates/sample_296_step_0.npz"
+      }
+    ],
+    "clean": {
+      "loss": 0.4005216956138611,
+      "predictions": [
+        0
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    },
+    "optimized": {
+      "loss": 0.4005216956138611,
+      "predictions": [
+        0
+      ],
+      "valid_steps": 1,
+      "correct_steps": 1,
+      "accuracy": 1.0
+    }
+  },
+  "value_sha256": "e09b32c5ae3715345145536c6d2d3cb262f16c4e99dc7c18d49b9c280d150b11",
+  "artifact": "results/experiments/adaptation_stage7_suite_v1/jobs/SSC/MT_TC_SE_adLIF/seed_42/optimized/sample_296.npz",
+  "artifact_sha256": "851a86b32cd9f8846e58f72cec0c6cb79d1fd9a4f525e47f52b4557e2de865a4"
+}

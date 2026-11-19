@@ -1,0 +1,48 @@
+# Frozen validation-only LT-DTH/DTH diagnostics; no training.
+inherits: config/studies/adaptation_mechanism_full_validation_v1.yaml
+paper_baseline: config/paper_baseline.yaml
+version: adaptation_lt_dth_full_validation_v1
+parent: DTH_SE_adLIF
+variant: LT_DTH_SE_adLIF
+output_root: results/experiments/adaptation_lt_dth_full_validation_v1
+hypothesis: LT-DTH benefit may depend on input temporal scale; association and perturbation
+  outcomes can contradict this hypothesis.
+training: false
+test_set_access: false
+runs:
+- model: DTH_SE_adLIF
+  seed: 42
+  cost_record: results/valid/DTH_SE_adLIF/SHD/seed_42/COST_RESULTS.json
+  checkpoint: results/valid/DTH_SE_adLIF/SHD/seed_42/ckpt/epoch=178-step=4475.ckpt
+  checkpoint_sha256: d7822e95690a85c94a5d9a04225f7eda592a78c2186c580ef7925a2558ab785e
+  selected_epoch: 178
+- model: DTH_SE_adLIF
+  seed: 123
+  cost_record: results/valid/DTH_SE_adLIF/SHD/seed_123/COST_RESULTS.json
+  checkpoint: results/valid/DTH_SE_adLIF/SHD/seed_123/ckpt/epoch=247-step=6200.ckpt
+  checkpoint_sha256: a1a90c9fd43518110d11f3e4771982c853b8f3f09f50ed6ce0fece7c01fe9cfe
+  selected_epoch: 247
+- model: DTH_SE_adLIF
+  seed: 456
+  cost_record: results/valid/DTH_SE_adLIF/SHD/seed_456/COST_RESULTS.json
+  checkpoint: results/valid/DTH_SE_adLIF/SHD/seed_456/ckpt/epoch=98-step=2475.ckpt
+  checkpoint_sha256: 76f079028f7fa3041f671212871c72b3b5eb25cadf2ced03907dd74af83135af
+  selected_epoch: 98
+- model: LT_DTH_SE_adLIF
+  seed: 42
+  cost_record: results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/COST_RESULTS.json
+  checkpoint: results/not_improved/LT_DTH_SE_adLIF/SHD/seed_42/ckpt/epoch=223-step=5600.ckpt
+  checkpoint_sha256: 455bb8ea256b2517bf0218e9e539ee32cafda43966e0027fc276538bf960ef04
+  selected_epoch: 223
+- model: LT_DTH_SE_adLIF
+  seed: 123
+  cost_record: results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/COST_RESULTS.json
+  checkpoint: results/not_improved/LT_DTH_SE_adLIF/SHD/seed_123/ckpt/epoch=253-step=6350.ckpt
+  checkpoint_sha256: 06a6e61e6d2654a9ecda4eef5e2594f1960c7e9c0307c1f267b94b08c9aefa6e
+  selected_epoch: 253
+- model: LT_DTH_SE_adLIF
+  seed: 456
+  cost_record: results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/COST_RESULTS.json
+  checkpoint: results/not_improved/LT_DTH_SE_adLIF/SHD/seed_456/ckpt/epoch=192-step=4825.ckpt
+  checkpoint_sha256: 15d2ecea89a3e382878be6515435d9b6e5eb4ee1107ccdfec6eb7f6a5b7bda19
+  selected_epoch: 192

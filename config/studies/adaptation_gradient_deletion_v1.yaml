@@ -1,0 +1,28 @@
+# Forward-only matched perturbations using verified, predetermined strict gradients.
+version: adaptation_gradient_deletion_v1
+inherits: config/paper_baseline.yaml
+dataset_section: SHD
+report_label: SHD*
+output_root: results/experiments/adaptation_gradient_deletion_v1
+source_root: results/experiments/adaptation_gradient_strict_v1
+source_manifest_sha256: 994dac55ff799dab9c0755dc44c39003ff4cc388b6e5fb2453780cb26171f849
+source_complete_sha256: c2d7683b34a42768fbb3a091dae96a734920ae39033c0dc161b6a186b08e6d25
+precision_mode: highest_matmul
+models: [MT_SE_adLIF, AMT_SE_adLIF]
+seeds: [42]
+samples: 40
+primary_layout: singleton_natural
+primary_repeat: 0
+deletion_fraction: 0.01
+random_replicates: 3
+random_seed: 20261116
+score_atol: 2.0e-5
+score_rtol: 1.0e-5
+guidance: parent MT absolute surrogate gradient on existing-event cells; stable flat-index ties
+zero_guidance: skip guided deletion for both models; retain clean and random controls
+budget: floor of one percent of framed events, minimum one when nonempty; exact equal budget
+training: false
+backward: false
+official_test_access: false
+input_optimization: false
+stage7_complete: false
