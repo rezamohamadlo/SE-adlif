@@ -1,0 +1,52 @@
+﻿import contextlib,hashlib,io,json
+from pathlib import Path
+import h5py,numpy as np,torch
+from hydra.utils import instantiate
+from omegaconf import OmegaConf
+from models.pl_module import build_training_model
+from module.study_control import forward_identity
+from project_paths import ROOT
+from extended_seed_study import atomic_json
+
+torch.set_float32_matmul_precision('high');torch.manual_seed(42)
+root=ROOT/'results/experiments/complementary_speaker_dev_v2'
+source=root/'PRIMARY_VALIDATION_CALIBRATION_SOURCE.txt';records=[]
+for name in ['SE_adLIF','FIR_SE_adLIF','GAIN_SE_adLIF']:
+    directory=root/'gain_control_A001_v1'/name/'SHD/seed_42'
+    receipt=json.loads((directory/'stages/030/RESULT.json').read_text());path=ROOT/receipt['best_checkpoint']
+    assert hashlib.sha256(path.read_bytes()).hexdigest()==receipt['best_checkpoint_sha256']
+    assert json.loads((directory/'MODEL_SOURCE_IDENTITY.json').read_text())==forward_identity('SHD')
+    saved=torch.load(path,map_location='cpu',weights_only=False);cfg=OmegaConf.create(saved['hyper_parameters']['cfg'])
+    assert cfg.dataset.validation_only_data and cfg.dataset.speaker_split_fingerprint=='7712626f45e9e226299fd2984b2a29ccaf173a4d64895b62a0a0386f2895e860'
+    dm=instantiate(cfg.dataset,data_path=str(ROOT/'data'));assert not hasattr(dm,'data_test')
+    with contextlib.redirect_stdout(io.StringIO()):model=build_training_model(cfg)
+    model.load_state_dict(saved['state_dict'],strict=True);model.cuda().eval()
+    probabilities=[];targets=[];losses=[]
+    with torch.inference_mode():
+        for x,y,blocks in dm.val_dataloader():
+            x,y,blocks=x.cuda(),y.cuda(),blocks.cuda()
+            reduced,loss,_=model.process_predictions_and_compute_losses(model(x),y,blocks)
+            mask=y.flatten()!=-1;assert int(mask.sum())==len(x)
+            logits=reduced[mask].float();label=y.flatten()[mask].long()
+            probabilities.append(torch.softmax(logits,-1).cpu().numpy());targets.append(label.cpu().numpy())
+            losses.append(torch.nn.functional.cross_entropy(logits,label,reduction='none').cpu().numpy())
+    probability=np.concatenate(probabilities);target=np.concatenate(targets);cross_entropy=np.concatenate(losses)
+    original_indices=np.array(dm.data_val.indices,dtype=np.int64);assert len(target)==len(original_indices)==1635
+    with h5py.File(ROOT/'data/SHDWrapper/shd_train.h5') as f:speakers=f['extra/speaker'][:][original_indices]
+    prediction=probability.argmax(1);correct=prediction==target;confidence=probability.max(1)
+    bins=np.minimum((confidence*15).astype(int),14);table=[];ece=0.
+    for index in range(15):
+        included=bins==index;n=int(included.sum())
+        if n:
+            accuracy=float(correct[included].mean());average_confidence=float(confidence[included].mean());ece+=n/len(target)*abs(accuracy-average_confidence)
+            table.append(dict(bin=index,count=n,accuracy=accuracy,mean_confidence=average_confidence))
+        else:table.append(dict(bin=index,count=0,accuracy=None,mean_confidence=None))
+    onehot=np.eye(probability.shape[1])[target];brier=float(np.square(probability-onehot).sum(1).mean())
+    record=dict(model=name,status='complete_validation_only_diagnostic',data='Frozen primary0/3validation from official train only',samples=len(target),checkpoint=receipt['best_checkpoint'],checkpoint_sha256=receipt['best_checkpoint_sha256'],selected_completed_epoch=receipt['selected_epoch_index']+1,original_selected_validation_accuracy=receipt['best_validation_accuracy'],recomputed_accuracy=float(correct.mean()),recomputed_accuracy_difference_pp=100*(float(correct.mean())-receipt['best_validation_accuracy']),cross_entropy=float(cross_entropy.mean()),ece15=float(ece),ece_units='fraction;15equal-width bins on top-label confidence',brier_sum_over_classes=brier,mean_confidence=float(confidence.mean()),mean_confidence_correct=float(confidence[correct].mean()) if correct.any() else None,mean_confidence_wrong=float(confidence[~correct].mean()) if (~correct).any() else None,mean_cross_entropy_wrong=float(cross_entropy[~correct].mean()) if (~correct).any() else None,per_speaker={str(int(s)):dict(n=int((speakers==s).sum()),accuracy=float(correct[speakers==s].mean())) for s in np.unique(speakers)},bins=table,inference='eval/inference_mode,f32high matmul, saved validation batch/masks/aggregation, no TTA or probability fitting',source_code='results/experiments/complementary_speaker_dev_v2/PRIMARY_VALIDATION_CALIBRATION_SOURCE.txt',source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),forward_identity=forward_identity('SHD'),official_test_opened=False,model_weights_or_hyperparameters_changed=False)
+    assert np.isfinite(cross_entropy).all() and np.isfinite(probability).all() and 0<=ece<=1
+    raw=directory/'diagnostic_rows';raw.mkdir(exist_ok=True)
+    np.savez_compressed(raw/'stage030_primary_validation_predictions.npz',row_indices=original_indices,speaker_ids=speakers,targets=target,predictions=prediction,probabilities=probability,cross_entropy=cross_entropy)
+    atomic_json(directory/'VALIDATION_CALIBRATION_STAGE030.json',record);records.append(record)
+    print(json.dumps({k:record[k] for k in ['model','recomputed_accuracy','cross_entropy','ece15','brier_sum_over_classes','mean_confidence_wrong','recomputed_accuracy_difference_pp']}),flush=True)
+    del model,dm,x,y,blocks,reduced,logits;torch.cuda.empty_cache()
+atomic_json(root/'PRIMARY_VALIDATION_CALIBRATION.json',dict(status='complete',records=records,source_code='PRIMARY_VALIDATION_CALIBRATION_SOURCE.txt',purpose='Primary development confidence diagnostic only; never replacing authoritative selected scores or using secondary/test data for tuning.'))

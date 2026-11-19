@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-11-12T15:34:59.062375+00:00",
+  "decision": "ADVANCE_A_ONLY_TO_BOUNDED_SSC_TRANSFER_SCREEN_AFTER_NEW_CALIBRATION",
+  "evidence": "C005_SENSITIVITY_STAGE030_COMPARISON.json",
+  "A_minus_Baseline_pp": 1.6990303993225098,
+  "A_minus_Baseline_CE": -0.008326531999705344,
+  "A_minus_Baseline_late10_pp": 1.1165052652359009,
+  "per_speaker_A_minus_Baseline_pp": {
+    "6": -1.342281879194629,
+    "10": 3.4220532319391705
+  },
+  "curves_visually_inspected": true,
+  "all_fresh_source_initial_state_and_checkpoint_validation_checks_passed": true,
+  "interpretation": "Fixed6/10 accuracy gate passes; small selectedCEimprovement and positive late10mean support. Speaker6regresses while10improves. Together withprimary/control this warrants testing another dataset, not uniformspeakerrobustness or test/paper/multi-seed superiority.",
+  "secondary_tuning_or_extension": false,
+  "next_action": "FreshSE/RDropSSCseed42officialvalidation,10then40onlyifjustified. Fixedalpha1/epsilon0; newreal256/512two-graphcalibration andmatchednewbatch beforetraining. Nofailedcombination/officialtests.",
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

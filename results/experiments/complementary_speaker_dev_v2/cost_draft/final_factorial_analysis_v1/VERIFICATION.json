@@ -1,0 +1,24 @@
+{
+  "verified_at": "2026-11-12T14:49:07.629220+00:00",
+  "status": "pure_final_accounting_draft_verified_not_applied",
+  "tests_passed": 8,
+  "test_seconds": 0.013,
+  "tests": "Synthetic36resultJSONfixtures,matchedseedcontrasts/interaction/sampleSD/StudenttCI,unroundedpaperdelta/perseedlabeling,missing/duplicate/validation/TTA/wrongplan/badmetric/mixedtestsource rejections,all3datasets/negativesretained.",
+  "shared_paired_statistics_function_verbatim": true,
+  "patch": "results/experiments/complementary_speaker_dev_v2/cost_draft/FINAL_FACTORIAL_ANALYSIS_DRAFT_v1.patch",
+  "patch_sha256": "3afdd9803ad768b8810db0a97f21ab2303f8da6ea1fef34531dfb8955563cf2b",
+  "files_sha256": {
+    "module/paired_seed_statistics.py": "7b046d41bd25d8516b8ee2434f1bed61a6b9e70f4a7c604935aeaaa902072e81",
+    "module/final_factorial_summary.py": "1ade68b5e47d19b1a0fdcf39f0545632e3a651631b46f698ce3f94799e647fda",
+    "tests/test_final_factorial_summary.py": "eb9eb2c10933fd6a0565cd7d77264799dcd68714bcf8d341fc0332c11add24e2",
+    "aggregate_extended_seeds.py": "fb3cc00c8115a986b86b448eb402c6661e2bf1554334c7a901a1b24cbc4a1492"
+  },
+  "apply_check_passed": true,
+  "root_source_changed": false,
+  "C005_source277files_unchanged": true,
+  "official_test_opened": false,
+  "training_executed": false,
+  "GPU_used": false,
+  "remaining": "Integrate after active source freeze; verify complete existing validation-aggregate regression and actual final evaluator records/model/config/provenance. This pure helper does not authorize test access or replace36checkpoint gate. Final realcohort/testing/costs/fullreports remain pending.",
+  "full_goal_complete": false
+}

@@ -1,0 +1,57 @@
+{
+  "interpretation": "This FIR changes constant-input gain as well as temporal filtering. Validation improvements do not isolate learned timing from amplitude effects. A gain-only/normalized-filter mechanism control remains necessary before claiming timing-specific benefits.",
+  "official_test_opened": false,
+  "records": [
+    {
+      "checkpoint": "results/experiments/complementary_speaker_dev_v2/primary_0_3/FIR_SE_adLIF/SHD/seed_42/stages/030/best.ckpt",
+      "constant_input_gain_max": 3.5764992237091064,
+      "constant_input_gain_mean": 2.2538182735443115,
+      "constant_input_gain_min": 1.262776255607605,
+      "model": "FIR_SE_adLIF",
+      "pair": "primary_0_3",
+      "selected_checkpoint_epoch_index": 25,
+      "tap_abs_mean": 0.3134545683860779,
+      "taps_mean_per_lag": [
+        0.2740757465362549,
+        0.2948019802570343,
+        0.32035622000694275,
+        0.36458417773246765
+      ],
+      "taps_positive_fraction": 1.0
+    },
+    {
+      "checkpoint": "results/experiments/complementary_speaker_dev_v2/primary_0_3/FIR_THIN_SE_adLIF/SHD/seed_42/stages/030/best.ckpt",
+      "constant_input_gain_max": 3.7649245262145996,
+      "constant_input_gain_mean": 2.311861991882324,
+      "constant_input_gain_min": 1.4436748027801514,
+      "model": "FIR_THIN_SE_adLIF",
+      "pair": "primary_0_3",
+      "selected_checkpoint_epoch_index": 21,
+      "tap_abs_mean": 0.32796555757522583,
+      "taps_mean_per_lag": [
+        0.28371572494506836,
+        0.30805909633636475,
+        0.3414139747619629,
+        0.37867337465286255
+      ],
+      "taps_positive_fraction": 1.0
+    },
+    {
+      "checkpoint": "results/experiments/complementary_speaker_dev_v2/sensitivity_6_10/FIR_SE_adLIF/SHD/seed_42/stages/030/best.ckpt",
+      "constant_input_gain_max": 3.768324851989746,
+      "constant_input_gain_mean": 2.2391841411590576,
+      "constant_input_gain_min": 1.3367314338684082,
+      "model": "FIR_SE_adLIF",
+      "pair": "sensitivity_6_10",
+      "selected_checkpoint_epoch_index": 25,
+      "tap_abs_mean": 0.31004512310028076,
+      "taps_mean_per_lag": [
+        0.2773154079914093,
+        0.29562482237815857,
+        0.3149776756763458,
+        0.3512662649154663
+      ],
+      "taps_positive_fraction": 0.9982143044471741
+    }
+  ]
+}

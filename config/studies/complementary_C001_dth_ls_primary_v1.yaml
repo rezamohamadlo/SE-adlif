@@ -1,0 +1,63 @@
+version: complementary_speaker_dev_v2
+candidate_version: C001_DTH_B002_LS_v1
+protocol_id: shd_speaker_dth_ls_v1
+plan: docs/experiments/complementary-C001-dth-ls-v1.md
+output_root: results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3
+idea: C001_DTH_B002_LABEL_SMOOTHING
+role: development
+pair_id: primary_0_3
+validation_speakers: [0, 3]
+split_manifest: results/experiments/complementary_speaker_dev_v2/primary_0_3/SPLIT_MANIFEST.json
+split_fingerprint: 7712626f45e9e226299fd2984b2a29ccaf173a4d64895b62a0a0386f2895e860
+training_seed: 42
+split_seed: 42
+hypothesis: Internal activity-dependent threshold conditioning may complement train-only confidence regularization; clean accuracy must improve over each component.
+models: [SE_adLIF, DTH_SE_adLIF, DTH_LS_SE_adLIF, LS_SE_adLIF]
+arm_labels:
+  SE_adLIF: Baseline
+  DTH_SE_adLIF: A existing DTH
+  DTH_LS_SE_adLIF: A+B DTH and label smoothing
+  LS_SE_adLIF: B label smoothing
+spike_deletion:
+  SE_adLIF: 0
+  DTH_SE_adLIF: 0
+  DTH_LS_SE_adLIF: 0
+  LS_SE_adLIF: 0
+input_fir_modes:
+  SE_adLIF: null
+  DTH_SE_adLIF: null
+  DTH_LS_SE_adLIF: null
+  LS_SE_adLIF: null
+training_objectives:
+  SE_adLIF: classification
+  DTH_SE_adLIF: classification
+  DTH_LS_SE_adLIF: classification_label_smoothing_v1
+  LS_SE_adLIF: classification_label_smoothing_v1
+label_smoothing_epsilon:
+  SE_adLIF: 0
+  DTH_SE_adLIF: 0
+  DTH_LS_SE_adLIF: 0.1
+  LS_SE_adLIF: 0.1
+hidden_cells:
+  SE_adLIF: se_adlif
+  DTH_SE_adLIF: dth_se_adlif
+  DTH_LS_SE_adLIF: dth_se_adlif
+  LS_SE_adLIF: se_adlif
+hidden_cell_settings:
+  dth_se_adlif:
+    rho_fast: 0.9
+    rho_slow: 0.99
+    target_rate: 0.05
+    theta_min: 0.5
+    theta_max: 1.5
+hypotheses:
+  SE_adLIF: Fresh matched plain SE-adLIF control; no old weights or held-out-speaker exposure.
+  DTH_SE_adLIF: Existing bounded threshold conditioning may improve held-out-speaker accuracy without input gain.
+  DTH_LS_SE_adLIF: Train-only smoothing may complement DTH; must improve over DTH and smoothing alone.
+  LS_SE_adLIF: Fresh smoothing-only control separates standalone regularization from complementarity.
+datasets:
+  SHD:
+    batch_size: 1024
+    validation_batch_size: 1024
+    ceilings: [30, 75]
+    stage: 1

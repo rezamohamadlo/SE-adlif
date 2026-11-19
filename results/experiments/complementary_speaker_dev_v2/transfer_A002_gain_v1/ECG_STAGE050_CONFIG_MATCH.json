@@ -1,0 +1,59 @@
+{
+  "status": "matched_except_explicit_gain_mechanism_and_provenance",
+  "config_sha256": {
+    "SE_adLIF": "def52c660f806d6fea0f27d5b295c2e26d57c8ed8c9d06ea2c58e2515c623120",
+    "GAIN_SE_adLIF": "3fff179658658694457d67397abd80632367cfa8e3849e07dc56e49f40589824"
+  },
+  "differences": {
+    "exp_name": {
+      "baseline": "ECG_SE_adLIF_2layer",
+      "gain": "ECG_GAIN_SE_adLIF_2layer"
+    },
+    "input_fir.lags": {
+      "baseline": null,
+      "gain": [
+        1,
+        2,
+        4,
+        8
+      ]
+    },
+    "input_fir.mode": {
+      "baseline": null,
+      "gain": "gain_only"
+    },
+    "logdir": {
+      "baseline": "results/experiments/complementary_speaker_dev_v2/transfer_A002_gain_v1/SE_adLIF/ECG/seed_42",
+      "gain": "results/experiments/complementary_speaker_dev_v2/transfer_A002_gain_v1/GAIN_SE_adLIF/ECG/seed_42"
+    },
+    "model_variant": {
+      "baseline": "SE_adLIF",
+      "gain": "GAIN_SE_adLIF"
+    },
+    "paper_baseline_deviations": {
+      "baseline": [
+        "validation-only staged discovery; official tests disabled",
+        "batch_size=256; LR unchanged",
+        "full_schedule_epochs=400; explicit staged stops"
+      ],
+      "gain": [
+        "model_variant=GAIN_SE_adLIF",
+        "validation-only staged discovery; official tests disabled",
+        "batch_size=256; LR unchanged",
+        "full_schedule_epochs=400; explicit staged stops"
+      ]
+    },
+    "run_mode": {
+      "baseline": "reference",
+      "gain": "ours"
+    },
+    "study_hypothesis": {
+      "baseline": "Fresh matched dataset-specific reference control; no historical weights or changed optimization.",
+      "gain": "A002 factorized channel gain tests cross-dataset transfer of the two speaker-pair accuracy gains; confidence diagnostics are mixed, and no novelty or test improvement is assumed."
+    }
+  },
+  "both_effective_datamodule_indices_equal_frozen_audit": true,
+  "frozen_split_fingerprint": "cf075d923dbd7c95b52b822e9f394a3cf6232fe510fc691d44d9e9bada99e77a",
+  "official_test_opened": false,
+  "baseline_adequacy_caveat": "Matched settings do not establish adequate optimization; baseline50screen remains underlearned."
+}

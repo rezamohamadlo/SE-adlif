@@ -1,0 +1,27 @@
+{
+  "recorded_at": "2026-11-12T12:40:53.656280+00:00",
+  "decision": "PREFER_STATIC_HYPOTHESIS_NO_DECLARED_DYNAMIC_ADVANTAGE_COMPLETE_STATIC_FACTORIAL_BEFORE_TRANSFER",
+  "evidence": "C002_PRIMARY_STAGE030_COMPARISON.json",
+  "static_minus_LS_pp": 1.0397553443908691,
+  "dynamic_minus_static_pp": -0.7339417934417725,
+  "dynamic_minus_LS_pp": 0.3058135509490967,
+  "practical_threshold_pp": 0.5,
+  "static_incremental_primary_gate_passed": true,
+  "dynamic_incremental_gate_passed": false,
+  "ordinary_CE_static_minus_LS": -0.012227118015289307,
+  "late10_static_minus_LS_pp": 1.5045869350433394,
+  "per_speaker_static_minus_LS_pp": {
+    "0": 0.8762322015334001,
+    "3": 1.2465373961218829
+  },
+  "interpretation": "Static thresholds with smoothing show a practical primary-development gain over smoothing alone, supported by both speakers, ordinary CE andlate10mean. Dynamicterms do not improve over static in this screen and add only0.30581pp overLS,below0.5. Thus a specifically dynamic-trace benefit is not supported; C001stronger incremental gain did not repeat above threshold in this fresh cohort. One repeatedly tuned pair/seed and observedrepeatspread preclude generalization or synergy claims.",
+  "numerical_repeatability": "C002_REDUCTION_REPEATABILITY.json",
+  "numeric_diagnostic_interpretation": "CPUand diagnostic deterministicCUDAreduction repeats were bitwise stable. DefaultCUDAreducedscores variedup to2.67029e-5 and inputgradientsup to1.39698e-9 with0predictionchanges on fixedsyntheticinputs. Possible contributor, notproven cause of1.34556pp actual repeated-training spread. No main setting changed.",
+  "same_seed_repeats_are_independent": false,
+  "actual_training_start_weight_hash_available": false,
+  "new_secondary_tuning_or_extension_allowed": false,
+  "official_test_evaluated": false,
+  "no_inference_speed_claim": true,
+  "next_action": "Prepare a fresh matched primary four-arm comparison Baseline/static-threshold-only/LS/static+LS to assess standalone static effect and factorial interaction before transfer. Add nonintrusive initial-state hash evidence if verified not to alter RNG/model behavior. Keep historical controls separate unless every relevant condition matches; do not silently mix cohorts or bypass source guards. No static candidate has yet demonstrated SSC/ECG transfer.",
+  "full_goal_complete": false
+}

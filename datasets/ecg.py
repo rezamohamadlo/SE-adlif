@@ -66,6 +66,8 @@ class ECGLDM(pl.LightningDataModule):
         num_workers=0,
         burn_in_time=0,
         num_classes: int = 6,  # for hydra
+        validation_only_data: bool = False,
+        validation_batch_size: int = None,
     ) -> None:
         super().__init__()
         if not os.path.isabs(data_path):
@@ -76,6 +78,8 @@ class ECGLDM(pl.LightningDataModule):
         self.cache_root = data_path if cache_root is None else cache_root
         self.valid_fraction = valid_fraction
         self.batch_size = batch_size
+        self.validation_only_data = validation_only_data
+        self.validation_batch_size = validation_batch_size or batch_size
         self.num_workers = num_workers
         self.random_seed = random_seed
         self.burn_in_time = burn_in_time
@@ -84,7 +88,9 @@ class ECGLDM(pl.LightningDataModule):
         self.generator = torch.Generator().manual_seed(random_seed)
         
         self.data_path.mkdir(exist_ok=True, parents=True)
-        self.download_if_not_exist(self.data_path, self.files_to_url)
+        files = ({k:v for k,v in self.files_to_url.items() if k.endswith('train.mat')}
+                 if self.validation_only_data else self.files_to_url)
+        self.download_if_not_exist(self.data_path, files)
 
         
     def prepare_data(self):
@@ -92,28 +98,30 @@ class ECGLDM(pl.LightningDataModule):
         assert os.path.exists(
             os.path.join(self.data_path, "QTDB/QTDB_train.mat")
         ), f"Data path {self.data_path} does not contain QTDB/QTDB_train.mat"
-        assert os.path.exists(
-            os.path.join(self.data_path, "QTDB/QTDB_test.mat")
-        ), f"Data path {self.data_path} does not contain QTDB/QTDB_test.mat"
+        if not self.validation_only_data:
+            assert os.path.exists(
+                os.path.join(self.data_path, "QTDB/QTDB_test.mat")
+            ), f"Data path {self.data_path} does not contain QTDB/QTDB_test.mat"
         
 
     def setup(self, stage: Optional[str] = None) -> None:
         train_mat = scipy.io.loadmat(
             os.path.join(self.data_path, "QTDB/QTDB_train.mat")
         )
-        test_mat = scipy.io.loadmat(os.path.join(self.data_path, "QTDB/QTDB_test.mat"))
         train_dt, train_x, train_y = convert_dataset_wtime(train_mat)
-        test_dt, test_x, test_y = convert_dataset_wtime(test_mat)
         self.train_val_dataset_ = QTDB_ECGWrapper(
             ds=TensorDataset(
                 torch.from_numpy(train_x * 1.0), torch.from_numpy(train_y)
             ),
             burn_in_time=self.burn_in_time,
         )
-        self.data_test = QTDB_ECGWrapper(
-            ds=TensorDataset(torch.from_numpy(test_x * 1.0), torch.from_numpy(test_y)),
-            burn_in_time=self.burn_in_time,
-        )
+        if not self.validation_only_data:
+            test_mat = scipy.io.loadmat(os.path.join(self.data_path, "QTDB/QTDB_test.mat"))
+            test_dt, test_x, test_y = convert_dataset_wtime(test_mat)
+            self.data_test = QTDB_ECGWrapper(
+                ds=TensorDataset(torch.from_numpy(test_x * 1.0), torch.from_numpy(test_y)),
+                burn_in_time=self.burn_in_time,
+            )
         valid_len = math.floor(len(self.train_val_dataset_) * self.valid_fraction)
         self.data_train, self.data_val = torch.utils.data.random_split(
             self.train_val_dataset_,
@@ -139,7 +147,7 @@ class ECGLDM(pl.LightningDataModule):
             self.data_val,
             shuffle=False,
             pin_memory=True,
-            batch_size=self.batch_size,
+            batch_size=self.validation_batch_size,
             drop_last=False,
             collate_fn=self.collate_fn,
             num_workers=self.num_workers,

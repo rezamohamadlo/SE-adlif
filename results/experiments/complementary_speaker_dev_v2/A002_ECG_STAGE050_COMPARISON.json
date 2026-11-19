@@ -1,0 +1,66 @@
+{
+  "models": {
+    "SE_adLIF": {
+      "status": "verified_completed_bounded_screen_not_full_budget",
+      "completed_epochs": 50,
+      "full_budget": 400,
+      "preliminary": true,
+      "selected_completed_epoch": 50,
+      "training_accuracy_at_selection": 0.361963152885437,
+      "validation_accuracy": 0.35564950108528137,
+      "validation_loss": 1.4227224588394165,
+      "tail10_validation_mean": 0.32534717321395873,
+      "initial10_validation_mean": 0.30047911405563354,
+      "macro_class_recall": 0.2554613834950135,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "3e8c6d4e1c2fe4a8a5f3dbc0b4cf5b7322ee6771debd479d52bca254dee6108d",
+          "epoch_index": 49,
+          "global_step": 100
+        },
+        "last": {
+          "sha256": "3e8c6d4e1c2fe4a8a5f3dbc0b4cf5b7322ee6771debd479d52bca254dee6108d",
+          "epoch_index": 49,
+          "global_step": 100
+        }
+      },
+      "official_test_opened": false
+    },
+    "GAIN_SE_adLIF": {
+      "status": "verified_completed_bounded_screen_not_full_budget",
+      "completed_epochs": 50,
+      "full_budget": 400,
+      "preliminary": true,
+      "selected_completed_epoch": 50,
+      "training_accuracy_at_selection": 0.6461585760116577,
+      "validation_accuracy": 0.6416346430778503,
+      "validation_loss": 1.0030912160873413,
+      "tail10_validation_mean": 0.631901103258133,
+      "initial10_validation_mean": 0.30047911405563354,
+      "macro_class_recall": 0.5995217331865551,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "1a64d68b0397dbc37a9162ec7eab7ada11f9d2cc18de126ed841f237efe09cdc",
+          "epoch_index": 49,
+          "global_step": 100
+        },
+        "last": {
+          "sha256": "1a64d68b0397dbc37a9162ec7eab7ada11f9d2cc18de126ed841f237efe09cdc",
+          "epoch_index": 49,
+          "global_step": 100
+        }
+      },
+      "official_test_opened": false
+    }
+  },
+  "delta_gain_minus_baseline_pp": 28.598514199256897,
+  "practical_threshold_pp": 0.1,
+  "practical_threshold_met": true,
+  "decision": "EXTEND_MATCHED_50_TO_100_INCONCLUSIVE_UNDERLEARNED_CONTROLS",
+  "reason": "Both best at final epoch and losses/accuracy improving late;100optimizer updates are insufficient to establish converged generalization. Gain shows learning acceleration, not a final test gain.",
+  "next_action": "Full resume each own last checkpoint to100; keep400epoch scheduler and all settings. Preserve50epoch snapshots; no B/final replication or official tests yet.",
+  "estimated_additional_seconds": 1100,
+  "completed_independent_training_seeds": 1,
+  "sample_sd_across_seeds": null,
+  "official_test_opened": false
+}

@@ -1,0 +1,339 @@
+diff --git a/test_checkpoint.py b/test_checkpoint.py
+--- a/test_checkpoint.py
++++ b/test_checkpoint.py
+@@ -53,19 +53,42 @@
+                 or set(plan.get('training_seeds',[]))!=seeds
+                 or plan.get('architecture_and_settings_frozen') is not True):
+             raise ValueError('Final evidence requires all four frozen arms, three datasets and three matching seeds')
++        from module.final_config_guard import validate_frozen_configurations
+         cohorts=set()
++        cohort_configs=[]
++        source_identities={}
+         for path,item in plan['checkpoints'].items():
+             result=json.loads(local_path(item['stage_receipt'],must_exist=True).read_text(encoding='utf-8'))
+             identity=(item.get('arm'),result.get('dataset'),result.get('seed'))
++            if identity[0] not in arms or identity[1] not in datasets or identity[2] not in seeds:
++                raise ValueError('Final plan contains an undeclared arm, dataset or training seed')
+             budget={'SHD':300,'SSC':40,'ECG':400}.get(result.get('dataset'))
+             if (identity in cohorts or result.get('status')!='stage_complete' or result.get('preliminary') is not False
+                     or result.get('completed_epochs')!=budget or result.get('full_budget')!=budget
+                     or result.get('best_checkpoint')!=path or result.get('best_checkpoint_sha256')!=item.get('sha256')
+                     or sha256(local_path(path,must_exist=True))!=item['sha256']):
+                 raise ValueError('Final plan contains incomplete, duplicated or incompatible training evidence')
++            saved=torch.load(local_path(path,must_exist=True),map_location='cpu',weights_only=False)
++            saved_cfg=portable_config(OmegaConf.to_container(OmegaConf.create(
++                saved.get('hyper_parameters',{}).get('cfg',{})),resolve=True))
++            dataset=result.get('dataset')
++            if dataset not in source_identities:
++                source_identities[dataset]=forward_identity(dataset)
++            if (not isinstance(saved_cfg,dict)
++                    or saved.get('epoch')!=result.get('selected_epoch_index')
++                    or not isinstance(saved.get('epoch'),int) or not 0<=saved['epoch']<budget
++                    or saved_cfg.get('model_variant')!=result.get('model')
++                    or saved_cfg.get('random_seed')!=result.get('seed')
++                    or saved_cfg.get('paper_baseline_dataset')!=dataset
++                    or saved_cfg.get('evaluation_protocol')!=result.get('protocol')
++                    or saved_cfg.get('complementary_study')=='complementary_speaker_dev_v2'
++                    or item.get('model_source_sha256')!=source_identities[dataset]):
++                raise ValueError('Final cohort checkpoint config, epoch or implementation differs from its receipt')
++            cohort_configs.append((*identity,saved_cfg))
+             cohorts.add(identity)
+         if cohorts!={(a,d,s) for a in arms for d in datasets for s in seeds}:
+             raise ValueError('Final plan omits part of the four-arm replicated comparison')
++        validate_frozen_configurations(plan,cohort_configs)
+     return dict(purpose=plan['purpose'],completed_training_epochs=receipt['completed_epochs'],
+                 full_budget=receipt['full_budget'],preliminary=receipt['preliminary'],
+                 checkpoint_sha256=entry['sha256'],selected_epoch_index=checkpoint['epoch'],
+diff --git a/module/final_config_guard.py b/module/final_config_guard.py
+new file mode 100644
+--- /dev/null
++++ b/module/final_config_guard.py
+@@ -0,0 +1,105 @@
++"""Draft pure configuration guard; no file loading, data access or training."""
++from copy import deepcopy
++import json
++
++ARMS = {'Baseline', 'A', 'B', 'A+B'}
++DATASETS = {'SHD', 'SSC', 'ECG'}
++SEEDS = {42, 123, 456}
++# These identify the run rather than its numerical training configuration.
++RUN_METADATA = {
++    'random_seed', 'logdir', 'exp_name', 'launcher_logdir', 'launcher_script',
++    'run_mode', 'study_hypothesis', 'study_stage', 'ckpt_path',
++}
++# Declared mechanism differences cannot waive these matched-condition checks.
++PROTECTED = {
++    'dataset', 'datadir', 'lr', 'batch_size', 'n_epochs', 'max_epochs',
++    'precision', 'device', 'optimizer', 'weight_decay', 'betas', 'scheduler',
++    'scheduler_min_lr', 'factor', 'patience', 'gradient_clip_val',
++    'early_stopping', 'early_stopping_patience', 'early_stopping_min_delta',
++    'loss_agg', 'paper_baseline', 'paper_baseline_version',
++    'paper_baseline_dataset', 'evaluation_protocol', 'tracking_metric',
++    'tracking_mode', 'stage_ceiling',
++}
++
++
++def _stable(config):
++    if not isinstance(config, dict):
++        raise ValueError('Expected a resolved JSON configuration mapping')
++    return {k: deepcopy(v) for k, v in config.items() if k not in RUN_METADATA}
++
++
++def _remove_path(config, path):
++    parts = path.split('.')
++    node = config
++    for part in parts[:-1]:
++        if not isinstance(node, dict) or part not in node:
++            return
++        node = node[part]
++    if isinstance(node, dict):
++        node.pop(parts[-1], None)
++
++
++def validate_frozen_configurations(plan, cohort):
++    """Validate all 36 checkpoint configs against pre-frozen arm specifications.
++
++    cohort contains (arm, dataset, training_seed, resolved_checkpoint_cfg).
++    The caller must verify checkpoint hashes, source identities and receipts,
++    and pass portable resolved configs read from those exact checkpoints.
++    This helper does not replace those independent provenance checks.
++    """
++    frozen = plan.get('frozen_configurations')
++    differences = plan.get('mechanism_difference_paths')
++    if (not isinstance(frozen, dict) or set(frozen) != DATASETS
++            or not isinstance(differences, list) or not differences
++            or any(not isinstance(p, str) for p in differences)
++            or len(set(differences)) != len(differences)):
++        raise ValueError('Final testing requires frozen per-arm configs and explicit mechanism paths')
++    for path in differences:
++        if (not isinstance(path, str) or not path or any(not p for p in path.split('.'))
++                or path.split('.')[0] in PROTECTED | RUN_METADATA):
++            raise ValueError('Mechanism paths cannot waive matched training conditions')
++    for dataset in DATASETS:
++        if not isinstance(frozen[dataset], dict) or set(frozen[dataset]) != ARMS:
++            raise ValueError('Frozen configurations must specify every arm for every dataset')
++        signatures = set()
++        shared = None
++        for arm in ARMS:
++            spec = _stable(frozen[dataset][arm])
++            computational = deepcopy(spec)
++            # Factory selection must also have explicit mechanism/architecture
++            # settings; renaming a baseline or its deviation note is not an arm.
++            computational.pop('model_variant', None)
++            computational.pop('paper_baseline_deviations', None)
++            signatures.add(json.dumps(computational, sort_keys=True))
++            common = deepcopy(spec)
++            # Deviations remain verified against each exact frozen arm config.
++            common.pop('paper_baseline_deviations', None)
++            for path in differences:
++                _remove_path(common, path)
++            if shared is None:
++                shared = common
++            elif common != shared:
++                raise ValueError('Frozen arms differ outside their declared mechanisms')
++        if len(signatures) != 4:
++            raise ValueError('Four arm labels must describe four distinct configurations')
++    seen = set()
++    for arm, dataset, seed, config in cohort:
++        identity = (arm, dataset, seed)
++        if arm not in ARMS or dataset not in DATASETS or seed not in SEEDS or identity in seen:
++            raise ValueError('Unexpected or duplicate final cohort identity')
++        seen.add(identity)
++        if config.get('random_seed') != seed or config.get('paper_baseline_dataset') != dataset:
++            raise ValueError('Checkpoint dataset/training seed differs from cohort identity')
++        if config.get('init_ckpt_path'):
++            raise ValueError('Final fresh-training comparison cannot use weights-only initialization')
++        if dataset == 'SHD':
++            data = config.get('dataset', {})
++            if (data.get('validate_on') != 0.2 or data.get('random_seed') != 42
++                    or data.get('speaker_split_manifest') or data.get('speaker_split_fingerprint')):
++                raise ValueError('Canonical SHD* requires its own random20percent split, seed42')
++        if _stable(config) != _stable(frozen[dataset][arm]):
++            raise ValueError('Checkpoint settings differ from the frozen arm configuration')
++    expected = {(a, d, s) for a in ARMS for d in DATASETS for s in SEEDS}
++    if seen != expected:
++        raise ValueError('Final configuration cohort is incomplete')
++    return {'verified_configurations': len(seen), 'matched_shared_conditions': True}
+diff --git a/tests/test_final_config_guard.py b/tests/test_final_config_guard.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_final_config_guard.py
+@@ -0,0 +1,89 @@
++"""Scientific protocol guards only: synthetic metadata, no model/data/training."""
++import copy
++import unittest
++from module.final_config_guard import validate_frozen_configurations
++
++
++class FinalConfigurationTests(unittest.TestCase):
++    def setUp(self):
++        self.plan = dict(frozen_configurations={},
++                         mechanism_difference_paths=['model_variant', 'input_gain', 'training_objective'])
++        self.cohort = []
++        for dataset in ('SHD', 'SSC', 'ECG'):
++            self.plan['frozen_configurations'][dataset] = {}
++            for arm in ('Baseline', 'A', 'B', 'A+B'):
++                cfg = dict(random_seed=42, paper_baseline_dataset=dataset,
++                           dataset=dict(validate_on=.2, random_seed=42),
++                           lr=.01, batch_size=256, n_epochs={'SHD':300,'SSC':40,'ECG':400}[dataset],
++                           model_variant='GAIN' if arm in ('A','A+B') else 'SE',
++                           input_gain=arm in ('A','A+B'),
++                           training_objective='smooth' if arm in ('B','A+B') else 'classification',
++                           paper_baseline_version='fixture', init_ckpt_path=None)
++                self.plan['frozen_configurations'][dataset][arm] = cfg
++                for seed in (42,123,456):
++                    own=copy.deepcopy(cfg);own.update(random_seed=seed,logdir=f'results/{arm}/{dataset}/{seed}')
++                    self.cohort.append((arm,dataset,seed,own))
++
++    def check(self):
++        return validate_frozen_configurations(self.plan,self.cohort)
++
++    def test_complete_matched_four_arm_replication(self):
++        self.assertEqual(self.check()['verified_configurations'],36)
++
++    def test_another_cohort_checkpoint_cannot_change_lr(self):
++        self.cohort[-1][3]['lr']=.002
++        with self.assertRaisesRegex(ValueError,'frozen arm'):self.check()
++
++    def test_declaring_lr_as_mechanism_cannot_waive_matching(self):
++        self.plan['mechanism_difference_paths'].append('lr')
++        with self.assertRaisesRegex(ValueError,'waive'):self.check()
++
++    def test_frozen_split_mismatch_is_rejected_even_if_every_seed_matches_it(self):
++        self.plan['frozen_configurations']['SHD']['A']['dataset']['random_seed']=7
++        with self.assertRaisesRegex(ValueError,'outside'):self.check()
++
++    def test_speaker_holdout_cannot_be_relabelled_canonical(self):
++        for arm in self.plan['frozen_configurations']['SHD']:
++            self.plan['frozen_configurations']['SHD'][arm]['dataset']['validate_on']='speaker_holdout'
++        for _,dataset,_,cfg in self.cohort:
++            if dataset=='SHD':cfg['dataset']['validate_on']='speaker_holdout'
++        with self.assertRaisesRegex(ValueError,'Canonical'):self.check()
++
++    def test_duplicate_arm_implementations_are_rejected(self):
++        f=self.plan['frozen_configurations']['SSC'];f['A']=copy.deepcopy(f['Baseline'])
++        with self.assertRaisesRegex(ValueError,'distinct'):self.check()
++
++    def test_different_labels_or_deviation_notes_do_not_create_four_mechanisms(self):
++        f=self.plan['frozen_configurations']['SSC']
++        for arm in f:
++            f[arm]=dict(copy.deepcopy(f['Baseline']),model_variant=arm,
++                        paper_baseline_deviations=['Renamed '+arm])
++        with self.assertRaisesRegex(ValueError,'distinct'):self.check()
++
++    def test_nonstring_mechanism_paths_are_rejected_cleanly(self):
++        self.plan['mechanism_difference_paths'].append({'lr':True})
++        with self.assertRaisesRegex(ValueError,'explicit mechanism'):self.check()
++
++    def test_missing_and_duplicate_cohorts_are_rejected(self):
++        self.cohort.pop()
++        with self.assertRaisesRegex(ValueError,'incomplete'):self.check()
++        self.cohort.append(self.cohort[0])
++        with self.assertRaisesRegex(ValueError,'duplicate'):self.check()
++
++    def test_weights_only_initialization_is_not_fresh_training(self):
++        self.cohort[0][3]['init_ckpt_path']='results/previous/best.ckpt'
++        with self.assertRaisesRegex(ValueError,'weights-only'):self.check()
++
++    def test_actual_training_seed_must_match_cohort(self):
++        self.cohort[1][3]['random_seed']=42
++        with self.assertRaisesRegex(ValueError,'seed'):self.check()
++
++    def test_unplanned_dropout_or_preprocessing_changes_rejected(self):
++        for key,value in [('dropout',.4),('unregistered_preprocess',{'warp':True})]:
++            with self.subTest(key=key):
++                changed=copy.deepcopy(self.cohort);changed[0][3][key]=value
++                with self.assertRaisesRegex(ValueError,'frozen arm'):
++                    validate_frozen_configurations(self.plan,changed)
++
++
++if __name__=='__main__':unittest.main()
+diff --git a/tests/test_study_evaluation.py b/tests/test_study_evaluation.py
+--- a/tests/test_study_evaluation.py
++++ b/tests/test_study_evaluation.py
+@@ -4,6 +4,7 @@
+ from pathlib import Path
+ import tempfile
+ import unittest
++import torch
+ from unittest.mock import patch
+ from omegaconf import OmegaConf
+ from project_paths import ROOT,portable_path
+@@ -64,25 +65,69 @@
+         p.update(datasets=['SHD','SSC','ECG'],training_seeds=[42,123,456])
+         with self.assertRaises(ValueError):self.evaluate(plan=p)
+ 
+-    def test_complete_final_cohort_and_full_budget_are_verified(self):
++    def complete_final_plan(self):
+         p=copy.deepcopy(self.plan)
+         p.update(purpose='final',arms=['Baseline','A','B','A+B'],architecture_and_settings_frozen=True,
+-                 datasets=['SHD','SSC','ECG'],training_seeds=[42,123,456],checkpoints={})
+-        for arm in p['arms']:
+-            for dataset in p['datasets']:
++                 datasets=['SHD','SSC','ECG'],training_seeds=[42,123,456],checkpoints={},
++                 frozen_configurations={},mechanism_difference_paths=['model_variant','input_fir','spike_delete_probability'])
++        models={'Baseline':'SE_adLIF','A':'FIR_SE_adLIF','B':'THIN_SE_adLIF','A+B':'FIR_THIN_SE_adLIF'}
++        for dataset in p['datasets']:
++            p['frozen_configurations'][dataset]={}
++            for arm in p['arms']:
++                budget={'SHD':300,'SSC':40,'ECG':400}[dataset]
++                config=dict(random_seed=42,model_variant=models[arm],paper_baseline_dataset=dataset,
++                            evaluation_protocol='fixture_final',init_ckpt_path=None,n_epochs=budget,
++                            dataset=dict(validate_on=.2 if dataset=='SHD' else 'validation',random_seed=42),
++                            batch_size=256,lr=.01,dropout=.15,
++                            input_fir=dict(lags=[1,2,4,8],mode='causal') if arm in ('A','A+B') else None,
++                            spike_delete_probability=.1 if arm in ('B','A+B') else 0)
++                p['frozen_configurations'][dataset][arm]=copy.deepcopy(config)
+                 for seed in p['training_seeds']:
+                     own=(arm=='A' and dataset=='SHD' and seed==42)
+                     path=self.path if own else Path(self.temp.name)/f'{arm}_{dataset}_{seed}.ckpt'
+                     receipt=self.receipt if own else path.with_suffix('.json')
+-                    if not own:path.write_bytes(b'trusted-test-fixture')
+-                    key=portable_path(path);budget={'SHD':300,'SSC':40,'ECG':400}[dataset]
+-                    record=dict(self.record,best_checkpoint=key,dataset=dataset,seed=seed,
++                    config['random_seed']=seed
++                    epoch=min(63,budget-1)
++                    torch.save(dict(epoch=epoch,hyper_parameters=dict(cfg=copy.deepcopy(config))),path)
++                    key=portable_path(path);digest=sha256(path)
++                    record=dict(self.record,best_checkpoint=key,best_checkpoint_sha256=digest,dataset=dataset,seed=seed,
++                                model=models[arm],protocol='fixture_final',selected_epoch_index=epoch,
+                                 status='stage_complete',completed_epochs=budget,full_budget=budget,preliminary=False)
+                     receipt.write_text(json.dumps(record))
+-                    p['checkpoints'][key]=dict(self.entry,stage_receipt=str(receipt),arm=arm)
++                    p['checkpoints'][key]=dict(self.entry,sha256=digest,stage_receipt=str(receipt),arm=arm)
++        return p
++
++    def test_complete_final_cohort_and_full_budget_are_verified(self):
++        p=self.complete_final_plan()
+         self.assertEqual(self.evaluate(plan=p)['purpose'],'final')
+         del p['checkpoints'][next(key for key in p['checkpoints'] if key!=self.key)]
+         with self.assertRaises(ValueError):self.evaluate(plan=p)
+ 
++    def test_other_final_checkpoint_must_match_its_receipt(self):
++        p=self.complete_final_plan()
++        key=next(key for key in p['checkpoints'] if key!=self.key)
++        item=p['checkpoints'][key];path=Path(key)
++        saved=torch.load(path,weights_only=False);saved['epoch']=0;torch.save(saved,path)
++        item['sha256']=sha256(path)
++        receipt=Path(item['stage_receipt']);record=json.loads(receipt.read_text())
++        record['best_checkpoint_sha256']=item['sha256'];receipt.write_text(json.dumps(record))
++        with self.assertRaisesRegex(ValueError,'config, epoch'):self.evaluate(plan=p)
++
++    def test_other_final_checkpoint_source_identity_is_verified(self):
++        p=self.complete_final_plan()
++        key=next(key for key in p['checkpoints'] if key!=self.key)
++        p['checkpoints'][key]['model_source_sha256']={'source':'changed'}
++        with self.assertRaisesRegex(ValueError,'implementation'):self.evaluate(plan=p)
++
++    def test_hash_consistent_other_checkpoint_config_drift_is_rejected(self):
++        p=self.complete_final_plan()
++        key=next(key for key in p['checkpoints'] if key!=self.key)
++        item=p['checkpoints'][key];path=Path(key)
++        saved=torch.load(path,weights_only=False);saved['hyper_parameters']['cfg']['lr']=.123
++        torch.save(saved,path);item['sha256']=sha256(path)
++        receipt=Path(item['stage_receipt']);record=json.loads(receipt.read_text())
++        record['best_checkpoint_sha256']=item['sha256'];receipt.write_text(json.dumps(record))
++        with self.assertRaisesRegex(ValueError,'frozen arm'):self.evaluate(plan=p)
++
+ 
+ if __name__=='__main__':unittest.main()

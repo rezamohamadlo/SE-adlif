@@ -1,0 +1,13 @@
+# @package _global_
+defaults:
+  - SHD_DIRECTION_DTH_RDROP_SE_adLIF
+  - /paper_baseline
+  - _self_
+exp_name: SHD_DIRECTION_AUG_DTH_RDROP_SE_adLIF
+dataset:
+  _target_: datasets.shd_augmented.AugmentedSHDLDM
+  training_frame_augmentation:
+    version: shd_frame_augmentation_v1
+    time_scale: [0.9, 1.1]
+    channel_shift: 2
+    spike_delete_probability: 0.05

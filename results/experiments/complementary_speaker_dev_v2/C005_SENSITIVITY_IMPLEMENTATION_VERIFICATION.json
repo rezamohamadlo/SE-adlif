@@ -1,0 +1,21 @@
+{
+  "verified_at": "2026-11-12T15:12:14.774328+00:00",
+  "status": "nontrainingpreflightverified_sourcefrozen_beforelaunch",
+  "source_files": 278,
+  "archives_content_verified": true,
+  "new_source_only": "NewsecondaryYAML and historicalprimaryclosure descriptions;model/runner/helper/tests unchanged.",
+  "nontraining_tests": {
+    "passed": 13,
+    "seconds": 5.408,
+    "fit_or_optimizer_steps": false,
+    "command": ".ven/Scripts/python.exe -m unittest tests.test_speaker_development tests.test_dropout_consistency"
+  },
+  "portable_runner_dry_run": "Botharms passedexternalTEMP;newpaths;no training/writes.",
+  "actual_data_preflight": "C005_SENSITIVITY_DATA_PREFLIGHT.json",
+  "calibration_reuse": "Sameactualarchitecture/objective/1024/precision/342maximumshape,existingrealtrainingfinitegradients/32.5%headroom;statesdiscarded.",
+  "protocol_artifacts_hashbound": true,
+  "fresh_training": true,
+  "primary_weights_reused": false,
+  "secondary_tuning_or_extension": false,
+  "official_tests": false
+}

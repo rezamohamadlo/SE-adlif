@@ -1,0 +1,483 @@
+{
+  "status": "verified_four_arm_primary30_validation_screen",
+  "training_seed": 42,
+  "validation_speakers": [
+    0,
+    3
+  ],
+  "completed_epochs_per_arm": 30,
+  "full_budget": 300,
+  "records": [
+    {
+      "model": "SE_adLIF",
+      "selected_validation_accuracy": 0.8214067220687866,
+      "selected_completed_epoch": 30,
+      "online_training_accuracy_in_selected_epoch": 0.9964192509651184,
+      "validation_loss_at_selection": 0.946418046951294,
+      "last10_validation_mean": 0.7949235618114472,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "ed1c6d1084058cc495404a4e5022437704d5f540dae26f48d1a2d29b7260852f",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "ed1c6d1084058cc495404a4e5022437704d5f540dae26f48d1a2d29b7260852f",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        }
+      },
+      "per_speaker": {
+        "0": {
+          "recordings": 913,
+          "correct": 757,
+          "accuracy": 0.8291347207009858
+        },
+        "3": {
+          "recordings": 722,
+          "correct": 586,
+          "accuracy": 0.8116343490304709
+        }
+      },
+      "macroclass_recall": 0.8275436285028779,
+      "training_objective_settings": {
+        "training_objective": "classification",
+        "label_smoothing_epsilon": 0.0,
+        "dropout_consistency_alpha": 0.0,
+        "inference_forward_passes": 1
+      },
+      "training_epoch_diagnostics": {},
+      "reproduced_validation_accuracy": 0.8214067278287461,
+      "reproduced_ordinary_ce": 0.946418188726501,
+      "source_code": "results/experiments/complementary_speaker_dev_v2/C005_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+      "source_sha256": "c3e28e11d46a4b062d2cf3e56c9f3b7f1f55e937adfa2af21cb575361094746f",
+      "official_test_evaluated": false,
+      "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+      "raw_prediction_sha256": "8c544298af9882c79e99a548f84c77d6ee76e6d1192003d6fc1a9a3e954afb74"
+    },
+    {
+      "model": "RDROP_SE_adLIF",
+      "selected_validation_accuracy": 0.8385320901870728,
+      "selected_completed_epoch": 23,
+      "online_training_accuracy_in_selected_epoch": 0.9827473759651184,
+      "validation_loss_at_selection": 0.9442790746688843,
+      "last10_validation_mean": 0.8034250736236572,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "32e68fb61eb4cdbfeb072acb86bd74edc40b185fbcefbecaa0c3f355297fc9b4",
+          "epoch_index": 22,
+          "global_step": 138,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "949c9b1699815f6fa0fb93662f1213061232f2102d1d5c34a6bf8833f57834cf",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        }
+      },
+      "per_speaker": {
+        "0": {
+          "recordings": 913,
+          "correct": 819,
+          "accuracy": 0.8970427163198248
+        },
+        "3": {
+          "recordings": 722,
+          "correct": 552,
+          "accuracy": 0.7645429362880887
+        }
+      },
+      "macroclass_recall": 0.8454179548047496,
+      "training_objective_settings": {
+        "training_objective": "classification_dropout_consistency_v1",
+        "label_smoothing_epsilon": 0.0,
+        "dropout_consistency_alpha": 1.0,
+        "inference_forward_passes": 1
+      },
+      "training_epoch_diagnostics": {
+        "train_hard_ce": {
+          "selected_epoch": 0.046984147280454636,
+          "last_epoch": 0.00926420371979475,
+          "maximum": 3.0039827823638916
+        },
+        "train_supervised_loss": {
+          "selected_epoch": 0.046984147280454636,
+          "last_epoch": 0.00926420371979475,
+          "maximum": 3.0039827823638916
+        },
+        "train_dropout_symmetric_kl": {
+          "selected_epoch": 0.013084874488413334,
+          "last_epoch": 0.006904854904860258,
+          "maximum": 0.029082858934998512
+        }
+      },
+      "reproduced_validation_accuracy": 0.8385321100917431,
+      "reproduced_ordinary_ce": 0.9442790936621687,
+      "source_code": "results/experiments/complementary_speaker_dev_v2/C005_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+      "source_sha256": "c3e28e11d46a4b062d2cf3e56c9f3b7f1f55e937adfa2af21cb575361094746f",
+      "official_test_evaluated": false,
+      "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/RDROP_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+      "raw_prediction_sha256": "a8430a71eea0ecf2363b4b247dd1db348fd5c6de6fa80ccc2dabb47633bebd74"
+    },
+    {
+      "model": "RDROP_LS_SE_adLIF",
+      "selected_validation_accuracy": 0.8629969358444214,
+      "selected_completed_epoch": 22,
+      "online_training_accuracy_in_selected_epoch": 0.98583984375,
+      "validation_loss_at_selection": 0.583821713924408,
+      "last10_validation_mean": 0.8512538194656372,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "175b2c8e369a140cbf6d58ae70d33ba72d0a312c17f6885954348084b8648d6f",
+          "epoch_index": 21,
+          "global_step": 132,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "884635fc65dd5589aadc0b3487fab0315d03e0662a70344c9039fdedf2d28fb4",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        }
+      },
+      "per_speaker": {
+        "0": {
+          "recordings": 913,
+          "correct": 832,
+          "accuracy": 0.9112814895947426
+        },
+        "3": {
+          "recordings": 722,
+          "correct": 579,
+          "accuracy": 0.8019390581717452
+        }
+      },
+      "macroclass_recall": 0.8698648252117476,
+      "training_objective_settings": {
+        "training_objective": "classification_dropout_consistency_v1",
+        "label_smoothing_epsilon": 0.1,
+        "dropout_consistency_alpha": 1.0,
+        "inference_forward_passes": 1
+      },
+      "training_epoch_diagnostics": {
+        "train_hard_ce": {
+          "selected_epoch": 0.1875109225511551,
+          "last_epoch": 0.15841646492481232,
+          "maximum": 3.003610849380493
+        },
+        "train_supervised_loss": {
+          "selected_epoch": 0.7367567420005798,
+          "last_epoch": 0.6996359825134277,
+          "maximum": 3.003178834915161
+        },
+        "train_dropout_symmetric_kl": {
+          "selected_epoch": 0.021123560145497322,
+          "last_epoch": 0.01957586593925953,
+          "maximum": 0.024001115933060646
+        }
+      },
+      "reproduced_validation_accuracy": 0.8629969418960245,
+      "reproduced_ordinary_ce": 0.5838216939832822,
+      "source_code": "results/experiments/complementary_speaker_dev_v2/C005_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+      "source_sha256": "c3e28e11d46a4b062d2cf3e56c9f3b7f1f55e937adfa2af21cb575361094746f",
+      "official_test_evaluated": false,
+      "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/RDROP_LS_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+      "raw_prediction_sha256": "8e0c85cb4e66e9d98348c7678ecf28314cccdff61ae07224843c323b9f700543"
+    },
+    {
+      "model": "LS_SE_adLIF",
+      "selected_validation_accuracy": 0.884403645992279,
+      "selected_completed_epoch": 28,
+      "online_training_accuracy_in_selected_epoch": 0.9933268427848816,
+      "validation_loss_at_selection": 0.5770623087882996,
+      "last10_validation_mean": 0.8592660605907441,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "20f1347f51e3d1804e327913dc9177f9c5305788485aa7f4bcdbf0a89c79fe19",
+          "epoch_index": 27,
+          "global_step": 168,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "6f7392393174eb5eb1736200061aff48478c2ef129c4e45eea59ce9ced592d03",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        }
+      },
+      "per_speaker": {
+        "0": {
+          "recordings": 913,
+          "correct": 848,
+          "accuracy": 0.9288061336254108
+        },
+        "3": {
+          "recordings": 722,
+          "correct": 598,
+          "accuracy": 0.8282548476454293
+        }
+      },
+      "macroclass_recall": 0.8907497668245234,
+      "training_objective_settings": {
+        "training_objective": "classification_label_smoothing_v1",
+        "label_smoothing_epsilon": 0.1,
+        "dropout_consistency_alpha": 0.0,
+        "inference_forward_passes": 1
+      },
+      "training_epoch_diagnostics": {},
+      "reproduced_validation_accuracy": 0.8844036697247707,
+      "reproduced_ordinary_ce": 0.5770622414915569,
+      "source_code": "results/experiments/complementary_speaker_dev_v2/C005_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+      "source_sha256": "c3e28e11d46a4b062d2cf3e56c9f3b7f1f55e937adfa2af21cb575361094746f",
+      "official_test_evaluated": false,
+      "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+      "raw_prediction_sha256": "6e13a3153f874dc02b07920e2e56ded014490b9a64611787cf663c65b06ab99b"
+    }
+  ],
+  "A_minus_Baseline_pp": 1.7125368118286133,
+  "B_minus_Baseline_pp": 6.299692392349243,
+  "AB_minus_A_pp": 2.4464845657348633,
+  "AB_minus_B_pp": -2.1406710147857666,
+  "interaction_pp": -3.85320782661438,
+  "practical_threshold_pp": 0.5,
+  "shared_config_match": true,
+  "configuration_differences": {
+    "RDROP_SE_adLIF": {
+      "model_variant": {
+        "baseline": "SE_adLIF",
+        "candidate": "RDROP_SE_adLIF"
+      },
+      "exp_name": {
+        "baseline": "SHD_SE_adLIF",
+        "candidate": "SHD_RDROP_SE_adLIF"
+      },
+      "paper_baseline_deviations": {
+        "baseline": [
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*"
+        ],
+        "candidate": [
+          "model_variant=RDROP_SE_adLIF",
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*",
+          "training_objective=classification_dropout_consistency_v1",
+          "dropout_consistency_alpha=1; two stochastic training forwards",
+          "label_smoothing_epsilon=0; training only",
+          "single ordinary inference; hard-label validation CE; first-view online train accuracy"
+        ]
+      },
+      "study_arm": {
+        "baseline": "Baseline",
+        "candidate": "A005 dropout consistency"
+      },
+      "training_objective": {
+        "baseline": "classification",
+        "candidate": "classification_dropout_consistency_v1"
+      },
+      "run_mode": {
+        "baseline": "reference",
+        "candidate": "ours"
+      },
+      "evaluation_protocol": {
+        "baseline": "shd_speaker_dropout_consistency_v1_primary_0_3",
+        "candidate": "shd_speaker_dropout_consistency_v1_primary_0_3_classification_dropout_consistency_v1"
+      },
+      "study_hypothesis": {
+        "baseline": "Baseline; same ordinary SE dynamics and own fresh split.",
+        "candidate": "A005 dropout consistency; same ordinary SE dynamics and own fresh split."
+      },
+      "dropout_consistency_alpha": {
+        "baseline": 0,
+        "candidate": 1
+      },
+      "logdir": {
+        "baseline": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/SE_adLIF/SHD/seed_42",
+        "candidate": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/RDROP_SE_adLIF/SHD/seed_42"
+      }
+    },
+    "RDROP_LS_SE_adLIF": {
+      "model_variant": {
+        "baseline": "SE_adLIF",
+        "candidate": "RDROP_LS_SE_adLIF"
+      },
+      "exp_name": {
+        "baseline": "SHD_SE_adLIF",
+        "candidate": "SHD_RDROP_LS_SE_adLIF"
+      },
+      "paper_baseline_deviations": {
+        "baseline": [
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*"
+        ],
+        "candidate": [
+          "model_variant=RDROP_LS_SE_adLIF",
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*",
+          "training_objective=classification_dropout_consistency_v1",
+          "dropout_consistency_alpha=1; two stochastic training forwards",
+          "label_smoothing_epsilon=0.1; training only",
+          "single ordinary inference; hard-label validation CE; first-view online train accuracy"
+        ]
+      },
+      "study_arm": {
+        "baseline": "Baseline",
+        "candidate": "A005+B002 dropout consistency and smoothing"
+      },
+      "label_smoothing_epsilon": {
+        "baseline": 0,
+        "candidate": 0.1
+      },
+      "training_objective": {
+        "baseline": "classification",
+        "candidate": "classification_dropout_consistency_v1"
+      },
+      "run_mode": {
+        "baseline": "reference",
+        "candidate": "ours"
+      },
+      "evaluation_protocol": {
+        "baseline": "shd_speaker_dropout_consistency_v1_primary_0_3",
+        "candidate": "shd_speaker_dropout_consistency_v1_primary_0_3_classification_dropout_consistency_v1"
+      },
+      "study_hypothesis": {
+        "baseline": "Baseline; same ordinary SE dynamics and own fresh split.",
+        "candidate": "A005+B002 dropout consistency and smoothing; same ordinary SE dynamics and own fresh split."
+      },
+      "dropout_consistency_alpha": {
+        "baseline": 0,
+        "candidate": 1
+      },
+      "logdir": {
+        "baseline": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/SE_adLIF/SHD/seed_42",
+        "candidate": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/RDROP_LS_SE_adLIF/SHD/seed_42"
+      }
+    },
+    "LS_SE_adLIF": {
+      "model_variant": {
+        "baseline": "SE_adLIF",
+        "candidate": "LS_SE_adLIF"
+      },
+      "exp_name": {
+        "baseline": "SHD_SE_adLIF",
+        "candidate": "SHD_LS_SE_adLIF"
+      },
+      "paper_baseline_deviations": {
+        "baseline": [
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*"
+        ],
+        "candidate": [
+          "model_variant=LS_SE_adLIF",
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*",
+          "training_objective=classification_label_smoothing_v1",
+          "label_smoothing_epsilon=0.1; training only",
+          "validation/inference use ordinary hard-label CE; train_hard_ce logged separately"
+        ]
+      },
+      "study_arm": {
+        "baseline": "Baseline",
+        "candidate": "B002 smoothing"
+      },
+      "label_smoothing_epsilon": {
+        "baseline": 0,
+        "candidate": 0.1
+      },
+      "training_objective": {
+        "baseline": "classification",
+        "candidate": "classification_label_smoothing_v1"
+      },
+      "run_mode": {
+        "baseline": "reference",
+        "candidate": "ours"
+      },
+      "evaluation_protocol": {
+        "baseline": "shd_speaker_dropout_consistency_v1_primary_0_3",
+        "candidate": "shd_speaker_dropout_consistency_v1_primary_0_3_classification_label_smoothing_v1"
+      },
+      "study_hypothesis": {
+        "baseline": "Baseline; same ordinary SE dynamics and own fresh split.",
+        "candidate": "B002 smoothing; same ordinary SE dynamics and own fresh split."
+      },
+      "logdir": {
+        "baseline": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/SE_adLIF/SHD/seed_42",
+        "candidate": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42"
+      }
+    }
+  },
+  "paired_validation_descriptive": {
+    "RDROP_LS_SE_adLIF versus RDROP_SE_adLIF": {
+      "fixes": 105,
+      "loses": 65,
+      "both_wrong": 159
+    },
+    "RDROP_LS_SE_adLIF versus LS_SE_adLIF": {
+      "fixes": 32,
+      "loses": 67,
+      "both_wrong": 157
+    }
+  },
+  "source277files_unchanged": true,
+  "initial_state_evidence": {
+    "actual_common_initial_tensors_match": true,
+    "actual_cpu_and_cuda_rng_hashes_match": true,
+    "intended_objective_pairs_full_state_hashes_match": true,
+    "execution_flags_match": true,
+    "records": {
+      "SE_adLIF": {
+        "path": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/SE_adLIF/SHD/seed_42/INITIAL_MODEL_STATE.json",
+        "file_sha256": "f014c136443ba14543c8be761423b81e09dc27b8505969aa76443af7b8c65b75",
+        "model_state_sha256": "6830e803aa1acda8558c1b87f7c4302599a13a52187b08b61aae3a1f5738301e",
+        "tensor_count": 31,
+        "cpu_rng_sha256": "9629fe96092d61990f320567f2980fc83aec529bb2bc7e956645f626f84e0486",
+        "cuda_rng_sha256": "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+      },
+      "RDROP_SE_adLIF": {
+        "path": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/RDROP_SE_adLIF/SHD/seed_42/INITIAL_MODEL_STATE.json",
+        "file_sha256": "42e9f9be23b00779a587cf1348b7938b73c3ae4a328eb6775865c46309907acf",
+        "model_state_sha256": "6830e803aa1acda8558c1b87f7c4302599a13a52187b08b61aae3a1f5738301e",
+        "tensor_count": 31,
+        "cpu_rng_sha256": "9629fe96092d61990f320567f2980fc83aec529bb2bc7e956645f626f84e0486",
+        "cuda_rng_sha256": "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+      },
+      "RDROP_LS_SE_adLIF": {
+        "path": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/RDROP_LS_SE_adLIF/SHD/seed_42/INITIAL_MODEL_STATE.json",
+        "file_sha256": "6405006285d008851874bb3a8373289715bf9743f4c3f73b7cb0a5cab59574e4",
+        "model_state_sha256": "6830e803aa1acda8558c1b87f7c4302599a13a52187b08b61aae3a1f5738301e",
+        "tensor_count": 31,
+        "cpu_rng_sha256": "9629fe96092d61990f320567f2980fc83aec529bb2bc7e956645f626f84e0486",
+        "cuda_rng_sha256": "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+      },
+      "LS_SE_adLIF": {
+        "path": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42/INITIAL_MODEL_STATE.json",
+        "file_sha256": "9d144d9469b96f935485974ec27814247d65440721e5d0563a1fbd0efe896128",
+        "model_state_sha256": "6830e803aa1acda8558c1b87f7c4302599a13a52187b08b61aae3a1f5738301e",
+        "tensor_count": 31,
+        "cpu_rng_sha256": "9629fe96092d61990f320567f2980fc83aec529bb2bc7e956645f626f84e0486",
+        "cuda_rng_sha256": "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+      }
+    },
+    "caveat": "Matching actual initial weights and RNG state does not establish identical subsequent numerical trajectories."
+  },
+  "selection_automated": false,
+  "decision": "REVIEW_REQUIRED_NO_AUTOMATIC_EXTENSION_OR_SHORTLIST",
+  "caveats": "Tuned development pair,one training seed,30/300epochs; recordings share two speakers. No population/significance/synergy or official-test improvement claim. Fresh dropout-consistency factorial; a positive KL-specific interpretation requires registered alpha0 two-pass controls. Two training graphs add compute; ordinary inference remains one pass. Initialhashmatches do not prove identical later numerical trajectories or significance.",
+  "training_accuracy_definition": "Logged online selected-epoch aggregate with dropout and changing weights; first stochastic view only for RDROP arms, not clean checkpoint training reevaluation. RDROP train loss averages two supervised losses plus alpha times symmetric KL; train_hard_ce is ordinary CE averaged across both views.",
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

@@ -1,0 +1,19 @@
+{
+  "registered_at": "2026-11-12T12:19:53.334804+00:00",
+  "source": "results/experiments/complementary_speaker_dev_v2/C002_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+  "source_sha256": "2101546cf581fdf71c072166dbe1931094bcc1bb22064d98544b8fd9a0486ae8",
+  "status": "prepared_syntax_checked_wait_for_all3stage030receipts_and_terminal_queue",
+  "scope": "Verify30uniqueepochs, own selected/lastSHA/config/state/source256files, exact1635validationrows; reproduce ordinary GPUaccuracy/CE, retain confusion/predictions, bothspeakers, frozenzero staticgains/learnedthresholds, pairederrors/curves.",
+  "primary_contrasts": [
+    "static_minus_LS",
+    "dynamic_minus_static"
+  ],
+  "practical_threshold_pp": 0.5,
+  "automatic_advancement": false,
+  "official_test_allowed": false,
+  "training_or_optimizer_steps": false,
+  "estimated_seconds": [
+    20,
+    60
+  ]
+}

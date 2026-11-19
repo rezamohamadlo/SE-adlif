@@ -1,0 +1,168 @@
+{
+  "calibration_evidence": [
+    "SHD_TRAINING_CALIBRATION.json",
+    "SHD_VALIDATION_CALIBRATION.json",
+    "SSC_TRAINING_CALIBRATION.json",
+    "SSC_VALIDATION_CALIBRATION.json",
+    "A002_SSC_BATCH1024_CONFIRMATION.json",
+    "ECG_TRAINING_CALIBRATION.json",
+    "ECG_VALIDATION_CALIBRATION.json"
+  ],
+  "canonical_split_manifest": "CANONICAL_SHD_SPLIT_MANIFEST.json",
+  "conditional_proposals": [
+    {
+      "condition": "Review A002 SSC/ECG transfer before investing in complementary confidence regularization; no official-test selection.",
+      "evidence": "B002_CONDITIONAL_HYPOTHESIS.md",
+      "id": "B002",
+      "status": "not_implemented_not_launched"
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "REVISE",
+      "evidence": "User replaced random-split-only selection with speaker-disjoint development. Canonical75epoch checkpoints saw held-out speakers; do not reuse.",
+      "next_action": "Freeze train-only0/3 and6/10indices; fresh matchedBaseline/A/AB primary screen, no official tests."
+    },
+    {
+      "decision": "ADVANCE_A_REJECT_B001_SCREEN",
+      "evidence": "PRIMARY_STAGE030_COMPARISON.json",
+      "next_action": "Fresh baseline/A sensitivity6/10 at30epochs; no primary-weight reuse or favorable-pair search."
+    },
+    {
+      "decision": "ADVANCE_A_SSC_SCREEN",
+      "evidence": "SENSITIVITY_STAGE030_COMPARISON.json",
+      "next_action": "Calibrate SSC real training batches and validation separately, then matched fresh baseline/A10epoch screen; no tests."
+    },
+    {
+      "decision": "EXTEND_SSC_INCONCLUSIVE_10_TO_40",
+      "evidence": "SSC_STAGE010_COMPARISON.json",
+      "next_action": "Full resume both own last checkpoints to40; preserve10epoch snapshots and no tests."
+    },
+    {
+      "decision": "REVISE_A001_SSC_TRANSFER",
+      "evidence": "SSC_STAGE040_COMPARISON.json",
+      "next_action": "Primary gain-only mechanism control after source snapshot; no furtherSSCextension, no tests; ECG pending."
+    },
+    {
+      "decision": "GAIN_ONLY_CONTROL_WEAKENS_TIMING_CLAIM_CHECK_FIXED_PAIR",
+      "evidence": "GAIN_CONTROL_STAGE030_COMPARISON.json",
+      "next_action": "Fresh Baseline/FIR/gain-only30epoch diagnostic on predeclared6/10only. Both accuracy gains pass, but loss worsens; no winner/generalization claim."
+    },
+    {
+      "decision": "ADVANCE_A002_TO_MATCHED_TRANSFER_SCREENS",
+      "evidence": "Both predefined pair accuracy gains; confidence diagnostics mixed",
+      "next_action": "Fresh matched SSC10epoch and ECG50epoch screens; no official tests or B investment yet."
+    },
+    {
+      "decision": "EXTEND_A002_SSC_10_TO_40",
+      "evidence": "A002_SSC_STAGE010_COMPARISON.json",
+      "next_action": "Full resume each own last checkpoint to40; no changed settings or tests. Baseline40complete and verified; candidate resume is active at this snapshot."
+    },
+    {
+      "decision": "NO_PRACTICAL_SSC_GAIN_PROCEED_PREDECLARED_BOUNDED_ECG_SCREEN",
+      "evidence": "A002_SSC_STAGE040_COMPARISON.json",
+      "next_action": "No SSC extension beyond40. Preserve source/results; calibrate then run fresh matched ECG50epoch controls. Defer B investment and final replication."
+    },
+    {
+      "decision": "ADVANCE_TO_PREDECLARED_BOUNDED_ECG50_SCREEN",
+      "evidence": "ECG_A002_CALIBRATION_COMPLETION.json",
+      "next_action": "Fresh Baseline/gain-only, seed42, matched50epochs, no official tests or B/final replication yet"
+    },
+    {
+      "decision": "EXTEND_A002_ECG50_TO_100_INCONCLUSIVE_UNDERLEARNED_CONTROLS",
+      "evidence": "A002_ECG_STAGE100_DECISION.json",
+      "next_action": "Own last full resume for both, unchanged settings/full400scheduler; review100epoch learning and clean validation before B/final replication"
+    }
+  ],
+  "execution_authorization": "Original study request explicitly authorizes agent-owned study training; latest correction changes split and stage order, not authorization.",
+  "final_generalization_endpoints": "FINAL_TEST_GENERALIZATION_ENDPOINTS.json",
+  "historical_primary_runtime_evidence": {
+    "completed_epochs_at_estimate": 5,
+    "observed_epoch_seconds": 9.536997399991378,
+    "source": "primary_0_3/SE_adLIF/SHD/seed_42/STATUS.json"
+  },
+  "ideas": [
+    {
+      "arm": "A",
+      "ceiling": 30,
+      "control": "Fresh SE_adLIF on same0/3split, identical preprocessing/optimization/batch/ceiling",
+      "estimated_cost": "Observed first2epochs37-40s duecache warm-up; warm epochs9-10s. Estimate5-10minutes per30epoch arm after warm-up; reevaluate at completed stage.",
+      "hypothesis": "Feature-specific causal FIR may transfer timing structure; its prior learned gain inflation is a confound.",
+      "id": "A001",
+      "outcome_evidence": [
+        "SSC_STAGE040_COMPARISON.json",
+        "GAIN_CONTROL_STAGE030_COMPARISON.json",
+        "GAIN_SENSITIVITY_STAGE030_COMPARISON.json"
+      ],
+      "primary_metric": "clean held-out-speaker accuracy",
+      "prior_art": "Learned delays/temporal filtering; different from failed projected-current DA. No novelty claim.",
+      "status": "speaker_development_positive_SSC40_negative_gain_control_complete_no_timing_specific_benefit_established",
+      "threshold_pp": 0.5
+    },
+    {
+      "arm": "A+B",
+      "ceiling": 30,
+      "control": "A on identical0/3split and all shared conditions",
+      "estimated_cost": "Observed first2epochs37-40s duecache warm-up; warm epochs9-10s. Estimate5-10minutes per30epoch arm after warm-up; reevaluate at completed stage.",
+      "hypothesis": "Training-only10percent per-event deletion reduces rate reliance of A001; clean validation measures unseen-speaker transfer.",
+      "id": "B001",
+      "primary_metric": "clean held-out-speaker accuracy",
+      "prior_art": "EventDrop IJCAI2021; earlier DTH/LG-DTH multi-augmentation trials differ from this isolated SE/FIR factorial. Not a new invention.",
+      "status": "unpromising_30epoch_primary_screen",
+      "threshold_pp": 0.5
+    },
+    {
+      "ECG50_delta_pp": 28.598514199256897,
+      "ECG50_evidence": "A002_ECG_STAGE050_COMPARISON.json",
+      "ECG_adequacy": "Both50epoch controls underlearned; final generalization unresolved; no automatic400epoch escalation",
+      "ECG_preregistration": "A002_ECG_STAGE050_PREREGISTRATION.json",
+      "SSC10_delta_pp": 0.5811035633087158,
+      "SSC10_evidence": "A002_SSC_STAGE010_COMPARISON.json",
+      "SSC40_baseline_verification": "transfer_A002_gain_v1/SE_adLIF/SSC/seed_42/stages/040/VERIFICATION.json",
+      "SSC40_candidate_status_source": "transfer_A002_gain_v1/GAIN_SE_adLIF/SSC/seed_42/STATUS.json",
+      "SSC40_delta_pp": 0.1001894474029541,
+      "SSC40_evidence": "A002_SSC_STAGE040_COMPARISON.json",
+      "SSC40_practical_threshold_met": false,
+      "arm": "A candidate",
+      "calibration_caveat": "Higher primary cross-entropy and more confident wrong predictions, but better Brier score; do not oversimplify calibration evidence.",
+      "hypothesis": "Optimization/implicit-regularization effects may transfer beyond the two SHD speaker pairs; no new representational capacity or guaranteed accuracy gain.",
+      "id": "A002",
+      "mechanism": "Gain-only factorized input conditioning, no added temporal FIR history",
+      "primary_metric": "Clean dataset-specific validation accuracy",
+      "prior_art": "Per-channel scaling/factorized linear parameterization is established; this is an empirical project hypothesis, not a novelty claim.",
+      "shared_conditions": "Fresh matched controls; same baseline optimization/batch/splits and declared budgets.",
+      "source_evidence": [
+        "GAIN_CONTROL_STAGE030_COMPARISON.json",
+        "GAIN_SENSITIVITY_STAGE030_COMPARISON.json",
+        "PRIMARY_VALIDATION_CALIBRATION.json"
+      ],
+      "status": "SSC40_weak_positive_ECG50_learning_acceleration_matched100epoch_extension_running",
+      "transfer_preregistration": "A002_TRANSFER_PREREGISTRATION.json"
+    }
+  ],
+  "next_stage_preregistration": "A002_ECG_STAGE100_DECISION.json",
+  "official_test_evaluated_in_study": false,
+  "primary_pair": [
+    0,
+    3
+  ],
+  "runtime_evidence": {
+    "ceiling": 100,
+    "completed_epochs": 65,
+    "dataset": "ECG",
+    "launcher_pid": 10504,
+    "live_training_pid_verified": 11212,
+    "meaning": "Verified live full-resume bounded-stage snapshot",
+    "model": "SE_adLIF",
+    "observed_at": "2026-11-12T00:27:00.137991+03:30",
+    "source": "transfer_A002_gain_v1/SE_adLIF/ECG/seed_42/STATUS.json"
+  },
+  "secondary_pair": [
+    6,
+    10
+  ],
+  "secondary_rule": "One predefined pair, shortlisted candidates only; fresh training on its own eight speakers.",
+  "source_freeze": "Finish implementation/calibration/tests before launching primary queue; no source edits during its bounded stage.",
+  "training_seed": 42,
+  "version": "complementary_speaker_dev_v2"
+}

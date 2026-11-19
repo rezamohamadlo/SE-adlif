@@ -1,0 +1,33 @@
+{
+  "recorded_at": "2026-11-12T11:46:20.176744+00:00",
+  "decision": "SHORTLIST_COMBINATION_AND_LS_REJECT_STANDALONE_DTH_SCREEN_CHECK_PREDEFINED_PAIR",
+  "primary_evidence": "C001_PRIMARY_STAGE030_COMPARISON.json",
+  "primary30closed": true,
+  "extend_to75_now": false,
+  "reason": "Combination exceeds both components and practical0.5pp incremental threshold, with lower ordinary CE and higher late10mean than LS. DTH alone underperforms fresh baseline by2.32416pp. No need to fully train both protocols before the predeclared pair-sensitivity gate.",
+  "preregistered_arm_labels_retained": {
+    "A": "DTH",
+    "B": "LS",
+    "AB": "DTH+LS"
+  },
+  "standalone_A_gate_failed": true,
+  "possible_progression": "Baseline->LS->LS+DTH is a revised conditional interpretation; it does not turn original DTH-alone failure into a pass or establish final complementarity.",
+  "combination_minus_LS_pp": 1.5290498733520508,
+  "per_speaker_combination_minus_LS_pp": {
+    "0": -0.766703176341732,
+    "3": 4.432132963988922
+  },
+  "nominal_interaction_pp": 3.85320782661438,
+  "interaction_proves_synergy": false,
+  "shortlisted_models": [
+    "LS_SE_adLIF",
+    "DTH_LS_SE_adLIF"
+  ],
+  "not_shortlisted": [
+    "DTH_SE_adLIF"
+  ],
+  "next_gate": "Fresh Baseline/LS/DTH+LS on already predefined6/10sensitivity pair, same30budget/seed42/sharedsettings. No primary weights, pair search or hyperparameter tuning. Compare clean accuracy, ordinary CE and both speakers; preserve any reversal.",
+  "mechanism_requirement": "If retained, static-threshold-only training control is still required before claiming a specifically dynamic-trace benefit. Nonzero learned gains are descriptive, not causal evidence.",
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

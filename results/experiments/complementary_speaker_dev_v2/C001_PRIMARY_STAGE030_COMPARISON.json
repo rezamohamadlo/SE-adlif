@@ -1,0 +1,491 @@
+{
+  "status": "verified_four_arm_primary30_validation_screen",
+  "training_seed": 42,
+  "validation_speakers": [
+    0,
+    3
+  ],
+  "completed_epochs_per_arm": 30,
+  "full_budget": 300,
+  "records": [
+    {
+      "model": "SE_adLIF",
+      "selected_validation_accuracy": 0.8330275416374207,
+      "selected_completed_epoch": 30,
+      "online_training_accuracy_in_selected_epoch": 0.9943034052848816,
+      "validation_loss_at_selection": 0.9105852246284485,
+      "last10_validation_mean": 0.7947400689125061,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "b469098aaa8bed09ee70be86ca0036d335889539375c1d50d321caca730fb320",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "b469098aaa8bed09ee70be86ca0036d335889539375c1d50d321caca730fb320",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        }
+      },
+      "per_speaker": {
+        "0": {
+          "recordings": 913,
+          "correct": 801,
+          "accuracy": 0.8773274917853231
+        },
+        "3": {
+          "recordings": 722,
+          "correct": 561,
+          "accuracy": 0.7770083102493075
+        }
+      },
+      "macroclass_recall": 0.8376968676983882,
+      "learned_dth_parameters": {},
+      "reproduced_validation_accuracy": 0.8330275229357799,
+      "reproduced_ordinary_ce": 0.9105854066140061,
+      "source_code": "results/experiments/complementary_speaker_dev_v2/C001_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+      "source_sha256": "85e3fa7d78f450790dc3ccb9c6e59bf88bae55e808a6bf9533259dd24c620895",
+      "official_test_evaluated": false,
+      "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3/SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+      "raw_prediction_sha256": "5aa04d9b635346d0790736effe7c58ffb7e6a1bcf62d798e067fe501dcb61540"
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "selected_validation_accuracy": 0.8097859621047974,
+      "selected_completed_epoch": 28,
+      "online_training_accuracy_in_selected_epoch": 0.9895833134651184,
+      "validation_loss_at_selection": 1.0900354385375977,
+      "last10_validation_mean": 0.7720489382743836,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "f9084971cb9025e0efc67afc3fe39a12e7b58a7a7e07dc48c4ace97ea78eb21a",
+          "epoch_index": 27,
+          "global_step": 168,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "de72a343ffc9b0fc73b7446ef8b433c68b2e67ca43dfcceb2d415c120a730753",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        }
+      },
+      "per_speaker": {
+        "0": {
+          "recordings": 913,
+          "correct": 779,
+          "accuracy": 0.8532311062431545
+        },
+        "3": {
+          "recordings": 722,
+          "correct": 545,
+          "accuracy": 0.7548476454293629
+        }
+      },
+      "macroclass_recall": 0.8169192977343365,
+      "learned_dth_parameters": {
+        "l1": {
+          "homeostatic_gain": 0.003683295100927353,
+          "transient_gain": 0.343573659658432,
+          "static_threshold_min": 0.7914109230041504,
+          "static_threshold_mean": 0.963434100151062,
+          "static_threshold_max": 1.0376132726669312
+        },
+        "l2": {
+          "homeostatic_gain": 0.03613220155239105,
+          "transient_gain": 0.007783346809446812,
+          "static_threshold_min": 0.9089940190315247,
+          "static_threshold_mean": 1.006125807762146,
+          "static_threshold_max": 1.0734308958053589
+        }
+      },
+      "reproduced_validation_accuracy": 0.8097859327217125,
+      "reproduced_ordinary_ce": 1.0900355540284323,
+      "source_code": "results/experiments/complementary_speaker_dev_v2/C001_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+      "source_sha256": "85e3fa7d78f450790dc3ccb9c6e59bf88bae55e808a6bf9533259dd24c620895",
+      "official_test_evaluated": false,
+      "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3/DTH_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+      "raw_prediction_sha256": "24e119ad4b7f3337789cec847117a932c2b8a6371b823a823b66e791e39f7e0b"
+    },
+    {
+      "model": "DTH_LS_SE_adLIF",
+      "selected_validation_accuracy": 0.8691131472587585,
+      "selected_completed_epoch": 22,
+      "online_training_accuracy_in_selected_epoch": 0.9794921875,
+      "validation_loss_at_selection": 0.5627442598342896,
+      "last10_validation_mean": 0.8554128408432007,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "66d5ebd96f71920403e74a50172ca567bfeaaa958da27e1ec6d3ee05aa512d6b",
+          "epoch_index": 21,
+          "global_step": 132,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "6d3e17e112a28666ea891851a5802263098ab5d9455041146e05e90e6ee8fa17",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        }
+      },
+      "per_speaker": {
+        "0": {
+          "recordings": 913,
+          "correct": 831,
+          "accuracy": 0.9101861993428259
+        },
+        "3": {
+          "recordings": 722,
+          "correct": 590,
+          "accuracy": 0.817174515235457
+        }
+      },
+      "macroclass_recall": 0.8746256431458412,
+      "learned_dth_parameters": {
+        "l1": {
+          "homeostatic_gain": 0.0028807951603084803,
+          "transient_gain": 0.29884880781173706,
+          "static_threshold_min": 0.7622188329696655,
+          "static_threshold_mean": 0.9599027037620544,
+          "static_threshold_max": 1.027881383895874
+        },
+        "l2": {
+          "homeostatic_gain": 0.18038515746593475,
+          "transient_gain": 0.000298945204121992,
+          "static_threshold_min": 0.9223812818527222,
+          "static_threshold_mean": 1.0009715557098389,
+          "static_threshold_max": 1.0560996532440186
+        }
+      },
+      "reproduced_validation_accuracy": 0.8691131498470948,
+      "reproduced_ordinary_ce": 0.5627443121843018,
+      "source_code": "results/experiments/complementary_speaker_dev_v2/C001_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+      "source_sha256": "85e3fa7d78f450790dc3ccb9c6e59bf88bae55e808a6bf9533259dd24c620895",
+      "official_test_evaluated": false,
+      "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3/DTH_LS_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+      "raw_prediction_sha256": "c4f8b66d4cdc888535dafa3e167d239cd340bbbc7e23ba5d43c74ffb31b71452"
+    },
+    {
+      "model": "LS_SE_adLIF",
+      "selected_validation_accuracy": 0.853822648525238,
+      "selected_completed_epoch": 27,
+      "online_training_accuracy_in_selected_epoch": 0.9944661259651184,
+      "validation_loss_at_selection": 0.6307353377342224,
+      "last10_validation_mean": 0.8432415843009948,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "b0a783aeddbe9c323dd699d2b0d0abab4cdbe3ceac438d4a3eaac536a20ab7f2",
+          "epoch_index": 26,
+          "global_step": 162,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "0aa866457ca94f73926b98b5e604390e01d73c1cf0c4e0a4edea03094612b7ee",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        }
+      },
+      "per_speaker": {
+        "0": {
+          "recordings": 913,
+          "correct": 838,
+          "accuracy": 0.9178532311062432
+        },
+        "3": {
+          "recordings": 722,
+          "correct": 558,
+          "accuracy": 0.7728531855955678
+        }
+      },
+      "macroclass_recall": 0.8617426316269452,
+      "learned_dth_parameters": {},
+      "reproduced_validation_accuracy": 0.8538226299694189,
+      "reproduced_ordinary_ce": 0.6307354955862786,
+      "source_code": "results/experiments/complementary_speaker_dev_v2/C001_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+      "source_sha256": "85e3fa7d78f450790dc3ccb9c6e59bf88bae55e808a6bf9533259dd24c620895",
+      "official_test_evaluated": false,
+      "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+      "raw_prediction_sha256": "0763301c47b788e8ccd5ea5548ca08c8e909283813bf92b2bac43079f8166a88"
+    }
+  ],
+  "A_minus_Baseline_pp": -2.324157953262329,
+  "B_minus_Baseline_pp": 2.0795106887817383,
+  "AB_minus_A_pp": 5.932718515396118,
+  "AB_minus_B_pp": 1.5290498733520508,
+  "interaction_pp": 3.85320782661438,
+  "practical_threshold_pp": 0.5,
+  "shared_config_match": true,
+  "configuration_differences": {
+    "DTH_SE_adLIF": {
+      "run_mode": {
+        "baseline": "reference",
+        "candidate": "ours"
+      },
+      "exp_name": {
+        "baseline": "SHD_SE_adLIF",
+        "candidate": "SHD_DTH_SE_adLIF"
+      },
+      "paper_baseline_deviations": {
+        "baseline": [
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*"
+        ],
+        "candidate": [
+          "model_variant=DTH_SE_adLIF",
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*"
+        ]
+      },
+      "l2.rho_fast": {
+        "baseline": null,
+        "candidate": 0.9
+      },
+      "l2.theta_min": {
+        "baseline": null,
+        "candidate": 0.5
+      },
+      "l2.cell": {
+        "baseline": "se_adlif",
+        "candidate": "dth_se_adlif"
+      },
+      "l2.theta_max": {
+        "baseline": null,
+        "candidate": 1.5
+      },
+      "l2.rho_slow": {
+        "baseline": null,
+        "candidate": 0.99
+      },
+      "l2.target_rate": {
+        "baseline": null,
+        "candidate": 0.05
+      },
+      "logdir": {
+        "baseline": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3/SE_adLIF/SHD/seed_42",
+        "candidate": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3/DTH_SE_adLIF/SHD/seed_42"
+      },
+      "model_variant": {
+        "baseline": "SE_adLIF",
+        "candidate": "DTH_SE_adLIF"
+      },
+      "l1.rho_fast": {
+        "baseline": null,
+        "candidate": 0.9
+      },
+      "l1.theta_min": {
+        "baseline": null,
+        "candidate": 0.5
+      },
+      "l1.cell": {
+        "baseline": "se_adlif",
+        "candidate": "dth_se_adlif"
+      },
+      "l1.theta_max": {
+        "baseline": null,
+        "candidate": 1.5
+      },
+      "l1.rho_slow": {
+        "baseline": null,
+        "candidate": 0.99
+      },
+      "l1.target_rate": {
+        "baseline": null,
+        "candidate": 0.05
+      },
+      "study_arm": {
+        "baseline": "Baseline",
+        "candidate": "A existing DTH"
+      },
+      "study_hypothesis": {
+        "baseline": "Fresh matched plain SE-adLIF control; no old weights or held-out-speaker exposure.",
+        "candidate": "Existing bounded threshold conditioning may improve held-out-speaker accuracy without input gain."
+      }
+    },
+    "DTH_LS_SE_adLIF": {
+      "run_mode": {
+        "baseline": "reference",
+        "candidate": "ours"
+      },
+      "exp_name": {
+        "baseline": "SHD_SE_adLIF",
+        "candidate": "SHD_DTH_LS_SE_adLIF"
+      },
+      "paper_baseline_deviations": {
+        "baseline": [
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*"
+        ],
+        "candidate": [
+          "model_variant=DTH_LS_SE_adLIF",
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*",
+          "training_objective=classification_label_smoothing_v1",
+          "label_smoothing_epsilon=0.1; training only",
+          "validation/inference use ordinary hard-label CE; train_hard_ce logged separately"
+        ]
+      },
+      "l2.rho_fast": {
+        "baseline": null,
+        "candidate": 0.9
+      },
+      "l2.theta_min": {
+        "baseline": null,
+        "candidate": 0.5
+      },
+      "l2.cell": {
+        "baseline": "se_adlif",
+        "candidate": "dth_se_adlif"
+      },
+      "l2.theta_max": {
+        "baseline": null,
+        "candidate": 1.5
+      },
+      "l2.rho_slow": {
+        "baseline": null,
+        "candidate": 0.99
+      },
+      "l2.target_rate": {
+        "baseline": null,
+        "candidate": 0.05
+      },
+      "logdir": {
+        "baseline": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3/SE_adLIF/SHD/seed_42",
+        "candidate": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3/DTH_LS_SE_adLIF/SHD/seed_42"
+      },
+      "model_variant": {
+        "baseline": "SE_adLIF",
+        "candidate": "DTH_LS_SE_adLIF"
+      },
+      "l1.rho_fast": {
+        "baseline": null,
+        "candidate": 0.9
+      },
+      "l1.theta_min": {
+        "baseline": null,
+        "candidate": 0.5
+      },
+      "l1.cell": {
+        "baseline": "se_adlif",
+        "candidate": "dth_se_adlif"
+      },
+      "l1.theta_max": {
+        "baseline": null,
+        "candidate": 1.5
+      },
+      "l1.rho_slow": {
+        "baseline": null,
+        "candidate": 0.99
+      },
+      "l1.target_rate": {
+        "baseline": null,
+        "candidate": 0.05
+      },
+      "evaluation_protocol": {
+        "baseline": "shd_speaker_dth_ls_v1_primary_0_3",
+        "candidate": "shd_speaker_dth_ls_v1_primary_0_3_classification_label_smoothing_v1"
+      },
+      "study_arm": {
+        "baseline": "Baseline",
+        "candidate": "A+B DTH and label smoothing"
+      },
+      "label_smoothing_epsilon": {
+        "baseline": 0,
+        "candidate": 0.1
+      },
+      "training_objective": {
+        "baseline": "classification",
+        "candidate": "classification_label_smoothing_v1"
+      },
+      "study_hypothesis": {
+        "baseline": "Fresh matched plain SE-adLIF control; no old weights or held-out-speaker exposure.",
+        "candidate": "Train-only smoothing may complement DTH; must improve over DTH and smoothing alone."
+      }
+    },
+    "LS_SE_adLIF": {
+      "run_mode": {
+        "baseline": "reference",
+        "candidate": "ours"
+      },
+      "exp_name": {
+        "baseline": "SHD_SE_adLIF",
+        "candidate": "SHD_LS_SE_adLIF"
+      },
+      "paper_baseline_deviations": {
+        "baseline": [
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*"
+        ],
+        "candidate": [
+          "model_variant=LS_SE_adLIF",
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=primary_0_3; not canonical SHD*",
+          "training_objective=classification_label_smoothing_v1",
+          "label_smoothing_epsilon=0.1; training only",
+          "validation/inference use ordinary hard-label CE; train_hard_ce logged separately"
+        ]
+      },
+      "logdir": {
+        "baseline": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3/SE_adLIF/SHD/seed_42",
+        "candidate": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42"
+      },
+      "model_variant": {
+        "baseline": "SE_adLIF",
+        "candidate": "LS_SE_adLIF"
+      },
+      "evaluation_protocol": {
+        "baseline": "shd_speaker_dth_ls_v1_primary_0_3",
+        "candidate": "shd_speaker_dth_ls_v1_primary_0_3_classification_label_smoothing_v1"
+      },
+      "study_arm": {
+        "baseline": "Baseline",
+        "candidate": "B label smoothing"
+      },
+      "label_smoothing_epsilon": {
+        "baseline": 0,
+        "candidate": 0.1
+      },
+      "training_objective": {
+        "baseline": "classification",
+        "candidate": "classification_label_smoothing_v1"
+      },
+      "study_hypothesis": {
+        "baseline": "Fresh matched plain SE-adLIF control; no old weights or held-out-speaker exposure.",
+        "candidate": "Fresh smoothing-only control separates standalone regularization from complementarity."
+      }
+    }
+  },
+  "paired_validation_descriptive": {
+    "DTH_LS_SE_adLIF versus DTH_SE_adLIF": {
+      "fixes": 140,
+      "loses": 43,
+      "both_wrong": 171
+    },
+    "DTH_LS_SE_adLIF versus LS_SE_adLIF": {
+      "fixes": 73,
+      "loses": 48,
+      "both_wrong": 166
+    }
+  },
+  "source250files_unchanged": true,
+  "selection_automated": false,
+  "decision": "REVIEW_REQUIRED_NO_AUTOMATIC_EXTENSION_OR_SHORTLIST",
+  "caveats": "Tuned development pair,one training seed,30/300epochs; recordings share two speakers. No population/significance/synergy or official-test improvement claim. DTH parameter inspection does not isolate static versus dynamic contribution.",
+  "training_accuracy_definition": "Logged online selected-epoch aggregate with dropout and changing weights; not clean checkpoint training reevaluation.",
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

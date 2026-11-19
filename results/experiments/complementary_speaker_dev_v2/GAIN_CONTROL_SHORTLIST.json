@@ -1,0 +1,19 @@
+{
+  "allow_pair_search": false,
+  "initialization": "All secondary arms fresh; primary weights saw6/10and cannot be used.",
+  "models": [
+    "FIR_SE_adLIF",
+    "GAIN_SE_adLIF"
+  ],
+  "official_test_evaluated": false,
+  "primary_ceiling": 30,
+  "reason": "Both accuracy improvements exceed0.5pp and late-curve means improve; worse loss is retained as contradictory calibration evidence. Assess pair sensitivity, do not declare a winner.",
+  "secondary_ceiling": 30,
+  "secondary_pair_predefined": [
+    6,
+    10
+  ],
+  "selected_using": "clean_primary_speaker_validation",
+  "source": "results/experiments/complementary_speaker_dev_v2/GAIN_CONTROL_STAGE030_COMPARISON.json",
+  "training_seed": 42
+}

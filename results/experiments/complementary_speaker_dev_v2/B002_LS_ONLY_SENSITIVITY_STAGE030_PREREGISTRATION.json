@@ -1,0 +1,30 @@
+{
+  "created_at": "2026-11-12T11:02:33.887337+03:30",
+  "hypothesis": "The clean held-out-speaker benefit of fixed training-only LS0.1 may persist on the predefined6/10pair. Test pair sensitivity, not independent population confirmation.",
+  "prior_art": "Existing uniform label smoothing; no novelty claim",
+  "models": [
+    "SE_adLIF",
+    "LS_SE_adLIF"
+  ],
+  "role": "pair_sensitivity",
+  "pair": [
+    6,
+    10
+  ],
+  "split_manifest": "results/experiments/complementary_speaker_dev_v2/sensitivity_6_10/SPLIT_MANIFEST.json",
+  "split_fingerprint": "a3a3e633e3cf80eb04be16dcb17328502c82533b40f1d9aaf32064daa78cc7a2",
+  "training_seed": 42,
+  "mode": "fresh",
+  "matched_control": "Fresh Baseline same source/split/settings; primary weights saw6/10 and are forbidden here",
+  "training_batch": 1024,
+  "validation_batch": 1024,
+  "full_schedule_epochs": 300,
+  "epoch_ceiling": 30,
+  "primary_metric": "Clean held-out-speaker validation accuracy, LS minus Baseline",
+  "practical_threshold_pp": 0.5,
+  "support": "Ordinary hard-label validation CE and learning curves",
+  "advance_rule": "If benefit is supportive, check LS-only on SSC then ECG with matched fresh controls and confirmed objective calibration. If weak or reversed, record pair sensitivity and revise; do not tune epsilon or choose a new pair.",
+  "estimated_compute": "About10minutes plus startup for2arms from measured9-10sec epochs",
+  "goal_scope": "Two complementary ideas, final canonical four-arm3dataset ablation, replication, official tests and costs remain incomplete; this component screen cannot replace them.",
+  "official_test_opened": false
+}

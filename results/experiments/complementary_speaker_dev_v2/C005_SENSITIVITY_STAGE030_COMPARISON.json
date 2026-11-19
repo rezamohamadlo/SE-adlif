@@ -1,0 +1,232 @@
+{
+  "status": "verified_predefined_shortlist_pair_sensitivity30",
+  "training_seed": 42,
+  "validation_speakers": [
+    6,
+    10
+  ],
+  "completed_epochs_per_arm": 30,
+  "full_budget": 300,
+  "records": [
+    {
+      "model": "SE_adLIF",
+      "selected_validation_accuracy": 0.8381876945495605,
+      "selected_completed_epoch": 27,
+      "online_training_accuracy_in_selected_epoch": 0.9899088740348816,
+      "validation_loss_at_selection": 0.6546921133995056,
+      "last10_validation_mean": 0.819902914762497,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "ecfc784b40ea413dce5ccc0e66c96d478fe98658365a07d97464516f36090694",
+          "epoch_index": 26,
+          "global_step": 162,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "d5416ca450915bd49aca5d8c1ce2a828724d40e0a62b4ecb44128e297a638785",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        }
+      },
+      "per_speaker": {
+        "6": {
+          "recordings": 447,
+          "correct": 392,
+          "accuracy": 0.8769574944071589
+        },
+        "10": {
+          "recordings": 789,
+          "correct": 644,
+          "accuracy": 0.8162230671736375
+        }
+      },
+      "macroclass_recall": 0.8342608779400813,
+      "training_objective_settings": {
+        "training_objective": "classification",
+        "label_smoothing_epsilon": 0.0,
+        "dropout_consistency_alpha": 0.0,
+        "inference_forward_passes": 1
+      },
+      "training_epoch_diagnostics": {},
+      "reproduced_validation_accuracy": 0.8381877022653722,
+      "reproduced_ordinary_ce": 0.6546921307600818,
+      "source_code": "results/experiments/complementary_speaker_dev_v2/C005_SENSITIVITY_STAGE030_AUDIT_SOURCE.txt",
+      "source_sha256": "8969daab7a204ae772990b8bc1afc64f26cede3e690c00c9994479b7c6f7cd93",
+      "official_test_evaluated": false,
+      "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/sensitivity_6_10/SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+      "raw_prediction_sha256": "dd8fc14606157ce1ec2c536dae4cf722be830519e1df9db6669c6a3c76c4c08c"
+    },
+    {
+      "model": "RDROP_SE_adLIF",
+      "selected_validation_accuracy": 0.8551779985427856,
+      "selected_completed_epoch": 21,
+      "online_training_accuracy_in_selected_epoch": 0.98291015625,
+      "validation_loss_at_selection": 0.6463654637336731,
+      "last10_validation_mean": 0.831067967414856,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "310e25596c2e641412cefee624c720fefec8f3d8ceccd0453e9553fa8689b466",
+          "epoch_index": 20,
+          "global_step": 126,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "9bacecedff63baeee36e53f99625af832e127b953af547e5c7a9e981ce02c2bc",
+          "epoch_index": 29,
+          "global_step": 180,
+          "config_matches": true
+        }
+      },
+      "per_speaker": {
+        "6": {
+          "recordings": 447,
+          "correct": 386,
+          "accuracy": 0.8635346756152126
+        },
+        "10": {
+          "recordings": 789,
+          "correct": 671,
+          "accuracy": 0.8504435994930292
+        }
+      },
+      "macroclass_recall": 0.8484158813043843,
+      "training_objective_settings": {
+        "training_objective": "classification_dropout_consistency_v1",
+        "label_smoothing_epsilon": 0.0,
+        "dropout_consistency_alpha": 1.0,
+        "inference_forward_passes": 1
+      },
+      "training_epoch_diagnostics": {
+        "train_hard_ce": {
+          "selected_epoch": 0.055631231516599655,
+          "last_epoch": 0.02953689731657505,
+          "maximum": 3.0016345977783203
+        },
+        "train_supervised_loss": {
+          "selected_epoch": 0.055631231516599655,
+          "last_epoch": 0.02953689731657505,
+          "maximum": 3.0016345977783203
+        },
+        "train_dropout_symmetric_kl": {
+          "selected_epoch": 0.0146377207711339,
+          "last_epoch": 0.011498577892780304,
+          "maximum": 0.031185505911707878
+        }
+      },
+      "reproduced_validation_accuracy": 0.8551779935275081,
+      "reproduced_ordinary_ce": 0.6463655987603765,
+      "source_code": "results/experiments/complementary_speaker_dev_v2/C005_SENSITIVITY_STAGE030_AUDIT_SOURCE.txt",
+      "source_sha256": "8969daab7a204ae772990b8bc1afc64f26cede3e690c00c9994479b7c6f7cd93",
+      "official_test_evaluated": false,
+      "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/sensitivity_6_10/RDROP_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+      "raw_prediction_sha256": "118129707b1641ac20cbbf88503f8f5e583b705945b1d33d629302968ffe95ba"
+    }
+  ],
+  "A_minus_Baseline_pp": 1.6990303993225098,
+  "exact_count_A_minus_Baseline_pp": 1.6990291262135915,
+  "A_minus_Baseline_CE": -0.008326531999705344,
+  "A_minus_Baseline_late10_pp": 1.1165052652359009,
+  "per_speaker_A_minus_Baseline_pp": {
+    "6": -1.342281879194629,
+    "10": 3.4220532319391705
+  },
+  "paired_validation_descriptive": {
+    "fixes": 68,
+    "loses": 47,
+    "both_wrong": 132
+  },
+  "shared_config_match": true,
+  "configuration_differences": {
+    "RDROP_SE_adLIF": {
+      "exp_name": {
+        "baseline": "SHD_SE_adLIF",
+        "candidate": "SHD_RDROP_SE_adLIF"
+      },
+      "study_arm": {
+        "baseline": "Baseline",
+        "candidate": "A005 dropout consistency"
+      },
+      "logdir": {
+        "baseline": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/sensitivity_6_10/SE_adLIF/SHD/seed_42",
+        "candidate": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/sensitivity_6_10/RDROP_SE_adLIF/SHD/seed_42"
+      },
+      "training_objective": {
+        "baseline": "classification",
+        "candidate": "classification_dropout_consistency_v1"
+      },
+      "study_hypothesis": {
+        "baseline": "Baseline; same ordinary SE dynamics and own fresh split.",
+        "candidate": "A005 dropout consistency; same ordinary SE dynamics and own fresh split."
+      },
+      "paper_baseline_deviations": {
+        "baseline": [
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=sensitivity_6_10; not canonical SHD*"
+        ],
+        "candidate": [
+          "model_variant=RDROP_SE_adLIF",
+          "validation-only staged discovery; official tests disabled",
+          "batch_size=1024; LR unchanged",
+          "full_schedule_epochs=300; explicit staged stops",
+          "speaker-disjoint development pair=sensitivity_6_10; not canonical SHD*",
+          "training_objective=classification_dropout_consistency_v1",
+          "dropout_consistency_alpha=1; two stochastic training forwards",
+          "label_smoothing_epsilon=0; training only",
+          "single ordinary inference; hard-label validation CE; first-view online train accuracy"
+        ]
+      },
+      "run_mode": {
+        "baseline": "reference",
+        "candidate": "ours"
+      },
+      "model_variant": {
+        "baseline": "SE_adLIF",
+        "candidate": "RDROP_SE_adLIF"
+      },
+      "evaluation_protocol": {
+        "baseline": "shd_speaker_dropout_consistency_v1_sensitivity_6_10",
+        "candidate": "shd_speaker_dropout_consistency_v1_sensitivity_6_10_classification_dropout_consistency_v1"
+      },
+      "dropout_consistency_alpha": {
+        "baseline": 0,
+        "candidate": 1
+      }
+    }
+  },
+  "source278files_and_frozen_protocol_artifacts_unchanged": true,
+  "initial_state_evidence": {
+    "actual_common_initial_tensors_match": true,
+    "actual_cpu_and_cuda_rng_hashes_match": true,
+    "intended_objective_pairs_full_state_hashes_match": true,
+    "execution_flags_match": true,
+    "records": {
+      "SE_adLIF": {
+        "path": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/sensitivity_6_10/SE_adLIF/SHD/seed_42/INITIAL_MODEL_STATE.json",
+        "file_sha256": "1c895144e7af1d66e26fe5e300f677160ba31e9f54c6b85b278bd25a95eeca8d",
+        "model_state_sha256": "6830e803aa1acda8558c1b87f7c4302599a13a52187b08b61aae3a1f5738301e",
+        "tensor_count": 31,
+        "cpu_rng_sha256": "9629fe96092d61990f320567f2980fc83aec529bb2bc7e956645f626f84e0486",
+        "cuda_rng_sha256": "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+      },
+      "RDROP_SE_adLIF": {
+        "path": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/sensitivity_6_10/RDROP_SE_adLIF/SHD/seed_42/INITIAL_MODEL_STATE.json",
+        "file_sha256": "aeb9815a5bdc4f5bff9ac94b6c6b5454979603fec7129b8526780f7ebf8ae531",
+        "model_state_sha256": "6830e803aa1acda8558c1b87f7c4302599a13a52187b08b61aae3a1f5738301e",
+        "tensor_count": 31,
+        "cpu_rng_sha256": "9629fe96092d61990f320567f2980fc83aec529bb2bc7e956645f626f84e0486",
+        "cuda_rng_sha256": "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+      }
+    },
+    "caveat": "Matching actual initial weights and RNG state does not establish identical subsequent numerical trajectories."
+  },
+  "practical_threshold_pp": 0.5,
+  "selection_automated": false,
+  "decision": "REVIEW_REQUIRED_NO_SECONDARY_TUNING_OR_EXTENSION",
+  "caveats": "One training seed,30/300epochs,predefined6/10 pair with accumulated sensitivity exposure. No pair search,secondary tuning,primary weights reuse,independent population/significance or test improvement claim.",
+  "training_accuracy_definition": "Online changing-weight/dropout aggregate; first stochastic view for RDrop. Training loss averages supervised views plus fixedalpha1 symmetricKL; validation uses one ordinary forward and hard-label CE.",
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

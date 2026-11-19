@@ -1,0 +1,35 @@
+version: complementary_speaker_dev_v2
+candidate_version: A002_input_gain_v1
+plan: docs/experiments/complementary-mechanisms-study-v2.md
+output_root: results/experiments/complementary_speaker_dev_v2/transfer_A002_gain_v1
+idea: A002_INPUT_GAIN
+role: cross_dataset_transfer
+training_seed: 42
+split_seed: 42
+hypothesis: Learned input-gain parameterization may improve optimization/generalization beyond SHD; it adds no independent linear representational capacity and no temporal FIR history.
+hypotheses:
+  SE_adLIF: Fresh matched dataset-specific reference control; no historical weights or changed optimization.
+  GAIN_SE_adLIF: A002 factorized channel gain tests cross-dataset transfer of the two speaker-pair accuracy gains; confidence diagnostics are mixed, and no novelty or test improvement is assumed.
+models: [SE_adLIF, GAIN_SE_adLIF]
+arm_labels:
+  SE_adLIF: Baseline
+  GAIN_SE_adLIF: A002 input gain
+spike_deletion:
+  SE_adLIF: 0
+  GAIN_SE_adLIF: 0
+input_fir_modes:
+  SE_adLIF: null
+  GAIN_SE_adLIF: gain_only
+datasets:
+  SSC:
+    batch_size: 1024
+    validation_batch_size: 1024
+    num_workers: 8
+    spawn_safe_transforms: true
+    ceilings: [10, 40]
+    stage: 3
+  ECG:
+    batch_size: 256
+    validation_batch_size: 64
+    ceilings: [50, 100, 400]
+    stage: 4

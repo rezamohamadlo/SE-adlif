@@ -1,0 +1,15 @@
+{
+  "advancement_rule": "Advance to ECG with a practical accuracy gain supported by loss/stability. If negligible or negative at40, preserve the outcome and investigate mechanisms rather than extending past the repository budget or forcing complementarity.",
+  "ceiling": 40,
+  "estimated_additional_cost": "30additional epochs at~93seconds per arm plus restart/validation overhead; approximately95minutes for both arms, estimated.",
+  "hypothesis": "Resolve whether FIR+gain yields a practical SSC unseen-speaker validation improvement beyond the preliminary+0.23pp.",
+  "idea": "A001",
+  "initialization": "Full resume of own last checkpoint; exact training provenance retained.",
+  "matched_control": "Same fresh-started Baseline/A runs, each fully resumed after10epochs; full40epoch schedule unchanged.",
+  "official_test_opened": false,
+  "primary_metric": "Clean official-validation accuracy",
+  "resume_randomness_caveat": "Full resume restores own weights/optimizer/scheduler/globalstep/epoch, but does not establish identical dropout/data-order randomness to uninterrupted training. Both matched arms pause after10.",
+  "source": "SSC_STAGE010_COMPARISON.json",
+  "stage": 3,
+  "threshold_pp": 0.5
+}

@@ -30,6 +30,8 @@ SEEDS = tuple(EVALUATION['seeds'])
 RUN_LOGDIR = "results/valid"
 SEED_COHORT = None
 VALIDATION_ONLY = False
+COMPLEMENTARY_STUDY = None  # Explicit opt-in; no ordinary comparison changes.
+STAGE_CEILING = None
 SSC_STUDY_JOB = None  # Explicit opt-in; ordinary and extension_v1 plans are unchanged.
 SPEAKER_HOLDOUT = None  # Frozen split metadata, set only by the opt-in workflow.
 # One explicit protocol shared by reference and proposed models.
@@ -147,18 +149,43 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                 if SPEAKER_HOLDOUT:
                     from shd_speaker_holdout import job_overrides
                     overrides += job_overrides(model, dataset, seed, SPEAKER_HOLDOUT)
+                if COMPLEMENTARY_STUDY:
+                    from module.study_control import study_overrides
+                    overrides += study_overrides(COMPLEMENTARY_STUDY, STAGE_CEILING, model, dataset, seed)
+                    deviations = ([] if model == 'SE_adLIF' else [f'model_variant={model}'])
+                    deviations += ['validation-only staged discovery; official tests disabled',
+                                   f'batch_size={COMPLEMENTARY_STUDY["datasets"][dataset]["batch_size"]}; LR unchanged',
+                                   f'full_schedule_epochs={_BASELINE.datasets[dataset].n_epochs}; explicit staged stops']
+                    loading = COMPLEMENTARY_STUDY['datasets'][dataset]
+                    if 'num_workers' in loading:
+                        deviations.append(f'num_workers={loading["num_workers"]}; separately measured deterministic data loading')
+                    if loading.get('spawn_safe_transforms'):
+                        deviations.append('spawn-safe preprocessing; exact tensor/label/mask parity verified')
+                    if COMPLEMENTARY_STUDY['version']=='complementary_speaker_dev_v2' and dataset=='SHD':
+                        deviations.append(f'speaker-disjoint development pair={COMPLEMENTARY_STUDY["pair_id"]}; not canonical SHD*')
+                    overrides += [f'++paper_baseline_deviations={json.dumps(deviations)}']
                 cfg = compose(config_name="main", overrides=overrides)
+                if COMPLEMENTARY_STUDY and cfg.get('spike_delete_probability',0):
+                    cfg.paper_baseline_deviations=list(cfg.paper_baseline_deviations)+[
+                        f'training-only per-event deletion probability={cfg.spike_delete_probability}; clean validation/inference']
+                    overrides.append(f'++paper_baseline_deviations={json.dumps(list(cfg.paper_baseline_deviations))}')
                 from models.pl_module import validate_training_objective
                 objective = validate_training_objective(cfg)
                 if objective != 'classification':
                     # An auxiliary training loss is an explicit protocol change,
                     # even though inference, supervised aggregation and budget match.
-                    cfg.evaluation_protocol = f'{dataset_protocol_name(dataset)}_{objective}'
-                    deviations = list(cfg.paper_baseline_deviations) + [
-                        f'training_objective={objective}',
-                        f'temporal_consistency.weight={cfg.temporal_consistency.weight}',
-                        f'temporal_consistency.window={cfg.temporal_consistency.window}',
-                    ]
+                    cfg.evaluation_protocol = f'{cfg.evaluation_protocol}_{objective}'
+                    deviations = list(cfg.paper_baseline_deviations) + [f'training_objective={objective}']
+                    if objective == 'mt_temporal_consistency_v1':
+                        deviations += [f'temporal_consistency.weight={cfg.temporal_consistency.weight}',
+                                       f'temporal_consistency.window={cfg.temporal_consistency.window}']
+                    elif objective == 'classification_label_smoothing_v1':
+                        deviations += [f'label_smoothing_epsilon={cfg.label_smoothing_epsilon}; training only',
+                                       'validation/inference use ordinary hard-label CE; train_hard_ce logged separately']
+                    elif objective == 'classification_dropout_consistency_v1':
+                        deviations += [f'dropout_consistency_alpha={cfg.dropout_consistency_alpha}; two stochastic training forwards',
+                                       f'label_smoothing_epsilon={cfg.label_smoothing_epsilon}; training only',
+                                       'single ordinary inference; hard-label validation CE; first-view online train accuracy']
                     cfg.paper_baseline_deviations = deviations
                     overrides += [f'++evaluation_protocol={cfg.evaluation_protocol}',
                                   f'++paper_baseline_deviations={json.dumps(deviations)}']
@@ -184,6 +211,15 @@ def build_plan(model, adaptation_update_interval=2, seeds=SEEDS, datasets=None, 
                 if not inspect_existing:
                     plan.append(dict(dataset=dataset, seed=seed, directory=directory,
                                      config=resolved, overrides=overrides, status='unchecked',
+                                     compatibility=None))
+                    continue
+                if COMPLEMENTARY_STUDY:
+                    from module.study_control import inspect_run
+                    status, checkpoint = inspect_run(directory, resolved)
+                    if checkpoint:
+                        overrides.append(f'ckpt_path={json.dumps(portable_path(checkpoint, ROOT))}')
+                    plan.append(dict(dataset=dataset, seed=seed, directory=directory,
+                                     config=resolved, overrides=overrides, status=status,
                                      compatibility=None))
                     continue
                 manifest = directory / "FULL_RUN_CONFIG.json"
@@ -461,7 +497,12 @@ def run_validation(model, interval, seeds, datasets, resume):
         result = subprocess.run([sys.executable, str(ROOT / 'run.py'), *item['overrides']], cwd=ROOT)
         if result.returncode:
             raise RuntimeError(f"Validation training failed; rerun the same command to resume: {directory}")
-        read_completed(directory)
+        if COMPLEMENTARY_STUDY:
+            from module.study_control import inspect_run
+            if inspect_run(directory, item['config'])[0] != 'complete':
+                raise RuntimeError(f'Staged validation run lacks its verified receipt: {directory}')
+        else:
+            read_completed(directory)
 
 
 def main(argv=None):
@@ -472,7 +513,7 @@ def main(argv=None):
     if any(arg == '--ssc-study-stage' or arg.startswith('--ssc-study-stage=') for arg in arguments):
         from ssc_validation_study import main as study_main
         return study_main(arguments, runner=sys.modules[__name__])
-    global EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY
+    global EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY, COMPLEMENTARY_STUDY, STAGE_CEILING
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--models", nargs="+", required=True,
                         help="SE_adLIF, DTH_SE_adLIF, LG_DTH_SE_adLIF (including _slow/_transient), or configured future models")
@@ -508,11 +549,27 @@ def main(argv=None):
     parser.add_argument('--tta', action='store_true', help='Frozen-checkpoint test-time augmentation only; no training')
     parser.add_argument('--tta-split', choices=('validation', 'test'), default='validation')
     parser.add_argument('--tta-output', help='Separate evaluation output; defaults to <model>_tta_v1 experiments')
+    parser.add_argument('--study-file', help='Opt-in matched staged discovery definition, repository relative')
+    parser.add_argument('--stage-ceiling', type=int, help='Enforced completed-epoch boundary for --study-file')
     args = parser.parse_args(argv)
     if args.no_measure_costs and args.measure_existing_costs:
         parser.error('--no-measure-costs and --measure-existing-costs cannot be combined')
-    original = EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY
+    original = EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY, COMPLEMENTARY_STUDY, STAGE_CEILING
     try:
+        if args.study_file:
+            from module.study_control import load_study
+            COMPLEMENTARY_STUDY = load_study(args.study_file)
+            if COMPLEMENTARY_STUDY['version']=='complementary_speaker_dev_v2':
+                print('[STAGE ORDER] primary speaker-disjoint screen -> fixed-pair sensitivity of shortlist -> SSC validation -> ECG validation -> freeze -> fresh canonical four-arm comparisons -> replication -> official tests/costs',flush=True)
+            STAGE_CEILING = args.stage_ceiling
+            if args.seed_cohort or args.tta or args.logdir or args.measure_existing_costs:
+                raise ValueError('Staged study owns its output/configuration and forbids TTA/test costs')
+            args.validation_only = True
+            args.logdir = COMPLEMENTARY_STUDY['output_root']
+            EVALUATION = copy.deepcopy(EVALUATION)
+            EVALUATION['name'] += '_' + COMPLEMENTARY_STUDY['version']
+        elif args.stage_ceiling is not None:
+            raise ValueError('--stage-ceiling requires --study-file')
         SEED_COHORT, VALIDATION_ONLY = args.seed_cohort, args.validation_only
         from extended_seed_study import cohort_definition
         args.seeds = args.seeds if args.seeds is not None else (
@@ -608,7 +665,7 @@ def main(argv=None):
     except (ValueError, RuntimeError) as error:
         parser.exit(1, f"Error: {error}\n")
     finally:
-        EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY = original
+        EVALUATION, PROTOCOL, RUN_LOGDIR, SEED_COHORT, VALIDATION_ONLY, COMPLEMENTARY_STUDY, STAGE_CEILING = original
 
 
 if __name__ == '__main__':

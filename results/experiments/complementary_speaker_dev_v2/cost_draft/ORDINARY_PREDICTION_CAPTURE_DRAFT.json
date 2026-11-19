@@ -1,0 +1,30 @@
+{
+  "status": "isolated_collector_unit_verified_not_connected_to_evaluator",
+  "patch": "results/experiments/complementary_speaker_dev_v2/cost_draft/ORDINARY_PREDICTION_CAPTURE_DRAFT.patch",
+  "patch_sha256": "62c9ad324dcce057895c2d0afc058f024bcd1eded8bf3707141b0f0442210c8a",
+  "normalized_source_sha256": {
+    "module/ordinary_prediction_capture.py": "1a40cf6ecc99d24c261a9bc24e61ad847e1a0a7158a01d59837dc5db6e28bdb8",
+    "tests/test_ordinary_prediction_capture.py": "ef8e5b41cd97731efe8d25f4dcf52e9b7178fee693ece4a30fbb566c76e1dcfd"
+  },
+  "collector_tests_passed": 9,
+  "combined_isolated_tests_passed": 40,
+  "training_executed_for_tests": false,
+  "real_inference_executed_for_tests": false,
+  "official_test_opened": false,
+  "active_source_changed": false,
+  "verified": [
+    "No added model forward, changed input arguments, return value, parameters or RNG state",
+    "Restores logging method on normal/error exits, including existing instance overrides",
+    "One valid target per recording with original ignore-index contract",
+    "Rejects partial/excess cohorts, invalid target shapes, training mode and regression",
+    "Recorded correct counts agree with a real CPU micro-accuracy metric on synthetic scores"
+  ],
+  "remaining": [
+    "Connect only after frozen final-test gate succeeds",
+    "Verify sequential non-dropping sampler and raw original-row dataset identity",
+    "Derive fitting-speaker membership from verified actual fitting indices",
+    "Validate observed labels against raw row metadata and saved test accuracy",
+    "Persist subgroup and per-record provenance; do not treat isolated tests as real final-test evidence",
+    "Apply only after active source-guarded training queue closes and run actual-checkout tests"
+  ]
+}

@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 import io
 import json
 import platform
+import importlib.metadata
 from pathlib import Path
 
 from omegaconf import OmegaConf
@@ -12,11 +13,11 @@ import torch
 
 import measure_reference_costs as reference
 import measure_shd_costs as shared
-from models.pl_module import layer_map
+from models.pl_module import layer_map, build_training_model
 from project_paths import local_path, portable_config, portable_path
 from cost_records import normalized_record
 
-VERSION = 'runner_test_costs_v1'
+VERSION = 'runner_test_costs_v2_fir'
 TARGETS = {'SHD': 'datasets.shd.SHDLDM', 'SSC': 'datasets.ssc.SSCLDM',
            'ECG': 'datasets.ecg.ECGLDM'}
 
@@ -60,6 +61,10 @@ def update_training_summary(directory, record):
               'Runtime is forward-only, excluding data loading, transfer, loss and temporal aggregation.',
               'These test measurements are separate from the validation GFLOPs estimate above.',
               'Detailed measurements, checkpoint identity and environment: [COST_RESULTS.json](COST_RESULTS.json) / [COST_RESULTS.md](COST_RESULTS.md).', end]
+    if 'input_fir_arithmetic_ops_per_sample' in metrics:
+        lines.insert(-1,
+            'Input FIR is included in forward runtime and scalar arithmetic. Its first projection is analog: '
+            'SynOps here cover hidden-driven connections only and are incompatible with raw-event total SynOps.')
     temporary = path.with_suffix('.md.costs.tmp')
     temporary.write_text(before.rstrip() + '\n\n' + '\n'.join(lines) + after.rstrip() + '\n', encoding='utf-8')
     temporary.replace(path)
@@ -121,6 +126,8 @@ def _collect(directory, dataset, dry_run=False):
     result_path = directory / 'COST_RESULTS.json'
     if result_path.exists():
         old = normalized_record(json.loads(result_path.read_text(encoding='utf-8')))
+        if cfg.get('input_fir') and old.get('version') != VERSION:
+            raise ValueError('Preserve the older FIR cost record before explicit versioned remeasurement')
         if (old.get('status') != 'complete' or old.get('checkpoint_sha256') != digest
                 or old.get('dataset') != dataset or old.get('seed') != cfg.random_seed):
             raise ValueError('Existing cost record has a different checkpoint/protocol; preserve it before remeasurement')
@@ -131,7 +138,7 @@ def _collect(directory, dataset, dry_run=False):
     torch.set_float32_matmul_precision('high')
     device = torch.device(str(cfg.device))
     with redirect_stdout(io.StringIO()):
-        model = shared.MLPSNN(cfg)
+        model = build_training_model(cfg)
     model.load_state_dict(checkpoint['state_dict'], strict=True)
     model.to(device).eval()
     print(f'Measuring {dataset} test activity/cost: {portable_path(path)}', flush=True)
@@ -147,15 +154,22 @@ def _collect(directory, dataset, dry_run=False):
         checkpoint_sha256=digest, best_epoch=int(checkpoint['epoch']),
         saved_config=portable_config(OmegaConf.to_container(cfg, resolve=True)), data_sha256=data_hash,
         environment=dict(python=platform.python_version(), torch=torch.__version__, cuda=torch.version.cuda,
+            packages={name:importlib.metadata.version(name) for name in
+                      ['torch','tonic','numpy','h5py','pytorch-lightning','hydra-core','omegaconf']},
             device=str(device), gpu=torch.cuda.get_device_name(device) if device.type == 'cuda' else platform.processor(),
             matmul_precision=torch.get_float32_matmul_precision(), timing_repeats=3, warmup=2,
             source_sha256={portable_path(p): shared.sha256(p) for p in
                 [Path(__file__), Path(__file__).with_name('cost_records.py'), Path(shared.__file__), Path(reference.__file__),
+                 shared.ROOT / 'functional/count_thinning.py',
+                 shared.ROOT / f'datasets/{dataset.lower()}.py',
+                 shared.ROOT / 'datasets/utils/pad_tensors.py',
+                 shared.ROOT / 'datasets/utils/transforms.py',
                  *sorted((shared.ROOT / 'models').rglob('*.py'))]}),
         scopes=dict(activity='Stored sequence extent before batch padding, including configured minimum padding and burn-in',
-            compute='Executed batch-padded timesteps; MLPSNN.forward only',
+            compute='Executed batch-padded timesteps; registered model forward including optional input FIR',
             timing='Synchronized forward wall time; excludes transfer/loading/loss/temporal aggregation',
-            synops='Dense fan-out event estimate; ECG analog input projection excluded and stored as dense MACs',
+            synops=('Hidden-driven event fan-out only; FIR-filtered analog first projection stored as dense MACs; incompatible with raw-event total SynOps'
+                    if cfg.get('input_fir') else 'Dense fan-out event estimate; ECG analog input projection excluded and stored as dense MACs'),
             arithmetic='Matrix MAC=2 FLOPs; selected scalar arithmetic; nonlinearities/comparisons excluded',
             logical='Matrix operations plus scalar operations, nonlinearities/comparisons each counted as one; not hardware FLOPs'),
         measurements=metrics)
@@ -169,6 +183,11 @@ def _collect(directory, dataset, dry_run=False):
         lines.append(f'| {key} | {metrics[key]:.6f} |')
     lines += ['', 'Activity is per stored sequence (including minimum padding/burn-in); compute includes batch padding.',
               'ECG SynOps exclude analog input; arithmetic/logical estimates are not exact full end-to-end FLOPs or energy.']
+    if cfg.get('input_fir'):
+        lines += ['', 'FIR source counts and filtered analog values are distinct. First-projection dense MACs and FIR scalar arithmetic are included. '
+                  'FIR SynOps cover hidden-driven connections only and must not be directly compared with raw-event-input total SynOps.',
+                  f'FIR arithmetic operations/sample: {metrics["input_fir_arithmetic_ops_per_sample"]:.6f}',
+                  f'FIR logical operations/sample: {metrics["input_fir_logical_ops_per_sample"]:.6f}']
     temporary = directory / 'COST_RESULTS.md.tmp'
     temporary.write_text('\n'.join(lines) + '\n', encoding='utf-8')
     temporary.replace(directory / 'COST_RESULTS.md')

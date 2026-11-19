@@ -1,0 +1,25 @@
+{
+  "created_at": "2026-11-12T11:14:50.346493+03:30",
+  "hypothesis": "Current baseline/LS-only factory and training objective fit the previously selected SSC1024batch with safe headroom, finite gradients and unchanged ordinary-validation batch behavior. Calibration is not accuracy evidence.",
+  "candidate": "B002_LS_ONLY",
+  "matched_probe": "Disposable fresh Baseline and LS-only, seed117, no main checkpoint initialization",
+  "source": "results/experiments/complementary_speaker_dev_v2/B002_SSC_CONFIRMATION_SOURCE.txt",
+  "source_sha256": "d16abb60cd8999ad60949a2cb96b88a0f7f7ceba126c117447d9a0e9ad2621e5",
+  "training_records": "Same1024official-training indices including128longest from SSC_TRAINING_CALIBRATION.json",
+  "training_batch": 1024,
+  "training_steps_per_arm": {
+    "warmup": 2,
+    "measured": 3
+  },
+  "lr": 0.006,
+  "lr_scaled": false,
+  "precision": "32-true/high float32matmul",
+  "validation_probe": "First1024official validation rows, batch256vs1024,1warm+2measuredpasses each; verify same predictions and ordinary CE within1e-5. No test data.",
+  "existing_full_validation_grid": "SSC_VALIDATION_CALIBRATION.json retained unchanged; bounded current-objective parity probe does not replace it",
+  "minimum_reserved_memory_headroom_fraction": 0.15,
+  "updates_per_main_epoch": 73,
+  "advancement_rule": "Both arms finite, headroom>=15%, unchanged validation predictions and CE difference<1e-5. Otherwise diagnose or prepare a separately versioned matched batch; never silently alter existing runs.",
+  "estimated_compute": "About1-3minutes plus real-data loading; measured runtime will be retained",
+  "all_states_discarded_before_main": true,
+  "official_test_opened": false
+}

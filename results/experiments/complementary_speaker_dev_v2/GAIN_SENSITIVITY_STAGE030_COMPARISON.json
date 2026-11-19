@@ -1,0 +1,52 @@
+{
+  "FIR_minus_Baseline_pp": 1.7799317836761475,
+  "FIR_minus_GAIN_pp": -0.2427220344543457,
+  "GAIN_minus_Baseline_pp": 2.022653818130493,
+  "completed_epochs_per_arm": 30,
+  "interpretation": "One predefined pair, no hyperparameter tuning or favorable-pair search. Different same-seed source-version replays are not independent seeds. Gain-only primary accuracy must be qualified by loss and calibration diagnostics.",
+  "official_test_evaluated": false,
+  "records": [
+    {
+      "clean_validation_accuracy": 0.8681229948997498,
+      "last_training_accuracy": 0.9925130009651184,
+      "last_validation_accuracy": 0.8042071461677551,
+      "model": "SE_adLIF",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/gain_sensitivity_A001_v1/SE_adLIF/SHD/seed_42/stages/030/RESULT.json",
+      "selected_completed_epoch": 26,
+      "tail10_epoch_sample_sd": 0.018243491957586365,
+      "tail10_mean_accuracy": 0.8290453135967255,
+      "training_accuracy_at_selection": 0.984375,
+      "validation_loss_at_selection": 0.5873734354972839
+    },
+    {
+      "clean_validation_accuracy": 0.8859223127365112,
+      "last_training_accuracy": 0.98486328125,
+      "last_validation_accuracy": 0.8786407709121704,
+      "model": "FIR_SE_adLIF",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/gain_sensitivity_A001_v1/FIR_SE_adLIF/SHD/seed_42/stages/030/RESULT.json",
+      "selected_completed_epoch": 18,
+      "tail10_epoch_sample_sd": 0.021369033659794277,
+      "tail10_mean_accuracy": 0.8417475819587708,
+      "training_accuracy_at_selection": 0.9801432490348816,
+      "validation_loss_at_selection": 0.460485577583313
+    },
+    {
+      "clean_validation_accuracy": 0.8883495330810547,
+      "last_training_accuracy": 0.99755859375,
+      "last_validation_accuracy": 0.8543689250946045,
+      "model": "GAIN_SE_adLIF",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/gain_sensitivity_A001_v1/GAIN_SE_adLIF/SHD/seed_42/stages/030/RESULT.json",
+      "selected_completed_epoch": 29,
+      "tail10_epoch_sample_sd": 0.01768560241507414,
+      "tail10_mean_accuracy": 0.8572006523609161,
+      "training_accuracy_at_selection": 0.9970703125,
+      "validation_loss_at_selection": 0.5110965371131897
+    }
+  ],
+  "status": "verified_predefined_pair_sensitivity_complete",
+  "training_seed": 42,
+  "validation_speakers": [
+    6,
+    10
+  ]
+}

@@ -1,0 +1,11 @@
+﻿{
+    "mode":  "full_resume_after_verified_interruption_at77",
+    "planned_pause_condition_deviation":  true,
+    "stdout":  "results/experiments/complementary_speaker_dev_v2/a002_ecg_stage100_recovery077_stdout.log",
+    "test_evaluated":  false,
+    "full_budget":  400,
+    "command":  ".ven/Scripts/python.exe -u runner.py --models SE_adLIF GAIN_SE_adLIF --datasets ECG --seeds 42 --study-file config/studies/complementary_transfer_A002_gain_v1.yaml --stage-ceiling 100",
+    "stderr":  "results/experiments/complementary_speaker_dev_v2/a002_ecg_stage100_recovery077_stderr.log",
+    "ceiling":  100,
+    "pid":  10596
+}

@@ -1,0 +1,24 @@
+﻿{
+    "launched_at":  "2026-11-12T11:17:24.6583770+03:30",
+    "pid":  16340,
+    "models":  [
+                   "SE_adLIF",
+                   "LS_SE_adLIF"
+               ],
+    "mode":  "fresh",
+    "dataset":  "SSC",
+    "validation":  "official_validation_only",
+    "training_seed":  42,
+    "epoch_ceiling":  10,
+    "full_schedule":  40,
+    "official_test":  false,
+    "training_batch":  1024,
+    "validation_batch":  1024,
+    "num_workers":  8,
+    "learning_rate":  0.006,
+    "study_file":  "config/studies/complementary_B002_transfer_v1.yaml",
+    "stdout":  "results/experiments/complementary_speaker_dev_v2/b002_ls_ssc_stage010_stdout.log",
+    "stderr":  "results/experiments/complementary_speaker_dev_v2/b002_ls_ssc_stage010_stderr.log",
+    "decision":  "B002_SSC_STAGE010_PREREGISTRATION.json",
+    "source_snapshot":  "B002_PRIMARY_SOURCE_SNAPSHOT.json"
+}

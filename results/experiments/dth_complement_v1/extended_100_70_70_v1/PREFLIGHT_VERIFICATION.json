@@ -1,0 +1,27 @@
+{
+  "non_training_tests_passed": 17,
+  "public_runner_resume_dry_runs_passed": 3,
+  "portable_powershell_preflight_passed": true,
+  "datasets": {
+    "SHD": {
+      "from_epoch": 30,
+      "to_epoch": 100,
+      "optimizer_scheduler_loop_and_weights_preserved": true,
+      "original_files_unchanged": true
+    },
+    "ECG": {
+      "from_epoch": 30,
+      "to_epoch": 70,
+      "optimizer_scheduler_loop_and_weights_preserved": true,
+      "original_files_unchanged": true
+    },
+    "SSC": {
+      "from_epoch": 31,
+      "to_epoch": 70,
+      "optimizer_scheduler_loop_and_weights_preserved": true,
+      "original_files_unchanged": true
+    }
+  },
+  "baseline_file_unchanged": true,
+  "training_started": false
+}

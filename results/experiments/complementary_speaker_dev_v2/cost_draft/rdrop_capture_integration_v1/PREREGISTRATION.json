@@ -1,0 +1,16 @@
+{
+  "registered_at": "2026-11-12T16:35:24.574920+00:00",
+  "models": [
+    "SE_adLIF",
+    "RDROP_SE_adLIF",
+    "RDROP_LS_SE_adLIF",
+    "LS_SE_adLIF",
+    "TWO_PASS_SE_adLIF"
+  ],
+  "source_sha256": "f49723df584ce366767f445882ff46f8499513e1f188867e9e5f5084689aac89",
+  "capture_source": "results/experiments/complementary_speaker_dev_v2/cost_draft/checkout/final_evaluation_integration_v5/module/ordinary_prediction_capture.py",
+  "capture_sha256": "1a40cf6ecc99d24c261a9bc24e61ad847e1a0a7158a01d59837dc5db6e28bdb8",
+  "scope": "CPU-only actual registered models and trusted local SHD development checkpoints on synthetic4x12 inputs; verify noextra forward/RNG/state/loss/metric/prediction changes; no realdataset/officialtest/Trainer/optimizer.",
+  "final_gate_bypassed": false,
+  "patch_applied": false
+}

@@ -1,0 +1,29 @@
+﻿{
+    "dataset":  "SHD_primary_current_normalization",
+    "validation_speakers":  [
+                                0,
+                                3
+                            ],
+    "initial_state_hashes":  true,
+    "training_seed":  42,
+    "stage_ceiling":  30,
+    "launched_at":  "2026-11-12T17:16:56.5955321+03:30",
+    "source_snapshot":  "C004_PRIMARY_SOURCE_SNAPSHOT.json",
+    "batch_size":  1024,
+    "pid":  26108,
+    "stderr":  "results/experiments/complementary_speaker_dev_v2/c004_primary_stage030_stderr.log",
+    "conditional_gain_controls_launched":  false,
+    "preregistration":  "C004_CURRENT_NORMALIZATION_PREREGISTRATION.json",
+    "models":  [
+                   "SE_adLIF",
+                   "RCN_SE_adLIF",
+                   "RCN_LS_SE_adLIF",
+                   "LS_SE_adLIF"
+               ],
+    "stdout":  "results/experiments/complementary_speaker_dev_v2/c004_primary_stage030_stdout.log",
+    "full_schedule":  300,
+    "official_tests":  false,
+    "study_file":  "config/studies/complementary_C004_current_norm_v1.yaml",
+    "precision_determinism_changed":  false,
+    "mode":  "fresh_initial4"
+}

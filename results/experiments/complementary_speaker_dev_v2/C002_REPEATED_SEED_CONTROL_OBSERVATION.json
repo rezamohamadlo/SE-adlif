@@ -1,0 +1,48 @@
+{
+  "observed_at": "2026-11-12T12:23:49.917977+00:00",
+  "status": "repeated_seed_control_spread_observed_cause_not_established",
+  "model": "LS_SE_adLIF",
+  "training_seed": 42,
+  "shared_effective_config_fields_match": true,
+  "identity_protocol_routing_differences": {
+    "launcher_logdir": {
+      "C001": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3",
+      "C002": "results/experiments/complementary_speaker_dev_v2/c002_static_threshold_control_v1/primary_0_3"
+    },
+    "study_hypothesis": {
+      "C001": "Fresh smoothing-only control separates standalone regularization from complementarity.",
+      "C002": "Fresh ordinary-threshold smoothing control; no prior weights."
+    },
+    "study_idea": {
+      "C001": "C001_DTH_B002_LABEL_SMOOTHING",
+      "C002": "C002_STATIC_VERSUS_DYNAMIC_WITH_LS"
+    },
+    "evaluation_protocol": {
+      "C001": "shd_speaker_dth_ls_v1_primary_0_3_classification_label_smoothing_v1",
+      "C002": "shd_speaker_static_threshold_control_v1_primary_0_3_classification_label_smoothing_v1"
+    },
+    "logdir": {
+      "C001": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42",
+      "C002": "results/experiments/complementary_speaker_dev_v2/c002_static_threshold_control_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42"
+    },
+    "study_file": {
+      "C001": "config/studies/complementary_C001_dth_ls_primary_v1.yaml",
+      "C002": "config/studies/complementary_C002_static_control_v1.yaml"
+    },
+    "study_arm": {
+      "C001": "B label smoothing",
+      "C002": "Smoothing-only matched control"
+    }
+  },
+  "model_registry_source_delta": "--- C001/models/pl_module.py\n\n+++ C002/models/pl_module.py\n\n@@ -7,6 +7,7 @@\n\n \n from models.alif import EFAdLIF, SEAdLIF\n from models.ours.dth_adlif import DTHSEAdLIF\n+from models.ours.static_threshold_adlif import StaticThresholdSEAdLIF\n from models.ours.lt_dth_adlif import LTDTHSEAdLIF\n from models.ours.lg_dth_adlif import LGDTHSEAdLIF\n from models.ours.mt_adlif import MTSEAdLIF\n@@ -26,6 +27,7 @@\n\n     \"lif\": LIF,\n     \"se_adlif\": SEAdLIF,\n     \"dth_se_adlif\": DTHSEAdLIF,\n+    \"static_threshold_se_adlif\": StaticThresholdSEAdLIF,\n     \"lt_dth_se_adlif\": LTDTHSEAdLIF,\n     \"lg_dth_se_adlif\": LGDTHSEAdLIF,\n     \"mt_se_adlif\": MTSEAdLIF,",
+  "model_registry_change_does_not_modify_LS_branch": true,
+  "C001_selected_validation_accuracy": 0.853822648525238,
+  "C002_selected_validation_accuracy": 0.8672782778739929,
+  "observed_difference_pp": 1.3455629348754883,
+  "not_independent_training_seeds": true,
+  "sample_SD_or_significance_inferred": false,
+  "cause_verified": false,
+  "initial_weight_hash_from_actual_training_starts_available": false,
+  "interpretation": "Same declared seed and matching effective settings do not prove identical executed numerical/random trajectories. Current original checkpoints/metrics stay authoritative; do not cherry-pick repeats or count them as seeds. Fresh cohort controls are used within their own matched comparisons. Investigate numerical repeatability after the active queue closes; no precision/determinism changes mid-study.",
+  "official_test_opened": false
+}

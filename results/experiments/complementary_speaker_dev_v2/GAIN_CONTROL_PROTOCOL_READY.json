@@ -1,0 +1,30 @@
+{
+  "batch_size": 1024,
+  "ceiling": 30,
+  "dropout": 0.15,
+  "ecg_status": "Pending; not omitted or replaced by this control.",
+  "estimated_cost": "Warm observedSHDepoch~9-10seconds, about5minutes per30epoch arm plus startup; roughly15-20minutes for all3, estimated.",
+  "full_schedule": 300,
+  "initialization": "Fresh random weights, optimizer and epoch0 for all3arms; no historical/canonical weights.",
+  "interpretation": "FIR-minus-gain-only >=0.5pp with supportive loss/stability supports useful history under this screen, not independent test evidence. Gain-only matching FIR would weaken timing-specific interpretation.",
+  "lr": 0.01,
+  "models": [
+    "SE_adLIF",
+    "FIR_SE_adLIF",
+    "GAIN_SE_adLIF"
+  ],
+  "official_test_opened": false,
+  "portability": "Runner preflight verified from repository root and an unrelated working directory; artifacts/config paths remain repository-relative.",
+  "primary_metric": "Clean held-out-speaker accuracy",
+  "prior_art": "A parameterization/mechanism control, not a novelty claim; input gain can be absorbed into first-projection weights.",
+  "source_evidence": "A001_GAIN_FACTORIZATION_AUDIT.json",
+  "split_fingerprint": "7712626f45e9e226299fd2984b2a29ccaf173a4d64895b62a0a0386f2895e860",
+  "status": "verified_preflight",
+  "threshold_pp": 0.5,
+  "training_seed": 42,
+  "validation_batch_size": 1024,
+  "validation_speakers": [
+    0,
+    3
+  ]
+}

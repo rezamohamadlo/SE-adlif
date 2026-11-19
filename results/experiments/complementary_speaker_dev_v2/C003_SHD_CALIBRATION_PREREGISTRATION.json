@@ -1,0 +1,9 @@
+{
+  "registered_at": "2026-11-12T12:50:00.049998+00:00",
+  "source": "results/experiments/complementary_speaker_dev_v2/C003_SHD_CONFIRMATION_SOURCE.txt",
+  "source_sha256": "f82fc2f42c29068e0fb565b92c9f039aa66887bfd8dd0feff77a5027e029eeeb",
+  "scope": "Current4arms at1024, full342timesteps,2warmup+3measuredrealoptimizersteps/disposable117state each; bothstaticarms frozenzero/no-gradientgain assertions aftereveryupdate. Full1635validation numericalparity256vs1024. No main Trainer/checkpoint initialization.",
+  "acceptance": "finite losses/gradients,>=15percentmemoryheadroom,0changedvalidationpredictions,CEdifference<1e-5",
+  "main_state_recording": "Notinvoked duringcalibration;45nontrainingchecks verifycallback/purehash preservesweights/RNG/executionflags. Maininitialstate willbe recordeddirectly atfreshstart.",
+  "official_test_allowed": false
+}

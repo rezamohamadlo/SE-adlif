@@ -1,0 +1,18 @@
+{
+  "acquired_at": "2026-11-12T21:21:14.577766+00:00",
+  "purpose": "Resolve future ECG test-data availability only; no ECG model or candidate checkpoint selected/evaluated.",
+  "source_repository": "byin-cwi/Efficient-spiking-networks",
+  "source_commit": "bfd47cff62d26b0812bb2cc24c5f220245443a32",
+  "source_url": "https://raw.githubusercontent.com/byin-cwi/Efficient-spiking-networks/bfd47cff62d26b0812bb2cc24c5f220245443a32/data/QTDB_test.mat",
+  "loader_source": "datasets/ecg.py:ECGLDM.files_to_url",
+  "train_source_url": "https://raw.githubusercontent.com/byin-cwi/Efficient-spiking-networks/bfd47cff62d26b0812bb2cc24c5f220245443a32/data/QTDB_train.mat",
+  "upstream_train_sha256_matches_existing": "72d1a10c96f1540880447e07256835d66da419c0b34f3dff495731a7928c5bc7",
+  "existing_train_preserved": true,
+  "test_file": "data/QTDB/QTDB_test.mat",
+  "test_sha256": "916f11e21679a5b61988305bbb7cd1e6df8b34f1ed4a157a7a4e295d400ef232",
+  "test_bytes": 112720,
+  "test_arrays_or_labels_parsed": false,
+  "test_predictions_or_metrics_computed": false,
+  "main_SSC_training_modified": false,
+  "note": "The loader normally downloads both files when test is absent; fetched only the pinned compatible test companion to preserve the local training file."
+}

@@ -1,0 +1,26 @@
+{
+  "registered_at": "2026-11-12T14:55:41.893787+00:00",
+  "status": "beforeconditionalcontroltraining",
+  "parent_preregistration": "C005_DROPOUT_CONSISTENCY_PREREGISTRATION.json",
+  "trigger_evidence": "C005_PRIMARY_STAGE030_DECISION.json",
+  "model": "TWO_PASS_SE_adLIF",
+  "hypothesis": "Two stochastic supervised forwards alone may explain the apparent standaloneRDrop gain; set only alpha0, epsilon0, same registeredmodel/fresh42ownprimarysplit and30ceiling.",
+  "primary_contrast": "RDROP_SE_adLIF minus TWO_PASS_SE_adLIF clean held-out-speaker accuracy",
+  "practical_threshold_pp": 0.5,
+  "advancement": "Require at least+0.5pp with ordinaryCE/curves supporting before a KL-specific interpretation. Report per-speaker heterogeneity and all same-cohort contrasts. A negative/inconclusive control does not authorize weight sweeps or secondary-pair tuning.",
+  "matched_control": "CompletedC005RDROP_SE_adLIF ownstage30, source277unchanged; Baseline retained for context, not substituted from another cohort.",
+  "cost_minutes_estimate": [
+    8,
+    12
+  ],
+  "conditional_two_pass_LS_launched": false,
+  "full_schedule": 300,
+  "stage_ceiling": 30,
+  "training_seed": 42,
+  "batch_size": 1024,
+  "validation_speakers": [
+    0,
+    3
+  ],
+  "official_test_allowed": false
+}

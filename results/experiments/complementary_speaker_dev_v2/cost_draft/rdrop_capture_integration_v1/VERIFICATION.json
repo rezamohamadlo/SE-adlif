@@ -1,0 +1,81 @@
+{
+  "status": "verified_CPU_synthetic_actual_registered_model_capture_integration",
+  "verified_at": "2026-11-12T16:35:30.350722+00:00",
+  "elapsed_seconds": 1.258103200001642,
+  "source_sha256": "f49723df584ce366767f445882ff46f8499513e1f188867e9e5f5084689aac89",
+  "capture_sha256": "1a40cf6ecc99d24c261a9bc24e61ad847e1a0a7158a01d59837dc5db6e28bdb8",
+  "records": [
+    {
+      "model": "SE_adLIF",
+      "checkpoint": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/SE_adLIF/SHD/seed_42/stages/030/best.ckpt",
+      "checkpoint_sha256": "ed1c6d1084058cc495404a4e5022437704d5f540dae26f48d1a2d29b7260852f",
+      "model_class": "MLPSNN",
+      "training_objective": "classification",
+      "dropout_consistency_alpha": 0.0,
+      "label_smoothing_epsilon": 0.0,
+      "synthetic_recordings": 4,
+      "ordinary_forward_calls": 2,
+      "captured_forward_calls": 2,
+      "predictions_loss_metric_counts_state_rng_and_restore_match": true
+    },
+    {
+      "model": "RDROP_SE_adLIF",
+      "checkpoint": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/RDROP_SE_adLIF/SHD/seed_42/stages/030/best.ckpt",
+      "checkpoint_sha256": "32e68fb61eb4cdbfeb072acb86bd74edc40b185fbcefbecaa0c3f355297fc9b4",
+      "model_class": "DropoutConsistentMLPSNN",
+      "training_objective": "classification_dropout_consistency_v1",
+      "dropout_consistency_alpha": 1.0,
+      "label_smoothing_epsilon": 0.0,
+      "synthetic_recordings": 4,
+      "ordinary_forward_calls": 2,
+      "captured_forward_calls": 2,
+      "predictions_loss_metric_counts_state_rng_and_restore_match": true
+    },
+    {
+      "model": "RDROP_LS_SE_adLIF",
+      "checkpoint": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/RDROP_LS_SE_adLIF/SHD/seed_42/stages/030/best.ckpt",
+      "checkpoint_sha256": "175b2c8e369a140cbf6d58ae70d33ba72d0a312c17f6885954348084b8648d6f",
+      "model_class": "DropoutConsistentMLPSNN",
+      "training_objective": "classification_dropout_consistency_v1",
+      "dropout_consistency_alpha": 1.0,
+      "label_smoothing_epsilon": 0.1,
+      "synthetic_recordings": 4,
+      "ordinary_forward_calls": 2,
+      "captured_forward_calls": 2,
+      "predictions_loss_metric_counts_state_rng_and_restore_match": true
+    },
+    {
+      "model": "LS_SE_adLIF",
+      "checkpoint": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42/stages/030/best.ckpt",
+      "checkpoint_sha256": "20f1347f51e3d1804e327913dc9177f9c5305788485aa7f4bcdbf0a89c79fe19",
+      "model_class": "LabelSmoothedMLPSNN",
+      "training_objective": "classification_label_smoothing_v1",
+      "dropout_consistency_alpha": 0.0,
+      "label_smoothing_epsilon": 0.1,
+      "synthetic_recordings": 4,
+      "ordinary_forward_calls": 2,
+      "captured_forward_calls": 2,
+      "predictions_loss_metric_counts_state_rng_and_restore_match": true
+    },
+    {
+      "model": "TWO_PASS_SE_adLIF",
+      "checkpoint": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/TWO_PASS_SE_adLIF/SHD/seed_42/stages/030/best.ckpt",
+      "checkpoint_sha256": "46f3ba34b60e52f3689873ca8ed77adc9bcdb80af4e0d3b229f55cc603099ec8",
+      "model_class": "DropoutConsistentMLPSNN",
+      "training_objective": "classification_dropout_consistency_v1",
+      "dropout_consistency_alpha": 0.0,
+      "label_smoothing_epsilon": 0.0,
+      "synthetic_recordings": 4,
+      "ordinary_forward_calls": 2,
+      "captured_forward_calls": 2,
+      "predictions_loss_metric_counts_state_rng_and_restore_match": true
+    }
+  ],
+  "official_test_opened": false,
+  "real_dataset_constructed": false,
+  "Trainer_or_optimizer_used": false,
+  "CUDA_initialized": false,
+  "root_source_changed": false,
+  "final_evaluator_patch_applied": false,
+  "limitations": "Technical synthetic inference only. No project accuracy result or final-cohort authorization; canonical training/config/source/data/test/cost integration remains required."
+}

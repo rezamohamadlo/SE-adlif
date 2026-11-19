@@ -1,0 +1,43 @@
+version: complementary_speaker_dev_v2
+plan: docs/experiments/complementary-mechanisms-study-v2.md
+output_root: results/experiments/complementary_speaker_dev_v2/primary_0_3
+idea: A001_B001
+role: development
+pair_id: primary_0_3
+validation_speakers: [0, 3]
+split_manifest: results/experiments/complementary_speaker_dev_v2/primary_0_3/SPLIT_MANIFEST.json
+split_fingerprint: 7712626f45e9e226299fd2984b2a29ccaf173a4d64895b62a0a0386f2895e860
+training_seed: 42
+split_seed: 42
+hypothesis: Improve clean held-out-speaker accuracy through feature timing and training-rate robustness; smaller gaps alone are not success.
+hypotheses:
+  SE_adLIF: Matched fresh SE-adLIF control; no candidate weights or held-out-speaker training exposure.
+  FIR_SE_adLIF: A001 channel-specific causal filtering may improve transfer to held-out speakers; learned gain is a known confound to inspect.
+  FIR_THIN_SE_adLIF: B001 independent10percent training event deletion may reduce A001 rate reliance; all validation is clean.
+  THIN_SE_adLIF: B-only control separates generic event-deletion regularization from complementarity with A001.
+arm_labels:
+  SE_adLIF: Baseline
+  FIR_SE_adLIF: A
+  FIR_THIN_SE_adLIF: A+B
+  THIN_SE_adLIF: B
+spike_deletion:
+  SE_adLIF: 0
+  FIR_SE_adLIF: 0
+  FIR_THIN_SE_adLIF: 0.10
+  THIN_SE_adLIF: 0.10
+datasets:
+  SHD:
+    batch_size: 1024
+    validation_batch_size: 1024
+    ceilings: [30, 75]
+    stage: 1
+  SSC:
+    batch_size: 256
+    ceilings: [10, 40]
+    stage: 3
+  ECG:
+    batch_size: 256
+    validation_batch_size: 64
+    ceilings: [50, 100, 400]
+    stage: 4
+models: [SE_adLIF, FIR_SE_adLIF, FIR_THIN_SE_adLIF, THIN_SE_adLIF]

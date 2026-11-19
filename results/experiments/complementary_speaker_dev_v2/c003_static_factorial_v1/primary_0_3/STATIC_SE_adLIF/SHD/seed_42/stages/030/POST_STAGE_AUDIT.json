@@ -1,0 +1,58 @@
+{
+  "model": "STATIC_SE_adLIF",
+  "selected_validation_accuracy": 0.78899085521698,
+  "selected_completed_epoch": 22,
+  "online_training_accuracy_in_selected_epoch": 0.9861653447151184,
+  "validation_loss_at_selection": 0.9470882415771484,
+  "last10_validation_mean": 0.7761467874050141,
+  "checkpoint_checks": {
+    "best": {
+      "sha256": "aa2dd6e65431785fea732072bf4b9c6ab063e1ec28343af8936e7ac01ba3bbcc",
+      "epoch_index": 21,
+      "global_step": 132,
+      "config_matches": true
+    },
+    "last": {
+      "sha256": "60e54d686985b5f4a07c0c6973959166975cdb6dd027b8cc7b3d8971f0a2a75b",
+      "epoch_index": 29,
+      "global_step": 180,
+      "config_matches": true
+    }
+  },
+  "per_speaker": {
+    "0": {
+      "recordings": 913,
+      "correct": 752,
+      "accuracy": 0.823658269441402
+    },
+    "3": {
+      "recordings": 722,
+      "correct": 538,
+      "accuracy": 0.7451523545706371
+    }
+  },
+  "macroclass_recall": 0.7948722612815622,
+  "threshold_parameters": {
+    "l1": {
+      "homeostatic_gain": 0.0,
+      "transient_gain": 0.0,
+      "static_threshold_min": 0.8109750747680664,
+      "static_threshold_mean": 0.9648621082305908,
+      "static_threshold_max": 1.037970781326294
+    },
+    "l2": {
+      "homeostatic_gain": 0.0,
+      "transient_gain": 0.0,
+      "static_threshold_min": 0.9101698994636536,
+      "static_threshold_mean": 1.0069934129714966,
+      "static_threshold_max": 1.0753965377807617
+    }
+  },
+  "reproduced_validation_accuracy": 0.7889908256880734,
+  "reproduced_ordinary_ce": 0.9470883699732089,
+  "source_code": "results/experiments/complementary_speaker_dev_v2/C003_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+  "source_sha256": "e694dde9297230f0ccc2ae8ec45403edaef912ae14a2e3e1699178497238fe43",
+  "official_test_evaluated": false,
+  "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c003_static_factorial_v1/primary_0_3/STATIC_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+  "raw_prediction_sha256": "d295dcbc11e4ff1477812600fc50c6a5c3ace95681ec87232b9f725f0121c599"
+}

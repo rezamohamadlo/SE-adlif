@@ -19,6 +19,8 @@ from project_paths import local_path, portable_config, relocate_checkpoint_callb
 from pytorch_lightning.callbacks import EarlyStopping, LearningRateMonitor, ModelCheckpoint
 from pytorch_lightning.loggers.csv_logs import CSVLogger, ExperimentWriter
 import logging
+import contextlib
+import io
 from models.pl_module import MLPSNN, build_training_model
 
 from pytorch_lightning.strategies import SingleDeviceStrategy
@@ -447,6 +449,9 @@ def main(cfg: DictConfig):
     if cfg.get('validation_only', False):
         from extended_seed_study import validate_config
         validate_config(OmegaConf.to_container(cfg, resolve=True))
+        if cfg.get('complementary_study'):
+            from module.study_control import validate_resume_checkpoint
+            validate_resume_checkpoint(OmegaConf.to_container(cfg,resolve=True))
     if Path('.hydra').is_dir():
         OmegaConf.save(cfg, '.hydra/config.yaml')
     logging.getLogger().addHandler(logging.FileHandler("out.log"))
@@ -457,7 +462,11 @@ def main(cfg: DictConfig):
     dataset_paths = {key: str(local_path(cfg.dataset[key]))
                      for key in ('data_path', 'cache_root') if cfg.dataset.get(key)}
     datamodule = hydra.utils.instantiate(cfg.dataset, **dataset_paths)
-    model = build_training_model(cfg, default_class=MLPSNN)
+    if cfg.get('complementary_study'):
+        with contextlib.redirect_stdout(io.StringIO()):
+            model = build_training_model(cfg, default_class=MLPSNN)
+    else:
+        model = build_training_model(cfg, default_class=MLPSNN)
     if cfg.get('init_ckpt_path'):
         if cfg.get('ckpt_path'):
             raise ValueError('Choose weights initialization or full resume, not both')
@@ -484,6 +493,9 @@ def main(cfg: DictConfig):
         ApplyLRSchedulerConfig(factor=cfg.factor, patience=cfg.patience),
         TrainingSummaryCallback(model_ckpt_tracker, cfg),
     ]
+    if cfg.get('complementary_study'):
+        from module.study_control import StudyProgress
+        callbacks.append(StudyProgress(cfg))
     if cfg.get("early_stopping", False):
         callbacks.append(
             EarlyStopping(
@@ -501,7 +513,8 @@ def main(cfg: DictConfig):
         logger=AppendCSVLogger("logs", name="mlp_snn", version=0),
         max_epochs=cfg.n_epochs,
         gradient_clip_val=cfg.get('gradient_clip_val', 1.5),
-        enable_progress_bar=True,
+        enable_progress_bar=not bool(cfg.get('complementary_study')),
+        enable_model_summary=not bool(cfg.get('complementary_study')),
         strategy=SingleDeviceStrategy(device=cfg.device),
         plugins=[ValidationCheckpointIO() if cfg.get('validation_only', False) else TrustedLocalCheckpointIO()],
         )
@@ -519,8 +532,12 @@ def main(cfg: DictConfig):
         logging.info(f"Final result: {result}")
 
     if cfg.get('validation_only', False):
-        from extended_seed_study import finish_validation
-        finish_validation(cfg, trainer)
+        if cfg.get('complementary_study'):
+            from module.study_control import finish_stage
+            finish_stage(cfg, trainer)
+        else:
+            from extended_seed_study import finish_validation
+            finish_validation(cfg, trainer)
 
     return trainer.checkpoint_callback.best_model_score.cpu().detach().numpy()
 

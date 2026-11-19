@@ -38,6 +38,11 @@ class DTHSEAdLIF(SEAdLIF):
         ))
         self.homeostatic_gain = Parameter(self.weight.new_zeros(()))
         self.transient_gain = Parameter(self.weight.new_zeros(()))
+        self.direction_aware = cfg.get("direction_aware", False)
+        if type(self.direction_aware) is not bool:
+            raise ValueError("direction_aware must be boolean")
+        if self.direction_aware:
+            self.offset_gain = Parameter(self.weight.new_zeros(()))
 
         def step_fn(recurrent, alpha, beta, thr, a, b, u_rest, carry, cur):
             u_prev, z_prev, w_prev, fast_prev, slow_prev = carry
@@ -56,6 +61,15 @@ class DTHSEAdLIF(SEAdLIF):
         self.step = step_fn
 
     def dynamic_threshold(self, fast, slow):
+        if self.direction_aware:
+            delta = fast - slow
+            logits = (
+                self.threshold_logits
+                + self.homeostatic_gain * (slow - self.target_rate)
+                - self.transient_gain * F.relu(delta)
+                + self.offset_gain * F.relu(-delta)
+            )
+            return self.theta_min + (self.theta_max - self.theta_min) * logits.sigmoid()
         logits = (
             self.threshold_logits
             + self.homeostatic_gain * (slow - self.target_rate)
@@ -75,6 +89,8 @@ class DTHSEAdLIF(SEAdLIF):
         with torch.no_grad():
             self.homeostatic_gain.clamp_(0, 5)
             self.transient_gain.clamp_(0, 5)
+            if self.direction_aware:
+                self.offset_gain.clamp_(-5, 5)
 
     def _scan(self, inputs, with_states=False):
         current = F.linear(inputs, self.weight, self.bias)

@@ -1,0 +1,233 @@
+{
+  "dataset": "ECG",
+  "metric": "validation only / per labeled timestep",
+  "checkpoint": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/SE_adLIF/ECG/seed_42/stages/100/best.ckpt",
+  "checkpoint_sha256": "f854648dab7e30d2d4001c7ed897cc1b0ac555e0eb5d017a3a21dd536ddc068b",
+  "accuracy": 0.7747630028183449,
+  "loss": 0.6399042010307312,
+  "confusion_rows_true_columns_predicted": [
+    [
+      4802,
+      169,
+      8,
+      10,
+      637,
+      2085
+    ],
+    [
+      232,
+      1416,
+      135,
+      0,
+      69,
+      923
+    ],
+    [
+      5,
+      243,
+      2157,
+      149,
+      3,
+      13
+    ],
+    [
+      0,
+      0,
+      234,
+      1674,
+      367,
+      4
+    ],
+    [
+      8,
+      8,
+      2,
+      131,
+      10649,
+      723
+    ],
+    [
+      883,
+      197,
+      286,
+      177,
+      1090,
+      9541
+    ]
+  ],
+  "class_support": [
+    7711,
+    2775,
+    2570,
+    2279,
+    11521,
+    12174
+  ],
+  "class_recall": [
+    0.6227467254571392,
+    0.5102702702702703,
+    0.8392996108949417,
+    0.7345326897762177,
+    0.9243121256835344,
+    0.7837194020042714
+  ],
+  "macro_class_recall": 0.7358134706810624,
+  "per_record": [
+    {
+      "original_row": 456,
+      "correct": 945,
+      "targets": 1301
+    },
+    {
+      "original_row": 298,
+      "correct": 990,
+      "targets": 1301
+    },
+    {
+      "original_row": 490,
+      "correct": 737,
+      "targets": 1301
+    },
+    {
+      "original_row": 163,
+      "correct": 908,
+      "targets": 1301
+    },
+    {
+      "original_row": 288,
+      "correct": 1065,
+      "targets": 1301
+    },
+    {
+      "original_row": 110,
+      "correct": 1004,
+      "targets": 1301
+    },
+    {
+      "original_row": 493,
+      "correct": 757,
+      "targets": 1301
+    },
+    {
+      "original_row": 103,
+      "correct": 1125,
+      "targets": 1301
+    },
+    {
+      "original_row": 514,
+      "correct": 1141,
+      "targets": 1301
+    },
+    {
+      "original_row": 583,
+      "correct": 1080,
+      "targets": 1301
+    },
+    {
+      "original_row": 342,
+      "correct": 971,
+      "targets": 1301
+    },
+    {
+      "original_row": 559,
+      "correct": 1141,
+      "targets": 1301
+    },
+    {
+      "original_row": 461,
+      "correct": 1160,
+      "targets": 1301
+    },
+    {
+      "original_row": 355,
+      "correct": 997,
+      "targets": 1301
+    },
+    {
+      "original_row": 526,
+      "correct": 1153,
+      "targets": 1301
+    },
+    {
+      "original_row": 135,
+      "correct": 1199,
+      "targets": 1301
+    },
+    {
+      "original_row": 51,
+      "correct": 872,
+      "targets": 1301
+    },
+    {
+      "original_row": 137,
+      "correct": 1185,
+      "targets": 1301
+    },
+    {
+      "original_row": 524,
+      "correct": 1161,
+      "targets": 1301
+    },
+    {
+      "original_row": 189,
+      "correct": 1135,
+      "targets": 1301
+    },
+    {
+      "original_row": 518,
+      "correct": 1160,
+      "targets": 1301
+    },
+    {
+      "original_row": 307,
+      "correct": 952,
+      "targets": 1301
+    },
+    {
+      "original_row": 78,
+      "correct": 1070,
+      "targets": 1301
+    },
+    {
+      "original_row": 318,
+      "correct": 956,
+      "targets": 1301
+    },
+    {
+      "original_row": 85,
+      "correct": 1184,
+      "targets": 1301
+    },
+    {
+      "original_row": 320,
+      "correct": 889,
+      "targets": 1301
+    },
+    {
+      "original_row": 252,
+      "correct": 1068,
+      "targets": 1301
+    },
+    {
+      "original_row": 292,
+      "correct": 741,
+      "targets": 1301
+    },
+    {
+      "original_row": 54,
+      "correct": 848,
+      "targets": 1301
+    },
+    {
+      "original_row": 496,
+      "correct": 645,
+      "targets": 1301
+    }
+  ],
+  "class_names": "C0..C5 original argmax columns; no clinical class-name assignment",
+  "patient_independence_verified": false,
+  "correlated_timesteps_are_independent_samples": false,
+  "official_test_opened": false,
+  "source_code": "results/experiments/complementary_speaker_dev_v2/B002_ECG_STAGE100_DIAGNOSTIC_SOURCE.txt",
+  "source_sha256": "9512420cffaf11c56917e0908938c81d1d2142e74415848a573067cd1f2b899c"
+}

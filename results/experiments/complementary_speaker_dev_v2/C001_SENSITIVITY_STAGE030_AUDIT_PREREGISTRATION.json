@@ -1,0 +1,18 @@
+{
+  "registered_at": "2026-11-12T11:51:31.596936+00:00",
+  "source": "results/experiments/complementary_speaker_dev_v2/C001_SENSITIVITY_STAGE030_AUDIT_SOURCE.txt",
+  "source_sha256": "78407f427a5d9c2c453397b12a299582b89d1e2df40e7f4b1a561325856ad54a",
+  "status": "prepared_syntax_checked_not_executed_wait_for3complete_receipts_and_terminal_launcher",
+  "models": [
+    "SE_adLIF",
+    "LS_SE_adLIF",
+    "DTH_LS_SE_adLIF"
+  ],
+  "scope": "Same completed-stage audit as primary:30uniqueepochs, selected/lastSHA/config/state, source251files, original1236validationrows/classes/6and10speakerIDs, ordinaryGPUaccuracy/CEreproduction, learnedthresholdgains, pairederrors andcurves. No training/testdata.",
+  "selection_rule": "Report fixed-pair combination-LS and combination-baseline; review original0.5pp criterion with CE/curves. No tuning, pair search, secondary budget extension or automatic transfer.",
+  "official_test_allowed": false,
+  "estimated_seconds": [
+    20,
+    60
+  ]
+}

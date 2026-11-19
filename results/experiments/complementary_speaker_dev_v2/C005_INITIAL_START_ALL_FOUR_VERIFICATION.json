@@ -1,0 +1,14 @@
+{
+  "verified_at": "2026-11-12T14:50:13.457766+00:00",
+  "all_four_actual_full_initial_tensors_identical": true,
+  "actual_initial_RNG_and_execution_flags_match": true,
+  "initial_model_state_sha256": "6830e803aa1acda8558c1b87f7c4302599a13a52187b08b61aae3a1f5738301e",
+  "record_files_sha256": {
+    "SE_adLIF": "f014c136443ba14543c8be761423b81e09dc27b8505969aa76443af7b8c65b75",
+    "RDROP_SE_adLIF": "42e9f9be23b00779a587cf1348b7938b73c3ae4a328eb6775865c46309907acf",
+    "RDROP_LS_SE_adLIF": "6405006285d008851874bb3a8373289715bf9743f4c3f73b7cb0a5cab59574e4",
+    "LS_SE_adLIF": "9d144d9469b96f935485974ec27814247d65440721e5d0563a1fbd0efe896128"
+  },
+  "caveat": "Matching initial weights/RNG does not establish identical later numerical/dropout trajectories or significance.",
+  "official_test_evaluated": false
+}

@@ -1,0 +1,21 @@
+{
+  "advancement_rule": "A-minus-Baseline >=0.5pp supported by loss/stability; if still improving or genuinely inconclusive extend both matched arms to40; preserve clear regressions and do not rescue by test selection.",
+  "calibration_evidence": [
+    "SSC_TRAINING_CALIBRATION.json",
+    "SSC_VALIDATION_CALIBRATION.json",
+    "SSC_WORKER_CALIBRATION.json",
+    "SSC_DATA_PIPELINE_CALIBRATION.json"
+  ],
+  "ceiling": 10,
+  "estimated_cost": "CalibratedGPU-only floor~73seconds/epoch plus loader/inference/checkpoint overhead; initially estimate15-25minutes per10epoch arm, revise from actual runtime.",
+  "hypothesis": "Causal auditory channel FIR plus learned gain that helped both predefined SHD speaker pairs may transfer to SSC official validation; not a pure timing or novelty claim.",
+  "idea": "A001",
+  "initialization": "Fresh random weights and optimizer at epoch0; neither SHD nor historicalSSC probe weights reused.",
+  "matched_control": "Fresh720x2SE_adLIF; identical batch1024,8workers,spawn-safe tensor-equivalent preprocessing,AdamLR0.006,dropout0.15,mean_membrane_potentials,seed42,officialtrain/validation,full40epoch schedule,10epoch ceiling.",
+  "official_test_opened": false,
+  "primary_metric": "clean SSC official-validation accuracy",
+  "prior_art_distinction": "Input-channel residual signed FIR before projection, distinct from earlier projected-current delayed-mixture DA; temporal filtering established prior art.",
+  "source_policy": "SHD30epoch screens closed and their233source/config files archived before adding transfer config; do not bypass old source guards. Freeze source for this bounded transfer stage.",
+  "stage": 3,
+  "threshold_pp": 0.5
+}

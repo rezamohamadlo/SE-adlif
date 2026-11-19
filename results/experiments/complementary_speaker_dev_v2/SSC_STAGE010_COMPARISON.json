@@ -1,0 +1,44 @@
+{
+  "A_minus_Baseline_pp": 0.23044347763061523,
+  "continuation": "Full resume from each own last.ckpt; optimizer/scheduler/globalstep/epoch restored; no weights-only continuation or changed optimization.",
+  "decision": "EXTEND_INCONCLUSIVE",
+  "next_ceiling": 40,
+  "official_test_evaluated": false,
+  "practical_threshold_pp": 0.5,
+  "protocol": "SSC official-validation; disjoint stored speakers",
+  "reason": "Below declared practical accuracy threshold, but both best checkpoints occur at epoch10 and curves still improve. Lower loss alone does not establish transfer; one planned full40epoch extension for both arms is justified.",
+  "records": [
+    {
+      "arm": "Baseline",
+      "clean_validation_accuracy": 0.7804828882217407,
+      "completed_epochs": 10,
+      "last4_epoch_sample_sd": 0.011128598679016688,
+      "last4_mean_accuracy": 0.7642270177602768,
+      "launch_training_seconds": 992.8788299000589,
+      "model": "SE_adLIF",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/transfer_A001/SE_adLIF/SSC/seed_42/stages/010/RESULT.json",
+      "selected_checkpoint_epoch_index": 9,
+      "selected_completed_epoch": 10,
+      "training_accuracy_at_selection": 0.7901862263679504,
+      "training_loss_at_selection": 0.6946203112602234,
+      "validation_loss_at_selection": 0.7224344611167908
+    },
+    {
+      "arm": "A",
+      "clean_validation_accuracy": 0.7827873229980469,
+      "completed_epochs": 10,
+      "last4_epoch_sample_sd": 0.011140940091003458,
+      "last4_mean_accuracy": 0.7732942700386047,
+      "launch_training_seconds": 1008.3578380000545,
+      "model": "FIR_SE_adLIF",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/transfer_A001/FIR_SE_adLIF/SSC/seed_42/stages/010/RESULT.json",
+      "selected_checkpoint_epoch_index": 9,
+      "selected_completed_epoch": 10,
+      "training_accuracy_at_selection": 0.8076305389404297,
+      "training_loss_at_selection": 0.6327053904533386,
+      "validation_loss_at_selection": 0.7067038416862488
+    }
+  ],
+  "status": "verified_stage_complete",
+  "training_seed": 42
+}

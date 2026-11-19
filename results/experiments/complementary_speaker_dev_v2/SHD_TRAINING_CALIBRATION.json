@@ -1,0 +1,57 @@
+{
+  "heldout_speakers_trained_on": false,
+  "model": "A+B FIR+trainingcountdeletion",
+  "official_test_opened": false,
+  "records": [
+    {
+      "batch": 256,
+      "disposable": true,
+      "estimated_epoch_train_seconds": 28.984141249384265,
+      "headroom_fraction": 0.8891851731227227,
+      "measured_steps": 2,
+      "peak_allocated_gib": 2.299229621887207,
+      "peak_reserved_gib": 2.658203125,
+      "samples_per_second": 220.81040610909804,
+      "source": "real primary-pair training records, includes128longest; no sequence truncation",
+      "stable_with_15pct_headroom": true,
+      "step_seconds": 1.1593656499753706,
+      "timesteps": 342,
+      "updates_per_epoch": 25,
+      "warmup_steps": 1
+    },
+    {
+      "batch": 512,
+      "disposable": true,
+      "estimated_epoch_train_seconds": 13.94859360018745,
+      "headroom_fraction": 0.7383109084617421,
+      "measured_steps": 2,
+      "peak_allocated_gib": 4.574637413024902,
+      "peak_reserved_gib": 6.27734375,
+      "samples_per_second": 440.47451493012403,
+      "source": "real primary-pair training records, includes128longest; no sequence truncation",
+      "stable_with_15pct_headroom": true,
+      "step_seconds": 1.1623828000156209,
+      "timesteps": 342,
+      "updates_per_epoch": 12,
+      "warmup_steps": 1
+    },
+    {
+      "batch": 1024,
+      "disposable": true,
+      "estimated_epoch_train_seconds": 7.238656499655917,
+      "headroom_fraction": 0.6135729843059825,
+      "measured_steps": 2,
+      "peak_allocated_gib": 9.235331535339355,
+      "peak_reserved_gib": 9.26953125,
+      "samples_per_second": 848.7762888447669,
+      "source": "real primary-pair training records, includes128longest; no sequence truncation",
+      "stable_with_15pct_headroom": true,
+      "step_seconds": 1.2064427499426529,
+      "timesteps": 342,
+      "updates_per_epoch": 6,
+      "warmup_steps": 1
+    }
+  ],
+  "selected_batch": 1024,
+  "status": "verified"
+}

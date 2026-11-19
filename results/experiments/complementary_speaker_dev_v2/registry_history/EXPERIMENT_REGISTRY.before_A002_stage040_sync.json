@@ -1,0 +1,104 @@
+{
+  "calibration_evidence": [
+    "SHD_TRAINING_CALIBRATION.json",
+    "SHD_VALIDATION_CALIBRATION.json"
+  ],
+  "decisions": [
+    {
+      "decision": "REVISE",
+      "evidence": "User replaced random-split-only selection with speaker-disjoint development. Canonical75epoch checkpoints saw held-out speakers; do not reuse.",
+      "next_action": "Freeze train-only0/3 and6/10indices; fresh matchedBaseline/A/AB primary screen, no official tests."
+    },
+    {
+      "decision": "ADVANCE_A_REJECT_B001_SCREEN",
+      "evidence": "PRIMARY_STAGE030_COMPARISON.json",
+      "next_action": "Fresh baseline/A sensitivity6/10 at30epochs; no primary-weight reuse or favorable-pair search."
+    },
+    {
+      "decision": "ADVANCE_A_SSC_SCREEN",
+      "evidence": "SENSITIVITY_STAGE030_COMPARISON.json",
+      "next_action": "Calibrate SSC real training batches and validation separately, then matched fresh baseline/A10epoch screen; no tests."
+    },
+    {
+      "decision": "EXTEND_SSC_INCONCLUSIVE_10_TO_40",
+      "evidence": "SSC_STAGE010_COMPARISON.json",
+      "next_action": "Full resume both own last checkpoints to40; preserve10epoch snapshots and no tests."
+    },
+    {
+      "decision": "REVISE_A001_SSC_TRANSFER",
+      "evidence": "SSC_STAGE040_COMPARISON.json",
+      "next_action": "Primary gain-only mechanism control after source snapshot; no furtherSSCextension, no tests; ECG pending."
+    },
+    {
+      "decision": "GAIN_ONLY_CONTROL_WEAKENS_TIMING_CLAIM_CHECK_FIXED_PAIR",
+      "evidence": "GAIN_CONTROL_STAGE030_COMPARISON.json",
+      "next_action": "Fresh Baseline/FIR/gain-only30epoch diagnostic on predeclared6/10only. Both accuracy gains pass, but loss worsens; no winner/generalization claim."
+    },
+    {
+      "decision": "ADVANCE_A002_TO_MATCHED_TRANSFER_SCREENS",
+      "evidence": "Both predefined pair accuracy gains; confidence diagnostics mixed",
+      "next_action": "Fresh matched SSC10epoch and ECG50epoch screens; no official tests or B investment yet."
+    }
+  ],
+  "execution_authorization": "Original study request explicitly authorizes agent-owned study training; latest correction changes split and stage order, not authorization.",
+  "ideas": [
+    {
+      "arm": "A",
+      "ceiling": 30,
+      "control": "Fresh SE_adLIF on same0/3split, identical preprocessing/optimization/batch/ceiling",
+      "estimated_cost": "Observed first2epochs37-40s duecache warm-up; warm epochs9-10s. Estimate5-10minutes per30epoch arm after warm-up; reevaluate at completed stage.",
+      "hypothesis": "Feature-specific causal FIR may transfer timing structure; its prior learned gain inflation is a confound.",
+      "id": "A001",
+      "primary_metric": "clean held-out-speaker accuracy",
+      "prior_art": "Learned delays/temporal filtering; different from failed projected-current DA. No novelty claim.",
+      "status": "SHD_development_positive_SSC_no_improvement_mechanism_control_next",
+      "threshold_pp": 0.5
+    },
+    {
+      "arm": "A+B",
+      "ceiling": 30,
+      "control": "A on identical0/3split and all shared conditions",
+      "estimated_cost": "Observed first2epochs37-40s duecache warm-up; warm epochs9-10s. Estimate5-10minutes per30epoch arm after warm-up; reevaluate at completed stage.",
+      "hypothesis": "Training-only10percent per-event deletion reduces rate reliance of A001; clean validation measures unseen-speaker transfer.",
+      "id": "B001",
+      "primary_metric": "clean held-out-speaker accuracy",
+      "prior_art": "EventDrop IJCAI2021; earlier DTH/LG-DTH multi-augmentation trials differ from this isolated SE/FIR factorial. Not a new invention.",
+      "status": "unpromising_30epoch_primary_screen",
+      "threshold_pp": 0.5
+    },
+    {
+      "arm": "A candidate",
+      "calibration_caveat": "Higher primary cross-entropy and more confident wrong predictions, but better Brier score; do not oversimplify calibration evidence.",
+      "hypothesis": "Optimization/implicit-regularization effects may transfer beyond the two SHD speaker pairs; no new representational capacity or guaranteed accuracy gain.",
+      "id": "A002",
+      "mechanism": "Gain-only factorized input conditioning, no added temporal FIR history",
+      "primary_metric": "Clean dataset-specific validation accuracy",
+      "prior_art": "Per-channel scaling/factorized linear parameterization is established; this is an empirical project hypothesis, not a novelty claim.",
+      "shared_conditions": "Fresh matched controls; same baseline optimization/batch/splits and declared budgets.",
+      "source_evidence": [
+        "GAIN_CONTROL_STAGE030_COMPARISON.json",
+        "GAIN_SENSITIVITY_STAGE030_COMPARISON.json",
+        "PRIMARY_VALIDATION_CALIBRATION.json"
+      ],
+      "status": "passed_primary_and_fixed_pair_accuracy_screen_transfer_pending"
+    }
+  ],
+  "next_stage_preregistration": "SSC_STAGE010_PREREGISTRATION.json",
+  "primary_pair": [
+    0,
+    3
+  ],
+  "runtime_evidence": {
+    "completed_epochs_at_estimate": 5,
+    "observed_epoch_seconds": 9.536997399991378,
+    "source": "primary_0_3/SE_adLIF/SHD/seed_42/STATUS.json"
+  },
+  "secondary_pair": [
+    6,
+    10
+  ],
+  "secondary_rule": "One predefined pair, shortlisted candidates only; fresh training on its own eight speakers.",
+  "source_freeze": "Finish implementation/calibration/tests before launching primary queue; no source edits during its bounded stage.",
+  "training_seed": 42,
+  "version": "complementary_speaker_dev_v2"
+}

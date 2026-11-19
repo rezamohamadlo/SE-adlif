@@ -1,0 +1,21 @@
+{
+  "verified_at": "2026-11-12T12:52:28.116795+00:00",
+  "nontraining_tests": {
+    "command": ".ven/Scripts/python.exe -m unittest tests.test_initial_state_evidence tests.test_static_threshold_control tests.test_dth_label_smoothing_study tests.test_label_smoothing tests.test_complementary_study tests.test_speaker_development tests.test_input_gain_control",
+    "passed": 45,
+    "runtime_seconds": 6.013,
+    "fit_or_optimizer_steps_in_tests": false
+  },
+  "initial_evidence_checks": "CPUCUDArnG/weights/flagsunchanged,create/reuse/conflictguards,dtype/scalarbuffers,fresh-onlycallbackgate,all4full-sizeinitialcommontensorhashesmatch",
+  "runner_dry_runs": "All4fresh passed root and externalTEMP",
+  "calibration": "C003_SHD_BATCH1024_CONFIRMATION.json",
+  "both_static_arm_gains_frozenzero_through_real_updates": true,
+  "source_snapshot": "C003_PRIMARY_SOURCE_SNAPSHOT.json",
+  "snapshot261files_archive_content_verified": true,
+  "precision_determinism_settings_changed": false,
+  "estimated_queue_minutes": [
+    20,
+    30
+  ],
+  "official_tests": false
+}

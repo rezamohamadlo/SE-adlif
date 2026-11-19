@@ -1,0 +1,11 @@
+{
+  "registered_at": "2026-11-12T15:16:45.078074+00:00",
+  "source": "results/experiments/complementary_speaker_dev_v2/C005_SENSITIVITY_STAGE030_AUDIT_SOURCE.txt",
+  "source_sha256": "8969daab7a204ae772990b8bc1afc64f26cede3e690c00c9994479b7c6f7cd93",
+  "status": "preparednotexecuted",
+  "scope": "Bothactualfreshinitialtensor/RNG/flags,278sourcefilesandhashboundshortlist/split/preregistration,exact30epochs/configs/best-last/optimizer/scheduler/180updates,realRDropcomponentlosslogs,ordinaryselectedcheckpointvalidation/per-speaker6and10/rawpredictions/pairederrors/CE/curves.",
+  "execution": "Onlyafterbothstage30receiptscompleteandlivequeue/trainingchildrenconfirmedterminal;noGPUauditduringtraining.",
+  "decision": "Original+0.5ppA-baselinewithCE/curvessupport;onefixedsensitivitypair,noalphatuning/pairsearch/budgetextension. Noautomatictransfer.",
+  "official_test_opened": false,
+  "full_goal_complete": false
+}

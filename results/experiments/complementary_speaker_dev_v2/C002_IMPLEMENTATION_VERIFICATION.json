@@ -1,0 +1,20 @@
+{
+  "verified_at": "2026-11-12T12:15:45.959137+00:00",
+  "nontraining_tests": {
+    "command": ".ven/Scripts/python.exe -m unittest tests.test_static_threshold_control tests.test_dth_label_smoothing_study tests.test_label_smoothing tests.test_complementary_study tests.test_speaker_development tests.test_input_gain_control",
+    "passed": 39,
+    "runtime_seconds": 4.946,
+    "fit_or_optimizer_steps_in_tests": false
+  },
+  "runner_dry_runs": "All3new runs passed root and externalTEMP",
+  "calibration": "C002_SHD_BATCH1024_CONFIRMATION.json",
+  "static_gains_frozen_zero_through_real_disposable_updates": true,
+  "source_snapshot": "C002_PRIMARY_SOURCE_SNAPSHOT.json",
+  "archive256files_content_hashes_verified": true,
+  "estimated_queue_minutes": [
+    18,
+    25
+  ],
+  "official_tests": false,
+  "main_checkpoint_initialization": "none; fresh seed42,calibrationseed117discarded"
+}

@@ -1,0 +1,233 @@
+--- a/models/ours/input_fir.py
++++ b/models/ours/input_fir.py
+@@ -13,12 +13,18 @@
+ 
+ 
+ class CausalInputFIR(nn.Module):
+-    def __init__(self, channels, lags):
++    def __init__(self, channels, lags, mode='causal'):
+         super().__init__()
++        if mode not in ('causal', 'gain_only'):
++            raise ValueError('Input FIR mode must be causal or gain_only')
++        self.mode = mode
+         self.lags = validate_fir(dict(lags=lags))
+         self.coefficients = nn.Parameter(torch.zeros(len(self.lags), channels))
+ 
+     def forward(self, inputs):
++        if self.mode == 'gain_only':
++            # Parameter-matched DC gain control, with no temporal history.
++            return inputs * (1 + self.coefficients.tanh().sum(dim=0))
+         result = inputs
+         for lag, coefficient in zip(self.lags, self.coefficients.tanh()):
+             if lag < inputs.shape[1]:
+@@ -30,7 +36,8 @@
+ class InputFIRMLPSNN(MLPSNN):
+     def __init__(self, cfg):
+         super().__init__(cfg)
+-        self.input_fir = CausalInputFIR(cfg.l1.input_size, validate_fir(cfg.input_fir))
++        self.input_fir = CausalInputFIR(cfg.l1.input_size, validate_fir(cfg.input_fir),
++                                     cfg.input_fir.get('mode', 'causal'))
+ 
+     def forward(self, inputs):
+         inputs=thin_input_counts(inputs,self.hparams.cfg.get('spike_delete_probability',0),self.training)
+--- a/module/study_control.py
++++ b/module/study_control.py
+@@ -92,6 +92,13 @@
+         expected_probability=spec['spike_deletion'].get(cfg['model_variant'],0)
+         if cfg.get('spike_delete_probability',0)!=expected_probability:
+             raise ValueError('Training event deletion differs from the declared factorial arm')
++        if 'input_fir_modes' in spec:
++            expected_mode=spec['input_fir_modes'][cfg['model_variant']]
++            actual=cfg.get('input_fir')
++            if ((expected_mode is None and actual)
++                    or (expected_mode is not None and
++                        (not actual or actual.get('mode','causal')!=expected_mode))):
++                raise ValueError('Input filter mode differs from the declared mechanism control')
+     if (cfg['paper_baseline'] != baseline or cfg['paper_baseline_version'] != baseline['version']
+             or cfg['run_test'] is not False or cfg.get('validation_only') is not True
+             or cfg['random_seed'] != spec['training_seed'] or cfg['early_stopping']
+@@ -232,7 +239,9 @@
+     def on_fit_start(self, trainer, model):
+         self.directory = local_path(self.cfg.logdir)
+         self.started = time.perf_counter()
+-        self.study_root = local_path(load_study(self.cfg.study_file)['output_root']).parent
++        study=load_study(self.cfg.study_file)
++        self.study_root = local_path(study['output_root']).parent
++        self.study_plan = study['plan']
+         self.protocol=str(self.cfg.get('evaluation_protocol','unspecified'))
+         self.pair_id=load_study(self.cfg.study_file).get('pair_id')
+         # on_fit_start precedes Lightning's loop-state restoration. The saved
+@@ -289,7 +298,7 @@
+                       training_event_deletion_probability=float(self.cfg.get('spike_delete_probability',0)))
+         atomic_json(self.directory/'STATUS.json', record)
+         atomic_json(self.study_root/'STATUS.json',dict(record,training_active=True,pid=os.getpid(),
+-                    run_directory=portable_path(self.directory),plan='docs/experiments/complementary-mechanisms-study-v1.md'))
++                    run_directory=portable_path(self.directory),plan=self.study_plan))
+         with (self.directory/'EPOCH_PROGRESS.jsonl').open('a', encoding='utf-8') as stream:
+             stream.write(json.dumps(record)+'\n')
+         available = lambda v: f'{v:.6g}' if v is not None else 'unavailable'
+@@ -349,7 +358,8 @@
+         f'# {cfg.model_variant}: staged validation study\n\n'
+         f'Protocol: {record["protocol"]}; dataset label: {record["dataset_label"]}.\n\n'
+         f'Completed {completed} epochs (indices 0 through {completed-1}); full budget {cfg.n_epochs}. '
+-        f'This is a preliminary screen, not full-budget completion.\n\n'
++        + (f'This is a preliminary screen, not full-budget completion.\n\n' if record['preliminary']
++         else 'The full training budget is complete; official-test evaluation remains pending.\n\n') +
+         f'Best validation accuracy: {score*100:.6f}%; selected epoch index {selected["epoch"]}. '
+         'No official test evaluation.\n\n'
+         f'Authoritative receipt: `stages/{completed:03d}/RESULT.json`; '
+--- /dev/null
++++ b/config/experiment/SHD_GAIN_SE_adLIF.yaml
+@@ -0,0 +1,7 @@
++# @package _global_
++defaults:
++  - SHD_FIR_SE_adLIF
++  - _self_
++exp_name: SHD_GAIN_SE_adLIF
++input_fir:
++  mode: gain_only
+--- /dev/null
++++ b/config/studies/complementary_gain_control_A001_v1.yaml
+@@ -0,0 +1,32 @@
++version: complementary_speaker_dev_v2
++control_version: gain_control_A001_v1
++plan: docs/experiments/complementary-mechanisms-study-v2.md
++output_root: results/experiments/complementary_speaker_dev_v2/gain_control_A001_v1
++idea: A001_GAIN_CONTROL
++role: development
++pair_id: primary_0_3
++validation_speakers: [0, 3]
++split_manifest: results/experiments/complementary_speaker_dev_v2/primary_0_3/SPLIT_MANIFEST.json
++split_fingerprint: 7712626f45e9e226299fd2984b2a29ccaf173a4d64895b62a0a0386f2895e860
++training_seed: 42
++split_seed: 42
++hypothesis: Separate FIR temporal-history effects from redundant gain parameterization using matched fresh controls; no timing-specific benefit is assumed.
++models: [SE_adLIF, FIR_SE_adLIF, GAIN_SE_adLIF]
++arm_labels:
++  SE_adLIF: Baseline
++  FIR_SE_adLIF: A
++  GAIN_SE_adLIF: Gain-only mechanism control
++spike_deletion:
++  SE_adLIF: 0
++  FIR_SE_adLIF: 0
++  GAIN_SE_adLIF: 0
++input_fir_modes:
++  SE_adLIF: null
++  FIR_SE_adLIF: causal
++  GAIN_SE_adLIF: gain_only
++datasets:
++  SHD:
++    batch_size: 1024
++    validation_batch_size: 1024
++    ceilings: [30]
++    stage: 1
+--- /dev/null
++++ b/tests/test_input_gain_control.py
+@@ -0,0 +1,107 @@
++"""Analytical input-control checks; no training, optimizer or real dataset."""
++import unittest
++import contextlib
++import io
++import json
++import tempfile
++from pathlib import Path
++from types import SimpleNamespace
++from unittest.mock import patch
++import torch
++from hydra import compose,initialize_config_dir
++from omegaconf import OmegaConf
++from models.ours.input_fir import CausalInputFIR
++from models.pl_module import build_training_model
++from module.study_control import load_study,study_overrides,validate_config,finish_stage
++from project_paths import ROOT
++
++
++class InputGainControlTests(unittest.TestCase):
++    def test_identity_initialization_and_parameter_match(self):
++        causal=CausalInputFIR(2,[1,2,4,8]);gain=CausalInputFIR(2,[1,2,4,8],mode='gain_only')
++        x=torch.randn(3,6,2)
++        torch.testing.assert_close(gain(x),x,rtol=0,atol=0)
++        self.assertEqual(sum(p.numel() for p in causal.parameters()),sum(p.numel() for p in gain.parameters()))
++
++    def test_no_history_mixing_and_analytical_gradient(self):
++        gain=CausalInputFIR(2,[1,3],mode='gain_only')
++        with torch.no_grad():gain.coefficients.copy_(torch.tensor([[.2,-.1],[.3,.4]]))
++        x=torch.arange(20,dtype=torch.float32).reshape(2,5,2)
++        scale=1+gain.coefficients.tanh().sum(0)
++        torch.testing.assert_close(gain(x),x*scale)
++        gain(x).sum().backward()
++        expected=(1-gain.coefficients.detach().tanh().square())*x.sum((0,1))
++        torch.testing.assert_close(gain.coefficients.grad,expected)
++        impulse=torch.zeros(1,5,2);impulse[:,0]=1
++        self.assertTrue((gain(impulse)[:,1:]==0).all())
++
++    def test_causal_math_and_gradient_remain_unchanged(self):
++        causal=CausalInputFIR(2,[1,3]);x=torch.arange(20,dtype=torch.float32).reshape(2,5,2)
++        with torch.no_grad():causal.coefficients.copy_(torch.tensor([[.2,-.1],[.3,.4]]))
++        expected=x.clone()
++        for t in range(5):
++            for lag,c in zip([1,3],causal.coefficients.tanh()):
++                if t>=lag:expected[:,t]=expected[:,t]+c*x[:,t-lag]
++        torch.testing.assert_close(causal(x),expected,rtol=0,atol=0)
++        causal(x).sum().backward()
++        grad=torch.stack([(1-causal.coefficients.detach()[i].tanh().square())*x[:,:5-lag].sum((0,1)) for i,lag in enumerate([1,3])])
++        torch.testing.assert_close(causal.coefficients.grad,grad)
++
++    def test_unknown_mode_is_not_silently_treated_as_causal(self):
++        with self.assertRaises(ValueError):CausalInputFIR(2,[1],mode='typo')
++
++    def test_config_inheritance_and_declared_mode_guard(self):
++        study=load_study('config/studies/complementary_gain_control_A001_v1.yaml')
++        frozen=dict(validation_speaker_ids=[0,3],role='development')
++        with patch('datasets.shd_speaker_split.load_manifest',return_value=frozen):
++            overrides=study_overrides(study,30,'GAIN_SE_adLIF','SHD',42)
++            with initialize_config_dir(config_dir=str(ROOT/'config'),version_base=None):
++                cfg=compose(config_name='main',overrides=['experiment=SHD_GAIN_SE_adLIF','+comparison=SHD','++model_variant=GAIN_SE_adLIF']+overrides)
++            resolved=OmegaConf.to_container(cfg,resolve=True);validate_config(resolved)
++            self.assertEqual(resolved['n_epochs'],300);self.assertEqual(resolved['input_fir']['mode'],'gain_only')
++            resolved['input_fir']['mode']='causal'
++            with self.assertRaisesRegex(ValueError,'mechanism control'):validate_config(resolved)
++        # Full classifier initialization and RNG consumption also match.
++        causal_cfg=OmegaConf.create(OmegaConf.to_container(cfg,resolve=True))
++        causal_cfg.input_fir.mode='causal'
++        with contextlib.redirect_stdout(io.StringIO()):
++            torch.manual_seed(42);gain_model=build_training_model(cfg);gain_rng=torch.get_rng_state()
++            torch.manual_seed(42);causal_model=build_training_model(causal_cfg);causal_rng=torch.get_rng_state()
++        self.assertEqual(gain_model.input_fir.mode,'gain_only')
++        self.assertTrue(torch.equal(gain_rng,causal_rng))
++        for key,value in gain_model.state_dict().items():
++            torch.testing.assert_close(value,causal_model.state_dict()[key],rtol=0,atol=0)
++
++    def test_gain_control_accounting_includes_shared_parameter_work(self):
++        from measure_reference_costs import input_fir_operations
++        gain=CausalInputFIR(2,[1,3],mode='gain_only')
++        operations=input_fir_operations(SimpleNamespace(input_fir=gain),torch.ones(3,6,2))
++        self.assertEqual(operations,{'tanh':4,'sum':2,'add':2,'mul':36})
++
++    def test_stage_report_distinguishes_short_and_full_budget_without_training(self):
++        # Presentation/receipt fixture only: never instantiate or fit a Trainer.
++        for budget in (1,2):
++            with self.subTest(budget=budget),tempfile.TemporaryDirectory() as tmp:
++                d=Path(tmp)/'seed';(d/'ckpt').mkdir(parents=True)
++                (Path(tmp)/'study').mkdir()
++                for name in ('best','last'):torch.save({'epoch':0},d/'ckpt'/f'{name}.ckpt')
++                logs=d/'logs/mlp_snn/version_0';logs.mkdir(parents=True)
++                (logs/'metrics.csv').write_text('epoch,val_acc\n0,0.5\n')
++                (d/'STATUS.json').write_text('{"status":"running"}')
++                cfg=OmegaConf.create(dict(logdir=str(d),stage_ceiling=1,n_epochs=budget,model_variant='FIR_SE_adLIF',
++                    paper_baseline_dataset='SHD',random_seed=42,evaluation_protocol='unit_fixture',
++                    dataset=dict(validate_on='speaker_holdout',speaker_split_fingerprint='fixture'),study_file='fixture.yaml'))
++                trainer=SimpleNamespace(checkpoint_callback=SimpleNamespace(best_model_path=str(d/'ckpt/best.ckpt'),best_model_score=torch.tensor(.5)))
++                with patch('module.study_control.validate_config'), \
++                     patch('module.study_control.load_study',return_value={'output_root':str(Path(tmp)/'study/run')}), \
++                     contextlib.redirect_stdout(io.StringIO()):
++                    finish_stage(cfg,trainer)
++                text=(d/'TRAINING_SUMMARY.md').read_text()
++                receipt=json.loads((d/'stages/001/RESULT.json').read_text())
++                self.assertEqual(receipt['preliminary'],budget>1)
++                if budget==1:self.assertIn('full training budget is complete',text)
++                else:self.assertIn('preliminary screen',text)
++                self.assertIn('No official test evaluation',text)
++
++
++if __name__=='__main__':unittest.main()

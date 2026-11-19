@@ -1,0 +1,30 @@
+{
+  "authorized_at": "2026-11-14T06:28:34.588790+00:00",
+  "authorization": "User explicitly requests only three remaining epochs, then result",
+  "mode": "full_resume_own_last_checkpoint",
+  "from_completed_epoch": 7,
+  "ceiling": 10,
+  "full_schedule_epochs": 40,
+  "retrain_control": false,
+  "hyperparameter_changes": false,
+  "official_tests_previously_exposed": true,
+  "interpretation": "exploratory; user-requested fixed-budget completion, no new candidate or search",
+  "resume_checkpoint": {
+    "original": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/runs/DTH_RDROP_SE_adLIF/SSC/seed_42/ckpt/last.ckpt",
+    "preserved": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/evaluations/user_requested_ssc_test_v1/PRE_RESUME_CHECKPOINTS/last.ckpt",
+    "sha256": "9147d5899f18dcf7eed7d4d593d7c4dd4db525f59091fd89da1209bbf4313a0e"
+  },
+  "preserved": [
+    {
+      "original": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/runs/DTH_RDROP_SE_adLIF/SSC/seed_42/ckpt/epoch=5-step=1764.ckpt",
+      "preserved": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/evaluations/user_requested_ssc_test_v1/PRE_RESUME_CHECKPOINTS/epoch=5-step=1764.ckpt",
+      "sha256": "502cf6e3323824ca9f4f68bfcf9f3121acae6293c32173b019287aae20f50714"
+    },
+    {
+      "original": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/runs/DTH_RDROP_SE_adLIF/SSC/seed_42/ckpt/last.ckpt",
+      "preserved": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/evaluations/user_requested_ssc_test_v1/PRE_RESUME_CHECKPOINTS/last.ckpt",
+      "sha256": "9147d5899f18dcf7eed7d4d593d7c4dd4db525f59091fd89da1209bbf4313a0e"
+    }
+  ],
+  "after_completion": "Freeze validation-selected candidate then evaluate once; reuse exact DTH10 ordinary test record. Stop after report; no40extension or other datasets."
+}

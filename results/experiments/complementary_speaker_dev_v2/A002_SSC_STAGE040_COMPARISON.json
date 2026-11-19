@@ -1,0 +1,71 @@
+{
+  "models": {
+    "SE_adLIF": {
+      "status": "verified_full_budget_validation_only",
+      "model": "SE_adLIF",
+      "dataset": "SSC",
+      "training_seed": 42,
+      "completed_epochs": 40,
+      "selected_completed_epoch": 37,
+      "train_accuracy_at_selection": 0.8867990374565125,
+      "validation_accuracy": 0.8145476579666138,
+      "validation_loss_at_selection": 0.6425706148147583,
+      "final_train_accuracy": 0.8857020735740662,
+      "final_validation_accuracy": 0.7953110933303833,
+      "tail10_validation_mean": 0.8077046394348144,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "4be3af373098dde149c3439146a88610e2b0ce0903ed2e9509697efbd007d330",
+          "epoch_index": 36,
+          "global_step": 2701
+        },
+        "last": {
+          "sha256": "bec8c5be766c61e2dce1ea36e052182be8b24c358ae9234ea34f164df5f57c54",
+          "epoch_index": 39,
+          "global_step": 2920
+        }
+      },
+      "stage010_snapshots_preserved": true,
+      "official_test_opened": false
+    },
+    "GAIN_SE_adLIF": {
+      "status": "verified_full_budget_validation_only",
+      "model": "GAIN_SE_adLIF",
+      "dataset": "SSC",
+      "training_seed": 42,
+      "completed_epochs": 40,
+      "selected_completed_epoch": 24,
+      "train_accuracy_at_selection": 0.8539303541183472,
+      "validation_accuracy": 0.8155495524406433,
+      "validation_loss_at_selection": 0.6248762011528015,
+      "final_train_accuracy": 0.8776755332946777,
+      "final_validation_accuracy": 0.8108406066894531,
+      "tail10_validation_mean": 0.8085161745548248,
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "881dccb083d6804ce9e04a6a52b916df930e6c5f1c6c1f43e68f508fa42e60d7",
+          "epoch_index": 23,
+          "global_step": 1752
+        },
+        "last": {
+          "sha256": "79e67ef034897e7c6a293aa1f26f350e6f0bb4b78ca4bddf412a101110dd603e",
+          "epoch_index": 39,
+          "global_step": 2920
+        }
+      },
+      "stage010_snapshots_preserved": true,
+      "official_test_opened": false
+    }
+  },
+  "dataset": "SSC",
+  "training_seed": 42,
+  "completed_independent_training_seeds": 1,
+  "sample_sd_across_seeds": null,
+  "delta_gain_minus_baseline_pp": 0.1001894474029541,
+  "practical_threshold_pp": 0.5,
+  "practical_threshold_met": false,
+  "decision": "NO_PRACTICAL_SSC_GAIN_PROCEED_PREDECLARED_BOUNDED_ECG_SCREEN",
+  "interpretation": "Nominal small positive accuracy difference and lower selected CE; single-seed validation only, no robust/two-dataset/test improvement claim.",
+  "next_action": "No SSC extension beyond40. Preserve source/results; calibrate then run fresh matched ECG50epoch controls. Defer B investment and final replication.",
+  "official_test_opened": false
+}

@@ -1,0 +1,15 @@
+{
+  "created_at": "2026-11-14T14:08:57.726055+00:00",
+  "authorization": "User explicitly requires complete four official-test cells for SHD/SSC at30 then DTH+RDrop ECG, no questions",
+  "training_seed": 42,
+  "table_selection_window_epochs": 30,
+  "preserve_active_SHD30_queue": true,
+  "SSC_control": "Own-last full resume10to30, original40scheduler",
+  "SSC_candidate": "Reuse exact validation-selected epoch19 test after verifying first30 metrics; actual training stopped31",
+  "SHD": "Fresh matched30 DTH and DTH+RDrop already active, canonical random20 split42",
+  "ECG": "Only after table complete: fresh DTH+RDrop30, batch64, original400scheduler and signed/masked data; no cross-dataset weights reuse",
+  "official_tests": "Validation selection only, ordinary single-pass noTTA, freeze weights before test; exploratory due prior exposure",
+  "no_new_ideas": true,
+  "no_automatic_budget_extension": true,
+  "stop_after_ECG_test_report": true
+}

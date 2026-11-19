@@ -1,0 +1,25 @@
+{
+  "recorded_at": "2026-11-12T14:10:32.076876+00:00",
+  "decision": "REJECT_A004_CURRENT_NORMALIZATION_UNDER_MATCHED30_SCREEN_NO_EXTENSION_OR_TRANSFER",
+  "evidence": "C004_PRIMARY_STAGE030_COMPARISON.json",
+  "A_minus_Baseline_pp": -0.12232661247253418,
+  "AB_minus_A_pp": 3.9143741130828857,
+  "AB_minus_B_pp": -1.1009156703948975,
+  "interaction_pp": -0.9785890579223633,
+  "practical_threshold_pp": 0.5,
+  "standalone_A_gate_passed": false,
+  "incremental_A_on_B_gate_passed": false,
+  "ordinary_CE_combination_minus_B": 0.012993454933166504,
+  "late10_combination_minus_B_pp": -2.452599406242373,
+  "per_speaker_combination_minus_B_pp": {
+    "0": 0.10952902519167917,
+    "3": -2.631578947368418
+  },
+  "actual_initial_evidence": "C004_INITIAL_STATE_COMPARISON.json",
+  "curves_visually_inspected": true,
+  "interpretation": "A alone misses the declared accuracy gate despite slightly lower selected CE and better late10mean. A and AB peak at completed16 without a later accuracy gain; AB is below B in selected accuracy, CE and late10mean. B is still improving at30, which does not justify extending failed A/AB. AB gains one correct recording on speaker0 and loses19 on speaker3 versus B. This is a negative30epoch tuned-development result, not a universal statement about normalization or a test finding.",
+  "conditional_gain_controls": "Not launched: positive normalization result required to justify mechanism attribution was absent. No normalization-specific improvement claim; isolated cost draft remains unapplied.",
+  "next_action": "Preserve all evidence; review distinct hypothesis grounded in observed held-speaker errors before any new experiment. No pair tuning, secondary exposure, SSC/ECG transfer, canonical retraining or official test of this rejected branch.",
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

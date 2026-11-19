@@ -1,0 +1,74 @@
+{
+  "150": {
+    "best_val_acc": 0.9895769357681274,
+    "epoch_index": 112,
+    "val_loss": 0.053165651857852936
+  },
+  "30": {
+    "best_val_acc": 0.9767014384269714,
+    "epoch_index": 27,
+    "val_loss": 0.09835851937532425
+  },
+  "300": {
+    "best_val_acc": 0.991416335105896,
+    "epoch_index": 261,
+    "val_loss": 0.06347879022359848
+  },
+  "75": {
+    "best_val_acc": 0.9865113496780396,
+    "epoch_index": 71,
+    "val_loss": 0.06704659759998322
+  },
+  "checkpoints": [
+    "epoch=261-step=6550.ckpt",
+    "last.ckpt"
+  ],
+  "differences": {
+    "dataset": [
+      {
+        "_target_": "datasets.shd.SHDLDM",
+        "additional_test_set_validation": false,
+        "batch_size": 256,
+        "cache_namespace": "controlled_v2",
+        "data_path": "data",
+        "ignore_first_timesteps": 10,
+        "num_classes": 20,
+        "num_workers": 0,
+        "pad_to_min_size": 250,
+        "random_seed": 42,
+        "spatial_factor": 0.2,
+        "time_factor": 0.001,
+        "validate_on": 0.2,
+        "window_size": 4
+      },
+      {
+        "_target_": "datasets.shd.SHDLDM",
+        "additional_test_set_validation": false,
+        "batch_size": 256,
+        "cache_namespace": "controlled_v2",
+        "data_path": "./data",
+        "ignore_first_timesteps": 10,
+        "num_classes": 20,
+        "num_workers": 0,
+        "pad_to_min_size": 250,
+        "random_seed": 42,
+        "spatial_factor": 0.2,
+        "time_factor": 0.001,
+        "validate_on": 0.2,
+        "window_size": 4
+      }
+    ]
+  },
+  "epochs": 300,
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "metadata": "results/valid/reference/SHD/seed_42/COST_RESULTS.json",
+  "new_batch": 1024,
+  "old_batch": 256,
+  "optimizer_updates_per_epoch_new": 6,
+  "optimizer_updates_per_epoch_old": 25,
+  "precision": "high",
+  "reason": "New training/validation batches 1024/1024 versus historical256/256. Fresh matched SE_adLIF control required; LR unchanged.",
+  "status": "historical_control_not_matched_after_calibration",
+  "validation_metrics": "results/valid/reference/SHD/seed_42/logs/mlp_snn/version_0/metrics.csv",
+  "validation_only_development": true
+}

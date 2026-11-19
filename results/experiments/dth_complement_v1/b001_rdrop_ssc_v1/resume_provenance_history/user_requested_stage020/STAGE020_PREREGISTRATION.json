@@ -1,0 +1,21 @@
+{
+  "authorized_at": "2026-11-14T08:07:26.695404+00:00",
+  "scope": "Only candidate DTH+RDrop SSC seed42, own full resume10to20",
+  "resume_checkpoint": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/runs/DTH_RDROP_SE_adLIF/SSC/seed_42/ckpt/last.ckpt",
+  "resume_checkpoint_sha256": "76f5e9a50695885effa052621fc54eec81f03551f947a4c316fe49cf621f1631",
+  "starting_completed_epochs": 10,
+  "starting_updates": 2940,
+  "target_completed_epochs": 20,
+  "target_updates": 5880,
+  "full_schedule_epochs": 40,
+  "control_training_authorized": false,
+  "previous_control_completed_epochs": 10,
+  "matched_control20_available": false,
+  "comparison_limit": "Do not compare candidate20 against DTH10 as a matched experiment",
+  "prior_test_exposure": true,
+  "official_test_automatic": false,
+  "stop_at20": true,
+  "original40stage_not_authorized": true,
+  "training_config_change": "Add ceiling20 only; no LR/batch/dropout/loss/preprocessing/model change",
+  "source_transition": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/runs/DTH_RDROP_SE_adLIF/SSC/seed_42/RESUME_SOURCE_TRANSITION.json"
+}

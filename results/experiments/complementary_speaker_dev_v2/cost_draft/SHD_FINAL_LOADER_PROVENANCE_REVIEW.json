@@ -1,0 +1,26 @@
+{
+  "reviewed_at": "2026-11-12T11:28:15.407595+03:30",
+  "status": "design_review_only_not_integrated",
+  "scope": "Future frozen final-test subgroup reporting; no official test data opened",
+  "source_files_sha256": {
+    "datasets\\shd.py": "9791d97b25d86c017a40b426ded6d12e3ef07472b5711d2bde40a4b84101c54d",
+    "datasets\\utils\\diskcache.py": "469438848eab06eb3a682b8fd74c51e5c03b614d633e095817e43b2aa629c651"
+  },
+  "observations": [
+    "SHDWrapper indexes original HDF5 rows directly.",
+    "SHDLDM.test_dataloader wraps SHDWrapper in project DiskCachedDataset with sequential non-drop loader.",
+    "DiskCachedDataset preserves requested item index but can return pre-existing cached tensors; matching labels alone cannot prove input-row provenance.",
+    "Prediction capture draft assigns original row IDs sequentially, so verified exhaustive sampler/dataset identity is a required precondition."
+  ],
+  "required_before_final_integration": [
+    "Verify frozen canonical fitting manifest/data SHA and actual fitting indices; derive seen/unseen membership from fitting speakers, not validation or all training-file speakers by assumption.",
+    "After final gate, use verified original-row loader with no stale cache exposure, or fully validate cached tensors against raw deterministic preprocessing. Preserve batch/collation/masks/precision and same ordinary model forward.",
+    "Reject subset/reordered/augmented loaders, random/distributed/replacement samplers, drop_last, multiple loader streams and incomplete coverage.",
+    "Check exact raw-label alignment and reconstructed subgroup totals against ordinary overall metric; report every group including null empty groups.",
+    "Include relevant loader/cache/collation source identities in frozen provenance and test synthetic failure cases before integration."
+  ],
+  "root_source_modified": false,
+  "draft_helpers_applied": false,
+  "official_test_opened": false,
+  "completion_claim": false
+}

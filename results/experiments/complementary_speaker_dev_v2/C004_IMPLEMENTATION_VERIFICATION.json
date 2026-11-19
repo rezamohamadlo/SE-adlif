@@ -1,0 +1,21 @@
+{
+  "verified_at": "2026-11-12T13:46:23.209901+00:00",
+  "nontraining_tests": {
+    "command": ".ven/Scripts/python.exe -m unittest tests.test_current_normalization tests.test_initial_state_evidence tests.test_static_threshold_control tests.test_dth_label_smoothing_study tests.test_label_smoothing tests.test_complementary_study tests.test_speaker_development tests.test_input_gain_control",
+    "passed": 53,
+    "runtime_seconds": 7.89,
+    "fit_or_optimizer_steps_in_tests": false
+  },
+  "correctness_scope": "CPUCUDAzero-gateforward/scan/stateidentity,manualLN/current/gradientoracle,causal/batch/quietchecks,matchedgainformula,finiteimmediategategradients,smoothingmasks/hard-evalCE,6full-sizecommoninitialtensorhashes,registeredmode/configguardsanddefaultregressions",
+  "runner_dry_runs": "All6registered passedroot;4initialpassedexternalTEMP",
+  "calibration": "C004_SHD_BATCH1024_CONFIRMATION.json",
+  "source_snapshot": "C004_PRIMARY_SOURCE_SNAPSHOT.json",
+  "snapshot269files_archive_content_verified": true,
+  "precision_determinism_settings_changed": false,
+  "estimated_initial4queue_minutes": [
+    20,
+    30
+  ],
+  "conditional_gain_controls_launch_now": false,
+  "official_tests": false
+}

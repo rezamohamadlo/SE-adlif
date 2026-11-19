@@ -1,0 +1,39 @@
+{
+  "prepared_at": "2026-11-12T12:27:50.466738+03:30",
+  "status": "isolated_adapter_tested_not_applied_or_CLI_integrated",
+  "patch": "results/experiments/complementary_speaker_dev_v2/cost_draft/SHD_FINAL_ADAPTER_DRAFT.patch",
+  "patch_sha256": "24aed5acefe57256638a152efc1f15e21ec0464b4a3d9c66776e61967abe3c97",
+  "files_sha256": {
+    "module/shd_final_evaluation.py": "37767267c6296c8b9545718f909697a353d4f6b5317b85081b0629c8ab3efce4",
+    "tests/test_shd_final_evaluation.py": "b0489b43eb7974c944ea58790902f0f53fd5a175ff37d9d3a9435702b36390fa"
+  },
+  "dependencies": [
+    "SHD_FINAL_PROVENANCE_DRAFT.patch",
+    "ORDINARY_PREDICTION_CAPTURE_DRAFT.patch",
+    "SPEAKER_GENERALIZATION_DRAFT.patch"
+  ],
+  "test_command": "python -m unittest tests.test_shd_final_evaluation tests.test_shd_final_provenance tests.test_ordinary_prediction_capture tests.test_speaker_generalization tests.test_final_config_guard tests.test_study_evaluation",
+  "tests_passed": 55,
+  "new_unique_tests": 5,
+  "seconds": 2.188,
+  "synthetic_only": true,
+  "CPU_Trainer_test_only": true,
+  "Trainer_fit_or_optimizer_training_steps": false,
+  "same_ordinary_metrics_verified": true,
+  "forward_calls_control": 2,
+  "forward_calls_captured": 2,
+  "parameters_unchanged": true,
+  "raw_row_ids_and_group_totals_verified": true,
+  "synthetic_fixture_initial_issue_resolved": "Int32 Windows labels require the same existing classification .long() conversion as real model; fixture corrected, root classification unchanged. Imported fixture TestCase duplicate discovery also removed.",
+  "caller_contract": "Complete final36cohort gate must return verified_configurations=36 and bind checkpoint/plan/test hashes before adapter can access data. Synthetic authorization fixture is not evidence that an actual cohort is complete.",
+  "remaining": [
+    "Connect adapters and verified final-cohort count in existing test_checkpoint.py after active staged source freezes close",
+    "Persist row NPZ and subgroup summary with checkpoint/plan/test/manifest identities and preserve existing output guards",
+    "Verify evaluator source identity under frozen plan and ordinary cached-vs-uncached preprocessing equivalence where applicable",
+    "Resolve future canonical version/replication support before architecture/settings freeze",
+    "Run root-level integration tests including actual selected model/objective after applying, before any final official testing"
+  ],
+  "official_project_test_data_opened": false,
+  "root_source_modified": false,
+  "full_goal_complete": false
+}

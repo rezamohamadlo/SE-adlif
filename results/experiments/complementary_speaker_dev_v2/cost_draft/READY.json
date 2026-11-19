@@ -1,0 +1,42 @@
+{
+  "additional_tests": [
+    "tests.test_cost_records",
+    "tests.test_measure_reference_costs"
+  ],
+  "apply_only_after": "Active source-frozen SSC queue closes; verify base hashes and patch before applying. Then rerun relevant checks in actual checkout.",
+  "changed_files": [
+    {
+      "base_sha256": "ee96fe7617899d564a3c3acbb589c5dd717ed0e2ddab4eaa1e615c5f9004d289",
+      "draft_sha256": "776fd8aadf7df8a6eaeb739ec46a51504e9eead72e17b3581fb6db2ea94e72bf",
+      "path": "measure_reference_costs.py"
+    },
+    {
+      "base_sha256": "a4c6b3e4167921a9b37d8963861e151f8e3a4d9e17e125772375626e9512e0ec",
+      "draft_sha256": "d52e95fab22e817d502b623e9c314045752d03e547f40353cd10a43e4501eab5",
+      "path": "measure_run_costs.py"
+    },
+    {
+      "base_sha256": "e748071771bf1f60e3c3287fd8077b62f0afd9b8e7493bd6c0b8ebafcc90417b",
+      "draft_sha256": "dd688c712e418137aa58377df2853ee1820597141dc77442153fc2d54ba313f3",
+      "path": "measure_shd_costs.py"
+    },
+    {
+      "base_sha256": "27afa30e1b12377df10a20d85444fc5c73726321e31a441aa2a9a0558d26408c",
+      "draft_sha256": "a237e749d1de5c91b3dfcd5f72f8d89a817f60a4953ac1b6ea0167fa0ccc3a49",
+      "path": "cost_records.py"
+    },
+    {
+      "base_sha256": null,
+      "draft_sha256": "e3d45d9ee4a554dc8255da76d8b00d476c85a6a9fdcaaf083c7ab7b7dd205b17",
+      "path": "tests/test_fir_costs.py"
+    }
+  ],
+  "cpu_tests_passed": 26,
+  "generated_checkout_not_for_git": true,
+  "main_cpu_tests_passed": 77,
+  "main_manifest_preflight_verified": true,
+  "no_training_or_official_test_data": true,
+  "patch": "results/experiments/complementary_speaker_dev_v2/cost_draft/FIR_COSTS_READY.patch",
+  "patch_sha256": "75d08d824bc1e9bd7b1715f7aa9f523506dcda6da4fce5449fc349356637e9ff",
+  "status": "applied_after_completed_SSC_queue"
+}

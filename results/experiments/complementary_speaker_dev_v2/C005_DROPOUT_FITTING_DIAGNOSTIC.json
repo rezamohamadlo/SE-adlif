@@ -1,0 +1,52 @@
+{
+  "verified_at": "2026-11-12T14:15:00.404170+00:00",
+  "records": [
+    {
+      "model": "SE_adLIF",
+      "checkpoint_sha256": "24c38b76c15c7bf6c2be1e40217a7d6053588206e9fdaaa0793b00f0dfa68216",
+      "fitting_recordings": 160,
+      "padded_frames": 285,
+      "clean_fit_accuracy": 0.9937500357627869,
+      "clean_fit_hard_ce": 0.029304316267371178,
+      "dropout_view_metrics": [
+        {
+          "accuracy": 0.981249988079071,
+          "hard_ce": 0.03987756744027138
+        },
+        {
+          "accuracy": 0.987500011920929,
+          "hard_ce": 0.060911618173122406
+        }
+      ],
+      "dropout_disagreement_count": 3,
+      "dropout_symmetric_KL_mean": 0.023642556741833687,
+      "dropout_symmetric_KL_max": 0.8512663841247559,
+      "state_tensors_unchanged": true
+    },
+    {
+      "model": "LS_SE_adLIF",
+      "checkpoint_sha256": "a7d58177fde7325f94881687096e9ad531d118883f0e9cedc72297687a3cefb7",
+      "fitting_recordings": 160,
+      "padded_frames": 285,
+      "clean_fit_accuracy": 1.0,
+      "clean_fit_hard_ce": 0.13219662010669708,
+      "dropout_view_metrics": [
+        {
+          "accuracy": 0.9937500357627869,
+          "hard_ce": 0.1469310224056244
+        },
+        {
+          "accuracy": 1.0,
+          "hard_ce": 0.15008452534675598
+        }
+      ],
+      "dropout_disagreement_count": 1,
+      "dropout_symmetric_KL_mean": 0.024766216054558754,
+      "dropout_symmetric_KL_max": 0.14511272311210632,
+      "state_tensors_unchanged": true
+    }
+  ],
+  "protocol": "fitting-only dropout susceptibility diagnostic; no training updates/official tests/validation-score selection",
+  "interpretation": "Dropout sensitivity may motivate consistency regularization, but this descriptive diagnostic cannot establish improved unseen-speaker generalization. Weight1 chosen before diagnostic results; independent candidate/control training required.",
+  "official_test_evaluated": false
+}

@@ -1,0 +1,26 @@
+{
+  "verified_at": "2026-11-12T10:37:05.667995+03:30",
+  "test_command": "python -m unittest tests.test_label_smoothing tests.test_complementary_study tests.test_input_gain_control tests.test_speaker_development tests.test_ssc_spawn_preprocessing tests.test_fir_costs tests.test_study_evaluation tests.test_paper_config tests.test_mt_consistency_runner tests.test_runner_ssc_mean tests.test_runner_costs tests.test_full_runner",
+  "tests_passed": 73,
+  "tests_seconds": 29.675,
+  "training_started_by_tests": false,
+  "correctness": [
+    "CPU/CUDA uniform smoothed CE and gradient reference",
+    "Exact ordinary eval CE and gradient parity",
+    "Default parameter/state/initialization/RNG parity",
+    "Original temporal aggregation and ignored targets retained",
+    "Finite backward without optimizer training steps",
+    "Objective metadata and study guards"
+  ],
+  "preflight": {
+    "repository_root": "passed, all3new",
+    "different_working_directory": "C:/Windows/Temp: passed, all3new"
+  },
+  "split_verification": "Official train SHA and both frozen index sets checked: exhaustive, disjoint rows/speakers, all20classes both sides",
+  "source_snapshot": "results/experiments/complementary_speaker_dev_v2/B002_PRIMARY_SOURCE_SNAPSHOT.json",
+  "training_mode": "fresh random weights/optimizer, seed42",
+  "objective": "classification_label_smoothing_v1, epsilon0.1 only B arms; ordinary hard CE validation",
+  "official_test_opened": false,
+  "test_accuracy": "pending frozen canonical full comparison, not selected from development",
+  "synthetic_runner_test_output": "Mock subprocess/temp-directory records are not research results"
+}

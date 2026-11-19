@@ -1,0 +1,30 @@
+{
+  "status": "verified_completed_bounded_screen_not_full_budget",
+  "completed_epochs": 100,
+  "full_budget": 400,
+  "preliminary": true,
+  "selected_completed_epoch": 99,
+  "training_accuracy_at_selection": 0.817146360874176,
+  "validation_accuracy": 0.7869331240653992,
+  "validation_loss": 0.5981804132461548,
+  "tail10_validation_mean": 0.7827466011047364,
+  "initial10_validation_mean": 0.30047911405563354,
+  "macro_class_recall": 0.7466868846363043,
+  "checkpoint_checks": {
+    "best": {
+      "sha256": "8fd31f1ed9dda205605dd5b1ab8750f292b83407545616c1386d813d86e76f32",
+      "epoch_index": 98,
+      "global_step": 198
+    },
+    "last": {
+      "sha256": "14e29e54b6217091caff9e75eee92a41ab9af35cad0f028255681427a4d41de6",
+      "epoch_index": 99,
+      "global_step": 200
+    }
+  },
+  "official_test_opened": false,
+  "model": "GAIN_SE_adLIF",
+  "dataset": "ECG",
+  "stage050_snapshots_preserved": true,
+  "additional_unplanned_interruption_at77": false
+}

@@ -1,0 +1,198 @@
+*** Begin Patch
+*** Add File: module/final_config_guard.py
++"""Draft pure configuration guard; no file loading, data access or training."""
++from copy import deepcopy
++import json
++
++ARMS = {'Baseline', 'A', 'B', 'A+B'}
++DATASETS = {'SHD', 'SSC', 'ECG'}
++SEEDS = {42, 123, 456}
++# These identify the run rather than its numerical training configuration.
++RUN_METADATA = {
++    'random_seed', 'logdir', 'exp_name', 'launcher_logdir', 'launcher_script',
++    'run_mode', 'study_hypothesis', 'study_stage', 'ckpt_path',
++}
++# Declared mechanism differences cannot waive these matched-condition checks.
++PROTECTED = {
++    'dataset', 'datadir', 'lr', 'batch_size', 'n_epochs', 'max_epochs',
++    'precision', 'device', 'optimizer', 'weight_decay', 'betas', 'scheduler',
++    'scheduler_min_lr', 'factor', 'patience', 'gradient_clip_val',
++    'early_stopping', 'early_stopping_patience', 'early_stopping_min_delta',
++    'loss_agg', 'paper_baseline', 'paper_baseline_version',
++    'paper_baseline_dataset', 'evaluation_protocol', 'tracking_metric',
++    'tracking_mode', 'stage_ceiling',
++}
++
++
++def _stable(config):
++    if not isinstance(config, dict):
++        raise ValueError('Expected a resolved JSON configuration mapping')
++    return {k: deepcopy(v) for k, v in config.items() if k not in RUN_METADATA}
++
++
++def _remove_path(config, path):
++    parts = path.split('.')
++    node = config
++    for part in parts[:-1]:
++        if not isinstance(node, dict) or part not in node:
++            return
++        node = node[part]
++    if isinstance(node, dict):
++        node.pop(parts[-1], None)
++
++
++def validate_frozen_configurations(plan, cohort):
++    """Validate all 36 checkpoint configs against pre-frozen arm specifications.
++
++    cohort contains (arm, dataset, training_seed, resolved_checkpoint_cfg).
++    The caller must verify checkpoint hashes, source identities and receipts,
++    and pass portable resolved configs read from those exact checkpoints.
++    This helper does not replace those independent provenance checks.
++    """
++    frozen = plan.get('frozen_configurations')
++    differences = plan.get('mechanism_difference_paths')
++    if (not isinstance(frozen, dict) or set(frozen) != DATASETS
++            or not isinstance(differences, list) or not differences
++            or any(not isinstance(p, str) for p in differences)
++            or len(set(differences)) != len(differences)):
++        raise ValueError('Final testing requires frozen per-arm configs and explicit mechanism paths')
++    for path in differences:
++        if (not isinstance(path, str) or not path or any(not p for p in path.split('.'))
++                or path.split('.')[0] in PROTECTED | RUN_METADATA):
++            raise ValueError('Mechanism paths cannot waive matched training conditions')
++    for dataset in DATASETS:
++        if not isinstance(frozen[dataset], dict) or set(frozen[dataset]) != ARMS:
++            raise ValueError('Frozen configurations must specify every arm for every dataset')
++        signatures = set()
++        shared = None
++        for arm in ARMS:
++            spec = _stable(frozen[dataset][arm])
++            computational = deepcopy(spec)
++            # Factory selection must also have explicit mechanism/architecture
++            # settings; renaming a baseline or its deviation note is not an arm.
++            computational.pop('model_variant', None)
++            computational.pop('paper_baseline_deviations', None)
++            signatures.add(json.dumps(computational, sort_keys=True))
++            common = deepcopy(spec)
++            # Deviations remain verified against each exact frozen arm config.
++            common.pop('paper_baseline_deviations', None)
++            for path in differences:
++                _remove_path(common, path)
++            if shared is None:
++                shared = common
++            elif common != shared:
++                raise ValueError('Frozen arms differ outside their declared mechanisms')
++        if len(signatures) != 4:
++            raise ValueError('Four arm labels must describe four distinct configurations')
++    seen = set()
++    for arm, dataset, seed, config in cohort:
++        identity = (arm, dataset, seed)
++        if arm not in ARMS or dataset not in DATASETS or seed not in SEEDS or identity in seen:
++            raise ValueError('Unexpected or duplicate final cohort identity')
++        seen.add(identity)
++        if config.get('random_seed') != seed or config.get('paper_baseline_dataset') != dataset:
++            raise ValueError('Checkpoint dataset/training seed differs from cohort identity')
++        if config.get('init_ckpt_path'):
++            raise ValueError('Final fresh-training comparison cannot use weights-only initialization')
++        if dataset == 'SHD':
++            data = config.get('dataset', {})
++            if (data.get('validate_on') != 0.2 or data.get('random_seed') != 42
++                    or data.get('speaker_split_manifest') or data.get('speaker_split_fingerprint')):
++                raise ValueError('Canonical SHD* requires its own random20percent split, seed42')
++        if _stable(config) != _stable(frozen[dataset][arm]):
++            raise ValueError('Checkpoint settings differ from the frozen arm configuration')
++    expected = {(a, d, s) for a in ARMS for d in DATASETS for s in SEEDS}
++    if seen != expected:
++        raise ValueError('Final configuration cohort is incomplete')
++    return {'verified_configurations': len(seen), 'matched_shared_conditions': True}
+*** Add File: tests/test_final_config_guard.py
++"""Scientific protocol guards only: synthetic metadata, no model/data/training."""
++import copy
++import unittest
++from module.final_config_guard import validate_frozen_configurations
++
++
++class FinalConfigurationTests(unittest.TestCase):
++    def setUp(self):
++        self.plan = dict(frozen_configurations={},
++                         mechanism_difference_paths=['model_variant', 'input_gain', 'training_objective'])
++        self.cohort = []
++        for dataset in ('SHD', 'SSC', 'ECG'):
++            self.plan['frozen_configurations'][dataset] = {}
++            for arm in ('Baseline', 'A', 'B', 'A+B'):
++                cfg = dict(random_seed=42, paper_baseline_dataset=dataset,
++                           dataset=dict(validate_on=.2, random_seed=42),
++                           lr=.01, batch_size=256, n_epochs={'SHD':300,'SSC':40,'ECG':400}[dataset],
++                           model_variant='GAIN' if arm in ('A','A+B') else 'SE',
++                           input_gain=arm in ('A','A+B'),
++                           training_objective='smooth' if arm in ('B','A+B') else 'classification',
++                           paper_baseline_version='fixture', init_ckpt_path=None)
++                self.plan['frozen_configurations'][dataset][arm] = cfg
++                for seed in (42,123,456):
++                    own=copy.deepcopy(cfg);own.update(random_seed=seed,logdir=f'results/{arm}/{dataset}/{seed}')
++                    self.cohort.append((arm,dataset,seed,own))
++
++    def check(self):
++        return validate_frozen_configurations(self.plan,self.cohort)
++
++    def test_complete_matched_four_arm_replication(self):
++        self.assertEqual(self.check()['verified_configurations'],36)
++
++    def test_another_cohort_checkpoint_cannot_change_lr(self):
++        self.cohort[-1][3]['lr']=.002
++        with self.assertRaisesRegex(ValueError,'frozen arm'):self.check()
++
++    def test_declaring_lr_as_mechanism_cannot_waive_matching(self):
++        self.plan['mechanism_difference_paths'].append('lr')
++        with self.assertRaisesRegex(ValueError,'waive'):self.check()
++
++    def test_frozen_split_mismatch_is_rejected_even_if_every_seed_matches_it(self):
++        self.plan['frozen_configurations']['SHD']['A']['dataset']['random_seed']=7
++        with self.assertRaisesRegex(ValueError,'outside'):self.check()
++
++    def test_speaker_holdout_cannot_be_relabelled_canonical(self):
++        for arm in self.plan['frozen_configurations']['SHD']:
++            self.plan['frozen_configurations']['SHD'][arm]['dataset']['validate_on']='speaker_holdout'
++        for _,dataset,_,cfg in self.cohort:
++            if dataset=='SHD':cfg['dataset']['validate_on']='speaker_holdout'
++        with self.assertRaisesRegex(ValueError,'Canonical'):self.check()
++
++    def test_duplicate_arm_implementations_are_rejected(self):
++        f=self.plan['frozen_configurations']['SSC'];f['A']=copy.deepcopy(f['Baseline'])
++        with self.assertRaisesRegex(ValueError,'distinct'):self.check()
++
++    def test_different_labels_or_deviation_notes_do_not_create_four_mechanisms(self):
++        f=self.plan['frozen_configurations']['SSC']
++        for arm in f:
++            f[arm]=dict(copy.deepcopy(f['Baseline']),model_variant=arm,
++                        paper_baseline_deviations=['Renamed '+arm])
++        with self.assertRaisesRegex(ValueError,'distinct'):self.check()
++
++    def test_nonstring_mechanism_paths_are_rejected_cleanly(self):
++        self.plan['mechanism_difference_paths'].append({'lr':True})
++        with self.assertRaisesRegex(ValueError,'explicit mechanism'):self.check()
++
++    def test_missing_and_duplicate_cohorts_are_rejected(self):
++        self.cohort.pop()
++        with self.assertRaisesRegex(ValueError,'incomplete'):self.check()
++        self.cohort.append(self.cohort[0])
++        with self.assertRaisesRegex(ValueError,'duplicate'):self.check()
++
++    def test_weights_only_initialization_is_not_fresh_training(self):
++        self.cohort[0][3]['init_ckpt_path']='results/previous/best.ckpt'
++        with self.assertRaisesRegex(ValueError,'weights-only'):self.check()
++
++    def test_actual_training_seed_must_match_cohort(self):
++        self.cohort[1][3]['random_seed']=42
++        with self.assertRaisesRegex(ValueError,'seed'):self.check()
++
++    def test_unplanned_dropout_or_preprocessing_changes_rejected(self):
++        for key,value in [('dropout',.4),('unregistered_preprocess',{'warp':True})]:
++            with self.subTest(key=key):
++                changed=copy.deepcopy(self.cohort);changed[0][3][key]=value
++                with self.assertRaisesRegex(ValueError,'frozen arm'):
++                    validate_frozen_configurations(self.plan,changed)
++
++
++if __name__=='__main__':unittest.main()
+*** End Patch

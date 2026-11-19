@@ -1,0 +1,27 @@
+﻿{
+    "launched_at":  "2026-11-12T13:53:49.2057873+03:30",
+    "pid":  26128,
+    "models":  [
+                   "SE_adLIF",
+                   "LS_SE_adLIF"
+               ],
+    "mode":  "fresh",
+    "dataset":  "ECG",
+    "training_seed":  42,
+    "split_seed":  42,
+    "training_records":  588,
+    "validation_records":  30,
+    "patient_independence_established":  false,
+    "epoch_ceiling":  50,
+    "full_schedule":  400,
+    "official_test":  false,
+    "training_batch":  256,
+    "validation_batch":  64,
+    "num_workers":  0,
+    "learning_rate":  0.01,
+    "study_file":  "config/studies/complementary_B002_transfer_v1.yaml",
+    "stdout":  "results/experiments/complementary_speaker_dev_v2/b002_ls_ecg_stage050_stdout.log",
+    "stderr":  "results/experiments/complementary_speaker_dev_v2/b002_ls_ecg_stage050_stderr.log",
+    "decision":  "B002_ECG_STAGE050_PREREGISTRATION.json",
+    "calibration":  "B002_ECG_BATCH256_CONFIRMATION.json"
+}

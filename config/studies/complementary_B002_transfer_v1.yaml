@@ -1,0 +1,66 @@
+version: complementary_speaker_dev_v2
+candidate_version: A002_B002_label_smoothing_v1
+protocol_id: label_smoothing_transfer_v1
+plan: docs/experiments/complementary-mechanisms-study-v2.md
+output_root: results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1
+idea: A002_B002_LABEL_SMOOTHING
+role: cross_dataset_transfer
+training_seed: 42
+split_seed: 42
+hypothesis: Input conditioning plus train-only confidence regularization may improve
+  clean held-out-speaker accuracy; loss or smaller gaps alone are not success.
+models:
+- SE_adLIF
+- GAIN_SE_adLIF
+- GAIN_LS_SE_adLIF
+- LS_SE_adLIF
+arm_labels:
+  SE_adLIF: Baseline
+  GAIN_SE_adLIF: A002 input gain
+  GAIN_LS_SE_adLIF: A002+B002 gain+label smoothing
+  LS_SE_adLIF: B002 label smoothing
+spike_deletion:
+  SE_adLIF: 0
+  GAIN_SE_adLIF: 0
+  GAIN_LS_SE_adLIF: 0
+  LS_SE_adLIF: 0
+input_fir_modes:
+  SE_adLIF: null
+  GAIN_SE_adLIF: gain_only
+  GAIN_LS_SE_adLIF: gain_only
+  LS_SE_adLIF: null
+training_objectives:
+  SE_adLIF: classification
+  GAIN_SE_adLIF: classification
+  GAIN_LS_SE_adLIF: classification_label_smoothing_v1
+  LS_SE_adLIF: classification_label_smoothing_v1
+label_smoothing_epsilon:
+  SE_adLIF: 0
+  GAIN_SE_adLIF: 0
+  GAIN_LS_SE_adLIF: 0.1
+  LS_SE_adLIF: 0.1
+hypotheses:
+  SE_adLIF: Fresh matched plain SE-adLIF control; no old weights.
+  GAIN_SE_adLIF: Fresh A002control under same source and split; ordinary classification
+    objective.
+  GAIN_LS_SE_adLIF: B002epsilon0.1smooths training targets only; clean accuracy must
+    improve over A; hard training CE logged separately.
+  LS_SE_adLIF: B-only control for the required factorial ablation; no input gain.
+datasets:
+  SSC:
+    batch_size: 1024
+    validation_batch_size: 1024
+    num_workers: 8
+    spawn_safe_transforms: true
+    ceilings:
+    - 10
+    - 40
+    stage: 3
+  ECG:
+    batch_size: 256
+    validation_batch_size: 64
+    ceilings:
+    - 50
+    - 100
+    - 400
+    stage: 4

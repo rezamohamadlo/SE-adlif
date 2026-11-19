@@ -1,0 +1,27 @@
+{
+  "created_at": "2026-11-12T13:22:11.845550+03:30",
+  "status": "completed_after_SSC40_queue_closed",
+  "hypothesis": "CPU/GPU numerical evaluation differences may account for net7/8correct-count differences on selected primary weights. Reproduce ordinary GPU high scores first; do not assume TF32 is the cause.",
+  "source_evidence": "B002_PRIMARY_CPU_DIAGNOSTICS.json",
+  "models": [
+    "SE_adLIF",
+    "LS_SE_adLIF"
+  ],
+  "data": "Same frozen primary0/3official-training validation only",
+  "mode": "Read-only selected checkpoint inference, no training or official tests",
+  "checks": [
+    "Exact checkpoint/config/source/index/label hashes; same saved1024batch/masks/aggregation",
+    "Two ordinary GPU high replays compare with retained selected metrics and with each other",
+    "Optional separately recorded GPU highest/fullFP32 diagnostic to isolate math-mode influence; never select a mode by score or adopt it for comparisons",
+    "CPU/GPU row-level correctness/probability differences, ordinary CE and per-speaker results; no new tuning"
+  ],
+  "primary_criterion": "Ordinary GPU high should reproduce retained selection accuracy counts and CE within rounding; any disagreement remains a technical diagnostic, not a new winning score",
+  "precision_policy": "Established high mode remains comparison authority. Highest is a diagnostic only, no training/protocol edits or TTA.",
+  "estimated_compute": "About30-90seconds inference after SSC closes; do not overlap the active GPU job",
+  "official_test_opened": false,
+  "prepared_source": "results/experiments/complementary_speaker_dev_v2/B002_PRIMARY_GPU_REPLAY_SOURCE.txt",
+  "source_sha256": "a26021c365d9fd696d65121481d8bd62faad9d7746d205673ab756857884834b",
+  "source_prepared_at": "2026-11-12T13:27:41.869004+03:30",
+  "executed": true,
+  "completion_evidence": "B002_PRIMARY_GPU_REPLAY_VERIFICATION.json"
+}

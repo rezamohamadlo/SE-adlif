@@ -1,0 +1,8 @@
+# @package _global_
+defaults:
+  - SHD_RCN_SE_adLIF
+  - /paper_baseline
+  - _self_
+exp_name: SHD_RCN_LS_SE_adLIF
+training_objective: classification_label_smoothing_v1
+label_smoothing_epsilon: 0.1

@@ -1,0 +1,20 @@
+{
+  "recorded_at": "2026-11-12T12:07:46.199476+00:00",
+  "status": "C001primary_and_predefined_sensitivity_bounded_stages_complete",
+  "primary_evidence": "C001_PRIMARY_STAGE030_COMPARISON.json",
+  "primary_decision": "C001_PRIMARY_STAGE030_DECISION.json",
+  "secondary_evidence": "C001_SENSITIVITY_STAGE030_COMPARISON.json",
+  "secondary_decision": "C001_SENSITIVITY_STAGE030_DECISION.json",
+  "primary_combination_minus_LS_pp": 1.5290498733520508,
+  "secondary_combination_minus_LS_pp": 0.40453076362609863,
+  "standalone_DTH_primary_delta_pp": -2.324157953262329,
+  "independent_training_seeds": 1,
+  "pair_results_not_independent_training_seeds": true,
+  "static_and_dynamic_contributions_isolated": false,
+  "two_complementary_ideas_established": false,
+  "canonical_four_arm_comparison_complete": false,
+  "official_test_evaluated": false,
+  "full_goal_complete": false,
+  "live_local_training_processes_at_closure": 0,
+  "next_action": "Inspect existing static-threshold/neuron controls and unsuccessful variants; preregister a distinct primary-only static-versus-dynamic threshold control with smoothing if not duplicative. Keep LS as promising SHD component, preserve negative SSC/ECG evidence. No heavy transfer/final freeze justified by this pair alone."
+}

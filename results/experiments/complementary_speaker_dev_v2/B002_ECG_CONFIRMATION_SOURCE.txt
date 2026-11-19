@@ -1,0 +1,66 @@
+"""One-off disposable ECG selected-batch confirmation; no main Trainer or checkpoint export."""
+from pathlib import Path
+from datetime import datetime
+import contextlib,gc,hashlib,io,json,math,statistics,time
+import hydra
+from hydra import compose,initialize_config_dir
+from omegaconf import OmegaConf
+import pytorch_lightning as pl
+import torch
+from models.pl_module import build_training_model
+from module.study_control import forward_identity
+from project_paths import ROOT,local_path,portable_config
+
+OUT=ROOT/'results/experiments/complementary_speaker_dev_v2';TARGET=OUT/'B002_ECG_BATCH256_CONFIRMATION.json'
+assert not TARGET.exists(),'Preserve existing calibration evidence'
+assert torch.cuda.is_available();torch.set_float32_matmul_precision('high');device=torch.device('cuda:0')
+audit=json.loads((OUT/'ECG_A002_SPLIT_AUDIT.json').read_text());prior=json.loads((OUT/'ECG_TRAINING_CALIBRATION.json').read_text())
+assert prior['selected_batch']==256 and len(prior['training_original_rows'])==256
+records=[];data=None;cpu_train=None
+for experiment in ['ECG_SE_adLIF_2layer','ECG_LS_SE_adLIF_2layer']:
+    pl.seed_everything(117,workers=True)
+    with initialize_config_dir(config_dir=str(ROOT/'config'),version_base=None):
+        cfg=compose(config_name='main',overrides=['experiment='+experiment,'+comparison=ECG','random_seed=117','batch_size=256','dataset.batch_size=256','dataset.num_workers=0','++dataset.validation_only_data=true','++dataset.validation_batch_size=64','run_test=false','early_stopping=false'])
+        cfg=OmegaConf.create(OmegaConf.to_container(cfg,resolve=True))
+    assert cfg.lr==.01 and cfg.n_epochs==400 and cfg.dropout==.15 and cfg.loss_agg=='summed_membrane_potentials'
+    if data is None:
+        cfg.dataset.data_path=str(local_path(cfg.dataset.data_path));data=hydra.utils.instantiate(cfg.dataset);data.prepare_data();data.setup('fit')
+        assert list(data.data_train.indices)==audit['train']['indices'] and list(data.data_val.indices)==audit['validation']['indices']
+        assert hashlib.sha256(local_path(audit['source']).read_bytes()).hexdigest()==audit['source_sha256']
+        lookup={row:i for i,row in enumerate(data.data_train.indices)}
+        cpu_train=[data.data_train[lookup[row]] for row in prior['training_original_rows']]
+        assert all(tuple(x.shape)==(1301,4) and x[-1,0]==-1 for x,y,b in cpu_train)
+    with contextlib.redirect_stdout(io.StringIO()):model=build_training_model(cfg).to(device).train()
+    configured=model.configure_optimizers();optimizer=configured['optimizer'] if isinstance(configured,dict) else configured
+    batch=tuple(t.to(device) for t in data.collate_fn(cpu_train));assert batch[0].shape[1]==1301 and batch[1].dtype==torch.int64
+    durations=[];losses=[]
+    for step in range(5):
+        optimizer.zero_grad(set_to_none=True);torch.cuda.synchronize()
+        if step==2:torch.cuda.reset_peak_memory_stats()
+        start=time.perf_counter();outputs=model(batch[0]);_,loss,_=model.process_predictions_and_compute_losses(outputs,batch[1],batch[2]);loss.backward()
+        torch.nn.utils.clip_grad_norm_(model.parameters(),float(cfg.gradient_clip_val));optimizer.step();model.on_train_batch_end(None,batch,step)
+        torch.cuda.synchronize();elapsed=time.perf_counter()-start;losses.append(float(loss.detach().cpu()))
+        if step>=2:durations.append(elapsed)
+        assert math.isfinite(losses[-1]) and all(torch.isfinite(p.grad).all().item() for p in model.parameters() if p.grad is not None)
+    reserved=torch.cuda.max_memory_reserved();allocated=torch.cuda.max_memory_allocated();headroom=1-reserved/torch.cuda.get_device_properties(device).total_memory;assert headroom>=.15
+    training={'batch':256,'warmup_steps':2,'measured_steps':3,'step_seconds':statistics.mean(durations),'samples_per_second':256/statistics.mean(durations),'peak_allocated_gib':allocated/2**30,'peak_reserved_gib':reserved/2**30,'headroom_fraction':headroom,'timesteps':1301,'updates_per_epoch':len(data.data_train)//256,'estimated_epoch_train_seconds':statistics.mean(durations)*(len(data.data_train)//256),'finite_losses_and_gradients':True,'losses':losses}
+    del optimizer,configured,batch,outputs,loss;gc.collect();torch.cuda.empty_cache();model.eval();probes=[];predictions={}
+    for size in [16,64]:
+        data.validation_batch_size=size
+        def validation_pass():
+            count=0;weighted=0.;pred=[];torch.cuda.synchronize();start=time.perf_counter()
+            with torch.inference_mode():
+                for cpu in data.val_dataloader():
+                    x,y,b=(t.to(device) for t in cpu);reduced,ce,_=model.process_predictions_and_compute_losses(model(x),y,b)
+                    mask=y.flatten().ne(-1);n=int(mask.sum());count+=n;weighted+=float(ce)*n;pred.extend(reduced[mask].argmax(-1).cpu().tolist())
+            torch.cuda.synchronize();assert count==39030
+            return time.perf_counter()-start,weighted/count,pred
+        validation_pass();torch.cuda.reset_peak_memory_stats();passes=[validation_pass(),validation_pass()];assert passes[0][2]==passes[1][2]
+        predictions[size]=passes[1][2];probes.append({'batch':size,'warmup_full_passes':1,'measured_full_passes':2,'validation_records':30,'valid_targets':39030,'seconds':statistics.mean(v[0] for v in passes),'loss':passes[1][1],'peak_reserved_gib':torch.cuda.max_memory_reserved()/2**30})
+    assert predictions[16]==predictions[64]
+    assert abs(probes[0]['loss']-probes[1]['loss'])<2e-5
+    record={'experiment':experiment,'training_objective':cfg.get('training_objective','classification'),'epsilon':cfg.get('label_smoothing_epsilon',0),'training':training,'validation':probes,'changed_predictions':0,'validation_loss_difference':abs(probes[0]['loss']-probes[1]['loss']),'config':portable_config(OmegaConf.to_container(cfg,resolve=True))}
+    records.append(record);print('[B002_ECG_CONFIRMATION] '+json.dumps(record),flush=True)
+    del model;gc.collect();torch.cuda.empty_cache()
+result={'status':'verified','created_at':datetime.now().astimezone().isoformat(),'records':records,'training_batch':256,'validation_batch':64,'lr':.01,'lr_scaled':False,'disposable_seed':117,'source_identity':forward_identity('ECG'),'frozen_split_fingerprint':audit['fingerprint'],'data_sha256':audit['source_sha256'],'source_training_rows':'ECG_TRAINING_CALIBRATION.json/training_original_rows','prior_full_batch_grid':'ECG_TRAINING_CALIBRATION.json preserved, not relabeled','prior_validation_grid':'ECG_VALIDATION_CALIBRATION.json preserved','full1301timesteps_preserved':True,'negative_input_marker_preserved':True,'disposable_states_discarded':True,'main_initialization_reused':False,'official_test_opened':False}
+TARGET.write_text(json.dumps(result,indent=2)+'\n');print('[CALIBRATION_COMPLETE] '+str(TARGET.relative_to(ROOT)),flush=True)

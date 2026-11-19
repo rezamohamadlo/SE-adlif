@@ -1,0 +1,1710 @@
+diff --git a/test_checkpoint.py b/test_checkpoint.py
+--- a/test_checkpoint.py
++++ b/test_checkpoint.py
+@@ -45,6 +45,7 @@
+             or receipt['model']!=cfg.model_variant or receipt['seed']!=cfg.random_seed
+             or receipt['dataset']!=cfg.paper_baseline_dataset):
+         raise ValueError('Evaluation must use the exact validation-selected stage checkpoint')
++    verified_configurations=0
+     if plan['purpose']=='final':
+         arms={'Baseline','A','B','A+B'}
+         datasets={'SHD','SSC','ECG'}
+@@ -53,24 +54,47 @@
+                 or set(plan.get('training_seeds',[]))!=seeds
+                 or plan.get('architecture_and_settings_frozen') is not True):
+             raise ValueError('Final evidence requires all four frozen arms, three datasets and three matching seeds')
++        from module.final_config_guard import validate_frozen_configurations
+         cohorts=set()
++        cohort_configs=[]
++        source_identities={}
+         for path,item in plan['checkpoints'].items():
+             result=json.loads(local_path(item['stage_receipt'],must_exist=True).read_text(encoding='utf-8'))
+             identity=(item.get('arm'),result.get('dataset'),result.get('seed'))
++            if identity[0] not in arms or identity[1] not in datasets or identity[2] not in seeds:
++                raise ValueError('Final plan contains an undeclared arm, dataset or training seed')
+             budget={'SHD':300,'SSC':40,'ECG':400}.get(result.get('dataset'))
+             if (identity in cohorts or result.get('status')!='stage_complete' or result.get('preliminary') is not False
+                     or result.get('completed_epochs')!=budget or result.get('full_budget')!=budget
+                     or result.get('best_checkpoint')!=path or result.get('best_checkpoint_sha256')!=item.get('sha256')
+                     or sha256(local_path(path,must_exist=True))!=item['sha256']):
+                 raise ValueError('Final plan contains incomplete, duplicated or incompatible training evidence')
++            saved=torch.load(local_path(path,must_exist=True),map_location='cpu',weights_only=False)
++            saved_cfg=portable_config(OmegaConf.to_container(OmegaConf.create(
++                saved.get('hyper_parameters',{}).get('cfg',{})),resolve=True))
++            dataset=result.get('dataset')
++            if dataset not in source_identities:
++                source_identities[dataset]=forward_identity(dataset)
++            if (not isinstance(saved_cfg,dict)
++                    or saved.get('epoch')!=result.get('selected_epoch_index')
++                    or not isinstance(saved.get('epoch'),int) or not 0<=saved['epoch']<budget
++                    or saved_cfg.get('model_variant')!=result.get('model')
++                    or saved_cfg.get('random_seed')!=result.get('seed')
++                    or saved_cfg.get('paper_baseline_dataset')!=dataset
++                    or saved_cfg.get('evaluation_protocol')!=result.get('protocol')
++                    or saved_cfg.get('complementary_study')=='complementary_speaker_dev_v2'
++                    or item.get('model_source_sha256')!=source_identities[dataset]):
++                raise ValueError('Final cohort checkpoint config, epoch or implementation differs from its receipt')
++            cohort_configs.append((*identity,saved_cfg))
+             cohorts.add(identity)
+         if cohorts!={(a,d,s) for a in arms for d in datasets for s in seeds}:
+             raise ValueError('Final plan omits part of the four-arm replicated comparison')
++        verified_configurations=validate_frozen_configurations(plan,cohort_configs)['verified_configurations']
+     return dict(purpose=plan['purpose'],completed_training_epochs=receipt['completed_epochs'],
+                 full_budget=receipt['full_budget'],preliminary=receipt['preliminary'],
+                 checkpoint_sha256=entry['sha256'],selected_epoch_index=checkpoint['epoch'],
+                 model=cfg.model_variant,dataset=cfg.paper_baseline_dataset,seed=int(cfg.random_seed),
+-                test_selects_ideas=False)
++                test_selects_ideas=False,verified_configurations=verified_configurations)
+ 
+ 
+ def main():
+@@ -103,6 +127,10 @@
+             saved=json.loads(previous.read_text(encoding='utf-8'))
+             if saved.get('study_evidence')!=study_evidence or saved.get('checkpoint')!=portable_path(checkpoint_path):
+                 raise ValueError('Output directory belongs to a different evaluation; preserve it')
++            if study_evidence['purpose']=='final' and cfg.paper_baseline_dataset=='SHD':
++                from module.shd_final_evaluation import frozen_shd_prediction_identity,verify_saved_shd_result
++                verify_saved_shd_result(saved,frozen_shd_prediction_identity(plan,study_evidence),
++                                        local_path(args.output_dir))
+             print(f'Already evaluated: {100*saved["metrics"]["test_acc"]:.6f}%');return
+         cfg.dataset.validation_only_data=False
+     pl.seed_everything(cfg.random_seed, workers=True)
+@@ -121,12 +149,23 @@
+         logger=False, enable_checkpointing=False,
+         enable_progress_bar=not bool(study_evidence),enable_model_summary=not bool(study_evidence),
+     )
+-    results = trainer.test(model, datamodule=datamodule)[0]
++    speaker_generalization=prediction_rows=prepared_shd=None
++    if study_evidence and study_evidence['purpose']=='final' and cfg.paper_baseline_dataset=='SHD':
++        from module.shd_final_evaluation import prepare_final_shd_evaluation,evaluate_prepared_shd
++        prepared_shd=prepare_final_shd_evaluation(cfg,datamodule,plan,study_evidence,test_path)
++        results,speaker_generalization,prediction_rows=evaluate_prepared_shd(model,trainer,prepared_shd)
++    else:
++        results = trainer.test(model, datamodule=datamodule)[0]
+     directory = local_path(args.output_dir) if args.output_dir else checkpoint_path.parent.parent
+     directory.mkdir(parents=True, exist_ok=True)
+     evidence=dict(checkpoint=portable_path(checkpoint_path),metrics=results)
+     if study_evidence is not None:
+         evidence.update(study_evidence=study_evidence,ordinary_inference=True,test_time_augmentation=False)
++    if speaker_generalization is not None:
++        from module.shd_final_evaluation import persist_shd_rows,shd_prediction_identity
++        identity=shd_prediction_identity(study_evidence,prepared_shd['provenance']['membership'])
++        evidence.update(speaker_generalization=speaker_generalization,
++                        prediction_rows=persist_shd_rows(directory,prediction_rows,identity))
+     (directory / 'TEST_RESULTS.json').write_text(
+         json.dumps(evidence, indent=2) + '\n',
+         encoding='utf-8',
+diff --git a/module/final_config_guard.py b/module/final_config_guard.py
+new file mode 100644
+--- /dev/null
++++ b/module/final_config_guard.py
+@@ -0,0 +1,122 @@
++"""Draft pure configuration guard; no file loading, data access or training."""
++from copy import deepcopy
++import json
++
++ARMS = {'Baseline', 'A', 'B', 'A+B'}
++DATASETS = {'SHD', 'SSC', 'ECG'}
++SEEDS = {42, 123, 456}
++# These identify the run rather than its numerical training configuration.
++RUN_METADATA = {
++    'random_seed', 'logdir', 'exp_name', 'launcher_logdir', 'launcher_script',
++    'run_mode', 'study_hypothesis', 'study_stage', 'ckpt_path',
++}
++# Declared mechanism differences cannot waive these matched-condition checks.
++PROTECTED = {
++    'dataset', 'datadir', 'lr', 'batch_size', 'n_epochs', 'max_epochs',
++    'precision', 'device', 'optimizer', 'weight_decay', 'betas', 'scheduler',
++    'scheduler_min_lr', 'factor', 'patience', 'gradient_clip_val',
++    'early_stopping', 'early_stopping_patience', 'early_stopping_min_delta',
++    'loss_agg', 'paper_baseline', 'paper_baseline_version',
++    'paper_baseline_dataset', 'evaluation_protocol', 'tracking_metric',
++    'tracking_mode', 'stage_ceiling',
++}
++
++
++def _stable(config):
++    if not isinstance(config, dict):
++        raise ValueError('Expected a resolved JSON configuration mapping')
++    return {k: deepcopy(v) for k, v in config.items() if k not in RUN_METADATA}
++
++
++def _comparison_protocol(config):
++    """Ignore only the exact objective annotation for shared-condition checks.
++
++    Each full per-arm protocol string is still checked against its frozen
++    config below. The underlying split/optimization protocol cannot be waived.
++    """
++    protocol = config.get('evaluation_protocol')
++    objective = config.get('training_objective', 'classification')
++    if (isinstance(protocol, str) and isinstance(objective, str)
++            and objective not in ('', 'classification')
++            and protocol.endswith('_' + objective)):
++        return protocol[:-len(objective)-1]
++    return protocol
++
++
++def _remove_path(config, path):
++    parts = path.split('.')
++    node = config
++    for part in parts[:-1]:
++        if not isinstance(node, dict) or part not in node:
++            return
++        node = node[part]
++    if isinstance(node, dict):
++        node.pop(parts[-1], None)
++
++
++def validate_frozen_configurations(plan, cohort):
++    """Validate all 36 checkpoint configs against pre-frozen arm specifications.
++
++    cohort contains (arm, dataset, training_seed, resolved_checkpoint_cfg).
++    The caller must verify checkpoint hashes, source identities and receipts,
++    and pass portable resolved configs read from those exact checkpoints.
++    This helper does not replace those independent provenance checks.
++    """
++    frozen = plan.get('frozen_configurations')
++    differences = plan.get('mechanism_difference_paths')
++    if (not isinstance(frozen, dict) or set(frozen) != DATASETS
++            or not isinstance(differences, list) or not differences
++            or any(not isinstance(p, str) for p in differences)
++            or len(set(differences)) != len(differences)):
++        raise ValueError('Final testing requires frozen per-arm configs and explicit mechanism paths')
++    for path in differences:
++        if (not isinstance(path, str) or not path or any(not p for p in path.split('.'))
++                or path.split('.')[0] in PROTECTED | RUN_METADATA):
++            raise ValueError('Mechanism paths cannot waive matched training conditions')
++    for dataset in DATASETS:
++        if not isinstance(frozen[dataset], dict) or set(frozen[dataset]) != ARMS:
++            raise ValueError('Frozen configurations must specify every arm for every dataset')
++        signatures = set()
++        shared = None
++        for arm in ARMS:
++            spec = _stable(frozen[dataset][arm])
++            computational = deepcopy(spec)
++            # Factory selection must also have explicit mechanism/architecture
++            # settings; renaming a baseline or its deviation note is not an arm.
++            computational.pop('model_variant', None)
++            computational.pop('paper_baseline_deviations', None)
++            signatures.add(json.dumps(computational, sort_keys=True))
++            common = deepcopy(spec)
++            if 'evaluation_protocol' in common:
++                common['evaluation_protocol'] = _comparison_protocol(spec)
++            # Deviations remain verified against each exact frozen arm config.
++            common.pop('paper_baseline_deviations', None)
++            for path in differences:
++                _remove_path(common, path)
++            if shared is None:
++                shared = common
++            elif common != shared:
++                raise ValueError('Frozen arms differ outside their declared mechanisms')
++        if len(signatures) != 4:
++            raise ValueError('Four arm labels must describe four distinct configurations')
++    seen = set()
++    for arm, dataset, seed, config in cohort:
++        identity = (arm, dataset, seed)
++        if arm not in ARMS or dataset not in DATASETS or seed not in SEEDS or identity in seen:
++            raise ValueError('Unexpected or duplicate final cohort identity')
++        seen.add(identity)
++        if config.get('random_seed') != seed or config.get('paper_baseline_dataset') != dataset:
++            raise ValueError('Checkpoint dataset/training seed differs from cohort identity')
++        if config.get('init_ckpt_path'):
++            raise ValueError('Final fresh-training comparison cannot use weights-only initialization')
++        if dataset == 'SHD':
++            data = config.get('dataset', {})
++            if (data.get('validate_on') != 0.2 or data.get('random_seed') != 42
++                    or data.get('speaker_split_manifest') or data.get('speaker_split_fingerprint')):
++                raise ValueError('Canonical SHD* requires its own random20percent split, seed42')
++        if _stable(config) != _stable(frozen[dataset][arm]):
++            raise ValueError('Checkpoint settings differ from the frozen arm configuration')
++    expected = {(a, d, s) for a in ARMS for d in DATASETS for s in SEEDS}
++    if seen != expected:
++        raise ValueError('Final configuration cohort is incomplete')
++    return {'verified_configurations': len(seen), 'matched_shared_conditions': True}
+diff --git a/module/speaker_generalization.py b/module/speaker_generalization.py
+new file mode 100644
+--- /dev/null
++++ b/module/speaker_generalization.py
+@@ -0,0 +1,72 @@
++"""Pure accounting for preregistered ordinary speaker-generalization evidence.
++
++No model fitting, file loading or dataset access. Call only after authorized
++final inference, with verified original row IDs and actual fitting speakers.
++"""
++from numbers import Integral
++
++
++def _integers(values, name):
++    values = list(values)
++    if any(isinstance(x, bool) or not isinstance(x, Integral) for x in values):
++        raise ValueError(f'{name} must contain integer IDs')
++    return [int(x) for x in values]
++
++
++def summarize_speaker_generalization(
++    predictions, observed_labels, row_ids, metadata_labels, metadata_speakers,
++    fitting_speaker_ids, num_classes=20,
++):
++    """Require one prediction for every official test row; return all groups.
++
++    Arrays from the same inference must retain exact row IDs. Metadata arrays
++    are indexed by original HDF5 row number. Correct counts reconstruct the
++    overall score exactly; empty subgroups have null accuracies, not zero.
++    This function cannot establish that a caller's row IDs or fitting indices
++    are genuine: the evaluator must verify sampler and dataset provenance.
++    """
++    if isinstance(num_classes, bool) or not isinstance(num_classes, Integral) or num_classes<2:
++        raise ValueError('num_classes must be an integer >=2')
++    predictions = _integers(predictions, 'predictions')
++    labels = _integers(observed_labels, 'observed labels')
++    rows = _integers(row_ids, 'row IDs')
++    raw_labels = _integers(metadata_labels, 'metadata labels')
++    speakers = _integers(metadata_speakers, 'metadata speakers')
++    fitting = set(_integers(fitting_speaker_ids, 'fitting speakers'))
++    n = len(raw_labels)
++    if not fitting or not n or any(len(x)!=n for x in (predictions, labels, rows, speakers)):
++        raise ValueError('Require nonempty fitting speakers and a complete aligned test cohort')
++    if sorted(rows)!=list(range(n)):
++        raise ValueError('Original test row IDs must be unique and exhaustive')
++    if any(x<0 for x in speakers) or any(x<0 for x in fitting):
++        raise ValueError('Speaker IDs must be nonnegative')
++    if any(not 0<=x<num_classes for x in predictions+labels+raw_labels):
++        raise ValueError('Class IDs lie outside the declared class range')
++    if any(label!=raw_labels[row] for label,row in zip(labels,rows)):
++        raise ValueError('Observed labels do not match original-row metadata')
++    by_speaker = {}
++    for prediction, label, row in zip(predictions, labels, rows):
++        speaker = speakers[row]
++        entry = by_speaker.setdefault(speaker, dict(recordings=0,correct=0,class_counts=[0]*num_classes))
++        entry['recordings']+=1
++        entry['correct']+=int(prediction==label)
++        entry['class_counts'][label]+=1
++    for speaker, entry in by_speaker.items():
++        entry['accuracy']=entry['correct']/entry['recordings']
++        entry['seen_during_fitting']=speaker in fitting
++    groups = {}
++    for name in ('all','seen','unseen'):
++        selected=[e for speaker,e in sorted(by_speaker.items())
++                  if name=='all' or (speaker in fitting)==(name=='seen')]
++        count=sum(e['recordings'] for e in selected)
++        correct=sum(e['correct'] for e in selected)
++        counts=[sum(e['class_counts'][c] for e in selected) for c in range(num_classes)]
++        groups[name]=dict(recordings=count,correct=correct,accuracy=correct/count if count else None,
++                          speakers=len(selected),class_counts=counts,
++                          classes_present=[c for c,nc in enumerate(counts) if nc],
++                          macro_speaker_accuracy=sum(e['accuracy'] for e in selected)/len(selected) if selected else None)
++    assert groups['seen']['recordings']+groups['unseen']['recordings']==groups['all']['recordings']==n
++    assert groups['seen']['correct']+groups['unseen']['correct']==groups['all']['correct']
++    return dict(groups=groups,per_speaker={str(s):by_speaker[s] for s in sorted(by_speaker)},
++                fitting_speaker_ids=sorted(fitting),num_classes=int(num_classes),
++                metric='ordinary_recording_accuracy',speaker_population_independence_established=False)
+diff --git a/module/ordinary_prediction_capture.py b/module/ordinary_prediction_capture.py
+new file mode 100644
+--- /dev/null
++++ b/module/ordinary_prediction_capture.py
+@@ -0,0 +1,83 @@
++"""Scoped read-only capture of existing SHD test metric inputs.
++
++No forward pass or trainer entrypoint. The caller must enforce the frozen-test
++gate and verify a sequential, complete original-row dataloader separately.
++"""
++from contextlib import contextmanager
++from numbers import Integral
++import torch
++
++
++class ClassificationRows:
++    def __init__(self, expected_records):
++        if isinstance(expected_records,bool) or not isinstance(expected_records,Integral) or expected_records<1:
++            raise ValueError('Expected a positive original test recording count')
++        self.expected_records=int(expected_records)
++        self.predictions=[]
++        self.labels=[]
++
++    def append(self, outputs, targets, classes, ignore_index):
++        integer_types=(torch.uint8,torch.int8,torch.int16,torch.int32,torch.int64)
++        if (not isinstance(targets,torch.Tensor) or targets.ndim!=2
++                or targets.dtype not in integer_types
++                or not isinstance(outputs,torch.Tensor) or outputs.ndim!=2
++                or outputs.shape!=(targets.numel(),classes)):
++            raise ValueError('Capture requires target-aligned classification scores and integer targets')
++        valid=targets.ne(ignore_index)
++        if not torch.all(valid.sum(dim=1)==1).item():
++            raise ValueError('SHD capture requires exactly one valid target per recording')
++        labels=targets.flatten()[valid.flatten()].detach().cpu().tolist()
++        if any(not 0<=label<classes for label in labels):
++            raise ValueError('Observed target outside declared class range')
++        predictions=outputs.detach().argmax(dim=-1)[valid.flatten()].cpu().tolist()
++        if len(self.labels)+len(labels)>self.expected_records:
++            raise ValueError('More predictions than original test recordings')
++        self.labels.extend(labels)
++        self.predictions.extend(predictions)
++
++    def finalize(self):
++        if len(self.labels)!=self.expected_records:
++            raise ValueError('Test prediction capture is incomplete')
++        return dict(row_ids=list(range(self.expected_records)),
++                    observed_labels=list(self.labels),predictions=list(self.predictions))
++
++
++@contextmanager
++def capture_ordinary_classification(model, expected_records):
++    """Preserve original logging method/arguments/results, restoring on error.
++
++    The collector assigns sequential original row IDs. Using it without a
++    verified sequential sampler is invalid, even if labels happen to match.
++    """
++    if getattr(model,'auto_regression',True) or getattr(model,'ignore_target_idx',None)!=-1:
++        raise ValueError('Only the established classification/ignore-target contract is supported')
++    if getattr(model,'_ordinary_prediction_capture_active',False):
++        raise ValueError('Prediction capture is already active')
++    classes=model.output_size
++    original=model.update_and_log_metrics
++    had_override='update_and_log_metrics' in vars(model)
++    previous=vars(model).get('update_and_log_metrics')
++    had_marker='_ordinary_prediction_capture_active' in vars(model)
++    previous_marker=vars(model).get('_ordinary_prediction_capture_active')
++    rows=ClassificationRows(expected_records)
++
++    def observed(outputs,targets,loss,metrics,prefix):
++        if prefix=='test_':
++            if model.training:
++                raise ValueError('Ordinary test capture requires evaluation mode')
++            rows.append(outputs,targets,classes,model.ignore_target_idx)
++        return original(outputs,targets,loss,metrics,prefix)
++
++    model._ordinary_prediction_capture_active=True
++    model.update_and_log_metrics=observed
++    try:
++        yield rows
++    finally:
++        if had_override:
++            model.update_and_log_metrics=previous
++        else:
++            delattr(model,'update_and_log_metrics')
++        if had_marker:
++            model._ordinary_prediction_capture_active=previous_marker
++        else:
++            delattr(model,'_ordinary_prediction_capture_active')
+diff --git a/module/shd_final_provenance.py b/module/shd_final_provenance.py
+new file mode 100644
+--- /dev/null
++++ b/module/shd_final_provenance.py
+@@ -0,0 +1,143 @@
++"""Draft final SHD* provenance guards; never fit models or choose candidates.
++
++Use only after the final evaluation gate. Membership uses official-training
++metadata supplied by the caller. Loader inspection may call dataset.__len__;
++it therefore belongs after authorization to access the final cohort.
++"""
++import hashlib
++import json
++import math
++from numbers import Integral
++from pathlib import Path
++import re
++from collections import Counter
++
++import torch
++from torch.utils.data import DataLoader, BatchSampler, SequentialSampler
++
++
++def _integers(values, name):
++    values = list(values)
++    if any(isinstance(x, bool) or not isinstance(x, Integral) for x in values):
++        raise ValueError(f'{name} must contain integer IDs')
++    return [int(x) for x in values]
++
++
++def verify_canonical_fitting_membership(
++    manifest_bytes, expected_manifest_sha256, source_sha256,
++    train_labels, train_speakers, fitting_indices, validation_indices, cfg,
++):
++    """Bind actual fitting indices to frozen bytes and training-file identity.
++
++    The caller hashes the actual HDF5 source and reads its metadata. This
++    helper cannot independently prove where supplied arrays came from.
++    Regenerating the split here verifies the fixed algorithm, not a new split.
++    """
++    if (not isinstance(manifest_bytes, bytes)
++            or not isinstance(expected_manifest_sha256, str)
++            or re.fullmatch('[0-9a-f]{64}', expected_manifest_sha256) is None
++            or hashlib.sha256(manifest_bytes).hexdigest() != expected_manifest_sha256):
++        raise ValueError('Canonical manifest bytes differ from the frozen digest')
++    manifest = json.loads(manifest_bytes)
++    dataset = cfg.get('dataset', {})
++    if (manifest.get('version') != 'canonical_shd_split_v1'
++            or manifest.get('dataset_label') != 'SHD*'
++            or manifest.get('validate_on') != .2 or manifest.get('split_seed') != 42
++            or manifest.get('official_test_opened') is not False
++            or dataset.get('validate_on') != .2 or dataset.get('random_seed') != 42
++            or dataset.get('additional_test_set_validation', False)
++            or dataset.get('speaker_split_manifest')
++            or dataset.get('speaker_split_fingerprint')
++            or cfg.get('init_ckpt_path')):
++        raise ValueError('Require fresh canonical SHD* fitting protocol, not speaker exposure or test selection')
++    if (not isinstance(source_sha256, str)
++            or re.fullmatch('[0-9a-f]{64}', source_sha256) is None
++            or manifest.get('source_sha256') != source_sha256):
++        raise ValueError('Training-file identity differs from the frozen split')
++    labels = _integers(train_labels, 'training labels')
++    speakers = _integers(train_speakers, 'training speakers')
++    fitting = _integers(fitting_indices, 'fitting indices')
++    validation = _integers(validation_indices, 'validation indices')
++    if (not labels or len(labels) != len(speakers)
++            or any(not 0 <= x < 20 for x in labels) or any(x < 0 for x in speakers)):
++        raise ValueError('Invalid aligned training-file labels/speakers')
++    valid_count = math.floor(len(labels) * .2)
++    order = torch.randperm(len(labels), generator=torch.Generator().manual_seed(42)).tolist()
++    expected_fit, expected_val = order[:-valid_count], order[-valid_count:]
++    if (not valid_count or fitting != expected_fit or validation != expected_val
++            or manifest.get('train', {}).get('indices') != expected_fit
++            or manifest.get('validation', {}).get('indices') != expected_val):
++        raise ValueError('Actual fitting/validation indices differ from the frozen canonical algorithm')
++    if any({labels[i] for i in indices} != set(range(20)) for indices in (fitting, validation)):
++        raise ValueError('Canonical fitting and validation must retain all20classes')
++    for name, indices in (('train', fitting), ('validation', validation)):
++        subset = manifest[name]
++        counts = Counter(labels[i] for i in indices)
++        speaker_counts = Counter(speakers[i] for i in indices)
++        if (subset.get('record_count') != len(indices)
++                or subset.get('class_counts') != [counts[i] for i in range(20)]
++                or subset.get('speaker_ids') != sorted(speaker_counts)
++                or subset.get('per_speaker_record_counts') != {str(k): v for k, v in speaker_counts.items()}):
++            raise ValueError('Frozen split counts or speaker membership disagree with original training rows')
++    return dict(
++        fitting_records=len(fitting), validation_records=len(validation),
++        fitting_speaker_ids=sorted({speakers[i] for i in fitting}),
++        training_file_speaker_ids=sorted(set(speakers)),
++        manifest_sha256=expected_manifest_sha256, training_source_sha256=source_sha256,
++        declared_split_fingerprint=manifest.get('fingerprint'),
++        split_seed=42, dataset_label='SHD*',
++    )
++
++
++def verify_original_row_loader(
++    loader, raw_dataset, expected_file, expected_records, expected_batch_size,
++    expected_transform,
++):
++    """Require complete unwrapped original-row SHD evaluation.
++
++    Existing disk caches are deliberately not accepted by this draft path.
++    The future evaluator must supply an uncached loader retaining the frozen
++    preprocessing/collation/batch settings, after checking file SHA/metadata.
++    No dataset item or model forward is requested by this guard.
++    """
++    from datasets.shd import SHDWrapper
++    from datasets.utils.pad_tensors import PadTensors
++
++    for value in (expected_records, expected_batch_size):
++        if isinstance(value, bool) or not isinstance(value, Integral) or value < 1:
++            raise ValueError('Expected positive recording count and batch size')
++    if (type(loader) is not DataLoader or type(raw_dataset) is not SHDWrapper
++            or loader.dataset is not raw_dataset):
++        raise ValueError('Require the original SHD dataset, without cache/subset/reordering wrappers')
++    if raw_dataset.data_filename != 'shd_test.h5' or Path(expected_file).name != 'shd_test.h5':
++        raise ValueError('Final loader must refer to the official-test filename')
++    try:
++        actual_file = Path(raw_dataset.location_on_system, raw_dataset.data_filename).resolve(strict=True)
++        frozen_file = Path(expected_file).resolve(strict=True)
++    except OSError as exc:
++        raise ValueError('Missing original HDF5 source') from exc
++    if actual_file != frozen_file:
++        raise ValueError('Loader refers to a different original HDF5 source')
++    if (raw_dataset.target_transform is not None or expected_transform is None
++            or raw_dataset.transform is not expected_transform):
++        raise ValueError('Loader input/label transforms differ from the verified clean pipeline')
++    if (type(loader.sampler) is not SequentialSampler
++            or loader.sampler.data_source is not raw_dataset
++            or type(loader.batch_sampler) is not BatchSampler
++            or loader.batch_sampler.sampler is not loader.sampler
++            or loader.drop_last or loader.batch_sampler.drop_last
++            or loader.batch_size != expected_batch_size
++            or loader.batch_sampler.batch_size != expected_batch_size):
++        raise ValueError('Require sequential exhaustive sampling at the frozen batch size')
++    collate = loader.collate_fn
++    if (type(collate) is not PadTensors or not collate.batch_first
++            or not collate.require_padding or collate.batch_dim != 0 or collate.temp_dim != 1
++            or collate.call_fn is not PadTensors._call_with_padding):
++        raise ValueError('Classification collation differs from the established target/mask contract')
++    if len(raw_dataset) != expected_records or len(loader.sampler) != expected_records:
++        raise ValueError('Loader does not cover the complete original recording cohort')
++    if len(loader) != math.ceil(expected_records / expected_batch_size):
++        raise ValueError('Unexpected evaluation batch count')
++    return dict(recordings=int(expected_records), batch_size=int(expected_batch_size),
++                batches=len(loader), original_row_order='0..N-1', cached=False,
++                sampler='SequentialSampler', drop_last=False)
+diff --git a/module/shd_final_evaluation.py b/module/shd_final_evaluation.py
+new file mode 100644
+--- /dev/null
++++ b/module/shd_final_evaluation.py
+@@ -0,0 +1,286 @@
++"""Draft adapters for a future frozen SHD* final test, never development.
++
++No training and no candidate selection. The entrypoint remains responsible
++for the complete final-cohort/checkpoint/config/source gate BEFORE calling.
++"""
++import hashlib
++import json
++import math
++from pathlib import Path
++import re
++import zipfile
++
++import h5py
++import numpy as np
++from omegaconf import OmegaConf
++from torch.utils.data import DataLoader, Subset
++
++from datasets.shd import SHDWrapper
++from project_paths import local_path, portable_path
++from module.shd_final_provenance import (
++    verify_canonical_fitting_membership, verify_original_row_loader,
++)
++from module.ordinary_prediction_capture import capture_ordinary_classification
++from module.speaker_generalization import summarize_speaker_generalization
++
++
++def _sha256(path):
++    with Path(path).open('rb') as stream:
++        return hashlib.file_digest(stream, 'sha256').hexdigest()
++
++
++def prepare_final_shd_evaluation(cfg, datamodule, plan, authorization, test_file):
++    """After the full gate, bind actual metadata and build one original-row loader.
++
++    Returns ephemeral raw metadata separately from serializable provenance.
++    The original SHDLDM constructor already builds its subsets; its setup and
++    prepare_data are no-ops. No model inference is performed here.
++    """
++    if (plan.get('status') != 'frozen' or plan.get('purpose') != 'final'
++            or plan.get('test_selects_ideas') is not False
++            or authorization.get('purpose') != 'final'
++            or authorization.get('verified_configurations') != 36
++            or authorization.get('dataset') != 'SHD'):
++        raise ValueError('Complete frozen four-arm final authorization must precede SHD data access')
++    settings = plan.get('shd_generalization', {})
++    if settings.get('ordinary_speaker_breakdown') is not True:
++        raise ValueError('Final plan must preregister the ordinary SHD speaker breakdown')
++    cfg = OmegaConf.to_container(cfg, resolve=True) if OmegaConf.is_config(cfg) else cfg
++    dataset_cfg = cfg.get('dataset', {})
++    if (cfg.get('paper_baseline_dataset') != 'SHD'
++            or dataset_cfg.get('bias_for_test_set', 0) != 0
++            or dataset_cfg.get('test_bias_variant', 'bias') not in ('bias', 'none')
++            or dataset_cfg.get('train_augmentation')):
++        raise ValueError('Final SHD evaluation requires the frozen clean ordinary pipeline')
++    if (type(datamodule.train_val_ds) is not SHDWrapper
++            or type(datamodule.data_train) is not Subset
++            or type(datamodule.data_val) is not Subset
++            or datamodule.data_train.dataset is not datamodule.train_val_ds
++            or datamodule.data_val.dataset is not datamodule.train_val_ds):
++        raise ValueError('Actual fitting/validation subsets must share the original training source')
++    train_file = Path(datamodule.train_val_ds.location_on_system, datamodule.train_val_ds.data_filename)
++    if train_file.name != 'shd_train.h5':
++        raise ValueError('Fitting metadata must come from the official training file')
++    manifest_path = local_path(settings['canonical_split_manifest'], must_exist=True)
++    manifest_bytes = manifest_path.read_bytes()
++    train_sha = _sha256(train_file)
++    with h5py.File(train_file, 'r') as source:
++        train_labels = source['labels'][:].reshape(-1).tolist()
++        train_speakers = source['extra/speaker'][:].reshape(-1).tolist()
++    membership = verify_canonical_fitting_membership(
++        manifest_bytes, settings['canonical_split_manifest_sha256'], train_sha,
++        train_labels, train_speakers, datamodule.data_train.indices,
++        datamodule.data_val.indices, cfg,
++    )
++    raw = datamodule.data_test
++    test_file = local_path(test_file, must_exist=True)
++    if (type(raw) is not SHDWrapper or raw.data_filename != 'shd_test.h5'
++            or Path(raw.location_on_system, raw.data_filename).resolve() != test_file.resolve()
++            or authorization.get('test_data_sha256') != _sha256(test_file)):
++        raise ValueError('Original test source differs from final authorized identity')
++    with h5py.File(test_file, 'r') as source:
++        labels = source['labels'][:].reshape(-1).tolist()
++        speakers = source['extra/speaker'][:].reshape(-1).tolist()
++    if datamodule.batch_size != cfg.get('batch_size'):
++        raise ValueError('Final evaluation batch differs from the frozen checkpoint')
++    loader = DataLoader(raw, shuffle=False, drop_last=False,
++                        batch_size=datamodule.batch_size, collate_fn=datamodule.collate_fn,
++                        num_workers=datamodule.num_workers, pin_memory=True,
++                        persistent_workers=datamodule.num_workers > 0)
++    loader_evidence = verify_original_row_loader(
++        loader, raw, test_file, len(labels), datamodule.batch_size,
++        datamodule.static_data_transform_test,
++    )
++    return dict(loader=loader, metadata_labels=labels, metadata_speakers=speakers,
++                provenance=dict(membership=membership, loader=loader_evidence,
++                                canonical_split_manifest=portable_path(manifest_path),
++                                test_data=portable_path(test_file),
++                                test_data_sha256=authorization['test_data_sha256'],
++                                evaluation_workers=datamodule.num_workers,
++                                ordinary_inference=True, test_time_augmentation=False))
++
++
++def evaluate_prepared_shd(model, trainer, prepared):
++    """Capture exactly the existing ordinary test forwards; verify all totals.
++
++    The caller persists the returned summary/rows with the checkpoint and plan
++    identities. Preparing/calling this outside the frozen gate is prohibited.
++    """
++    count = prepared['provenance']['loader']['recordings']
++    if model.output_size != 20:
++        raise ValueError('Final SHD speaker accounting requires the declared20classes')
++    with capture_ordinary_classification(model, count) as capture:
++        results = trainer.test(model, dataloaders=prepared['loader'])
++        rows = capture.finalize()
++    if len(results) != 1:
++        raise ValueError('Require one complete ordinary SHD test loader')
++    result = results[0]
++    summary = summarize_speaker_generalization(
++        rows['predictions'], rows['observed_labels'], rows['row_ids'],
++        prepared['metadata_labels'], prepared['metadata_speakers'],
++        prepared['provenance']['membership']['fitting_speaker_ids'], num_classes=20,
++    )
++    if (not math.isfinite(float(result['test_acc']))
++            or not math.isclose(float(result['test_acc']), summary['groups']['all']['accuracy'],
++                                rel_tol=0, abs_tol=2e-7)):
++        raise ValueError('Speaker-group counts disagree with the ordinary overall test metric')
++    rows['observed_speaker_ids'] = [prepared['metadata_speakers'][i] for i in rows['row_ids']]
++    return result, dict(summary, provenance=prepared['provenance']), rows
++
++
++_ROW_KEYS = ('row_ids', 'observed_labels', 'predictions', 'observed_speaker_ids')
++_IDENTITY_HASHES = ('checkpoint_sha256', 'evaluation_plan_sha256', 'test_data_sha256',
++                    'training_source_sha256', 'canonical_split_manifest_sha256')
++
++
++def _row_payload(rows, identity):
++    if (not isinstance(identity, dict)
++            or any(not isinstance(identity.get(k), str)
++                   or re.fullmatch('[0-9a-f]{64}', identity[k]) is None for k in _IDENTITY_HASHES)
++            or identity.get('ordinary_inference') is not True
++            or identity.get('test_time_augmentation') is not False):
++        raise ValueError('Prediction rows require exact ordinary checkpoint/plan/data/split identities')
++    fitting = identity.get('fitting_speaker_ids')
++    if (not isinstance(fitting, list) or not fitting
++            or any(isinstance(x, bool) or not isinstance(x, int) or x < 0 for x in fitting)
++            or fitting != sorted(set(fitting))):
++        raise ValueError('Prediction identity requires verified unique fitting speakers')
++    arrays = {}
++    for name in _ROW_KEYS:
++        value = np.asarray(rows.get(name))
++        if value.ndim != 1 or value.dtype.kind not in 'iu' or not len(value):
++            raise ValueError('Prediction rows must contain nonempty aligned integer arrays')
++        if np.any(value < 0) or (name in ('observed_labels', 'predictions') and np.any(value >= 20)):
++            raise ValueError('Prediction row class/speaker/row IDs are invalid')
++        if np.any(value > np.iinfo(np.int64).max):
++            raise ValueError('Prediction IDs exceed the supported integer range')
++        arrays[name] = value.astype(np.int64)
++    n = len(arrays['row_ids'])
++    if (any(len(value) != n for value in arrays.values())
++            or not np.array_equal(arrays['row_ids'], np.arange(n, dtype=np.int64))):
++        raise ValueError('Prediction rows must exhaust original sequential recordings')
++    identity_json = json.dumps(identity, sort_keys=True, separators=(',', ':'))
++    return arrays, identity_json
++
++
++def verify_saved_shd_rows(path, expected_sha256, expected_identity):
++    """Verify a saved ordinary-pass archive without any dataset/model access."""
++    path = Path(path)
++    if _sha256(path) != expected_sha256:
++        raise ValueError('Saved prediction archive hash differs from its result record')
++    try:
++        with np.load(path, allow_pickle=False) as archive:
++            if set(archive.files) != set(_ROW_KEYS) | {'identity_json'}:
++                raise ValueError('Prediction archive has incompatible fields')
++            encoded = archive['identity_json']
++            if encoded.ndim != 0 or encoded.dtype.kind != 'U':
++                raise ValueError('Prediction archive identity must be plain JSON text')
++            identity = json.loads(encoded.item())
++            rows = {name: archive[name].tolist() for name in _ROW_KEYS}
++    except (OSError, ValueError, zipfile.BadZipFile, EOFError, KeyError, TypeError) as exc:
++        raise ValueError('Invalid saved prediction archive; preserve the existing file') from exc
++    _row_payload(rows, identity)
++    if identity != expected_identity:
++        raise ValueError('Saved prediction rows belong to another checkpoint/plan/data identity')
++    return rows
++
++
++def persist_shd_rows(directory, rows, identity):
++    """Create-only ordinary-pass rows; identical reruns reuse existing bytes.
++
++    Output-directory and frozen-plan guards belong to the existing entrypoint.
++    There is no overwrite, candidate selection, fitting or model inference here.
++    """
++    arrays, encoded = _row_payload(rows, identity)
++    directory = Path(directory)
++    target = directory / 'SHD_GENERALIZATION_ROWS.npz'
++    if target.exists():
++        existing = verify_saved_shd_rows(target, _sha256(target), identity)
++        if any(not np.array_equal(arrays[name], np.asarray(existing[name])) for name in _ROW_KEYS):
++            raise ValueError('Existing prediction rows differ; preserve the output and use a versioned directory')
++    else:
++        directory.mkdir(parents=True, exist_ok=True)
++        with target.open('xb') as stream:
++            np.savez_compressed(stream, **arrays, identity_json=np.asarray(encoded))
++    return dict(path=portable_path(target), sha256=_sha256(target), recordings=len(arrays['row_ids']),
++                identity=identity)
++
++
++def shd_prediction_identity(authorization, membership):
++    """Bind a pass to the fully checked plan/checkpoint and fitting provenance."""
++    if (authorization.get('purpose') != 'final'
++            or authorization.get('verified_configurations') != 36
++            or authorization.get('dataset') != 'SHD'):
++        raise ValueError('Final cohort authorization is required for prediction evidence')
++    return dict(checkpoint_sha256=authorization['checkpoint_sha256'],
++                evaluation_plan_sha256=authorization['evaluation_plan_sha256'],
++                test_data_sha256=authorization['test_data_sha256'],
++                training_source_sha256=membership['training_source_sha256'],
++                canonical_split_manifest_sha256=membership['manifest_sha256'],
++                fitting_speaker_ids=membership['fitting_speaker_ids'],
++                ordinary_inference=True, test_time_augmentation=False)
++
++
++def frozen_shd_prediction_identity(plan, authorization):
++    """Expected identity for reusing already verified outputs; no HDF5/model access."""
++    if (plan.get('status') != 'frozen' or plan.get('purpose') != 'final'
++            or plan.get('test_selects_ideas') is not False
++            or authorization.get('verified_configurations') != 36):
++        raise ValueError('Frozen final authorization must precede output reuse')
++    settings = plan.get('shd_generalization', {})
++    if settings.get('ordinary_speaker_breakdown') is not True:
++        raise ValueError('Frozen final SHD plan omits its ordinary speaker breakdown')
++    source = local_path(settings['canonical_split_manifest'], must_exist=True)
++    raw = source.read_bytes();digest = hashlib.sha256(raw).hexdigest()
++    if digest != settings['canonical_split_manifest_sha256']:
++        raise ValueError('Frozen canonical split manifest changed')
++    manifest = json.loads(raw)
++    if (manifest.get('version') != 'canonical_shd_split_v1'
++            or manifest.get('dataset_label') != 'SHD*'):
++        raise ValueError('Final output reuse requires the frozen canonical SHD* split')
++    return shd_prediction_identity(authorization, dict(
++        training_source_sha256=manifest['source_sha256'], manifest_sha256=digest,
++        fitting_speaker_ids=manifest['train']['speaker_ids'],
++    ))
++
++
++def verify_saved_shd_result(evidence, expected_identity, directory):
++    """Reconstruct saved ordinary metrics/groups before accepting an existing result."""
++    record = evidence.get('prediction_rows', {})
++    if (evidence.get('ordinary_inference') is not True
++            or evidence.get('test_time_augmentation') is not False
++            or not evidence.get('speaker_generalization')
++            or record.get('identity') != expected_identity):
++        raise ValueError('Existing final SHD result lacks matching ordinary prediction evidence')
++    actual = local_path(record['path'], must_exist=True)
++    expected = Path(directory).resolve() / 'SHD_GENERALIZATION_ROWS.npz'
++    if actual.resolve() != expected:
++        raise ValueError('Prediction archive must remain beside its exact test result')
++    rows = verify_saved_shd_rows(actual, record['sha256'], expected_identity)
++    if record.get('recordings') != len(rows['row_ids']):
++        raise ValueError('Prediction recording count differs from its result record')
++    summary = summarize_speaker_generalization(
++        rows['predictions'], rows['observed_labels'], rows['row_ids'],
++        rows['observed_labels'], rows['observed_speaker_ids'],
++        expected_identity['fitting_speaker_ids'], num_classes=20,
++    )
++    saved = evidence['speaker_generalization']
++    provenance = saved.get('provenance', {})
++    membership = provenance.get('membership', {})
++    loader = provenance.get('loader', {})
++    if (membership.get('training_source_sha256') != expected_identity['training_source_sha256']
++            or membership.get('manifest_sha256') != expected_identity['canonical_split_manifest_sha256']
++            or membership.get('fitting_speaker_ids') != expected_identity['fitting_speaker_ids']
++            or provenance.get('test_data_sha256') != expected_identity['test_data_sha256']
++            or provenance.get('ordinary_inference') is not True
++            or provenance.get('test_time_augmentation') is not False
++            or loader.get('recordings') != len(rows['row_ids']) or loader.get('cached') is not False
++            or loader.get('drop_last') is not False or loader.get('sampler') != 'SequentialSampler'
++            or loader.get('original_row_order') != '0..N-1'):
++        raise ValueError('Saved final SHD provenance differs from the verified original-row protocol')
++    if any(saved.get(key) != value for key, value in summary.items()):
++        raise ValueError('Saved speaker-group summary differs from the original prediction rows')
++    if not math.isclose(float(evidence['metrics']['test_acc']), summary['groups']['all']['accuracy'],
++                        rel_tol=0, abs_tol=2e-7):
++        raise ValueError('Saved ordinary test metric differs from the original prediction rows')
++    return summary
+diff --git a/tests/test_final_config_guard.py b/tests/test_final_config_guard.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_final_config_guard.py
+@@ -0,0 +1,112 @@
++"""Scientific protocol guards only: synthetic metadata, no model/data/training."""
++import copy
++import unittest
++from module.final_config_guard import validate_frozen_configurations
++
++
++class FinalConfigurationTests(unittest.TestCase):
++    def setUp(self):
++        self.plan = dict(frozen_configurations={},
++                         mechanism_difference_paths=['model_variant', 'input_gain', 'training_objective'])
++        self.cohort = []
++        for dataset in ('SHD', 'SSC', 'ECG'):
++            self.plan['frozen_configurations'][dataset] = {}
++            for arm in ('Baseline', 'A', 'B', 'A+B'):
++                cfg = dict(random_seed=42, paper_baseline_dataset=dataset,
++                           dataset=dict(validate_on=.2, random_seed=42),
++                           lr=.01, batch_size=256, n_epochs={'SHD':300,'SSC':40,'ECG':400}[dataset],
++                           model_variant='GAIN' if arm in ('A','A+B') else 'SE',
++                           input_gain=arm in ('A','A+B'),
++                           training_objective='smooth' if arm in ('B','A+B') else 'classification',
++                           paper_baseline_version='fixture', init_ckpt_path=None)
++                self.plan['frozen_configurations'][dataset][arm] = cfg
++                for seed in (42,123,456):
++                    own=copy.deepcopy(cfg);own.update(random_seed=seed,logdir=f'results/{arm}/{dataset}/{seed}')
++                    self.cohort.append((arm,dataset,seed,own))
++
++    def check(self):
++        return validate_frozen_configurations(self.plan,self.cohort)
++
++    def test_complete_matched_four_arm_replication(self):
++        self.assertEqual(self.check()['verified_configurations'],36)
++
++    def annotate_objectives(self):
++        for dataset,arms in self.plan['frozen_configurations'].items():
++            for arm,cfg in arms.items():
++                cfg['evaluation_protocol']='matched'+('_smooth' if arm in ('B','A+B') else '')
++        for arm,dataset,seed,cfg in self.cohort:
++            cfg['evaluation_protocol']=self.plan['frozen_configurations'][dataset][arm]['evaluation_protocol']
++
++    def test_explicit_objective_annotation_preserves_common_protocol(self):
++        self.annotate_objectives()
++        self.assertEqual(self.check()['verified_configurations'],36)
++
++    def test_objective_annotation_cannot_hide_a_different_base_protocol(self):
++        self.annotate_objectives()
++        self.plan['frozen_configurations']['SHD']['B']['evaluation_protocol']='other_smooth'
++        for arm,dataset,seed,cfg in self.cohort:
++            if arm=='B' and dataset=='SHD':cfg['evaluation_protocol']='other_smooth'
++        with self.assertRaisesRegex(ValueError,'outside'):self.check()
++
++    def test_full_frozen_protocol_annotation_still_required_per_checkpoint(self):
++        self.annotate_objectives()
++        next(cfg for arm,dataset,seed,cfg in self.cohort if arm=='B')['evaluation_protocol']='matched'
++        with self.assertRaisesRegex(ValueError,'frozen arm'):self.check()
++
++    def test_another_cohort_checkpoint_cannot_change_lr(self):
++        self.cohort[-1][3]['lr']=.002
++        with self.assertRaisesRegex(ValueError,'frozen arm'):self.check()
++
++    def test_declaring_lr_as_mechanism_cannot_waive_matching(self):
++        self.plan['mechanism_difference_paths'].append('lr')
++        with self.assertRaisesRegex(ValueError,'waive'):self.check()
++
++    def test_frozen_split_mismatch_is_rejected_even_if_every_seed_matches_it(self):
++        self.plan['frozen_configurations']['SHD']['A']['dataset']['random_seed']=7
++        with self.assertRaisesRegex(ValueError,'outside'):self.check()
++
++    def test_speaker_holdout_cannot_be_relabelled_canonical(self):
++        for arm in self.plan['frozen_configurations']['SHD']:
++            self.plan['frozen_configurations']['SHD'][arm]['dataset']['validate_on']='speaker_holdout'
++        for _,dataset,_,cfg in self.cohort:
++            if dataset=='SHD':cfg['dataset']['validate_on']='speaker_holdout'
++        with self.assertRaisesRegex(ValueError,'Canonical'):self.check()
++
++    def test_duplicate_arm_implementations_are_rejected(self):
++        f=self.plan['frozen_configurations']['SSC'];f['A']=copy.deepcopy(f['Baseline'])
++        with self.assertRaisesRegex(ValueError,'distinct'):self.check()
++
++    def test_different_labels_or_deviation_notes_do_not_create_four_mechanisms(self):
++        f=self.plan['frozen_configurations']['SSC']
++        for arm in f:
++            f[arm]=dict(copy.deepcopy(f['Baseline']),model_variant=arm,
++                        paper_baseline_deviations=['Renamed '+arm])
++        with self.assertRaisesRegex(ValueError,'distinct'):self.check()
++
++    def test_nonstring_mechanism_paths_are_rejected_cleanly(self):
++        self.plan['mechanism_difference_paths'].append({'lr':True})
++        with self.assertRaisesRegex(ValueError,'explicit mechanism'):self.check()
++
++    def test_missing_and_duplicate_cohorts_are_rejected(self):
++        self.cohort.pop()
++        with self.assertRaisesRegex(ValueError,'incomplete'):self.check()
++        self.cohort.append(self.cohort[0])
++        with self.assertRaisesRegex(ValueError,'duplicate'):self.check()
++
++    def test_weights_only_initialization_is_not_fresh_training(self):
++        self.cohort[0][3]['init_ckpt_path']='results/previous/best.ckpt'
++        with self.assertRaisesRegex(ValueError,'weights-only'):self.check()
++
++    def test_actual_training_seed_must_match_cohort(self):
++        self.cohort[1][3]['random_seed']=42
++        with self.assertRaisesRegex(ValueError,'seed'):self.check()
++
++    def test_unplanned_dropout_or_preprocessing_changes_rejected(self):
++        for key,value in [('dropout',.4),('unregistered_preprocess',{'warp':True})]:
++            with self.subTest(key=key):
++                changed=copy.deepcopy(self.cohort);changed[0][3][key]=value
++                with self.assertRaisesRegex(ValueError,'frozen arm'):
++                    validate_frozen_configurations(self.plan,changed)
++
++
++if __name__=='__main__':unittest.main()
+diff --git a/tests/test_speaker_generalization.py b/tests/test_speaker_generalization.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_speaker_generalization.py
+@@ -0,0 +1,65 @@
++"""Synthetic accounting tests: never open official data or perform inference."""
++import unittest
++from module.speaker_generalization import summarize_speaker_generalization
++
++
++class SpeakerGeneralizationTests(unittest.TestCase):
++    def setUp(self):
++        self.args=dict(predictions=[0,0,0,2,2,2,1],observed_labels=[0,0,1,2,2,2,2],
++                       row_ids=list(range(7)),metadata_labels=[0,0,1,2,2,2,2],
++                       metadata_speakers=[0,0,1,2,2,2,2],fitting_speaker_ids=[0],num_classes=3)
++
++    def test_weighted_and_macro_speaker_accuracy_are_distinct(self):
++        result=summarize_speaker_generalization(**self.args)
++        groups=result['groups']
++        self.assertEqual(groups['all']['accuracy'],5/7)
++        self.assertEqual(groups['seen']['accuracy'],1)
++        self.assertEqual(groups['unseen']['accuracy'],3/5)
++        self.assertEqual(groups['unseen']['macro_speaker_accuracy'],.375)
++        self.assertEqual(groups['unseen']['class_counts'],[0,1,4])
++        self.assertEqual(groups['unseen']['classes_present'],[1,2])
++        self.assertFalse(result['speaker_population_independence_established'])
++
++    def test_empty_unseen_group_is_null_not_zero(self):
++        self.args['fitting_speaker_ids']=[0,1,2]
++        group=summarize_speaker_generalization(**self.args)['groups']['unseen']
++        self.assertEqual(group['recordings'],0)
++        self.assertIsNone(group['accuracy']);self.assertIsNone(group['macro_speaker_accuracy'])
++
++    def test_empty_seen_group_is_supported(self):
++        self.args['fitting_speaker_ids']=[99]
++        result=summarize_speaker_generalization(**self.args)['groups']
++        self.assertIsNone(result['seen']['accuracy'])
++        self.assertEqual(result['unseen']['accuracy'],5/7)
++
++    def test_explicit_original_row_ids_preserve_accounting_after_permutation(self):
++        expected=summarize_speaker_generalization(**self.args)
++        order=[6,4,2,0,5,3,1]
++        for key in ('predictions','observed_labels','row_ids'):
++            self.args[key]=[self.args[key][i] for i in order]
++        self.assertEqual(summarize_speaker_generalization(**self.args),expected)
++
++    def test_duplicate_and_missing_rows_are_rejected(self):
++        self.args['row_ids'][-1]=0
++        with self.assertRaisesRegex(ValueError,'unique'):summarize_speaker_generalization(**self.args)
++        self.args['predictions'].pop()
++        with self.assertRaisesRegex(ValueError,'complete'):summarize_speaker_generalization(**self.args)
++
++    def test_label_alignment_is_checked_against_original_rows(self):
++        self.args['observed_labels'][-1]=1
++        with self.assertRaisesRegex(ValueError,'metadata'):summarize_speaker_generalization(**self.args)
++
++    def test_invalid_class_or_speaker_ids_are_rejected(self):
++        for key,value in [('predictions',[99]*7),('metadata_speakers',[-1]*7),('fitting_speaker_ids',[])]:
++            with self.subTest(key=key):
++                args=dict(self.args);args[key]=value
++                with self.assertRaises(ValueError):summarize_speaker_generalization(**args)
++
++    def test_boolean_or_fractional_ids_are_not_silently_cast(self):
++        for invalid in (True,.5):
++            args=dict(self.args);args['row_ids']=[invalid]+list(range(1,7))
++            with self.subTest(invalid=invalid),self.assertRaises(ValueError):
++                summarize_speaker_generalization(**args)
++
++
++if __name__=='__main__':unittest.main()
+diff --git a/tests/test_ordinary_prediction_capture.py b/tests/test_ordinary_prediction_capture.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_ordinary_prediction_capture.py
+@@ -0,0 +1,110 @@
++"""No Trainer, optimizer, real data, model forward or official-test access."""
++import unittest
++import torch
++from module.ordinary_prediction_capture import capture_ordinary_classification
++
++
++class LoggingFixture(torch.nn.Module):
++    def __init__(self):
++        super().__init__()
++        self.auto_regression=False;self.ignore_target_idx=-1;self.output_size=3
++        self.weight=torch.nn.Parameter(torch.tensor([1.0]))
++        self.received=[];self.forward_calls=0
++        self.eval()
++
++    def forward(self,*args):
++        self.forward_calls+=1
++        raise AssertionError('Capture must never call forward')
++
++    def update_and_log_metrics(self,outputs,targets,loss,metrics,prefix):
++        self.received.append((outputs,targets,loss,metrics,prefix))
++        return 'original return value'
++
++
++class PredictionCaptureTests(unittest.TestCase):
++    def setUp(self):
++        self.model=LoggingFixture()
++        self.scores=torch.tensor([[0.,3.,0.],[4.,0.,0.],[0.,0.,3.],[0.,3.,0.]],requires_grad=True)
++        self.targets=torch.tensor([[-1,0],[-1,2]],dtype=torch.int64)
++
++    def call(self,**overrides):
++        values=dict(outputs=self.scores,targets=self.targets,loss='loss',metrics='metric',prefix='test_')
++        values.update(overrides)
++        return self.model.update_and_log_metrics(**values)
++
++    def test_capture_preserves_arguments_return_state_and_rng_without_forward(self):
++        original=self.model.update_and_log_metrics.__func__
++        rng=torch.get_rng_state().clone();weight=self.model.weight.detach().clone()
++        with capture_ordinary_classification(self.model,2) as rows:
++            self.assertEqual(self.call(),'original return value')
++            self.assertEqual(rows.finalize(),dict(row_ids=[0,1],observed_labels=[0,2],predictions=[0,1]))
++        self.assertIs(self.model.update_and_log_metrics.__func__,original)
++        self.assertIs(self.model.received[0][0],self.scores)
++        self.assertIs(self.model.received[0][1],self.targets)
++        self.assertTrue(torch.equal(rng,torch.get_rng_state()))
++        self.assertTrue(torch.equal(weight,self.model.weight.detach()))
++        self.assertTrue(self.scores.requires_grad)
++        self.assertEqual(self.model.forward_calls,0)
++        self.assertNotIn('_ordinary_prediction_capture_active',vars(self.model))
++
++    def test_validation_logging_is_not_counted_as_test_predictions(self):
++        with capture_ordinary_classification(self.model,2) as rows:
++            self.call(prefix='val_');self.call()
++            self.assertEqual(len(rows.finalize()['predictions']),2)
++        self.assertEqual(len(self.model.received),2)
++
++    def test_incomplete_or_excess_predictions_are_rejected(self):
++        with capture_ordinary_classification(self.model,3) as rows:
++            self.call()
++            with self.assertRaisesRegex(ValueError,'incomplete'):rows.finalize()
++            with self.assertRaisesRegex(ValueError,'More'):self.call()
++
++    def test_multiple_classification_targets_per_recording_are_rejected(self):
++        targets=torch.tensor([[1,0],[-1,2]])
++        with capture_ordinary_classification(self.model,2):
++            with self.assertRaisesRegex(ValueError,'exactly one'):self.call(targets=targets)
++
++    def test_scope_restores_method_after_inference_exception(self):
++        original=self.model.update_and_log_metrics.__func__
++        with self.assertRaises(RuntimeError):
++            with capture_ordinary_classification(self.model,2):
++                raise RuntimeError('Synthetic inference error')
++        self.assertIs(self.model.update_and_log_metrics.__func__,original)
++
++    def test_nested_capture_does_not_corrupt_outer_scope(self):
++        with capture_ordinary_classification(self.model,2) as rows:
++            with self.assertRaisesRegex(ValueError,'already active'):
++                with capture_ordinary_classification(self.model,2):pass
++            self.call();self.assertEqual(len(rows.finalize()['predictions']),2)
++
++    def test_training_mode_and_regression_are_rejected(self):
++        self.model.train()
++        with capture_ordinary_classification(self.model,2):
++            with self.assertRaisesRegex(ValueError,'evaluation mode'):self.call()
++        self.model.auto_regression=True
++        with self.assertRaisesRegex(ValueError,'classification'):
++            with capture_ordinary_classification(self.model,2):pass
++
++    def test_misaligned_scores_or_float_targets_are_rejected(self):
++        for values in (dict(outputs=self.scores[:2]),dict(targets=self.targets.float())):
++            with self.subTest(values=list(values)),capture_ordinary_classification(self.model,2):
++                with self.assertRaisesRegex(ValueError,'target-aligned'):self.call(**values)
++
++    def test_counted_accuracy_matches_real_ordinary_micro_metric(self):
++        from torchmetrics.classification import MulticlassAccuracy
++        metric=MulticlassAccuracy(num_classes=3,average='micro',ignore_index=-1)
++        def original(outputs,targets,loss,metrics,prefix):
++            metrics(outputs,targets.flatten())
++            return 'unchanged'
++        self.model.update_and_log_metrics=original
++        self.model._ordinary_prediction_capture_active=False
++        with capture_ordinary_classification(self.model,2) as rows:
++            self.assertEqual(self.call(metrics=metric),'unchanged')
++            evidence=rows.finalize()
++        correct=sum(p==y for p,y in zip(evidence['predictions'],evidence['observed_labels']))
++        self.assertEqual(float(metric.compute()),correct/2)
++        self.assertIs(self.model.update_and_log_metrics,original)
++        self.assertIs(self.model._ordinary_prediction_capture_active,False)
++
++
++if __name__=='__main__':unittest.main()
+diff --git a/tests/test_shd_final_provenance.py b/tests/test_shd_final_provenance.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_shd_final_provenance.py
+@@ -0,0 +1,148 @@
++"""Synthetic metadata/HDF5 only; no official data, Trainer or model training."""
++import copy
++import hashlib
++import json
++from pathlib import Path
++import tempfile
++import unittest
++from collections import Counter
++
++import h5py
++import numpy as np
++import torch
++from torch.utils.data import DataLoader, Subset
++from datasets.shd import SHDWrapper
++from datasets.utils.pad_tensors import PadTensors
++from datasets.utils.diskcache import DiskCachedDataset
++from module.shd_final_provenance import (
++    verify_canonical_fitting_membership, verify_original_row_loader,
++)
++from module.ordinary_prediction_capture import capture_ordinary_classification
++from module.speaker_generalization import summarize_speaker_generalization
++from tests.test_ordinary_prediction_capture import LoggingFixture
++
++
++class FittingMembershipTests(unittest.TestCase):
++    def setUp(self):
++        self.labels=[i%20 for i in range(2000)]
++        self.speakers=[i//200 for i in range(2000)]
++        order=torch.randperm(2000,generator=torch.Generator().manual_seed(42)).tolist()
++        self.fitting,self.validation=order[:1600],order[1600:]
++        self.cfg=dict(dataset=dict(validate_on=.2,random_seed=42),init_ckpt_path=None)
++
++    def manifest(self):
++        result=dict(version='canonical_shd_split_v1',dataset_label='SHD*',validate_on=.2,
++                    split_seed=42,official_test_opened=False,source_sha256='a'*64)
++        for name,indices in [('train',self.fitting),('validation',self.validation)]:
++            classes=Counter(self.labels[i] for i in indices)
++            speakers=Counter(self.speakers[i] for i in indices)
++            result[name]=dict(indices=list(indices),record_count=len(indices),
++                              class_counts=[classes[i] for i in range(20)],
++                              speaker_ids=sorted(speakers),
++                              per_speaker_record_counts={str(k):v for k,v in speakers.items()})
++        return result
++
++    def check(self,manifest=None,**overrides):
++        raw=json.dumps(manifest or self.manifest()).encode()
++        values=dict(manifest_bytes=raw,expected_manifest_sha256=hashlib.sha256(raw).hexdigest(),
++                    source_sha256='a'*64,train_labels=self.labels,train_speakers=self.speakers,
++                    fitting_indices=self.fitting,validation_indices=self.validation,cfg=self.cfg)
++        values.update(overrides)
++        return verify_canonical_fitting_membership(**values)
++
++    def test_exact_split_and_membership_without_global_rng_consumption(self):
++        state=torch.get_rng_state().clone()
++        r=self.check()
++        self.assertEqual(r['fitting_records'],1600)
++        self.assertEqual(r['validation_records'],400)
++        self.assertEqual(r['fitting_speaker_ids'],list(range(10)))
++        self.assertTrue(torch.equal(state,torch.get_rng_state()))
++
++    def test_membership_uses_fitting_rows_not_every_training_file_speaker(self):
++        for i in self.validation:self.speakers[i]=99
++        r=self.check()
++        self.assertIn(99,r['training_file_speaker_ids'])
++        self.assertNotIn(99,r['fitting_speaker_ids'])
++
++    def test_frozen_bytes_and_training_source_identity_are_required(self):
++        for overrides in [dict(expected_manifest_sha256='b'*64),dict(source_sha256='b'*64)]:
++            with self.subTest(overrides=overrides),self.assertRaises(ValueError):self.check(**overrides)
++
++    def test_wrong_fitting_exposure_or_order_is_rejected(self):
++        for indices in [self.fitting[:-1],list(reversed(self.fitting)),self.validation]:
++            with self.subTest(indices=len(indices)),self.assertRaises(ValueError):
++                self.check(fitting_indices=indices)
++
++    def test_speaker_holdout_test_selection_and_weights_initialization_are_rejected(self):
++        for cfg in [dict(dataset=dict(validate_on='speaker_holdout',random_seed=42)),
++                    dict(dataset=dict(validate_on=.2,random_seed=7)),
++                    dict(dataset=dict(validate_on=.2,random_seed=42,additional_test_set_validation=True)),
++                    dict(dataset=dict(validate_on=.2,random_seed=42),init_ckpt_path='old.ckpt')]:
++            with self.subTest(cfg=cfg),self.assertRaises(ValueError):self.check(cfg=cfg)
++
++    def test_missing_classes_bad_counts_and_noninteger_metadata_are_rejected(self):
++        with self.assertRaises(ValueError):self.check(train_labels=[0]*2000)
++        m=self.manifest();m['train']['class_counts'][0]+=1
++        with self.assertRaises(ValueError):self.check(manifest=m)
++        with self.assertRaises(ValueError):self.check(train_speakers=[True]*2000)
++
++
++class OriginalRowLoaderTests(unittest.TestCase):
++    def setUp(self):
++        self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
++        self.path=Path(self.temp.name)/'shd_test.h5'  # Synthetic temporary file only.
++        with h5py.File(self.path,'w') as f:
++            f['labels']=np.array([0,1,2],dtype=np.int64)
++            f['spikes/times']=np.array([[.01,.02]]*3,dtype=np.float16)
++            f['spikes/units']=np.arange(6).reshape(3,2)
++        self.raw=object.__new__(SHDWrapper)  # Never call Tonic download/initialization.
++        self.raw.location_on_system=str(self.path.parent);self.raw.data_filename=self.path.name
++        self.raw.ignore_first_timesteps=0;self.raw.target_transform=None
++        self.transform=lambda events:torch.tensor(events['x'].astype(np.float32)).unsqueeze(1)
++        self.raw.transform=self.transform
++
++    def loader(self,**kwargs):
++        values=dict(dataset=self.raw,batch_size=2,shuffle=False,drop_last=False,
++                    num_workers=0,collate_fn=PadTensors());values.update(kwargs)
++        return DataLoader(**values)
++
++    def check(self,loader=None,**kwargs):
++        values=dict(loader=loader or self.loader(),raw_dataset=self.raw,
++                    expected_file=self.path,expected_records=3,expected_batch_size=2,
++                    expected_transform=self.transform);values.update(kwargs)
++        return verify_original_row_loader(**values)
++
++    def test_complete_uncached_sequential_loader(self):
++        r=self.check();self.assertEqual(r['batches'],2);self.assertFalse(r['cached'])
++
++    def test_cache_subset_shuffle_drop_last_and_wrong_batch_are_rejected(self):
++        cache=DiskCachedDataset(self.raw,Path(self.temp.name)/'cache')
++        for loader in [self.loader(dataset=cache),self.loader(dataset=Subset(self.raw,[2,1,0])),
++                       self.loader(shuffle=True),self.loader(drop_last=True),self.loader(batch_size=1)]:
++            with self.subTest(loader=loader),self.assertRaises(ValueError):self.check(loader)
++
++    def test_source_count_label_transform_and_collation_are_checked(self):
++        with self.assertRaises(ValueError):self.check(expected_records=4)
++        with self.assertRaises(ValueError):self.check(expected_file=self.path.parent/'other.h5')
++        with self.assertRaises(ValueError):self.check(self.loader(collate_fn=PadTensors(batch_first=False)))
++        self.raw.target_transform=lambda y:y
++        with self.assertRaises(ValueError):self.check()
++
++    def test_same_ordinary_predictions_reconstruct_every_speaker_group(self):
++        loader=self.loader();self.check(loader);model=LoggingFixture()
++        with capture_ordinary_classification(model,3) as rows:
++            for x,y,b in loader:
++                scores=torch.zeros((y.numel(),3));valid=y.flatten().ne(-1)
++                positions=valid.nonzero().flatten();scores[positions,y.flatten()[valid]]=1
++                model.update_and_log_metrics(scores,y,'loss','metrics','test_')
++            captured=rows.finalize()
++        summary=summarize_speaker_generalization(
++            captured['predictions'],captured['observed_labels'],captured['row_ids'],
++            [0,1,2],[7,8,8],[7],num_classes=3)
++        self.assertEqual(summary['groups']['all']['correct'],3)
++        self.assertEqual(summary['groups']['seen']['recordings'],1)
++        self.assertEqual(summary['groups']['unseen']['recordings'],2)
++        self.assertEqual(model.forward_calls,0)
++
++
++if __name__=='__main__':unittest.main()
+diff --git a/tests/test_shd_final_evaluation.py b/tests/test_shd_final_evaluation.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_shd_final_evaluation.py
+@@ -0,0 +1,160 @@
++"""Synthetic component integration, CPU Trainer.test only; never fit/train.
++
++The 36-checkpoint gate is tested separately. Here authorization is a fixture;
++no actual project data, checkpoints, official tests or CUDA work are used.
++"""
++import copy
++import hashlib
++import json
++from pathlib import Path
++from types import SimpleNamespace
++import tempfile
++import unittest
++from unittest.mock import patch
++
++import h5py
++import numpy as np
++import pytorch_lightning as pl
++import torch
++import torchmetrics
++from torch.utils.data import Subset
++
++from datasets.shd import SHDWrapper
++from datasets.utils.pad_tensors import PadTensors
++from module.shd_final_evaluation import prepare_final_shd_evaluation, evaluate_prepared_shd
++from tests import test_shd_final_provenance as provenance_fixtures
++from tests.test_ordinary_prediction_capture import LoggingFixture
++
++
++class SyntheticOrdinaryModel(pl.LightningModule):
++    """Known ordinary predictions with the existing classification logging shape."""
++    def __init__(self):
++        super().__init__()
++        self.auto_regression=False;self.ignore_target_idx=-1;self.output_size=20
++        self.dummy=torch.nn.Parameter(torch.ones(()));self.forward_calls=0
++        self.metric=torchmetrics.Accuracy(task='multiclass',num_classes=20,ignore_index=-1)
++
++    def forward(self,x):
++        self.forward_calls+=1
++        scores=torch.zeros((x.shape[0]*2,20),device=x.device)
++        scores[torch.arange(x.shape[0],device=x.device)*2+1,(x[:,0,0].long()//2)]=self.dummy
++        return scores
++
++    def update_and_log_metrics(self,outputs,targets,loss,metrics,prefix):
++        metrics.update(outputs,targets.flatten())
++        self.log(prefix+'acc',metrics,on_step=False,on_epoch=True)
++        self.log(prefix+'loss',loss,on_step=False,on_epoch=True,batch_size=targets.shape[0])
++
++    def test_step(self,batch,batch_idx):
++        x,y,b=batch;outputs=self(x);valid=y.flatten().ne(-1)
++        # Match the real classification path's existing int64 compatibility conversion.
++        loss=torch.nn.functional.cross_entropy(outputs[valid],y.flatten()[valid].long())
++        self.update_and_log_metrics(outputs,y,loss,self.metric,'test_')
++        return loss
++
++
++class SyntheticTrainerFixture:
++    """No model forward; only exercise negative accounting/capture cases."""
++    def __init__(self,reported_accuracy=1.):self.reported_accuracy=reported_accuracy
++
++    def test(self,model,dataloaders):
++        model.eval()
++        for x,y,b in dataloaders:
++            scores=torch.zeros((y.numel(),20));valid=y.flatten().ne(-1)
++            scores[valid.nonzero().flatten(),y.flatten()[valid]]=1
++            model.update_and_log_metrics(scores,y,'loss','metrics','test_')
++        return [dict(test_acc=self.reported_accuracy,test_loss=0.)]
++
++
++class FinalSHDAdapterTests(unittest.TestCase):
++    def setUp(self):
++        self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
++        self.root=Path(self.temp.name)
++        fitting=provenance_fixtures.FittingMembershipTests();fitting.setUp()
++        source_root=self.root/'SHDWrapper';source_root.mkdir()
++        self.train_file=source_root/'shd_train.h5';self.test_file=source_root/'shd_test.h5'
++        with h5py.File(self.train_file,'w') as f:
++            f['labels']=np.asarray(fitting.labels);f['extra/speaker']=np.asarray(fitting.speakers)
++        with h5py.File(self.test_file,'w') as f:
++            f['labels']=np.asarray([0,1,2]);f['extra/speaker']=np.asarray([0,10,10])
++            f['spikes/times']=np.array([[.01,.02]]*3,dtype=np.float16)
++            f['spikes/units']=np.arange(6).reshape(3,2)
++        self.transform=lambda events:torch.tensor(events['x'].astype(np.float32)).unsqueeze(1)
++        def raw(path):
++            ds=object.__new__(SHDWrapper)  # No dataset constructors/downloads.
++            ds.location_on_system=str(path.parent);ds.data_filename=path.name
++            ds.ignore_first_timesteps=0;ds.target_transform=None;ds.transform=self.transform
++            return ds
++        train=raw(self.train_file)
++        self.dm=SimpleNamespace(train_val_ds=train,data_train=Subset(train,fitting.fitting),
++                                data_val=Subset(train,fitting.validation),data_test=raw(self.test_file),
++                                static_data_transform_test=self.transform,batch_size=2,
++                                num_workers=0,collate_fn=PadTensors())
++        manifest=fitting.manifest();manifest['source_sha256']=hashlib.sha256(self.train_file.read_bytes()).hexdigest()
++        manifest_file=self.root/'frozen_split.json';manifest_file.write_text(json.dumps(manifest))
++        self.cfg=dict(paper_baseline_dataset='SHD',batch_size=2,init_ckpt_path=None,
++                      dataset=dict(validate_on=.2,random_seed=42,data_path=str(self.root)))
++        self.plan=dict(status='frozen',purpose='final',test_selects_ideas=False,
++                       shd_generalization=dict(ordinary_speaker_breakdown=True,
++                            canonical_split_manifest=str(manifest_file),
++                            canonical_split_manifest_sha256=hashlib.sha256(manifest_file.read_bytes()).hexdigest()))
++        self.authorization=dict(purpose='final',verified_configurations=36,dataset='SHD',
++                                checkpoint_sha256='a'*64,evaluation_plan_sha256='b'*64,
++                                test_data_sha256=hashlib.sha256(self.test_file.read_bytes()).hexdigest())
++
++    def prepare(self,**changes):
++        values=dict(cfg=self.cfg,datamodule=self.dm,plan=self.plan,
++                    authorization=self.authorization,test_file=self.test_file)
++        values.update(changes)
++        return prepare_final_shd_evaluation(**values)
++
++    def test_authorization_failure_precedes_any_hdf5_access(self):
++        with patch('module.shd_final_evaluation.h5py.File',side_effect=AssertionError('No data access')):
++            for auth in [{},dict(self.authorization,verified_configurations=35)]:
++                with self.assertRaisesRegex(ValueError,'authorization'):self.prepare(authorization=auth)
++
++    def test_frozen_manifest_test_identity_and_fitting_exposure_are_bound(self):
++        plan=copy.deepcopy(self.plan);plan['shd_generalization']['canonical_split_manifest_sha256']='b'*64
++        with self.assertRaises(ValueError):self.prepare(plan=plan)
++        with self.assertRaises(ValueError):self.prepare(authorization=dict(self.authorization,test_data_sha256='b'*64))
++        self.dm.data_train=Subset(self.dm.train_val_ds,list(reversed(self.dm.data_train.indices)))
++        with self.assertRaises(ValueError):self.prepare()
++
++    def test_test_wrappers_augmentation_and_batch_changes_are_rejected(self):
++        cfg=copy.deepcopy(self.cfg);cfg['dataset']['bias_for_test_set']=.1
++        with self.assertRaises(ValueError):self.prepare(cfg=cfg)
++        self.dm.batch_size=1
++        with self.assertRaises(ValueError):self.prepare()
++        self.dm.batch_size=2;self.dm.data_test=Subset(self.dm.data_test,[2,1,0])
++        with self.assertRaises(ValueError):self.prepare()
++
++    def test_cpu_lightning_ordinary_pass_matches_capture_without_extra_forwards(self):
++        prepared=self.prepare()
++        def trainer():
++            return pl.Trainer(accelerator='cpu',devices=1,logger=False,
++                              enable_checkpointing=False,enable_progress_bar=False,
++                              enable_model_summary=False)
++        ordinary=SyntheticOrdinaryModel();before={k:v.clone() for k,v in ordinary.state_dict().items()}
++        ordinary_result=trainer().test(ordinary,dataloaders=prepared['loader'])[0]
++        observed=SyntheticOrdinaryModel()
++        result,summary,rows=evaluate_prepared_shd(observed,trainer(),prepared)
++        self.assertEqual(result,ordinary_result)
++        self.assertEqual(ordinary.forward_calls,2);self.assertEqual(observed.forward_calls,2)
++        self.assertEqual(rows['row_ids'],[0,1,2]);self.assertEqual(rows['observed_labels'],[0,1,2])
++        self.assertEqual(summary['groups']['all']['accuracy'],1.)
++        self.assertEqual(summary['groups']['seen']['recordings'],1)
++        self.assertEqual(summary['groups']['unseen']['recordings'],2)
++        self.assertFalse(summary['provenance']['loader']['cached'])
++        self.assertTrue(all(torch.equal(v,ordinary.state_dict()[k]) for k,v in before.items()))
++        self.assertTrue(torch.equal(ordinary.dummy,observed.dummy))
++
++    def test_metric_or_raw_label_disagreement_fails_closed(self):
++        prepared=self.prepare();model=LoggingFixture();model.output_size=20
++        with self.assertRaisesRegex(ValueError,'overall test metric'):
++            evaluate_prepared_shd(model,SyntheticTrainerFixture(.5),prepared)
++        prepared['metadata_labels']=[2,1,0]
++        with self.assertRaisesRegex(ValueError,'original-row metadata'):
++            evaluate_prepared_shd(model,SyntheticTrainerFixture(),prepared)
++
++
++if __name__=='__main__':unittest.main()
+diff --git a/tests/test_shd_prediction_rows.py b/tests/test_shd_prediction_rows.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_shd_prediction_rows.py
+@@ -0,0 +1,85 @@
++"""Synthetic create-only evidence archives; no model or real dataset access."""
++import copy
++import hashlib
++from pathlib import Path
++import tempfile
++import unittest
++
++import numpy as np
++from module.shd_final_evaluation import persist_shd_rows, verify_saved_shd_rows
++from module.speaker_generalization import summarize_speaker_generalization
++
++
++class PredictionRowsTests(unittest.TestCase):
++    def setUp(self):
++        self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
++        self.root=Path(self.temp.name)
++        self.rows=dict(row_ids=[0,1,2],observed_labels=[0,1,2],predictions=[0,0,2],
++                       observed_speaker_ids=[0,10,10])
++        names=['checkpoint_sha256','evaluation_plan_sha256','test_data_sha256',
++               'training_source_sha256','canonical_split_manifest_sha256']
++        self.identity={name:str(i+1)*64 for i,name in enumerate(names)}
++        self.identity.update(ordinary_inference=True,test_time_augmentation=False,fitting_speaker_ids=[0])
++
++    def save(self,rows=None,identity=None):
++        return persist_shd_rows(self.root,rows or self.rows,identity or self.identity)
++
++    def test_archive_roundtrip_and_group_counts_use_same_saved_rows(self):
++        record=self.save();path=Path(record['path'])
++        self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(),record['sha256'])
++        rows=verify_saved_shd_rows(path,record['sha256'],self.identity)
++        self.assertEqual(rows,self.rows)
++        with np.load(path,allow_pickle=False) as archive:
++            self.assertEqual(archive['observed_speaker_ids'].dtype,np.dtype('int64'))
++        summary=summarize_speaker_generalization(
++            rows['predictions'],rows['observed_labels'],rows['row_ids'],rows['observed_labels'],
++            rows['observed_speaker_ids'],self.identity['fitting_speaker_ids'])
++        self.assertEqual(summary['groups']['all']['correct'],2)
++        self.assertEqual(summary['groups']['seen']['correct'],1)
++        self.assertEqual(summary['groups']['unseen']['correct'],1)
++
++    def test_identical_rerun_reuses_existing_bytes_and_timestamp(self):
++        first=self.save();path=Path(first['path']);before=(path.read_bytes(),path.stat().st_mtime_ns)
++        second=self.save()
++        self.assertEqual(first,second)
++        self.assertEqual(before,(path.read_bytes(),path.stat().st_mtime_ns))
++
++    def test_conflicting_checkpoint_or_prediction_never_overwrites(self):
++        saved=self.save();path=Path(saved['path']);before=path.read_bytes()
++        other=dict(self.identity,checkpoint_sha256='f'*64)
++        with self.assertRaises(ValueError):self.save(identity=other)
++        other=copy.deepcopy(self.rows);other['predictions']=[0,1,2]
++        with self.assertRaises(ValueError):self.save(rows=other)
++        self.assertEqual(path.read_bytes(),before)
++
++    def test_invalid_rows_or_identities_fail_before_creating_output(self):
++        cases=[]
++        for key,value in [('row_ids',[1,0,2]),('predictions',[0.,0.,2.]),
++                          ('predictions',[0,0,20]),('observed_labels',[0,1]),
++                          ('observed_speaker_ids',[0,-1,10]),('row_ids',[])]:
++            rows=copy.deepcopy(self.rows);rows[key]=value;cases.append((rows,self.identity))
++        for change in [dict(fitting_speaker_ids=[True]),dict(test_time_augmentation=True),
++                       dict(checkpoint_sha256='not-a-hash')]:
++            cases.append((self.rows,dict(self.identity,**change)))
++        for i,(rows,identity) in enumerate(cases):
++            directory=self.root/str(i)
++            with self.subTest(case=i),self.assertRaises(ValueError):
++                persist_shd_rows(directory,rows,identity)
++            self.assertFalse(directory.exists())
++
++    def test_hash_or_invalid_archive_rejected_without_modification(self):
++        record=self.save();path=Path(record['path'])
++        with self.assertRaisesRegex(ValueError,'hash differs'):
++            verify_saved_shd_rows(path,'f'*64,self.identity)
++        invalid=self.root/'invalid.npz';invalid.write_bytes(b'not an archive')
++        with self.assertRaises(ValueError):
++            verify_saved_shd_rows(invalid,hashlib.sha256(invalid.read_bytes()).hexdigest(),self.identity)
++        self.assertEqual(invalid.read_bytes(),b'not an archive')
++
++    def test_identity_mismatch_rejected_even_with_matching_archive_hash(self):
++        record=self.save();path=Path(record['path']);other=dict(self.identity,fitting_speaker_ids=[10])
++        with self.assertRaisesRegex(ValueError,'another checkpoint'):
++            verify_saved_shd_rows(path,record['sha256'],other)
++
++
++if __name__=='__main__':unittest.main()
+diff --git a/tests/test_shd_final_cli.py b/tests/test_shd_final_cli.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_shd_final_cli.py
+@@ -0,0 +1,76 @@
++"""Existing CLI composition with synthetic CPU test data and a mocked cohort gate.
++
++The real36cohort gate has separate guard tests. No official data, real trained
++checkpoint, Trainer.fit, optimizer training step or GPU work occurs here.
++"""
++import contextlib
++import copy
++import io
++import json
++from pathlib import Path
++import sys
++import unittest
++from unittest.mock import patch
++
++import torch
++from tests import test_shd_final_evaluation as fixtures
++import test_checkpoint
++
++
++class FinalSHDCLITests(unittest.TestCase):
++    def setUp(self):
++        self.fixture=fixtures.FinalSHDAdapterTests();self.fixture.setUp()
++        self.addCleanup(self.fixture.doCleanups)
++        self.output=self.fixture.root/'evaluations'
++        self.plan=self.fixture.root/'plan.json';self.plan.write_text(json.dumps(self.fixture.plan))
++        cfg=copy.deepcopy(self.fixture.cfg)
++        cfg.update(random_seed=42,device='cpu',model_variant='SE_adLIF',
++                   complementary_study='complementary_canonical_v3')
++        cfg['dataset'].update(_target_='datasets.shd.SHDLDM',validation_only_data=True,num_workers=0)
++        self.checkpoint=self.fixture.root/'best.ckpt'
++        torch.save(dict(epoch=299,hyper_parameters=dict(cfg=cfg),
++                        state_dict=fixtures.SyntheticOrdinaryModel().state_dict()),self.checkpoint)
++        self.authorization=dict(self.fixture.authorization,
++                                checkpoint_sha256=test_checkpoint.sha256(self.checkpoint))
++
++    def invoke(self,include_plan=True):
++        args=['test_checkpoint.py','--checkpoint',str(self.checkpoint),'--output-dir',str(self.output)]
++        if include_plan:args+=['--evaluation-plan',str(self.plan)]
++        with patch.object(sys,'argv',args),contextlib.redirect_stdout(io.StringIO()), \
++                patch('test_checkpoint.validate_study_evaluation',side_effect=lambda *a:dict(self.authorization)) as gate, \
++                patch('test_checkpoint.build_training_model',side_effect=lambda *a,**k:fixtures.SyntheticOrdinaryModel()) as model, \
++                patch('test_checkpoint.hydra.utils.instantiate',return_value=self.fixture.dm) as data:
++            test_checkpoint.main()
++        return gate,model,data
++
++    def test_existing_cli_saves_and_reuses_exact_ordinary_group_evidence(self):
++        gate,model,data=self.invoke()
++        self.assertEqual(gate.call_count,1);self.assertEqual(model.call_count,1);self.assertEqual(data.call_count,1)
++        saved=json.loads((self.output/'TEST_RESULTS.json').read_text())
++        self.assertEqual(saved['metrics']['test_acc'],1.)
++        self.assertEqual(saved['speaker_generalization']['groups']['unseen']['recordings'],2)
++        self.assertEqual(saved['prediction_rows']['recordings'],3)
++        self.assertTrue((self.output/'SHD_GENERALIZATION_ROWS.npz').is_file())
++        original=(self.output/'TEST_RESULTS.json').read_bytes()
++        gate,model,data=self.invoke()
++        model.assert_not_called();data.assert_not_called()
++        self.assertEqual((self.output/'TEST_RESULTS.json').read_bytes(),original)
++
++    def test_corrupted_prediction_archive_blocks_reuse_without_reinference(self):
++        self.invoke();path=self.output/'SHD_GENERALIZATION_ROWS.npz'
++        path.write_bytes(path.read_bytes()+b'changed')
++        with self.assertRaisesRegex(ValueError,'hash differs'):self.invoke()
++        self.assertTrue(path.read_bytes().endswith(b'changed'))
++
++    def test_incomplete_existing_speaker_result_is_preserved_and_rejected(self):
++        self.invoke();path=self.output/'TEST_RESULTS.json';saved=json.loads(path.read_text())
++        saved.pop('prediction_rows');path.write_text(json.dumps(saved));before=path.read_bytes()
++        with self.assertRaisesRegex(ValueError,'lacks matching ordinary'):self.invoke()
++        self.assertEqual(path.read_bytes(),before)
++
++    def test_missing_plan_rejects_before_dataset_or_model_creation(self):
++        with self.assertRaisesRegex(ValueError,'require --evaluation-plan'):self.invoke(include_plan=False)
++        self.assertFalse(self.output.exists())
++
++
++if __name__=='__main__':unittest.main()
+diff --git a/tests/test_study_evaluation.py b/tests/test_study_evaluation.py
+--- a/tests/test_study_evaluation.py
++++ b/tests/test_study_evaluation.py
+@@ -4,6 +4,7 @@
+ from pathlib import Path
+ import tempfile
+ import unittest
++import torch
+ from unittest.mock import patch
+ from omegaconf import OmegaConf
+ from project_paths import ROOT,portable_path
+@@ -64,25 +65,71 @@
+         p.update(datasets=['SHD','SSC','ECG'],training_seeds=[42,123,456])
+         with self.assertRaises(ValueError):self.evaluate(plan=p)
+ 
+-    def test_complete_final_cohort_and_full_budget_are_verified(self):
++    def complete_final_plan(self):
+         p=copy.deepcopy(self.plan)
+         p.update(purpose='final',arms=['Baseline','A','B','A+B'],architecture_and_settings_frozen=True,
+-                 datasets=['SHD','SSC','ECG'],training_seeds=[42,123,456],checkpoints={})
+-        for arm in p['arms']:
+-            for dataset in p['datasets']:
++                 datasets=['SHD','SSC','ECG'],training_seeds=[42,123,456],checkpoints={},
++                 frozen_configurations={},mechanism_difference_paths=['model_variant','input_fir','spike_delete_probability'])
++        models={'Baseline':'SE_adLIF','A':'FIR_SE_adLIF','B':'THIN_SE_adLIF','A+B':'FIR_THIN_SE_adLIF'}
++        for dataset in p['datasets']:
++            p['frozen_configurations'][dataset]={}
++            for arm in p['arms']:
++                budget={'SHD':300,'SSC':40,'ECG':400}[dataset]
++                config=dict(random_seed=42,model_variant=models[arm],paper_baseline_dataset=dataset,
++                            evaluation_protocol='fixture_final',init_ckpt_path=None,n_epochs=budget,
++                            dataset=dict(validate_on=.2 if dataset=='SHD' else 'validation',random_seed=42),
++                            batch_size=256,lr=.01,dropout=.15,
++                            input_fir=dict(lags=[1,2,4,8],mode='causal') if arm in ('A','A+B') else None,
++                            spike_delete_probability=.1 if arm in ('B','A+B') else 0)
++                p['frozen_configurations'][dataset][arm]=copy.deepcopy(config)
+                 for seed in p['training_seeds']:
+                     own=(arm=='A' and dataset=='SHD' and seed==42)
+                     path=self.path if own else Path(self.temp.name)/f'{arm}_{dataset}_{seed}.ckpt'
+                     receipt=self.receipt if own else path.with_suffix('.json')
+-                    if not own:path.write_bytes(b'trusted-test-fixture')
+-                    key=portable_path(path);budget={'SHD':300,'SSC':40,'ECG':400}[dataset]
+-                    record=dict(self.record,best_checkpoint=key,dataset=dataset,seed=seed,
++                    config['random_seed']=seed
++                    epoch=min(63,budget-1)
++                    torch.save(dict(epoch=epoch,hyper_parameters=dict(cfg=copy.deepcopy(config))),path)
++                    key=portable_path(path);digest=sha256(path)
++                    record=dict(self.record,best_checkpoint=key,best_checkpoint_sha256=digest,dataset=dataset,seed=seed,
++                                model=models[arm],protocol='fixture_final',selected_epoch_index=epoch,
+                                 status='stage_complete',completed_epochs=budget,full_budget=budget,preliminary=False)
+                     receipt.write_text(json.dumps(record))
+-                    p['checkpoints'][key]=dict(self.entry,stage_receipt=str(receipt),arm=arm)
+-        self.assertEqual(self.evaluate(plan=p)['purpose'],'final')
++                    p['checkpoints'][key]=dict(self.entry,sha256=digest,stage_receipt=str(receipt),arm=arm)
++        return p
++
++    def test_complete_final_cohort_and_full_budget_are_verified(self):
++        p=self.complete_final_plan()
++        evidence=self.evaluate(plan=p)
++        self.assertEqual(evidence['purpose'],'final')
++        self.assertEqual(evidence['verified_configurations'],36)
+         del p['checkpoints'][next(key for key in p['checkpoints'] if key!=self.key)]
+         with self.assertRaises(ValueError):self.evaluate(plan=p)
+ 
++    def test_other_final_checkpoint_must_match_its_receipt(self):
++        p=self.complete_final_plan()
++        key=next(key for key in p['checkpoints'] if key!=self.key)
++        item=p['checkpoints'][key];path=Path(key)
++        saved=torch.load(path,weights_only=False);saved['epoch']=0;torch.save(saved,path)
++        item['sha256']=sha256(path)
++        receipt=Path(item['stage_receipt']);record=json.loads(receipt.read_text())
++        record['best_checkpoint_sha256']=item['sha256'];receipt.write_text(json.dumps(record))
++        with self.assertRaisesRegex(ValueError,'config, epoch'):self.evaluate(plan=p)
++
++    def test_other_final_checkpoint_source_identity_is_verified(self):
++        p=self.complete_final_plan()
++        key=next(key for key in p['checkpoints'] if key!=self.key)
++        p['checkpoints'][key]['model_source_sha256']={'source':'changed'}
++        with self.assertRaisesRegex(ValueError,'implementation'):self.evaluate(plan=p)
++
++    def test_hash_consistent_other_checkpoint_config_drift_is_rejected(self):
++        p=self.complete_final_plan()
++        key=next(key for key in p['checkpoints'] if key!=self.key)
++        item=p['checkpoints'][key];path=Path(key)
++        saved=torch.load(path,weights_only=False);saved['hyper_parameters']['cfg']['lr']=.123
++        torch.save(saved,path);item['sha256']=sha256(path)
++        receipt=Path(item['stage_receipt']);record=json.loads(receipt.read_text())
++        record['best_checkpoint_sha256']=item['sha256'];receipt.write_text(json.dumps(record))
++        with self.assertRaisesRegex(ValueError,'frozen arm'):self.evaluate(plan=p)
++
+ 
+ if __name__=='__main__':unittest.main()

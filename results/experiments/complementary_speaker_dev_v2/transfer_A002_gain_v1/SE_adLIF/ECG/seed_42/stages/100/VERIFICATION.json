@@ -1,0 +1,36 @@
+{
+  "status": "verified_completed_bounded_screen_not_full_budget",
+  "dataset": "ECG",
+  "model": "SE_adLIF",
+  "completed_epochs": 100,
+  "full_budget": 400,
+  "preliminary": true,
+  "selected_completed_epoch": 96,
+  "training_accuracy_at_selection": 0.7911252379417419,
+  "validation_accuracy": 0.7761209607124329,
+  "validation_loss": 0.6440821290016174,
+  "final_validation_accuracy": 0.7735075354576111,
+  "tail10_validation_mean": 0.7662772178649903,
+  "checkpoint_checks": {
+    "best": {
+      "sha256": "e69ed024c96f01da2794aa248fd2592953827111918bf5b8c09435698dab8f4a",
+      "epoch_index": 95,
+      "global_step": 192
+    },
+    "last": {
+      "sha256": "85f840a31feee6b22620d2603a0a8493281189abf551615e7bc75fe30f96080e",
+      "epoch_index": 99,
+      "global_step": 200
+    }
+  },
+  "CSV_histories": [
+    "logs/mlp_snn/version_0/metrics.csv"
+  ],
+  "unique_validation_epochs": 100,
+  "stage050_snapshots_preserved": true,
+  "additional_unplanned_interruption_at77": true,
+  "interpretation": "Exploratory; baseline restart history differs from candidate. No claim of uninterrupted equivalence or final generalization.",
+  "official_test_opened": false,
+  "initial10_validation_mean": 0.30047911405563354,
+  "macro_class_recall": 0.7363705305645128
+}

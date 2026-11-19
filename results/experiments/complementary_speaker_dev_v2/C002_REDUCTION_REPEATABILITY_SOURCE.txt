@@ -1,0 +1,68 @@
+"""Synthetic temporal-reduction forward/gradient diagnostic, no model or training."""
+import hashlib
+import json
+from datetime import datetime, timezone
+import torch
+from torch.nn import functional as F
+from models.pl_module import aggregate_temporal_outputs
+from project_paths import ROOT
+
+OUT = ROOT/'results/experiments/complementary_speaker_dev_v2'
+SOURCE = OUT/'C002_REDUCTION_REPEATABILITY_SOURCE.txt'
+TARGET = OUT/'C002_REDUCTION_REPEATABILITY.json'
+assert not TARGET.exists()
+torch.set_num_threads(2)
+torch.set_float32_matmul_precision('high')
+generator = torch.Generator(device='cpu').manual_seed(117)
+fixed = torch.randn(1024,342,20,generator=generator)
+blocks = torch.ones(1024,342,dtype=torch.long)
+blocks[:,:10] = 0
+labels = torch.arange(1024,dtype=torch.long)%20
+records = []
+original_determinism = torch.are_deterministic_algorithms_enabled()
+try:
+    for device in ['cpu']+(['cuda:0'] if torch.cuda.is_available() else []):
+        for deterministic in (False,True):
+            torch.use_deterministic_algorithms(deterministic)
+            reference = None
+            losses = []
+            record = dict(device=device,deterministic_algorithms=deterministic,repeats=12,
+                status='running',max_absolute_reduced_score_change=0.,max_absolute_input_gradient_change=0.,
+                max_differing_score_entries=0,max_differing_gradient_entries=0,max_prediction_changes=0)
+            try:
+                for repeat in range(12):
+                    x = fixed.to(device).clone().requires_grad_(True)
+                    reduced = aggregate_temporal_outputs(x,blocks.to(device),2,'sum_softmax_over_time')[:,1]
+                    loss = F.cross_entropy(reduced.float(),labels.to(device))
+                    gradient = torch.autograd.grad(loss,x)[0]
+                    assert torch.isfinite(gradient).all() and torch.isfinite(reduced).all()
+                    scores = reduced.detach().cpu()
+                    grad = gradient.detach().cpu()
+                    losses.append(float(loss.detach()))
+                    if reference is None:
+                        reference = (scores.clone(),grad.clone())
+                    else:
+                        record['max_absolute_reduced_score_change'] = max(record['max_absolute_reduced_score_change'],float((scores-reference[0]).abs().max()))
+                        record['max_absolute_input_gradient_change'] = max(record['max_absolute_input_gradient_change'],float((grad-reference[1]).abs().max()))
+                        record['max_differing_score_entries'] = max(record['max_differing_score_entries'],int(scores.ne(reference[0]).sum()))
+                        record['max_differing_gradient_entries'] = max(record['max_differing_gradient_entries'],int(grad.ne(reference[1]).sum()))
+                        record['max_prediction_changes'] = max(record['max_prediction_changes'],int(scores.argmax(-1).ne(reference[0].argmax(-1)).sum()))
+                    del x,reduced,loss,gradient,scores,grad
+                record.update(status='completed',loss_min=min(losses),loss_max=max(losses),completed_repeats=len(losses))
+            except RuntimeError as error:
+                record.update(status='runtime_error',actual_exception=str(error),completed_repeats=len(losses))
+            records.append(record)
+            print('[REDUCTION_REPEATABILITY] '+json.dumps(record),flush=True)
+            del reference
+            if device.startswith('cuda'):
+                torch.cuda.empty_cache()
+finally:
+    torch.use_deterministic_algorithms(original_determinism)
+result = dict(recorded_at=datetime.now(timezone.utc).isoformat(),scope='Synthetic same-input ordinary temporal aggregation/CE/input-gradient repeats only',
+    input_shape=[1024,342,20],seed=117,records=records,source=SOURCE.relative_to(ROOT).as_posix(),
+    source_sha256=hashlib.sha256(SOURCE.read_bytes()).hexdigest(),torch_version=torch.__version__,
+    cuda_version=torch.version.cuda,training_or_optimizer_steps=False,model_weights_loaded=False,
+    actual_dataset_or_official_test_opened=False,main_precision_or_determinism_changed=False,
+    caution='Any observed numerical differences identify a possible contributor, not proof of the cause of actual repeated training-score spread. Absence here does not prove full training determinism. Deterministic mode is diagnostic only; never select it using validation/test accuracy or silently change running protocols.')
+TARGET.write_text(json.dumps(result,indent=2)+'\n')
+print('[REPEATABILITY_COMPLETE] No model/dataset/training process used; main protocol unchanged.',flush=True)

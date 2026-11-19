@@ -1,0 +1,33 @@
+version: complementary_speaker_dev_v2
+control_version: gain_sensitivity_A001_v1
+plan: docs/experiments/complementary-mechanisms-study-v2.md
+output_root: results/experiments/complementary_speaker_dev_v2/gain_sensitivity_A001_v1
+idea: A001_GAIN_PAIR_SENSITIVITY
+role: pair_sensitivity
+pair_id: sensitivity_6_10
+validation_speakers: [6, 10]
+split_manifest: results/experiments/complementary_speaker_dev_v2/sensitivity_6_10/SPLIT_MANIFEST.json
+split_fingerprint: a3a3e633e3cf80eb04be16dcb17328502c82533b40f1d9aaf32064daa78cc7a2
+shortlist: results/experiments/complementary_speaker_dev_v2/GAIN_CONTROL_SHORTLIST.json
+training_seed: 42
+split_seed: 42
+hypothesis: Assess shortlisted FIR and gain-only controls on one predefined second pair; retain conflicting validation-loss evidence, do not tune settings or search pairs.
+models: [SE_adLIF, FIR_SE_adLIF, GAIN_SE_adLIF]
+arm_labels:
+  SE_adLIF: Baseline
+  FIR_SE_adLIF: A
+  GAIN_SE_adLIF: Gain-only mechanism control
+spike_deletion:
+  SE_adLIF: 0
+  FIR_SE_adLIF: 0
+  GAIN_SE_adLIF: 0
+input_fir_modes:
+  SE_adLIF: null
+  FIR_SE_adLIF: causal
+  GAIN_SE_adLIF: gain_only
+datasets:
+  SHD:
+    batch_size: 1024
+    validation_batch_size: 1024
+    ceilings: [30]
+    stage: 2

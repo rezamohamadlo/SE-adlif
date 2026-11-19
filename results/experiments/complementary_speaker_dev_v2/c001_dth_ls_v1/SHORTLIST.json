@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-11-12T11:46:20.176744+00:00",
+  "selected_using": "clean_primary_speaker_validation",
+  "models": [
+    "LS_SE_adLIF",
+    "DTH_LS_SE_adLIF"
+  ],
+  "evidence": "results/experiments/complementary_speaker_dev_v2/C001_PRIMARY_STAGE030_COMPARISON.json",
+  "decision": "results/experiments/complementary_speaker_dev_v2/C001_PRIMARY_STAGE030_DECISION.json",
+  "matching_control": "SE_adLIF",
+  "sensitivity_pair": [
+    6,
+    10
+  ],
+  "fresh_weights_required": true,
+  "pair_tuning_allowed": false,
+  "candidate_hyperparameters_frozen": true
+}

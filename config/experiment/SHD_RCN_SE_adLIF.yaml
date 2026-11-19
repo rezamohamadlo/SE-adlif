@@ -1,0 +1,14 @@
+# @package _global_
+defaults:
+  - SHD_SE_adLIF
+  - /paper_baseline
+  - _self_
+exp_name: SHD_RCN_SE_adLIF
+l1:
+  cell: residual_current_norm_se_adlif
+  current_norm_mode: layer_norm
+  current_norm_eps: 1.0e-5
+l2:
+  cell: residual_current_norm_se_adlif
+  current_norm_mode: layer_norm
+  current_norm_eps: 1.0e-5

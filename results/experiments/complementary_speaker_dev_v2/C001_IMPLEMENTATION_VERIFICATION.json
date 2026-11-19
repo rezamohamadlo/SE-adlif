@@ -1,0 +1,20 @@
+{
+  "verified_at": "2026-11-12T11:19:52.556140+00:00",
+  "nontraining_tests": {
+    "command": ".ven/Scripts/python.exe -m unittest tests.test_dth_label_smoothing_study tests.test_label_smoothing tests.test_complementary_study tests.test_speaker_development tests.test_input_gain_control",
+    "passed": 34,
+    "test_runtime_seconds": 3.595,
+    "trainer_fit_or_optimizer_steps_in_tests": false
+  },
+  "runner_dry_run": "All4fresh passed from repository root and WindowsTEMPoutsidecheckout",
+  "calibration": "C001_SHD_BATCH1024_CONFIRMATION.json",
+  "source_snapshot": "C001_PRIMARY_SOURCE_SNAPSHOT.json",
+  "snapshot_files": 250,
+  "source_archive_content_hashes_verified": true,
+  "estimated_main_queue_minutes": [
+    20,
+    30
+  ],
+  "no_calibration_checkpoint_exported": true,
+  "official_tests": false
+}

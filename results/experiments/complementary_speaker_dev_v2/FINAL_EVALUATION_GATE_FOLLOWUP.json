@@ -1,0 +1,79 @@
+{
+  "status": "isolated_v5_verified_not_applied_activeC005source_preserved",
+  "scope": "Future frozen ordinary-inference final evaluation, not development selection",
+  "inspected": [
+    "test_checkpoint.py:validate_study_evaluation",
+    "tests/test_study_evaluation.py"
+  ],
+  "verified_existing_checks": [
+    "Frozen evaluation plan with test_selects_ideas=false",
+    "Exact selected checkpoint hash, epoch and current model/data source identity for the requested checkpoint",
+    "Four arm labels, three datasets, three matching training seeds and full completed budgets",
+    "Speaker-development study weights rejected as canonical test evidence"
+  ],
+  "remaining_verification_work": [
+    "No hard-coded FIR/THIN model-family requirement was found in the final cohort loop; retain architecture-independent arm labels.",
+    "Verify frozen arm-to-model/objective mapping across every cohort entry; current cohort loop does not enforce distinct intended arm implementations.",
+    "Verify matching resolved split, batch, preprocessing, optimizer, scheduler and stopping settings across arms, allowing only preregistered mechanism/objective deviations.",
+    "Verify every cohort checkpoint's saved config/source identity, not only the checkpoint currently requested for evaluation.",
+    "Use a separately frozen canonical study identity: existing complementary_speaker_dev_v2 checkpoint identity is intentionally rejected by the evaluator.",
+    "Add non-training negative tests for mismatched splits, arm assignments and configurations before freezing the final evaluation plan."
+  ],
+  "active_run_safety": "SSC initial10 queue launcher20700 / RDrop training20572 confirmed live at this review;280frozenrootfiles and11protocolartifacts unchanged. Historical active-run observation retained in source snapshots.",
+  "draft_progress": {
+    "status": "isolated_evaluator_integration_verified_not_applied",
+    "receipt": "results/experiments/complementary_speaker_dev_v2/cost_draft/FINAL_EVALUATION_INTEGRATION_DRAFT.json",
+    "non_training_tests_passed": 23,
+    "patch_apply_check": "passed without applying",
+    "limitation": "Actual-checkout integration/tests and the final frozen cohort remain pending. No active source or training settings changed."
+  },
+  "official_test_opened": false,
+  "final_evaluation_ready": false,
+  "latest_isolated_draft": {
+    "patch": "cost_draft/SHD_FINAL_EVALUATION_CLI_DRAFT_v5.patch",
+    "receipt": "cost_draft/SHD_FINAL_EVALUATION_CLI_DRAFT_v5.json",
+    "tests_passed": 78,
+    "synthetic_CPU_only": true,
+    "CLI_authorization_fixture_mocked": true,
+    "source_and_output_identity_guards_tested": true,
+    "shared_settings_waiver_regressions_fixed": 5,
+    "apply_check_passed": true,
+    "applied_to_root": false,
+    "actual_final_cohort_evaluated": false,
+    "updated_at": "2026-11-12T14:38:04.251322+00:00"
+  },
+  "remaining_before_application_and_freeze": [
+    "Finish any currentC005source-frozen stages and preserve all discovery evidence.",
+    "Review/apply/retest actual selected registered model/objective in actual checkout.",
+    "Implement separately versioned frozen canonical SHD*/SSC/ECG3seed official-runner full-budget/final-test/aggregation/cost workflow.",
+    "FreezeactualA/B/settings/source/environment/ordinarytestplan;completeactualmatched36runcohort.",
+    "Evaluateofficialtestsaftervalidationselectionandfreeze;reporttestvariation,costs,andpriorreuse."
+  ],
+  "draft_history": [
+    {
+      "patch": "cost_draft/SHD_FINAL_EVALUATION_CLI_DRAFT_v4.patch",
+      "receipt": "cost_draft/SHD_FINAL_EVALUATION_CLI_DRAFT_v4.json",
+      "tests_passed": 75,
+      "synthetic_CPU_only": true,
+      "CLI_authorization_fixture_mocked": true,
+      "source_and_output_identity_guards_tested": true,
+      "apply_check_passed": true,
+      "applied_to_root": false,
+      "actual_final_cohort_evaluated": false,
+      "updated_at": "2026-11-12T13:04:49.031209+03:30"
+    }
+  ],
+  "actual_registered_model_capture_followup": {
+    "verified_at": "2026-11-12T16:35:53.284077+00:00",
+    "evidence": "results/experiments/complementary_speaker_dev_v2/cost_draft/rdrop_capture_integration_v1/VERIFICATION.json",
+    "evidence_sha256": "4146dcd8a73bee943d7622ee60d47c0b3672b3dd18b758d2607273069d630a32",
+    "actual_registered_models_verified": 5,
+    "input_type": "synthetic CPU tensors only; trusted local speaker-development checkpoint weights",
+    "predictions_losses_metric_counts_weights_rng_restore_and_forward_counts_match": true,
+    "CUDA_initialized": false,
+    "real_dataset_or_official_test_opened": false,
+    "root_source280_and_protocol11_unchanged": true,
+    "patch_applied": false,
+    "limitation": "Technical capture integration only; final cohort/gates/config/source/data/cost integration and actual tests remain pending."
+  }
+}

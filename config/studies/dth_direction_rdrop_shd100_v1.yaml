@@ -1,0 +1,42 @@
+version: dth_complement_v1
+candidate_version: direction_aware_v1
+protocol_id: dth_direction_rdrop_shd100_v1
+canonical_protocol_override: true
+plan: docs/experiments/dth-direction-rdrop-shd100-v1.md
+output_root: results/experiments/dth_complement_v1/direction_shd100_v1/runs
+idea: DIRECTION_AWARE_TRANSIENT
+role: exploratory_historical_control_comparison
+training_seed: 42
+split_seed: 42
+hypothesis: Independent bounded falling-activity threshold response; unverified hypothesis with fixed R-Drop.
+models: [DIRECTION_DTH_RDROP_SE_adLIF]
+arm_labels:
+  DIRECTION_DTH_RDROP_SE_adLIF: Direction-aware DTH plus R-Drop
+training_objectives:
+  DIRECTION_DTH_RDROP_SE_adLIF: classification_dropout_consistency_v1
+label_smoothing_epsilon:
+  DIRECTION_DTH_RDROP_SE_adLIF: 0
+dropout_consistency_alpha:
+  DIRECTION_DTH_RDROP_SE_adLIF: 1
+spike_deletion:
+  DIRECTION_DTH_RDROP_SE_adLIF: 0
+input_fir_modes:
+  DIRECTION_DTH_RDROP_SE_adLIF: null
+hidden_cells:
+  DIRECTION_DTH_RDROP_SE_adLIF: dth_se_adlif
+hidden_cell_settings:
+  dth_se_adlif:
+    rho_fast: 0.9
+    rho_slow: 0.99
+    target_rate: 0.05
+    theta_min: 0.5
+    theta_max: 1.5
+    direction_aware: true
+record_initial_state: true
+datasets:
+  SHD:
+    batch_size: 256
+    validation_batch_size: 256
+    num_workers: 0
+    ceilings: [100]
+    stage: 1

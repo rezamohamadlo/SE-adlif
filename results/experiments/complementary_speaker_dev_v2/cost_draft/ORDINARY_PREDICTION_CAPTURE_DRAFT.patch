@@ -1,0 +1,203 @@
+diff --git a/module/ordinary_prediction_capture.py b/module/ordinary_prediction_capture.py
+new file mode 100644
+--- /dev/null
++++ b/module/ordinary_prediction_capture.py
+@@ -0,0 +1,83 @@
++"""Scoped read-only capture of existing SHD test metric inputs.
++
++No forward pass or trainer entrypoint. The caller must enforce the frozen-test
++gate and verify a sequential, complete original-row dataloader separately.
++"""
++from contextlib import contextmanager
++from numbers import Integral
++import torch
++
++
++class ClassificationRows:
++    def __init__(self, expected_records):
++        if isinstance(expected_records,bool) or not isinstance(expected_records,Integral) or expected_records<1:
++            raise ValueError('Expected a positive original test recording count')
++        self.expected_records=int(expected_records)
++        self.predictions=[]
++        self.labels=[]
++
++    def append(self, outputs, targets, classes, ignore_index):
++        integer_types=(torch.uint8,torch.int8,torch.int16,torch.int32,torch.int64)
++        if (not isinstance(targets,torch.Tensor) or targets.ndim!=2
++                or targets.dtype not in integer_types
++                or not isinstance(outputs,torch.Tensor) or outputs.ndim!=2
++                or outputs.shape!=(targets.numel(),classes)):
++            raise ValueError('Capture requires target-aligned classification scores and integer targets')
++        valid=targets.ne(ignore_index)
++        if not torch.all(valid.sum(dim=1)==1).item():
++            raise ValueError('SHD capture requires exactly one valid target per recording')
++        labels=targets.flatten()[valid.flatten()].detach().cpu().tolist()
++        if any(not 0<=label<classes for label in labels):
++            raise ValueError('Observed target outside declared class range')
++        predictions=outputs.detach().argmax(dim=-1)[valid.flatten()].cpu().tolist()
++        if len(self.labels)+len(labels)>self.expected_records:
++            raise ValueError('More predictions than original test recordings')
++        self.labels.extend(labels)
++        self.predictions.extend(predictions)
++
++    def finalize(self):
++        if len(self.labels)!=self.expected_records:
++            raise ValueError('Test prediction capture is incomplete')
++        return dict(row_ids=list(range(self.expected_records)),
++                    observed_labels=list(self.labels),predictions=list(self.predictions))
++
++
++@contextmanager
++def capture_ordinary_classification(model, expected_records):
++    """Preserve original logging method/arguments/results, restoring on error.
++
++    The collector assigns sequential original row IDs. Using it without a
++    verified sequential sampler is invalid, even if labels happen to match.
++    """
++    if getattr(model,'auto_regression',True) or getattr(model,'ignore_target_idx',None)!=-1:
++        raise ValueError('Only the established classification/ignore-target contract is supported')
++    if getattr(model,'_ordinary_prediction_capture_active',False):
++        raise ValueError('Prediction capture is already active')
++    classes=model.output_size
++    original=model.update_and_log_metrics
++    had_override='update_and_log_metrics' in vars(model)
++    previous=vars(model).get('update_and_log_metrics')
++    had_marker='_ordinary_prediction_capture_active' in vars(model)
++    previous_marker=vars(model).get('_ordinary_prediction_capture_active')
++    rows=ClassificationRows(expected_records)
++
++    def observed(outputs,targets,loss,metrics,prefix):
++        if prefix=='test_':
++            if model.training:
++                raise ValueError('Ordinary test capture requires evaluation mode')
++            rows.append(outputs,targets,classes,model.ignore_target_idx)
++        return original(outputs,targets,loss,metrics,prefix)
++
++    model._ordinary_prediction_capture_active=True
++    model.update_and_log_metrics=observed
++    try:
++        yield rows
++    finally:
++        if had_override:
++            model.update_and_log_metrics=previous
++        else:
++            delattr(model,'update_and_log_metrics')
++        if had_marker:
++            model._ordinary_prediction_capture_active=previous_marker
++        else:
++            delattr(model,'_ordinary_prediction_capture_active')
+diff --git a/tests/test_ordinary_prediction_capture.py b/tests/test_ordinary_prediction_capture.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_ordinary_prediction_capture.py
+@@ -0,0 +1,110 @@
++"""No Trainer, optimizer, real data, model forward or official-test access."""
++import unittest
++import torch
++from module.ordinary_prediction_capture import capture_ordinary_classification
++
++
++class LoggingFixture(torch.nn.Module):
++    def __init__(self):
++        super().__init__()
++        self.auto_regression=False;self.ignore_target_idx=-1;self.output_size=3
++        self.weight=torch.nn.Parameter(torch.tensor([1.0]))
++        self.received=[];self.forward_calls=0
++        self.eval()
++
++    def forward(self,*args):
++        self.forward_calls+=1
++        raise AssertionError('Capture must never call forward')
++
++    def update_and_log_metrics(self,outputs,targets,loss,metrics,prefix):
++        self.received.append((outputs,targets,loss,metrics,prefix))
++        return 'original return value'
++
++
++class PredictionCaptureTests(unittest.TestCase):
++    def setUp(self):
++        self.model=LoggingFixture()
++        self.scores=torch.tensor([[0.,3.,0.],[4.,0.,0.],[0.,0.,3.],[0.,3.,0.]],requires_grad=True)
++        self.targets=torch.tensor([[-1,0],[-1,2]],dtype=torch.int64)
++
++    def call(self,**overrides):
++        values=dict(outputs=self.scores,targets=self.targets,loss='loss',metrics='metric',prefix='test_')
++        values.update(overrides)
++        return self.model.update_and_log_metrics(**values)
++
++    def test_capture_preserves_arguments_return_state_and_rng_without_forward(self):
++        original=self.model.update_and_log_metrics.__func__
++        rng=torch.get_rng_state().clone();weight=self.model.weight.detach().clone()
++        with capture_ordinary_classification(self.model,2) as rows:
++            self.assertEqual(self.call(),'original return value')
++            self.assertEqual(rows.finalize(),dict(row_ids=[0,1],observed_labels=[0,2],predictions=[0,1]))
++        self.assertIs(self.model.update_and_log_metrics.__func__,original)
++        self.assertIs(self.model.received[0][0],self.scores)
++        self.assertIs(self.model.received[0][1],self.targets)
++        self.assertTrue(torch.equal(rng,torch.get_rng_state()))
++        self.assertTrue(torch.equal(weight,self.model.weight.detach()))
++        self.assertTrue(self.scores.requires_grad)
++        self.assertEqual(self.model.forward_calls,0)
++        self.assertNotIn('_ordinary_prediction_capture_active',vars(self.model))
++
++    def test_validation_logging_is_not_counted_as_test_predictions(self):
++        with capture_ordinary_classification(self.model,2) as rows:
++            self.call(prefix='val_');self.call()
++            self.assertEqual(len(rows.finalize()['predictions']),2)
++        self.assertEqual(len(self.model.received),2)
++
++    def test_incomplete_or_excess_predictions_are_rejected(self):
++        with capture_ordinary_classification(self.model,3) as rows:
++            self.call()
++            with self.assertRaisesRegex(ValueError,'incomplete'):rows.finalize()
++            with self.assertRaisesRegex(ValueError,'More'):self.call()
++
++    def test_multiple_classification_targets_per_recording_are_rejected(self):
++        targets=torch.tensor([[1,0],[-1,2]])
++        with capture_ordinary_classification(self.model,2):
++            with self.assertRaisesRegex(ValueError,'exactly one'):self.call(targets=targets)
++
++    def test_scope_restores_method_after_inference_exception(self):
++        original=self.model.update_and_log_metrics.__func__
++        with self.assertRaises(RuntimeError):
++            with capture_ordinary_classification(self.model,2):
++                raise RuntimeError('Synthetic inference error')
++        self.assertIs(self.model.update_and_log_metrics.__func__,original)
++
++    def test_nested_capture_does_not_corrupt_outer_scope(self):
++        with capture_ordinary_classification(self.model,2) as rows:
++            with self.assertRaisesRegex(ValueError,'already active'):
++                with capture_ordinary_classification(self.model,2):pass
++            self.call();self.assertEqual(len(rows.finalize()['predictions']),2)
++
++    def test_training_mode_and_regression_are_rejected(self):
++        self.model.train()
++        with capture_ordinary_classification(self.model,2):
++            with self.assertRaisesRegex(ValueError,'evaluation mode'):self.call()
++        self.model.auto_regression=True
++        with self.assertRaisesRegex(ValueError,'classification'):
++            with capture_ordinary_classification(self.model,2):pass
++
++    def test_misaligned_scores_or_float_targets_are_rejected(self):
++        for values in (dict(outputs=self.scores[:2]),dict(targets=self.targets.float())):
++            with self.subTest(values=list(values)),capture_ordinary_classification(self.model,2):
++                with self.assertRaisesRegex(ValueError,'target-aligned'):self.call(**values)
++
++    def test_counted_accuracy_matches_real_ordinary_micro_metric(self):
++        from torchmetrics.classification import MulticlassAccuracy
++        metric=MulticlassAccuracy(num_classes=3,average='micro',ignore_index=-1)
++        def original(outputs,targets,loss,metrics,prefix):
++            metrics(outputs,targets.flatten())
++            return 'unchanged'
++        self.model.update_and_log_metrics=original
++        self.model._ordinary_prediction_capture_active=False
++        with capture_ordinary_classification(self.model,2) as rows:
++            self.assertEqual(self.call(metrics=metric),'unchanged')
++            evidence=rows.finalize()
++        correct=sum(p==y for p,y in zip(evidence['predictions'],evidence['observed_labels']))
++        self.assertEqual(float(metric.compute()),correct/2)
++        self.assertIs(self.model.update_and_log_metrics,original)
++        self.assertIs(self.model._ordinary_prediction_capture_active,False)
++
++
++if __name__=='__main__':unittest.main()

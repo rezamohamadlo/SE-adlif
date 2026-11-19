@@ -1,0 +1,48 @@
+{
+  "initialization_reused_for_main": false,
+  "official_test_opened": false,
+  "probe_checkpoint": "results/valid/reference/SSC/seed_42/ckpt/epoch=18-step=5586.ckpt",
+  "probe_sha256": "05d179a2a65e5574b17d6eefab0f959ca421e352819732c74e7c1a1b02231a58",
+  "probe_usage": "historical diagnostic trained SSC weights plus exactly identity FIR; numerical/speed calibration only, not matched control or main initialization",
+  "records": [
+    {
+      "batch": 256,
+      "changed_predictions": 0,
+      "consistent": true,
+      "loss_tolerance": 0.0001,
+      "max_absolute_loss_difference": 0.0,
+      "measured_full_passes": 1,
+      "peak_reserved_gib": 0.373046875,
+      "seconds": 15.87646629998926,
+      "validation_records": 9981,
+      "warmup_batches": 1
+    },
+    {
+      "batch": 512,
+      "changed_predictions": 0,
+      "consistent": true,
+      "loss_tolerance": 0.0001,
+      "max_absolute_loss_difference": 9.059906005859375e-06,
+      "measured_full_passes": 1,
+      "peak_reserved_gib": 1.029296875,
+      "seconds": 8.166798299993388,
+      "validation_records": 9981,
+      "warmup_batches": 1
+    },
+    {
+      "batch": 1024,
+      "changed_predictions": 0,
+      "consistent": true,
+      "loss_tolerance": 0.0001,
+      "max_absolute_loss_difference": 9.059906005859375e-06,
+      "measured_full_passes": 1,
+      "peak_reserved_gib": 1.859375,
+      "seconds": 4.192165300017223,
+      "validation_records": 9981,
+      "warmup_batches": 1
+    }
+  ],
+  "selected_batch": 1024,
+  "source": "SSC official validation, original order, unchanged masks and mean_membrane_potentials aggregation",
+  "status": "verified"
+}

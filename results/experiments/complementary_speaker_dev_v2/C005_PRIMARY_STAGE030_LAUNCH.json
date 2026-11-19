@@ -1,0 +1,27 @@
+﻿{
+    "preregistration":  "C005_DROPOUT_CONSISTENCY_PREREGISTRATION.json",
+    "full_schedule":  300,
+    "stderr":  "results/experiments/complementary_speaker_dev_v2/c005_primary_stage030_stderr.log",
+    "pid":  9328,
+    "batch_size":  1024,
+    "training_seed":  42,
+    "mode":  "fresh_initial4",
+    "launched_at":  "2026-11-12T17:55:59.8992710+03:30",
+    "stdout":  "results/experiments/complementary_speaker_dev_v2/c005_primary_stage030_stdout.log",
+    "source_snapshot":  "C005_PRIMARY_SOURCE_SNAPSHOT.json",
+    "initial_state_hashes":  true,
+    "stage_ceiling":  30,
+    "study_file":  "config/studies/complementary_C005_dropout_consistency_v1.yaml",
+    "conditional_two_pass_controls_launched":  false,
+    "models":  [
+                   "SE_adLIF",
+                   "RDROP_SE_adLIF",
+                   "RDROP_LS_SE_adLIF",
+                   "LS_SE_adLIF"
+               ],
+    "validation_speakers":  [
+                                0,
+                                3
+                            ],
+    "official_tests":  false
+}

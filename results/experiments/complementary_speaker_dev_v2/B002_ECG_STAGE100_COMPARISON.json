@@ -1,0 +1,94 @@
+{
+  "status": "verified_completed_matched_ECG100_screen_not_full_budget",
+  "verified_at": "2026-11-12T11:11:21.607927+00:00",
+  "training_seed": 42,
+  "independent_training_seeds": 1,
+  "completed_epochs_per_arm": 100,
+  "full_budget": 400,
+  "records": [
+    {
+      "model": "SE_adLIF",
+      "selected_validation_accuracy": 0.7747629880905151,
+      "selected_completed_epoch": 99,
+      "online_training_accuracy_in_selected_epoch": 0.7981991171836853,
+      "validation_loss_at_selection": 0.6399042010307312,
+      "macro_class_recall": 0.7358134706810624,
+      "class_recall": [
+        0.6227467254571392,
+        0.5102702702702703,
+        0.8392996108949417,
+        0.7345326897762177,
+        0.9243121256835344,
+        0.7837194020042714
+      ],
+      "last10_validation_mean": 0.7680886507034301,
+      "epoch91_to100_accuracy_gain_pp": 1.5680253505706787,
+      "epoch91_to100_loss_change": -0.04555225372314453,
+      "final_online_training_accuracy": 0.7971181869506836,
+      "final_validation_accuracy": 0.7732513546943665,
+      "receipt": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/SE_adLIF/ECG/seed_42/stages/100/RESULT.json",
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "f854648dab7e30d2d4001c7ed897cc1b0ac555e0eb5d017a3a21dd536ddc068b",
+          "epoch_index": 98,
+          "global_step": 198,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "6b306aa35e514307a70ac68a2fd6e98cc801642960381c60e084438eb570c737",
+          "epoch_index": 99,
+          "global_step": 200,
+          "config_matches": true
+        }
+      },
+      "stage050_preserved": true
+    },
+    {
+      "model": "LS_SE_adLIF",
+      "selected_validation_accuracy": 0.7693825364112854,
+      "selected_completed_epoch": 100,
+      "online_training_accuracy_in_selected_epoch": 0.7938124537467957,
+      "validation_loss_at_selection": 0.6827183961868286,
+      "macro_class_recall": 0.7259528374979597,
+      "class_recall": [
+        0.5904551938788744,
+        0.4875675675675676,
+        0.8373540856031129,
+        0.7196138657305836,
+        0.9450568527037584,
+        0.7756694595038607
+      ],
+      "last10_validation_mean": 0.7661978006362915,
+      "epoch91_to100_accuracy_gain_pp": 0.27670860290527344,
+      "epoch91_to100_loss_change": -0.025320589542388916,
+      "final_online_training_accuracy": 0.7938124537467957,
+      "final_validation_accuracy": 0.7693825364112854,
+      "receipt": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/LS_SE_adLIF/ECG/seed_42/stages/100/RESULT.json",
+      "checkpoint_checks": {
+        "best": {
+          "sha256": "8a2f26f03cf4c0e5eed16a47ba0d408c676d42cff49c9c715918ba81ae525de1",
+          "epoch_index": 99,
+          "global_step": 200,
+          "config_matches": true
+        },
+        "last": {
+          "sha256": "8a2f26f03cf4c0e5eed16a47ba0d408c676d42cff49c9c715918ba81ae525de1",
+          "epoch_index": 99,
+          "global_step": 200,
+          "config_matches": true
+        }
+      },
+      "stage050_preserved": true
+    }
+  ],
+  "LS_minus_Baseline_pp": -0.5380451679229736,
+  "practical_threshold_pp": 1.0,
+  "shared_settings_verified": true,
+  "decision": "REJECT_ECG_GAIN_UNDER_DECLARED100_SCREEN_NO_AUTOMATIC_EXTENSION",
+  "interpretation": "LS has lower selected microaccuracy and macrorecall, higher ordinary CE, and no declared practical gain. Preserve promising SHD-only evidence and negative/below-threshold SSC/ECG transfer; do not assume two-dataset benefit or complementarity. Stop this transfer branch at100; no400training or seed expansion on this evidence. This is a staged rejection, not proof no longer-budget benefit is possible.",
+  "training_accuracy_definition": "Online epoch aggregate with dropout and changing weights, not clean fixed-checkpoint train reevaluation.",
+  "patient_independence_established": false,
+  "timesteps_are_independent_samples": false,
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

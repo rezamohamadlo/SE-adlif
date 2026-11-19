@@ -1,0 +1,9 @@
+﻿{
+    "pid":  12368,
+    "command":  ".ven/Scripts/python.exe -u runner.py --models SE_adLIF FIR_SE_adLIF --datasets SSC --seeds 42 --study-file config/studies/complementary_transfer_A001_v2.yaml --stage-ceiling 40",
+    "stdout":  "results/experiments/complementary_speaker_dev_v2/ssc_stage040_stdout.log",
+    "stderr":  "results/experiments/complementary_speaker_dev_v2/ssc_stage040_stderr.log",
+    "mode":  "full_state_resume_own_last_after10epochs",
+    "ceiling":  40,
+    "test_evaluated":  false
+}

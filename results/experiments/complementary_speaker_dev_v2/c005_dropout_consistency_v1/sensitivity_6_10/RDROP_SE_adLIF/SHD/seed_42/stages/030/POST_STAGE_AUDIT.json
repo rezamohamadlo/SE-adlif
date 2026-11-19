@@ -1,0 +1,65 @@
+{
+  "model": "RDROP_SE_adLIF",
+  "selected_validation_accuracy": 0.8551779985427856,
+  "selected_completed_epoch": 21,
+  "online_training_accuracy_in_selected_epoch": 0.98291015625,
+  "validation_loss_at_selection": 0.6463654637336731,
+  "last10_validation_mean": 0.831067967414856,
+  "checkpoint_checks": {
+    "best": {
+      "sha256": "310e25596c2e641412cefee624c720fefec8f3d8ceccd0453e9553fa8689b466",
+      "epoch_index": 20,
+      "global_step": 126,
+      "config_matches": true
+    },
+    "last": {
+      "sha256": "9bacecedff63baeee36e53f99625af832e127b953af547e5c7a9e981ce02c2bc",
+      "epoch_index": 29,
+      "global_step": 180,
+      "config_matches": true
+    }
+  },
+  "per_speaker": {
+    "6": {
+      "recordings": 447,
+      "correct": 386,
+      "accuracy": 0.8635346756152126
+    },
+    "10": {
+      "recordings": 789,
+      "correct": 671,
+      "accuracy": 0.8504435994930292
+    }
+  },
+  "macroclass_recall": 0.8484158813043843,
+  "training_objective_settings": {
+    "training_objective": "classification_dropout_consistency_v1",
+    "label_smoothing_epsilon": 0.0,
+    "dropout_consistency_alpha": 1.0,
+    "inference_forward_passes": 1
+  },
+  "training_epoch_diagnostics": {
+    "train_hard_ce": {
+      "selected_epoch": 0.055631231516599655,
+      "last_epoch": 0.02953689731657505,
+      "maximum": 3.0016345977783203
+    },
+    "train_supervised_loss": {
+      "selected_epoch": 0.055631231516599655,
+      "last_epoch": 0.02953689731657505,
+      "maximum": 3.0016345977783203
+    },
+    "train_dropout_symmetric_kl": {
+      "selected_epoch": 0.0146377207711339,
+      "last_epoch": 0.011498577892780304,
+      "maximum": 0.031185505911707878
+    }
+  },
+  "reproduced_validation_accuracy": 0.8551779935275081,
+  "reproduced_ordinary_ce": 0.6463655987603765,
+  "source_code": "results/experiments/complementary_speaker_dev_v2/C005_SENSITIVITY_STAGE030_AUDIT_SOURCE.txt",
+  "source_sha256": "8969daab7a204ae772990b8bc1afc64f26cede3e690c00c9994479b7c6f7cd93",
+  "official_test_evaluated": false,
+  "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/sensitivity_6_10/RDROP_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+  "raw_prediction_sha256": "118129707b1641ac20cbbf88503f8f5e583b705945b1d33d629302968ffe95ba"
+}

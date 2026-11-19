@@ -1,0 +1,16 @@
+{
+  "ECG": {
+    "evidence": "ECG_DATA_INSPECTION.json",
+    "official_test_opened": false,
+    "patient_ids_available": false,
+    "status": "training_file_inspected"
+  },
+  "SSC": {
+    "initial_attempt": "Singleconnection urllib ~60KiB/s; our own downloader stopped;22MBpartial preserved underdata/SSCWrapper/ssc_train.h5.zip.initial-partial",
+    "source": "https://zenkelab.org/datasets/",
+    "status": "downloading_train_then_validation",
+    "technical_correction": "Initial ranged downloader raised KeyError('content-length'); corrected to derive size from verified206 Content-Range.",
+    "tool_session_id": 62584,
+    "transfer": "8 resumable HTTP-range workers; final archive verification uses official Tonic MD5; no test download"
+  }
+}

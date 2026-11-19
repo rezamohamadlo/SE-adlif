@@ -1,0 +1,44 @@
+﻿{
+    "verified_at":  "2026-11-14T17:43:27.540684+00:00",
+    "four_test_cells_complete":  true,
+    "cells":  [
+                  {
+                      "cell":  "SHD_DTH",
+                      "accuracy_percent":  92.71201413427562,
+                      "selected_epoch":  27,
+                      "checkpoint_sha256":  "4e8dd85ac4ce5c4043547cde29710bf48d4d824bf3edd22c94d4a1b556a8015f"
+                  },
+                  {
+                      "cell":  "SHD_DTH_RDrop",
+                      "accuracy_percent":  93.24204946996466,
+                      "selected_epoch":  15,
+                      "checkpoint_sha256":  "a8c9b88899419fdf894186a87ccc29889d3be1e9ac49eb614af8f65a12193483"
+                  },
+                  {
+                      "cell":  "SSC_DTH",
+                      "accuracy_percent":  80.1540575017172,
+                      "selected_epoch":  19,
+                      "checkpoint_sha256":  "395d9d6532efebb1d6d7ad261ca69a815a22a6fc11763719fcfe390e7ad47597"
+                  },
+                  {
+                      "cell":  "SSC_DTH_RDrop",
+                      "accuracy_percent":  80.5318418212148,
+                      "selected_epoch":  19,
+                      "checkpoint_sha256":  "15561257012d2eba48286a538e04c56c5b392bf8651ca89544fcf430e460649f"
+                  }
+              ],
+    "ECG_test_accuracy_percent":  84.37154180363169,
+    "ECG_test_loss":  0.4247657897624564,
+    "ECG_selected_epoch":  28,
+    "ECG_records":  141,
+    "ECG_valid_timesteps":  183441,
+    "ECG_raw_mat_labels_and_record_time_mapping_independently_verified":  true,
+    "report_links_valid":  true,
+    "final_results_sha256":  "76f021e2bfdb8905c7c815af687e38d9e3102ce87e69eb1535850bb5fc1acba7",
+    "ordinary_single_pass":  true,
+    "tta":  false,
+    "no_further_work_scheduled":  true,
+    "training_active":  false,
+    "queue_active":  false,
+    "related_process_count_at_final_check":  0
+}

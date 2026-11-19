@@ -1,0 +1,76 @@
+{
+  "verified_at": "2026-11-12T13:43:13.376329+03:30",
+  "status": "original_GPU_high_selection_reproduced",
+  "records": [
+    {
+      "model": "SE_adLIF",
+      "accuracy": 0.818348623853211,
+      "cross_entropy": 0.9220763444900513,
+      "ece15": 0.11447259109319168,
+      "brier_sum_over_classes": 0.3045027119322384,
+      "mean_confidence": 0.9305407404899597,
+      "mean_wrong_confidence": 0.8176701068878174,
+      "per_speaker": {
+        "0": {
+          "recordings": 913,
+          "accuracy": 0.8433734939759037
+        },
+        "3": {
+          "recordings": 722,
+          "accuracy": 0.7867036011080333
+        }
+      },
+      "source_prediction_rows": "results/experiments/complementary_speaker_dev_v2/b002_label_smoothing_v1/primary_0_3/SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_primary_GPU_high_replay1.npz",
+      "source_prediction_sha256": "8e009c6cd60e868262332603fca7a88414a67e5add6f91c15e4e05875d010f7e"
+    },
+    {
+      "model": "LS_SE_adLIF",
+      "accuracy": 0.8654434250764526,
+      "cross_entropy": 0.5944452881813049,
+      "ece15": 0.17795551098450244,
+      "brier_sum_over_classes": 0.2500110404016234,
+      "mean_confidence": 0.6876271963119507,
+      "mean_wrong_confidence": 0.4686432480812073,
+      "per_speaker": {
+        "0": {
+          "recordings": 913,
+          "accuracy": 0.8937568455640745
+        },
+        "3": {
+          "recordings": 722,
+          "accuracy": 0.8296398891966759
+        }
+      },
+      "source_prediction_rows": "results/experiments/complementary_speaker_dev_v2/b002_label_smoothing_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_primary_GPU_high_replay1.npz",
+      "source_prediction_sha256": "230760ba7b136c957c620d17ac5f7539da0bb5423461f158c51a83c25c194c32"
+    }
+  ],
+  "paired_GPU_high_correctness": {
+    "all": {
+      "recordings": 1635,
+      "baseline_only_correct": 52,
+      "LS_only_correct": 129,
+      "both_wrong": 168,
+      "LS_minus_Baseline_pp": 4.70948012232415
+    },
+    "speaker0": {
+      "recordings": 913,
+      "baseline_only_correct": 29,
+      "LS_only_correct": 75,
+      "both_wrong": 68,
+      "LS_minus_Baseline_pp": 5.038335158817087
+    },
+    "speaker3": {
+      "recordings": 722,
+      "baseline_only_correct": 23,
+      "LS_only_correct": 54,
+      "both_wrong": 100,
+      "LS_minus_Baseline_pp": 4.293628808864258
+    }
+  },
+  "backend_finding": "GPU high(TF32 allowed) reproduces retained selected correctness counts and CE within rounding, repeats are label-stable. Switching GPU matmul to highest(TF32 disabled) reduces CPU prediction disagreements from26/30to1/1. Matmul precision explains most observed CPU/GPU discrepancies; residual backend difference remains.",
+  "precision_policy": "Keep original high for all comparisons. Highest remains diagnosis only, not an adopted protocol or selected score.",
+  "interpretation": "Both primary speakers improve under the actual established GPU protocol; calibration remains mixed. One reused development pair, one training seed, validation-selected checkpoints; no causal/population/official-test claim.",
+  "official_test_opened": false,
+  "selection_scores_replaced": false
+}

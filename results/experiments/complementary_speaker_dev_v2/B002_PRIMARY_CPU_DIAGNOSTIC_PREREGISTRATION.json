@@ -1,0 +1,19 @@
+{
+  "created_at": "2026-11-12T13:10:46.795352+03:30",
+  "hypothesis": "Diagnose whether the existing LS-only primary validation gain covers both held speakers and how class/confidence errors change. No new candidate or hyperparameter selection.",
+  "models": [
+    "SE_adLIF",
+    "LS_SE_adLIF"
+  ],
+  "matched_checkpoints": "Own validation-selected30epoch snapshots, exact saved source/split/config/hash",
+  "data": "Frozen primary0/3validation from official training HDF5 only; no secondary or test data",
+  "runtime": "CPU2threads/1interop, no CUDA; same saved1024validation batch, masks and temporal aggregation; workers0",
+  "primary_descriptive_metrics": "Per-speaker clean accuracy and paired correctness counts",
+  "support": "Per-class confusion/recall, ordinary CE, ECE15, Brier and wrong-confidence; do not rank candidates on calibration alone",
+  "advancement_rule": "No advancement from this diagnostic alone; current SSC/ECG transfer and final freeze/testing requirements unchanged",
+  "backend_disagreement_rule": "Record CPU-minus-authoritative-GPU difference explicitly; never substitute diagnostic accuracy for original selected score. Investigate material differences before causal interpretation.",
+  "estimated_compute": "About1-5minutes on2CPUthreads; GPU training continues unchanged",
+  "source": "results/experiments/complementary_speaker_dev_v2/B002_PRIMARY_CPU_DIAGNOSTIC_SOURCE.txt",
+  "source_sha256": "a8af8a2fc09e3cc14a21512a0da304a5f4a8b0577f9117f635a98eb04ba15b71",
+  "official_test_opened": false
+}

@@ -1,0 +1,302 @@
+--- a/measure_reference_costs.py
++++ b/measure_reference_costs.py
+@@ -115,13 +115,42 @@
+     return batches, digest.hexdigest()
+ 
+ 
++def input_fir_operations(model, inputs):
++    """Executed scalar work, including zero coefficients and padded slots.
++
++    Count tanh as one logical operation, as for neuron special functions.
++    The shared counter deliberately excludes shape/memory operations. This
++    probe neither mutates weights nor samples randomness.
++    """
++    fir = getattr(model, 'input_fir', None)
++    if fir is None:
++        return Counter()
++    with torch.inference_mode(), shared.ScalarOperations() as counter:
++        fir(inputs)
++    return counter.counts
++
++
+ def measure(model, batches, device, event_input, repeats, warmup):
+     profiles = shared.operation_profiles(model)
+     counts, operations = Counter(), Counter()
++    fir_operations = Counter()
++    has_fir = getattr(model, 'input_fir', None) is not None
++    # A weighted FIR output is analog even when its source was event counts.
++    # Hidden spikes remain binary and retain the existing activity definition.
++    projection_event_input = event_input and not has_fir
++    raw_input_events = 0.0
+     for cpu_batch in batches:
+         inputs, targets, block_idx, lengths = [x.to(device) for x in cpu_batch]
+         b, t = inputs.shape[:2]
+-        counter = ReferenceCounter(model, lengths, event_input)
++        if has_fir:
++            component = input_fir_operations(model, inputs)
++            fir_operations.update(component)
++            operations.update(component)
++            if event_input:
++                if (inputs < 0).any() or not torch.equal(inputs, inputs.round()):
++                    raise ValueError('FIR event-source costs require original nonnegative integer counts')
++                raw_input_events += float(inputs.sum(dtype=torch.float64))
++        counter = ReferenceCounter(model, lengths, projection_event_input)
+         try:
+             outputs = model(inputs)
+         finally:
+@@ -161,7 +190,7 @@
+                for cell in [model.l1, model.l2, model.out_layer])
+     dense = 2 * macs * counts['padded_sample_timesteps'] / n / 1e9
+     arith = sum(v for k, v in operations.items() if k in ARITHMETIC) / n / 1e9
+-    return dict(totals=dict(counts), operation_profiles=profiles,
++    result = dict(totals=dict(counts), operation_profiles=profiles,
+         nonmatrix_scalar_operations_by_kind=dict(operations),
+         total_parameters=sum(p.numel() for p in model.parameters()),
+         trainable_parameters=sum(p.numel() for p in model.parameters() if p.requires_grad),
+@@ -174,10 +203,20 @@
+         nonmatrix_ops_per_sample=sum(operations.values()) / n,
+         dense_gflops_test_padded=dense, arithmetic_gflops_test_padded=dense + arith,
+         logical_gops_test_padded=dense + sum(operations.values()) / n / 1e9,
+-        analog_input_dense_macs_per_sample=(0 if event_input else
++        analog_input_dense_macs_per_sample=(0 if projection_event_input else
+             model.l1.weight.numel() * counts['padded_sample_timesteps'] / n),
+         forward_ms_per_sample=statistics.mean(times), timing_repeat_ms_per_sample=times,
+         reproduced_test_acc=counts['correct'] / counts['targets'])
++    if has_fir:
++        result.update(
++            first_projection_input_kind='FIR-filtered analog values',
++            synops_scope='Hidden-driven connections only; filtered analog first projection excluded',
++            raw_input_events_per_sample=raw_input_events / n if event_input else None,
++            input_fir_scalar_operations_by_kind=dict(fir_operations),
++            input_fir_arithmetic_ops_per_sample=sum(v for k, v in fir_operations.items() if k in ARITHMETIC) / n,
++            input_fir_logical_ops_per_sample=sum(fir_operations.values()) / n,
++        )
++    return result
+ 
+ 
+ def update_report(output=None):
+--- a/measure_run_costs.py
++++ b/measure_run_costs.py
+@@ -5,6 +5,7 @@
+ import io
+ import json
+ import platform
++import importlib.metadata
+ from pathlib import Path
+ 
+ from omegaconf import OmegaConf
+@@ -12,11 +13,11 @@
+ 
+ import measure_reference_costs as reference
+ import measure_shd_costs as shared
+-from models.pl_module import layer_map
++from models.pl_module import layer_map, build_training_model
+ from project_paths import local_path, portable_config, portable_path
+ from cost_records import normalized_record
+ 
+-VERSION = 'runner_test_costs_v1'
++VERSION = 'runner_test_costs_v2_fir'
+ TARGETS = {'SHD': 'datasets.shd.SHDLDM', 'SSC': 'datasets.ssc.SSCLDM',
+            'ECG': 'datasets.ecg.ECGLDM'}
+ 
+@@ -60,6 +61,10 @@
+               'Runtime is forward-only, excluding data loading, transfer, loss and temporal aggregation.',
+               'These test measurements are separate from the validation GFLOPs estimate above.',
+               'Detailed measurements, checkpoint identity and environment: [COST_RESULTS.json](COST_RESULTS.json) / [COST_RESULTS.md](COST_RESULTS.md).', end]
++    if 'input_fir_arithmetic_ops_per_sample' in metrics:
++        lines.insert(-1,
++            'Input FIR is included in forward runtime and scalar arithmetic. Its first projection is analog: '
++            'SynOps here cover hidden-driven connections only and are incompatible with raw-event total SynOps.')
+     temporary = path.with_suffix('.md.costs.tmp')
+     temporary.write_text(before.rstrip() + '\n\n' + '\n'.join(lines) + after.rstrip() + '\n', encoding='utf-8')
+     temporary.replace(path)
+@@ -121,6 +126,8 @@
+     result_path = directory / 'COST_RESULTS.json'
+     if result_path.exists():
+         old = normalized_record(json.loads(result_path.read_text(encoding='utf-8')))
++        if cfg.get('input_fir') and old.get('version') != VERSION:
++            raise ValueError('Preserve the older FIR cost record before explicit versioned remeasurement')
+         if (old.get('status') != 'complete' or old.get('checkpoint_sha256') != digest
+                 or old.get('dataset') != dataset or old.get('seed') != cfg.random_seed):
+             raise ValueError('Existing cost record has a different checkpoint/protocol; preserve it before remeasurement')
+@@ -131,7 +138,7 @@
+     torch.set_float32_matmul_precision('high')
+     device = torch.device(str(cfg.device))
+     with redirect_stdout(io.StringIO()):
+-        model = shared.MLPSNN(cfg)
++        model = build_training_model(cfg)
+     model.load_state_dict(checkpoint['state_dict'], strict=True)
+     model.to(device).eval()
+     print(f'Measuring {dataset} test activity/cost: {portable_path(path)}', flush=True)
+@@ -147,15 +154,22 @@
+         checkpoint_sha256=digest, best_epoch=int(checkpoint['epoch']),
+         saved_config=portable_config(OmegaConf.to_container(cfg, resolve=True)), data_sha256=data_hash,
+         environment=dict(python=platform.python_version(), torch=torch.__version__, cuda=torch.version.cuda,
++            packages={name:importlib.metadata.version(name) for name in
++                      ['torch','tonic','numpy','h5py','pytorch-lightning','hydra-core','omegaconf']},
+             device=str(device), gpu=torch.cuda.get_device_name(device) if device.type == 'cuda' else platform.processor(),
+             matmul_precision=torch.get_float32_matmul_precision(), timing_repeats=3, warmup=2,
+             source_sha256={portable_path(p): shared.sha256(p) for p in
+                 [Path(__file__), Path(__file__).with_name('cost_records.py'), Path(shared.__file__), Path(reference.__file__),
++                 shared.ROOT / 'functional/count_thinning.py',
++                 shared.ROOT / f'datasets/{dataset.lower()}.py',
++                 shared.ROOT / 'datasets/utils/pad_tensors.py',
++                 shared.ROOT / 'datasets/utils/transforms.py',
+                  *sorted((shared.ROOT / 'models').rglob('*.py'))]}),
+         scopes=dict(activity='Stored sequence extent before batch padding, including configured minimum padding and burn-in',
+-            compute='Executed batch-padded timesteps; MLPSNN.forward only',
++            compute='Executed batch-padded timesteps; registered model forward including optional input FIR',
+             timing='Synchronized forward wall time; excludes transfer/loading/loss/temporal aggregation',
+-            synops='Dense fan-out event estimate; ECG analog input projection excluded and stored as dense MACs',
++            synops=('Hidden-driven event fan-out only; FIR-filtered analog first projection stored as dense MACs; incompatible with raw-event total SynOps'
++                    if cfg.get('input_fir') else 'Dense fan-out event estimate; ECG analog input projection excluded and stored as dense MACs'),
+             arithmetic='Matrix MAC=2 FLOPs; selected scalar arithmetic; nonlinearities/comparisons excluded',
+             logical='Matrix operations plus scalar operations, nonlinearities/comparisons each counted as one; not hardware FLOPs'),
+         measurements=metrics)
+@@ -169,6 +183,11 @@
+         lines.append(f'| {key} | {metrics[key]:.6f} |')
+     lines += ['', 'Activity is per stored sequence (including minimum padding/burn-in); compute includes batch padding.',
+               'ECG SynOps exclude analog input; arithmetic/logical estimates are not exact full end-to-end FLOPs or energy.']
++    if cfg.get('input_fir'):
++        lines += ['', 'FIR source counts and filtered analog values are distinct. First-projection dense MACs and FIR scalar arithmetic are included. '
++                  'FIR SynOps cover hidden-driven connections only and must not be directly compared with raw-event-input total SynOps.',
++                  f'FIR arithmetic operations/sample: {metrics["input_fir_arithmetic_ops_per_sample"]:.6f}',
++                  f'FIR logical operations/sample: {metrics["input_fir_logical_ops_per_sample"]:.6f}']
+     temporary = directory / 'COST_RESULTS.md.tmp'
+     temporary.write_text('\n'.join(lines) + '\n', encoding='utf-8')
+     temporary.replace(directory / 'COST_RESULTS.md')
+--- a/measure_shd_costs.py
++++ b/measure_shd_costs.py
+@@ -130,7 +130,7 @@
+               'index_select', 'cat', 'stack', 'clone', 'copy_', 'lift_fresh',
+               'lift_fresh_copy', '_to_copy', 'to', 'empty', 'empty_like',
+               'empty_strided', 'zeros', 'zeros_like', 'ones_like', 'full_like',
+-              'fill_', 'new_zeros', 'new_empty', 'constant_pad_nd'}
++              'fill_', 'new_zeros', 'new_empty', 'constant_pad_nd', 'pad'}
+ 
+     def __init__(self):
+         super().__init__()
+--- a/cost_records.py
++++ b/cost_records.py
+@@ -5,7 +5,7 @@
+ 
+ ARITHMETIC = {'add', 'sub', 'rsub', 'mul', 'div', 'neg', 'reciprocal',
+               'sum', 'mean', 'bias_add', 'square'}
+-VERSIONS = {'runner_test_costs_v1', 'shd_costs_v1', 'reference_test_costs_v1'}
++VERSIONS = {'runner_test_costs_v1', 'runner_test_costs_v2_fir', 'shd_costs_v1', 'reference_test_costs_v1'}
+ 
+ 
+ def seed_directory(root, model, dataset, seed):
+@@ -44,7 +44,7 @@
+         raise ValueError('Unknown measurement record version')
+     if r['version'] == 'shd_costs_v1':
+         r.setdefault('dataset', 'SHD')
+-    if r['version'] != 'runner_test_costs_v1':
++    if r['version'] not in {'runner_test_costs_v1', 'runner_test_costs_v2_fir'}:
+         if not isinstance(r.get('measurements', {}).get('reproduced_test_acc'), (int, float)):
+             raise ValueError('Historical measurement lacks its test-accuracy check')
+         r.setdefault('status', 'complete')
+--- /dev/null
++++ b/tests/test_fir_costs.py
+@@ -0,0 +1,101 @@
++"""CPU-only synthetic inference/accounting checks; no training or test data."""
++import contextlib
++import io
++import json
++from pathlib import Path
++import tempfile
++import unittest
++from unittest.mock import patch
++
++import torch
++from models.pl_module import build_training_model
++from measure_reference_costs import input_fir_operations, measure, ReferenceCounter
++import measure_run_costs
++from tests.test_measure_shd_costs import tiny_model
++
++
++def fixture(lags=(1,3), timesteps=5):
++    base=tiny_model()
++    cfg=base.hparams.cfg.copy();cfg.input_fir={'lags':list(lags)}
++    with contextlib.redirect_stdout(io.StringIO()):
++        fir=build_training_model(cfg).eval()
++    missing=fir.load_state_dict(base.state_dict(),strict=False)
++    assert missing.missing_keys==['input_fir.coefficients'] and not missing.unexpected_keys
++    x=torch.ones(3,timesteps,4)
++    block=torch.ones(3,timesteps,dtype=torch.long)
++    with torch.inference_mode():pred=fir(x).softmax(-1).sum(1).argmax(-1)
++    target=torch.stack([torch.full_like(pred,-1),pred],dim=1)
++    return base,fir,(x,target,block,torch.full((3,),timesteps,dtype=torch.long))
++
++
++class FIRCostTests(unittest.TestCase):
++    def test_executed_identity_filter_costs_and_short_sequence_boundary(self):
++        base,fir,batch=fixture()
++        with torch.inference_mode():
++            torch.testing.assert_close(fir(batch[0]),base(batch[0]),rtol=0,atol=0)
++        # Two active taps multiply/add every padded slot, even at identity init.
++        self.assertEqual(input_fir_operations(fir,batch[0]),{'tanh':8,'mul':120,'add':120})
++        self.assertEqual(input_fir_operations(fir,batch[0][:,:1]),{'tanh':8})
++        self.assertEqual(input_fir_operations(base,batch[0]),{})
++
++    def test_fir_adds_arithmetic_and_uses_analog_first_projection(self):
++        base,fir,batch=fixture()
++        with torch.inference_mode():
++            ordinary=measure(base,[batch],torch.device('cpu'),True,1,0)
++            filtered=measure(fir,[batch],torch.device('cpu'),True,1,0)
++        self.assertEqual(filtered['input_fir_arithmetic_ops_per_sample'],80)
++        self.assertEqual(filtered['input_fir_logical_ops_per_sample'],248/3)
++        self.assertEqual(filtered['analog_input_dense_macs_per_sample'],120)
++        self.assertEqual(ordinary['analog_input_dense_macs_per_sample'],0)
++        self.assertAlmostEqual(filtered['arithmetic_gflops_test_padded']-ordinary['arithmetic_gflops_test_padded'],80/1e9)
++        self.assertAlmostEqual(filtered['logical_gops_test_padded']-ordinary['logical_gops_test_padded'],248/3/1e9)
++        self.assertEqual(filtered['total_parameters']-ordinary['total_parameters'],8)
++        self.assertEqual(filtered['raw_input_events_per_sample'],20)
++        self.assertEqual(filtered['reproduced_test_acc'],ordinary['reproduced_test_acc'])
++        self.assertNotIn('input_fir_scalar_operations_by_kind',ordinary)
++
++    def test_signed_filter_output_is_not_counted_as_negative_events(self):
++        _,fir,batch=fixture()
++        with torch.no_grad():fir.input_fir.coefficients.fill_(-2)
++        with torch.inference_mode():
++            metrics=measure(fir,[batch],torch.device('cpu'),True,1,0)
++            counter=ReferenceCounter(fir,batch[3],False)
++            try:fir(batch[0])
++            finally:activity=counter.close()
++        expected=sum(v[1] for v in activity.values())/3
++        self.assertEqual(metrics['synops_per_sample'],expected)
++        self.assertGreaterEqual(expected,0)
++        self.assertEqual(metrics['raw_input_events_per_sample'],20)
++
++    def test_registered_checkpoint_factory_and_idempotent_measurement(self):
++        _,fir,batch=fixture()
++        cfg=fir.hparams.cfg;cfg.random_seed=42;cfg.device='cpu';cfg.dataset._target_='datasets.shd.SHDLDM'
++        with tempfile.TemporaryDirectory() as tmp:
++            d=Path(tmp);p=d/'best.ckpt'
++            torch.save(dict(state_dict=fir.state_dict(),hyper_parameters=dict(cfg=cfg),epoch=2),p)
++            (d/'completed.txt').touch();(d/'TRAINING_SUMMARY.md').write_text('# Training\nPreserved history\n')
++            with patch.object(measure_run_costs.shared,'selected_checkpoint',return_value=p), \
++                 patch.object(measure_run_costs,'prepare_batches',return_value=([batch],'fixture')) as data, \
++                 patch.object(measure_run_costs.shared,'saved_test_accuracy',return_value=1.), \
++                 contextlib.redirect_stdout(io.StringIO()):
++                first=measure_run_costs.collect(d,'SHD');second=measure_run_costs.collect(d,'SHD')
++            self.assertEqual(first,second);data.assert_called_once()
++            self.assertEqual(first['version'],'runner_test_costs_v2_fir')
++            self.assertEqual(first['measurements']['input_fir_arithmetic_ops_per_sample'],80)
++            self.assertIn('incompatible',first['scopes']['synops'])
++            self.assertIn('Preserved history',(d/'TRAINING_SUMMARY.md').read_text())
++            self.assertIn('first projection is analog',(d/'TRAINING_SUMMARY.md').read_text())
++            self.assertIn('functional/count_thinning.py',first['environment']['source_sha256'])
++            # An older record must not be silently reused for the new FIR scope.
++            old=dict(first,version='runner_test_costs_v1')
++            (d/'COST_RESULTS.json').write_text(json.dumps(old))
++            before=(d/'COST_RESULTS.json').read_bytes()
++            with patch.object(measure_run_costs.shared,'selected_checkpoint',return_value=p), \
++                 patch.object(measure_run_costs,'prepare_batches') as data:
++                with self.assertRaisesRegex(ValueError,'Preserve the older FIR cost record'):
++                    measure_run_costs.collect(d,'SHD')
++                data.assert_not_called()
++            self.assertEqual((d/'COST_RESULTS.json').read_bytes(),before)
++
++
++if __name__=='__main__':unittest.main()

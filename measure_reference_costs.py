@@ -115,13 +115,42 @@ def prepare_batches(dataset, cfg):
     return batches, digest.hexdigest()
 
 
+def input_fir_operations(model, inputs):
+    """Executed scalar work, including zero coefficients and padded slots.
+
+    Count tanh as one logical operation, as for neuron special functions.
+    The shared counter deliberately excludes shape/memory operations. This
+    probe neither mutates weights nor samples randomness.
+    """
+    fir = getattr(model, 'input_fir', None)
+    if fir is None:
+        return Counter()
+    with torch.inference_mode(), shared.ScalarOperations() as counter:
+        fir(inputs)
+    return counter.counts
+
+
 def measure(model, batches, device, event_input, repeats, warmup):
     profiles = shared.operation_profiles(model)
     counts, operations = Counter(), Counter()
+    fir_operations = Counter()
+    has_fir = getattr(model, 'input_fir', None) is not None
+    # A weighted FIR output is analog even when its source was event counts.
+    # Hidden spikes remain binary and retain the existing activity definition.
+    projection_event_input = event_input and not has_fir
+    raw_input_events = 0.0
     for cpu_batch in batches:
         inputs, targets, block_idx, lengths = [x.to(device) for x in cpu_batch]
         b, t = inputs.shape[:2]
-        counter = ReferenceCounter(model, lengths, event_input)
+        if has_fir:
+            component = input_fir_operations(model, inputs)
+            fir_operations.update(component)
+            operations.update(component)
+            if event_input:
+                if (inputs < 0).any() or not torch.equal(inputs, inputs.round()):
+                    raise ValueError('FIR event-source costs require original nonnegative integer counts')
+                raw_input_events += float(inputs.sum(dtype=torch.float64))
+        counter = ReferenceCounter(model, lengths, projection_event_input)
         try:
             outputs = model(inputs)
         finally:
@@ -161,7 +190,7 @@ def measure(model, batches, device, event_input, repeats, warmup):
                for cell in [model.l1, model.l2, model.out_layer])
     dense = 2 * macs * counts['padded_sample_timesteps'] / n / 1e9
     arith = sum(v for k, v in operations.items() if k in ARITHMETIC) / n / 1e9
-    return dict(totals=dict(counts), operation_profiles=profiles,
+    result = dict(totals=dict(counts), operation_profiles=profiles,
         nonmatrix_scalar_operations_by_kind=dict(operations),
         total_parameters=sum(p.numel() for p in model.parameters()),
         trainable_parameters=sum(p.numel() for p in model.parameters() if p.requires_grad),
@@ -174,10 +203,20 @@ def measure(model, batches, device, event_input, repeats, warmup):
         nonmatrix_ops_per_sample=sum(operations.values()) / n,
         dense_gflops_test_padded=dense, arithmetic_gflops_test_padded=dense + arith,
         logical_gops_test_padded=dense + sum(operations.values()) / n / 1e9,
-        analog_input_dense_macs_per_sample=(0 if event_input else
+        analog_input_dense_macs_per_sample=(0 if projection_event_input else
             model.l1.weight.numel() * counts['padded_sample_timesteps'] / n),
         forward_ms_per_sample=statistics.mean(times), timing_repeat_ms_per_sample=times,
         reproduced_test_acc=counts['correct'] / counts['targets'])
+    if has_fir:
+        result.update(
+            first_projection_input_kind='FIR-filtered analog values',
+            synops_scope='Hidden-driven connections only; filtered analog first projection excluded',
+            raw_input_events_per_sample=raw_input_events / n if event_input else None,
+            input_fir_scalar_operations_by_kind=dict(fir_operations),
+            input_fir_arithmetic_ops_per_sample=sum(v for k, v in fir_operations.items() if k in ARITHMETIC) / n,
+            input_fir_logical_ops_per_sample=sum(fir_operations.values()) / n,
+        )
+    return result
 
 
 def update_report(output=None):

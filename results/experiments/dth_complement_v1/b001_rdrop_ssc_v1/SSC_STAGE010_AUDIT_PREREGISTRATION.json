@@ -1,0 +1,17 @@
+{
+  "registered_at": "2026-11-12T19:01:29.697334+00:00",
+  "source": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/SSC_STAGE010_AUDIT_SOURCE.txt",
+  "source_sha256": "5971ce955bf6549d85a375424037e2d2be0f5b1e2204b9bac41941801b1bec8b",
+  "status": "prepared_not_executed",
+  "practical_validation_gain_pp": 0.5,
+  "scope": "Both completed SSC10 arms: actual37tensorinitialstate/RNG/flags,288sourcefiles/9protocolartifacts,fullconfigs,10uniqueepochs,best-last/optimizer/scheduler/2940updates,DTHbackboneandRDropterms,ordinaryfull9981validationreproduction/CE/macroclass/stored-speakers/pairederrors/curves.",
+  "execution_gate": "Onlyafterbothstage010receiptscompleteandlauncher/main/workersconfirmedterminal;noGPUauditduringtraining.",
+  "data_loader": "Auditworkers0only;unchangedorderedpreprocessing,batch1024;originalworker8trainingconfigretained.",
+  "official_test_opened": false,
+  "selection_automated": false,
+  "decision": "Reviewcompletedcurvesandordinarycleanscoresbeforeanyown-last40resume;noautomaticextension.",
+  "pre_execution_label_amendment": {
+    "previous_source_sha256": "798fa3e54e36282a98960d38ed1e6dc9fe1d9a8c766a71acf534c4e596b459be",
+    "reason": "Name reported contrasts DTH+B minus DTH; no endpoint,threshold,model or setting change; source not executed."
+  }
+}

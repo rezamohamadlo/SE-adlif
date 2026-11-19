@@ -1,0 +1,28 @@
+{
+  "comparison_pending_AB": true,
+  "official_test_evaluated": false,
+  "records": [
+    {
+      "clean_heldout_accuracy": 0.8159021139144897,
+      "last_accuracy": 0.7724770903587341,
+      "last_loss": 1.1335947513580322,
+      "model": "SE_adLIF",
+      "selected_completed_epoch": 23,
+      "tail10_mean_accuracy": 0.7903363883495331,
+      "tail10_sample_sd": 0.0156964060750548,
+      "training_accuracy_at_selection": 0.9860026240348816,
+      "validation_loss_at_selection": 0.9617340564727783
+    },
+    {
+      "clean_heldout_accuracy": 0.8293578028678894,
+      "last_accuracy": 0.8232415914535522,
+      "last_loss": 0.8483833074569702,
+      "model": "FIR_SE_adLIF",
+      "selected_completed_epoch": 26,
+      "tail10_mean_accuracy": 0.8171253859996795,
+      "tail10_sample_sd": 0.012313697871892465,
+      "training_accuracy_at_selection": 0.9962565302848816,
+      "validation_loss_at_selection": 0.7857329845428467
+    }
+  ]
+}

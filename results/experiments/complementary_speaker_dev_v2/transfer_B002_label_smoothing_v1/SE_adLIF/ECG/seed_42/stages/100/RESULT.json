@@ -1,0 +1,23 @@
+{
+  "best_checkpoint": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/SE_adLIF/ECG/seed_42/stages/100/best.ckpt",
+  "best_checkpoint_sha256": "f854648dab7e30d2d4001c7ed897cc1b0ac555e0eb5d017a3a21dd536ddc068b",
+  "best_validation_accuracy": 0.7747629880905151,
+  "completed_epochs": 100,
+  "dataset": "ECG",
+  "dataset_label": "ECG",
+  "full_budget": 400,
+  "label_smoothing_epsilon": 0.0,
+  "last_checkpoint": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/SE_adLIF/ECG/seed_42/stages/100/last.ckpt",
+  "last_checkpoint_sha256": "6b306aa35e514307a70ac68a2fd6e98cc801642960381c60e084438eb570c737",
+  "metric": "validation_accuracy",
+  "model": "SE_adLIF",
+  "preliminary": true,
+  "protocol": "label_smoothing_transfer_v1_ECG",
+  "seed": 42,
+  "selected_epoch_index": 98,
+  "split_fingerprint": null,
+  "status": "stage_complete",
+  "test_evaluated": false,
+  "training_objective": "classification",
+  "validation_loss_definition": "ordinary hard-label cross-entropy"
+}

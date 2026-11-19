@@ -1,0 +1,56 @@
+{
+  "decisions": [
+    {
+      "decision": "ADVANCE",
+      "evidence": "Calibration:884 samples/s at1024,61.7%reserved-memory headroom; validation all predictions consistent across tested batches; train fresh matched control.",
+      "next_action": "SHD Baseline and A001 at30 completed epochs, fixedLR.01 and300epoch scheduler metadata"
+    },
+    {
+      "decision": "EXTEND",
+      "evidence": "Best SHD validation +0.429pp with lower loss; sixupdates/epoch and variable curves merit matched75epoch extension, no tests.",
+      "from_epochs": 30,
+      "idea": "A001",
+      "next_action": "Full-resume both arms from their own last.ckpt, unchanged full300 scheduler and frozenbatches.",
+      "stage": 1,
+      "to_epochs": 75
+    },
+    {
+      "decision": "EXTEND",
+      "estimated_compute_seconds": 1412,
+      "evidence": "Best-validation difference +0.0613pp isbelow0.20pp screen threshold and selectedCEisworse, but last15meanaccuracy favorsA by0.993pp with lower variability; bothcurvesunstable and haveonly450updates. Genuinelyinconclusive, no unseentestclaim.",
+      "final_success_metric": "ordinary matchedtestaccuracy on unseenrecords; tests notused to make thisdecision",
+      "from_epochs": 75,
+      "idea": "A001",
+      "next_action": "One declared150epochcheck forbothmatchedarms; ownlastfullresume; no LR/batch/architecture change; do not keep extendingflatresults.",
+      "stage": 1,
+      "to_epochs": 150
+    },
+    {
+      "decision": "REVISE",
+      "evidence": "150epochlaunch didnottrain: source revision guard. Newuserplan requires speaker-disjoint discovery.",
+      "next_action": "Preserve75epochcanonicalweights andreceipts as separate evidence; no earlyofficialtest; v2freshstarts."
+    }
+  ],
+  "final_success_metric": "Matched ordinary testaccuracy across frozen arms and matching seeds",
+  "generalization_endpoint": "ordinary unseen-test accuracy versus matchedSE_adLIF; validation screening isnot proof",
+  "ideas": [
+    {
+      "control": "Matched SE_adLIF, seed42 and split42; baseline inherited; batch frozen after calibration",
+      "epoch_ceiling": 150,
+      "estimated_cost": "~7s training compute/epoch plus validation/I/O/checkpoints; 30 epochs initially estimated 5-10 minutes per arm, not guaranteed.",
+      "hypothesis": "Per-input-channel causal residual FIR before projection improves temporal alignment while preserving initial reference dynamics.",
+      "id": "A001",
+      "initialization": "fresh random; calibration states discarded",
+      "practical_threshold_pp": 0.2,
+      "primary_metric": "best validation accuracy with joint loss, stability and curve review",
+      "primary_metric_scope": "Development screen only; final success is ordinary unseen-test accuracy.",
+      "prior_art_distinction": "Not the retained DA projected-current mixture; signed channel-specific pre-projection filter with identity initialization and wider horizon. Temporal filtering/delay learning itself is established prior art.",
+      "status": "inconclusive_extend_to150",
+      "training_batch": 1024,
+      "validation_batch": 1024
+    }
+  ],
+  "study_status": "canonical_development_superseded_by_speaker_dev_v2",
+  "test_timing_clarification": "User asked final testaccuracy emphasis; await choice on exploratory currentA001 test versus original frozen-fourarm schedule",
+  "version": "complementary_mechanisms_v1"
+}

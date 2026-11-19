@@ -1,0 +1,76 @@
+{
+  "verified_at": "2026-11-12T13:55:06.885609+00:00",
+  "official_train_sha256": "2bddb4bd46732f09982b7d1631b7c29c19853c73d3d240e3eb32bba909bdd6c1",
+  "official_test_opened": false,
+  "splits": [
+    {
+      "pair": "primary_0_3",
+      "fit_speakers": [
+        1,
+        2,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "validation_speakers": [
+        0,
+        3
+      ],
+      "fit_count": 6521,
+      "validation_count": 1635,
+      "all_20_classes_each_side": true,
+      "no_row_or_speaker_overlap": true,
+      "exhaustive": true,
+      "fingerprint": "7712626f45e9e226299fd2984b2a29ccaf173a4d64895b62a0a0386f2895e860",
+      "manifest_sha256": "e015903f8bf0e7889b3a7d83e25992045b284e8e2ad0e3cd8bee2256eb304485"
+    },
+    {
+      "pair": "sensitivity_6_10",
+      "fit_speakers": [
+        0,
+        1,
+        2,
+        3,
+        7,
+        8,
+        9,
+        11
+      ],
+      "validation_speakers": [
+        6,
+        10
+      ],
+      "fit_count": 6920,
+      "validation_count": 1236,
+      "all_20_classes_each_side": true,
+      "no_row_or_speaker_overlap": true,
+      "exhaustive": true,
+      "fingerprint": "a3a3e633e3cf80eb04be16dcb17328502c82533b40f1d9aaf32064daa78cc7a2",
+      "manifest_sha256": "ac34a76a3d3ebab55c486c7b9d22020fe243eeb364aac75fd141d1a4eea6de91"
+    }
+  ],
+  "active_cohort_status": [
+    {
+      "model": "RCN_SE_adLIF",
+      "status": "running",
+      "completed_epochs": 15,
+      "ceiling": 30,
+      "protocol": "shd_speaker_residual_current_norm_v1_primary_0_3",
+      "seed": 42
+    },
+    {
+      "model": "SE_adLIF",
+      "status": "stage_complete",
+      "completed_epochs": 30,
+      "ceiling": 30,
+      "protocol": "shd_speaker_residual_current_norm_v1_primary_0_3",
+      "seed": 42
+    }
+  ],
+  "action": "Preserve current bounded primary speaker-development queue; no launch, resume, stop, source edit, or test evaluation in this plan-review turn.",
+  "advance_rule": "Clean held-out-speaker accuracy supported by hard-label validation CE and learning curves; gap reduction alone insufficient.",
+  "full_goal_complete": false
+}

@@ -1,0 +1,37 @@
+{
+  "arms": [
+    {
+      "all_state_tensors_finite": true,
+      "arm": "SE_adLIF",
+      "total_parameters": 450760,
+      "trainable_parameters": 450020
+    },
+    {
+      "all_state_tensors_finite": true,
+      "arm": "FIR_SE_adLIF",
+      "constant_input_channel_gain_max": 3.9662671089172363,
+      "constant_input_channel_gain_mean": 2.446122169494629,
+      "constant_input_channel_gain_min": 1.5018131732940674,
+      "interpretation": "Signed feature-specific temporal filtering can change gain as well as timing. It is not a pure count-preserving delay.",
+      "lags": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "per_lag_mean": [
+        0.3178161084651947,
+        0.33894607424736023,
+        0.3750077486038208,
+        0.4143519699573517
+      ],
+      "tap_abs_mean": 0.3615685701370239,
+      "tap_max": 0.7817621827125549,
+      "tap_min": -0.0066399057395756245,
+      "total_parameters": 451320,
+      "trainable_parameters": 450580
+    }
+  ],
+  "test_generalization_established": false,
+  "weights_inspected": "validation-selected75epoch stage snapshots; main150epoch training isnot changed"
+}

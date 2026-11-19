@@ -1,0 +1,60 @@
+{
+  "status": "matched_except_explicit_gain_mechanism_and_provenance",
+  "differences": {
+    "ckpt_path": {
+      "baseline": "results/experiments/complementary_speaker_dev_v2/transfer_A002_gain_v1/SE_adLIF/SSC/seed_42/ckpt/last.ckpt",
+      "gain": "results/experiments/complementary_speaker_dev_v2/transfer_A002_gain_v1/GAIN_SE_adLIF/SSC/seed_42/ckpt/last.ckpt"
+    },
+    "exp_name": {
+      "baseline": "SSC_SE_adLIF",
+      "gain": "SSC_GAIN_SE_adLIF"
+    },
+    "input_fir.lags": {
+      "baseline": null,
+      "gain": [
+        1,
+        2,
+        4,
+        8
+      ]
+    },
+    "input_fir.mode": {
+      "baseline": null,
+      "gain": "gain_only"
+    },
+    "logdir": {
+      "baseline": "results/experiments/complementary_speaker_dev_v2/transfer_A002_gain_v1/SE_adLIF/SSC/seed_42",
+      "gain": "results/experiments/complementary_speaker_dev_v2/transfer_A002_gain_v1/GAIN_SE_adLIF/SSC/seed_42"
+    },
+    "model_variant": {
+      "baseline": "SE_adLIF",
+      "gain": "GAIN_SE_adLIF"
+    },
+    "paper_baseline_deviations": {
+      "baseline": [
+        "validation-only staged discovery; official tests disabled",
+        "batch_size=1024; LR unchanged",
+        "full_schedule_epochs=40; explicit staged stops",
+        "num_workers=8; separately measured deterministic data loading",
+        "spawn-safe preprocessing; exact tensor/label/mask parity verified"
+      ],
+      "gain": [
+        "model_variant=GAIN_SE_adLIF",
+        "validation-only staged discovery; official tests disabled",
+        "batch_size=1024; LR unchanged",
+        "full_schedule_epochs=40; explicit staged stops",
+        "num_workers=8; separately measured deterministic data loading",
+        "spawn-safe preprocessing; exact tensor/label/mask parity verified"
+      ]
+    },
+    "run_mode": {
+      "baseline": "reference",
+      "gain": "ours"
+    },
+    "study_hypothesis": {
+      "baseline": "Fresh matched dataset-specific reference control; no historical weights or changed optimization.",
+      "gain": "A002 factorized channel gain tests cross-dataset transfer of the two speaker-pair accuracy gains; confidence diagnostics are mixed, and no novelty or test improvement is assumed."
+    }
+  },
+  "official_test_opened": false
+}

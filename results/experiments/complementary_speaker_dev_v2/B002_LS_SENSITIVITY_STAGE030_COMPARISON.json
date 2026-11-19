@@ -1,0 +1,53 @@
+{
+  "status": "verified_fixed_pair_sensitivity_complete",
+  "validation_speakers": [
+    6,
+    10
+  ],
+  "training_seed": 42,
+  "completed_epochs_per_arm": 30,
+  "full_budget": 300,
+  "records": [
+    {
+      "model": "SE_adLIF",
+      "arm": "Baseline",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/b002_label_smoothing_v1/sensitivity_6_10/SE_adLIF/SHD/seed_42/stages/030/RESULT.json",
+      "selected_validation_accuracy": 0.8430420756340027,
+      "selected_completed_epoch": 30,
+      "training_accuracy_at_selection": 0.994140625,
+      "validation_loss_at_selection": 0.6967836618423462,
+      "training_loss_at_selection": 0.02150576002895832,
+      "training_hard_ce_at_selection": 0.02150576002895832,
+      "final_training_accuracy": 0.994140625,
+      "final_validation_accuracy": 0.8430420756340027,
+      "tail10_mean_accuracy": 0.8272653758525849,
+      "tail10_epoch_sample_sd": 0.013196775891062584,
+      "epsilon": 0
+    },
+    {
+      "model": "LS_SE_adLIF",
+      "arm": "LS0.1",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/b002_label_smoothing_v1/sensitivity_6_10/LS_SE_adLIF/SHD/seed_42/stages/030/RESULT.json",
+      "selected_validation_accuracy": 0.8948220014572144,
+      "selected_completed_epoch": 26,
+      "training_accuracy_at_selection": 0.9944661259651184,
+      "validation_loss_at_selection": 0.5316434502601624,
+      "training_loss_at_selection": 0.6967763304710388,
+      "training_hard_ce_at_selection": 0.1665068119764328,
+      "final_training_accuracy": 0.9964192509651184,
+      "final_validation_accuracy": 0.8600323796272278,
+      "tail10_mean_accuracy": 0.8758899688720703,
+      "tail10_epoch_sample_sd": 0.01522334590027583,
+      "epsilon": 0.1
+    }
+  ],
+  "LS_minus_Baseline_pp": 5.177992582321167,
+  "threshold_pp": 0.5,
+  "shared_config_match_verified": true,
+  "source_archive_unchanged_verified": true,
+  "decision": "ADVANCE_LS_ONLY_TO_MATCHED_SSC_VALIDATION_SCREEN_AFTER_CURRENT_OBJECTIVE_CALIBRATION",
+  "interpretation": "LS-only improves clean accuracy and ordinary validation CE on both predefined pairs; shortlist component for cross-dataset checks, no pair/epsilon tuning. This is one training seed, previously observed training-speaker pairs, short30epoch budgets and validation-selected peaks; not independent final-test or population evidence. Gain+LS is not established as complementary. Two-idea goal remains incomplete.",
+  "official_test_evaluated": false,
+  "next_action": "Disposable SSC current-source/LS-objective batch1024 and validation parity confirmation, discard states; then fresh matched Baseline/LS-only SSC10screen with original40schedule.",
+  "training_accuracy_definition": "Training accuracy is the logged online epoch aggregate with dropout active and weights changing across batches. It is not a clean full-training-set reevaluation of the fixed selected checkpoint. Validation is a clean fixed-checkpoint pass; the gap alone is not a success criterion."
+}

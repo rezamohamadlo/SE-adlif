@@ -1,0 +1,41 @@
+{
+  "actual_common_initial_tensors_match": true,
+  "actual_cpu_and_cuda_rng_hashes_match": true,
+  "intended_objective_pairs_full_state_hashes_match": true,
+  "execution_flags_match": true,
+  "records": {
+    "SE_adLIF": {
+      "path": "results/experiments/complementary_speaker_dev_v2/c004_current_normalization_v1/primary_0_3/SE_adLIF/SHD/seed_42/INITIAL_MODEL_STATE.json",
+      "file_sha256": "e435226c6513e9dbe6124c953efba6f2e3ce1550f791ae395ffc85fb445b315e",
+      "model_state_sha256": "6830e803aa1acda8558c1b87f7c4302599a13a52187b08b61aae3a1f5738301e",
+      "tensor_count": 31,
+      "cpu_rng_sha256": "9629fe96092d61990f320567f2980fc83aec529bb2bc7e956645f626f84e0486",
+      "cuda_rng_sha256": "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+    },
+    "RCN_SE_adLIF": {
+      "path": "results/experiments/complementary_speaker_dev_v2/c004_current_normalization_v1/primary_0_3/RCN_SE_adLIF/SHD/seed_42/INITIAL_MODEL_STATE.json",
+      "file_sha256": "67b35c14527174404110f6088a1fbb9a8a7a915186670bef4b008ac9f99124ea",
+      "model_state_sha256": "8659c0c4388d534a887cc8e8542fdb648990fea5a761caf843d5e9ddf7640fe7",
+      "tensor_count": 33,
+      "cpu_rng_sha256": "9629fe96092d61990f320567f2980fc83aec529bb2bc7e956645f626f84e0486",
+      "cuda_rng_sha256": "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+    },
+    "RCN_LS_SE_adLIF": {
+      "path": "results/experiments/complementary_speaker_dev_v2/c004_current_normalization_v1/primary_0_3/RCN_LS_SE_adLIF/SHD/seed_42/INITIAL_MODEL_STATE.json",
+      "file_sha256": "b6ef1d8052883b33f98f582f9691699d53c773d5635dbabf9b38a9ca574a3493",
+      "model_state_sha256": "8659c0c4388d534a887cc8e8542fdb648990fea5a761caf843d5e9ddf7640fe7",
+      "tensor_count": 33,
+      "cpu_rng_sha256": "9629fe96092d61990f320567f2980fc83aec529bb2bc7e956645f626f84e0486",
+      "cuda_rng_sha256": "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+    },
+    "LS_SE_adLIF": {
+      "path": "results/experiments/complementary_speaker_dev_v2/c004_current_normalization_v1/primary_0_3/LS_SE_adLIF/SHD/seed_42/INITIAL_MODEL_STATE.json",
+      "file_sha256": "0d27ea58cb55ee8215ee9b03aac48dde773a499cccccfb418c38b651b0143245",
+      "model_state_sha256": "6830e803aa1acda8558c1b87f7c4302599a13a52187b08b61aae3a1f5738301e",
+      "tensor_count": 31,
+      "cpu_rng_sha256": "9629fe96092d61990f320567f2980fc83aec529bb2bc7e956645f626f84e0486",
+      "cuda_rng_sha256": "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+    }
+  },
+  "caveat": "Matching actual initial weights and RNG state does not establish identical subsequent numerical trajectories."
+}

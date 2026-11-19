@@ -1,0 +1,20 @@
+{
+  "verified_at": "2026-11-12T13:56:14.011117+00:00",
+  "actual_common_initial_tensors_match": true,
+  "execution_and_initial_rng_flags_match": [
+    "cpu_rng_sha256",
+    "cuda_rng_sha256",
+    "precision",
+    "float32_matmul_precision",
+    "deterministic_algorithms",
+    "cuda_allow_tf32",
+    "cublas_workspace_config"
+  ],
+  "extra_parameters": [
+    "l1.current_norm_gate",
+    "l2.current_norm_gate"
+  ],
+  "source269files_unchanged": true,
+  "all_four_arm_initial_comparison": "pendingremainingfreshstarts",
+  "caveat": "Matching start values does not imply identical later numerical trajectories."
+}

@@ -1,0 +1,46 @@
+{
+  "registered_at": "2026-11-12T15:08:37.991740+00:00",
+  "status": "beforesensitivitytraining",
+  "study_file": "config/studies/complementary_C005_dropout_sensitivity_v1.yaml",
+  "shortlist": "C005_SHORTLIST.json",
+  "hypothesis": "Fixedalpha1RDropmayormaynottransferacrossthepredefinedheld-speakerpair;freshownsplitonly,nosecondarytuning.",
+  "models": [
+    "SE_adLIF",
+    "RDROP_SE_adLIF"
+  ],
+  "training_seed": 42,
+  "validation_speakers": [
+    6,
+    10
+  ],
+  "fit_speakers": [
+    0,
+    1,
+    2,
+    3,
+    7,
+    8,
+    9,
+    11
+  ],
+  "fit_validation_recordings": [
+    6920,
+    1236
+  ],
+  "practical_threshold_pp": 0.5,
+  "advancement": "RDrop-baseline>=+0.5pp supportedbyordinaryCE/curves. Mixed/negativeoutcomeisreported;noalpha/dropout/pair/budgetsweep. SSC/ECGonlyafterreview;canonicalownsplit/finaltestsremainlater.",
+  "batch_size": 1024,
+  "LR": 0.01,
+  "dropout": 0.15,
+  "precision": "32-true/high",
+  "full_schedule": 300,
+  "stage_ceiling": 30,
+  "fresh_weights_and_optimizer": true,
+  "primary_or_calibration_weights_reused": false,
+  "cost_minutes_estimate": [
+    13,
+    20
+  ],
+  "data_preflight": "Verifyfrozenindices/role/all20classes/exposure andlongestactualprocessedfittingsequenceagainstverified342framecalibrationbeforelaunch.",
+  "official_test_allowed": false
+}

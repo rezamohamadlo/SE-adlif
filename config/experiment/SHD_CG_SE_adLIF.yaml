@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - SHD_RCN_SE_adLIF
+  - /paper_baseline
+  - _self_
+exp_name: SHD_CG_SE_adLIF
+l1:
+  cell: current_gain_se_adlif
+  current_norm_mode: gain_only
+l2:
+  cell: current_gain_se_adlif
+  current_norm_mode: gain_only

@@ -1,0 +1,39 @@
+{
+  "recorded_at": "2026-11-12T10:51:11.173375+00:00",
+  "decision": "EXTEND_MATCHED_50_TO100_UNDERLEARNED_CONTROLS",
+  "evidence": "B002_ECG_STAGE050_COMPARISON.json",
+  "hypothesis": "Assess whether training-only label smoothing improves established ECG validation after both matched controls have learned beyond the weak50epoch stage. No early generalization benefit is assumed.",
+  "prior_art": "Established uniform label smoothing, epsilon0.1; no novelty or complementarity claim.",
+  "primary_metric": "clean ECG validation accuracy; ordinary hard-label CE and learning curves support interpretation",
+  "practical_improvement_threshold_pp": 1.0,
+  "mode": "full_resume_each_own_last_checkpoint",
+  "from_completed_epochs": 50,
+  "to_completed_epochs": 100,
+  "full_scheduler_budget": 400,
+  "settings_changed": false,
+  "checkpoints": [
+    {
+      "model": "SE_adLIF",
+      "checkpoint": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/SE_adLIF/ECG/seed_42/ckpt/last.ckpt",
+      "sha256": "e8fa8c63282147efd1361bd01fdafe2054d1f50537b8d722cc9f660af1c3d183",
+      "epoch_index": 49,
+      "global_step": 100,
+      "optimizer_and_scheduler_present": true
+    },
+    {
+      "model": "LS_SE_adLIF",
+      "checkpoint": "results/experiments/complementary_speaker_dev_v2/transfer_B002_label_smoothing_v1/LS_SE_adLIF/ECG/seed_42/ckpt/last.ckpt",
+      "sha256": "245a3c94f471e858360241de1439a1a953336e89691803bfd271d64645e4ab12",
+      "epoch_index": 49,
+      "global_step": 100,
+      "optimizer_and_scheduler_present": true
+    }
+  ],
+  "estimated_additional_minutes": [
+    18,
+    22
+  ],
+  "official_test_allowed": false,
+  "dry_run": "passed two resumable runs; no training/writes",
+  "next_gate": "Review100stage; no automatic400epoch/final-replication advancement."
+}

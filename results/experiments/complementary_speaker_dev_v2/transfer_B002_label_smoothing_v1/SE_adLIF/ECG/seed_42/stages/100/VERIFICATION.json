@@ -1,0 +1,26 @@
+{
+  "status": "verified_completed_bounded_screen_not_full_budget",
+  "completed_epochs": 100,
+  "full_budget": 400,
+  "preliminary": true,
+  "selected_completed_epoch": 99,
+  "online_training_accuracy_in_selected_epoch": 0.7981991171836853,
+  "validation_accuracy": 0.7747629880905151,
+  "validation_loss": 0.6399042010307312,
+  "tail10_validation_mean": 0.7680886507034301,
+  "initial10_validation_mean": 0.30047911405563354,
+  "macro_class_recall": 0.7358134706810624,
+  "checkpoint_checks": {
+    "best": {
+      "sha256": "f854648dab7e30d2d4001c7ed897cc1b0ac555e0eb5d017a3a21dd536ddc068b",
+      "epoch_index": 98,
+      "global_step": 198
+    },
+    "last": {
+      "sha256": "6b306aa35e514307a70ac68a2fd6e98cc801642960381c60e084438eb570c737",
+      "epoch_index": 99,
+      "global_step": 200
+    }
+  },
+  "official_test_opened": false
+}

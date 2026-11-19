@@ -1,0 +1,18 @@
+﻿{
+    "pid":  25200,
+    "models":  [
+                   "SE_adLIF",
+                   "LS_SE_adLIF"
+               ],
+    "epoch_ceiling":  100,
+    "stderr":  "results/experiments/complementary_speaker_dev_v2/b002_ls_ecg_stage100_stderr.log",
+    "training_seed":  42,
+    "stdout":  "results/experiments/complementary_speaker_dev_v2/b002_ls_ecg_stage100_stdout.log",
+    "decision":  "B002_ECG_STAGE100_DECISION.json",
+    "official_test":  false,
+    "launched_at":  "2026-11-12T14:21:25.1679062+03:30",
+    "mode":  "full_resume_each_own_last",
+    "from_completed_epochs":  50,
+    "dataset":  "ECG",
+    "full_schedule":  400
+}

@@ -1,0 +1,58 @@
+{
+  "FIR_minus_Baseline_pp": 0.917428731918335,
+  "FIR_minus_GAIN_pp": -0.9174346923828125,
+  "GAIN_minus_Baseline_pp": 1.8348634243011475,
+  "completed_epochs_per_arm": 30,
+  "decision": "SHORTLIST_FIR_AND_GAIN_FOR_PREDEFINED_PAIR_SENSITIVITY",
+  "interpretation": "Gain-only exceeds FIR by0.91743pp in primary accuracy; no timing-specific benefit is established. Both beat matched baseline by declared practical threshold, and late-curve means improve, but selected validation loss is worse, especially gain-only; calibration/overconfidence is a concern. One reused development pair, one training seed, no significance claim.",
+  "official_test_evaluated": false,
+  "records": [
+    {
+      "clean_validation_accuracy": 0.8103975653648376,
+      "filter_mode": null,
+      "last_training_accuracy": 0.9957682490348816,
+      "last_validation_accuracy": 0.7944954037666321,
+      "model": "SE_adLIF",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/gain_control_A001_v1/SE_adLIF/SHD/seed_42/stages/030/RESULT.json",
+      "selected_completed_epoch": 18,
+      "tail10_epoch_sample_sd": 0.017623458717704356,
+      "tail10_mean_accuracy": 0.7849541366100311,
+      "training_accuracy_at_selection": 0.9684244990348816,
+      "validation_loss_at_selection": 0.7144078612327576
+    },
+    {
+      "clean_validation_accuracy": 0.819571852684021,
+      "constant_input_gain_mean": 2.271209716796875,
+      "filter_mode": "causal",
+      "last_training_accuracy": 0.9982096552848816,
+      "last_validation_accuracy": 0.7963302731513977,
+      "model": "FIR_SE_adLIF",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/gain_control_A001_v1/FIR_SE_adLIF/SHD/seed_42/stages/030/RESULT.json",
+      "selected_completed_epoch": 24,
+      "tail10_epoch_sample_sd": 0.017556349935503802,
+      "tail10_mean_accuracy": 0.7949847102165222,
+      "training_accuracy_at_selection": 0.9884440302848816,
+      "validation_loss_at_selection": 0.8373631238937378
+    },
+    {
+      "clean_validation_accuracy": 0.8287461996078491,
+      "constant_input_gain_mean": 2.0748517513275146,
+      "filter_mode": "gain_only",
+      "last_training_accuracy": 0.9988606572151184,
+      "last_validation_accuracy": 0.8097859621047974,
+      "model": "GAIN_SE_adLIF",
+      "receipt": "results/experiments/complementary_speaker_dev_v2/gain_control_A001_v1/GAIN_SE_adLIF/SHD/seed_42/stages/030/RESULT.json",
+      "selected_completed_epoch": 27,
+      "tail10_epoch_sample_sd": 0.011480278211671068,
+      "tail10_mean_accuracy": 0.8080122411251068,
+      "training_accuracy_at_selection": 0.9931640625,
+      "validation_loss_at_selection": 1.0140914916992188
+    }
+  ],
+  "status": "verified_primary_development_control_complete",
+  "training_seed": 42,
+  "validation_speakers": [
+    0,
+    3
+  ]
+}

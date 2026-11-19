@@ -1,0 +1,58 @@
+{
+  "model": "DTH_LS_SE_adLIF",
+  "selected_validation_accuracy": 0.8826860785484314,
+  "selected_completed_epoch": 25,
+  "online_training_accuracy_in_selected_epoch": 0.9921875,
+  "validation_loss_at_selection": 0.550308883190155,
+  "last10_validation_mean": 0.8644822001457214,
+  "checkpoint_checks": {
+    "best": {
+      "sha256": "d2deff2c52c0b9c7545315b7397fc66ef1ca19d417cb708f08591d7d6cca9936",
+      "epoch_index": 24,
+      "global_step": 150,
+      "config_matches": true
+    },
+    "last": {
+      "sha256": "80435bcfece9f1507f4211f6ac3fd8ca2a5e5f970e933d91f61ebbe9c13468f7",
+      "epoch_index": 29,
+      "global_step": 180,
+      "config_matches": true
+    }
+  },
+  "per_speaker": {
+    "6": {
+      "recordings": 447,
+      "correct": 401,
+      "accuracy": 0.8970917225950783
+    },
+    "10": {
+      "recordings": 789,
+      "correct": 690,
+      "accuracy": 0.8745247148288974
+    }
+  },
+  "macroclass_recall": 0.8745660780178346,
+  "learned_dth_parameters": {
+    "l1": {
+      "homeostatic_gain": 0.0,
+      "transient_gain": 0.31660395860671997,
+      "static_threshold_min": 0.7827354073524475,
+      "static_threshold_mean": 0.9593450427055359,
+      "static_threshold_max": 1.0450119972229004
+    },
+    "l2": {
+      "homeostatic_gain": 0.20291663706302643,
+      "transient_gain": 0.001148395356722176,
+      "static_threshold_min": 0.9132132530212402,
+      "static_threshold_mean": 0.998230516910553,
+      "static_threshold_max": 1.0625767707824707
+    }
+  },
+  "reproduced_validation_accuracy": 0.8826860841423948,
+  "reproduced_ordinary_ce": 0.5503088978501971,
+  "source_code": "results/experiments/complementary_speaker_dev_v2/C001_SENSITIVITY_STAGE030_AUDIT_SOURCE.txt",
+  "source_sha256": "78407f427a5d9c2c453397b12a299582b89d1e2df40e7f4b1a561325856ad54a",
+  "official_test_evaluated": false,
+  "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c001_dth_ls_v1/sensitivity_6_10/DTH_LS_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+  "raw_prediction_sha256": "7799670920415b39c883c6d19b3b50c4f72025b4214a9123c9218ef514d76af7"
+}

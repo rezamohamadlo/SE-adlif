@@ -1,0 +1,205 @@
+{
+  "verified_at": "2026-11-12T15:05:30.838712+00:00",
+  "status": "matched_alpha0control_stage30_verified_review_required",
+  "control": {
+    "model": "TWO_PASS_SE_adLIF",
+    "selected_validation_accuracy": 0.8103975653648376,
+    "reproduced_validation_accuracy": 0.8103975535168195,
+    "reproduced_ordinary_ce": 1.0507774921003104,
+    "selected_completed_epoch": 29,
+    "validation_loss_at_selection": 1.0507773160934448,
+    "last10_validation_mean": 0.7874006152153015,
+    "per_speaker": {
+      "0": {
+        "recordings": 913,
+        "correct": 776,
+        "accuracy": 0.8499452354874042
+      },
+      "3": {
+        "recordings": 722,
+        "correct": 549,
+        "accuracy": 0.760387811634349
+      }
+    },
+    "checkpoint_checks": {
+      "best": {
+        "sha256": "46f3ba34b60e52f3689873ca8ed77adc9bcdb80af4e0d3b229f55cc603099ec8",
+        "epoch_index": 28,
+        "global_step": 174,
+        "config_matches": true
+      },
+      "last": {
+        "sha256": "31aea116834d4ae3d03d5f3985cbfb41cc7a821a5ac6b35913bfed266918131a",
+        "epoch_index": 29,
+        "global_step": 180,
+        "config_matches": true
+      }
+    },
+    "ordinary_forward_invocations": 2,
+    "trainable_parameters": 450760,
+    "objective_alpha": 0.0,
+    "label_smoothing_epsilon": 0.0,
+    "online_training_accuracy_in_selected_epoch": 0.9970703125,
+    "training_diagnostics": {
+      "train_loss_epoch": {
+        "selected_epoch": 0.014464500360190868,
+        "last_epoch": 0.01215407159179449,
+        "maximum": 3.00398325920105
+      },
+      "train_supervised_loss": {
+        "selected_epoch": 0.014464500360190868,
+        "last_epoch": 0.01215407159179449,
+        "maximum": 3.00398325920105
+      },
+      "train_hard_ce": {
+        "selected_epoch": 0.014464500360190868,
+        "last_epoch": 0.01215407159179449,
+        "maximum": 3.00398325920105
+      },
+      "train_dropout_symmetric_kl": {
+        "selected_epoch": 0.011079532094299793,
+        "last_epoch": 0.010090037249028683,
+        "maximum": 0.03637342527508736
+      }
+    },
+    "official_test_evaluated": false,
+    "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/TWO_PASS_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+    "raw_prediction_sha256": "4a96226e67050493e75c9dca0981ebc8a66573317cbd54eee4615da9220a7d46"
+  },
+  "RDrop_reference": {
+    "model": "RDROP_SE_adLIF",
+    "selected_validation_accuracy": 0.8385320901870728,
+    "selected_completed_epoch": 23,
+    "online_training_accuracy_in_selected_epoch": 0.9827473759651184,
+    "validation_loss_at_selection": 0.9442790746688843,
+    "last10_validation_mean": 0.8034250736236572,
+    "checkpoint_checks": {
+      "best": {
+        "sha256": "32e68fb61eb4cdbfeb072acb86bd74edc40b185fbcefbecaa0c3f355297fc9b4",
+        "epoch_index": 22,
+        "global_step": 138,
+        "config_matches": true
+      },
+      "last": {
+        "sha256": "949c9b1699815f6fa0fb93662f1213061232f2102d1d5c34a6bf8833f57834cf",
+        "epoch_index": 29,
+        "global_step": 180,
+        "config_matches": true
+      }
+    },
+    "per_speaker": {
+      "0": {
+        "recordings": 913,
+        "correct": 819,
+        "accuracy": 0.8970427163198248
+      },
+      "3": {
+        "recordings": 722,
+        "correct": 552,
+        "accuracy": 0.7645429362880887
+      }
+    },
+    "macroclass_recall": 0.8454179548047496,
+    "training_objective_settings": {
+      "training_objective": "classification_dropout_consistency_v1",
+      "label_smoothing_epsilon": 0.0,
+      "dropout_consistency_alpha": 1.0,
+      "inference_forward_passes": 1
+    },
+    "training_epoch_diagnostics": {
+      "train_hard_ce": {
+        "selected_epoch": 0.046984147280454636,
+        "last_epoch": 0.00926420371979475,
+        "maximum": 3.0039827823638916
+      },
+      "train_supervised_loss": {
+        "selected_epoch": 0.046984147280454636,
+        "last_epoch": 0.00926420371979475,
+        "maximum": 3.0039827823638916
+      },
+      "train_dropout_symmetric_kl": {
+        "selected_epoch": 0.013084874488413334,
+        "last_epoch": 0.006904854904860258,
+        "maximum": 0.029082858934998512
+      }
+    },
+    "reproduced_validation_accuracy": 0.8385321100917431,
+    "reproduced_ordinary_ce": 0.9442790936621687,
+    "source_code": "results/experiments/complementary_speaker_dev_v2/C005_PRIMARY_STAGE030_AUDIT_SOURCE.txt",
+    "source_sha256": "c3e28e11d46a4b062d2cf3e56c9f3b7f1f55e937adfa2af21cb575361094746f",
+    "official_test_evaluated": false,
+    "raw_prediction_archive": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/RDROP_SE_adLIF/SHD/seed_42/diagnostic_rows/stage030_validation_predictions.npz",
+    "raw_prediction_sha256": "a8430a71eea0ecf2363b4b247dd1db348fd5c6de6fa80ccc2dabb47633bebd74"
+  },
+  "RDrop_minus_control_pp": 2.8134556574923586,
+  "control_minus_baseline_pp": -1.1009174311926606,
+  "RDrop_minus_control_CE": -0.10649839843814168,
+  "RDrop_minus_control_late10_pp": 1.6024458408355757,
+  "RDrop_minus_control_per_speaker_pp": {
+    "0": 4.70974808324206,
+    "3": 0.41551246537396835
+  },
+  "RDrop_vs_control_paired": {
+    "fixes": 89,
+    "loses": 43,
+    "both_wrong": 221
+  },
+  "matched_configuration_differences": {
+    "study_arm": {
+      "RDrop": "A005 dropout consistency",
+      "control": "Two-pass alpha0 supervised control"
+    },
+    "logdir": {
+      "RDrop": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/RDROP_SE_adLIF/SHD/seed_42",
+      "control": "results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3/TWO_PASS_SE_adLIF/SHD/seed_42"
+    },
+    "paper_baseline_deviations": {
+      "RDrop": [
+        "model_variant=RDROP_SE_adLIF",
+        "validation-only staged discovery; official tests disabled",
+        "batch_size=1024; LR unchanged",
+        "full_schedule_epochs=300; explicit staged stops",
+        "speaker-disjoint development pair=primary_0_3; not canonical SHD*",
+        "training_objective=classification_dropout_consistency_v1",
+        "dropout_consistency_alpha=1; two stochastic training forwards",
+        "label_smoothing_epsilon=0; training only",
+        "single ordinary inference; hard-label validation CE; first-view online train accuracy"
+      ],
+      "control": [
+        "model_variant=TWO_PASS_SE_adLIF",
+        "validation-only staged discovery; official tests disabled",
+        "batch_size=1024; LR unchanged",
+        "full_schedule_epochs=300; explicit staged stops",
+        "speaker-disjoint development pair=primary_0_3; not canonical SHD*",
+        "training_objective=classification_dropout_consistency_v1",
+        "dropout_consistency_alpha=0; two stochastic training forwards",
+        "label_smoothing_epsilon=0; training only",
+        "single ordinary inference; hard-label validation CE; first-view online train accuracy"
+      ]
+    },
+    "exp_name": {
+      "RDrop": "SHD_RDROP_SE_adLIF",
+      "control": "SHD_TWO_PASS_SE_adLIF"
+    },
+    "study_hypothesis": {
+      "RDrop": "A005 dropout consistency; same ordinary SE dynamics and own fresh split.",
+      "control": "Two-pass alpha0 supervised control; same ordinary SE dynamics and own fresh split."
+    },
+    "model_variant": {
+      "RDrop": "RDROP_SE_adLIF",
+      "control": "TWO_PASS_SE_adLIF"
+    },
+    "dropout_consistency_alpha": {
+      "RDrop": 1,
+      "control": 0
+    }
+  },
+  "source277files_unchanged": true,
+  "actual_initial_full_tensor_RNG_flags_match": true,
+  "practical_threshold_pp": 0.5,
+  "source": "results/experiments/complementary_speaker_dev_v2/C005_A_ONLY_CONTROL_STAGE030_AUDIT_SOURCE.txt",
+  "source_sha256": "20a8dda749ff1537b47d284dc830ab2603604afd3b09c3ae4811ce02dfa69efa",
+  "interpretation": "One seed,tuned primary0/3,30/300epochs; opposite speaker effects and repeated-seed variability require care. This control isolates KL from two-forward supervision; no automatic advancement, population significance, synergy, test or paper improvement claim.",
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

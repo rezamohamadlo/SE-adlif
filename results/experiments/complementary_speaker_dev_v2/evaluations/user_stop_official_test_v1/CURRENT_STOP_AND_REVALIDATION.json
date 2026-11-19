@@ -1,0 +1,99 @@
+{
+  "verified_at": "2026-11-12T21:52:49.470786+00:00",
+  "action": "user_requested_stop_and_revalidate_existing_one_time_C005_diagnostic",
+  "original_freeze_time": "2026-11-12T17:41:11.011024+00:00",
+  "original_test_finished_at": "2026-11-12T17:50:30.520821+00:00",
+  "existing_results_reused_without_repeat_inference": true,
+  "frozen_plan_sha256": "8d7bf541b7b648b8e218c3bea44211bd8550574d3f20795443dcdf8adb8337b5",
+  "checks": [
+    {
+      "dataset": "SHD",
+      "model": "SE_adLIF",
+      "checkpoint_and_validation_selection_verified": true,
+      "original_single_pass_results_and_metadata_verified": true
+    },
+    {
+      "dataset": "SHD",
+      "model": "RDROP_SE_adLIF",
+      "checkpoint_and_validation_selection_verified": true,
+      "original_single_pass_results_and_metadata_verified": true
+    },
+    {
+      "dataset": "SHD",
+      "model": "LS_SE_adLIF",
+      "checkpoint_and_validation_selection_verified": true,
+      "original_single_pass_results_and_metadata_verified": true
+    },
+    {
+      "dataset": "SHD",
+      "model": "RDROP_LS_SE_adLIF",
+      "checkpoint_and_validation_selection_verified": true,
+      "original_single_pass_results_and_metadata_verified": true
+    },
+    {
+      "dataset": "SSC",
+      "model": "SE_adLIF",
+      "checkpoint_and_validation_selection_verified": true,
+      "original_single_pass_results_and_metadata_verified": true
+    },
+    {
+      "dataset": "SSC",
+      "model": "RDROP_SE_adLIF",
+      "checkpoint_and_validation_selection_verified": true,
+      "original_single_pass_results_and_metadata_verified": true
+    }
+  ],
+  "current_training_active": false,
+  "current_queue_active": false,
+  "stop_method": "Study-only console Ctrl+C; Lightning acknowledged graceful KeyboardInterrupt; all launcher/training/workers exited.",
+  "stop_boundary": "Interrupted during epoch 8; last completed boundary 7 retained, best completed epoch 6 retained. No new boundary was trained.",
+  "stopped_study": "dth_complement_v1/B001 SSC",
+  "stopped_processes": [
+    23192,
+    8024,
+    6576,
+    28308
+  ],
+  "current_study_checkpoint_preservation": [
+    {
+      "model": "DTH_SE_adLIF",
+      "checkpoint": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/runs/DTH_SE_adLIF/SSC/seed_42/ckpt/epoch=8-step=2646.ckpt",
+      "sha256": "e8e952bb30bc618a31453ea0ce027aa6e42275518a4bc7e047b92e446110b889",
+      "completed_epoch": 9,
+      "global_step": 2646,
+      "optimizer_preserved": true,
+      "scheduler_preserved": true
+    },
+    {
+      "model": "DTH_SE_adLIF",
+      "checkpoint": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/runs/DTH_SE_adLIF/SSC/seed_42/ckpt/last.ckpt",
+      "sha256": "f3d1b2f269d48f0fde6b9917cdac9128eb5d7b6a1670f8e9bd88f44c6813f2f3",
+      "completed_epoch": 10,
+      "global_step": 2940,
+      "optimizer_preserved": true,
+      "scheduler_preserved": true
+    },
+    {
+      "model": "DTH_RDROP_SE_adLIF",
+      "checkpoint": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/runs/DTH_RDROP_SE_adLIF/SSC/seed_42/ckpt/epoch=5-step=1764.ckpt",
+      "sha256": "502cf6e3323824ca9f4f68bfcf9f3121acae6293c32173b019287aae20f50714",
+      "completed_epoch": 6,
+      "global_step": 1764,
+      "optimizer_preserved": true,
+      "scheduler_preserved": true
+    },
+    {
+      "model": "DTH_RDROP_SE_adLIF",
+      "checkpoint": "results/experiments/dth_complement_v1/b001_rdrop_ssc_v1/runs/DTH_RDROP_SE_adLIF/SSC/seed_42/ckpt/last.ckpt",
+      "sha256": "9147d5899f18dcf7eed7d4d593d7c4dd4db525f59091fd89da1209bbf4313a0e",
+      "completed_epoch": 7,
+      "global_step": 2058,
+      "optimizer_preserved": true,
+      "scheduler_preserved": true
+    }
+  ],
+  "unrelated_jobs_terminated": false,
+  "goal_status": "paused",
+  "new_training_or_search_started": false,
+  "test_scores_trigger_further_work": false
+}

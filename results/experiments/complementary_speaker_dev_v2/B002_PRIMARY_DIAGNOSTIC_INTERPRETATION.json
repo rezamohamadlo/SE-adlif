@@ -1,0 +1,128 @@
+{
+  "created_at": "2026-11-12T13:22:11.445551+03:30",
+  "source": "B002_PRIMARY_CPU_DIAGNOSTICS.json",
+  "status": "primary_CPU_and_GPU_diagnostics_complete",
+  "authoritative_GPU_selected_scores_unchanged": true,
+  "both_primary_speakers_improve_on_CPU": true,
+  "speaker0_delta_pp": 4.271631982475355,
+  "speaker3_delta_pp": 5.124653739612183,
+  "paired_correctness": {
+    "all": {
+      "recordings": 1635,
+      "both_correct": 1274,
+      "baseline_only_correct": 57,
+      "LS_only_correct": 133,
+      "both_wrong": 171,
+      "LS_minus_Baseline_pp": 4.648318042813459
+    },
+    "speaker0": {
+      "recordings": 913,
+      "both_correct": 733,
+      "baseline_only_correct": 35,
+      "LS_only_correct": 74,
+      "both_wrong": 71,
+      "LS_minus_Baseline_pp": 4.271631982475355
+    },
+    "speaker3": {
+      "recordings": 722,
+      "both_correct": 541,
+      "baseline_only_correct": 22,
+      "LS_only_correct": 59,
+      "both_wrong": 100,
+      "LS_minus_Baseline_pp": 5.124653739612183
+    }
+  },
+  "calibration_interpretation": "LS improves CPU accuracy, ordinary CE and Brier and reduces wrong-prediction confidence, but ECE15 worsens: average confidence falls below accuracy. Do not claim uniform calibration improvement or fit a temperature to manufacture an accuracy benefit.",
+  "remaining_errors": "171recordings wrong under both selected models; class-specific regressions and persistent confusions remain. These descriptive patterns do not identify a causal mechanism or justify a new heavy combination before transfer checks.",
+  "backend_interpretation": "GPU high(TF32 allowed) reproduces retained selected correctness counts and CE within rounding, repeats are label-stable. Switching GPU matmul to highest(TF32 disabled) reduces CPU prediction disagreements from26/30to1/1. Matmul precision explains most observed CPU/GPU discrepancies; residual backend difference remains.",
+  "class_names_from": "official training HDF5 extra/keys",
+  "class_names": [
+    "zero",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "null",
+    "eins",
+    "zwei",
+    "drei",
+    "vier",
+    "fuenf",
+    "sechs",
+    "sieben",
+    "acht",
+    "neun"
+  ],
+  "lowest_class_recall_deltas": [
+    {
+      "label": 1,
+      "name": "one",
+      "delta_pp": -11.842105263157897
+    },
+    {
+      "label": 2,
+      "name": "two",
+      "delta_pp": -7.692307692307687
+    },
+    {
+      "label": 12,
+      "name": "zwei",
+      "delta_pp": -5.61797752808989
+    }
+  ],
+  "highest_class_recall_deltas": [
+    {
+      "label": 9,
+      "name": "nine",
+      "delta_pp": 35.61643835616438
+    },
+    {
+      "label": 10,
+      "name": "null",
+      "delta_pp": 19.767441860465112
+    },
+    {
+      "label": 8,
+      "name": "eight",
+      "delta_pp": 14.66666666666666
+    }
+  ],
+  "not_established": [
+    "Official-test gain",
+    "Independent speaker-population evidence",
+    "Two complementary improvements",
+    "Uniform calibration improvement",
+    "Cause of CPU/GPU discrepancy"
+  ],
+  "official_test_opened": false,
+  "initial_backend_interpretation": "CPU yields7fewer correct baseline and8fewer correct LS recordings versus original GPU score counts. These are net count differences, not measured numbers of changed predictions. CPU/GPU numeric cause is not isolated. GPU high replay will be checked after active SSC closes; no score replacement or precision selection.",
+  "GPU_replay_verification": "B002_PRIMARY_GPU_REPLAY_VERIFICATION.json",
+  "paired_GPU_high_correctness": {
+    "all": {
+      "recordings": 1635,
+      "baseline_only_correct": 52,
+      "LS_only_correct": 129,
+      "both_wrong": 168,
+      "LS_minus_Baseline_pp": 4.70948012232415
+    },
+    "speaker0": {
+      "recordings": 913,
+      "baseline_only_correct": 29,
+      "LS_only_correct": 75,
+      "both_wrong": 68,
+      "LS_minus_Baseline_pp": 5.038335158817087
+    },
+    "speaker3": {
+      "recordings": 722,
+      "baseline_only_correct": 23,
+      "LS_only_correct": 54,
+      "both_wrong": 100,
+      "LS_minus_Baseline_pp": 4.293628808864258
+    }
+  }
+}

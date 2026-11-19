@@ -1,0 +1,38 @@
+{
+  "registered_at": "2026-11-12T18:40:49.311391+00:00",
+  "source_sha256": "9706d127b02d3ec4bc0d8478370cc236617bb700a191cd1160981c0657d6724f",
+  "hypothesis": "B001fixedalpha1RDrop maycomplementDTH;thisisrealbatchtimingandfinitegradientsmoketestonly.",
+  "models": [
+    "DTH_SE_adLIF",
+    "DTH_RDROP_SE_adLIF"
+  ],
+  "calibration_seed": 117,
+  "training_batch_candidates": [
+    256,
+    512,
+    1024
+  ],
+  "large_batch_expansion": "1024onlyifmeasured512two-graphreservedprojectionretains15percentheadroom",
+  "warmup_steps": 2,
+  "measured_optimizer_steps": 3,
+  "sequence_policy": "Originalfull300frames,includingpreviouslyfrozen128longestSSCtrainingrecordings;no truncation or resolution changes.",
+  "validation_batch_candidates": [
+    256,
+    512,
+    1024
+  ],
+  "official_validation_rows": 9981,
+  "minimum_memory_headroom": 0.15,
+  "LR": 0.006,
+  "LR_scaled": false,
+  "precision": "32true/high",
+  "main_state_reused": false,
+  "states_discarded": true,
+  "prior_source": "results/experiments/complementary_speaker_dev_v2/c005_dropout_ssc_v1/SSC_CALIBRATION_SOURCE.txt",
+  "fitting_indices_reused": "results/experiments/complementary_speaker_dev_v2/SSC_TRAINING_CALIBRATION.json",
+  "main_training_started": false,
+  "pre_execution_path_correction": {
+    "previous_source_sha256": "8cceb51519d13e3434e959e75c3d428d82be03bba2feb1165ed44ac959dec0a3",
+    "reason": "Adapted OUT assignment was relative to the old PARENT; corrected before any execution. Frozen fitting-index PARENT intentionally retained."
+  }
+}

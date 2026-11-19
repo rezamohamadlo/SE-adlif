@@ -1,0 +1,80 @@
+{
+  "verified_at": "2026-11-12T14:41:05.022724+00:00",
+  "status": "first2stage30_CPUcheckpointandCSVverified_remainingqueueactive",
+  "records": [
+    {
+      "model": "SE_adLIF",
+      "selected_validation_accuracy": 0.8214067220687866,
+      "selected_completed_epoch": 30,
+      "ordinary_validation_ce": 0.946418046951294,
+      "last10_validation_mean": 0.7949235618114472,
+      "checkpoints": {
+        "best": {
+          "sha256": "ed1c6d1084058cc495404a4e5022437704d5f540dae26f48d1a2d29b7260852f",
+          "epoch_index": 29,
+          "global_step": 180,
+          "saved_config_matches": true
+        },
+        "last": {
+          "sha256": "ed1c6d1084058cc495404a4e5022437704d5f540dae26f48d1a2d29b7260852f",
+          "epoch_index": 29,
+          "global_step": 180,
+          "saved_config_matches": true
+        }
+      },
+      "training_objective_diagnostics": {}
+    },
+    {
+      "model": "RDROP_SE_adLIF",
+      "selected_validation_accuracy": 0.8385320901870728,
+      "selected_completed_epoch": 23,
+      "ordinary_validation_ce": 0.9442790746688843,
+      "last10_validation_mean": 0.8034250736236572,
+      "checkpoints": {
+        "best": {
+          "sha256": "32e68fb61eb4cdbfeb072acb86bd74edc40b185fbcefbecaa0c3f355297fc9b4",
+          "epoch_index": 22,
+          "global_step": 138,
+          "saved_config_matches": true
+        },
+        "last": {
+          "sha256": "949c9b1699815f6fa0fb93662f1213061232f2102d1d5c34a6bf8833f57834cf",
+          "epoch_index": 29,
+          "global_step": 180,
+          "saved_config_matches": true
+        }
+      },
+      "training_objective_diagnostics": {
+        "train_loss_epoch": {
+          "selected": 0.06006902456283569,
+          "last": 0.01616905815899372,
+          "maximum": 3.0039827823638916
+        },
+        "train_supervised_loss": {
+          "selected": 0.046984147280454636,
+          "last": 0.00926420371979475,
+          "maximum": 3.0039827823638916
+        },
+        "train_dropout_symmetric_kl": {
+          "selected": 0.013084874488413334,
+          "last": 0.006904854904860258,
+          "maximum": 0.029082858934998512
+        },
+        "train_hard_ce": {
+          "selected": 0.046984147280454636,
+          "last": 0.00926420371979475,
+          "maximum": 3.0039827823638916
+        },
+        "maximum_loss_decomposition_roundoff": 3.189197741448879e-07
+      }
+    }
+  ],
+  "A_minus_Baseline_pp": 1.7125368118286133,
+  "A_minus_Baseline_CE": -0.002138972282409668,
+  "A_minus_Baseline_late10_pp": 0.8501511812210039,
+  "actual_first_three_full_initial_tensors_and_RNG_flags_match": true,
+  "interpretation": "Positive single-cohort preliminary A accuracy contrast; full four-arm GPU validation reproduction and declared alpha0two-pass control required before KL-specific advancement. Not official-test or paper improvement evidence.",
+  "GPU_audit_done": false,
+  "official_test_evaluated": false,
+  "full_goal_complete": false
+}

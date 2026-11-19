@@ -1,0 +1,102 @@
+version: complementary_speaker_dev_v2
+candidate_version: A005_B002_dropout_consistency_v1
+protocol_id: shd_speaker_dropout_consistency_v1
+plan: docs/experiments/complementary-C005-dropout-consistency-v1.md
+output_root: results/experiments/complementary_speaker_dev_v2/c005_dropout_consistency_v1/primary_0_3
+idea: A005_B002_DROPOUT_CONSISTENCY
+role: development
+pair_id: primary_0_3
+validation_speakers:
+- 0
+- 3
+split_manifest: results/experiments/complementary_speaker_dev_v2/primary_0_3/SPLIT_MANIFEST.json
+split_fingerprint: 7712626f45e9e226299fd2984b2a29ccaf173a4d64895b62a0a0386f2895e860
+training_seed: 42
+split_seed: 42
+hypothesis: Independent dropout-pass agreement may improve clean held-out-speaker
+  generalization; not assumed from fitting susceptibility.
+models:
+- SE_adLIF
+- RDROP_SE_adLIF
+- RDROP_LS_SE_adLIF
+- LS_SE_adLIF
+- TWO_PASS_SE_adLIF
+- TWO_PASS_LS_SE_adLIF
+arm_labels:
+  SE_adLIF: Baseline
+  RDROP_SE_adLIF: A005 dropout consistency
+  RDROP_LS_SE_adLIF: A005+B002 dropout consistency and smoothing
+  LS_SE_adLIF: B002 smoothing
+  TWO_PASS_SE_adLIF: Two-pass alpha0 supervised control
+  TWO_PASS_LS_SE_adLIF: Two-pass alpha0 supervised and smoothing control
+spike_deletion:
+  SE_adLIF: 0
+  RDROP_SE_adLIF: 0
+  RDROP_LS_SE_adLIF: 0
+  LS_SE_adLIF: 0
+  TWO_PASS_SE_adLIF: 0
+  TWO_PASS_LS_SE_adLIF: 0
+input_fir_modes:
+  SE_adLIF: null
+  RDROP_SE_adLIF: null
+  RDROP_LS_SE_adLIF: null
+  LS_SE_adLIF: null
+  TWO_PASS_SE_adLIF: null
+  TWO_PASS_LS_SE_adLIF: null
+training_objectives:
+  SE_adLIF: classification
+  RDROP_SE_adLIF: classification_dropout_consistency_v1
+  RDROP_LS_SE_adLIF: classification_dropout_consistency_v1
+  LS_SE_adLIF: classification_label_smoothing_v1
+  TWO_PASS_SE_adLIF: classification_dropout_consistency_v1
+  TWO_PASS_LS_SE_adLIF: classification_dropout_consistency_v1
+label_smoothing_epsilon:
+  SE_adLIF: 0
+  RDROP_SE_adLIF: 0
+  RDROP_LS_SE_adLIF: 0.1
+  LS_SE_adLIF: 0.1
+  TWO_PASS_SE_adLIF: 0
+  TWO_PASS_LS_SE_adLIF: 0.1
+hidden_cells:
+  SE_adLIF: se_adlif
+  RDROP_SE_adLIF: se_adlif
+  RDROP_LS_SE_adLIF: se_adlif
+  LS_SE_adLIF: se_adlif
+  TWO_PASS_SE_adLIF: se_adlif
+  TWO_PASS_LS_SE_adLIF: se_adlif
+hidden_cell_settings: {}
+hypotheses:
+  SE_adLIF: Baseline; same ordinary SE dynamics and own fresh split.
+  RDROP_SE_adLIF: A005 dropout consistency; same ordinary SE dynamics and own fresh
+    split.
+  RDROP_LS_SE_adLIF: A005+B002 dropout consistency and smoothing; same ordinary SE
+    dynamics and own fresh split.
+  LS_SE_adLIF: B002 smoothing; same ordinary SE dynamics and own fresh split.
+  TWO_PASS_SE_adLIF: Two-pass alpha0 supervised control; same ordinary SE dynamics
+    and own fresh split.
+  TWO_PASS_LS_SE_adLIF: Two-pass alpha0 supervised and smoothing control; same ordinary
+    SE dynamics and own fresh split.
+datasets:
+  SHD:
+    batch_size: 1024
+    validation_batch_size: 1024
+    ceilings:
+    - 30
+    - 75
+    stage: 1
+record_initial_state: true
+initial_screen_models:
+- SE_adLIF
+- RDROP_SE_adLIF
+- RDROP_LS_SE_adLIF
+- LS_SE_adLIF
+conditional_two_pass_controls:
+  RDROP_SE_adLIF: TWO_PASS_SE_adLIF
+  RDROP_LS_SE_adLIF: TWO_PASS_LS_SE_adLIF
+dropout_consistency_alpha:
+  SE_adLIF: 0
+  RDROP_SE_adLIF: 1
+  RDROP_LS_SE_adLIF: 1
+  LS_SE_adLIF: 0
+  TWO_PASS_SE_adLIF: 0
+  TWO_PASS_LS_SE_adLIF: 0

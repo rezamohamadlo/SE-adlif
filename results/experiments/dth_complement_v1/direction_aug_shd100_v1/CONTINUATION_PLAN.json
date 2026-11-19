@@ -1,0 +1,160 @@
+{
+  "status": "prepared",
+  "starting_completed_epochs": 41,
+  "target_completed_epochs": 100,
+  "training_seed": 42,
+  "split_seed": 42,
+  "checkpoints": [
+    {
+      "kind": "last",
+      "source_checkpoint": "results/experiments/dth_complement_v1/direction_shd100_v1/runs/DIRECTION_DTH_RDROP_SE_adLIF/SHD/seed_42/ckpt/last.ckpt",
+      "source_checkpoint_sha256": "120b876c36892f29fb90a25a09bb9768cdade9687ac55dc583dbf6faef4d7e56",
+      "derived_checkpoint": "results/experiments/dth_complement_v1/direction_aug_shd100_v1/runs/DIRECTION_AUG_DTH_RDROP_SE_adLIF/SHD/seed_42/ckpt/last.ckpt",
+      "derived_checkpoint_sha256": "a4ab8bc1456dee7d607f35874557ad50381676f7515255ab0ac2083207bc1f5b",
+      "preserved_states": {
+        "state_dict": "5b5071da9c50449e98fabe333725ba50ef9541e5f306fbd6dd425e08edb8329a",
+        "optimizer_states": "b01143b333bb7bce5a6970e4e0302bba0c742420e5f306c71bdc2792762c4c41",
+        "lr_schedulers": "7e9447fec69f90839ec145d0281b9bd85de14604438802187f387027784e67f5",
+        "loops": "f663e0384a2eeb6782a6d8a8f5cd55ae4d648ba767cdaf3ac72f45f03d71b118"
+      },
+      "epoch_index": 40,
+      "global_step": 1025
+    },
+    {
+      "kind": "best",
+      "source_checkpoint": "results/experiments/dth_complement_v1/direction_shd100_v1/runs/DIRECTION_DTH_RDROP_SE_adLIF/SHD/seed_42/ckpt/epoch=28-step=725.ckpt",
+      "source_checkpoint_sha256": "976d5194903ee6e57643f2eabbaa4344a5a73c45b13c3b2190931d5e48218344",
+      "derived_checkpoint": "results/experiments/dth_complement_v1/direction_aug_shd100_v1/runs/DIRECTION_AUG_DTH_RDROP_SE_adLIF/SHD/seed_42/ckpt/epoch=28-step=725.ckpt",
+      "derived_checkpoint_sha256": "29054d4e1e7fcb071051b67be527a0dd7b174012300296c988f060df33594e36",
+      "preserved_states": {
+        "state_dict": "d7b2fe0a97553b14103c9ac69fef6a7f1fd10d5cc9d3050fc19863ed3cd29916",
+        "optimizer_states": "661b1f8395141237d5c43b4ffa219dbebc5967e1fedc7e08be224309c3d3081d",
+        "lr_schedulers": "b562e77e143299395e36e09a9c6980d867906c58bc2f25898bcf0f233e885503",
+        "loops": "b895200996beec10e626b471f10b27baf9b4406ab51b6ada07679294a251811a"
+      },
+      "epoch_index": 28,
+      "global_step": 725
+    }
+  ],
+  "configuration_changes": {
+    "study_file": {
+      "original": "config/studies/dth_direction_rdrop_shd100_v1.yaml",
+      "continued": "config/studies/dth_direction_aug_shd100_v1.yaml"
+    },
+    "study_hypothesis": {
+      "original": "Independent bounded falling-activity threshold response; unverified hypothesis with fixed R-Drop.",
+      "continued": "User-requested augmentation added after41 completed epochs; fixed original R-Drop and SHD* split; total100 epochs."
+    },
+    "logdir": {
+      "original": "results/experiments/dth_complement_v1/direction_shd100_v1/runs/DIRECTION_DTH_RDROP_SE_adLIF/SHD/seed_42",
+      "continued": "results/experiments/dth_complement_v1/direction_aug_shd100_v1/runs/DIRECTION_AUG_DTH_RDROP_SE_adLIF/SHD/seed_42"
+    },
+    "study_record_initial_state": {
+      "original": true,
+      "continued": false
+    },
+    "paper_baseline_deviations": {
+      "original": [
+        "model_variant=DIRECTION_DTH_RDROP_SE_adLIF",
+        "validation-only staged discovery; official tests disabled",
+        "batch_size=256; LR unchanged",
+        "full_schedule_epochs=300; explicit staged stops",
+        "num_workers=0; separately measured deterministic data loading",
+        "training_objective=classification_dropout_consistency_v1",
+        "dropout_consistency_alpha=1; two stochastic training forwards",
+        "label_smoothing_epsilon=0; training only",
+        "single ordinary inference; hard-label validation CE; first-view online train accuracy"
+      ],
+      "continued": [
+        "model_variant=DIRECTION_AUG_DTH_RDROP_SE_adLIF",
+        "validation-only staged discovery; official tests disabled",
+        "batch_size=256; LR unchanged",
+        "full_schedule_epochs=300; explicit staged stops",
+        "num_workers=0; separately measured deterministic data loading",
+        "training_objective=classification_dropout_consistency_v1",
+        "dropout_consistency_alpha=1; two stochastic training forwards",
+        "label_smoothing_epsilon=0; training only",
+        "single ordinary inference; hard-label validation CE; first-view online train accuracy"
+      ]
+    },
+    "exp_name": {
+      "original": "SHD_DIRECTION_DTH_RDROP_SE_adLIF",
+      "continued": "SHD_DIRECTION_AUG_DTH_RDROP_SE_adLIF"
+    },
+    "launcher_logdir": {
+      "original": "results/experiments/dth_complement_v1/direction_shd100_v1/runs",
+      "continued": "results/experiments/dth_complement_v1/direction_aug_shd100_v1/runs"
+    },
+    "study_idea": {
+      "original": "DIRECTION_AWARE_TRANSIENT",
+      "continued": "USER_DIRECTION_AUGMENTATION_CONTINUATION"
+    },
+    "study_continuation_manifest": {
+      "original": null,
+      "continued": "results/experiments/dth_complement_v1/direction_aug_shd100_v1/CONTINUATION_PLAN.json"
+    },
+    "model_variant": {
+      "original": "DIRECTION_DTH_RDROP_SE_adLIF",
+      "continued": "DIRECTION_AUG_DTH_RDROP_SE_adLIF"
+    },
+    "dataset": {
+      "original": {
+        "_target_": "datasets.shd.SHDLDM",
+        "data_path": "data",
+        "spatial_factor": 0.2,
+        "time_factor": 0.001,
+        "pad_to_min_size": 250,
+        "window_size": 4,
+        "batch_size": 256,
+        "num_workers": 0,
+        "num_classes": 20,
+        "validate_on": 0.2,
+        "random_seed": 42,
+        "cache_namespace": "controlled_v2",
+        "ignore_first_timesteps": 10,
+        "additional_test_set_validation": false,
+        "validation_batch_size": 256,
+        "validation_only_data": true
+      },
+      "continued": {
+        "_target_": "datasets.shd_augmented.AugmentedSHDLDM",
+        "data_path": "data",
+        "spatial_factor": 0.2,
+        "time_factor": 0.001,
+        "pad_to_min_size": 250,
+        "window_size": 4,
+        "batch_size": 256,
+        "num_workers": 0,
+        "num_classes": 20,
+        "validate_on": 0.2,
+        "random_seed": 42,
+        "cache_namespace": "controlled_v2",
+        "ignore_first_timesteps": 10,
+        "training_frame_augmentation": {
+          "version": "shd_frame_augmentation_v1",
+          "time_scale": [
+            0.9,
+            1.1
+          ],
+          "channel_shift": 2,
+          "spike_delete_probability": 0.05
+        },
+        "additional_test_set_validation": false,
+        "validation_batch_size": 256,
+        "validation_only_data": true
+      }
+    },
+    "study_stage": {
+      "original": 1,
+      "continued": 2
+    },
+    "evaluation_protocol": {
+      "original": "dth_direction_rdrop_shd100_v1_SHD_classification_dropout_consistency_v1",
+      "continued": "dth_direction_aug_continuation_v1_SHD_classification_dropout_consistency_v1"
+    }
+  },
+  "state_audit_library": "results/experiments/dth_complement_v1/extended_100_70_70_v1/ACTIONS.py",
+  "state_audit_library_sha256": "d22133c3ef303425ab0955f3d2810fcf0e1ebe0c3d3bfbc103e865f3067d5665",
+  "audit_helper_sha256": "3544c611a6353be9fd1fd5597e00d7ed0d934bf57a55b18b5bebd5b4771a098a",
+  "prior_test_exposure": true
+}

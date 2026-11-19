@@ -1,0 +1,28 @@
+{
+  "created_at": "2026-11-12T13:46:45.203319+03:30",
+  "hypothesis": "Current Baseline/LS-only ECG objective fits previously selected train256/validation64with finite gradients, safe headroom and unchanged validation predictions; no accuracy selection from calibration.",
+  "matched_probes": [
+    "ECG_SE_adLIF_2layer",
+    "ECG_LS_SE_adLIF_2layer"
+  ],
+  "source": "results/experiments/complementary_speaker_dev_v2/B002_ECG_CONFIRMATION_SOURCE.txt",
+  "source_sha256": "ee6b3169cf9be0b1b07f585d9a9852015bc0ebad3c92f40457ef7f776ee658ad",
+  "disposable_seed": 117,
+  "training_data": "Same256original fitting rows recorded in prior ECG_TRAINING_CALIBRATION.json; original QTDB train MAT only",
+  "split": "Established frozen588/30row split42, all6classes; patient IDs unavailable",
+  "training_batch": 256,
+  "validation_batch": 64,
+  "warmup_steps": 2,
+  "measured_steps": 3,
+  "learning_rate": 0.01,
+  "lr_scaled": false,
+  "precision": "32-true/high matmul, original protocol retained",
+  "full_timesteps": 1301,
+  "input_marker": "Original negative end marker retained; no sequence/label/mask changes",
+  "minimum_headroom_fraction": 0.15,
+  "validation_probe": "Full30records/39030valid targets; batches16and64,1warm+2measuredpasses each. Require identical predictions and CE difference<2e-5 before proceeding.",
+  "advancement_rule": "Both probes finite, headroom>=15%, full validation consistency. If failure, diagnose and preserve evidence; no main training until verified.",
+  "estimated_compute": "About1-3minutes for2models from prior4.5second full-sequence training steps, plus validation",
+  "all_states_discarded_before_main": true,
+  "official_test_opened": false
+}

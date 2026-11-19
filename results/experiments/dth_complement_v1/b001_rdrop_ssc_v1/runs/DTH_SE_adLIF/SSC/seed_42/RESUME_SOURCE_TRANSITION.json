@@ -1,0 +1,17 @@
+{
+  "version": "identical_training_source_resume_v1",
+  "created_at": "2026-11-14T14:19:31.179651+00:00",
+  "original_provenance": "results/experiments/dth_complement_v1/table30_then_ecg_v1/preparation_history/SSC_CONTROL_LAUNCH_ENVIRONMENTS_BEFORE30.json",
+  "original_provenance_sha256": "f3dc8ea5e1dd169e93061f523e48c054baf2bb9a17ec6c53b77ac4cc040ede0d",
+  "source_snapshot": "results/experiments/dth_complement_v1/table30_then_ecg_v1/preparation_history/SOURCE_SNAPSHOT_AFTER_SHD.json",
+  "source_snapshot_sha256": "f68d07a859436b438bdd74e669da53d9f7506fc3de6d39a35f4a1bc4724392ac",
+  "guard_only_amendments": {
+    "extended_seed_study.py": "527b905e64cea3ceb3abe7da75ce9c6b064828d1ed22a130949aac2aa890d67b"
+  },
+  "resumed_source_identity": {
+    "git_commit": "f1ab5aa7c0eeddf0ee80ec241d1aa732b8db839d",
+    "source_files_sha256": "f4729c15be5b347e0ebe34f6f7e3c6ce66be20636649a7ac329b7e2385c18cc0",
+    "tracked_diff_sha256": "f438b5e5ae2665d8eb49b49e7cd8843d563c75cf66f05e6f6c52c6a9f13219a6"
+  },
+  "reason": "User requests matched30 table. Resume the existing DTH control10to30. Model/data/loss forward identity exactly unchanged; only allowed ceiling30 and independent ECG definitions added. Original config/provenance/checkpoints preserved."
+}
