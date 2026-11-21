@@ -1,0 +1,19 @@
+{
+  "reviewed_utc": "2026-11-21T04:38:01.921582+00:00",
+  "status": "verification_passed",
+  "command": ".\\.venv\\Scripts\\python.exe -u -m scripts.finalize_temporal_permutation --verify-only",
+  "return_code": 0,
+  "stdout": "Saved finalization verified; rows: 1254096 no inference or analysis rerun.",
+  "complete_sha256": "5c1669a7745c39e1d95fc31f9a0d48e8c973d6a9cad786167cbcd4c8641137f0",
+  "manifest_sha256": "12459d93fa66bc26e0d092b7c3fb1daed861d9f5e69023415f6feb2a1fe9ea4f",
+  "authenticated_output_files": 3316,
+  "authenticated_source_files": 8295,
+  "paired_rows": 1254096,
+  "datasets": [
+    "SHD",
+    "SSC"
+  ],
+  "new_inference": false,
+  "new_analysis": false,
+  "scientific_interpretation_reviewed": false
+}
