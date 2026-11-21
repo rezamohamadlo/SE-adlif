@@ -120,3 +120,5 @@ scripts/adaptation_temporal_permutation/*.py -text whitespace=blank-at-eol,blank
 tests/test_adaptation_temporal_permutation.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 config/studies/adaptation_temporal_permutation_v1.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 results/experiments/adaptation_temporal_permutation_*/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/finalize_temporal_permutation.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+tests/test_finalize_temporal_permutation.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

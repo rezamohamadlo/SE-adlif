@@ -1,0 +1,5 @@
+{
+  "status": "failed",
+  "traceback": "Traceback (most recent call last):\n  File \"E:\\AI_paper_nazari\\SE-adlif\\scripts\\adaptation_temporal_permutation\\run.py\", line 326, in execute\n    store.write(root / 'PAIRED_RESULTS.json', paired)\n  File \"E:\\AI_paper_nazari\\SE-adlif\\scripts\\ssc_resume_io.py\", line 28, in __call__\n    payload = json.dumps(data, indent=2, allow_nan=False) + '\\n'\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\mohammadloo.r.SPADANACO\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\json\\__init__.py\", line 238, in dumps\n    **kw).encode(obj)\n          ^^^^^^^^^^^\n  File \"C:\\Users\\mohammadloo.r.SPADANACO\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\json\\encoder.py\", line 202, in encode\n    chunks = list(chunks)\n             ^^^^^^^^^^^^\nMemoryError\n",
+  "recorded_utc": "2026-11-19T13:58:54.965076+00:00"
+}
